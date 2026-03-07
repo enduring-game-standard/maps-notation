@@ -13,7 +13,7 @@ Music faced the same problem for centuries. Melodies passed from teacher to stud
 
 Games today fuse their mechanics into executable code — opaque, fragile, and locked to one implementation. When a studio closes, the rules themselves disappear with the codebase. Genres evolve through imitation rather than study, because there is no way to read a mechanic apart from its rendering. Each generation of designers starts nearly from scratch.
 
-The **MAPS Notation** provides a neutral, implementation-agnostic notation for describing game mechanics as open rulebooks. While [RUNS](https://github.com/enduring-game-standard/runs-spec) defines *the game* — how it executes each frame through data flow — and [AEMS](https://github.com/enduring-game-standard/aems-schema) defines *the things* that participate, MAPS defines *the rules*: the states, actions, transitions, and resources that shape play.
+The **MAPS Notation** provides a neutral, implementation-agnostic notation for describing game mechanics as open rulebooks. While [RUNS](https://github.com/enduring-game-standard/runs-spec) provides *the source* — composable components compiled into platform-specific builds — and [AEMS](https://github.com/enduring-game-standard/aems-schema) defines *the things* that participate, MAPS defines *the rules*: the states, actions, transitions, and resources that shape play.
 
 Think of it as sheet music for gameplay: sufficient to convey the interactive structure clearly, leaving performance — execution, visuals, timing — to specialized interpreters.
 
@@ -113,7 +113,7 @@ verbs:
           target: door_open
 ```
 
-A reader can trace both paths: an agent at `near_door` with `inventory.keys >= 1` can fire `open_door`, consuming one key and transitioning to `door_open`. Alternatively, an agent with `strength >= 5` can fire `kick_door` without consuming a resource. Both Verbs lead to the same State, but through different mechanical constraints. The Score is complete enough to analyze for fairness, simulate for balance, or export to a RUNS Network for execution.
+A reader can trace both paths: an agent at `near_door` with `inventory.keys >= 1` can fire `open_door`, consuming one key and transitioning to `door_open`. Alternatively, an agent with `strength >= 5` can fire `kick_door` without consuming a resource. Both Verbs lead to the same State, but through different mechanical constraints. The Score is complete enough to analyze for fairness, simulate for balance, or serve as the blueprint for a RUNS implementation.
 
 **Guards in practice.** Guards are evaluated at enablement time using current Marks. Supported operations include comparisons (`>=`, `==`, etc.), arithmetic, and logical connectors. This keeps the notation compact for gradients (health ranges, inventory counts) while preserving non-deterministic choice when multiple Verbs are enabled.
 
@@ -133,7 +133,7 @@ These exclusions follow the same discipline that governs TCP/IP (no opinion on c
 
 MAPS Notation does not exist in isolation. It is one layer of a jointly necessary architecture.
 
-**MAPS → RUNS.** A Score becomes executable when its primitives map to RUNS components. States become Records. Verbs become Processors. Arcs become the wiring that connects them. The notation is the design-time blueprint; RUNS is the execution-time substrate. A designer writes a Score; a developer implements the corresponding Processors; the RUNS Network executes the result.
+**MAPS → RUNS.** A Score's primitives map onto RUNS components: States are implemented as Records, Verbs as Processors, Arcs as Network wiring. The relationship is design-to-implementation — MAPS is the notation (the written score), RUNS is the source code (the composition built from that score), and the compiled binary is the performance. A designer writes a MAPS Score; a developer (or build tool) creates the corresponding RUNS source; a runtime compiles it for a specific platform.
 
 **MAPS → AEMS.** AEMS defines the things that MAPS rules act upon. A `maps:locked-transition` Pattern requires something with a `keys` property — that thing is defined in AEMS as an Entity (the named role `key`) with a Manifestation carrying game-specific properties. MAPS describes the rules; AEMS holds the things those rules reference.
 
