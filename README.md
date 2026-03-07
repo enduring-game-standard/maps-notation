@@ -13,7 +13,7 @@ Music faced the same problem for centuries. Melodies passed from teacher to stud
 
 Games today fuse their mechanics into executable code — opaque, fragile, and locked to one implementation. When a studio closes, the rules themselves disappear with the codebase. Genres evolve through imitation rather than study, because there is no way to read a mechanic apart from its rendering. Each generation of designers starts nearly from scratch.
 
-The **MAPS Notation** provides a neutral, implementation-agnostic notation for describing game mechanics as open rulebooks. While [RUNS](https://github.com/enduring-game-standard/runs-spec) defines *how* a game executes each frame through data flow, and [AEMS](https://github.com/enduring-game-standard/aems-schema) defines *what* entities participate, MAPS defines the underlying *grammar*: the states, actions, transitions, and resources that shape play.
+The **MAPS Notation** provides a neutral, implementation-agnostic notation for describing game mechanics as open rulebooks. While [RUNS](https://github.com/enduring-game-standard/runs-spec) defines *the game* — how it executes each frame through data flow — and [AEMS](https://github.com/enduring-game-standard/aems-schema) defines *the things* that participate, MAPS defines *the rules*: the states, actions, transitions, and resources that shape play.
 
 Think of it as sheet music for gameplay: sufficient to convey the interactive structure clearly, leaving performance — execution, visuals, timing — to specialized interpreters.
 
@@ -135,7 +135,7 @@ MAPS Notation does not exist in isolation. It is one layer of a jointly necessar
 
 **MAPS → RUNS.** A Score becomes executable when its primitives map to RUNS components. States become Records. Verbs become Processors. Arcs become the wiring that connects them. The notation is the design-time blueprint; RUNS is the execution-time substrate. A designer writes a Score; a developer implements the corresponding Processors; the RUNS Network executes the result.
 
-**MAPS → AEMS.** AEMS entities carry the properties that MAPS Scores reference. A `maps:locked-transition` Pattern requires an entity with a `keys` property — that entity is defined in AEMS as a Manifestation. The notation describes the mechanical role; AEMS holds the concrete object.
+**MAPS → AEMS.** AEMS defines the things that MAPS rules act upon. A `maps:locked-transition` Pattern requires something with a `keys` property — that thing is defined in AEMS as an Entity (the named role `key`) with a Manifestation carrying game-specific properties. MAPS describes the rules; AEMS holds the things those rules reference.
 
 **MAPS → WOCS.** WOCS coordinates services around shared Patterns and Scores. A community Pattern registry, matchmaking for games described by a given Score, or coordinated playtesting across implementations — these are WOCS coordination tasks. The notation defines what the game *is*; WOCS enables the ecosystem around it.
 
