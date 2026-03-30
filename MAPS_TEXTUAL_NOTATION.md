@@ -178,7 +178,7 @@ Empty arcs (no guard, no effects) use bare arrows:
 
 ### Guard Expressions
 
-Guard expressions are boolean predicates evaluated against the current marking (mark values on States).
+Guard expressions are boolean predicates evaluated against the current marking (mark values on States). Guards check conditions — they do not compute.
 
 #### Comparison Operators
 
@@ -191,6 +191,13 @@ Guard expressions are boolean predicates evaluated against the current marking (
 | `<=` | Less than or equal |
 | `>=` | Greater than or equal |
 
+Comparison operands are mark names and integer literals. A guard compares a mark to a value or a mark to another mark:
+
+```maps
+(alive)-|fuel > 0|->[thrust]          # mark vs literal
+(ready)-|health > threshold|->[act]   # mark vs mark
+```
+
 #### Logical Operators
 
 | Operator | Meaning |
@@ -199,18 +206,12 @@ Guard expressions are boolean predicates evaluated against the current marking (
 | `OR` | Logical disjunction |
 | `NOT` | Logical negation |
 
-Logical operators are uppercase to distinguish them from identifiers. Operands are mark names, integer literals, and comparison expressions.
+Logical operators are uppercase to distinguish them from identifiers. They combine comparison predicates:
 
-#### Arithmetic Operators
-
-| Operator | Meaning |
-|----------|---------|
-| `+` | Addition |
-| `-` | Subtraction |
-| `*` | Multiplication |
-| `/` | Division (integer, truncates toward zero) |
-
-Arithmetic operators are permitted in guard expressions for computing derived values: `fuel * 2 > thrust_cost`.
+```maps
+(alive)-|ammo > 0 AND reload == 0|->[fire]
+(ready)-|keys >= 1 OR strength >= 5|->[open]
+```
 
 #### Operator Precedence
 
@@ -218,14 +219,14 @@ From highest to lowest binding:
 
 | Level | Operators | Associativity |
 |-------|-----------|---------------|
-| 1 | `NOT`, `-` (unary) | Right |
-| 2 | `*`, `/` | Left |
-| 3 | `+`, `-` | Left |
-| 4 | `==`, `!=`, `<`, `>`, `<=`, `>=` | None (no chaining) |
-| 5 | `AND` | Left |
-| 6 | `OR` | Left |
+| 1 | `NOT` | Right |
+| 2 | `==`, `!=`, `<`, `>`, `<=`, `>=` | None (no chaining) |
+| 3 | `AND` | Left |
+| 4 | `OR` | Left |
 
-Parentheses override precedence: `(fuel + reserve) > threshold`.
+Parentheses group logical sub-expressions: `(keys >= 1 OR lockpick >= 1) AND near_door > 0`.
+
+> **Design decision: no arithmetic in guards.** Guards observe the current marking — they read marks and compare values. They do not compute. If a game needs a derived quantity ("effective fuel", "total damage"), a Verb computes it and deposits the result as a Mark on a State. The guard reads that Mark. This enforces the conversation model: the "listen" phase reads state, it doesn't calculate. Calculation is the Verb's job. Petri net arc inscriptions work the same way — they test token counts, they don't perform arithmetic on them.
 
 ### Self-Loops
 
@@ -563,21 +564,20 @@ effect            = consume | produce | weight ;
 
 consume           = "−" [ INTEGER ] IDENT ;
 produce           = "+" [ INTEGER ] IDENT ;
-weight            = "~" ( NUMBER | IDENT | "(" expression ")" ) ;
+weight            = "~" weight_expr ;
+weight_expr       = NUMBER | IDENT | "(" weight_arith ")" ;
+weight_arith      = weight_term { ( "+" | "-" ) weight_term } ;
+weight_term       = weight_factor { ( "*" | "/" ) weight_factor } ;
+weight_factor     = [ "-" ] ( NUMBER | IDENT | "(" weight_arith ")" ) ;
 
-(* Guard expressions *)
-guard_expr        = expression ;
-
-expression        = or_expr ;
+(* Guard expressions — comparisons and logical connectives only, no arithmetic *)
+guard_expr        = or_expr ;
 or_expr           = and_expr { "OR" and_expr } ;
 and_expr          = not_expr { "AND" not_expr } ;
-not_expr          = [ "NOT" ] comparison ;
-comparison        = arithmetic [ comp_op arithmetic ] ;
+not_expr          = [ "NOT" ] predicate ;
+predicate         = operand comp_op operand | "(" or_expr ")" ;
 comp_op           = "==" | "!=" | "<" | ">" | "<=" | ">=" ;
-arithmetic        = term { ( "+" | "-" ) term } ;
-term              = factor { ( "*" | "/" ) factor } ;
-factor            = [ "-" ] atom ;
-atom              = IDENT | INTEGER | "(" expression ")" ;
+operand           = IDENT | INTEGER ;
 
 (* Shared terminals *)
 ident_list        = IDENT { "," IDENT } ;
@@ -598,7 +598,8 @@ NEWLINE           = U+000A ;
 
 1. **No indentation structure.** Unlike DIGS, MAPS uses braces for block structure. This makes the notation viable in Nostr event `content` fields where indentation may not be preserved by all relay implementations.
 2. **All identifiers are lowercase.** This prevents ambiguity with the uppercase logical operators `AND`, `OR`, `NOT`.
-3. **The `−` in consume effects is the Unicode minus sign (U+2212).** This distinguishes mark consumption from the arithmetic subtraction operator (`-`, U+002D). A parser SHOULD accept both characters in the consume position for convenience. When written by a tool, U+2212 is canonical.
+3. **The `−` in consume effects is the Unicode minus sign (U+2212).** This distinguishes mark consumption from other uses of the minus character. A parser SHOULD accept both U+2212 and U+002D in the consume position for convenience. When written by a tool, U+2212 is canonical.
+6. **Guard expressions contain no arithmetic.** Guards test marks against values and combine tests with logical operators. Derived quantities are computed by Verbs and stored as Marks. Weight expressions (`~`) permit arithmetic for probability ratios (e.g., `~(1 − risk)`) because weights describe mathematical relationships between probabilities, not gameplay computation.
 4. **Arc syntax is flexible.** Both `(a)-|guard|->[b]` (pipe-delimited inline) and `(a)->|guard|[b]` (pipes after arrow) are valid. The EBNF captures both forms.
 5. **State and Verb references are the same in paths and declarations.** `(alive)` in a path and `state (alive) { ... }` in a declaration refer to the same node.
 
@@ -643,6 +644,7 @@ The notation does not and will never express:
 | Play state (current marking during play) | The notation describes the graph and initial marking. Runtime state belongs to the runtime. | RUNS Records |
 | Execution order | The notation describes which transitions are possible, not the order they fire in. Scheduling is a runtime concern. | RUNS Network topology |
 | Implementation logic | A MAPS Verb says "thrust happens." A RUNS Processor says how. | DIGS expression bodies |
+| Arithmetic in guards | Guards observe; they don't compute. Derived quantities are computed by Verbs and stored as Marks. Guards read the result. | Verbs (MAPS) / Processors (DIGS) |
 | Memory management | The notation is a graph description, not a program. | N/A |
 
 ---
@@ -740,7 +742,7 @@ WOCS coordinates services around shared MAPS Possibility Spaces. Pattern registr
 
 ### DIGS (Deterministic Inspectable Game Syntax)
 
-DIGS defines computation within RUNS Processors. MAPS does not use DIGS directly — MAPS guard expressions use a deliberately simpler expression grammar (comparison and arithmetic operators only, no type system, no side effects). When a MAPS Possibility Space is implemented in RUNS, MAPS guards are compiled into DIGS expressions.
+DIGS defines computation within RUNS Processors. MAPS does not use DIGS directly — MAPS guard expressions are pure boolean predicates (comparisons and logical connectives, no arithmetic, no type system). When a MAPS Possibility Space is implemented in RUNS, MAPS guards are compiled into DIGS expressions. Any derived quantity that a MAPS guard tests was computed by a DIGS Processor and stored in a RUNS Record.
 
 ---
 
