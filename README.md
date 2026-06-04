@@ -1,6 +1,6 @@
 # MAPS Notation — Mechanics and Play Structures
 
-🏠 **[Overview](https://github.com/enduring-game-standard)** · 🔧 **[RUNS](https://github.com/enduring-game-standard/runs-spec)** · 📦 **[AEMS](https://github.com/enduring-game-standard/aems-schema)** · ⚡ **[WOCS](https://github.com/enduring-game-standard/wocs-protocol)** · 🎼 **[MAPS Notation](https://github.com/enduring-game-standard/maps-notation)** · ❓ **[FAQ](https://github.com/enduring-game-standard/.github/blob/main/profile/FAQ.md)**
+🏠 **[Overview](https://github.com/enduring-game-standard)** · 🔧 **[RUNS](https://github.com/enduring-game-standard/runs-spec)** · 📦 **[AEMS](https://github.com/enduring-game-standard/aems-schema)** · ⚡ **[WOCS](https://github.com/enduring-game-standard/wocs-protocol)** · 🎼 **[MAPS Notation](https://github.com/enduring-game-standard/maps-notation)** · ❓ **[FAQ](https://github.com/enduring-game-standard/.github/blob/main/profile/FAQ.md)** · 🔤 **[Glossary](https://github.com/enduring-game-standard/.github/blob/main/profile/GLOSSARY.md)**
 
 > **Status**: Draft / RFC  
 > **Version**: 0.1.0
