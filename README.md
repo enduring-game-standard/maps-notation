@@ -1,6 +1,6 @@
 # MAPS Notation — Mechanics and Play Structures
 
-🏠 **[Overview](https://github.com/enduring-game-standard)** · 🔧 **[RUNS](https://github.com/enduring-game-standard/runs-spec)** · 📦 **[AEMS](https://github.com/enduring-game-standard/aems-schema)** · ⚡ **[WOCS](https://github.com/enduring-game-standard/wocs-protocol)** · 🎼 **[MAPS Notation](https://github.com/enduring-game-standard/maps-notation)** · ❓ **[FAQ](https://github.com/enduring-game-standard/.github/blob/main/profile/FAQ.md)** · 🔤 **[Glossary](https://github.com/enduring-game-standard/.github/blob/main/profile/GLOSSARY.md)**
+🏠 **[Overview](https://github.com/enduring-game-standard)** · 🔧 **[RUNS](https://github.com/enduring-game-standard/runs-spec)** · 📦 **[AEMS](https://github.com/enduring-game-standard/aems-schema)** · ⚡ **[WOCS](https://github.com/enduring-game-standard/wocs-protocol)** · 🎼 **[MAPS Notation](https://github.com/enduring-game-standard/maps-notation)** · ❓ **[FAQ](https://github.com/enduring-game-standard/.github/blob/main/profile/FAQ.md)** · 🔤 **[Glossary](https://github.com/enduring-game-standard/.github/blob/main/profile/README.md#glossary)**
 
 > **Status**: Draft / RFC  
 > **Version**: 0.1.0
@@ -60,7 +60,7 @@ Primitives combine into higher-level reusable units.
 | **Pattern**| Named, versioned cluster of Atoms/primitives | Reusable mechanic with defined interface            | `maps:locked-transition` (a keyed door with precondition) |
 | **Score**  | Root composition importing Patterns  | Full game ruleset, defining complete Capability/Content split | A dungeon-crawl ruleset importing locked-transition, resource-acquire, and basic-exchange |
 
-A designer composes a Score by importing Patterns from the [MAPS Library](https://github.com/enduring-game-standard/ludic-notation-library), the community-maintained vocabulary of reusable mechanics. Patterns support extension and forking: a designer can take `maps:locked-transition@1.0`, add a new Verb (e.g., `kick`), and publish the variant as a new versioned Pattern.
+A designer composes a Score by importing Patterns from the [MAPS Library](https://github.com/enduring-game-standard/maps-library), the community-maintained vocabulary of reusable mechanics. Patterns support extension and forking: a designer can take `maps:locked-transition@1.0`, add a new Verb (e.g., `kick`), and publish the variant as a new versioned Pattern.
 
 ## Schema Separation
 
@@ -149,7 +149,7 @@ This is what distinguishes MAPS from a file format specification. A JSON schema 
 
 ## Summary
 
-MAPS Notation turns mechanics into open, composable artifacts — readable as text, analyzable by tools, preservable beyond any single engine or company. The four primitives (State, Verb, Arc, Mark) provide the minimal grammar. [Patterns](https://github.com/enduring-game-standard/ludic-notation-library) provide the shared vocabulary. Nostr provides the commons.
+MAPS Notation turns mechanics into open, composable artifacts — readable as text, analyzable by tools, preservable beyond any single engine or company. The four primitives (State, Verb, Arc, Mark) provide the minimal grammar. [Patterns](https://github.com/enduring-game-standard/maps-library) provide the shared vocabulary. Nostr provides the commons.
 
 A teenager in Dortmund pulls the combat Patterns from a game whose studio dissolved three years ago, drops them into her own project, swaps the visual layer, and publishes a variant that a competitive community in São Paulo picks up for tournaments. No permission required. The mechanics survived because they were written in notation, not locked in a binary. That is what composable craft looks like.
 
