@@ -131,9 +131,9 @@ These exclusions follow the same discipline that governs TCP/IP (no opinion on c
 
 ## Integration with the Enduring Game Standard
 
-MAPS Notation does not exist in isolation. It is one layer of a jointly necessary architecture.
+MAPS Notation does not exist in isolation. It is one layer of a jointly necessary architecture; the full topology is owned by the [EGS correspondence map](https://github.com/enduring-game-standard/.github/blob/main/profile/CORRESPONDENCE.md).
 
-**MAPS → RUNS.** A Score's primitives map onto RUNS components: States are implemented as Records, Verbs as Processors, Arcs as Network wiring — and guard expressions on Arcs become guarded transitions in the Network, preserving the conditional routing that MAPS notation describes. The relationship is design-to-implementation — MAPS is the notation (the written score), RUNS is the source code (the composition built from that score), and the compiled binary is the performance. A designer writes a MAPS Score; a developer (or build tool) creates the corresponding RUNS source; a runtime compiles it for a specific platform.
+**MAPS → RUNS.** The relationship is design-to-implementation — MAPS is the notation (the written score), RUNS is the source code (the composition built from that score), and the compiled binary is the performance. The term-for-term mapping between a Score's primitives and RUNS components is owned by the [correspondence map](https://github.com/enduring-game-standard/.github/blob/main/profile/CORRESPONDENCE.md). A designer writes a MAPS Score; a developer (or build tool) creates the corresponding RUNS source; a runtime compiles it for a specific platform.
 
 **MAPS → AEMS.** AEMS defines the things that MAPS rules act upon. A `maps:locked-transition` Pattern requires something with a `keys` property — that thing is defined in AEMS as an Entity (the named role `key`) with a Manifestation carrying game-specific properties. MAPS describes the rules; AEMS holds the things those rules reference.
 
