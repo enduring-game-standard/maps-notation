@@ -17,13 +17,15 @@ The **MAPS Notation** provides a neutral, implementation-agnostic notation for d
 
 Think of it as sheet music for gameplay: sufficient to convey the interactive structure clearly, leaving performance — execution, visuals, timing — to specialized interpreters.
 
+MAPS is the lowest-friction layer of EGS: it requires a text editor, no infrastructure, no tooling, and no other protocol. Notating the mechanics of one existing game — a dungeon's lock-and-key structure, a combat loop — is complete adoption in itself, and makes those mechanics studyable and forkable whether or not anything else in the standard ever touches them.
+
 ## A Converging Lineage
 
 The four primitives described below did not emerge from a single design session. They represent a convergence across decades of independent work on formalizing interactive systems.
 
 Carl Adam Petri introduced Petri nets in 1962 — a mathematical formalism for modeling concurrent, discrete-event systems using places, transitions, and tokens. Stéphane Bura applied Petri-net thinking directly to game design, mapping places to game states and transitions to player actions. Joris Dormans extended this approach into Machinations, a visual language for diagramming and simulating game economies as resource flows between nodes. Cameron Browne's Ludii system, developed under the Digital Ludeme Project at Maastricht University, decomposed over a thousand traditional strategy games into fundamental conceptual units called ludemes — proving that a common grammar could describe games spanning millennia of human history.
 
-These projects, alongside contributions from Raph Koster, Daniel Cook, and the work surveyed in the book's Chapter 13, point to the same structural insight: interactive systems share a small set of recurring formal elements. MAPS Notation distills that convergence into four primitives — State, Verb, Arc, Mark — designed to be the minimal sufficient vocabulary for describing game mechanics as readable, composable artifacts.
+These projects, alongside contributions from Raph Koster, Daniel Cook, and the work surveyed in *Enduring Games* (Scott Sheppard, 2026), point to the same structural insight: interactive systems share a small set of recurring formal elements. MAPS Notation distills that convergence into four primitives — State, Verb, Arc, Mark — designed to be the minimal sufficient vocabulary for describing game mechanics as readable, composable artifacts.
 
 ## Core Primitives
 
