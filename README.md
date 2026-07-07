@@ -45,7 +45,7 @@ Represents any distinguishable situation — `door_locked`, `player_alive`, `inv
 Represents an action the agent can attempt — `open`, `attack`, `trade`. A Verb is enabled when all precondition Arcs are satisfied, including any guards. When multiple Verbs are simultaneously enabled, the player faces a meaningful choice.
 
 **Arc**  
-The directional link defining legality and consequences. An Arc may require a minimum quantity of Marks, include a **guard** (a boolean expression evaluated over current Marks, e.g., `strength >= 5` or `inventory.keys >= 1`), and consume or produce Marks upon firing. Guards enable compact representation of ranged conditions without state explosion, while remaining decomposable to pure Petri-net forms.
+The directional link defining legality and consequences. An Arc may require a minimum quantity of Marks, include a **guard** (a boolean expression evaluated over current Marks, e.g., `strength >= 5` or `inventory.keys >= 1`), and consume or produce Marks upon firing. Guards enable compact representation of ranged conditions without state explosion. Lower-bound guards (`>=`) decompose to pure Petri-net arc weights; guards that test equality, upper bounds, or negation (`==`, `<`, `NOT`) correspond to the inhibitor-arc extension of Petri nets.
 
 **Mark**  
 Quantifiable resources or tokens placed on States — `health=3`, `ammo=10`, `strength=7`. Marks support numeric values and accessor syntax in guards (e.g., `inventory.bombs >= 1`), allowing future extension to structured data without changing primitives.
@@ -115,7 +115,7 @@ verbs:
 
 A reader can trace both paths: an agent at `near_door` with `inventory.keys >= 1` can fire `open_door`, consuming one key and transitioning to `door_open`. Alternatively, an agent with `strength >= 5` can fire `kick_door` without consuming a resource. Both Verbs lead to the same State, but through different mechanical constraints. The Score is complete enough to analyze for fairness, simulate for balance, or serve as the blueprint for a RUNS implementation.
 
-**Guards in practice.** Guards are evaluated at enablement time using current Marks. Supported operations include comparisons (`>=`, `==`, etc.), arithmetic, and logical connectors. This keeps the notation compact for gradients (health ranges, inventory counts) while preserving non-deterministic choice when multiple Verbs are enabled.
+**Guards in practice.** Guards are evaluated at enablement time using current Marks. Supported operations are comparisons (`==`, `!=`, `<`, `>`, `<=`, `>=`) and logical connectors (`AND`, `OR`, `NOT`) — no arithmetic. Guards observe; they don't compute: a derived quantity ("effective fuel", "total damage") is computed by a Verb and stored as a Mark, which the guard then reads. This keeps the notation compact for gradients (health ranges, inventory counts) while preserving non-deterministic choice when multiple Verbs are enabled.
 
 ## What the Notation Deliberately Excludes
 
