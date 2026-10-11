@@ -49,11 +49,19 @@ const overlaps = (net: Net, routes: Map<string, Pt[]>) => {
 }
 
 const passesInOrder = (pts: Pt[], via: Pt[]) => {
-  const ss = samples(pts)
-  let k = 0
+  let i = 0
+  let u = 0
   for (const v of via) {
-    while (k < ss.length && Math.hypot(ss[k].x - v.x, ss[k].y - v.y) > 0.5) k++
-    if (k === ss.length) return false
+    for (; i + 1 < pts.length; i++, u = 0) {
+      const [p, q] = [pts[i], pts[i + 1]]
+      const [dx, dy] = [q.x - p.x, q.y - p.y]
+      const t = Math.max(u, Math.min(1, ((v.x - p.x) * dx + (v.y - p.y) * dy) / (dx * dx + dy * dy || 1)))
+      if (Math.hypot(p.x + t * dx - v.x, p.y + t * dy - v.y) < 0.5) {
+        u = t
+        break
+      }
+    }
+    if (i + 1 >= pts.length) return false
   }
   return true
 }
