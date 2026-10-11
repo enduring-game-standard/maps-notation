@@ -23,6 +23,9 @@ describe('text form', () => {
     ['a bare arc', 'verb go "Go" by world\n  take', 'an arc is'],
     ['an attribute given twice', 'place a "A" marks 1 marks 2', 'given twice'],
     ['a missing header', null, 'starts with'],
+    ['words after a title', 'title "A" bogus', 'one quoted label'],
+    ['words after a group', 'group g "G" bogus', 'name and a quoted label'],
+    ['a bare word where a label belongs', 'place a A', 'expected quoted'],
   ])('rejects %s', (_, body, message) => {
     expect(() => (body === null ? parse('place a "A"\n') : net(body))).toThrow(message)
   })

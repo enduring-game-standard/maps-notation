@@ -79,6 +79,7 @@ export const parse = (src: string): Net => {
     const [kw, ...rest] = t
     switch (kw) {
       case 'title':
+        if (rest.length !== 1) throw new MapsSyntaxError(n, 'title takes one quoted label')
         net.title = quoted(rest[0], n, 'title')
         break
       case 'seat':
@@ -89,6 +90,7 @@ export const parse = (src: string): Net => {
         break
       }
       case 'group':
+        if (rest.length !== 2) throw new MapsSyntaxError(n, 'group takes a name and a quoted label')
         net.groups.push({ id: ident(rest[0], n, 'group'), label: quoted(rest[1], n, 'group label') })
         break
       case 'place': {

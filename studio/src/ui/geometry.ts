@@ -25,16 +25,23 @@ export const shapesOf = (net: Net, chance: Set<string>) => {
   return m
 }
 
-/** World verbs that may be enabled together at one priority (they share an input), so chance picks among them. */
+/**
+ * World verbs drawn with a die: alternative results of one event. They sit at one priority with
+ * identical inputs, so whenever one is possible all are, and chance picks. Sharing a single input
+ * is not enough: tic-tac-toe's line checks share the judge mark but almost never tie.
+ */
 export const chanceTies = (net: Net) => {
-  const inputs = new Map<string, Set<string>>()
-  for (const a of net.arcs) if (a.kind !== 'give') inputs.set(a.verb, (inputs.get(a.verb) ?? new Set()).add(a.place))
-  const world = net.verbs.filter((v) => v.by === WORLD)
+  const sig = new Map<string, string[]>()
+  for (const a of net.arcs) if (a.kind !== 'give') sig.set(a.verb, [...(sig.get(a.verb) ?? []), `${a.kind} ${a.count} ${a.place}`])
+  const groups = new Map<string, string[]>()
+  for (const v of net.verbs) {
+    if (v.by !== WORLD) continue
+    const k = `${v.priority}|${(sig.get(v.id) ?? []).sort().join(',')}`
+    groups.set(k, [...(groups.get(k) ?? []), v.id])
+  }
   const out = new Set<string>()
-  for (const a of world)
-    for (const b of world)
-      if (a !== b && a.priority === b.priority && [...(inputs.get(a.id) ?? [])].some((p) => inputs.get(b.id)?.has(p))) out.add(a.id).add(b.id)
-  for (const v of world) if (v.weight !== 1) out.add(v.id)
+  for (const ids of groups.values()) if (ids.length > 1) ids.forEach((id) => out.add(id))
+  for (const v of net.verbs) if (v.by === WORLD && v.weight !== 1) out.add(v.id)
   return out
 }
 
