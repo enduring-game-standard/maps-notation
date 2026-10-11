@@ -116,4 +116,4 @@ Options:
 - Can a single RUNS implementation conform to multiple MAPS Scores? (e.g., a game that implements both a combat Score and an exploration Score)
 - How does correspondence interact with Pattern composition (T3)? If a Score imports a Pattern, does the RUNS implementation need to preserve the Pattern boundary, or can it flatten everything?
 - Should the correspondence specification be versioned independently from both MAPS and RUNS specs?
-- How does this relate to AEMS? A MAPS Score references entities (the things Marks represent). Those entities are defined in AEMS. Does the correspondence extend to a three-way MAPS↔RUNS↔AEMS relationship?
+- How does this relate to AEMS? A MAPS Score references the things Marks represent. AEMS can name those things, as Manifestations tagged with the role a Pattern needs, each referencing an object-identity Entity. Does the correspondence extend to a three-way MAPS↔RUNS↔AEMS relationship, or does AEMS stay an optional seam to each?
