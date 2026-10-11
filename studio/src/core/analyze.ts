@@ -18,6 +18,8 @@ export interface Analysis {
   outcomes: Map<string, number>
   stalls: string[]
   plays: number | 'endless'
+  /** complete plays ending in each outcome; stalled plays are counted under STALLED */
+  playsBy: Map<string, number>
   firedVerbs: Set<string>
   deadVerbs: string[]
   maxMarks: Map<string, number>
@@ -96,35 +98,44 @@ export const analyze = (net: Net, limit = 250_000): Analysis => {
     complete,
     outcomes,
     stalls,
-    plays: complete ? countPlays(nodes, root) : 'endless',
+    ...countPlays(nodes, root, complete),
     firedVerbs: fired,
     deadVerbs: complete ? net.verbs.filter((v) => !fired.has(v.id)).map((v) => v.id) : [],
     maxMarks,
   }
 }
 
+export const STALLED = 'stalled'
+
 /** Distinct complete plays: sequences of seat choices and chance results that end the game. */
-const countPlays = (nodes: Map<string, Node>, root: string[]): number | 'endless' => {
-  const memo = new Map<string, number>()
+const countPlays = (nodes: Map<string, Node>, root: string[], complete: boolean): Pick<Analysis, 'plays' | 'playsBy'> => {
+  if (!complete) return { plays: 'endless', playsBy: new Map() }
+  const memo = new Map<string, Map<string, number>>()
   const onPath = new Set<string>()
   let endless = false
-  const go = (k: string): number => {
+  const add = (into: Map<string, number>, from: Map<string, number>) => {
+    for (const [k, v] of from) into.set(k, (into.get(k) ?? 0) + v)
+  }
+  const go = (k: string): Map<string, number> => {
     if (memo.has(k)) return memo.get(k)!
     if (onPath.has(k)) {
       endless = true
-      return 0
+      return new Map()
     }
     const n = nodes.get(k)!
-    if (n.outcome !== undefined || n.stalled) return 1
+    if (n.outcome !== undefined) return new Map([[n.outcome, 1]])
+    if (n.stalled) return new Map([[STALLED, 1]])
     onPath.add(k)
-    let total = 0
-    for (const e of n.next) for (const t of e.to) total += go(t)
+    const total = new Map<string, number>()
+    for (const e of n.next) for (const t of e.to) add(total, go(t))
     onPath.delete(k)
     memo.set(k, total)
     return total
   }
-  const total = root.reduce((s, k) => s + go(k), 0)
-  return endless ? 'endless' : total
+  const playsBy = new Map<string, number>()
+  for (const k of root) add(playsBy, go(k))
+  if (endless) return { plays: 'endless', playsBy: new Map() }
+  return { plays: [...playsBy.values()].reduce((a, b) => a + b, 0), playsBy }
 }
 
 export const speakerName = (net: Net, id: string) => (id === WORLD ? 'the world' : (net.seats.find((s) => s.id === id)?.name ?? id))

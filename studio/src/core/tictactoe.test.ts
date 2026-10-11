@@ -59,7 +59,7 @@ describe('tic-tac-toe written in MAPS', () => {
     expect(d.turn).toEqual({ kind: 'over', outcome: 'Draw' })
   })
 
-  it('reaches exactly the 5,478 legal positions, 958 endings and 255,168 games of tic-tac-toe', () => {
+  it('reaches exactly the 5,478 legal positions, 958 endings and 255,168 games (131,184 / 77,904 / 46,080) of tic-tac-toe', () => {
     const a = analyze(net)
     const boards = new Set([...a.nodes.values()].map((n) => [1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (n.marking[`x_${i}`] ? 'x' : n.marking[`o_${i}`] ? 'o' : '.')).join('')))
     expect(a.complete).toBe(true)
@@ -67,6 +67,7 @@ describe('tic-tac-toe written in MAPS', () => {
     expect(boards.size).toBe(5478)
     expect(Object.fromEntries(a.outcomes)).toEqual({ 'X wins': 626, 'O wins': 316, Draw: 16 })
     expect(a.plays).toBe(255_168)
+    expect(Object.fromEntries(a.playsBy)).toEqual({ 'X wins': 131_184, 'O wins': 77_904, Draw: 46_080 })
     expect(a.stalls).toEqual([])
     expect(a.deadVerbs).toEqual([])
   })

@@ -1,0 +1,49 @@
+maps 2
+title "Call the coin"
+
+seat caller "Caller" color "#7b2cbf"
+
+place coin "Coin in hand" marks 1 at 100 200
+place heads "Heads, covered" seen-by none at 340 120
+place tails "Tails, covered" seen-by none at 340 280
+place may_call "Caller may call" marks 1 at 340 440
+place said_heads "Called heads" at 580 380
+place said_tails "Called tails" at 580 500
+place caller_won "Caller wins" ends "Caller wins" at 900 200
+place caller_lost "Caller loses" ends "Caller loses" at 900 360
+
+verb flip_heads "Lands heads" by world at 220 120
+  take coin
+  give heads
+
+verb flip_tails "Lands tails" by world at 220 280
+  take coin
+  give tails
+
+verb call_heads "Call heads" by caller at 460 380
+  take may_call
+  give said_heads
+
+verb call_tails "Call tails" by caller at 460 500
+  take may_call
+  give said_tails
+
+verb right_heads "Heads, as called" by world at 760 160
+  take heads
+  take said_heads
+  give caller_won
+
+verb right_tails "Tails, as called" by world at 760 240
+  take tails
+  take said_tails
+  give caller_won
+
+verb wrong_heads "Heads, called tails" by world at 760 320
+  take heads
+  take said_tails
+  give caller_lost
+
+verb wrong_tails "Tails, called heads" by world at 760 400
+  take tails
+  take said_heads
+  give caller_lost
