@@ -68,6 +68,8 @@ type Gesture =
 type Tool = 'state' | 'verb' | null
 
 const FRAME_MS = 280
+/** Shorter segments are port stubs and jogs: still draggable, but a grip on them would cover the arrowhead or the node. */
+const GRIP_MIN = 16
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const isTyping = (t: EventTarget | null) => t instanceof HTMLElement && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))
 
@@ -304,18 +306,8 @@ export function Canvas(props: Props) {
     setConnectTo(toWorld(e.clientX, e.clientY))
   }
 
-  /** Grabs the segment of the arc's route nearest the pointer; dragging slides it sideways. */
-  const startRouteDrag = (e: React.PointerEvent, a: Arc) => {
-    const pts = routes.get(arcKey(a))
-    if (!pts) return
-    const w = toWorld(e.clientX, e.clientY)
-    let seg = 0
-    let best = Infinity
-    for (let i = 0; i + 1 < pts.length; i++) {
-      const d = distToSegment(w, pts[i], pts[i + 1])
-      if (d < best) [best, seg] = [d, i]
-    }
-    gesture.current = { kind: 'route', ref: arcRef(a), seg, start: w, base: net, routes, shapes, moved: false }
+  const startRouteDrag = (e: React.PointerEvent, a: Arc, seg: number) => {
+    gesture.current = { kind: 'route', ref: arcRef(a), seg, start: toWorld(e.clientX, e.clientY), base: net, routes, shapes, moved: false }
   }
 
   const anim = useFlightAnimation(play?.flight, net, routes)
@@ -354,21 +346,39 @@ export function Canvas(props: Props) {
           {a.kind === 'need' ? <ArcCap at={capAt(end, before, 3.5)} r={3.5} filled /> : null}
           {a.kind === 'unless' ? <ArcCap at={capAt(end, before, 4.5)} r={4.5} /> : null}
           {a.count !== 1 ? <CountBadge at={badgeSpot(pts, a.kind === 'give', lastJunction.get(arcKey(a)))} n={a.count} /> : null}
-          {mode === 'edit' ? (
-            <path
-              d={d}
-              className="arc-hit"
-              onPointerDown={(e) => {
-                e.stopPropagation()
-                if (e.button !== 0 || space.current) return startPan(e)
-                if (props.touch && !isSelected(a)) return startPan(e, arcRef(a))
-                onSelect(arcRef(a))
-                startRouteDrag(e, a)
-              }}
-            >
-              <title>{`${a.kind} ${a.state} → ${a.verb}${a.via ? ' · placed by hand' : ''}. Drag to move its route.`}</title>
-            </path>
-          ) : null}
+          {mode === 'edit'
+            ? pts.slice(1).map((q, i) => {
+                const p = pts[i]
+                if (p.x === q.x && p.y === q.y) return null
+                return (
+                  <line
+                    key={i}
+                    x1={p.x}
+                    y1={p.y}
+                    x2={q.x}
+                    y2={q.y}
+                    className={`arc-hit ${p.y === q.y ? 'slide-y' : 'slide-x'}`}
+                    onPointerDown={(e) => {
+                      e.stopPropagation()
+                      if (e.button !== 0 || space.current) return startPan(e)
+                      if (props.touch && !isSelected(a)) return startPan(e, arcRef(a))
+                      onSelect(arcRef(a))
+                      startRouteDrag(e, a, i)
+                    }}
+                  >
+                    <title>{`${a.kind} ${a.state} → ${a.verb}${a.via ? ' · placed by hand' : ''}. Drag to move its route.`}</title>
+                  </line>
+                )
+              })
+            : null}
+          {mode === 'edit' && isSelected(a)
+            ? pts.slice(1).map((q, i) => {
+                const p = pts[i]
+                return Math.abs(q.x - p.x) + Math.abs(q.y - p.y) < GRIP_MIN ? null : (
+                  <rect key={`g${i}`} className="arc-grip" x={(p.x + q.x) / 2 - 3} y={(p.y + q.y) / 2 - 3} width={6} height={6} rx={1.5} />
+                )
+              })
+            : null}
         </g>
       )
     })

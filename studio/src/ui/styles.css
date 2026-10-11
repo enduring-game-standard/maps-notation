@@ -451,6 +451,18 @@ kbd {
   stroke-width: 10;
   cursor: pointer;
 }
+.arc-hit.slide-x {
+  cursor: ew-resize;
+}
+.arc-hit.slide-y {
+  cursor: ns-resize;
+}
+.arc-grip {
+  fill: var(--panel);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  pointer-events: none;
+}
 .arc-count rect {
   fill: var(--panel);
   stroke: var(--line-strong);
