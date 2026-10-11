@@ -257,7 +257,6 @@ interface Target {
 interface Found {
   cells: number[]
   dirs: number[]
-  cost: number
 }
 
 /** Search buffers outlive one routing call: a drag routes every frame, and allocating them each time shows. */
@@ -377,7 +376,7 @@ class Searcher {
     }
     cells.reverse()
     dirs.reverse()
-    return { cells, dirs, cost: best }
+    return { cells, dirs }
   }
 }
 
@@ -459,7 +458,7 @@ interface Tree {
   leaves: Set<number>
 }
 
-/** What the canvas routed when a drag began, and which nodes the drag moves. */
+/** Routes from an earlier full routing, and the nodes that have moved or changed since. */
 export interface Prior {
   routes: Map<ArcKey, Pt[]>
   moved: Set<string>
@@ -483,7 +482,7 @@ class Router {
   private active: Tree | undefined
 
   constructor(
-    readonly net: Net,
+    net: Net,
     shapes: Map<string, Shape>,
   ) {
     let i = 0
@@ -592,13 +591,13 @@ class Router {
     const chains: { cells: number[]; border: Pt } [] = []
     for (const pts of paths as Pt[][]) {
       const cells: number[] = []
-      let straight = true
+      let orthogonal = true
       for (let j = 1; j < pts.length; j++) {
         const p = pts[j - 1]
         const q = pts[j]
         const a = Math.abs(p.y - q.y) < 1e-6 ? 0 : Math.abs(p.x - q.x) < 1e-6 ? 1 : -1
         if (a < 0) {
-          straight = false
+          orthogonal = false
           continue
         }
         const c0 = cellAt(g, p.x, p.y)
@@ -611,7 +610,7 @@ class Router {
           if (c === c1 || !step) break
         }
       }
-      if (!straight) continue
+      if (!orthogonal) continue
       let lo = 0
       let hi = cells.length - 1
       while (lo <= hi && g.owner[cells[lo]] !== FREE) lo++
@@ -775,8 +774,9 @@ const FIRST_CROSS = 10
  * and grown as a tree from the state, so siblings share a trunk. Different cables never share a grid edge,
  * so they run as parallel tracks at least one pitch apart.
  *
- * With a `prior`, only cables touching a moved node, or now run over by one, are routed again; the rest keep
- * their prior paths. That keeps a drag cheap; route without a prior when the drag ends.
+ * With a `prior`, only arcs touching a moved node, or now run over by one, are routed again, as branches off
+ * whatever of their cable still stands; the rest keep their prior paths. That is cheap enough for every frame of
+ * a drag. Without one, every cable is routed, then ripped up and routed again.
  */
 export function routeArcs(net: Net, shapes: Map<string, Shape>, prior?: Prior): Map<ArcKey, Pt[]> {
   const r = new Router(net, shapes)

@@ -347,7 +347,7 @@ export function Canvas(props: Props) {
         .join(' ')
       const d = polylinePath(pts)
       return (
-        <g key={arcKey(a)} className={cls}>
+        <g key={arcKey(a)} className={cls} data-arc={arcKey(a)}>
           <path d={d} className="arc-line" />
           {a.kind === 'take' ? <path d={arrowAt(end, before)} className="arc-head" /> : null}
           {a.kind === 'give' ? <path d={arrowAt(pts[0], pts[1])} className="arc-head" /> : null}
@@ -691,7 +691,8 @@ function useFlightAnimation(flight: Flight | undefined, net: Net, routes: Map<Ar
     const t0 = performance.now()
     let raf = 0
     const tick = (now: number) => {
-      const t = now - t0
+      // A frame's timestamp can predate t0, which was read after the frame began.
+      const t = Math.max(0, now - t0)
       const i = Math.floor(t / FRAME_MS)
       if (i >= flight.frames.length) return setState(null)
       const f = (t % FRAME_MS) / FRAME_MS
