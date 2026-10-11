@@ -42,17 +42,23 @@ A verb's speaker is a seat or `world`.
 - A seat's verb is a choice. When it is possible, the seat may say it.
 - A world verb is a consequence. When it is possible, the world must say it.
 
-World verbs carry two more numbers. `priority` orders the world's responses, and the highest wins. `weight` sets the odds when several world verbs of the same priority are possible at once. That tie is chance. A die roll is a set of world verbs at one priority, weighted by how often each face comes up.
+World verbs carry two more numbers. `priority` orders the world's responses, and the highest wins. Priority is one order for the whole rulebook, the way a rulebook says "first check for a win, then pass the turn". `weight`, a whole number of at least 1, sets the odds when several world verbs of the same priority are possible at once. That tie is chance. A die roll is a set of world verbs at one priority, weighted by how often each face comes up.
+
+A tie between world verbs that do not compete for the same marks is harmless. They fire one after another in a random order, and every order reaches the same place, so the odds of where the world settles are unchanged. A die with faces weighted 1 and 3 still lands 1 a quarter of the time when an unrelated rule is possible at the same moment.
 
 ### Outcomes
 
-A place with `ends "text"` is an outcome. When any outcome place holds a mark, the game is over, nobody speaks again, and the text names the result: "X wins", "Draw".
+A place with `ends "text"` is an outcome. When any outcome place holds a mark, the game is over, nobody speaks again, and the text names the result: "X wins", "Draw". If several outcome places hold marks at once, the result names all of them, "Ann wins and Bo wins", which is how a shared victory is written.
 
 ### Hidden information
 
 A place is seen by everyone unless it says `seen-by` and lists seats. `seen-by none` hides it from every seat. A seat that cannot see a place sees that it exists but not its marks.
 
 Revealing information is moving a mark. A card flips face up when a verb takes it from a private place and gives it to a public one. MAPS needs no rules about visibility changing, because places never change who sees them.
+
+Saying a verb is public, but a seat hears a verb by name only if it can see every place the verb touches. Otherwise it hears only that the speaker acted. When the world flips a covered coin, the caller hears "the world acted", not "heads".
+
+A seat's verb that takes, needs, or is blocked by a place the seat cannot see leaks that place: whether the verb is offered tells the seat something about the hidden marks. Sometimes that is the design. "Draw a card" is offered only while the deck has cards, and a player at a real table can see the deck's height. The checker warns about every such arc so the leak is a choice.
 
 ## The conversation
 
@@ -61,16 +67,16 @@ These rules decide who may speak. They are the whole meaning of a net.
 1. Start with each place holding its starting marks.
 2. If an outcome place holds a mark, the conversation is over.
 3. If any world verb is possible, the world speaks. Take the possible world verbs with the highest priority. If there is one, say it. If there are several, chance picks one, each in proportion to its weight. Saying a verb applies its arcs. Go to step 2.
-4. The world is silent. Every seat with a possible verb may choose one of them. Saying a verb applies its arcs. Go to step 2.
+4. The world is silent. Any seat with a possible verb may say one of them. The first seat to speak goes first. Saying a verb applies its arcs. Go to step 2.
 5. If no world verb and no seat verb is possible and no outcome holds a mark, the conversation stalls. A stall in a finished design is almost always a missing rule.
 
-Turn order is not a separate concept. It is a mark in a place such as "X to move", and the seat's verbs take it. A real-time game or a game of simultaneous moves is a net where more than one seat can speak at the same moment. Step 4 allows that.
+Turn order is not a separate concept. It is a mark in a place such as "X to move", and the seat's verbs take it. A real-time game is a net where more than one seat can speak at the same moment, and whoever speaks first goes first. Simultaneous moves, as in rock, paper, scissors, are commitments to places the other seats cannot see, followed by a world verb that reveals them once everyone has committed. The order of the commitments then carries no information, because nobody can hear what the others chose.
 
-A transcript is the list of what was said, in order: the speaker, the verb, and the odds for a chance result. A transcript is to a MAPS design what a recorded chess game is to the rules of chess.
+A transcript is the list of what was said, in order: the speaker, the verb, and the odds for a chance result. A transcript is to a MAPS design what a recorded chess game is to the rules of chess. A transcript is legal when each utterance was allowed at its moment by the rules above. `replay` in `studio/src/core/engine.ts` checks that.
 
 ## The text form
 
-A `.maps` file starts with the line `maps 2`. After that, each line is one statement. A `#` that starts a word begins a comment that runs to the end of the line. Names use lowercase letters, digits, and `_`, and start with a letter. Labels are in double quotes.
+A `.maps` file starts with the line `maps 2`. After that, each line is one statement. A `#` that starts a word begins a comment that runs to the end of the line. Names use lowercase letters, digits, and `_`, and start with a letter. `world`, `all`, and `none` are reserved. Labels are in double quotes, with `\"` for a quote inside a label. An attribute may appear once per statement.
 
 ```maps
 maps 2
@@ -110,22 +116,37 @@ verb x_line_456 "X has 4-5-6" by world priority 2 in judge at 1220 65
 | `seat name "label"` | `color "#rrggbb"` |
 | `group name "label"` | |
 | `place name "label"` | `marks n`, `seen-by all` or `seen-by none` or `seen-by a,b`, `ends "text"`, `in group`, `at x y` |
-| `verb name "label"` | `by seat-or-world` (default `world`), `priority n`, `weight n`, `in group`, `at x y` |
+| `verb name "label"` | `by seat-or-world` (required), `priority n`, `weight n`, `in group`, `at x y` |
 | `  take n place` | an indented arc belongs to the verb above it; `n` is optional |
 
-The reference implementation is `studio/src/core/text.ts`. Printing a parsed file gives back the same file.
+The reference implementation is `studio/src/core/text.ts`. The printer writes a canonical file: attributes in the order of the table above, a position on every node, and no comments. Parsing a canonical file and printing it gives back the same text. Comments in a hand-written file do not survive a trip through the studio.
 
 ## What the checker reports
 
-A design tool must report these structural problems.
+A design tool must report these structural problems as errors.
 
-- A name used twice, or a seat named `world`.
-- A verb spoken by a seat that does not exist, or an arc to a place that does not exist.
+- A name used twice, or a reserved name.
+- A seat color that is not `#rrggbb`.
+- A verb spoken by a seat that does not exist, an arc to a place that does not exist, or an arc whose verb does not exist.
 - Two identical arcs on one verb. Use a count instead.
+- A world verb with a weight below 1, or an arc count below 1.
+
+It must report these as warnings.
+
 - A verb with no inputs. It is always possible, and a world verb with no inputs never lets the world fall silent.
 - Priority or weight on a seat's verb. They only order the world.
+- A seat's verb that depends on a place that seat cannot see.
 
-A design tool should also play the whole conversation out and report what it finds: how many positions are reachable, how many end in each outcome, how many distinct complete plays exist, where the conversation stalls, which verbs can never be said, and which places grow without limit. `studio/src/core/analyze.ts` does this.
+A design tool should also play the whole conversation out and report what it finds:
+
+- how many positions are reachable, and how many of them end in each outcome;
+- how many distinct complete plays exist, in total and for each outcome. Two plays are distinct when a seat chose differently or chance led somewhere different;
+- where the conversation stalls;
+- where the world answers forever without falling silent;
+- which verbs can never be said;
+- the most marks each place ever holds. A place that keeps growing is a sign of an unbounded design, and an exploration that hits its limit reports that it is incomplete.
+
+`studio/src/core/analyze.ts` does this.
 
 ## Worked example: tic-tac-toe
 
@@ -143,7 +164,7 @@ Playing every conversation out reaches 5,478 positions, 958 of them endings (626
 
 Writing tic-tac-toe exposed five things that MAPS 1 could not say or did not notice.
 
-1. **The world's answers need an order.** Completing a line must end the game before the turn passes. With every world verb at one priority, the judge and the turn-passer race, and the net reaches 7,046 positions and 577,440 games, with play continuing after a win. Priority fixes it, and analysis shows the difference.
+1. **The world's answers need an order.** Completing a line must end the game before the turn passes. Put the line checks at the same priority as passing the turn, and the two race: the net reaches 7,046 positions and 577,440 games, because play can continue after a line is complete. Put every world verb at one priority and it reaches 7,270 positions and 1,222,560 games. Priority fixes it, and analysis shows the difference. The tests pin all three figures.
 2. **A draw is a test for absence.** "The board is full" is the absence of empty squares, an `unless` arc on the counter. Leave the draw rule out and the analysis reports 16 stalled positions, which are the 16 draws with no rule to end them.
 3. **The world's thinking deserves a place.** The "judge X's move" place sits between X speaking and O's turn. It is where the world listens and decides, and it makes Crawford's listen, think, and speak loop visible on the page. It also gives RUNS an explicit point where order matters.
 4. **One idea is written many times.** "A seat marks an empty square" is written 18 times, and "three in a row wins" is written 16 times. MAPS needs a way to fold repeated structure into one verb over a family of places. This is open; see below.
@@ -164,7 +185,7 @@ RUNS runs games. Its working implementation runs rules in a declared sequence, p
 | Outcome places | The halting conditions and the result each one reports |
 | `seen-by` | What each player's view may show |
 
-RUNS chooses number representations, data layout, timing, rendering, and input devices. MAPS has no opinion about them. Two RUNS games built from one MAPS design should produce the same transcripts for the same choices and chance results. That is the test that a RUNS game implements a MAPS design.
+RUNS chooses number representations, data layout, timing, rendering, and input devices. MAPS has no opinion about them. A RUNS game implements a MAPS design when every transcript it produces replays as legal against the design. That test needs a shared transcript format, which is still open.
 
 ## Changes from MAPS 1
 
@@ -183,5 +204,7 @@ MAPS 1 described itself as a Petri net but did not behave like one. MAPS 2 start
 - **Folding.** Tic-tac-toe shows the need to write "a seat marks an empty square" once for all nine squares. Coloured Petri nets solve this with typed marks. MAPS needs the smallest version of that idea a designer can draw by hand, and the analysis must still unfold it.
 - **Composition.** Designs should reuse mechanics from other designs by fusing named places, so a lock-and-key mechanic can be published once and used in many games. The text form needs a way to import a design and bind its places.
 - **Publishing.** Each design should be a signed Nostr event. The provisional kind `30040` that MAPS 1 named collides with an existing Nostr specification (NKBIP-01), so MAPS needs a different kind.
+- **Transcripts.** The engine has a transcript type and a replay check, but no text form for transcripts yet. RUNS conformance needs one.
+- **Scores.** Outcomes are named results. Games that end in a ranking or a score need a way to read the result from places that count points.
 - **Time.** Real-time games are nets where several seats can speak at once. Whether MAPS needs durations or rates beyond that is undecided.
 - **Strategic analysis.** Feedback loops, choice density, and structural comparison between two games can be computed from the reachability graph. The analysis does not compute them yet.

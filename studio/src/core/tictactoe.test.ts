@@ -71,4 +71,25 @@ describe('tic-tac-toe written in MAPS', () => {
     expect(a.stalls).toEqual([])
     expect(a.deadVerbs).toEqual([])
   })
+
+  it('without priority the judge races the turn: 7,046 positions when wins tie with passing', () => {
+    const n = ticTacToe()
+    n.verbs.forEach((v) => v.id.includes('_line_') && (v.priority = 0))
+    const a = analyze(n)
+    expect([a.nodes.size, a.plays]).toEqual([7046, 577_440])
+  })
+
+  it('with every world verb at one priority: 7,270 positions', () => {
+    const n = ticTacToe()
+    n.verbs.forEach((v) => (v.priority = 0))
+    const a = analyze(n)
+    expect([a.nodes.size, a.plays]).toEqual([7270, 1_222_560])
+  })
+
+  it('without the draw rule the conversation stalls in exactly the 16 drawn positions', () => {
+    const n = ticTacToe()
+    n.verbs = n.verbs.filter((v) => v.id !== 'board_full')
+    n.arcs = n.arcs.filter((a) => a.verb !== 'board_full')
+    expect(analyze(n).stalls).toHaveLength(16)
+  })
 })

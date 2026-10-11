@@ -1,4 +1,4 @@
-import { ARC_KINDS, WORLD, emptyNet, isIdent, type ArcKind, type Net, type Place, type Verb } from './model'
+import { ARC_KINDS, emptyNet, isIdent, type ArcKind, type Net, type Place, type Verb } from './model'
 
 export const HEADER = 'maps 2'
 
@@ -13,15 +13,28 @@ export class MapsSyntaxError extends Error {
 
 const tokenize = (line: string, n: number): string[] => {
   const out: string[] = []
-  const re = /\s*(?:"((?:[^"\\]|\\.)*)"|(\S+))/y
-  let m: RegExpExecArray | null
-  while (re.lastIndex < line.length && (m = re.exec(line))) {
-    if (m[2]?.startsWith('#')) break
-    if (m[1] !== undefined) out.push('"' + m[1].replace(/\\(.)/g, '$1'))
-    else if (m[2] !== undefined) out.push(m[2])
+  let i = 0
+  while (i < line.length) {
+    const ch = line[i]
+    if (ch === ' ' || ch === '\t') i++
+    else if (ch === '#') break
+    else if (ch === '"') {
+      let s = ''
+      for (i++; ; i++) {
+        if (i >= line.length) throw new MapsSyntaxError(n, 'unterminated string')
+        if (line[i] === '"') break
+        if (line[i] === '\\') i++
+        s += line[i]
+      }
+      i++
+      out.push('"' + s)
+    } else {
+      let j = i
+      while (j < line.length && line[j] !== ' ' && line[j] !== '\t') j++
+      out.push(line.slice(i, j))
+      i = j
+    }
   }
-  if (re.lastIndex < line.trimEnd().length && !line.slice(re.lastIndex).trim().startsWith('#'))
-    throw new MapsSyntaxError(n, 'unterminated string')
   return out
 }
 
@@ -56,6 +69,7 @@ export const parse = (src: string): Net => {
       if (!verb) throw new MapsSyntaxError(n, 'an indented arc must follow a verb')
       const kind = t[0] as ArcKind
       if (!ARC_KINDS.includes(kind)) throw new MapsSyntaxError(n, `arcs are ${ARC_KINDS.join(', ')}; got ${t[0]}`)
+      if (t.length !== 2 && t.length !== 3) throw new MapsSyntaxError(n, `an arc is "${kind} place" or "${kind} count place"`)
       const count = t.length === 3 ? int(t[1], n, 'count') : 1
       if (count < 1) throw new MapsSyntaxError(n, 'an arc count is at least 1')
       net.arcs.push({ kind, count, place: ident(t[t.length - 1], n, 'place'), verb: verb.id })
@@ -93,7 +107,7 @@ export const parse = (src: string): Net => {
         break
       }
       case 'verb': {
-        const v: Verb = { id: ident(rest[0], n, 'verb'), label: quoted(rest[1], n, 'verb label'), by: WORLD, priority: 0, weight: 1, x: 0, y: 0 }
+        const v: Verb = { id: ident(rest[0], n, 'verb'), label: quoted(rest[1], n, 'verb label'), by: '', priority: 0, weight: 1, x: 0, y: 0 }
         attrs(rest.slice(2), n, {
           by: (a) => (v.by = ident(a(), n, 'speaker')),
           priority: (a) => (v.priority = int(a(), n, 'priority')),
@@ -101,6 +115,7 @@ export const parse = (src: string): Net => {
           in: (a) => (v.group = ident(a(), n, 'group')),
           at: (a) => ((v.x = int(a(), n, 'x')), (v.y = int(a(), n, 'y'))),
         })
+        if (!v.by) throw new MapsSyntaxError(n, `verb ${v.id} must say who speaks it: "by world" or "by <seat>"`)
         net.verbs.push(v)
         verb = v
         break
@@ -115,6 +130,7 @@ export const parse = (src: string): Net => {
 
 const attrs = (toks: string[], n: number, handlers: Record<string, (next: () => string) => void>) => {
   let i = 0
+  const used = new Set<string>()
   const next = () => {
     if (i >= toks.length) throw new MapsSyntaxError(n, 'attribute is missing its value')
     return toks[i++]
@@ -123,11 +139,13 @@ const attrs = (toks: string[], n: number, handlers: Record<string, (next: () => 
     const key = toks[i++]
     const h = handlers[key]
     if (!h) throw new MapsSyntaxError(n, `unknown attribute "${key}"; expected ${Object.keys(handlers).join(', ')}`)
+    if (used.has(key)) throw new MapsSyntaxError(n, `"${key}" is given twice`)
+    used.add(key)
     h(next)
   }
 }
 
-const q = (s: string) => `"${s.replace(/(["\\])/g, '\\$1')}"`
+const q = (s: string) => `"${s.replace(/(["\\])/g, '\\$1').replace(/\n/g, ' ')}"`
 
 export const print = (net: Net): string => {
   const lines = [HEADER, `title ${q(net.title)}`, '']

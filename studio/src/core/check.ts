@@ -6,26 +6,32 @@ export interface Problem {
   at?: string
 }
 
-/** Structural problems: anything that makes the net mean nothing or mean two things. */
+const RESERVED = [WORLD, 'all', 'none']
+
+/** Structural problems: anything that makes the net mean nothing, mean two things, or leak a secret. */
 export const check = (net: Net): Problem[] => {
   const out: Problem[] = []
   const err = (message: string, at?: string) => out.push({ severity: 'error', message, at })
   const warn = (message: string, at?: string) => out.push({ severity: 'warning', message, at })
   const ids = new Map<string, string>()
   const claim = (id: string, what: string) => {
-    if (ids.has(id)) err(`"${id}" names both a ${ids.get(id)} and a ${what}`, id)
+    if (RESERVED.includes(id)) err(`"${id}" is reserved and cannot name a ${what}`, id)
+    else if (ids.has(id)) err(`"${id}" names both a ${ids.get(id)} and a ${what}`, id)
     else ids.set(id, what)
   }
   net.seats.forEach((s) => claim(s.id, 'seat'))
-  if (ids.has(WORLD)) err('"world" is the rules themselves; a seat cannot use that name', WORLD)
+  net.groups.forEach((g) => claim(g.id, 'group'))
   net.places.forEach((p) => claim(p.id, 'place'))
   net.verbs.forEach((v) => claim(v.id, 'verb'))
+  for (const s of net.seats) if (!/^#[0-9a-f]{6}$/i.test(s.color)) err(`seat ${s.id} has color "${s.color}"; use #rrggbb`, s.id)
+
   const seats = new Set(net.seats.map((s) => s.id))
-  const places = new Set(net.places.map((p) => p.id))
+  const placeById = new Map(net.places.map((p) => [p.id, p]))
+  const verbIds = new Set(net.verbs.map((v) => v.id))
   const groups = new Set(net.groups.map((g) => g.id))
   for (const v of net.verbs) {
     if (v.by !== WORLD && !seats.has(v.by)) err(`${v.id} is spoken by "${v.by}", which is not a seat`, v.id)
-    if (v.weight < 0) err(`${v.id} has a negative weight`, v.id)
+    if (v.by === WORLD && v.weight < 1) err(`${v.id} has weight ${v.weight}; a world verb's weight is at least 1`, v.id)
     if (v.by !== WORLD && (v.priority || v.weight !== 1)) warn(`${v.id}: priority and weight only order the world's responses; a seat simply chooses`, v.id)
     if (v.group && !groups.has(v.group)) err(`${v.id} is in unknown group ${v.group}`, v.id)
     if (!net.arcs.some((a) => a.verb === v.id && a.kind !== 'give'))
@@ -38,10 +44,16 @@ export const check = (net: Net): Problem[] => {
   }
   const seen = new Set<string>()
   for (const a of net.arcs) {
-    if (!places.has(a.place)) err(`${a.verb} ${a.kind}s unknown place ${a.place}`, a.verb)
+    if (!verbIds.has(a.verb)) err(`an arc to ${a.place} belongs to unknown verb ${a.verb}`, a.place)
+    const place = placeById.get(a.place)
+    if (!place) err(`${a.verb} ${a.kind}s unknown place ${a.place}`, a.verb)
+    if (a.count < 1) err(`${a.verb} ${a.kind}s ${a.count} of ${a.place}; a count is at least 1`, a.verb)
     const key = `${a.kind}|${a.place}|${a.verb}`
     if (seen.has(key)) err(`${a.verb} has two "${a.kind} ${a.place}" arcs; use a count instead`, a.verb)
     seen.add(key)
+    const speaker = net.verbs.find((v) => v.id === a.verb)?.by
+    if (place && speaker && speaker !== WORLD && a.kind !== 'give' && place.seenBy !== 'all' && !place.seenBy.includes(speaker))
+      warn(`${a.verb} ${a.kind}s ${a.place}, which ${speaker} cannot see; whether ${a.verb} is possible tells ${speaker} about it`, a.verb)
   }
   return out
 }
