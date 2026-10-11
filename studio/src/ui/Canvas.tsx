@@ -12,6 +12,8 @@ import {
   dieWidth,
   groupHulls,
   inflate,
+  PRIORITY_R,
+  priorityBadge,
   readableOn,
   shapeBox,
   shapesOf,
@@ -20,7 +22,7 @@ import {
   type Pt,
   type Shape,
 } from './geometry'
-import { arcKey, cableJunctions, pointAlong, polylinePath, type ArcKey } from './route'
+import { arcKey, cableJunctions, countBadgeAt, pointAlong, polylinePath, type ArcKey } from './route'
 import { useRoutes } from './useRoutes'
 
 export interface Flight {
@@ -327,8 +329,6 @@ export function Canvas(props: Props) {
     const isSelected = (a: Arc) => selection?.kind === 'arc' && sameArc(a, selection)
     const rank = (a: Arc) => (isSelected(a) ? 2 : touches(a) ? 1 : 0)
     const byKey = new Map(net.arcs.map((a) => [arcKey(a), a]))
-    const lastJunction = new Map<ArcKey, Pt>()
-    for (const j of junctions) for (const k of j.arcs) lastJunction.set(k, j.at)
     const drawn = net.arcs.filter((a) => routes.has(arcKey(a))).sort((a, b) => rank(a) - rank(b))
     const arcs = drawn.map((a) => {
       const pts = routes.get(arcKey(a))!
@@ -345,7 +345,7 @@ export function Canvas(props: Props) {
           {a.kind === 'give' ? <path d={arrowAt(pts[0], pts[1])} className="arc-head" /> : null}
           {a.kind === 'need' ? <ArcCap at={capAt(end, before, 3.5)} r={3.5} filled /> : null}
           {a.kind === 'unless' ? <ArcCap at={capAt(end, before, 4.5)} r={4.5} /> : null}
-          {a.count !== 1 ? <CountBadge at={badgeSpot(pts, a.kind === 'give', lastJunction.get(arcKey(a)))} n={a.count} /> : null}
+          {a.count !== 1 ? <CountBadge at={countBadgeAt(net, routes, a)} n={a.count} /> : null}
           {mode === 'edit'
             ? pts.slice(1).map((q, i) => {
                 const p = pts[i]
@@ -519,8 +519,8 @@ export function Canvas(props: Props) {
                   {v.label}
                 </text>
                 {v.priority !== 0 ? (
-                  <g className="badge" transform={`translate(${w / 2},0)`}>
-                    <circle r={7} />
+                  <g className="badge" transform={`translate(${priorityBadge(w).x},${priorityBadge(w).y})`}>
+                    <circle r={PRIORITY_R} />
                     <text dy={3.5}>{v.priority}</text>
                     <title>{`priority ${v.priority}`}</title>
                   </g>
@@ -641,29 +641,6 @@ function CountBadge({ at, n }: { at: Pt; n: number }) {
       <text dy={4}>{n}</text>
     </g>
   )
-}
-
-/** A count badge sits on the arc's own stretch, past the last junction, so it can't be read as a cable-mate's count. */
-const badgeSpot = (pts: Pt[], give: boolean, junction: Pt | undefined): Pt => {
-  const own = give ? [...pts].reverse() : pts
-  let from = 0
-  if (junction) for (let i = 0; i + 1 < own.length; i++) if (distToSegment(junction, own[i], own[i + 1]) < 0.5) from = i
-  let best = from
-  let len = -1
-  for (let i = from; i + 1 < own.length; i++) {
-    const l = Math.hypot(own[i + 1].x - own[i].x, own[i + 1].y - own[i].y)
-    if (l > len) [best, len] = [i, l]
-  }
-  const a = junction && best === from ? junction : own[best]
-  const b = own[best + 1]
-  return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }
-}
-
-const distToSegment = (p: Pt, a: Pt, b: Pt) => {
-  const dx = b.x - a.x
-  const dy = b.y - a.y
-  const t = Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / (dx * dx + dy * dy || 1)))
-  return Math.hypot(p.x - a.x - t * dx, p.y - a.y - t * dy)
 }
 
 function ArcCap({ at, r, filled }: { at: Pt; r: number; filled?: boolean }): ReactNode {

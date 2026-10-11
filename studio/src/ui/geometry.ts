@@ -15,6 +15,10 @@ export const dieWidth = (v: Verb, chance: boolean) => (chance ? DIE_W + (v.weigh
 
 export const verbWidth = (v: Verb, chance = false) => Math.max(64, Math.min(180, Math.round(v.label.length * 6.2 + 20))) + dieWidth(v, chance)
 
+/** A verb's priority badge, relative to its centre: on the top-right corner, off the right edge where outputs leave. */
+export const priorityBadge = (w: number): Pt => ({ x: w / 2 - 3, y: -VERB_H / 2 + 2 })
+export const PRIORITY_R = 7
+
 export const stateShape = (p: State): Shape => ({ kind: 'circle', x: p.x, y: p.y, r: STATE_R })
 export const verbShape = (v: Verb, chance = false): Shape => ({ kind: 'rect', x: v.x, y: v.y, w: verbWidth(v, chance), h: VERB_H })
 

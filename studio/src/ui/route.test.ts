@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest'
 import type { Arc, Net } from '../core/model'
 import { parse, print } from '../core/text'
 import { autoRoute, moveNodes, moveSegment } from './edit'
-import { chanceTies, shapesOf, type Pt, type Shape } from './geometry'
-import { arcKey, cableJunctions, cableKey, priorFor, routeArcs } from './route'
+import { PRIORITY_R, chanceTies, priorityBadge, shapesOf, type Pt, type Shape } from './geometry'
+import { arcKey, cableJunctions, cableKey, countBadgeAt, priorFor, routeArcs } from './route'
 
 const load = (name: string) => parse(readFileSync(new URL(`../../../examples/${name}.maps`, import.meta.url), 'utf8'))
 const route = (net: Net) => {
@@ -156,5 +156,34 @@ describe('placing routes by hand', () => {
 
     expect(autoRoute(dragged).arcs.some((a) => a.via)).toBe(false)
     expect(autoRoute(dragged, [ref]).arcs.filter((a) => a.via)).toHaveLength(placed.length - 1)
+  })
+})
+
+describe('badges', () => {
+  it('no arc runs under a priority badge', () => {
+    const net = load('tic-tac-toe')
+    const { shapes, routes } = route(net)
+    const badges = net.verbs.filter((v) => v.priority !== 0).map((v) => {
+      const s = shapes.get(v.id) as Extract<Shape, { kind: 'rect' }>
+      const b = priorityBadge(s.w)
+      return { id: v.id, x: s.x + b.x, y: s.y + b.y }
+    })
+    expect(badges.length).toBeGreaterThan(0)
+    const under = net.arcs.flatMap((a) =>
+      badges.filter((b) => samples(routes.get(arcKey(a))!).some((p) => Math.hypot(p.x - b.x, p.y - b.y) < PRIORITY_R)).map((b) => `${arcKey(a)} under ${b.id}`),
+    )
+    expect(under).toEqual([])
+  })
+
+  it("a count badge sits on its own arc, never on a stretch a cable-mate also runs along", () => {
+    const net = load('tic-tac-toe')
+    const { routes } = route(net)
+    const onMate = net.arcs.flatMap((a) => {
+      const at = countBadgeAt(net, routes, a)
+      const near = (pts: Pt[]) => samples(pts).some((p) => Math.hypot(p.x - at.x, p.y - at.y) < 1.5)
+      expect(near(routes.get(arcKey(a))!), arcKey(a)).toBe(true)
+      return net.arcs.filter((b) => b !== a && cableKey(b) === cableKey(a) && near(routes.get(arcKey(b))!)).map((b) => `${arcKey(a)} badge on ${arcKey(b)}`)
+    })
+    expect(onMate).toEqual([])
   })
 })

@@ -1,5 +1,5 @@
 import type { Arc, Net } from '../core/model'
-import { STATE_R, groupHulls, type Pt, type Shape } from './geometry'
+import { PRIORITY_R, STATE_R, groupHulls, priorityBadge, type Pt, type Shape } from './geometry'
 
 /** Routes run on a grid of this pitch; hand-placed bend points snap to it. */
 export const PITCH = 5
@@ -104,7 +104,11 @@ const blockNodes = (g: Grid, net: Net, nodes: Map<string, Node>, shapes: Map<str
     if (s.kind === 'circle') claimCircle(g, n.index, s.x, s.y, n.r + CLEAR)
     else {
       claimRect(g, n.index, s.x, s.y, s.w / 2 + CLEAR, s.h / 2 + CLEAR)
-      if (n.badge) claimCircle(g, n.index, s.x + s.w / 2, s.y, 7 + CLEAR)
+      if (n.badge) {
+        const b = priorityBadge(s.w)
+        // the extra pitch keeps an input's end marker on a nearby top port from touching the badge
+        claimCircle(g, n.index, s.x + b.x, s.y + b.y, PRIORITY_R + CLEAR + PITCH)
+      }
     }
   }
   for (const p of net.states) {
@@ -167,7 +171,7 @@ const verbPorts = (g: Grid, n: Node, output: boolean): Port[] => {
   const ports: Port[] = []
   for (const out of output ? [E, S] : [W, N]) {
     const horizontal = axis(out) === 0
-    const half = horizontal ? s.w / 2 + (out === E && n.badge ? 7 : 0) : s.h / 2
+    const half = horizontal ? s.w / 2 : s.h / 2
     const reach = half + CLEAR + 0.5
     const at = horizontal ? s.x + DX[out] * reach : s.y + DY[out] * reach
     const base = horizontal ? g.x0 : g.y0
@@ -184,7 +188,6 @@ const verbPorts = (g: Grid, n: Node, output: boolean): Port[] => {
       if (g.owner[cell] !== FREE) continue
       const p = ptOf(g, cell)
       const off = horizontal ? p.y - s.y : p.x - s.x
-      if (out === E && n.badge && Math.abs(off) < 8) continue
       const border = horizontal ? { x: s.x + DX[out] * (s.w / 2 + 2), y: p.y } : { x: p.x, y: s.y + DY[out] * (s.h / 2 + 2) }
       const steps = Math.round(Math.abs(horizontal ? p.x - s.x : p.y - s.y) / PITCH) - 1
       if (!stubClear(g, cell, out, n.index, steps)) continue
@@ -880,6 +883,52 @@ export const pointAlong = (pts: Pt[], t: number): Pt => {
     left -= len
   }
   return pts[pts.length - 1]
+}
+
+/**
+ * Where an arc's count badge goes: the middle of the longest stretch of its route that no cable-mate runs along, kept
+ * off the end markers, so the count can't be read as a mate's. When the arc's own stretch is only its end stub, the badge goes there anyway.
+ */
+export const countBadgeAt = (net: Net, routes: Map<ArcKey, Pt[]>, arc: Arc): Pt => {
+  const own = routes.get(arcKey(arc))!
+  const mates = net.arcs.filter((b) => cableKey(b) === cableKey(arc) && arcKey(b) !== arcKey(arc)).map((b) => routes.get(arcKey(b)) ?? [])
+  const total = own.slice(1).reduce((n, q, i) => n + Math.hypot(q.x - own[i].x, q.y - own[i].y), 0)
+  const ENDS = 12
+  const BADGE_W = 16
+  let best = { from: 0, to: 0 }
+  let unclipped = { from: 0, to: 0 }
+  let run = 0
+  for (let i = 1; i < own.length; i++) {
+    const [p, q] = [own[i - 1], own[i]]
+    const len = Math.hypot(q.x - p.x, q.y - p.y)
+    const horizontal = p.y === q.y
+    const covered: [number, number][] = []
+    if (horizontal || p.x === q.x)
+      for (const m of mates)
+        for (let j = 1; j < m.length; j++) {
+          const [r, s] = [m[j - 1], m[j]]
+          const on = horizontal ? r.y === p.y && s.y === p.y : r.x === p.x && s.x === p.x
+          if (!on) continue
+          const along = (t: Pt) => (horizontal ? (t.x - p.x) * Math.sign(q.x - p.x) : (t.y - p.y) * Math.sign(q.y - p.y))
+          covered.push([Math.min(along(r), along(s)), Math.max(along(r), along(s))])
+        }
+    covered.sort((a, b) => a[0] - b[0])
+    let at = 0
+    const free = (lo: number, hi: number) => {
+      if (hi - lo > unclipped.to - unclipped.from) unclipped = { from: run + lo, to: run + hi }
+      const from = Math.max(run + lo, ENDS)
+      const to = Math.min(run + hi, total - ENDS)
+      if (to - from > best.to - best.from) best = { from, to }
+    }
+    for (const [lo, hi] of covered) {
+      if (lo > at) free(at, Math.min(lo, len))
+      at = Math.max(at, hi)
+    }
+    if (at < len) free(at, len)
+    run += len
+  }
+  const at = best.to - best.from >= BADGE_W ? best : unclipped
+  return pointAlong(own, at.to > at.from ? (at.from + at.to) / 2 / total : 0.5)
 }
 
 /** SVG path for a polyline with its corners rounded. */
