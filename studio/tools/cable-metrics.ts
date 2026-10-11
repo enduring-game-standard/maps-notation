@@ -83,6 +83,7 @@ const measure = (net: Net, route: Router) => {
     ink += hi - lo
   }
   let crossings = 0
+  const points = new Set<string>()
   let overlap = 0
   let crowded = 0
   for (let i = 0; i < arcs.length; i++)
@@ -90,7 +91,11 @@ const measure = (net: Net, route: Router) => {
       if (cable(arcs[i]) === cable(arcs[j])) continue
       for (const [a, b] of segs(routes.get(key(arcs[i]))!))
         for (const [c, d] of segs(routes.get(key(arcs[j]))!)) {
-          if (cross(a, b, c, d)) crossings++
+          if (cross(a, b, c, d)) {
+            crossings++
+            const t = ((c.x - a.x) * (d.y - c.y) - (c.y - a.y) * (d.x - c.x)) / ((b.x - a.x) * (d.y - c.y) - (b.y - a.y) * (d.x - c.x))
+            points.add([cable(arcs[i]), cable(arcs[j])].sort().join('/') + `@${Math.round(a.x + t * (b.x - a.x))},${Math.round(a.y + t * (b.y - a.y))}`)
+          }
           const h1 = a.y === b.y && a.x !== b.x
           const h2 = c.y === d.y && c.x !== d.x
           const v1 = a.x === b.x && a.y !== b.y
@@ -109,7 +114,8 @@ const measure = (net: Net, route: Router) => {
     arcs: `${arcs.length}/${net.arcs.length}`,
     'node intrusions': intrusions,
     'arcs over a label': labelHits,
-    crossings,
+    'crossings (arc pairs)': crossings,
+    'crossings (distinct cable points)': points.size,
     'overlap px (different cables)': Math.round(overlap),
     'crowded px (<5px apart)': Math.round(crowded),
     'ink px': Math.round(ink),
