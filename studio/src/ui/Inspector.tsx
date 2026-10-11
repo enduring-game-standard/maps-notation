@@ -3,6 +3,7 @@ import {
   addGroup,
   addSeat,
   arcRef,
+  autoRoute,
   deleteGroup,
   deleteSeat,
   deleteSelection,
@@ -258,6 +259,36 @@ function ArcEditor({ net, arcSel, onCommit }: { net: Net; arcSel: ArcRef; onComm
           if (r) onCommit(r[0], r[1])
         }}
       />
+      <RouteRow net={net} arcSel={arcSel} onCommit={onCommit} />
+    </>
+  )
+}
+
+function RouteRow({ net, arcSel, onCommit }: { net: Net; arcSel: ArcRef; onCommit: Props['onCommit'] }) {
+  const arc = net.arcs.find((a) => sameArc(a, arcSel))!
+  const placedMates = net.arcs.filter((a) => a !== arc && a.via && a.state === arc.state && a.kind === arc.kind)
+  return (
+    <>
+      <Row label="Route">
+        <span className="route-state">{arc.via ? `Placed by hand · ${arc.via.length} ${arc.via.length === 1 ? 'bend' : 'bends'}` : 'Automatic'}</span>
+      </Row>
+      {arc.via ? (
+        <div className="route-actions">
+          <button className="ghost-btn" onClick={() => onCommit(autoRoute(net, [arcSel]), arcSel)}>
+            Route automatically
+          </button>
+          {placedMates.length ? (
+            <button className="ghost-btn" onClick={() => onCommit(autoRoute(net, [arcSel, ...placedMates.map(arcRef)]), arcSel)}>
+              Whole cable ({placedMates.length + 1})
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+      <p className="hint">
+        {arc.via
+          ? 'This route stays where you put it when nodes move.'
+          : 'The editor routes this arc around nodes and bundles it with arcs that share its state and kind. Drag the arc to place it by hand; dragging a shared trunk moves it for every arc on it.'}
+      </p>
     </>
   )
 }
@@ -321,6 +352,17 @@ function NetPanel({ net, onCommit, touch }: { net: Net; onCommit: Props['onCommi
           </button>
         </div>
       ))}
+      <div className="list-head">
+        <h3>Arc routes</h3>
+        <button className="ghost-btn" disabled={!net.arcs.some((a) => a.via)} onClick={() => onCommit(autoRoute(net))}>
+          Route all automatically
+        </button>
+      </div>
+      <p className="hint">
+        {net.arcs.some((a) => a.via)
+          ? `${net.arcs.filter((a) => a.via).length} of ${net.arcs.length} arcs placed by hand; the rest are routed for you.`
+          : 'Every arc is routed for you. Drag an arc to place its route by hand.'}
+      </p>
       {touch ? (
         <p className="hint">Tap a node to edit it. Tap State or Verb, then tap the canvas to place one. Drag a selected node's dot onto another node to connect them. Pinch to zoom.</p>
       ) : (

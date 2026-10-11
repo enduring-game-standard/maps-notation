@@ -72,11 +72,10 @@ export const pointAt = ({ start: s, ctrl: c, end: e }: Curve, t: number): Pt => 
   return { x: u * u * s.x + 2 * u * t * c.x + t * t * e.x, y: u * u * s.y + 2 * u * t * c.y + t * t * e.y }
 }
 
-export const curvePath = ({ start: s, ctrl: c, end: e }: Curve) => `M${s.x},${s.y} Q${c.x},${c.y} ${e.x},${e.y}`
-
 /** Take and give run state-to-verb and verb-to-state, so their bends land on opposite sides; need and unless bend the other way to stay clear of a take. */
 const BEND: Record<Arc['kind'], number> = { take: 0.1, give: 0.1, need: -0.12, unless: -0.2 }
 
+/** The single curve every arc used to be; kept as the baseline that tools/cable-metrics.ts compares routers against. */
 export const arcCurve = (arc: Arc, shapes: Map<string, Shape>): Curve | undefined => {
   const p = shapes.get(arc.state)
   const v = shapes.get(arc.verb)
@@ -84,23 +83,25 @@ export const arcCurve = (arc: Arc, shapes: Map<string, Shape>): Curve | undefine
   return arc.kind === 'give' ? curveBetween(v, p, BEND.give) : curveBetween(p, v, BEND[arc.kind])
 }
 
-export const arrowHead = (c: Curve, size = 8) => {
-  const dx = c.end.x - c.ctrl.x
-  const dy = c.end.y - c.ctrl.y
+/** An arrowhead with its tip at `tip`, pointing away from `from`. */
+export const arrowAt = (tip: Pt, from: Pt, size = 8) => {
+  const dx = tip.x - from.x
+  const dy = tip.y - from.y
   const len = Math.hypot(dx, dy) || 1
   const ux = dx / len
   const uy = dy / len
-  const bx = c.end.x - ux * size
-  const by = c.end.y - uy * size
+  const bx = tip.x - ux * size
+  const by = tip.y - uy * size
   const w = size * 0.5
-  return `M${c.end.x},${c.end.y} L${bx - uy * w},${by + ux * w} L${bx + uy * w},${by - ux * w} Z`
+  return `M${tip.x},${tip.y} L${bx - uy * w},${by + ux * w} L${bx + uy * w},${by - ux * w} Z`
 }
 
-export const endCap = (c: Curve, r: number): Pt => {
-  const dx = c.end.x - c.ctrl.x
-  const dy = c.end.y - c.ctrl.y
+/** The center of a cap of radius `r` sitting at the end `tip` of a line arriving from `from`. */
+export const capAt = (tip: Pt, from: Pt, r: number): Pt => {
+  const dx = tip.x - from.x
+  const dy = tip.y - from.y
   const len = Math.hypot(dx, dy) || 1
-  return { x: c.end.x - (dx / len) * r, y: c.end.y - (dy / len) * r }
+  return { x: tip.x - (dx / len) * r, y: tip.y - (dy / len) * r }
 }
 
 export interface Box {

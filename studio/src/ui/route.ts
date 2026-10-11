@@ -1,5 +1,5 @@
 import type { Arc, Net } from '../core/model'
-import { STATE_R, type Pt, type Shape } from './geometry'
+import { STATE_R, groupHulls, type Pt, type Shape } from './geometry'
 
 /** Routes run on a grid of this pitch; hand-placed bend points snap to it. */
 export const PITCH = 5
@@ -95,7 +95,10 @@ interface Node {
   badge: boolean
 }
 
-const blockNodes = (g: Grid, net: Net, nodes: Map<string, Node>) => {
+const blockNodes = (g: Grid, net: Net, nodes: Map<string, Node>, shapes: Map<string, Shape>) => {
+  groupHulls(net, shapes).forEach(({ group, box }, i) =>
+    claimRect(g, nodes.size + i, box.x0 + 14 + (group.label.length * 7) / 2, box.y0 + 14, (group.label.length * 7) / 2 + 4, 9),
+  )
   for (const n of nodes.values()) {
     const s = n.shape
     if (s.kind === 'circle') claimCircle(g, n.index, s.x, s.y, n.r + CLEAR)
@@ -257,20 +260,27 @@ interface Found {
   cost: number
 }
 
+/** Search buffers outlive one routing call: a drag routes every frame, and allocating them each time shows. */
+let scratch: { g: Float64Array; seen: Uint32Array; from: Int32Array; closed: Uint32Array; stamp: number } | undefined
+
 class Searcher {
   g: Float64Array
   seen: Uint32Array
   from: Int32Array
   closed: Uint32Array
-  stamp = 0
   cross = CROSS
+  greed = GREED
+  /** expansions allowed per search; a drag gives up on hard arcs rather than drop frames */
+  budget = Infinity
   heap = new Heap()
   constructor(readonly grid: Grid) {
     const n = grid.cols * grid.rows * 4
-    this.g = new Float64Array(n)
-    this.seen = new Uint32Array(n)
-    this.from = new Int32Array(n)
-    this.closed = new Uint32Array(n)
+    if (!scratch || scratch.g.length < n || scratch.stamp > 4e9)
+      scratch = { g: new Float64Array(n), seen: new Uint32Array(n), from: new Int32Array(n), closed: new Uint32Array(n), stamp: 0 }
+    this.g = scratch.g
+    this.seen = scratch.seen
+    this.from = scratch.from
+    this.closed = scratch.closed
   }
 
   /**
@@ -278,9 +288,9 @@ class Searcher {
    * may leave but not re-enter. `lenient` turns walls into costs so a path always exists.
    */
   run(cable: number, starts: Start[], target: Target, mine: Uint8Array | null, lenient: boolean): Found | undefined {
-    const { grid, g, seen, from, heap } = this
+    const { grid, g, seen, from, heap, greed } = this
     const { cols, rows, owner, occ } = grid
-    const stamp = ++this.stamp
+    const stamp = ++scratch!.stamp
     heap.size = 0
     const { cx0, cy0, cx1, cy1 } = target.box
     const h = (c: number) => {
@@ -288,10 +298,11 @@ class Searcher {
       const y = (c - x) / cols
       const ox = Math.max(0, cx0 - x, x - cx1)
       const oy = Math.max(0, cy0 - y, y - cy1)
-      return ((ox + oy) * STEP + (ox && oy ? BEND : 0)) * GREED
+      return ((ox + oy) * STEP + (ox && oy ? BEND : 0)) * greed
     }
     let best = Infinity
     let bestState = -1
+    let budget = this.budget
     for (const s of starts) {
       const st = s.cell * 4 + s.dir
       if (seen[st] === stamp && g[st] <= s.cost) continue
@@ -311,6 +322,7 @@ class Searcher {
       const st = heap.pop()
       if (this.closed[st] === stamp) continue
       this.closed[st] = stamp
+      if (--budget < 0) return undefined
       const c = st >> 2
       const d = st & 3
       const gc = g[st]
@@ -441,8 +453,8 @@ const straight = (from: Shape, to: Shape): Pt[] => {
 interface Tree {
   /** per cell: the previous cell toward the state, -1 at a root port */
   parent: Map<number, number>
-  rootPort: Map<number, Port>
-  mine: Uint8Array
+  /** where each root cell's stub meets the state */
+  rootPort: Map<number, Pt>
   /** cells where a branch ends at a verb: never a place to attach */
   leaves: Set<number>
 }
@@ -466,6 +478,9 @@ class Router {
   /** per cable: the occupancy it wrote, as (axis * cells + cell, previous value) pairs */
   private logs = new Map<string, number[]>()
   private log: number[] = []
+  /** cells of the tree being routed now, which its new branches may leave but not re-enter */
+  private mine: Uint8Array
+  private active: Tree | undefined
 
   constructor(
     readonly net: Net,
@@ -500,8 +515,9 @@ class Router {
       this.cables.set(cableKey(a), [...(this.cables.get(cableKey(a)) ?? []), a])
     }
     this.grid = makeGrid(Number.isFinite(box.x0) ? box : { x0: 0, y0: 0, x1: 0, y1: 0 })
-    blockNodes(this.grid, net, this.nodes)
+    blockNodes(this.grid, net, this.nodes, shapes)
     this.search = new Searcher(this.grid)
+    this.mine = new Uint8Array(this.grid.cols * this.grid.rows)
     for (const k of this.cables.keys()) this.ids.set(k, this.ids.size)
     const span = (list: Arc[]) => {
       const s = this.nodes.get(list[0].state)!.shape
@@ -540,8 +556,10 @@ class Router {
     if (last !== undefined) this.mark(axis(last), cells[cells.length - 1], cable)
   }
 
-  setCross(c: number) {
-    this.search.cross = c
+  tune(cross: number, greed: number, budget = Infinity) {
+    this.search.cross = cross
+    this.search.greed = greed
+    this.search.budget = budget
   }
 
   release(key: string) {
@@ -558,54 +576,94 @@ class Router {
     for (const a of this.cables.get(key)!) this.routes.delete(arcKey(a))
   }
 
-  /** Lays down a cable exactly where it was; false when a node now sits on it. */
-  replay(key: string, prior: Map<ArcKey, Pt[]>) {
-    const list = this.cables.get(key)!
+  /**
+   * Lays down a cable's arcs exactly where they were, except `skip`, and rebuilds its tree so skipped arcs can
+   * branch off it again. False, with nothing laid, when a node now sits on one of them.
+   */
+  replay(key: string, prior: Map<ArcKey, Pt[]>, skip: Set<ArcKey>) {
+    const list = this.cables.get(key)!.filter((a) => !skip.has(arcKey(a)) && !this.runOver(a, prior.get(arcKey(a))))
+    for (const a of this.cables.get(key)!) if (!list.includes(a)) skip.add(arcKey(a))
     const own = new Set<number>()
     for (const a of list) own.add(this.nodes.get(a.state)!.index).add(this.nodes.get(a.verb)!.index)
     const paths = list.map((a) => prior.get(arcKey(a)))
     if (paths.some((p) => !p)) return false
     const g = this.grid
-    const cells: [number, number][] = []
-    for (const pts of paths as Pt[][])
+    const marks: [number, number][] = []
+    const chains: { cells: number[]; border: Pt } [] = []
+    for (const pts of paths as Pt[][]) {
+      const cells: number[] = []
+      let straight = true
       for (let j = 1; j < pts.length; j++) {
         const p = pts[j - 1]
         const q = pts[j]
         const a = Math.abs(p.y - q.y) < 1e-6 ? 0 : Math.abs(p.x - q.x) < 1e-6 ? 1 : -1
-        if (a < 0) continue
+        if (a < 0) {
+          straight = false
+          continue
+        }
         const c0 = cellAt(g, p.x, p.y)
         const c1 = cellAt(g, q.x, q.y)
         const step = a === 0 ? Math.sign(c1 - c0) : Math.sign(c1 - c0) * g.cols
         for (let c = c0; ; c += step) {
           if (g.owner[c] !== FREE && !own.has(g.owner[c])) return false
-          cells.push([a, c])
+          marks.push([a, c])
+          if (cells[cells.length - 1] !== c) cells.push(c)
           if (c === c1 || !step) break
         }
       }
+      if (!straight) continue
+      let lo = 0
+      let hi = cells.length - 1
+      while (lo <= hi && g.owner[cells[lo]] !== FREE) lo++
+      while (hi >= lo && g.owner[cells[hi]] !== FREE) hi--
+      if (lo <= hi) chains.push({ cells: cells.slice(lo, hi + 1), border: pts[0] })
+    }
     const cable = this.ids.get(key)!
     this.log = []
-    for (const [a, c] of cells) this.mark(a, c, cable)
+    for (const [a, c] of marks) this.mark(a, c, cable)
     this.logs.set(key, this.log)
+    const t = this.tree(key)
+    for (const { cells, border } of chains) {
+      this.adopt(t, cells, t.parent.has(cells[0]) ? undefined : border)
+      t.leaves.add(cells[cells.length - 1])
+    }
     list.forEach((a, j) => this.routes.set(arcKey(a), paths[j]!))
     return true
+  }
+
+  /** Whether a node other than the arc's own ends now sits on its prior path. */
+  private runOver(a: Arc, pts: Pt[] | undefined) {
+    if (!pts) return true
+    const g = this.grid
+    const own = [this.nodes.get(a.state)!.index, this.nodes.get(a.verb)!.index]
+    for (let j = 1; j < pts.length; j++) {
+      const p = pts[j - 1]
+      const q = pts[j]
+      const n = Math.max(1, Math.ceil((Math.abs(q.x - p.x) + Math.abs(q.y - p.y)) / PITCH))
+      for (let s = 0; s <= n; s++) {
+        const o = g.owner[cellAt(g, p.x + ((q.x - p.x) * s) / n, p.y + ((q.y - p.y) * s) / n)]
+        if (o !== FREE && o !== own[0] && o !== own[1]) return true
+      }
+    }
+    return false
   }
 
   private tree(key: string): Tree {
     let t = this.trees.get(key)
     if (!t) {
-      t = { parent: new Map(), rootPort: new Map(), mine: new Uint8Array(this.grid.cols * this.grid.rows), leaves: new Set() }
+      t = { parent: new Map(), rootPort: new Map(), leaves: new Set() }
       this.trees.set(key, t)
     }
     return t
   }
 
-  private adopt(t: Tree, cells: number[], rootPort: Port | undefined) {
+  private adopt(t: Tree, cells: number[], root: Pt | undefined) {
     for (let j = 0; j < cells.length; j++) {
       const c = cells[j]
       if (t.parent.has(c)) continue
       t.parent.set(c, j === 0 ? -1 : cells[j - 1])
-      if (j === 0 && rootPort) t.rootPort.set(c, rootPort)
-      t.mine[c] = 1
+      if (j === 0 && root) t.rootPort.set(c, root)
+      if (t === this.active) this.mine[c] = 1
     }
   }
 
@@ -631,7 +689,7 @@ class Router {
     const tail = pickPort(vPorts, cells[cells.length - 1], dirs[dirs.length - 1])
     this.occupy(cable, cells, dirs, head?.out, tail?.out)
     const t = this.tree(cableKey(a))
-    this.adopt(t, cells, head)
+    this.adopt(t, cells, head?.border)
     t.leaves.add(cells[cells.length - 1])
     const pts = (head ? [head.border] : []).concat(cells.map((c) => ptOf(grid, c)))
     if (tail) pts.push(tail.border)
@@ -641,19 +699,23 @@ class Router {
     })
   }
 
-  routeCable(key: string) {
+  /** Routes the cable's arcs, or only those in `only`, branching from whatever of its tree is already laid. */
+  routeCable(key: string, only?: Set<ArcKey>) {
     const { grid, search, nodes } = this
     const cable = this.ids.get(key)!
-    const list = this.cables.get(key)!
-    this.log = []
+    const all = this.cables.get(key)!
+    const list = only ? all.filter((a) => only.has(arcKey(a))) : all
+    this.log = this.logs.get(key) ?? []
+    const t = this.tree(key)
+    this.active = t
+    for (const c of t.parent.keys()) this.mine[c] = 1
     for (const a of list) {
       if (!a.via?.length) continue
       const pts = this.routeVia(a, cable) ?? [nodes.get(a.state)!.shape, ...a.via, nodes.get(a.verb)!.shape].map((p) => ({ x: p.x, y: p.y }))
       this.routes.set(arcKey(a), simplify(pts))
     }
-    const state = nodes.get(list[0].state)!
+    const state = nodes.get(all[0].state)!
     const sPorts = this.portsOf(state.id, false)
-    const t = this.tree(key)
     const near = (a: Arc) => {
       const v = nodes.get(a.verb)!.shape
       return Math.abs(v.x - state.shape.x) + Math.abs(v.y - state.shape.y)
@@ -664,11 +726,11 @@ class Router {
       const starts: Start[] = []
       for (const c of t.parent.keys()) if (!t.leaves.has(c)) for (let d = 0; d < 4; d++) starts.push({ cell: c, dir: d, cost: 0 })
       const spare = t.parent.size ? SPARE_PORT : 0
-      for (const p of sPorts) if (!t.mine[p.cell]) starts.push({ cell: p.cell, dir: p.out, cost: p.cost + spare })
+      for (const p of sPorts) if (!this.mine[p.cell]) starts.push({ cell: p.cell, dir: p.out, cost: p.cost + spare })
       const found =
         vPorts.length && starts.length
-          ? (search.run(cable, starts, portTarget(grid, vPorts, cable, false), t.mine, false) ??
-            search.run(cable, starts, portTarget(grid, vPorts, cable, true), t.mine, true))
+          ? (search.run(cable, starts, portTarget(grid, vPorts, cable, false), this.mine, false) ??
+            search.run(cable, starts, portTarget(grid, vPorts, cable, true), this.mine, true))
           : undefined
       if (!found) {
         this.routes.set(arcKey(a), straight(state.shape, nodes.get(a.verb)!.shape))
@@ -679,17 +741,19 @@ class Router {
       const head = fromTree ? undefined : pickPort(sPorts, first, found.dirs[0])
       const tail = pickPort(vPorts, found.cells[found.cells.length - 1], found.dirs[found.dirs.length - 1])
       this.occupy(cable, found.cells, found.dirs, head?.out, tail?.out)
-      this.adopt(t, found.cells, head)
+      this.adopt(t, found.cells, head?.border)
       t.leaves.add(found.cells[found.cells.length - 1])
       const trunk: number[] = []
       for (let c = t.parent.get(first)!; c >= 0; c = t.parent.get(c)!) trunk.push(c)
       trunk.reverse()
-      const root = t.rootPort.get(trunk.length ? trunk[0] : first) ?? head
-      const pts = (root ? [root.border] : []).concat([...trunk, ...found.cells].map((c) => ptOf(grid, c)))
+      const root = t.rootPort.get(trunk.length ? trunk[0] : first) ?? head?.border
+      const pts = (root ? [root] : []).concat([...trunk, ...found.cells].map((c) => ptOf(grid, c)))
       if (tail) pts.push(tail.border)
       this.routes.set(arcKey(a), simplify(pts))
     }
     this.logs.set(key, this.log)
+    for (const c of t.parent.keys()) this.mine[c] = 0
+    this.active = undefined
   }
 }
 
@@ -698,6 +762,9 @@ const pickPort = (ports: Port[], cell: number, dir: number) => {
   for (const p of ports) if (p.cell === cell && (!best || (back(p.out) === dir && back(best.out) !== dir))) best = p
   return best
 }
+
+const DRAG_GREED = 3
+const DRAG_BUDGET = 12000
 
 /** The first pass routes cheaply; the second rips each cable up and routes it again knowing where the rest went. */
 const FIRST_CROSS = 10
@@ -714,16 +781,24 @@ const FIRST_CROSS = 10
 export function routeArcs(net: Net, shapes: Map<string, Shape>, prior?: Prior): Map<ArcKey, Pt[]> {
   const r = new Router(net, shapes)
   if (prior) {
-    const fresh = r.order.filter((k) => {
+    const todo: [string, Set<ArcKey> | undefined][] = []
+    for (const k of r.order) {
       const list = r.cables.get(k)!
-      return list.some((a) => prior.moved.has(a.state) || prior.moved.has(a.verb)) || !r.replay(k, prior.routes)
-    })
-    for (const k of fresh) r.routeCable(k)
+      if (prior.moved.has(list[0].state)) {
+        todo.push([k, undefined])
+        continue
+      }
+      const stale = new Set(list.filter((a) => prior.moved.has(a.verb) || !prior.routes.has(arcKey(a))).map(arcKey))
+      if (!r.replay(k, prior.routes, stale)) todo.push([k, undefined])
+      else if (stale.size) todo.push([k, stale])
+    }
+    r.tune(CROSS, DRAG_GREED, DRAG_BUDGET)
+    for (const [k, only] of todo) r.routeCable(k, only)
     return r.routes
   }
-  r.setCross(FIRST_CROSS)
+  r.tune(FIRST_CROSS, GREED)
   for (const k of r.order) r.routeCable(k)
-  r.setCross(CROSS)
+  r.tune(CROSS, GREED)
   for (const k of r.order) {
     r.release(k)
     r.routeCable(k)
@@ -731,47 +806,96 @@ export function routeArcs(net: Net, shapes: Map<string, Shape>, prior?: Prior): 
   return r.routes
 }
 
-/** Points where a cable splits: a grid point that one cable leaves in three or more directions. */
-export function cableJunctions(net: Net, routes: Map<ArcKey, Pt[]>): Pt[] {
-  const byCable = new Map<string, Pt[][]>()
-  for (const a of net.arcs) {
-    const r = routes.get(arcKey(a))
-    if (r) byCable.set(cableKey(a), [...(byCable.get(cableKey(a)) ?? []), r])
-  }
-  const out: Pt[] = []
-  for (const paths of byCable.values()) {
-    if (paths.length < 2) continue
-    const dirs = new Map<string, number>()
-    const mark = (x: number, y: number, bit: number) => {
-      const k = `${Math.round(x * 2)},${Math.round(y * 2)}`
-      dirs.set(k, (dirs.get(k) ?? 0) | bit)
-    }
-    for (const pts of paths)
+export interface Junction {
+  at: Pt
+  /** the arcs whose routes pass through the junction */
+  arcs: ArcKey[]
+}
+
+/** Points where a cable splits: a point that one cable leaves in three or more directions. */
+export function cableJunctions(net: Net, routes: Map<ArcKey, Pt[]>): Junction[] {
+  const byCable = new Map<string, ArcKey[]>()
+  for (const a of net.arcs) if (routes.has(arcKey(a))) byCable.set(cableKey(a), [...(byCable.get(cableKey(a)) ?? []), arcKey(a)])
+  const out: Junction[] = []
+  for (const keys of byCable.values()) {
+    if (keys.length < 2) continue
+    const bits = new Map<number, number>()
+    const through = new Map<number, number[]>()
+    const at = (x: number, y: number) => Math.round(x * 2) * 1e6 + Math.round(y * 2)
+    keys.forEach((key, n) => {
+      const pts = routes.get(key)!
       for (let j = 1; j < pts.length; j++) {
         const p = pts[j - 1]
         const q = pts[j]
         if (p.x !== q.x && p.y !== q.y) continue
-        const len = Math.hypot(q.x - p.x, q.y - p.y)
+        const len = Math.abs(q.x - p.x) + Math.abs(q.y - p.y)
         if (!len) continue
-        const ux = (q.x - p.x) / len
-        const uy = (q.y - p.y) / len
-        const fwd = ux > 0 ? 1 : ux < 0 ? 4 : uy > 0 ? 2 : 8
-        const rev = ux > 0 ? 4 : ux < 0 ? 1 : uy > 0 ? 8 : 2
+        const fwd = q.x > p.x ? 1 : q.x < p.x ? 4 : q.y > p.y ? 2 : 8
+        const rev = q.x > p.x ? 4 : q.x < p.x ? 1 : q.y > p.y ? 8 : 2
         const steps = Math.max(1, Math.round(len / PITCH))
         for (let s = 0; s <= steps; s++) {
-          const x = p.x + (q.x - p.x) * (s / steps)
-          const y = p.y + (q.y - p.y) * (s / steps)
-          mark(x, y, (s < steps ? fwd : 0) | (s > 0 ? rev : 0))
+          const k = at(p.x + (q.x - p.x) * (s / steps), p.y + (q.y - p.y) * (s / steps))
+          bits.set(k, (bits.get(k) ?? 0) | (s < steps ? fwd : 0) | (s > 0 ? rev : 0))
+          const t = through.get(k)
+          if (!t) through.set(k, [n])
+          else if (t[t.length - 1] !== n) t.push(n)
         }
       }
-    for (const [k, bits] of dirs) {
-      let n = 0
-      for (let b = bits; b; b &= b - 1) n++
-      if (n >= 3) {
-        const [x, y] = k.split(',').map((v) => Number(v) / 2)
-        out.push({ x, y })
-      }
+    })
+    for (const [k, b] of bits) {
+      if (b !== 7 && b !== 11 && b !== 13 && b !== 14 && b !== 15) continue
+      const x2 = Math.round(k / 1e6)
+      out.push({ at: { x: x2 / 2, y: (k - x2 * 1e6) / 2 }, arcs: through.get(k)!.map((n) => keys[n]) })
     }
   }
   return out
+}
+
+/**
+ * What changed between a routed net and the current one: nodes whose shape moved or resized, and the states of
+ * arcs whose hand-placed points changed. Cables touching them are routed again; the rest keep their paths.
+ */
+export const priorFor = (before: { shapes: Map<string, Shape>; net: Net; routes: Map<ArcKey, Pt[]> }, net: Net, shapes: Map<string, Shape>): Prior => {
+  const moved = new Set<string>()
+  for (const [id, s] of shapes) {
+    const o = before.shapes.get(id)
+    if (!o || o.x !== s.x || o.y !== s.y || (o.kind === 'rect' && s.kind === 'rect' && o.w !== s.w)) moved.add(id)
+  }
+  const was = new Map(before.net.arcs.map((a) => [arcKey(a), a]))
+  for (const a of net.arcs) {
+    const o = was.get(arcKey(a))
+    if (!o || JSON.stringify(o.via ?? null) !== JSON.stringify(a.via ?? null)) moved.add(a.state)
+  }
+  return { routes: before.routes, moved }
+}
+
+/** The point a fraction `t` of the way along a polyline, by length. */
+export const pointAlong = (pts: Pt[], t: number): Pt => {
+  let total = 0
+  for (let i = 1; i < pts.length; i++) total += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y)
+  let left = Math.max(0, Math.min(1, t)) * total
+  for (let i = 1; i < pts.length; i++) {
+    const len = Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y)
+    if (left <= len && len > 0) return { x: pts[i - 1].x + ((pts[i].x - pts[i - 1].x) * left) / len, y: pts[i - 1].y + ((pts[i].y - pts[i - 1].y) * left) / len }
+    left -= len
+  }
+  return pts[pts.length - 1]
+}
+
+/** SVG path for a polyline with its corners rounded. */
+export const polylinePath = (pts: Pt[], radius = 4) => {
+  let d = `M${pts[0].x},${pts[0].y}`
+  for (let i = 1; i < pts.length - 1; i++) {
+    const [a, b, c] = [pts[i - 1], pts[i], pts[i + 1]]
+    const l1 = Math.hypot(b.x - a.x, b.y - a.y)
+    const l2 = Math.hypot(c.x - b.x, c.y - b.y)
+    const r = Math.min(radius, l1 / 2, l2 / 2)
+    if (r < 0.5) {
+      d += ` L${b.x},${b.y}`
+      continue
+    }
+    d += ` L${b.x + ((a.x - b.x) * r) / l1},${b.y + ((a.y - b.y) * r) / l1} Q${b.x},${b.y} ${b.x + ((c.x - b.x) * r) / l2},${b.y + ((c.y - b.y) * r) / l2}`
+  }
+  const z = pts[pts.length - 1]
+  return `${d} L${z.x},${z.y}`
 }

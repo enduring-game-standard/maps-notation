@@ -1,27 +1,27 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { canSee } from '../core/engine'
 import { WORLD, type Arc, type Marking, type Net, type SeatId } from '../core/model'
-import { addState, addVerb, arcRef, connect, deleteSelection, moveNodes, sameArc, snap, type NodeRef, type Selection } from './edit'
+import { addState, addVerb, arcRef, connect, deleteSelection, moveNodes, moveSegment, sameArc, snap, type ArcRef, type NodeRef, type Selection } from './edit'
 import {
   DOTS,
   STATE_R,
   VERB_H,
-  arcCurve,
+  arrowAt,
+  capAt,
   chanceTies,
   dieWidth,
-  arrowHead,
-  curvePath,
-  endCap,
   groupHulls,
   inflate,
-  pointAt,
   readableOn,
   shapeBox,
   shapesOf,
   union,
   verbWidth,
   type Pt,
+  type Shape,
 } from './geometry'
+import { arcKey, cableJunctions, pointAlong, polylinePath, type ArcKey } from './route'
+import { useRoutes } from './useRoutes'
 
 export interface Flight {
   key: number
@@ -62,6 +62,7 @@ type Gesture =
   | { kind: 'pan'; sx: number; sy: number; from: View; moved: boolean; tap?: Selection }
   | { kind: 'drag'; start: Pt; base: Net; origins: Map<string, Pt>; snapEach: boolean; moved: boolean }
   | { kind: 'connect'; from: NodeRef }
+  | { kind: 'route'; ref: ArcRef; seg: number; start: Pt; base: Net; routes: Map<ArcKey, Pt[]>; shapes: Map<string, Shape>; moved: boolean }
   | { kind: 'pinch'; d0: number; mid0: Pt; from: View }
 
 type Tool = 'state' | 'verb' | null
@@ -89,6 +90,8 @@ export function Canvas(props: Props) {
   const chanceVerbs = useMemo(() => chanceTies(net), [net])
   const shapes = useMemo(() => shapesOf(net, chanceVerbs), [net, chanceVerbs])
   const hulls = useMemo(() => groupHulls(net, shapes), [net, shapes])
+  const routes = useRoutes(net, shapes)
+  const junctions = useMemo(() => cableJunctions(net, routes), [net, routes])
 
   const toWorld = (cx: number, cy: number, v = latest.current.view): Pt => {
     const r = svg.current!.getBoundingClientRect()
@@ -173,6 +176,13 @@ export function Canvas(props: Props) {
         if (!g.moved) p.onCheckpoint()
         g.moved = true
         p.onLive(moveNodes(g.base, g.origins, dx, dy, g.snapEach))
+      } else if (g.kind === 'route') {
+        const w = toWorld(e.clientX, e.clientY, v)
+        const by = { x: w.x - g.start.x, y: w.y - g.start.y }
+        if (!g.moved && Math.hypot(by.x, by.y) * v.k < 3) return
+        if (!g.moved) p.onCheckpoint()
+        g.moved = true
+        p.onLive(moveSegment(g.base, g.routes, g.shapes, g.ref, g.seg, by))
       } else if (g.kind === 'connect') setConnectTo(toWorld(e.clientX, e.clientY, v))
     }
     const up = (e: PointerEvent) => {
@@ -294,7 +304,21 @@ export function Canvas(props: Props) {
     setConnectTo(toWorld(e.clientX, e.clientY))
   }
 
-  const anim = useFlightAnimation(play?.flight, net, shapes)
+  /** Grabs the segment of the arc's route nearest the pointer; dragging slides it sideways. */
+  const startRouteDrag = (e: React.PointerEvent, a: Arc) => {
+    const pts = routes.get(arcKey(a))
+    if (!pts) return
+    const w = toWorld(e.clientX, e.clientY)
+    let seg = 0
+    let best = Infinity
+    for (let i = 0; i + 1 < pts.length; i++) {
+      const d = distToSegment(w, pts[i], pts[i + 1])
+      if (d < best) [best, seg] = [d, i]
+    }
+    gesture.current = { kind: 'route', ref: arcRef(a), seg, start: w, base: net, routes, shapes, moved: false }
+  }
+
+  const anim = useFlightAnimation(play?.flight, net, routes)
   const marking = mode === 'play' && play ? (anim?.marking ?? play.marking) : undefined
 
   const selFocus = selection && (selection.kind === 'state' || selection.kind === 'verb') && !(props.touch && mode === 'play') ? selection : null
@@ -306,44 +330,54 @@ export function Canvas(props: Props) {
     return s.size > 1 ? s : undefined
   }, [focus?.id, net])
 
-  const arcLayer = useMemo(
-    () =>
-      net.arcs.map((a) => {
-        const c = arcCurve(a, shapes)
-        if (!c) return null
-        const touches = !!focus && (a.state === focus.id || a.verb === focus.id)
-        const selected = selection?.kind === 'arc' && sameArc(a, selection)
-        const cls = ['arc', `arc-${a.kind}`, touches && 'is-focus', focus && !touches && 'is-faded', selected && 'is-selected'].filter(Boolean).join(' ')
-        const mid = pointAt(c, 0.5)
-        return (
-          <g key={`${a.kind}|${a.state}|${a.verb}`} className={cls}>
-            <path d={curvePath(c)} className="arc-line" />
-            {a.kind === 'take' || a.kind === 'give' ? <path d={arrowHead(c)} className="arc-head" /> : null}
-            {a.kind === 'need' ? <ArcCap at={endCap(c, 3.5)} r={3.5} filled /> : null}
-            {a.kind === 'unless' ? <ArcCap at={endCap(c, 4.5)} r={4.5} /> : null}
-            {a.count !== 1 ? (
-              <g className="arc-count" transform={`translate(${mid.x},${mid.y})`}>
-                <rect x={-8} y={-7} width={16} height={14} rx={7} />
-                <text dy={4}>{a.count}</text>
-              </g>
-            ) : null}
-            {mode === 'edit' ? (
-              <path
-                d={curvePath(c)}
-                className="arc-hit"
-                onPointerDown={(e) => {
-                  e.stopPropagation()
-                  if (props.touch) startPan(e, arcRef(a))
-                  else if (!space.current) onSelect(arcRef(a))
-                  else startPan(e)
-                }}
-              />
-            ) : null}
-          </g>
-        )
-      }),
-    [net, shapes, focus?.id, selection, mode],
-  )
+  const arcLayer = useMemo(() => {
+    const touches = (a: Arc) => !!focus && (a.state === focus.id || a.verb === focus.id)
+    const isSelected = (a: Arc) => selection?.kind === 'arc' && sameArc(a, selection)
+    const rank = (a: Arc) => (isSelected(a) ? 2 : touches(a) ? 1 : 0)
+    const byKey = new Map(net.arcs.map((a) => [arcKey(a), a]))
+    const lastJunction = new Map<ArcKey, Pt>()
+    for (const j of junctions) for (const k of j.arcs) lastJunction.set(k, j.at)
+    const drawn = net.arcs.filter((a) => routes.has(arcKey(a))).sort((a, b) => rank(a) - rank(b))
+    const arcs = drawn.map((a) => {
+      const pts = routes.get(arcKey(a))!
+      const end = pts[pts.length - 1]
+      const before = pts[pts.length - 2]
+      const cls = ['arc', `arc-${a.kind}`, touches(a) && 'is-focus', focus && !touches(a) && 'is-faded', isSelected(a) && 'is-selected', a.via && 'is-placed']
+        .filter(Boolean)
+        .join(' ')
+      const d = polylinePath(pts)
+      return (
+        <g key={arcKey(a)} className={cls}>
+          <path d={d} className="arc-line" />
+          {a.kind === 'take' ? <path d={arrowAt(end, before)} className="arc-head" /> : null}
+          {a.kind === 'give' ? <path d={arrowAt(pts[0], pts[1])} className="arc-head" /> : null}
+          {a.kind === 'need' ? <ArcCap at={capAt(end, before, 3.5)} r={3.5} filled /> : null}
+          {a.kind === 'unless' ? <ArcCap at={capAt(end, before, 4.5)} r={4.5} /> : null}
+          {a.count !== 1 ? <CountBadge at={badgeSpot(pts, a.kind === 'give', lastJunction.get(arcKey(a)))} n={a.count} /> : null}
+          {mode === 'edit' ? (
+            <path
+              d={d}
+              className="arc-hit"
+              onPointerDown={(e) => {
+                e.stopPropagation()
+                if (e.button !== 0 || space.current) return startPan(e)
+                if (props.touch && !isSelected(a)) return startPan(e, arcRef(a))
+                onSelect(arcRef(a))
+                startRouteDrag(e, a)
+              }}
+            >
+              <title>{`${a.kind} ${a.state} → ${a.verb}${a.via ? ' · placed by hand' : ''}. Drag to move its route.`}</title>
+            </path>
+          ) : null}
+        </g>
+      )
+    })
+    const dots = junctions.map((j) => {
+      const lit = j.arcs.some((k) => touches(byKey.get(k)!))
+      return <circle key={`${j.arcs[0]}@${j.at.x},${j.at.y}`} className={`junction ${lit ? 'is-focus' : focus ? 'is-faded' : ''}`} cx={j.at.x} cy={j.at.y} r={2.6} />
+    })
+    return [...arcs, <g key="junctions">{dots}</g>]
+  }, [net, routes, junctions, focus?.id, selection, mode])
 
   const nodeCls = (id: string, extra: (string | false | undefined)[]) =>
     ['node', neighbors && !neighbors.has(id) && 'is-faded', ...extra].filter(Boolean).join(' ')
@@ -590,6 +624,38 @@ function Die({ x, weight, fill }: { x: number; weight: number; fill: string }) {
   )
 }
 
+function CountBadge({ at, n }: { at: Pt; n: number }) {
+  return (
+    <g className="arc-count" transform={`translate(${at.x},${at.y})`}>
+      <rect x={-8} y={-7} width={16} height={14} rx={7} />
+      <text dy={4}>{n}</text>
+    </g>
+  )
+}
+
+/** A count badge sits on the arc's own stretch, past the last junction, so it can't be read as a cable-mate's count. */
+const badgeSpot = (pts: Pt[], give: boolean, junction: Pt | undefined): Pt => {
+  const own = give ? [...pts].reverse() : pts
+  let from = 0
+  if (junction) for (let i = 0; i + 1 < own.length; i++) if (distToSegment(junction, own[i], own[i + 1]) < 0.5) from = i
+  let best = from
+  let len = -1
+  for (let i = from; i + 1 < own.length; i++) {
+    const l = Math.hypot(own[i + 1].x - own[i].x, own[i + 1].y - own[i].y)
+    if (l > len) [best, len] = [i, l]
+  }
+  const a = junction && best === from ? junction : own[best]
+  const b = own[best + 1]
+  return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }
+}
+
+const distToSegment = (p: Pt, a: Pt, b: Pt) => {
+  const dx = b.x - a.x
+  const dy = b.y - a.y
+  const t = Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / (dx * dx + dy * dy || 1)))
+  return Math.hypot(p.x - a.x - t * dx, p.y - a.y - t * dy)
+}
+
 function ArcCap({ at, r, filled }: { at: Pt; r: number; filled?: boolean }): ReactNode {
   return <circle cx={at.x} cy={at.y} r={r} className={filled ? 'arc-cap is-filled' : 'arc-cap'} />
 }
@@ -616,7 +682,7 @@ export function Legend() {
   )
 }
 
-function useFlightAnimation(flight: Flight | undefined, net: Net, shapes: ReturnType<typeof shapesOf>) {
+function useFlightAnimation(flight: Flight | undefined, net: Net, routes: Map<ArcKey, Pt[]>) {
   const [state, setState] = useState<{ tokens: Pt[]; marking: Marking } | null>(null)
   useEffect(() => {
     if (!flight || !flight.frames.length || reducedMotion()) return setState(null)
@@ -636,8 +702,8 @@ function useFlightAnimation(flight: Flight | undefined, net: Net, shapes: Return
       const moving = arcs.filter((a) => (f < 0.5 ? a.kind === 'take' : a.kind === 'give'))
       const u = ease(f < 0.5 ? f * 2 : (f - 0.5) * 2)
       const tokens = moving.flatMap((a) => {
-        const c = arcCurve(a, shapes)
-        return c ? [pointAt(c, u)] : []
+        const pts = routes.get(arcKey(a))
+        return pts ? [pointAlong(pts, a.kind === 'give' ? 1 - u : u)] : []
       })
       setState({ tokens, marking: mid })
       raf = requestAnimationFrame(tick)

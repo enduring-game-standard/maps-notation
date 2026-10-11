@@ -16,6 +16,7 @@
   --world: #8a9099;
   --arc: #8d939c;
   --arc-strong: #2d333b;
+  --arc-faint: #e4e6ea;
   --mark: #23272e;
   --radius: 8px;
   --s1: 4px;
@@ -402,11 +403,23 @@ kbd {
 .arc-cap.is-filled {
   fill: var(--arc);
 }
-.arcs > .arc {
-  opacity: 0.6;
+.arcs.has-focus > .arc.is-faded .arc-line,
+.arcs.has-focus > .arc.is-faded .arc-cap {
+  stroke: var(--arc-faint);
 }
-.arcs.has-focus > .arc.is-faded {
-  opacity: 0.07;
+.arcs.has-focus > .arc.is-faded .arc-head,
+.arcs.has-focus > .arc.is-faded .arc-cap.is-filled {
+  fill: var(--arc-faint);
+}
+.junction {
+  fill: var(--arc);
+  pointer-events: none;
+}
+.junction.is-focus {
+  fill: var(--arc-strong);
+}
+.junction.is-faded {
+  fill: var(--arc-faint);
 }
 .arc.is-focus {
   opacity: 1;
@@ -1601,4 +1614,15 @@ button.line:hover {
   .phone-app .sheet-summary {
     display: none;
   }
+}
+
+.route-state {
+  font-size: 12px;
+  color: var(--muted);
+}
+.route-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 4px 0 2px;
 }

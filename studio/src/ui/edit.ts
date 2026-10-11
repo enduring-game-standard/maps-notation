@@ -1,4 +1,6 @@
-import { WORLD, isIdent, type Arc, type ArcKind, type Net, type State, type Seat, type Verb } from '../core/model'
+import { WORLD, isIdent, type Arc, type ArcKind, type Net, type Point, type State, type Seat, type Verb } from '../core/model'
+import type { Shape } from './geometry'
+import { PITCH, arcKey, cableKey } from './route'
 
 export type NodeKind = 'state' | 'verb'
 export interface NodeRef {
@@ -150,3 +152,71 @@ export const deleteGroup = (net: Net, id: string): Net => {
   const ungroup = <T extends { group?: string }>(n: T): T => (n.group === id ? { ...n, group: undefined } : n)
   return { ...net, groups: net.groups.filter((g) => g.id !== id), states: net.states.map(ungroup), verbs: net.verbs.map(ungroup) }
 }
+
+const outside = (s: Shape, p: Point, pad: number) =>
+  s.kind === 'circle' ? Math.hypot(p.x - s.x, p.y - s.y) > s.r + pad : Math.abs(p.x - s.x) > s.w / 2 + pad || Math.abs(p.y - s.y) > s.h / 2 + pad
+
+const dropStraight = (pts: Point[]) =>
+  pts.filter((p, i) => {
+    if (i === 0 || i === pts.length - 1) return true
+    const a = pts[i - 1]
+    const b = pts[i + 1]
+    return Math.abs((p.x - a.x) * (b.y - p.y) - (p.y - a.y) * (b.x - p.x)) > 1e-6
+  })
+
+const onLine = (p: Point, q: Point, r: Point, s: Point) => {
+  const horizontal = Math.abs(p.y - q.y) < 0.5
+  if (horizontal ? Math.abs(r.y - s.y) >= 0.5 || Math.abs(r.y - p.y) >= 0.5 : Math.abs(r.x - s.x) >= 0.5 || Math.abs(r.x - p.x) >= 0.5) return false
+  const along = horizontal ? (t: Point) => t.x : (t: Point) => t.y
+  const lo = Math.max(Math.min(along(p), along(q)), Math.min(along(r), along(s)))
+  const hi = Math.min(Math.max(along(p), along(q)), Math.max(along(r), along(s)))
+  return hi - lo > 1
+}
+
+/**
+ * Slides one segment of an arc's route sideways and stores the result as `via`. Every arc of the same cable that
+ * runs along that segment moves with it, so dragging a shared trunk moves the trunk.
+ */
+export const moveSegment = (net: Net, routes: Map<string, Point[]>, shapes: Map<string, Shape>, ref: ArcRef, seg: number, by: Point): Net => {
+  const arc = net.arcs.find((a) => sameArc(a, ref))
+  const pts = arc && routes.get(arcKey(arc))
+  if (!arc || !pts || seg < 0 || seg + 1 >= pts.length) return net
+  const [p, q] = [pts[seg], pts[seg + 1]]
+  const horizontal = Math.abs(p.y - q.y) < 0.5
+  const vertical = Math.abs(p.x - q.x) < 0.5
+  const shift = horizontal ? { x: 0, y: snap5(by.y) } : vertical ? { x: snap5(by.x), y: 0 } : { x: snap5(by.x), y: snap5(by.y) }
+  if (!shift.x && !shift.y) return net
+  const viaFor = (a: Arc): Point[] | undefined => {
+    const r = routes.get(arcKey(a))
+    if (!r) return undefined
+    const j = a === arc ? seg : r.findIndex((s, i) => i + 1 < r.length && (horizontal || vertical) && onLine(p, q, s, r[i + 1]))
+    if (j < 0) return undefined
+    const moved = r.map((t, i) => (i === j || i === j + 1 ? { x: t.x + shift.x, y: t.y + shift.y } : t))
+    const via = moved.slice(1, -1)
+    if (j === 0 && outside(shapes.get(a.state)!, moved[0], 6)) via.unshift(moved[0])
+    if (j + 1 === r.length - 1 && outside(shapes.get(a.verb)!, moved[moved.length - 1], 6)) via.push(moved[moved.length - 1])
+    const snapped = via.map((t) => ({ x: snap5(t.x), y: snap5(t.y) }))
+    return dropStraight(snapped).filter((t, i, all) => i === 0 || t.x !== all[i - 1].x || t.y !== all[i - 1].y)
+  }
+  const cable = cableKey(arc)
+  return {
+    ...net,
+    arcs: net.arcs.map((a) => {
+      if (cableKey(a) !== cable) return a
+      const via = viaFor(a)
+      return via ? { ...a, via } : a
+    }),
+  }
+}
+
+const snap5 = (n: number) => Math.round(n / PITCH) * PITCH
+
+/** Returns the given arcs, or every arc, to automatic routing. */
+export const autoRoute = (net: Net, which?: ArcRef[]): Net => ({
+  ...net,
+  arcs: net.arcs.map((a) => {
+    if (!a.via || (which && !which.some((r) => sameArc(a, r)))) return a
+    const { via: _, ...rest } = a
+    return rest
+  }),
+})
