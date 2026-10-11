@@ -125,7 +125,7 @@ A reader can trace both paths: an agent at `near_door` with `inventory.keys >= 1
 |-------------------------|----------------------------------------------|--------------------------------------|
 | Timing / real-time flow | Varies by genre (turn-based vs. continuous)  | RUNS execution / runtime             |
 | Probability & RNG       | Implementation detail                        | Specific Processors                  |
-| Visuals / audio         | Presentation layer                           | AEMS Manifestations define; RUNS Processors render |
+| Visuals / audio         | Presentation layer                           | Client presentation; RUNS Processors render (AEMS conventions may carry asset URLs) |
 | Hidden implementation   | Notation must be complete and transparent    | Forbidden                            |
 | Platform specifics      | Keeps rules neutral                          | Runtime bindings                     |
 
@@ -137,7 +137,7 @@ MAPS Notation does not exist in isolation. It is one layer of a jointly necessar
 
 **MAPS → RUNS.** The relationship is design-to-implementation — MAPS is the notation (the written score), RUNS is the source code (the composition built from that score), and the compiled binary is the performance. The term-for-term mapping between a Score's primitives and RUNS components is owned by the [correspondence map](https://github.com/enduring-game-standard/.github/blob/main/profile/CORRESPONDENCE.md). A designer writes a MAPS Score; a developer (or build tool) creates the corresponding RUNS source; a runtime compiles it for a specific platform.
 
-**MAPS → AEMS.** AEMS defines the things that MAPS rules act upon. A `maps:locked-transition` Pattern requires something with a `keys` property — that thing is defined in AEMS as an Entity (the named role `key`) with a Manifestation carrying game-specific properties. MAPS describes the rules; AEMS holds the things those rules reference.
+**MAPS and AEMS.** MAPS rules act upon things, and AEMS can name those things. A `maps:locked-transition` Pattern requires something with a `keys` property. In AEMS, that thing is a Manifestation tagged with the role `key`, referencing an object-identity Entity such as `keycard`. The Manifestation carries the game-specific properties. MAPS describes the rules; AEMS holds signed claims about the things. Neither depends on the other.
 
 **MAPS → WOCS.** WOCS coordinates services around shared Patterns and Scores. A community Pattern registry, matchmaking for games described by a given Score, or coordinated playtesting across implementations — these are WOCS coordination tasks. The notation defines what the game *is*; WOCS enables the ecosystem around it.
 

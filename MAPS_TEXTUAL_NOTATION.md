@@ -639,7 +639,7 @@ The notation does not and will never express:
 |------------------|-----------|-----------------|
 | Timing / real-time flow | Varies by genre. Turn-based and continuous games share mechanics; timing is orthogonal. | RUNS execution / runtime |
 | Random number generation | Implementation detail. Probability weights (`~0.8`) describe the design intent; the RNG algorithm belongs to the runtime. | RUNS Processors |
-| Visuals / audio | Presentation layer. | AEMS Manifestations |
+| Visuals / audio | Presentation layer. | Client presentation (AEMS conventions may carry asset URLs) |
 | Platform specifics | Keeps rules neutral. | RUNS compilation |
 | Play state (current marking during play) | The notation describes the graph and initial marking. Runtime state belongs to the runtime. | RUNS Records |
 | Execution order | The notation describes which transitions are possible, not the order they fire in. Scheduling is a runtime concern. | RUNS Network topology |
@@ -734,7 +734,7 @@ MAPS Marks correspond to RUNS Record fields (typed values on Records). MAPS guar
 
 ### AEMS (Asset-Entity-Manifestation-State)
 
-AEMS defines the things that MAPS rules act upon. A MAPS Mechanic requiring "a key" expects an AEMS Entity with a `key` role. MAPS describes the rules; AEMS holds the things those rules reference.
+MAPS rules act upon things, and AEMS can name those things. A MAPS Mechanic requiring "a key" can be met by an AEMS Manifestation tagged with the role `key`, referencing an object-identity Entity such as `keycard`. MAPS describes the rules; AEMS holds signed claims about the things. Neither depends on the other.
 
 ### WOCS (Work Offered, Claimed, Settled)
 
