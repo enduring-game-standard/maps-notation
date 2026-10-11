@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Net } from '../core/model'
 import { chanceTies, shapesOf, type Pt, type Shape } from './geometry'
-import { priorFor, routeArcs, type ArcKey } from './route'
+import { arcKey, priorFor, routeArcs, type ArcKey, type Prior } from './route'
 
 interface Settled {
   net: Net
@@ -13,8 +13,9 @@ const SETTLE_MS = 120
 
 /**
  * Routes for the net on screen. A full route (two passes over every cable) runs in a worker once the net has been
- * still for a moment; until it lands, the canvas routes only what changed since the last full route, on the main
- * thread, keeping every other cable where it was. That is what keeps a node drag smooth.
+ * still for a moment, or at once on first load; until it lands, the canvas routes only what changed since the last
+ * full route, on the main thread, keeping every other cable where it was. That is what keeps a node drag smooth.
+ * Before the first full route, or after a change that leaves nothing to keep, no arcs are drawn.
  */
 export function useRoutes(net: Net, shapes: Map<string, Shape>): Map<ArcKey, Pt[]> {
   const [settled, setSettled] = useState<Settled | null>(null)
@@ -34,15 +35,24 @@ export function useRoutes(net: Net, shapes: Map<string, Shape>): Map<ArcKey, Pt[
 
   useEffect(() => {
     if (settled?.net === net) return
-    const t = setTimeout(() => {
-      asked.current = { id: (asked.current?.id ?? 0) + 1, net }
-      worker.current?.postMessage(asked.current)
-    }, SETTLE_MS)
+    const t = setTimeout(
+      () => {
+        asked.current = { id: (asked.current?.id ?? 0) + 1, net }
+        worker.current?.postMessage(asked.current)
+      },
+      settled ? SETTLE_MS : 0,
+    )
     return () => clearTimeout(t)
   }, [net, settled])
 
-  return useMemo(
-    () => (settled?.net === net ? settled.routes : routeArcs(net, shapes, settled ? priorFor(settled, net, shapes) : { routes: new Map(), moved: new Set() })),
-    [net, shapes, settled],
-  )
+  return useMemo(() => {
+    if (settled?.net === net) return settled.routes
+    const prior = settled && priorFor(settled, net, shapes)
+    return prior && keepsSome(prior, net) ? routeArcs(net, shapes, prior) : NONE
+  }, [net, shapes, settled])
 }
+
+const NONE = new Map<ArcKey, Pt[]>()
+
+/** With nothing to keep, a route here would be a full one on the main thread, so the canvas waits for the worker. */
+const keepsSome = (prior: Prior, net: Net) => net.arcs.some((a) => prior.routes.has(arcKey(a)) && !prior.moved.has(a.state) && !prior.moved.has(a.verb))
