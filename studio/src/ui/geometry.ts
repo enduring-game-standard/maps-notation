@@ -11,7 +11,6 @@ export const VERB_H = 22
 
 export const DIE_W = 16
 
-/** Room for the chance die (and its weight) inside the verb's left edge. */
 export const dieWidth = (v: Verb, chance: boolean) => (chance ? DIE_W + (v.weight !== 1 ? 6 + String(v.weight).length * 6 : 0) : 0)
 
 export const verbWidth = (v: Verb, chance = false) => Math.max(64, Math.min(180, Math.round(v.label.length * 6.2 + 20))) + dieWidth(v, chance)
@@ -39,7 +38,6 @@ export const chanceTies = (net: Net) => {
   return out
 }
 
-/** Where the ray from a shape's center toward `t` leaves the shape. */
 export const borderPoint = (s: Shape, t: Pt, gap = 2): Pt => {
   const dx = t.x - s.x
   const dy = t.y - s.y
@@ -91,7 +89,6 @@ export const arrowHead = (c: Curve, size = 8) => {
   return `M${c.end.x},${c.end.y} L${bx - uy * w},${by + ux * w} L${bx + uy * w},${by - ux * w} Z`
 }
 
-/** Point just short of the curve's end, where an inhibitor or test circle sits. */
 export const endCap = (c: Curve, r: number): Pt => {
   const dx = c.end.x - c.ctrl.x
   const dy = c.end.y - c.ctrl.y
@@ -127,7 +124,6 @@ export const groupHulls = (net: Net, shapes: Map<string, Shape>) =>
     return box ? [{ group: g, members, box: inflate({ ...box, y0: box.y0 - 14 }, HULL_PAD) }] : []
   })
 
-/** Dice-face layout for 1..5 marks inside a place. */
 export const DOTS: Pt[][] = [
   [],
   [{ x: 0, y: 0 }],

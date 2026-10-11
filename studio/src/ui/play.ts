@@ -48,14 +48,11 @@ export const legalVerbs = (turn: Step['turn'], viewer: SeatId | undefined): Set<
   return out
 }
 
-export const waitingVerbs = (turn: Step['turn']): Set<string> => legalVerbs(turn, undefined)
-
 export const randomMove = (turn: Step['turn'], rand: () => number = Math.random): string | undefined => {
   const all = [...legalVerbs(turn, undefined)]
   return all.length ? all[Math.floor(rand() * all.length)] : undefined
 }
 
-/** Each utterance replayed as a marking transition, for animating marks along arcs. */
 export const transitions = (c: Compiled, step: Step) => {
   let m = step.before
   return step.said.map((u) => {

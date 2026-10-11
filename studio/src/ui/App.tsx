@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
-import { compile } from '../core/engine'
+import { compile, heardBy } from '../core/engine'
 import { initialMarking, type Marking, type Net, type SeatId } from '../core/model'
 import { parse } from '../core/text'
 import { AnalysisPanel } from './AnalysisPanel'
@@ -48,7 +48,10 @@ export function App() {
 
   const animate = (g: Game) => {
     flights.current += 1
-    setFlight({ key: flights.current, frames: transitions(compiled, current(g)) })
+    const step = current(g)
+    // Marks flying to a hidden place would reveal what the viewer must not see.
+    const frames = transitions(compiled, step).filter((_, i) => heardBy(compiled, step.said[i], viewer) !== undefined)
+    setFlight({ key: flights.current, frames })
   }
 
   const play = (from: Marking = initialMarking(net)) => {

@@ -79,8 +79,8 @@ export function Canvas(props: Props) {
   const [panning, setPanning] = useState(false)
   const gesture = useRef<Gesture>({ kind: 'idle' })
   const space = useRef(false)
-  const latest = useRef({ props, view, hover, tool, cursor })
-  latest.current = { props, view, hover, tool, cursor }
+  const latest = useRef({ props, view, tool, cursor })
+  latest.current = { props, view, tool, cursor }
 
   const chanceVerbs = useMemo(() => chanceTies(net), [net])
   const shapes = useMemo(() => shapesOf(net, chanceVerbs), [net, chanceVerbs])
@@ -138,12 +138,14 @@ export function Canvas(props: Props) {
         p.onLive(moveNodes(g.base, g.origins, dx, dy, g.snapEach))
       } else if (g.kind === 'connect') setConnectTo(toWorld(e.clientX, e.clientY, v))
     }
-    const up = () => {
+    const up = (e: PointerEvent) => {
       const g = gesture.current
-      const { props: p, hover: h } = latest.current
+      const { props: p } = latest.current
       if (g.kind === 'pan' && !g.moved) p.onSelect(null)
       if (g.kind === 'connect') {
-        const made = h && connect(p.net, g.from, h)
+        const el = document.elementFromPoint(e.clientX, e.clientY)?.closest<SVGGElement>('[data-node]')
+        const to = el && ({ kind: el.dataset.kind, id: el.dataset.node } as NodeRef)
+        const made = to && connect(p.net, g.from, to)
         if (made) p.onCommit(made[0], made[1])
         setConnectTo(null)
       }
@@ -246,7 +248,7 @@ export function Canvas(props: Props) {
     if (!focus) return undefined
     const s = new Set([focus.id])
     for (const a of net.arcs) if (a.place === focus.id || a.verb === focus.id) s.add(a.place).add(a.verb)
-    return s
+    return s.size > 1 ? s : undefined
   }, [focus?.id, net])
 
   const arcLayer = useMemo(
@@ -351,6 +353,8 @@ export function Canvas(props: Props) {
             return (
               <g
                 key={p.id}
+                data-node={p.id}
+                data-kind="place"
                 className={nodeCls(p.id, ['place', isSel('place', p.id) && 'is-selected', p.ends !== undefined && n > 0 && mode === 'play' && 'is-reached'])}
                 transform={`translate(${p.x},${p.y})`}
                 onPointerDown={(e) => onNodeDown(e, ref)}
@@ -380,6 +384,8 @@ export function Canvas(props: Props) {
             return (
               <g
                 key={v.id}
+                data-node={v.id}
+                data-kind="verb"
                 className={nodeCls(v.id, ['verb', v.by === WORLD && 'is-world', isSel('verb', v.id) && 'is-selected', state])}
                 transform={`translate(${v.x},${v.y})`}
                 style={{ ['--seat' as string]: color ?? 'var(--world)' }}
@@ -534,7 +540,6 @@ function Legend() {
   )
 }
 
-/** Marks travel along the arcs of each utterance: inputs flow into the verb, then outputs flow out. */
 function useFlightAnimation(flight: Flight | undefined, net: Net, shapes: ReturnType<typeof shapesOf>) {
   const [state, setState] = useState<{ tokens: Pt[]; marking: Marking } | null>(null)
   useEffect(() => {
