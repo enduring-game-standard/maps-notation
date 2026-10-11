@@ -684,6 +684,8 @@ export function Legend() {
 
 function useFlightAnimation(flight: Flight | undefined, net: Net, routes: Map<ArcKey, Pt[]>) {
   const [state, setState] = useState<{ tokens: Pt[]; marking: Marking } | null>(null)
+  const paths = useRef(routes)
+  paths.current = routes
   useEffect(() => {
     if (!flight || !flight.frames.length || reducedMotion()) return setState(null)
     const byVerb = new Map<string, Arc[]>()
@@ -703,7 +705,7 @@ function useFlightAnimation(flight: Flight | undefined, net: Net, routes: Map<Ar
       const moving = arcs.filter((a) => (f < 0.5 ? a.kind === 'take' : a.kind === 'give'))
       const u = ease(f < 0.5 ? f * 2 : (f - 0.5) * 2)
       const tokens = moving.flatMap((a) => {
-        const pts = routes.get(arcKey(a))
+        const pts = paths.current.get(arcKey(a))
         return pts ? [pointAlong(pts, a.kind === 'give' ? 1 - u : u)] : []
       })
       setState({ tokens, marking: mid })
