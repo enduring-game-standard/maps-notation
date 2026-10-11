@@ -9,6 +9,7 @@ import { EXAMPLES, autosave, download, loadInitial, newNet } from './files'
 import { docReducer } from './history'
 import { Inspector } from './Inspector'
 import { current, legalVerbs, randomMove, rewind, speak, startGame, transitions, type Game } from './play'
+import { PHONE_QUERY, PhoneLayout, useMediaQuery } from './Phone'
 import { PlayPanel } from './PlayPanel'
 import { TextPane } from './TextPane'
 
@@ -30,6 +31,9 @@ export function App() {
   const [fitKey, setFitKey] = useState(0)
   const [toast, setToast] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
+  const phone = useMediaQuery(PHONE_QUERY)
+  const [reveal, setReveal] = useState<{ tab: 'inspect' | 'text' | 'analysis'; key: number } | null>(null)
+  const showTab = (tab: 'inspect' | 'text' | 'analysis') => setReveal((r) => ({ tab, key: (r?.key ?? 0) + 1 }))
   const flights = useRef(0)
 
   const compiled = useMemo(() => compile(net), [net])
@@ -121,6 +125,95 @@ export function App() {
     mode === 'play' && now
       ? { marking: now.marking, viewer, legal: legalVerbs(now.turn, viewer), waiting: legalVerbs(now.turn, undefined), onSpeak, flight }
       : undefined
+
+  if (phone) {
+    const fileInputEl = (
+      <input
+        ref={fileInput}
+        type="file"
+        accept=".maps,text/plain"
+        hidden
+        onChange={(e) => {
+          const f = e.target.files?.[0]
+          if (f) importFile(f)
+          e.target.value = ''
+        }}
+      />
+    )
+    return (
+      <PhoneLayout
+        net={net}
+        mode={mode}
+        onMode={(m) => (m === 'edit' ? (setMode('edit'), setAutoplay(false)) : mode !== 'play' && play())}
+        canUndo={doc.past.length > 0}
+        canRedo={doc.future.length > 0}
+        onUndo={() => dispatch({ type: 'undo' })}
+        onRedo={() => dispatch({ type: 'redo' })}
+        fileMenu={
+          <>
+            <FileMenu label="⋯" onNew={() => open(newNet())} onExample={(text) => open(parse(text))} onImport={() => fileInput.current?.click()} onDownload={() => download(net)} />
+            {fileInputEl}
+          </>
+        }
+        canvas={
+          <Canvas
+            net={net}
+            mode={mode}
+            selection={selection}
+            onSelect={setSelection}
+            onCommit={commit}
+            onCheckpoint={() => dispatch({ type: 'checkpoint' })}
+            onLive={(n) => dispatch({ type: 'live', net: n })}
+            play={playView}
+            fitKey={fitKey}
+            touch
+          />
+        }
+        inspector={<Inspector net={net} selection={selection} onCommit={commit} onSelect={setSelection} touch />}
+        playPanel={
+          game ? (
+            <PlayPanel
+              net={net}
+              game={game}
+              viewer={viewer}
+              onViewer={setViewer}
+              onRewind={(at) => setGame(rewind(game, at))}
+              onRestart={() => play()}
+              autoplay={autoplay}
+              onAutoplay={setAutoplay}
+              touch
+            />
+          ) : null
+        }
+        text={<TextPane net={net} onCommit={(n) => commit(n)} />}
+        analysis={
+          <AnalysisPanel
+            net={net}
+            onSelect={(s) => {
+              setMode('edit')
+              setSelection(s)
+              showTab('inspect')
+            }}
+            onPlayFrom={(m) => (play(m), showTab('inspect'))}
+          />
+        }
+        selection={selection}
+        game={game}
+        viewer={viewer}
+        legal={playView?.legal ?? new Set()}
+        onSpeak={onSpeak}
+        onRestart={() => play()}
+        reveal={reveal}
+        toast={
+          toast ? (
+            <div className="toast" role="alert" onClick={() => setToast(null)}>
+              {toast}
+            </div>
+          ) : null
+        }
+      />
+    )
+  }
 
   return (
     <div className={`app ${drawer ? 'has-drawer' : ''}`}>
@@ -240,7 +333,7 @@ export function App() {
   )
 }
 
-function FileMenu({ onNew, onExample, onImport, onDownload }: { onNew: () => void; onExample: (text: string) => void; onImport: () => void; onDownload: () => void }) {
+function FileMenu({ onNew, onExample, onImport, onDownload, label = 'File' }: { onNew: () => void; onExample: (text: string) => void; onImport: () => void; onDownload: () => void; label?: string }) {
   const ref = useRef<HTMLDetailsElement>(null)
   const close = (f: () => void) => () => {
     ref.current?.removeAttribute('open')
@@ -253,7 +346,7 @@ function FileMenu({ onNew, onExample, onImport, onDownload }: { onNew: () => voi
   }, [])
   return (
     <details className="menu" ref={ref}>
-      <summary>File</summary>
+      <summary aria-label={label === 'File' ? undefined : 'File menu'}>{label}</summary>
       <div className="menu-pop" role="menu">
         <button role="menuitem" onClick={close(onNew)}>
           New design

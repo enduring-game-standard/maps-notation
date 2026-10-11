@@ -1258,3 +1258,347 @@ button.line:hover {
     opacity: 0.6;
   }
 }
+
+/* Phone. Everything below is scoped to .phone-app, which only the phone layout renders. */
+.phone-app {
+  --top: 52px;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  background: var(--bg);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+.phone-top {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: calc(var(--top) + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 8px 0 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.phone-logo circle {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.phone-logo rect {
+  fill: var(--accent);
+}
+.phone-title {
+  flex: 1;
+  min-width: 0;
+  font-weight: 650;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.phone-app .segmented {
+  position: static;
+  transform: none;
+  flex: none;
+}
+.phone-app .segmented button {
+  padding: 7px 14px;
+  font-size: 14px;
+}
+.phone-icon,
+.phone-app .menu summary {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  border-radius: 10px;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text);
+}
+.phone-icon svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.phone-icon:active,
+.phone-app .menu summary:active {
+  background: var(--panel-2);
+}
+.phone-app .menu-pop {
+  left: auto;
+  right: 0;
+  min-width: 220px;
+  z-index: 20;
+}
+.phone-app .menu-pop button {
+  padding: 12px 14px;
+  font-size: 15px;
+}
+
+.phone-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.phone-app .palette {
+  top: 10px;
+  left: 10px;
+  padding: 4px;
+  border-radius: 12px;
+}
+.phone-app .palette button {
+  padding: 10px 14px;
+  font-size: 15px;
+}
+.phone-app .palette kbd,
+.phone-app .palette-hint,
+.phone-app .canvas > .legend {
+  display: none;
+}
+.phone-app .zoom {
+  right: 10px;
+  bottom: 10px;
+  border-radius: 12px;
+}
+.phone-app .zoom button {
+  min-width: 40px;
+  height: 38px;
+  font-size: 17px;
+}
+.phone-app .knob-stem {
+  stroke: var(--accent);
+  pointer-events: none;
+}
+.phone-app .handle-hit {
+  fill: transparent;
+  stroke: none;
+}
+
+.sheet {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -6px 24px rgb(20 20 30 / 0.08);
+  padding-bottom: env(safe-area-inset-bottom);
+  margin-top: -12px;
+  position: relative;
+  z-index: 5;
+  transition: height 0.22s ease;
+}
+.sheet.is-dragging {
+  transition: none;
+}
+.sheet.snap-peek {
+  height: auto;
+}
+.sheet.snap-half {
+  height: 55dvh;
+}
+.sheet.snap-full {
+  height: calc(100dvh - var(--top) - env(safe-area-inset-top) + 12px);
+}
+.sheet-grip {
+  flex: none;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  cursor: grab;
+}
+.sheet-grip span {
+  width: 40px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--line-strong);
+}
+.sheet-summary {
+  flex: none;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border: 0;
+  background: none;
+  padding: 2px 16px 10px;
+  text-align: left;
+  min-width: 0;
+}
+.sheet-summary .eyebrow {
+  flex: none;
+}
+.sheet-summary-title {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sheet-summary .chev {
+  color: var(--faint);
+  font-size: 20px;
+}
+.sheet-play {
+  flex: none;
+  padding: 0 12px 8px;
+}
+.sheet-play .status {
+  margin: 0 4px 8px;
+  font-size: 14px;
+}
+.moves {
+  mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 4px 4px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.moves > :last-child {
+  margin-right: 24px;
+}
+.moves::-webkit-scrollbar {
+  display: none;
+}
+.move {
+  flex: none;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--world);
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.move:active {
+  filter: brightness(0.9);
+}
+.move.is-quiet {
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+.sheet-tabs {
+  flex: none;
+  display: flex;
+  gap: 4px;
+  padding: 0 12px 8px;
+}
+.sheet-tabs button {
+  flex: 1;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  border-radius: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 14px;
+}
+.sheet-tabs button.is-on {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+}
+.sheet-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-top: 1px solid var(--line);
+}
+.sheet.snap-peek:not(.is-dragging) .sheet-body {
+  display: none;
+}
+.sheet-body > div {
+  min-height: 100%;
+}
+.sheet-legend {
+  padding: 0 16px 16px;
+}
+.sheet-legend .legend {
+  position: static;
+  box-shadow: none;
+}
+.sheet-text {
+  display: flex;
+  flex-direction: column;
+}
+.phone-app .sheet-text .text-pane {
+  flex: 1;
+  min-height: 60dvh;
+}
+.phone-app input,
+.phone-app select,
+.phone-app textarea {
+  font-size: 16px;
+}
+.phone-app .row-control > input,
+.phone-app .row-control > select {
+  min-height: 40px;
+}
+.phone-app .transcript .line {
+  min-height: 40px;
+}
+.phone-app .toast {
+  left: 12px;
+  right: 12px;
+  transform: none;
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  max-width: none;
+}
+
+/* Phone held sideways: the sheet docks as a column so the canvas keeps the full height. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .phone-app {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min(320px, 40vw);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: 'top top' 'stage sheet';
+  }
+  .phone-top {
+    grid-area: top;
+    --top: 44px;
+  }
+  .phone-stage {
+    grid-area: stage;
+  }
+  .phone-app .sheet,
+  .phone-app .sheet.snap-peek,
+  .phone-app .sheet.snap-half,
+  .phone-app .sheet.snap-full {
+    grid-area: sheet;
+    height: auto;
+    margin: 0;
+    border-radius: 0;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+    box-shadow: none;
+    padding-top: 8px;
+  }
+  .phone-app .sheet-grip {
+    display: none;
+  }
+  .phone-app .sheet.snap-peek .sheet-body {
+    display: block;
+  }
+}
+.sheet:not(.snap-peek) .sheet-summary {
+  display: none;
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .phone-app .sheet-summary {
+    display: none;
+  }
+}

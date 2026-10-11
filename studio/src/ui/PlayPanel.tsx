@@ -12,11 +12,12 @@ interface Props {
   onRestart: () => void
   autoplay: boolean
   onAutoplay: (on: boolean) => void
+  touch?: boolean
 }
 
 const pct = (p: number) => `${Math.round(p * 1000) / 10}%`
 
-export function PlayPanel({ net, game, viewer, onViewer, onRewind, onRestart, autoplay, onAutoplay }: Props) {
+export function PlayPanel({ net, game, viewer, onViewer, onRewind, onRestart, autoplay, onAutoplay, touch }: Props) {
   const now = current(game)
   const seat = (id: string) => net.seats.find((s) => s.id === id)
   const label = (verb: string) => net.verbs.find((v) => v.id === verb)?.label ?? verb
@@ -47,7 +48,7 @@ export function PlayPanel({ net, game, viewer, onViewer, onRewind, onRestart, au
           </select>
         </span>
       </div>
-      <TurnStatus step={now} net={net} viewer={viewer} />
+      <TurnStatus step={now} net={net} viewer={viewer} touch={touch} />
       <div className="controls">
         <button className="ghost-btn" onClick={onRestart}>
           Restart
@@ -100,7 +101,7 @@ export function PlayPanel({ net, game, viewer, onViewer, onRewind, onRestart, au
   )
 }
 
-function TurnStatus({ step, net, viewer }: { step: Step; net: Net; viewer: SeatId | undefined }) {
+export function TurnStatus({ step, net, viewer, touch }: { step: Step; net: Net; viewer: SeatId | undefined; touch?: boolean }) {
   const t = step.turn
   if (t.kind === 'over') return <div className="status is-over">Game over: {t.outcome}</div>
   if (t.kind === 'stalled') return <div className="status is-stalled">Nobody can speak. The design stalls here.</div>
@@ -121,7 +122,7 @@ function TurnStatus({ step, net, viewer }: { step: Step; net: Net; viewer: SeatI
         ),
       )}{' '}
       may speak
-      {viewer && !t.choices.has(viewer) ? <span className="muted"> · you are waiting</span> : <span className="muted"> · click a glowing verb</span>}
+      {viewer && !t.choices.has(viewer) ? <span className="muted"> · you are waiting</span> : <span className="muted"> · {touch ? 'tap a move' : 'click a glowing verb'}</span>}
     </div>
   )
 }

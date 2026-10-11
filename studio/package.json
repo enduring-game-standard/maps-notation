@@ -6,7 +6,8 @@
     "dev": "vite --host 0.0.0.0",
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
-    "gen": "tsx tools/gen-tictactoe.ts"
+    "gen": "tsx tools/gen-tictactoe.ts",
+    "e2e:phone": "node e2e/phone.mjs"
   },
   "dependencies": {
     "react": "^19.3.0",
@@ -17,6 +18,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "playwright": "^1.64.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite": "^8.3.4",

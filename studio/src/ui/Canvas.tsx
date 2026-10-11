@@ -47,6 +47,8 @@ interface Props {
   onLive: (net: Net) => void
   play: PlayView | undefined
   fitKey: number
+  /** phone layout: touch-sized handles, no page gestures on the canvas */
+  touch?: boolean
 }
 
 interface View {
@@ -57,9 +59,10 @@ interface View {
 
 type Gesture =
   | { kind: 'idle' }
-  | { kind: 'pan'; sx: number; sy: number; from: View; moved: boolean }
+  | { kind: 'pan'; sx: number; sy: number; from: View; moved: boolean; tap?: Selection }
   | { kind: 'drag'; start: Pt; base: Net; origins: Map<string, Pt>; snapEach: boolean; moved: boolean }
   | { kind: 'connect'; from: NodeRef }
+  | { kind: 'pinch'; d0: number; mid0: Pt; from: View }
 
 type Tool = 'state' | 'verb' | null
 
@@ -79,6 +82,7 @@ export function Canvas(props: Props) {
   const [panning, setPanning] = useState(false)
   const gesture = useRef<Gesture>({ kind: 'idle' })
   const space = useRef(false)
+  const pointers = useRef(new Map<number, Pt>())
   const latest = useRef({ props, view, tool, cursor })
   latest.current = { props, view, tool, cursor }
 
@@ -120,8 +124,41 @@ export function Canvas(props: Props) {
   }, [])
 
   useEffect(() => {
-    const move = (e: PointerEvent) => {
+    const el = svg.current!
+    const down = (e: PointerEvent) => {
+      if (e.pointerType !== 'touch') return
+      const r = el.getBoundingClientRect()
+      pointers.current.set(e.pointerId, { x: e.clientX - r.left, y: e.clientY - r.top })
+      if (pointers.current.size !== 2) return
+      e.stopPropagation()
       const g = gesture.current
+      const { props: p, view: v } = latest.current
+      if (g.kind === 'drag' && g.moved) p.onLive(g.base)
+      setConnectTo(null)
+      const [a, b] = [...pointers.current.values()]
+      gesture.current = { kind: 'pinch', d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, mid0: { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, from: v }
+    }
+    el.addEventListener('pointerdown', down, { capture: true })
+    return () => el.removeEventListener('pointerdown', down, { capture: true })
+  }, [])
+
+  useEffect(() => {
+    const move = (e: PointerEvent) => {
+      if (pointers.current.has(e.pointerId)) {
+        const r = svg.current!.getBoundingClientRect()
+        pointers.current.set(e.pointerId, { x: e.clientX - r.left, y: e.clientY - r.top })
+      }
+      const g = gesture.current
+      if (g.kind === 'pinch') {
+        if (pointers.current.size < 2) return
+        const [a, b] = [...pointers.current.values()]
+        const k = Math.min(4, Math.max(0.15, (g.from.k * Math.hypot(a.x - b.x, a.y - b.y)) / g.d0))
+        const mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }
+        const wx = (g.mid0.x - g.from.x) / g.from.k
+        const wy = (g.mid0.y - g.from.y) / g.from.k
+        setView({ k, x: mid.x - wx * k, y: mid.y - wy * k })
+        return
+      }
       const { props: p, view: v } = latest.current
       if (g.kind === 'pan') {
         const dx = e.clientX - g.sx
@@ -139,9 +176,14 @@ export function Canvas(props: Props) {
       } else if (g.kind === 'connect') setConnectTo(toWorld(e.clientX, e.clientY, v))
     }
     const up = (e: PointerEvent) => {
+      pointers.current.delete(e.pointerId)
       const g = gesture.current
+      if (g.kind === 'pinch') {
+        if (pointers.current.size === 0) gesture.current = { kind: 'idle' }
+        return
+      }
       const { props: p } = latest.current
-      if (g.kind === 'pan' && !g.moved) p.onSelect(null)
+      if (g.kind === 'pan' && !g.moved) p.onSelect(g.tap ?? null)
       if (g.kind === 'connect') {
         const el = document.elementFromPoint(e.clientX, e.clientY)?.closest<SVGGElement>('[data-node]')
         const to = el && ({ kind: el.dataset.kind, id: el.dataset.node } as NodeRef)
@@ -152,11 +194,21 @@ export function Canvas(props: Props) {
       gesture.current = { kind: 'idle' }
       setPanning(false)
     }
+    const cancel = (e: PointerEvent) => {
+      pointers.current.delete(e.pointerId)
+      if (pointers.current.size === 0) {
+        gesture.current = { kind: 'idle' }
+        setConnectTo(null)
+        setPanning(false)
+      }
+    }
     window.addEventListener('pointermove', move)
     window.addEventListener('pointerup', up)
+    window.addEventListener('pointercancel', cancel)
     return () => {
       window.removeEventListener('pointermove', move)
       window.removeEventListener('pointerup', up)
+      window.removeEventListener('pointercancel', cancel)
     }
   }, [])
 
@@ -203,8 +255,9 @@ export function Canvas(props: Props) {
     return { x: (r.width / 2 - v.x) / v.k, y: (r.height / 2 - v.y) / v.k }
   }
 
-  const startPan = (e: React.PointerEvent) => {
-    gesture.current = { kind: 'pan', sx: e.clientX, sy: e.clientY, from: view, moved: false }
+  /** On touch, pressing something unselected pans; a tap without movement selects it instead. */
+  const startPan = (e: React.PointerEvent, tap?: Selection) => {
+    gesture.current = { kind: 'pan', sx: e.clientX, sy: e.clientY, from: latest.current.view, moved: false, tap }
     setPanning(true)
   }
 
@@ -230,6 +283,7 @@ export function Canvas(props: Props) {
     if (e.button !== 0) return
     e.stopPropagation()
     if (space.current || mode === 'play') return startPan(e)
+    if (props.touch && !isSel(ref.kind, ref.id)) return startPan(e, ref)
     onSelect(ref)
     startDrag(e, [ref.id], true)
   }
@@ -243,7 +297,8 @@ export function Canvas(props: Props) {
   const anim = useFlightAnimation(play?.flight, net, shapes)
   const marking = mode === 'play' && play ? (anim?.marking ?? play.marking) : undefined
 
-  const focus = hover ?? (selection && (selection.kind === 'state' || selection.kind === 'verb') ? selection : null)
+  const selFocus = selection && (selection.kind === 'state' || selection.kind === 'verb') && !(props.touch && mode === 'play') ? selection : null
+  const focus = hover ?? selFocus
   const neighbors = useMemo(() => {
     if (!focus) return undefined
     const s = new Set([focus.id])
@@ -278,7 +333,8 @@ export function Canvas(props: Props) {
                 className="arc-hit"
                 onPointerDown={(e) => {
                   e.stopPropagation()
-                  if (!space.current) onSelect(arcRef(a))
+                  if (props.touch) startPan(e, arcRef(a))
+                  else if (!space.current) onSelect(arcRef(a))
                   else startPan(e)
                 }}
               />
@@ -294,10 +350,28 @@ export function Canvas(props: Props) {
   const isSel = (kind: string, id: string) => selection?.kind === kind && 'id' in selection && selection.id === id
   const handle = (ref: NodeRef, x: number, y: number) =>
     mode === 'edit' && (hover?.id === ref.id || isSel(ref.kind, ref.id)) ? (
-      <circle className="handle" cx={x} cy={y} r={5} onPointerDown={(e) => onHandleDown(e, ref)}>
-        <title>Drag to connect</title>
-      </circle>
+      props.touch ? (
+        touchKnob(ref, x, y)
+      ) : (
+        <circle className="handle" cx={x} cy={y} r={5} onPointerDown={(e) => onHandleDown(e, ref)}>
+          <title>Drag to connect</title>
+        </circle>
+      )
     ) : null
+  /** On touch the knob sits on a stem outside the node, so a finger on the node itself still drags it. */
+  const touchKnob = (ref: NodeRef, x: number, y: number) => {
+    const len = Math.hypot(x, y) || 1
+    const reach = 26 / view.k
+    const kx = x + (x / len) * reach
+    const ky = y + (y / len) * reach
+    return (
+      <g className="touch-knob">
+        <line className="knob-stem" x1={x} y1={y} x2={kx} y2={ky} style={{ strokeWidth: 1.5 / view.k }} />
+        <circle className="handle" cx={kx} cy={ky} r={7 / view.k} style={{ strokeWidth: 1.5 / view.k }} />
+        <circle className="handle-hit" cx={kx} cy={ky} r={20 / view.k} onPointerDown={(e) => onHandleDown(e, ref)} />
+      </g>
+    )
+  }
   const hoverProps = (ref: NodeRef) => ({
     onPointerEnter: () => setHover(ref),
     onPointerLeave: () => setHover((h) => (h?.id === ref.id ? null : h)),
@@ -320,6 +394,7 @@ export function Canvas(props: Props) {
         onPointerDown={onBackgroundDown}
         onPointerMove={(e) => setCursor(toWorld(e.clientX, e.clientY))}
         onPointerLeave={() => setCursor(null)}
+        style={props.touch ? { touchAction: 'none' } : undefined}
       >
         <defs>
           <pattern id="fog" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -335,6 +410,7 @@ export function Canvas(props: Props) {
               onPointerDown={(e) => {
                 if (mode !== 'edit' || space.current || e.button !== 0) return
                 e.stopPropagation()
+                if (props.touch && !isSel('group', group.id)) return startPan(e, { kind: 'group', id: group.id })
                 onSelect({ kind: 'group', id: group.id })
                 startDrag(e, members, false)
               }}
@@ -518,7 +594,7 @@ function ArcCap({ at, r, filled }: { at: Pt; r: number; filled?: boolean }): Rea
   return <circle cx={at.x} cy={at.y} r={r} className={filled ? 'arc-cap is-filled' : 'arc-cap'} />
 }
 
-function Legend() {
+export function Legend() {
   const item = (label: string, line: ReactNode) => (
     <li>
       <svg width="40" height="14" viewBox="0 0 40 14">

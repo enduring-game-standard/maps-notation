@@ -24,9 +24,10 @@ interface Props {
   selection: Selection
   onCommit: (net: Net, sel?: Selection) => void
   onSelect: (s: Selection) => void
+  touch?: boolean
 }
 
-export function Inspector({ net, selection, onCommit, onSelect }: Props) {
+export function Inspector({ net, selection, onCommit, onSelect, touch }: Props) {
   const state = selection?.kind === 'state' ? net.states.find((p) => p.id === selection.id) : undefined
   const verb = selection?.kind === 'verb' ? net.verbs.find((v) => v.id === selection.id) : undefined
   const arc = selection?.kind === 'arc' ? net.arcs.find((a) => sameArc(a, selection)) : undefined
@@ -59,7 +60,7 @@ export function Inspector({ net, selection, onCommit, onSelect }: Props) {
         <p className="hint">Drag the group's outline to move every member. Deleting a group keeps its members.</p>
       </section>
     )
-  return <NetPanel net={net} onCommit={onCommit} />
+  return <NetPanel net={net} onCommit={onCommit} touch={touch} />
 }
 
 function Header({ kind, title, onDelete }: { kind: string; title: string; onDelete: () => void }) {
@@ -261,7 +262,7 @@ function ArcEditor({ net, arcSel, onCommit }: { net: Net; arcSel: ArcRef; onComm
   )
 }
 
-function NetPanel({ net, onCommit }: { net: Net; onCommit: Props['onCommit'] }) {
+function NetPanel({ net, onCommit, touch }: { net: Net; onCommit: Props['onCommit']; touch?: boolean }) {
   return (
     <section className="panel-section">
       <header className="inspector-head">
@@ -320,9 +321,13 @@ function NetPanel({ net, onCommit }: { net: Net; onCommit: Props['onCommit'] }) 
           </button>
         </div>
       ))}
-      <p className="hint">
-        Select a node to edit it. <kbd>S</kbd> adds a state and <kbd>V</kbd> a verb at the cursor; drag a node's dot onto another node to connect them.
-      </p>
+      {touch ? (
+        <p className="hint">Tap a node to edit it. Tap State or Verb, then tap the canvas to place one. Drag a selected node's dot onto another node to connect them. Pinch to zoom.</p>
+      ) : (
+        <p className="hint">
+          Select a node to edit it. <kbd>S</kbd> adds a state and <kbd>V</kbd> a verb at the cursor; drag a node's dot onto another node to connect them.
+        </p>
+      )}
     </section>
   )
 }
