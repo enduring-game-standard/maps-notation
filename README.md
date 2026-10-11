@@ -27,6 +27,7 @@ The studio opens tic-tac-toe. Switch to Play and take X's turn. Switch the viewe
 ## Files
 
 - [SPEC.md](SPEC.md) is the notation: the model, the conversation rules, the text form, and what tic-tac-toe taught.
+- [GAME_ABSTRACTION_LEVELS.md](GAME_ABSTRACTION_LEVELS.md) places MAPS among five levels of game description, from the running performance to structural identity.
 - [examples/tic-tac-toe.maps](examples/tic-tac-toe.maps) is a complete game, written by `studio/tools/gen-tictactoe.ts`.
 - `studio/src/core/` is the reference implementation: parser and printer, the conversation engine, the checker, and the analysis.
 - `studio/src/ui/` is the design tool.
