@@ -1,4 +1,4 @@
-import { ARC_KINDS, emptyNet, isIdent, type ArcKind, type Net, type State, type Verb } from './model'
+import { ARC_KINDS, emptyNet, isIdent, type Arc, type ArcKind, type Net, type State, type Verb } from './model'
 
 export const HEADER = 'maps 2'
 
@@ -69,10 +69,19 @@ export const parse = (src: string): Net => {
       if (!verb) throw new MapsSyntaxError(n, 'an indented arc must follow a verb')
       const kind = t[0] as ArcKind
       if (!ARC_KINDS.includes(kind)) throw new MapsSyntaxError(n, `arcs are ${ARC_KINDS.join(', ')}; got ${t[0]}`)
-      if (t.length !== 2 && t.length !== 3) throw new MapsSyntaxError(n, `an arc is "${kind} state" or "${kind} count state"`)
-      const count = t.length === 3 ? int(t[1], n, 'count') : 1
+      const v = t.indexOf('via')
+      const head = v < 0 ? t : t.slice(0, v)
+      if (head.length !== 2 && head.length !== 3) throw new MapsSyntaxError(n, `an arc is "${kind} state" or "${kind} count state", then optionally "via x y ..."`)
+      const count = head.length === 3 ? int(head[1], n, 'count') : 1
       if (count < 1) throw new MapsSyntaxError(n, 'an arc count is at least 1')
-      net.arcs.push({ kind, count, state: ident(t[t.length - 1], n, 'state'), verb: verb.id })
+      const arc: Arc = { kind, count, state: ident(head[head.length - 1], n, 'state'), verb: verb.id }
+      if (v >= 0) {
+        const xs = t.slice(v + 1)
+        if (!xs.length || xs.length % 2) throw new MapsSyntaxError(n, 'via takes pairs of whole numbers, x y')
+        arc.via = []
+        for (let k = 0; k < xs.length; k += 2) arc.via.push({ x: int(xs[k], n, 'x'), y: int(xs[k + 1], n, 'y') })
+      }
+      net.arcs.push(arc)
       return
     }
     verb = undefined
@@ -172,7 +181,10 @@ export const print = (net: Net): string => {
     a.push(`at ${Math.round(v.x)} ${Math.round(v.y)}`)
     lines.push(a.join(' '))
     for (const arc of net.arcs.filter((x) => x.verb === v.id))
-      lines.push(`  ${arc.kind}${arc.count !== 1 ? ' ' + arc.count : ''} ${arc.state}`)
+      lines.push(
+        `  ${arc.kind}${arc.count !== 1 ? ' ' + arc.count : ''} ${arc.state}` +
+          (arc.via?.length ? ` via ${arc.via.map((p) => `${Math.round(p.x)} ${Math.round(p.y)}`).join(' ')}` : ''),
+      )
   }
   return lines.join('\n') + '\n'
 }

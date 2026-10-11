@@ -21,6 +21,8 @@ describe('text form', () => {
     ['a verb with no speaker', 'verb go "Go"', 'must say who speaks it'],
     ['an arc with extra words', 'verb go "Go" by world\n  take 2 a b', 'an arc is'],
     ['a bare arc', 'verb go "Go" by world\n  take', 'an arc is'],
+    ['a via with an odd number of coordinates', 'verb go "Go" by world\n  take a via 1 2 3', 'pairs of whole numbers'],
+    ['an empty via', 'verb go "Go" by world\n  take a via', 'pairs of whole numbers'],
     ['an attribute given twice', 'state a "A" marks 1 marks 2', 'given twice'],
     ['a missing header', null, 'starts with'],
     ['words after a title', 'title "A" bogus', 'one quoted label'],
@@ -33,7 +35,7 @@ describe('text form', () => {
   it('reports the line of a syntax error', () => expect(() => net('title "x"\nstate A "A"')).toThrow('line 3'))
 
   it('prints a canonical file that parses back to the same net and the same text', () => {
-    const n = net('seat ann "Ann" color "#123456"\nstate a "A \\"quoted\\"" marks 2 seen-by ann at 1 2\nverb go "Go" by ann at 3 4\n  take 2 a')
+    const n = net('seat ann "Ann" color "#123456"\nstate a "A \\"quoted\\"" marks 2 seen-by ann at 1 2\nverb go "Go" by ann at 3 4\n  take 2 a\n  give a via 10 20 10 40')
     expect(parse(print(n))).toEqual(n)
     expect(print(parse(print(n)))).toBe(print(n))
   })

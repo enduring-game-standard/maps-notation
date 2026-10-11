@@ -38,11 +38,18 @@ export interface Verb {
 
 export type ArcKind = 'take' | 'give' | 'need' | 'unless'
 
+export interface Point {
+  x: number
+  y: number
+}
+
 export interface Arc {
   kind: ArcKind
   state: string
   verb: string
   count: number
+  /** Bend points set by hand, listed from the state end to the verb end. Absent means the editor routes the arc. */
+  via?: Point[]
 }
 
 export interface Net {

@@ -117,7 +117,9 @@ verb x_line_456 "X has 4-5-6" by world priority 2 in judge at 1220 65
 | `group name "label"` | |
 | `state name "label"` | `marks n`, `seen-by all` or `seen-by none` or `seen-by a,b`, `ends "text"`, `in group`, `at x y` |
 | `verb name "label"` | `by seat-or-world` (required), `priority n`, `weight n`, `in group`, `at x y` |
-| `  take n state` | an indented arc belongs to the verb above it; `n` is optional |
+| `  take n state` | `via x y x y ...`. An indented arc belongs to the verb above it, and `n` is optional |
+
+Positions are part of the design, for arcs as much as for nodes. `at x y` places a node. `via` lists the bend points of an arc that someone placed by hand, in order from the state end to the verb end. An arc without `via` is routed by the editor, which keeps it clear of nodes and labels and gathers arcs that leave or reach one state into a single cable. Moving a node never rewrites `via`, so a hand-placed route stays where it was put.
 
 The reference implementation is `studio/src/core/text.ts`. The printer writes a canonical file: attributes in the order of the table above, a position on every node, and no comments. Parsing a canonical file and printing it gives back the same text. Comments in a hand-written file do not survive a trip through the studio.
 
