@@ -1,4 +1,4 @@
-import { WORLD, ARC_KINDS, isIdent, type ArcKind, type Net, type Place, type Verb } from '../core/model'
+import { WORLD, ARC_KINDS, isIdent, type ArcKind, type Net, type State, type Verb } from '../core/model'
 import {
   addGroup,
   addSeat,
@@ -10,7 +10,7 @@ import {
   sameArc,
   updateArc,
   updateGroup,
-  updatePlace,
+  updateState,
   updateSeat,
   updateVerb,
   validateNewId,
@@ -27,22 +27,22 @@ interface Props {
 }
 
 export function Inspector({ net, selection, onCommit, onSelect }: Props) {
-  const place = selection?.kind === 'place' ? net.places.find((p) => p.id === selection.id) : undefined
+  const state = selection?.kind === 'state' ? net.states.find((p) => p.id === selection.id) : undefined
   const verb = selection?.kind === 'verb' ? net.verbs.find((v) => v.id === selection.id) : undefined
   const arc = selection?.kind === 'arc' ? net.arcs.find((a) => sameArc(a, selection)) : undefined
   const group = selection?.kind === 'group' ? net.groups.find((g) => g.id === selection.id) : undefined
   const remove = () => onCommit(deleteSelection(net, selection), null)
 
-  if (place) return <PlaceInspector net={net} place={place} onCommit={onCommit} onSelect={onSelect} onDelete={remove} />
+  if (state) return <StateInspector net={net} state={state} onCommit={onCommit} onSelect={onSelect} onDelete={remove} />
   if (verb) return <VerbInspector net={net} verb={verb} onCommit={onCommit} onSelect={onSelect} onDelete={remove} />
   if (arc && selection?.kind === 'arc')
     return (
       <section className="panel-section">
-        <Header kind="Arc" title={`${arc.kind} ${arc.place} → ${arc.verb}`} onDelete={remove} />
+        <Header kind="Arc" title={`${arc.kind} ${arc.state} → ${arc.verb}`} onDelete={remove} />
         <ArcEditor net={net} arcSel={selection} onCommit={onCommit} />
         <p className="hint">
-          <button className="link" onClick={() => onSelect({ kind: 'place', id: arc.place })}>
-            {arc.place}
+          <button className="link" onClick={() => onSelect({ kind: 'state', id: arc.state })}>
+            {arc.state}
           </button>{' '}
           ·{' '}
           <button className="link" onClick={() => onSelect({ kind: 'verb', id: arc.verb })}>
@@ -76,7 +76,7 @@ function Header({ kind, title, onDelete }: { kind: string; title: string; onDele
   )
 }
 
-function IdField({ net, kind, id, onCommit }: { net: Net; kind: 'place' | 'verb'; id: string; onCommit: Props['onCommit'] }) {
+function IdField({ net, kind, id, onCommit }: { net: Net; kind: 'state' | 'verb'; id: string; onCommit: Props['onCommit'] }) {
   return (
     <TextField
       label="Id"
@@ -103,8 +103,8 @@ function GroupSelect({ net, value, onChange }: { net: Net; value?: string; onCha
   )
 }
 
-function PlaceInspector({ net, place: p, onCommit, onSelect, onDelete }: { net: Net; place: Place; onCommit: Props['onCommit']; onSelect: Props['onSelect']; onDelete: () => void }) {
-  const set = (patch: Partial<Place>) => onCommit(updatePlace(net, p.id, patch))
+function StateInspector({ net, state: p, onCommit, onSelect, onDelete }: { net: Net; state: State; onCommit: Props['onCommit']; onSelect: Props['onSelect']; onDelete: () => void }) {
+  const set = (patch: Partial<State>) => onCommit(updateState(net, p.id, patch))
   const everyone = p.seenBy === 'all'
   const toggleSeat = (seat: string, on: boolean) => {
     const cur = p.seenBy === 'all' ? net.seats.map((s) => s.id) : p.seenBy
@@ -113,8 +113,8 @@ function PlaceInspector({ net, place: p, onCommit, onSelect, onDelete }: { net: 
   }
   return (
     <section className="panel-section">
-      <Header kind="Place" title={p.label} onDelete={onDelete} />
-      <IdField net={net} kind="place" id={p.id} onCommit={onCommit} />
+      <Header kind="State" title={p.label} onDelete={onDelete} />
+      <IdField net={net} kind="state" id={p.id} onCommit={onCommit} />
       <TextField label="Label" value={p.label} onCommit={(label) => set({ label })} />
       <NumberField label="Marks" value={p.marks} min={0} onCommit={(marks) => set({ marks })} />
       <Row label="Seen by">
@@ -142,7 +142,7 @@ function PlaceInspector({ net, place: p, onCommit, onSelect, onDelete }: { net: 
       </Row>
       {p.ends !== undefined ? <TextField label="Outcome text" value={p.ends} onCommit={(ends) => set({ ends })} /> : null}
       <GroupSelect net={net} value={p.group} onChange={(group) => set({ group })} />
-      <ArcList net={net} filter={(a) => a.place === p.id} other={(a) => a.verb} onCommit={onCommit} onSelect={onSelect} />
+      <ArcList net={net} filter={(a) => a.state === p.id} other={(a) => a.verb} onCommit={onCommit} onSelect={onSelect} />
     </section>
   )
 }
@@ -174,7 +174,7 @@ function VerbInspector({ net, verb: v, onCommit, onSelect, onDelete }: { net: Ne
         <p className="hint">A seat simply chooses; priority and weight only order the world's replies.</p>
       )}
       <GroupSelect net={net} value={v.group} onChange={(group) => set({ group })} />
-      <ArcList net={net} filter={(a) => a.verb === v.id} other={(a) => a.place} onCommit={onCommit} onSelect={onSelect} />
+      <ArcList net={net} filter={(a) => a.verb === v.id} other={(a) => a.state} onCommit={onCommit} onSelect={onSelect} />
     </section>
   )
 }
@@ -198,7 +198,7 @@ function ArcList({
       <h3>Arcs</h3>
       {arcs.length === 0 ? <p className="hint">None yet. Drag from the node's dot to another node.</p> : null}
       {arcs.map((a) => (
-        <div className="arc-item" key={`${a.kind}|${a.place}|${a.verb}`}>
+        <div className="arc-item" key={`${a.kind}|${a.state}|${a.verb}`}>
           <KindSelect net={net} arcSel={arcRef(a)} onCommit={onCommit} keepSelection />
           {a.count !== 1 ? <span className="count">×{a.count}</span> : null}
           <button className="link mono" onClick={() => onSelect(arcRef(a))}>
@@ -214,7 +214,7 @@ const KIND_HINT: Record<ArcKind, string> = {
   take: 'consumes marks when the verb is said',
   give: 'produces marks when the verb is said',
   need: 'requires marks, consumes none',
-  unless: 'blocks the verb while the place holds at least this many',
+  unless: 'blocks the verb while the state holds at least this many',
 }
 
 function KindSelect({ net, arcSel, onCommit, keepSelection }: { net: Net; arcSel: ArcRef; onCommit: Props['onCommit']; keepSelection?: boolean }) {
@@ -238,7 +238,7 @@ function KindSelect({ net, arcSel, onCommit, keepSelection }: { net: Net; arcSel
 }
 
 const kindAllowed = (net: Net, r: ArcRef, k: ArcKind) =>
-  k === r.arcKind || !net.arcs.some((a) => a.place === r.place && a.verb === r.verb && a.kind === k)
+  k === r.arcKind || !net.arcs.some((a) => a.state === r.state && a.verb === r.verb && a.kind === k)
 
 function ArcEditor({ net, arcSel, onCommit }: { net: Net; arcSel: ArcRef; onCommit: Props['onCommit'] }) {
   const arc = net.arcs.find((a) => sameArc(a, arcSel))!
@@ -321,7 +321,7 @@ function NetPanel({ net, onCommit }: { net: Net; onCommit: Props['onCommit'] }) 
         </div>
       ))}
       <p className="hint">
-        Select a node to edit it. <kbd>P</kbd> adds a place and <kbd>V</kbd> a verb at the cursor; drag a node's dot onto another node to connect them.
+        Select a node to edit it. <kbd>S</kbd> adds a state and <kbd>V</kbd> a verb at the cursor; drag a node's dot onto another node to connect them.
       </p>
     </section>
   )

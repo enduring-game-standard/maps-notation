@@ -21,12 +21,12 @@ export const check = (net: Net): Problem[] => {
   }
   net.seats.forEach((s) => claim(s.id, 'seat'))
   net.groups.forEach((g) => claim(g.id, 'group'))
-  net.places.forEach((p) => claim(p.id, 'place'))
+  net.states.forEach((p) => claim(p.id, 'state'))
   net.verbs.forEach((v) => claim(v.id, 'verb'))
   for (const s of net.seats) if (!/^#[0-9a-f]{6}$/i.test(s.color)) err(`seat ${s.id} has color "${s.color}"; use #rrggbb`, s.id)
 
   const seats = new Set(net.seats.map((s) => s.id))
-  const placeById = new Map(net.places.map((p) => [p.id, p]))
+  const stateById = new Map(net.states.map((p) => [p.id, p]))
   const verbIds = new Set(net.verbs.map((v) => v.id))
   const groups = new Set(net.groups.map((g) => g.id))
   for (const v of net.verbs) {
@@ -37,23 +37,23 @@ export const check = (net: Net): Problem[] => {
     if (!net.arcs.some((a) => a.verb === v.id && a.kind !== 'give'))
       warn(`${v.id} has no inputs, so it is always possible${v.by === WORLD ? ' and the world never falls silent' : ''}`, v.id)
   }
-  for (const p of net.places) {
+  for (const p of net.states) {
     if (p.seenBy !== 'all') for (const s of p.seenBy) if (!seats.has(s)) err(`${p.id} is seen by unknown seat ${s}`, p.id)
     if (p.group && !groups.has(p.group)) err(`${p.id} is in unknown group ${p.group}`, p.id)
     if (p.marks < 0) err(`${p.id} starts with negative marks`, p.id)
   }
   const seen = new Set<string>()
   for (const a of net.arcs) {
-    if (!verbIds.has(a.verb)) err(`an arc to ${a.place} belongs to unknown verb ${a.verb}`, a.place)
-    const place = placeById.get(a.place)
-    if (!place) err(`${a.verb} ${a.kind}s unknown place ${a.place}`, a.verb)
-    if (a.count < 1) err(`${a.verb} ${a.kind}s ${a.count} of ${a.place}; a count is at least 1`, a.verb)
-    const key = `${a.kind}|${a.place}|${a.verb}`
-    if (seen.has(key)) err(`${a.verb} has two "${a.kind} ${a.place}" arcs; use a count instead`, a.verb)
+    if (!verbIds.has(a.verb)) err(`an arc to ${a.state} belongs to unknown verb ${a.verb}`, a.state)
+    const state = stateById.get(a.state)
+    if (!state) err(`${a.verb} ${a.kind}s unknown state ${a.state}`, a.verb)
+    if (a.count < 1) err(`${a.verb} ${a.kind}s ${a.count} of ${a.state}; a count is at least 1`, a.verb)
+    const key = `${a.kind}|${a.state}|${a.verb}`
+    if (seen.has(key)) err(`${a.verb} has two "${a.kind} ${a.state}" arcs; use a count instead`, a.verb)
     seen.add(key)
     const speaker = net.verbs.find((v) => v.id === a.verb)?.by
-    if (place && speaker && speaker !== WORLD && a.kind !== 'give' && place.seenBy !== 'all' && !place.seenBy.includes(speaker))
-      warn(`${a.verb} ${a.kind}s ${a.place}, which ${speaker} cannot see; whether ${a.verb} is possible tells ${speaker} about it`, a.verb)
+    if (state && speaker && speaker !== WORLD && a.kind !== 'give' && state.seenBy !== 'all' && !state.seenBy.includes(speaker))
+      warn(`${a.verb} ${a.kind}s ${a.state}, which ${speaker} cannot see; whether ${a.verb} is possible tells ${speaker} about it`, a.verb)
   }
   return out
 }

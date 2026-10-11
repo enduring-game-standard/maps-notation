@@ -7,41 +7,41 @@ group turn "Whose turn"
 group board "The board"
 group judge "The judge"
 
-place x_to_move "X to move" marks 1 in turn at 120 260
-place o_to_move "O to move" in turn at 120 540
-place squares_left "Squares left" marks 9 in turn at 120 400
-place empty_1 "1 empty" marks 1 in board at 360 155
-place x_1 "X on 1" in board at 305 250
-place o_1 "O on 1" in board at 415 250
-place empty_2 "2 empty" marks 1 in board at 560 155
-place x_2 "X on 2" in board at 505 250
-place o_2 "O on 2" in board at 615 250
-place empty_3 "3 empty" marks 1 in board at 760 155
-place x_3 "X on 3" in board at 705 250
-place o_3 "O on 3" in board at 815 250
-place empty_4 "4 empty" marks 1 in board at 360 355
-place x_4 "X on 4" in board at 305 450
-place o_4 "O on 4" in board at 415 450
-place empty_5 "5 empty" marks 1 in board at 560 355
-place x_5 "X on 5" in board at 505 450
-place o_5 "O on 5" in board at 615 450
-place empty_6 "6 empty" marks 1 in board at 760 355
-place x_6 "X on 6" in board at 705 450
-place o_6 "O on 6" in board at 815 450
-place empty_7 "7 empty" marks 1 in board at 360 555
-place x_7 "X on 7" in board at 305 650
-place o_7 "O on 7" in board at 415 650
-place empty_8 "8 empty" marks 1 in board at 560 555
-place x_8 "X on 8" in board at 505 650
-place o_8 "O on 8" in board at 615 650
-place empty_9 "9 empty" marks 1 in board at 760 555
-place x_9 "X on 9" in board at 705 650
-place o_9 "O on 9" in board at 815 650
-place judge_x "Judge X's move" in judge at 1080 260
-place x_won "X wins" ends "X wins" in judge at 1360 260
-place judge_o "Judge O's move" in judge at 1080 780
-place o_won "O wins" ends "O wins" in judge at 1360 780
-place drawn "Draw" ends "Draw" in judge at 1360 400
+state x_to_move "X to move" marks 1 in turn at 120 260
+state o_to_move "O to move" in turn at 120 540
+state squares_left "Squares left" marks 9 in turn at 120 400
+state empty_1 "1 empty" marks 1 in board at 360 155
+state x_1 "X on 1" in board at 305 250
+state o_1 "O on 1" in board at 415 250
+state empty_2 "2 empty" marks 1 in board at 560 155
+state x_2 "X on 2" in board at 505 250
+state o_2 "O on 2" in board at 615 250
+state empty_3 "3 empty" marks 1 in board at 760 155
+state x_3 "X on 3" in board at 705 250
+state o_3 "O on 3" in board at 815 250
+state empty_4 "4 empty" marks 1 in board at 360 355
+state x_4 "X on 4" in board at 305 450
+state o_4 "O on 4" in board at 415 450
+state empty_5 "5 empty" marks 1 in board at 560 355
+state x_5 "X on 5" in board at 505 450
+state o_5 "O on 5" in board at 615 450
+state empty_6 "6 empty" marks 1 in board at 760 355
+state x_6 "X on 6" in board at 705 450
+state o_6 "O on 6" in board at 815 450
+state empty_7 "7 empty" marks 1 in board at 360 555
+state x_7 "X on 7" in board at 305 650
+state o_7 "O on 7" in board at 415 650
+state empty_8 "8 empty" marks 1 in board at 560 555
+state x_8 "X on 8" in board at 505 650
+state o_8 "O on 8" in board at 615 650
+state empty_9 "9 empty" marks 1 in board at 760 555
+state x_9 "X on 9" in board at 705 650
+state o_9 "O on 9" in board at 815 650
+state judge_x "Judge X's move" in judge at 1080 260
+state x_won "X wins" ends "X wins" in judge at 1360 260
+state judge_o "Judge O's move" in judge at 1080 780
+state o_won "O wins" ends "O wins" in judge at 1360 780
+state drawn "Draw" ends "Draw" in judge at 1360 400
 
 verb x_marks_1 "X marks 1" by x in board at 305 195
   take x_to_move

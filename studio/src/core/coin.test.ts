@@ -30,7 +30,7 @@ describe('call the coin: chance and hidden information', () => {
   })
 
   it('the caller cannot see the covered coin', () => {
-    const covered = net.places.filter((p) => !canSee(p, 'caller')).map((p) => p.id)
+    const covered = net.states.filter((p) => !canSee(p, 'caller')).map((p) => p.id)
     expect(covered).toEqual(['heads', 'tails'])
   })
 

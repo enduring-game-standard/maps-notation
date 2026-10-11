@@ -3,14 +3,14 @@ title "Call the coin"
 
 seat caller "Caller" color "#7b2cbf"
 
-place coin "Coin in hand" marks 1 at 100 200
-place heads "Heads, covered" seen-by none at 340 120
-place tails "Tails, covered" seen-by none at 340 280
-place may_call "Caller may call" marks 1 at 340 440
-place said_heads "Called heads" at 580 380
-place said_tails "Called tails" at 580 500
-place caller_won "Caller wins" ends "Caller wins" at 900 200
-place caller_lost "Caller loses" ends "Caller loses" at 900 360
+state coin "Coin in hand" marks 1 at 100 200
+state heads "Heads, covered" seen-by none at 340 120
+state tails "Tails, covered" seen-by none at 340 280
+state may_call "Caller may call" marks 1 at 340 440
+state said_heads "Called heads" at 580 380
+state said_tails "Called tails" at 580 500
+state caller_won "Caller wins" ends "Caller wins" at 900 200
+state caller_lost "Caller loses" ends "Caller loses" at 900 360
 
 verb flip_heads "Lands heads" by world at 220 120
   take coin

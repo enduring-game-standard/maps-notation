@@ -171,7 +171,7 @@ kbd {
   width: 28px;
   height: 28px;
   display: inline-grid;
-  place-items: center;
+  state-items: center;
   border: 0;
   border-radius: 6px;
   background: none;
@@ -458,17 +458,17 @@ kbd {
 .mode-edit .node {
   cursor: move;
 }
-.place-body {
+.state-body {
   fill: var(--panel);
   stroke: #4a5059;
   stroke-width: 1.6;
 }
-.place:hover .place-body {
+.state:hover .state-body {
   stroke: var(--text);
   stroke-width: 2;
 }
-.place.is-selected .place-body,
-.place.is-selected .outcome-ring {
+.state.is-selected .state-body,
+.state.is-selected .outcome-ring {
   stroke: var(--accent);
   stroke-width: 2.4;
 }
@@ -477,10 +477,10 @@ kbd {
   stroke: #4a5059;
   stroke-width: 1.2;
 }
-.place.is-reached .place-body {
+.state.is-reached .state-body {
   fill: #fff6d6;
 }
-.place.is-reached .outcome-ring {
+.state.is-reached .outcome-ring {
   stroke: var(--warn);
   stroke-width: 2.4;
 }

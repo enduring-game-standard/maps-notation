@@ -19,7 +19,7 @@ export function AnalysisPanel({ net, onSelect, onPlayFrom }: Props) {
   const problems = useMemo(() => check(net), [net])
   const [run, setRun] = useState<Run>({ status: 'idle' })
   const selectId = (id: string) => {
-    if (net.places.some((p) => p.id === id)) onSelect({ kind: 'place', id })
+    if (net.states.some((p) => p.id === id)) onSelect({ kind: 'state', id })
     else if (net.verbs.some((v) => v.id === id)) onSelect({ kind: 'verb', id })
   }
 
@@ -74,7 +74,7 @@ export function AnalysisPanel({ net, onSelect, onPlayFrom }: Props) {
 function Results({ r, ms, net, selectId, onPlayFrom }: { r: Analysis; ms: number; net: Net; selectId: (id: string) => void; onPlayFrom: (m: Marking) => void }) {
   const total = [...r.outcomes.values()].reduce((a, b) => a + b, 0)
   const growing = [...r.maxMarks].filter(([, n]) => n > UNBOUNDED)
-  const label = (id: string) => net.places.find((p) => p.id === id)?.label ?? net.verbs.find((v) => v.id === id)?.label ?? id
+  const label = (id: string) => net.states.find((p) => p.id === id)?.label ?? net.verbs.find((v) => v.id === id)?.label ?? id
   return (
     <div className="results">
       <div className="stats">
@@ -166,10 +166,10 @@ function Results({ r, ms, net, selectId, onPlayFrom }: { r: Analysis; ms: number
           ))}
         </div>
       ) : (
-        <p className="hint">No place holds more than {UNBOUNDED} marks.</p>
+        <p className="hint">No state holds more than {UNBOUNDED} marks.</p>
       )}
       <details className="max-marks">
-        <summary>Most marks each place ever holds</summary>
+        <summary>Most marks each state ever holds</summary>
         <ul>
           {[...r.maxMarks].map(([id, n]) => (
             <li key={id}>

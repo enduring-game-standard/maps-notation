@@ -1,7 +1,7 @@
 import { WORLD_LIMIT, compile, fire, whoseTurn, type Compiled } from './engine'
 import { WORLD, initialMarking, type Marking, type Net } from './model'
 
-const key = (c: Compiled, m: Marking) => c.net.places.map((p) => m[p.id] ?? 0).join(',')
+const key = (c: Compiled, m: Marking) => c.net.states.map((p) => m[p.id] ?? 0).join(',')
 
 export interface Node {
   marking: Marking
@@ -111,7 +111,7 @@ export const analyze = (net: Net, limit = 250_000): Analysis => {
     if (n.outcome !== undefined) outcomes.set(n.outcome, (outcomes.get(n.outcome) ?? 0) + 1)
     if (n.stalled) stalls.push(k)
     if (n.livelock) livelocks.push(k)
-    for (const p of net.places) maxMarks.set(p.id, Math.max(maxMarks.get(p.id) ?? 0, n.marking[p.id] ?? 0))
+    for (const p of net.states) maxMarks.set(p.id, Math.max(maxMarks.get(p.id) ?? 0, n.marking[p.id] ?? 0))
   }
 
   return {

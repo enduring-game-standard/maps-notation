@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs'
-import { WORLD, type Arc, type Net, type Place, type Verb } from '../src/core/model'
+import { WORLD, type Arc, type Net, type State, type Verb } from '../src/core/model'
 import { print } from '../src/core/text'
 
 const LINES = [
@@ -13,31 +13,31 @@ const SEATS = [
 ]
 
 export const ticTacToe = (): Net => {
-  const places: Place[] = []
+  const states: State[] = []
   const verbs: Verb[] = []
   const arcs: Arc[] = []
-  const place = (p: Partial<Place> & Pick<Place, 'id' | 'label' | 'x' | 'y'>) => places.push({ marks: 0, seenBy: 'all', ...p })
+  const state = (p: Partial<State> & Pick<State, 'id' | 'label' | 'x' | 'y'>) => states.push({ marks: 0, seenBy: 'all', ...p })
   const verb = (v: Partial<Verb> & Pick<Verb, 'id' | 'label' | 'by' | 'x' | 'y'>, ...a: [Arc['kind'], string, number?][]) => {
     verbs.push({ priority: 0, weight: 1, ...v })
-    for (const [kind, p, count = 1] of a) arcs.push({ kind, place: p, verb: v.id, count })
+    for (const [kind, p, count = 1] of a) arcs.push({ kind, state: p, verb: v.id, count })
   }
 
   const cell = (i: number) => ({ cx: 360 + ((i - 1) % 3) * 200, cy: 200 + Math.floor((i - 1) / 3) * 200 })
-  place({ id: 'x_to_move', label: 'X to move', marks: 1, group: 'turn', x: 120, y: 260 })
-  place({ id: 'o_to_move', label: 'O to move', group: 'turn', x: 120, y: 540 })
-  place({ id: 'squares_left', label: 'Squares left', marks: 9, group: 'turn', x: 120, y: 400 })
+  state({ id: 'x_to_move', label: 'X to move', marks: 1, group: 'turn', x: 120, y: 260 })
+  state({ id: 'o_to_move', label: 'O to move', group: 'turn', x: 120, y: 540 })
+  state({ id: 'squares_left', label: 'Squares left', marks: 9, group: 'turn', x: 120, y: 400 })
   for (let i = 1; i <= 9; i++) {
     const { cx, cy } = cell(i)
-    place({ id: `empty_${i}`, label: `${i} empty`, marks: 1, group: 'board', x: cx, y: cy - 45 })
-    place({ id: `x_${i}`, label: `X on ${i}`, group: 'board', x: cx - 55, y: cy + 50 })
-    place({ id: `o_${i}`, label: `O on ${i}`, group: 'board', x: cx + 55, y: cy + 50 })
+    state({ id: `empty_${i}`, label: `${i} empty`, marks: 1, group: 'board', x: cx, y: cy - 45 })
+    state({ id: `x_${i}`, label: `X on ${i}`, group: 'board', x: cx - 55, y: cy + 50 })
+    state({ id: `o_${i}`, label: `O on ${i}`, group: 'board', x: cx + 55, y: cy + 50 })
   }
   for (const s of SEATS) {
     const jy = s.id === 'x' ? 140 : 660
-    place({ id: `judge_${s.id}`, label: `Judge ${s.name}'s move`, group: 'judge', x: 1080, y: jy + 120 })
-    place({ id: `${s.id}_won`, label: `${s.name} wins`, ends: `${s.name} wins`, group: 'judge', x: 1360, y: jy + 120 })
+    state({ id: `judge_${s.id}`, label: `Judge ${s.name}'s move`, group: 'judge', x: 1080, y: jy + 120 })
+    state({ id: `${s.id}_won`, label: `${s.name} wins`, ends: `${s.name} wins`, group: 'judge', x: 1360, y: jy + 120 })
   }
-  place({ id: 'drawn', label: 'Draw', ends: 'Draw', group: 'judge', x: 1360, y: 400 })
+  state({ id: 'drawn', label: 'Draw', ends: 'Draw', group: 'judge', x: 1360, y: 400 })
 
   for (const s of SEATS)
     for (let i = 1; i <= 9; i++) {
@@ -69,7 +69,7 @@ export const ticTacToe = (): Net => {
       { id: 'board', label: 'The board' },
       { id: 'judge', label: 'The judge' },
     ],
-    places,
+    states,
     verbs,
     arcs,
   }

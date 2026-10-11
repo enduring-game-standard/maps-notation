@@ -1,10 +1,10 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { canSee } from '../core/engine'
 import { WORLD, type Arc, type Marking, type Net, type SeatId } from '../core/model'
-import { addPlace, addVerb, arcRef, connect, deleteSelection, moveNodes, sameArc, snap, type NodeRef, type Selection } from './edit'
+import { addState, addVerb, arcRef, connect, deleteSelection, moveNodes, sameArc, snap, type NodeRef, type Selection } from './edit'
 import {
   DOTS,
-  PLACE_R,
+  STATE_R,
   VERB_H,
   arcCurve,
   chanceTies,
@@ -61,7 +61,7 @@ type Gesture =
   | { kind: 'drag'; start: Pt; base: Net; origins: Map<string, Pt>; snapEach: boolean; moved: boolean }
   | { kind: 'connect'; from: NodeRef }
 
-type Tool = 'place' | 'verb' | null
+type Tool = 'state' | 'verb' | null
 
 const FRAME_MS = 280
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -173,9 +173,9 @@ export function Canvas(props: Props) {
       if (p.mode !== 'edit' || e.ctrlKey || e.metaKey || e.altKey) return
       const at = c ?? centerOf(v)
       const k = e.key.toLowerCase()
-      if (k === 'p' || k === 'v') {
-        const [next, id] = k === 'p' ? addPlace(p.net, at.x, at.y) : addVerb(p.net, at.x, at.y)
-        p.onCommit(next, { kind: k === 'p' ? 'place' : 'verb', id })
+      if (k === 's' || k === 'v') {
+        const [next, id] = k === 's' ? addState(p.net, at.x, at.y) : addVerb(p.net, at.x, at.y)
+        p.onCommit(next, { kind: k === 's' ? 'state' : 'verb', id })
       } else if ((e.key === 'Delete' || e.key === 'Backspace') && p.selection) {
         e.preventDefault()
         p.onCommit(deleteSelection(p.net, p.selection), null)
@@ -212,7 +212,7 @@ export function Canvas(props: Props) {
     if (e.button !== 0 && e.button !== 1) return
     if (mode === 'edit' && tool && !space.current) {
       const w = toWorld(e.clientX, e.clientY)
-      const [next, id] = tool === 'place' ? addPlace(net, w.x, w.y) : addVerb(net, w.x, w.y)
+      const [next, id] = tool === 'state' ? addState(net, w.x, w.y) : addVerb(net, w.x, w.y)
       props.onCommit(next, { kind: tool, id })
       setTool(null)
       return
@@ -222,7 +222,7 @@ export function Canvas(props: Props) {
 
   const startDrag = (e: React.PointerEvent, ids: string[], snapEach: boolean) => {
     const origins = new Map<string, Pt>()
-    for (const n of [...net.places, ...net.verbs]) if (ids.includes(n.id)) origins.set(n.id, { x: n.x, y: n.y })
+    for (const n of [...net.states, ...net.verbs]) if (ids.includes(n.id)) origins.set(n.id, { x: n.x, y: n.y })
     gesture.current = { kind: 'drag', start: toWorld(e.clientX, e.clientY), base: net, origins, snapEach, moved: false }
   }
 
@@ -243,11 +243,11 @@ export function Canvas(props: Props) {
   const anim = useFlightAnimation(play?.flight, net, shapes)
   const marking = mode === 'play' && play ? (anim?.marking ?? play.marking) : undefined
 
-  const focus = hover ?? (selection && (selection.kind === 'place' || selection.kind === 'verb') ? selection : null)
+  const focus = hover ?? (selection && (selection.kind === 'state' || selection.kind === 'verb') ? selection : null)
   const neighbors = useMemo(() => {
     if (!focus) return undefined
     const s = new Set([focus.id])
-    for (const a of net.arcs) if (a.place === focus.id || a.verb === focus.id) s.add(a.place).add(a.verb)
+    for (const a of net.arcs) if (a.state === focus.id || a.verb === focus.id) s.add(a.state).add(a.verb)
     return s.size > 1 ? s : undefined
   }, [focus?.id, net])
 
@@ -256,12 +256,12 @@ export function Canvas(props: Props) {
       net.arcs.map((a) => {
         const c = arcCurve(a, shapes)
         if (!c) return null
-        const touches = !!focus && (a.place === focus.id || a.verb === focus.id)
+        const touches = !!focus && (a.state === focus.id || a.verb === focus.id)
         const selected = selection?.kind === 'arc' && sameArc(a, selection)
         const cls = ['arc', `arc-${a.kind}`, touches && 'is-focus', focus && !touches && 'is-faded', selected && 'is-selected'].filter(Boolean).join(' ')
         const mid = pointAt(c, 0.5)
         return (
-          <g key={`${a.kind}|${a.place}|${a.verb}`} className={cls}>
+          <g key={`${a.kind}|${a.state}|${a.verb}`} className={cls}>
             <path d={curvePath(c)} className="arc-line" />
             {a.kind === 'take' || a.kind === 'give' ? <path d={arrowHead(c)} className="arc-head" /> : null}
             {a.kind === 'need' ? <ArcCap at={endCap(c, 3.5)} r={3.5} filled /> : null}
@@ -346,28 +346,28 @@ export function Canvas(props: Props) {
             </g>
           ))}
           <g className={focus ? 'arcs has-focus' : 'arcs'}>{arcLayer}</g>
-          {net.places.map((p) => {
-            const ref: NodeRef = { kind: 'place', id: p.id }
+          {net.states.map((p) => {
+            const ref: NodeRef = { kind: 'state', id: p.id }
             const n = marking ? (marking[p.id] ?? 0) : p.marks
             const hidden = mode === 'play' && !canSee(p, viewer)
             return (
               <g
                 key={p.id}
                 data-node={p.id}
-                data-kind="place"
-                className={nodeCls(p.id, ['place', isSel('place', p.id) && 'is-selected', p.ends !== undefined && n > 0 && mode === 'play' && 'is-reached'])}
+                data-kind="state"
+                className={nodeCls(p.id, ['state', isSel('state', p.id) && 'is-selected', p.ends !== undefined && n > 0 && mode === 'play' && 'is-reached'])}
                 transform={`translate(${p.x},${p.y})`}
                 onPointerDown={(e) => onNodeDown(e, ref)}
                 {...hoverProps(ref)}
               >
-                {p.ends !== undefined ? <circle r={PLACE_R + 4} className="outcome-ring" /> : null}
-                <circle r={PLACE_R} className="place-body" fill={hidden ? 'url(#fog)' : undefined} />
+                {p.ends !== undefined ? <circle r={STATE_R + 4} className="outcome-ring" /> : null}
+                <circle r={STATE_R} className="state-body" fill={hidden ? 'url(#fog)' : undefined} />
                 {hidden ? <text className="fog-q" dy={5}>?</text> : <Marks n={n} />}
                 {p.seenBy !== 'all' ? <PrivateBadge seenBy={p.seenBy} net={net} /> : null}
-                <text className="label" y={PLACE_R + 11}>
+                <text className="label" y={STATE_R + 11}>
                   {p.label}
                 </text>
-                {handle(ref, PLACE_R, 0)}
+                {handle(ref, STATE_R, 0)}
                 <title>{`${p.id}${p.ends !== undefined ? ` · ends "${p.ends}"` : ''}`}</title>
               </g>
             )
@@ -380,13 +380,13 @@ export function Canvas(props: Props) {
             const color = seatColor(v.by)
             const legal = play?.legal.has(v.id)
             const waiting = !legal && play?.waiting.has(v.id)
-            const state = mode !== 'play' ? undefined : legal ? 'is-legal' : waiting ? 'is-waiting' : 'is-idle'
+            const playState = mode !== 'play' ? undefined : legal ? 'is-legal' : waiting ? 'is-waiting' : 'is-idle'
             return (
               <g
                 key={v.id}
                 data-node={v.id}
                 data-kind="verb"
-                className={nodeCls(v.id, ['verb', v.by === WORLD && 'is-world', isSel('verb', v.id) && 'is-selected', state])}
+                className={nodeCls(v.id, ['verb', v.by === WORLD && 'is-world', isSel('verb', v.id) && 'is-selected', playState])}
                 transform={`translate(${v.x},${v.y})`}
                 style={{ ['--seat' as string]: color ?? 'var(--world)' }}
                 onPointerDown={(e) => onNodeDown(e, ref)}
@@ -414,8 +414,8 @@ export function Canvas(props: Props) {
           {anim?.tokens.map((t, i) => <circle key={i} className="token" cx={t.x} cy={t.y} r={4} />)}
           {connectFrom && connectTo ? <line className="connect-preview" x1={connectFrom.x} y1={connectFrom.y} x2={connectTo.x} y2={connectTo.y} /> : null}
           {ghost ? (
-            tool === 'place' ? (
-              <circle className="ghost" cx={snap(ghost.x)} cy={snap(ghost.y)} r={PLACE_R} />
+            tool === 'state' ? (
+              <circle className="ghost" cx={snap(ghost.x)} cy={snap(ghost.y)} r={STATE_R} />
             ) : (
               <rect className="ghost" x={snap(ghost.x) - 40} y={snap(ghost.y) - VERB_H / 2} width={80} height={VERB_H} rx={6} />
             )
@@ -424,11 +424,11 @@ export function Canvas(props: Props) {
       </svg>
       {mode === 'edit' ? (
         <div className="palette" role="toolbar" aria-label="Add">
-          <button className={tool === 'place' ? 'is-on' : ''} onClick={() => setTool(tool === 'place' ? null : 'place')} title="Add place (P)">
+          <button className={tool === 'state' ? 'is-on' : ''} onClick={() => setTool(tool === 'state' ? null : 'state')} title="Add state (S)">
             <svg width="18" height="18" viewBox="0 0 18 18">
               <circle cx="9" cy="9" r="7" />
             </svg>
-            Place <kbd>P</kbd>
+            State <kbd>S</kbd>
           </button>
           <button className={tool === 'verb' ? 'is-on' : ''} onClick={() => setTool(tool === 'verb' ? null : 'verb')} title="Add verb (V)">
             <svg width="18" height="18" viewBox="0 0 18 18">
@@ -484,7 +484,7 @@ function PrivateBadge({ seenBy, net }: { seenBy: SeatId[]; net: Net }) {
   const text = names.length ? names.join(', ') : 'nobody'
   const w = 22 + text.length * 5.6
   return (
-    <g className="private" transform={`translate(${PLACE_R - 6},${-PLACE_R - 6})`}>
+    <g className="private" transform={`translate(${STATE_R - 6},${-STATE_R - 6})`}>
       <rect x={0} y={-8} width={w} height={16} rx={8} />
       <g transform="translate(9,0)">
         <path d="M-5,0 Q0,-5 5,0 Q0,5 -5,0 Z" className="eye" />
@@ -556,7 +556,7 @@ function useFlightAnimation(flight: Flight | undefined, net: Net, shapes: Return
       const { verb, before } = flight.frames[i]
       const arcs = byVerb.get(verb) ?? []
       const mid = { ...before }
-      for (const a of arcs) if (a.kind === 'take') mid[a.place] -= a.count
+      for (const a of arcs) if (a.kind === 'take') mid[a.state] -= a.count
       const moving = arcs.filter((a) => (f < 0.5 ? a.kind === 'take' : a.kind === 'give'))
       const u = ease(f < 0.5 ? f * 2 : (f - 0.5) * 2)
       const tokens = moving.flatMap((a) => {

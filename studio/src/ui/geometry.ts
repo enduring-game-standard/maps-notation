@@ -1,4 +1,4 @@
-import { WORLD, type Arc, type Net, type Place, type Verb } from '../core/model'
+import { WORLD, type Arc, type Net, type State, type Verb } from '../core/model'
 
 export interface Pt {
   x: number
@@ -6,7 +6,7 @@ export interface Pt {
 }
 export type Shape = { kind: 'circle'; x: number; y: number; r: number } | { kind: 'rect'; x: number; y: number; w: number; h: number }
 
-export const PLACE_R = 18
+export const STATE_R = 18
 export const VERB_H = 22
 
 export const DIE_W = 16
@@ -15,12 +15,12 @@ export const dieWidth = (v: Verb, chance: boolean) => (chance ? DIE_W + (v.weigh
 
 export const verbWidth = (v: Verb, chance = false) => Math.max(64, Math.min(180, Math.round(v.label.length * 6.2 + 20))) + dieWidth(v, chance)
 
-export const placeShape = (p: Place): Shape => ({ kind: 'circle', x: p.x, y: p.y, r: PLACE_R })
+export const stateShape = (p: State): Shape => ({ kind: 'circle', x: p.x, y: p.y, r: STATE_R })
 export const verbShape = (v: Verb, chance = false): Shape => ({ kind: 'rect', x: v.x, y: v.y, w: verbWidth(v, chance), h: VERB_H })
 
 export const shapesOf = (net: Net, chance: Set<string>) => {
   const m = new Map<string, Shape>()
-  for (const p of net.places) m.set(p.id, placeShape(p))
+  for (const p of net.states) m.set(p.id, stateShape(p))
   for (const v of net.verbs) m.set(v.id, verbShape(v, chance.has(v.id)))
   return m
 }
@@ -32,7 +32,7 @@ export const shapesOf = (net: Net, chance: Set<string>) => {
  */
 export const chanceTies = (net: Net) => {
   const sig = new Map<string, string[]>()
-  for (const a of net.arcs) if (a.kind !== 'give') sig.set(a.verb, [...(sig.get(a.verb) ?? []), `${a.kind} ${a.count} ${a.place}`])
+  for (const a of net.arcs) if (a.kind !== 'give') sig.set(a.verb, [...(sig.get(a.verb) ?? []), `${a.kind} ${a.count} ${a.state}`])
   const groups = new Map<string, string[]>()
   for (const v of net.verbs) {
     if (v.by !== WORLD) continue
@@ -74,11 +74,11 @@ export const pointAt = ({ start: s, ctrl: c, end: e }: Curve, t: number): Pt => 
 
 export const curvePath = ({ start: s, ctrl: c, end: e }: Curve) => `M${s.x},${s.y} Q${c.x},${c.y} ${e.x},${e.y}`
 
-/** Take and give run place-to-verb and verb-to-place, so their bends land on opposite sides; need and unless bend the other way to stay clear of a take. */
+/** Take and give run state-to-verb and verb-to-state, so their bends land on opposite sides; need and unless bend the other way to stay clear of a take. */
 const BEND: Record<Arc['kind'], number> = { take: 0.1, give: 0.1, need: -0.12, unless: -0.2 }
 
 export const arcCurve = (arc: Arc, shapes: Map<string, Shape>): Curve | undefined => {
-  const p = shapes.get(arc.place)
+  const p = shapes.get(arc.state)
   const v = shapes.get(arc.verb)
   if (!p || !v) return undefined
   return arc.kind === 'give' ? curveBetween(v, p, BEND.give) : curveBetween(p, v, BEND[arc.kind])
@@ -126,7 +126,7 @@ export const HULL_PAD = 20
 
 export const groupHulls = (net: Net, shapes: Map<string, Shape>) =>
   net.groups.flatMap((g) => {
-    const members = [...net.places, ...net.verbs].filter((n) => n.group === g.id).map((n) => n.id)
+    const members = [...net.states, ...net.verbs].filter((n) => n.group === g.id).map((n) => n.id)
     const box = union(members.map((id) => shapeBox(shapes.get(id)!)))
     return box ? [{ group: g, members, box: inflate({ ...box, y0: box.y0 - 14 }, HULL_PAD) }] : []
   })

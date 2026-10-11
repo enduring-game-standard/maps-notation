@@ -1,4 +1,4 @@
-import { ARC_KINDS, emptyNet, isIdent, type ArcKind, type Net, type Place, type Verb } from './model'
+import { ARC_KINDS, emptyNet, isIdent, type ArcKind, type Net, type State, type Verb } from './model'
 
 export const HEADER = 'maps 2'
 
@@ -69,10 +69,10 @@ export const parse = (src: string): Net => {
       if (!verb) throw new MapsSyntaxError(n, 'an indented arc must follow a verb')
       const kind = t[0] as ArcKind
       if (!ARC_KINDS.includes(kind)) throw new MapsSyntaxError(n, `arcs are ${ARC_KINDS.join(', ')}; got ${t[0]}`)
-      if (t.length !== 2 && t.length !== 3) throw new MapsSyntaxError(n, `an arc is "${kind} place" or "${kind} count place"`)
+      if (t.length !== 2 && t.length !== 3) throw new MapsSyntaxError(n, `an arc is "${kind} state" or "${kind} count state"`)
       const count = t.length === 3 ? int(t[1], n, 'count') : 1
       if (count < 1) throw new MapsSyntaxError(n, 'an arc count is at least 1')
-      net.arcs.push({ kind, count, place: ident(t[t.length - 1], n, 'place'), verb: verb.id })
+      net.arcs.push({ kind, count, state: ident(t[t.length - 1], n, 'state'), verb: verb.id })
       return
     }
     verb = undefined
@@ -93,8 +93,8 @@ export const parse = (src: string): Net => {
         if (rest.length !== 2) throw new MapsSyntaxError(n, 'group takes a name and a quoted label')
         net.groups.push({ id: ident(rest[0], n, 'group'), label: quoted(rest[1], n, 'group label') })
         break
-      case 'place': {
-        const p: Place = { id: ident(rest[0], n, 'place'), label: quoted(rest[1], n, 'place label'), marks: 0, seenBy: 'all', x: 0, y: 0 }
+      case 'state': {
+        const p: State = { id: ident(rest[0], n, 'state'), label: quoted(rest[1], n, 'state label'), marks: 0, seenBy: 'all', x: 0, y: 0 }
         attrs(rest.slice(2), n, {
           marks: (a) => (p.marks = int(a(), n, 'marks')),
           'seen-by': (a) => {
@@ -105,7 +105,7 @@ export const parse = (src: string): Net => {
           in: (a) => (p.group = ident(a(), n, 'group')),
           at: (a) => ((p.x = int(a(), n, 'x')), (p.y = int(a(), n, 'y'))),
         })
-        net.places.push(p)
+        net.states.push(p)
         break
       }
       case 'verb': {
@@ -154,8 +154,8 @@ export const print = (net: Net): string => {
   for (const s of net.seats) lines.push(`seat ${s.id} ${q(s.name)} color ${q(s.color)}`)
   for (const g of net.groups) lines.push(`group ${g.id} ${q(g.label)}`)
   if (net.seats.length || net.groups.length) lines.push('')
-  for (const p of net.places) {
-    const a = [`place ${p.id} ${q(p.label)}`]
+  for (const p of net.states) {
+    const a = [`state ${p.id} ${q(p.label)}`]
     if (p.marks) a.push(`marks ${p.marks}`)
     if (p.seenBy !== 'all') a.push(`seen-by ${p.seenBy.length ? p.seenBy.join(',') : 'none'}`)
     if (p.ends !== undefined) a.push(`ends ${q(p.ends)}`)
@@ -172,7 +172,7 @@ export const print = (net: Net): string => {
     a.push(`at ${Math.round(v.x)} ${Math.round(v.y)}`)
     lines.push(a.join(' '))
     for (const arc of net.arcs.filter((x) => x.verb === v.id))
-      lines.push(`  ${arc.kind}${arc.count !== 1 ? ' ' + arc.count : ''} ${arc.place}`)
+      lines.push(`  ${arc.kind}${arc.count !== 1 ? ' ' + arc.count : ''} ${arc.state}`)
   }
   return lines.join('\n') + '\n'
 }

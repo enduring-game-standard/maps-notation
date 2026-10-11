@@ -49,7 +49,7 @@ export function App() {
   const animate = (g: Game) => {
     flights.current += 1
     const step = current(g)
-    // Marks flying to a hidden place would reveal what the viewer must not see.
+    // Marks flying to a hidden state would reveal what the viewer must not see.
     const frames = transitions(compiled, step).filter((_, i) => heardBy(compiled, step.said[i], viewer) !== undefined)
     setFlight({ key: flights.current, frames })
   }

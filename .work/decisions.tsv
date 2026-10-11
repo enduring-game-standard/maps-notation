@@ -34,3 +34,5 @@ when	what	why	evidence	result
 2026-10-11T00:08:21-07:00	Die glyph only on world verbs with identical inputs at one priority (alternative results of one event), or weight != 1	Delegate's rule over-flagged all 16 line checks and 4 coin judges	screenshot: only Lands heads/tails carry a die	VERIFIED
 2026-10-11T00:08:21-07:00	Parser rejects stray words after title/group	Delegate found 'title "A" bogus' silently dropped	core.test.ts	VERIFIED
 2026-10-11T00:08:21-07:00	Renderer froze once after reload in a tab open during a hot reload	Not reproducible in a fresh tab nor after reload in Play/Caller state; delegate reported stale listeners after HMR	two reload attempts	INCONCLUSIVE (dev-only, inferred)
+2026-10-11T00:15:49-07:00	Reverted Place->State rename: primitive is State again (text keyword 'state', studio shortcut S)	Owner: 'they were called State on purpose. no collision.' My AEMS-collision rationale was wrong	codemod scratchpad/rename.py; 54 tests, build	adopted
+2026-10-11T00:15:49-07:00	Kept GAME_ABSTRACTION_LEVELS.md verbatim, linked from README	Owner request; it still uses MAPS 1 notation in ~14 lines	git checkout 6e572cd	adopted
