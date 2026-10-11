@@ -54,8 +54,6 @@ A place is seen by everyone unless it says `seen-by` and lists seats. `seen-by n
 
 Revealing information is moving a mark. A card flips face up when a verb takes it from a private place and gives it to a public one. MAPS needs no rules about visibility changing, because places never change who sees them.
 
-A seat acts blind when one of its own verbs depends on a place it cannot see. The seat can try the verb, but it cannot know beforehand whether the verb is possible. Bluffing and guessing games live here.
-
 ## The conversation
 
 These rules decide who may speak. They are the whole meaning of a net.
@@ -139,7 +137,9 @@ A design tool should also play the whole conversation out and report what it fin
 - 1 world verb at priority 1, "board full", that fires unless any square is left and ends the game in a draw;
 - 2 world verbs at priority 0 that pass the turn.
 
-Playing every conversation out reaches 5,478 positions, 958 of them endings (X wins 626, O wins 316, draws 16), across 255,168 distinct games. Those are tic-tac-toe's known counts, and `studio/src/core/tictactoe.test.ts` checks them on every run.
+Playing every conversation out reaches 5,478 positions, 958 of them endings (626 won by X, 316 by O, 16 drawn). It finds 255,168 distinct games: X wins 131,184, O wins 77,904, and 46,080 are drawn. Those are tic-tac-toe's known counts, and `studio/src/core/tictactoe.test.ts` checks them on every run.
+
+`examples/call-the-coin.maps` covers what tic-tac-toe does not. The world flips a coin at even odds into one of two places no seat can see, the caller calls heads or tails, and the world compares. Analysis finds four plays, two won and two lost. `studio/src/core/coin.test.ts` checks the odds, the hidden places, and a weighted coin.
 
 Writing tic-tac-toe exposed five things that MAPS 1 could not say or did not notice.
 

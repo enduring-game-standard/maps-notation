@@ -89,10 +89,3 @@ export const settle = (c: Compiled, m: Marking, rand: () => number = Math.random
 
 export const canSee = (place: Place, seat: SeatId | undefined) =>
   seat === undefined || place.seenBy === 'all' || place.seenBy.includes(seat)
-
-/** A verb its own seat cannot fully evaluate: one of its inputs is hidden from that seat. */
-export const actsBlind = (c: Compiled, verb: Verb): boolean => {
-  if (verb.by === WORLD) return false
-  const byId = new Map(c.net.places.map((p) => [p.id, p]))
-  return c.inputs.get(verb.id)!.some(({ place }) => !canSee(byId.get(place)!, verb.by))
-}
