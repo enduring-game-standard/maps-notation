@@ -2,6 +2,35 @@ import { standardLoadouts } from '../loadouts'
 import type { DmgType } from '../../inventory'
 import type { ActorSpec, Attack, Cite, Excluded, Phase, Step } from '../../spec'
 
+/*
+ * Reported gaps (the types cannot express these):
+ * - The second tentacle. After the nucleus's third sword hit (hitCount, z_boss_mo.c:1807) tentacle 1's RETREAT
+ *   spawns a second tentacle (z_boss_mo.c:978-994). Its strike lasts 55 frames, not 175 (z_boss_mo.c:657-662), and
+ *   each tentacle waits while the other holds Link (HAS_LINK, z_boss_mo.c:647, 686, 706). An encounter is one actor
+ *   in one phase, and no pool threshold counts hits rather than health, so the spec models tentacle 1 only.
+ * - The shield and the lash. The tentacle's AT flags (z_boss_mo_colchk.inc.c:6) share bits with the shield's AC mask
+ *   (z_player.c:10518), so a raised shield bounces the 16 contact damage (z_player.c:4882). The bounce still marks the
+ *   element hit (z_collision_check.c:1730), which sets playerHitTimer (z_boss_mo.c:1217-1219), and grabPlayer checks no
+ *   shield (z_player.c:16089-16099), so the grab still lands. One attack has one `blockable`; the spec keeps the lash
+ *   unblockable because the grab is the larger cost, and so overcharges 16 against a raised shield.
+ * - The hold before the shake. CURL and GRAB hold Link for up to 40 frames with no drain (z_boss_mo.c:689, 775-787)
+ *   before SHAKE's 150 (z_boss_mo.c:791). A grab has one duration, so tent_held and the grab both run the 150 frames
+ *   of the drain. A grab that grabPlayer refuses (z_player.c:16090-16091, player states the model lacks) is not modeled.
+ * - A miss with Link more than 300 units away sends the tentacle to RETREAT for 75 frames, not READY
+ *   (z_boss_mo.c:705-711). The range bands cannot tell 300 units from the strike's 120 (z_boss_mo.c:686), so a miss
+ *   always goes to tent_reset.
+ * - A sword-stunned nucleus that drops back into the water goes to MAKE_TENT at once (z_boss_mo.c:1982-1986), then to
+ *   MOVE with timer 70 (z_boss_mo.c:1953-1956), instead of MOVE with timer 30 (z_boss_mo.c:1979-1980). Which happens
+ *   depends on the nucleus's height, which the model does not track; the spec models the 30-frame recovery.
+ * - Under the tentacle (MAKE_TENT) the nucleus sits 40 units below the tentacle's base (z_boss_mo.c:2130). The code
+ *   gates sword and hookshot hits by state only (z_boss_mo.c:1793-1796, 1831-1833); that they cannot reach it there is
+ *   a reach judgment, not a code rule. Its body contact there is left out on the same judgment.
+ * - The grab drain is -1 per tick (z_boss_mo.c:815), which Double Defense's shift leaves at -1; the generator halves
+ *   the drain under Double Defense.
+ * - Once the SHAKE timer is 0 the drain fires every frame until the tentacle's swing passes the exit test
+ *   (z_boss_mo.c:850-853); the rate models the 150 timed frames only.
+ */
+
 const F = 'src/overlays/actors/ovl_Boss_Mo/z_boss_mo.c'
 const COL = 'src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c'
 const CC = 'src/code/z_collision_check.c'
@@ -19,6 +48,10 @@ const SWORD_DAMAGE: [DmgType, number, number][] = [
 
 /** The tentacle's phases: the nucleus sits under its base (MAKE_TENT) or rides inside it (ATTACK, RETREAT). */
 const TENT = ['tent_rise', 'tent_ready', 'tent_reset', 'tent_swing', 'tent_strike', 'tent_held', 'tent_cut', 'tent_retreat'] as const
+/** Phases where the core is in ATTACK (riding the tentacle), so a hookshot hit also cuts tentacle 1 (z_boss_mo.c:1833-1839). */
+const RIDING: Tent[] = ['tent_strike', 'tent_cut']
+/** Link is held: grabPlayer puts him in the held action (z_player.c:16093), so none of his attacks are swung. */
+const HELD = 'src/overlays/actors/ovl_player_actor/z_player.c:16093' as Cite
 type Tent = (typeof TENT)[number]
 /** Phases where the nucleus is under the water at the tentacle's base, 40 units below it. */
 const SUBMERGED: Tent[] = ['tent_rise', 'tent_ready', 'tent_reset', 'tent_swing', 'tent_retreat']
@@ -27,9 +60,11 @@ const CUTTABLE: Tent[] = ['tent_rise', 'tent_ready', 'tent_reset', 'tent_swing',
 
 const tentOverrides = (p: Tent): Phase['overrides'] => {
   const out: NonNullable<Phase['overrides']> = {}
-  const swordCite = SUBMERGED.includes(p) ? at(2130) : at(1796)
+  const swordCite = SUBMERGED.includes(p) ? at(2130) : p === 'tent_held' ? HELD : at(1796)
   for (const [d] of SWORD_DAMAGE) out[d] = { damage: 0, cite: swordCite }
-  if (p !== 'tent_strike') out.HOOKSHOT = { damage: 0, cite: SUBMERGED.includes(p) ? at(2130) : at(1833) }
+  out.HOOKSHOT = RIDING.includes(p)
+    ? { damage: 0, to: 'stunned_hook_cut', cite: at(1838) }
+    : { damage: 0, cite: SUBMERGED.includes(p) ? at(2130) : HELD }
   if (CUTTABLE.includes(p)) out.MAGIC_FIRE = { damage: 0, to: 'tent_cut', cite: at(1195) }
   return out
 }
@@ -43,13 +78,17 @@ const phases: Phase[] = [
   { id: 'recover', label: 'The nucleus swims free after a stun', frames: { value: 30, cite: at(1980) }, cite: at(1937) },
   { id: 'stunned_sword', label: 'The nucleus reels from a sword hit', frames: { value: 25, cite: at(1799) }, cite: at(1798) },
   { id: 'stunned_hook', label: 'The nucleus lies hooked out of the water', frames: { value: 30, cite: at(1848) }, cite: at(1847) },
+  { id: 'stunned_hook_cut', label: 'The nucleus lies hooked out of its cut tentacle', frames: { value: 30, cite: at(1848) }, cite: at(1838) },
+  /** The core waits for tentacle 1 to be back in WAIT or READY (z_boss_mo.c:1939-1941); its RETREAT timer is 75. */
+  { id: 'recover_cut', label: 'The nucleus swims free while its cut tentacle sinks', frames: { value: 75, cite: at(913) }, cite: at(1940) },
   tentPhase('tent_rise', 'A tentacle rises out of the water', [70, 1947], 571),
   tentPhase('tent_ready', 'The tentacle sways, ready', [60, 579], 611),
   tentPhase('tent_reset', 'The tentacle sways after a miss', [30, 704], 698),
   tentPhase('tent_swing', 'The tentacle winds up', [50, 649], 612),
   tentPhase('tent_strike', 'The tentacle strikes, the nucleus inside it', [175, 659], 666),
   tentPhase('tent_held', 'The tentacle holds and shakes Link', [150, 791], 809),
-  tentPhase('tent_cut', 'The tentacle melts where it was cut', [40, 1196], 888),
+  /** Din's Fire cuts at 15 (z_boss_mo.c:1193) and the melt runs one index a frame to 41, so 25 frames. */
+  tentPhase('tent_cut', 'The tentacle melts where it was cut', [25, 911], 888),
   tentPhase('tent_retreat', 'The tentacle sinks back into the water', [75, 865], 920),
 ]
 
@@ -60,6 +99,13 @@ const steps: Step[] = [
   { from: 'recover', to: 'recover', label: 'The nucleus bumps Link', range: 'near', attack: 'nucleus', cite: at(2280) },
   { from: 'stunned_sword', to: 'recover', label: 'The nucleus recovers', afterTimer: true, cite: at(1979) },
   { from: 'stunned_hook', to: 'recover', label: 'The nucleus recovers', afterTimer: true, cite: at(1979) },
+  { from: 'stunned_hook_cut', to: 'recover_cut', label: 'The nucleus recovers', afterTimer: true, cite: at(1979) },
+  { from: 'recover_cut', to: 'tent_rise', label: 'The nucleus raises a tentacle', afterTimer: true, cite: at(1944) },
+  { from: 'recover_cut', to: 'recover_cut', label: 'The nucleus bumps Link', range: 'near', attack: 'nucleus', cite: at(2280) },
+  { from: 'tent_ready', to: 'tent_ready', label: 'The swaying tentacle hits Link', range: 'near', attack: 'tent_contact', cite: at(2432) },
+  { from: 'tent_reset', to: 'tent_reset', label: 'The swaying tentacle hits Link', range: 'near', attack: 'tent_contact', cite: at(2432) },
+  { from: 'tent_swing', to: 'tent_swing', label: 'The winding tentacle hits Link', range: 'near', attack: 'tent_contact', cite: at(2432) },
+  { from: 'tent_cut', to: 'tent_cut', label: 'The nucleus in the melting tentacle bumps Link', range: 'near', attack: 'nucleus', cite: at(2280) },
   { from: 'tent_rise', to: 'tent_ready', label: 'The tentacle is up', afterTimer: true, cite: at(578) },
   { from: 'tent_ready', to: 'tent_swing', label: 'The tentacle winds up', afterTimer: true, cite: at(648) },
   { from: 'tent_reset', to: 'tent_swing', label: 'The tentacle winds up', afterTimer: true, cite: at(648) },
@@ -74,9 +120,11 @@ const steps: Step[] = [
 const attacks: Attack[] = [
   {
     id: 'lash', label: 'Tentacle lash and grab', damage: 16,
-    effect: { kind: 'grab', frames: { value: 150, cite: at(791) }, damagePerBeat: 2, release: 'escape' },
+    effect: { kind: 'grab', frames: { value: 150, cite: at(791) }, damagePerBeat: { value: { units: 1, frames: 8 }, cite: at(814) }, release: 'escape' },
     blockable: false, dodgeable: true, source: col(7),
   },
+  /** READY and SWING keep the tentacle's AT on (z_boss_mo.c:2426-2433, radius at 2450); a hit there only sets playerHitTimer (z_boss_mo.c:1217-1219), which only ATTACK and CURL read. */
+  { id: 'tent_contact', label: 'Tentacle contact', damage: 16, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: col(7) },
   { id: 'nucleus', label: 'Nucleus contact', damage: 16, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: col(239) },
 ]
 
@@ -110,8 +158,8 @@ export const bossMo: ActorSpec = {
     MO_CORE_MAKE_TENT: { phase: 'tent_*', cite: at(1952) },
     MO_CORE_UNDERWATER: excl('the nucleus chases Link only while he is more than 50 units under the water surface, and the encounter has no depth (no Iron Boots state)', 1929),
     MO_CORE_STUNNED: { phase: 'stunned_*', cite: at(1976) },
-    MO_CORE_ATTACK: { phase: 'tent_strike', cite: at(1993) },
-    MO_CORE_RETREAT: { phase: 'tent_retreat', cite: at(2008) },
+    MO_CORE_ATTACK: { phase: 'tent_*', cite: at(1993) },
+    MO_CORE_RETREAT: { phase: 'tent_*', cite: at(2008) },
     MO_CORE_INTRO_WAIT: excl(intro, 1904),
     MO_CORE_INTRO_REVEAL: excl(intro, 2018),
     MO_CORE_UNUSED: excl('no code sets this state; its case only breaks', 1988),
@@ -152,7 +200,7 @@ export const bossMo: ActorSpec = {
       ),
       lash_lands_again: 'only the lash grabs Link, and the tentacle then holds him in tent_held for exactly as many beats as the grab lasts (150 frames each), so it cannot lash him again while he is held',
       lash_lands_dd_again: 'as lash_lands_again',
-      link_hurt_overkill: 'Link starts at 32; without Double Defense every cost is 16 or a full 8-beat grab drain of 16, with it 8 or the same 16, and no other attack lands mid-grab, so a cost never finds less health left than it takes',
+      grab_count_clears: 'the grab ends only when its 8-beat timer (150 frames) runs out, and its drain costs every 2 beats, so the count is back at 0 every time the grab ends',
     },
   },
 }
