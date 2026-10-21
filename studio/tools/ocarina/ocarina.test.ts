@@ -93,6 +93,20 @@ for (const spec of modeled()) {
           })
         }
 
+    for (const st of spec.steps.filter((x) => x.restore)) {
+      const pool = spec.pools.find((q) => q.id === st.restore!.pool)!
+      for (const left of [0, 1, pool.hp.value])
+        it(`${st.from} -> ${st.to} resets ${pool.id} from ${left} to ${st.restore!.to}`, () => {
+          const base: Marking = Object.fromEntries(net.states.map((s) => [s.id, 0]))
+          let rest = left
+          for (const sg of poolSegments(pool).reverse()) base[sg.id] = Math.min(rest, sg.marks), (rest -= base[sg.id])
+          const m = quiet(c, { ...base, in_fight: 1, link_hp: 1, [`restore_${pool.id}`]: 1 })
+          expect(poolSegments(pool).reduce((n, sg) => n + m[sg.id], 0)).toBe(st.restore!.to)
+          expect(m[`alive_${pool.id}`]).toBe(1)
+          for (const t of pool.thresholds ?? []) expect(m[`above_${pool.id}_${t.at}`]).toBe(t.at < st.restore!.to ? 1 : 0)
+        })
+    }
+
     for (const a of spec.attacks) {
       const variants = has('has_double_defense') ? [false, true] : [false]
       for (const dd of variants)

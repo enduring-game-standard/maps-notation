@@ -422,6 +422,20 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
         ['take', `dmg_${pool.id}`], ['take', sg.id], ...segs.slice(0, k).map((u): [ArcKind, string] => ['unless', u.id]),
       ]),
     )
+    const restores = [...new Set(spec.steps.filter((st) => st.restore?.pool === pool.id).map((st) => st.restore!.to))]
+    if (restores.length > 1) throw new Error(`${spec.overlay}: pool ${pool.id} is restored to different values`)
+    for (const to of restores) {
+      if (to < 1 || to > pool.hp.value) throw new Error(`${spec.overlay}: pool ${pool.id} cannot be restored to ${to}`)
+      const tok = `restore_${pool.id}`
+      b.state(tok, `${pool.label}: health being reset to ${to}`, 'enemy_health')
+      const bounds = [pool.hp.value, ...segs.slice(1).map((sg) => sg.below!), 0]
+      segs.forEach((sg) => b.verb(`${pool.id}_resets_${sg.id}`, `${pool.label}: old health cleared`, WORLD, 'enemy_health', P.heal, [['need', tok], ['take', sg.id]]))
+      for (const t of (pool.thresholds ?? []).filter((x) => x.at < to))
+        b.verb(`${pool.id}_rearms_${t.at}`, `${pool.label}: back above ${t.at}`, WORLD, 'enemy_health', P.heal, [['need', tok], ['unless', `above_${pool.id}_${t.at}`], ['give', `above_${pool.id}_${t.at}`]])
+      b.verb(`${pool.id}_stands_again`, `${pool.label} stands again`, WORLD, 'enemy_health', P.heal, [['need', tok], ['unless', `alive_${pool.id}`], ['give', `alive_${pool.id}`]])
+      const fill = segs.map((sg, k): [ArcKind, string, number] => ['give', sg.id, Math.min(Math.max(to - bounds[k + 1], 0), sg.marks)]).filter((a) => a[2] > 0)
+      b.verb(`${pool.id}_reset_to_${to}`, `${pool.label} has ${to} health`, WORLD, 'enemy_health', P.refill, [['take', tok], ...segs.map((sg): [ArcKind, string] => ['unless', sg.id]), ...fill])
+    }
     b.verb(`${pool.id}_overkill`, `${pool.label} has no health left to lose`, WORLD, 'enemy_health', P.overkill, [['take', `dmg_${pool.id}`], ...segs.map((u): [ArcKind, string] => ['unless', u.id])])
   }
 
@@ -561,6 +575,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       ...move(s.from, s.to),
       ...(s.afterTimer ? ([['unless', `timer_${s.from}`]] as [ArcKind, string][]) : []),
       ...(s.attack ? ([['give', `incoming_${s.attack}`]] as [ArcKind, string][]) : []),
+      ...(s.restore ? ([['give', `restore_${s.restore.pool}`]] as [ArcKind, string][]) : []),
       ['give', 'beat_end'],
     ]
     const gearArcs: [ArcKind, string][] = []

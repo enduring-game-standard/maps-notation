@@ -165,6 +165,8 @@ export interface Step {
   afterTimer?: boolean
   /** Only possible when Link has (or lacks) this gear, such as a mask he wears. */
   gear?: { gear: Gear; has: boolean }[]
+  /** The step sets a pool's health to `to` (a respawn or a refill), standing it back up and re-arming thresholds below `to`. */
+  restore?: { pool: string; to: number; cite: Cite }
   cite: Cite
 }
 
