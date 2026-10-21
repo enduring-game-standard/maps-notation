@@ -57,68 +57,74 @@ state has_fairy "Has fairy" in gear at 1720 780
 state has_blue_potion "Has blue potion" in gear at 1860 780
 state phase_wait_hi "Ganondorf floats and waits" in enemy at 2040 80
 state timer_wait_hi "Ganondorf floats and waits: beats left" in enemy at 2180 80
-state phase_block_hi "Ganondorf blocks a shot with his cape" in enemy at 2180 150
-state timer_block_hi "Ganondorf blocks a shot with his cape: beats left" in enemy at 2040 220
-state phase_charge_hi "Ganondorf charges a light ball" in enemy at 2040 290
-state timer_charge_hi "Ganondorf charges a light ball: beats left" in enemy at 2180 290
-state phase_ball_out_hi "The light ball flies at Link" in enemy at 2180 360
-state phase_ball_back_hi "Link sends the light ball back at Ganondorf" in enemy at 2040 430
-state phase_pound_hi "Ganondorf rises to pound the floor" in enemy at 2180 430
-state timer_pound_hi "Ganondorf rises to pound the floor: beats left" in enemy at 2040 500
-state phase_pound_end_hi "Ganondorf lands and gets back up" in enemy at 2040 570
-state timer_pound_end_hi "Ganondorf lands and gets back up: beats left" in enemy at 2180 570
-state phase_stunned_hi "Ganondorf reels from his own light" in enemy at 2180 640
-state timer_stunned_hi "Ganondorf reels from his own light: beats left" in enemy at 2040 710
-state phase_falling_hi "A light arrow drops Ganondorf to the floor" in enemy at 2040 780
-state phase_downed_hi "Ganondorf is down and open to the sword" in enemy at 2180 780
-state timer_downed_hi "Ganondorf is down and open to the sword: beats left" in enemy at 2040 850
-state phase_rising_hi "Ganondorf gets back up, still open" in enemy at 2040 920
-state phase_wait_lo "Ganondorf floats and waits (health under 20)" in enemy at 2180 920
-state timer_wait_lo "Ganondorf floats and waits (health under 20): beats left" in enemy at 2040 990
-state phase_block_lo "Ganondorf blocks a shot with his cape (health under 20)" in enemy at 2040 1060
-state timer_block_lo "Ganondorf blocks a shot with his cape (health under 20): beats left" in enemy at 2180 1060
-state phase_charge_lo "Ganondorf charges a light ball (health under 20)" in enemy at 2180 1130
-state timer_charge_lo "Ganondorf charges a light ball (health under 20): beats left" in enemy at 2040 1200
-state phase_ball_out_lo "The light ball flies at Link (health under 20)" in enemy at 2040 1270
-state phase_ball_back_lo "Link sends the light ball back at Ganondorf (health under 20)" in enemy at 2180 1270
-state phase_pound_lo "Ganondorf rises to pound the floor (health under 20)" in enemy at 2040 1340
-state timer_pound_lo "Ganondorf rises to pound the floor (health under 20): beats left" in enemy at 2180 1340
-state phase_pound_end_lo "Ganondorf lands and gets back up (health under 20)" in enemy at 2180 1410
-state timer_pound_end_lo "Ganondorf lands and gets back up (health under 20): beats left" in enemy at 2040 1480
-state phase_stunned_lo "Ganondorf reels from his own light (health under 20)" in enemy at 2040 1550
-state timer_stunned_lo "Ganondorf reels from his own light (health under 20): beats left" in enemy at 2180 1550
-state phase_falling_lo "A light arrow drops Ganondorf to the floor (health under 20)" in enemy at 2180 1620
-state phase_downed_lo "Ganondorf is down and open to the sword (health under 20)" in enemy at 2040 1690
-state timer_downed_lo "Ganondorf is down and open to the sword (health under 20): beats left" in enemy at 2180 1690
-state phase_rising_lo "Ganondorf gets back up, still open (health under 20)" in enemy at 2180 1760
-state phase_magic_start_lo "Ganondorf starts to charge his big magic (health under 20)" in enemy at 2040 1830
-state timer_magic_start_lo "Ganondorf starts to charge his big magic (health under 20): beats left" in enemy at 2180 1830
-state phase_magic_hold_lo "Ganondorf holds his big magic (health under 20)" in enemy at 2180 1900
-state timer_magic_hold_lo "Ganondorf holds his big magic (health under 20): beats left" in enemy at 2040 1970
-state phase_magic_out_lo "Five big magic balls fly at Link (health under 20)" in enemy at 2040 2040
-state phase_wait_fl "Ganondorf floats and waits (health 2 or less)" in enemy at 2180 2040
-state timer_wait_fl "Ganondorf floats and waits (health 2 or less): beats left" in enemy at 2040 2110
-state phase_block_fl "Ganondorf blocks a shot with his cape (health 2 or less)" in enemy at 2040 2180
-state timer_block_fl "Ganondorf blocks a shot with his cape (health 2 or less): beats left" in enemy at 2180 2180
-state phase_charge_fl "Ganondorf charges a light ball (health 2 or less)" in enemy at 2180 2250
-state timer_charge_fl "Ganondorf charges a light ball (health 2 or less): beats left" in enemy at 2040 2320
-state phase_ball_out_fl "The light ball flies at Link (health 2 or less)" in enemy at 2040 2390
-state phase_ball_back_fl "Link sends the light ball back at Ganondorf (health 2 or less)" in enemy at 2180 2390
-state phase_pound_fl "Ganondorf rises to pound the floor (health 2 or less)" in enemy at 2040 2460
-state timer_pound_fl "Ganondorf rises to pound the floor (health 2 or less): beats left" in enemy at 2180 2460
-state phase_pound_end_fl "Ganondorf lands and gets back up (health 2 or less)" in enemy at 2180 2530
-state timer_pound_end_fl "Ganondorf lands and gets back up (health 2 or less): beats left" in enemy at 2040 2600
-state phase_stunned_fl "Ganondorf reels from his own light (health 2 or less)" in enemy at 2040 2670
-state timer_stunned_fl "Ganondorf reels from his own light (health 2 or less): beats left" in enemy at 2180 2670
-state phase_falling_fl "A light arrow drops Ganondorf to the floor (health 2 or less)" in enemy at 2180 2740
-state phase_downed_fl "Ganondorf is down and open to the sword (health 2 or less)" in enemy at 2040 2810
-state timer_downed_fl "Ganondorf is down and open to the sword (health 2 or less): beats left" in enemy at 2180 2810
-state phase_rising_fl "Ganondorf gets back up, still open (health 2 or less)" in enemy at 2180 2880
-state phase_magic_start_fl "Ganondorf starts to charge his big magic (health 2 or less)" in enemy at 2040 2950
-state timer_magic_start_fl "Ganondorf starts to charge his big magic (health 2 or less): beats left" in enemy at 2180 2950
-state phase_magic_hold_fl "Ganondorf holds his big magic (health 2 or less)" in enemy at 2180 3020
-state timer_magic_hold_fl "Ganondorf holds his big magic (health 2 or less): beats left" in enemy at 2040 3090
-state phase_magic_out_fl "Five big magic balls fly at Link (health 2 or less)" in enemy at 2040 3160
+state phase_wait_hit_hi "Ganondorf floats after his light ball hit Link" in enemy at 2180 150
+state timer_wait_hit_hi "Ganondorf floats after his light ball hit Link: beats left" in enemy at 2040 220
+state phase_block_hi "Ganondorf blocks a shot with his cape" in enemy at 2040 290
+state timer_block_hi "Ganondorf blocks a shot with his cape: beats left" in enemy at 2180 290
+state phase_charge_hi "Ganondorf charges a light ball" in enemy at 2180 360
+state timer_charge_hi "Ganondorf charges a light ball: beats left" in enemy at 2040 430
+state phase_ball_out_hi "The light ball flies at Link" in enemy at 2040 500
+state phase_ball_back_hi "Link sends the light ball back at Ganondorf" in enemy at 2180 500
+state phase_pound_hi "Ganondorf rises to pound the floor" in enemy at 2040 570
+state timer_pound_hi "Ganondorf rises to pound the floor: beats left" in enemy at 2180 570
+state phase_pound_end_hi "Ganondorf lands and gets back up" in enemy at 2180 640
+state timer_pound_end_hi "Ganondorf lands and gets back up: beats left" in enemy at 2040 710
+state phase_stunned_hi "Ganondorf reels from his own light" in enemy at 2040 780
+state timer_stunned_hi "Ganondorf reels from his own light: beats left" in enemy at 2180 780
+state phase_down_falling_hi "A light arrow drops Ganondorf to the floor" in enemy at 2180 850
+state phase_down_lying_hi "Ganondorf is down and open to the sword" in enemy at 2040 920
+state timer_down_lying_hi "Ganondorf is down and open to the sword: beats left" in enemy at 2180 920
+state phase_down_rising_hi "Ganondorf gets back up" in enemy at 2180 990
+state phase_wait_lo "Ganondorf floats and waits (health under 20)" in enemy at 2040 1060
+state timer_wait_lo "Ganondorf floats and waits (health under 20): beats left" in enemy at 2180 1060
+state phase_wait_hit_lo "Ganondorf floats after his light ball hit Link (health under 20)" in enemy at 2180 1130
+state timer_wait_hit_lo "Ganondorf floats after his light ball hit Link (health under 20): beats left" in enemy at 2040 1200
+state phase_block_lo "Ganondorf blocks a shot with his cape (health under 20)" in enemy at 2040 1270
+state timer_block_lo "Ganondorf blocks a shot with his cape (health under 20): beats left" in enemy at 2180 1270
+state phase_charge_lo "Ganondorf charges a light ball (health under 20)" in enemy at 2180 1340
+state timer_charge_lo "Ganondorf charges a light ball (health under 20): beats left" in enemy at 2040 1410
+state phase_ball_out_lo "The light ball flies at Link (health under 20)" in enemy at 2040 1480
+state phase_ball_back_lo "Link sends the light ball back at Ganondorf (health under 20)" in enemy at 2180 1480
+state phase_pound_lo "Ganondorf rises to pound the floor (health under 20)" in enemy at 2040 1550
+state timer_pound_lo "Ganondorf rises to pound the floor (health under 20): beats left" in enemy at 2180 1550
+state phase_pound_end_lo "Ganondorf lands and gets back up (health under 20)" in enemy at 2180 1620
+state timer_pound_end_lo "Ganondorf lands and gets back up (health under 20): beats left" in enemy at 2040 1690
+state phase_stunned_lo "Ganondorf reels from his own light (health under 20)" in enemy at 2040 1760
+state timer_stunned_lo "Ganondorf reels from his own light (health under 20): beats left" in enemy at 2180 1760
+state phase_down_falling_lo "A light arrow drops Ganondorf to the floor (health under 20)" in enemy at 2180 1830
+state phase_down_lying_lo "Ganondorf is down and open to the sword (health under 20)" in enemy at 2040 1900
+state timer_down_lying_lo "Ganondorf is down and open to the sword (health under 20): beats left" in enemy at 2180 1900
+state phase_down_rising_lo "Ganondorf gets back up (health under 20)" in enemy at 2180 1970
+state phase_magic_start_lo "Ganondorf starts to charge his big magic (health under 20)" in enemy at 2040 2040
+state timer_magic_start_lo "Ganondorf starts to charge his big magic (health under 20): beats left" in enemy at 2180 2040
+state phase_magic_hold_lo "Ganondorf holds his big magic (health under 20)" in enemy at 2180 2110
+state timer_magic_hold_lo "Ganondorf holds his big magic (health under 20): beats left" in enemy at 2040 2180
+state phase_magic_out_lo "Five big magic balls fly at Link (health under 20)" in enemy at 2040 2250
+state phase_wait_fl "Ganondorf floats and waits (health 2 or less)" in enemy at 2180 2250
+state timer_wait_fl "Ganondorf floats and waits (health 2 or less): beats left" in enemy at 2040 2320
+state phase_wait_hit_fl "Ganondorf floats after his light ball hit Link (health 2 or less)" in enemy at 2040 2390
+state timer_wait_hit_fl "Ganondorf floats after his light ball hit Link (health 2 or less): beats left" in enemy at 2180 2390
+state phase_block_fl "Ganondorf blocks a shot with his cape (health 2 or less)" in enemy at 2180 2460
+state timer_block_fl "Ganondorf blocks a shot with his cape (health 2 or less): beats left" in enemy at 2040 2530
+state phase_charge_fl "Ganondorf charges a light ball (health 2 or less)" in enemy at 2040 2600
+state timer_charge_fl "Ganondorf charges a light ball (health 2 or less): beats left" in enemy at 2180 2600
+state phase_ball_out_fl "The light ball flies at Link (health 2 or less)" in enemy at 2180 2670
+state phase_ball_back_fl "Link sends the light ball back at Ganondorf (health 2 or less)" in enemy at 2040 2740
+state phase_pound_fl "Ganondorf rises to pound the floor (health 2 or less)" in enemy at 2180 2740
+state timer_pound_fl "Ganondorf rises to pound the floor (health 2 or less): beats left" in enemy at 2040 2810
+state phase_pound_end_fl "Ganondorf lands and gets back up (health 2 or less)" in enemy at 2040 2880
+state timer_pound_end_fl "Ganondorf lands and gets back up (health 2 or less): beats left" in enemy at 2180 2880
+state phase_stunned_fl "Ganondorf reels from his own light (health 2 or less)" in enemy at 2180 2950
+state timer_stunned_fl "Ganondorf reels from his own light (health 2 or less): beats left" in enemy at 2040 3020
+state phase_down_falling_fl "A light arrow drops Ganondorf to the floor (health 2 or less)" in enemy at 2040 3090
+state phase_down_lying_fl "Ganondorf is down and open to the sword (health 2 or less)" in enemy at 2180 3090
+state timer_down_lying_fl "Ganondorf is down and open to the sword (health 2 or less): beats left" in enemy at 2040 3160
+state phase_down_rising_fl "Ganondorf gets back up (health 2 or less)" in enemy at 2040 3230
+state phase_magic_start_fl "Ganondorf starts to charge his big magic (health 2 or less)" in enemy at 2180 3230
+state timer_magic_start_fl "Ganondorf starts to charge his big magic (health 2 or less): beats left" in enemy at 2040 3300
+state phase_magic_hold_fl "Ganondorf holds his big magic (health 2 or less)" in enemy at 2040 3370
+state timer_magic_hold_fl "Ganondorf holds his big magic (health 2 or less): beats left" in enemy at 2180 3370
+state phase_magic_out_fl "Five big magic balls fly at Link (health 2 or less)" in enemy at 2180 3440
 state hp_body "Ganondorf: health" marks 21 in enemy_health at 2360 80
 state hp_body_19 "Ganondorf: health up to 19" marks 17 in enemy_health at 2500 80
 state hp_body_2 "Ganondorf: health up to 2" marks 2 in enemy_health at 2360 150
@@ -132,24 +138,24 @@ state link_guard "Link holds up his shield" in link_state at 1220 360
 state link_dodge "Link dodges" in link_state at 1080 430
 state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
 state swing_explosive "Explosion on its way" in hits at 3000 150
-state swing_arrow_normal "Arrow on its way" in hits at 3000 360
-state swing_hammer_swing "Hammer swing on its way" in hits at 3140 640
-state swing_hookshot "Hookshot on its way" in hits at 3000 1130
-state swing_slash_master "Master Sword slash on its way" in hits at 3140 1270
-state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 1760
-state swing_arrow_fire "Fire arrow on its way" in hits at 3140 2180
-state swing_arrow_ice "Ice arrow on its way" in hits at 3000 2530
-state swing_arrow_light "Light arrow on its way" in hits at 3140 2810
-state swing_magic_fire "Din's Fire on its way" in hits at 3140 3440
-state swing_shield "Shield on its way" in hits at 3000 3720
-state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 3860
-state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 4350
-state swing_jump_giant "Two-handed jump attack on its way" in hits at 3140 4840
-state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3000 5330
-state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 5820
-state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3140 6240
-state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 6730
-state swing_reflect_big_magic "Big magic ball (Actor_SetPlayerKnockbackLarge, 0x50 damage), sent back on its way" in hits at 3140 7010
+state swing_arrow_normal "Arrow on its way" in hits at 3000 290
+state swing_hammer_swing "Hammer swing on its way" in hits at 3000 640
+state swing_hookshot "Hookshot on its way" in hits at 3000 990
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 1270
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 1620
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 1970
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 2320
+state swing_arrow_light "Light arrow on its way" in hits at 3000 2670
+state swing_magic_fire "Din's Fire on its way" in hits at 3140 3300
+state swing_shield "Shield on its way" in hits at 3000 3510
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 3650
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3000 4070
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3140 4420
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 4770
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 5190
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 5540
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 5890
+state swing_reflect_big_magic "Big magic ball (Actor_SetPlayerKnockbackLarge, 0x50 damage), sent back on its way" in hits at 3000 6100
 state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 710
 state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1220 710
 state incoming_light_ball "Light ball (Actor_SetPlayerKnockbackLarge, 0x30 damage) incoming" in attacks at 3320 80
@@ -159,103 +165,115 @@ state incoming_shockwave "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 d
 state tick_nayru "Beat ends: nayru checked" in beat at 440 360
 state lens_count "The Lens: beats toward the next cost" in beat at 580 430
 
-verb wait_hi_timer_clears "Ganondorf floats and waits is over" by world priority 99 in enemy at 2040 150
+verb wait_hi_timer_clears "Ganondorf floats and waits is over" by world priority 100 in enemy at 2040 150
   take timer_wait_hi
   unless phase_wait_hi
 
-verb block_hi_timer_clears "Ganondorf blocks a shot with his cape is over" by world priority 99 in enemy at 2180 220
+verb wait_hit_hi_timer_clears "Ganondorf floats after his light ball hit Link is over" by world priority 100 in enemy at 2180 220
+  take timer_wait_hit_hi
+  unless phase_wait_hit_hi
+
+verb block_hi_timer_clears "Ganondorf blocks a shot with his cape is over" by world priority 100 in enemy at 2040 360
   take timer_block_hi
   unless phase_block_hi
 
-verb charge_hi_timer_clears "Ganondorf charges a light ball is over" by world priority 99 in enemy at 2040 360
+verb charge_hi_timer_clears "Ganondorf charges a light ball is over" by world priority 100 in enemy at 2180 430
   take timer_charge_hi
   unless phase_charge_hi
 
-verb pound_hi_timer_clears "Ganondorf rises to pound the floor is over" by world priority 99 in enemy at 2180 500
+verb pound_hi_timer_clears "Ganondorf rises to pound the floor is over" by world priority 100 in enemy at 2040 640
   take timer_pound_hi
   unless phase_pound_hi
 
-verb pound_end_hi_timer_clears "Ganondorf lands and gets back up is over" by world priority 99 in enemy at 2040 640
+verb pound_end_hi_timer_clears "Ganondorf lands and gets back up is over" by world priority 100 in enemy at 2180 710
   take timer_pound_end_hi
   unless phase_pound_end_hi
 
-verb stunned_hi_timer_clears "Ganondorf reels from his own light is over" by world priority 99 in enemy at 2180 710
+verb stunned_hi_timer_clears "Ganondorf reels from his own light is over" by world priority 100 in enemy at 2040 850
   take timer_stunned_hi
   unless phase_stunned_hi
 
-verb downed_hi_timer_clears "Ganondorf is down and open to the sword is over" by world priority 99 in enemy at 2180 850
-  take timer_downed_hi
-  unless phase_downed_hi
+verb down_lying_hi_timer_clears "Ganondorf is down and open to the sword is over" by world priority 100 in enemy at 2040 990
+  take timer_down_lying_hi
+  unless phase_down_lying_hi
 
-verb wait_lo_timer_clears "Ganondorf floats and waits (health under 20) is over" by world priority 99 in enemy at 2180 990
+verb wait_lo_timer_clears "Ganondorf floats and waits (health under 20) is over" by world priority 100 in enemy at 2040 1130
   take timer_wait_lo
   unless phase_wait_lo
 
-verb block_lo_timer_clears "Ganondorf blocks a shot with his cape (health under 20) is over" by world priority 99 in enemy at 2040 1130
+verb wait_hit_lo_timer_clears "Ganondorf floats after his light ball hit Link (health under 20) is over" by world priority 100 in enemy at 2180 1200
+  take timer_wait_hit_lo
+  unless phase_wait_hit_lo
+
+verb block_lo_timer_clears "Ganondorf blocks a shot with his cape (health under 20) is over" by world priority 100 in enemy at 2040 1340
   take timer_block_lo
   unless phase_block_lo
 
-verb charge_lo_timer_clears "Ganondorf charges a light ball (health under 20) is over" by world priority 99 in enemy at 2180 1200
+verb charge_lo_timer_clears "Ganondorf charges a light ball (health under 20) is over" by world priority 100 in enemy at 2180 1410
   take timer_charge_lo
   unless phase_charge_lo
 
-verb pound_lo_timer_clears "Ganondorf rises to pound the floor (health under 20) is over" by world priority 99 in enemy at 2040 1410
+verb pound_lo_timer_clears "Ganondorf rises to pound the floor (health under 20) is over" by world priority 100 in enemy at 2040 1620
   take timer_pound_lo
   unless phase_pound_lo
 
-verb pound_end_lo_timer_clears "Ganondorf lands and gets back up (health under 20) is over" by world priority 99 in enemy at 2180 1480
+verb pound_end_lo_timer_clears "Ganondorf lands and gets back up (health under 20) is over" by world priority 100 in enemy at 2180 1690
   take timer_pound_end_lo
   unless phase_pound_end_lo
 
-verb stunned_lo_timer_clears "Ganondorf reels from his own light (health under 20) is over" by world priority 99 in enemy at 2040 1620
+verb stunned_lo_timer_clears "Ganondorf reels from his own light (health under 20) is over" by world priority 100 in enemy at 2040 1830
   take timer_stunned_lo
   unless phase_stunned_lo
 
-verb downed_lo_timer_clears "Ganondorf is down and open to the sword (health under 20) is over" by world priority 99 in enemy at 2040 1760
-  take timer_downed_lo
-  unless phase_downed_lo
+verb down_lying_lo_timer_clears "Ganondorf is down and open to the sword (health under 20) is over" by world priority 100 in enemy at 2040 1970
+  take timer_down_lying_lo
+  unless phase_down_lying_lo
 
-verb magic_start_lo_timer_clears "Ganondorf starts to charge his big magic (health under 20) is over" by world priority 99 in enemy at 2040 1900
+verb magic_start_lo_timer_clears "Ganondorf starts to charge his big magic (health under 20) is over" by world priority 100 in enemy at 2040 2110
   take timer_magic_start_lo
   unless phase_magic_start_lo
 
-verb magic_hold_lo_timer_clears "Ganondorf holds his big magic (health under 20) is over" by world priority 99 in enemy at 2180 1970
+verb magic_hold_lo_timer_clears "Ganondorf holds his big magic (health under 20) is over" by world priority 100 in enemy at 2180 2180
   take timer_magic_hold_lo
   unless phase_magic_hold_lo
 
-verb wait_fl_timer_clears "Ganondorf floats and waits (health 2 or less) is over" by world priority 99 in enemy at 2180 2110
+verb wait_fl_timer_clears "Ganondorf floats and waits (health 2 or less) is over" by world priority 100 in enemy at 2180 2320
   take timer_wait_fl
   unless phase_wait_fl
 
-verb block_fl_timer_clears "Ganondorf blocks a shot with his cape (health 2 or less) is over" by world priority 99 in enemy at 2040 2250
+verb wait_hit_fl_timer_clears "Ganondorf floats after his light ball hit Link (health 2 or less) is over" by world priority 100 in enemy at 2040 2460
+  take timer_wait_hit_fl
+  unless phase_wait_hit_fl
+
+verb block_fl_timer_clears "Ganondorf blocks a shot with his cape (health 2 or less) is over" by world priority 100 in enemy at 2180 2530
   take timer_block_fl
   unless phase_block_fl
 
-verb charge_fl_timer_clears "Ganondorf charges a light ball (health 2 or less) is over" by world priority 99 in enemy at 2180 2320
+verb charge_fl_timer_clears "Ganondorf charges a light ball (health 2 or less) is over" by world priority 100 in enemy at 2040 2670
   take timer_charge_fl
   unless phase_charge_fl
 
-verb pound_fl_timer_clears "Ganondorf rises to pound the floor (health 2 or less) is over" by world priority 99 in enemy at 2040 2530
+verb pound_fl_timer_clears "Ganondorf rises to pound the floor (health 2 or less) is over" by world priority 100 in enemy at 2180 2810
   take timer_pound_fl
   unless phase_pound_fl
 
-verb pound_end_fl_timer_clears "Ganondorf lands and gets back up (health 2 or less) is over" by world priority 99 in enemy at 2180 2600
+verb pound_end_fl_timer_clears "Ganondorf lands and gets back up (health 2 or less) is over" by world priority 100 in enemy at 2040 2950
   take timer_pound_end_fl
   unless phase_pound_end_fl
 
-verb stunned_fl_timer_clears "Ganondorf reels from his own light (health 2 or less) is over" by world priority 99 in enemy at 2040 2740
+verb stunned_fl_timer_clears "Ganondorf reels from his own light (health 2 or less) is over" by world priority 100 in enemy at 2180 3020
   take timer_stunned_fl
   unless phase_stunned_fl
 
-verb downed_fl_timer_clears "Ganondorf is down and open to the sword (health 2 or less) is over" by world priority 99 in enemy at 2040 2880
-  take timer_downed_fl
-  unless phase_downed_fl
+verb down_lying_fl_timer_clears "Ganondorf is down and open to the sword (health 2 or less) is over" by world priority 100 in enemy at 2180 3160
+  take timer_down_lying_fl
+  unless phase_down_lying_fl
 
-verb magic_start_fl_timer_clears "Ganondorf starts to charge his big magic (health 2 or less) is over" by world priority 99 in enemy at 2040 3020
+verb magic_start_fl_timer_clears "Ganondorf starts to charge his big magic (health 2 or less) is over" by world priority 100 in enemy at 2180 3300
   take timer_magic_start_fl
   unless phase_magic_start_fl
 
-verb magic_hold_fl_timer_clears "Ganondorf holds his big magic (health 2 or less) is over" by world priority 99 in enemy at 2180 3090
+verb magic_hold_fl_timer_clears "Ganondorf holds his big magic (health 2 or less) is over" by world priority 100 in enemy at 2040 3440
   take timer_magic_hold_fl
   unless phase_magic_hold_fl
 
@@ -417,61 +435,61 @@ verb fight_adult_light_arrows "Fight as adult Link: adult light arrows (6 hearts
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 12 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Ganondorf loses health" by world priority 96 in enemy_health at 2500 290
+verb body_hurt "Ganondorf loses health" by world priority 97 in enemy_health at 2500 290
   take dmg_body
   take hp_body
 
-verb body_hurt_19 "Ganondorf loses health (19 or less)" by world priority 96 in enemy_health at 2360 360
+verb body_hurt_19 "Ganondorf loses health (19 or less)" by world priority 97 in enemy_health at 2360 360
   take dmg_body
   take hp_body_19
   unless hp_body
 
-verb body_hurt_2 "Ganondorf loses health (2 or less)" by world priority 96 in enemy_health at 2500 360
+verb body_hurt_2 "Ganondorf loses health (2 or less)" by world priority 97 in enemy_health at 2500 360
   take dmg_body
   take hp_body_2
   unless hp_body
   unless hp_body_19
 
-verb body_overkill "Ganondorf has no health left to lose" by world priority 95 in enemy_health at 2360 430
+verb body_overkill "Ganondorf has no health left to lose" by world priority 96 in enemy_health at 2360 430
   take dmg_body
   unless hp_body
   unless hp_body_19
@@ -725,987 +743,816 @@ verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits a
 verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 150
   take swing_explosive
 
-verb hit_explosive__downed_hi "Explosion hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 220
+verb hit_explosive__down_lying_hi "Explosion hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 220
   take swing_explosive
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_explosive__rising_hi "Explosion hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3140 220
+verb hit_explosive__down_lying_lo "Explosion hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 220
   take swing_explosive
-  need phase_rising_hi
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_explosive__downed_lo "Explosion hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 290
-  take swing_explosive
-  need phase_downed_lo
-  give 2 dmg_body
-
-verb hit_explosive__rising_lo "Explosion hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3140 290
-  take swing_explosive
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3140 360
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3140 290
   take swing_arrow_normal
 
-verb hit_arrow_normal__wait_hi "Arrow hits (Ganondorf floats and waits)" by world priority 80 in hits at 3000 430
+verb hit_arrow_normal__wait_hi "Arrow hits (Ganondorf floats and waits)" by world priority 80 in hits at 3000 360
   take swing_arrow_normal
   take phase_wait_hi
   give phase_block_hi
   give timer_block_hi
 
-verb hit_arrow_normal__downed_hi "Arrow hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 430
+verb hit_arrow_normal__wait_hit_hi "Arrow hits (Ganondorf floats after his light ball hit Link)" by world priority 80 in hits at 3140 360
   take swing_arrow_normal
-  need phase_downed_hi
+  take phase_wait_hit_hi
+  give phase_block_hi
+  give timer_block_hi
+
+verb hit_arrow_normal__down_lying_hi "Arrow hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 430
+  take swing_arrow_normal
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_arrow_normal__rising_hi "Arrow hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3000 500
-  take swing_arrow_normal
-  need phase_rising_hi
-  give 2 dmg_body
-
-verb hit_arrow_normal__wait_lo "Arrow hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3140 500
+verb hit_arrow_normal__wait_lo "Arrow hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3140 430
   take swing_arrow_normal
   take phase_wait_lo
   give phase_block_lo
   give timer_block_lo
 
-verb hit_arrow_normal__downed_lo "Arrow hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 570
+verb hit_arrow_normal__wait_hit_lo "Arrow hits (Ganondorf floats after his light ball hit Link (health under 20))" by world priority 80 in hits at 3000 500
   take swing_arrow_normal
-  need phase_downed_lo
+  take phase_wait_hit_lo
+  give phase_block_lo
+  give timer_block_lo
+
+verb hit_arrow_normal__down_lying_lo "Arrow hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 500
+  take swing_arrow_normal
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_arrow_normal__rising_lo "Arrow hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3140 570
-  take swing_arrow_normal
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb hit_arrow_normal__wait_fl "Arrow hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 640
+verb hit_arrow_normal__wait_fl "Arrow hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 570
   take swing_arrow_normal
   take phase_wait_fl
   give phase_block_fl
   give timer_block_fl
 
-verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3000 710
+verb hit_arrow_normal__wait_hit_fl "Arrow hits (Ganondorf floats after his light ball hit Link (health 2 or less))" by world priority 80 in hits at 3140 570
+  take swing_arrow_normal
+  take phase_wait_hit_fl
+  give phase_block_fl
+  give timer_block_fl
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 640
   take swing_hammer_swing
 
-verb hit_hammer_swing__ball_out_hi "Hammer swing hits (The light ball flies at Link)" by world priority 80 in hits at 3140 710
+verb hit_hammer_swing__ball_out_hi "Hammer swing hits (The light ball flies at Link)" by world priority 80 in hits at 3000 710
   take swing_hammer_swing
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_hammer_swing__downed_hi "Hammer swing hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 780
+verb hit_hammer_swing__down_lying_hi "Hammer swing hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 710
   take swing_hammer_swing
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_hammer_swing__rising_hi "Hammer swing hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3140 780
-  take swing_hammer_swing
-  need phase_rising_hi
-  give 2 dmg_body
-
-verb hit_hammer_swing__ball_out_lo "Hammer swing hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 850
+verb hit_hammer_swing__ball_out_lo "Hammer swing hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 780
   take swing_hammer_swing
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_hammer_swing__downed_lo "Hammer swing hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 850
+verb hit_hammer_swing__down_lying_lo "Hammer swing hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 780
   take swing_hammer_swing
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_hammer_swing__rising_lo "Hammer swing hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 920
-  take swing_hammer_swing
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb hit_hammer_swing__magic_out_lo "Hammer swing hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 920
+verb hit_hammer_swing__magic_out_lo "Hammer swing hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 850
   take swing_hammer_swing
   take phase_magic_out_lo
-  give phase_stunned_lo
-  give 4 timer_stunned_lo
+  give phase_wait_lo
+  give 3 timer_wait_lo
 
-verb hit_hammer_swing__ball_out_fl "Hammer swing hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 990
+verb hit_hammer_swing__ball_out_fl "Hammer swing hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 850
   take swing_hammer_swing
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_hammer_swing__downed_fl "Hammer swing hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 990
+verb hit_hammer_swing__down_lying_fl "Hammer swing hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 920
   take swing_hammer_swing
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 2 dmg_body
 
-verb hit_hammer_swing__rising_fl "Hammer swing hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3000 1060
-  take swing_hammer_swing
-  need phase_rising_fl
-  give 2 dmg_body
-
-verb hit_hammer_swing__magic_out_fl "Hammer swing hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 1060
+verb hit_hammer_swing__magic_out_fl "Hammer swing hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 920
   take swing_hammer_swing
   take phase_magic_out_fl
-  give phase_stunned_fl
-  give 4 timer_stunned_fl
+  give phase_wait_fl
+  give 3 timer_wait_fl
 
-verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 1130
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 990
   take swing_hookshot
 
-verb hit_hookshot__wait_hi "Hookshot hits (Ganondorf floats and waits)" by world priority 80 in hits at 3000 1200
+verb hit_hookshot__wait_hi "Hookshot hits (Ganondorf floats and waits)" by world priority 80 in hits at 3000 1060
   take swing_hookshot
   take phase_wait_hi
   give phase_block_hi
   give timer_block_hi
 
-verb hit_hookshot__wait_lo "Hookshot hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3140 1200
+verb hit_hookshot__wait_hit_hi "Hookshot hits (Ganondorf floats after his light ball hit Link)" by world priority 80 in hits at 3140 1060
+  take swing_hookshot
+  take phase_wait_hit_hi
+  give phase_block_hi
+  give timer_block_hi
+
+verb hit_hookshot__wait_lo "Hookshot hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3000 1130
   take swing_hookshot
   take phase_wait_lo
   give phase_block_lo
   give timer_block_lo
 
-verb hit_hookshot__wait_fl "Hookshot hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 1270
+verb hit_hookshot__wait_hit_lo "Hookshot hits (Ganondorf floats after his light ball hit Link (health under 20))" by world priority 80 in hits at 3140 1130
+  take swing_hookshot
+  take phase_wait_hit_lo
+  give phase_block_lo
+  give timer_block_lo
+
+verb hit_hookshot__wait_fl "Hookshot hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 1200
   take swing_hookshot
   take phase_wait_fl
   give phase_block_fl
   give timer_block_fl
 
-verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3000 1340
+verb hit_hookshot__wait_hit_fl "Hookshot hits (Ganondorf floats after his light ball hit Link (health 2 or less))" by world priority 80 in hits at 3140 1200
+  take swing_hookshot
+  take phase_wait_hit_fl
+  give phase_block_fl
+  give timer_block_fl
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3140 1270
   take swing_slash_master
 
-verb hit_slash_master__ball_out_hi "Master Sword slash hits (The light ball flies at Link)" by world priority 80 in hits at 3140 1340
+verb hit_slash_master__ball_out_hi "Master Sword slash hits (The light ball flies at Link)" by world priority 80 in hits at 3000 1340
   take swing_slash_master
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_slash_master__downed_hi "Master Sword slash hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 1410
+verb hit_slash_master__down_lying_hi "Master Sword slash hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 1340
   take swing_slash_master
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_slash_master__rising_hi "Master Sword slash hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3140 1410
-  take swing_slash_master
-  need phase_rising_hi
-  give 2 dmg_body
-
-verb hit_slash_master__ball_out_lo "Master Sword slash hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 1480
+verb hit_slash_master__ball_out_lo "Master Sword slash hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 1410
   take swing_slash_master
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_slash_master__downed_lo "Master Sword slash hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 1480
+verb hit_slash_master__down_lying_lo "Master Sword slash hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 1410
   take swing_slash_master
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_slash_master__rising_lo "Master Sword slash hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 1550
-  take swing_slash_master
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb hit_slash_master__magic_out_lo "Master Sword slash hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 1550
+verb hit_slash_master__magic_out_lo "Master Sword slash hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 1480
   take swing_slash_master
   take phase_magic_out_lo
-  give phase_stunned_lo
-  give 4 timer_stunned_lo
+  give phase_wait_lo
+  give 3 timer_wait_lo
 
-verb hit_slash_master__ball_out_fl "Master Sword slash hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 1620
+verb hit_slash_master__ball_out_fl "Master Sword slash hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 1480
   take swing_slash_master
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_slash_master__downed_fl "Master Sword slash hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 1620
+verb hit_slash_master__down_lying_fl "Master Sword slash hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 1550
   take swing_slash_master
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 2 dmg_body
 
-verb hit_slash_master__rising_fl "Master Sword slash hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3000 1690
-  take swing_slash_master
-  need phase_rising_fl
-  give 2 dmg_body
-
-verb hit_slash_master__magic_out_fl "Master Sword slash hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 1690
+verb hit_slash_master__magic_out_fl "Master Sword slash hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 1550
   take swing_slash_master
   take phase_magic_out_fl
-  give phase_stunned_fl
-  give 4 timer_stunned_fl
+  give phase_wait_fl
+  give 3 timer_wait_fl
 
-verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3140 1760
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3140 1620
   take swing_slash_giant
 
-verb hit_slash_giant__ball_out_hi "Two-handed sword slash hits (The light ball flies at Link)" by world priority 80 in hits at 3000 1830
+verb hit_slash_giant__ball_out_hi "Two-handed sword slash hits (The light ball flies at Link)" by world priority 80 in hits at 3000 1690
   take swing_slash_giant
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_slash_giant__downed_hi "Two-handed sword slash hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 1830
+verb hit_slash_giant__down_lying_hi "Two-handed sword slash hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 1690
   take swing_slash_giant
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 4 dmg_body
 
-verb hit_slash_giant__rising_hi "Two-handed sword slash hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3000 1900
-  take swing_slash_giant
-  need phase_rising_hi
-  give 4 dmg_body
-
-verb hit_slash_giant__ball_out_lo "Two-handed sword slash hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3140 1900
+verb hit_slash_giant__ball_out_lo "Two-handed sword slash hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 1760
   take swing_slash_giant
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_slash_giant__downed_lo "Two-handed sword slash hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 1970
+verb hit_slash_giant__down_lying_lo "Two-handed sword slash hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 1760
   take swing_slash_giant
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 4 dmg_body
 
-verb hit_slash_giant__rising_lo "Two-handed sword slash hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3140 1970
-  take swing_slash_giant
-  need phase_rising_lo
-  give 4 dmg_body
-
-verb hit_slash_giant__magic_out_lo "Two-handed sword slash hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 2040
+verb hit_slash_giant__magic_out_lo "Two-handed sword slash hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 1830
   take swing_slash_giant
   take phase_magic_out_lo
-  give phase_stunned_lo
-  give 4 timer_stunned_lo
+  give phase_wait_lo
+  give 3 timer_wait_lo
 
-verb hit_slash_giant__ball_out_fl "Two-handed sword slash hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 2040
+verb hit_slash_giant__ball_out_fl "Two-handed sword slash hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 1830
   take swing_slash_giant
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_slash_giant__downed_fl "Two-handed sword slash hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 2110
+verb hit_slash_giant__down_lying_fl "Two-handed sword slash hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 1900
   take swing_slash_giant
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 4 dmg_body
 
-verb hit_slash_giant__rising_fl "Two-handed sword slash hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3140 2110
-  take swing_slash_giant
-  need phase_rising_fl
-  give 4 dmg_body
-
-verb hit_slash_giant__magic_out_fl "Two-handed sword slash hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3000 2180
+verb hit_slash_giant__magic_out_fl "Two-handed sword slash hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 1900
   take swing_slash_giant
   take phase_magic_out_fl
-  give phase_stunned_fl
-  give 4 timer_stunned_fl
+  give phase_wait_fl
+  give 3 timer_wait_fl
 
-verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3000 2250
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3140 1970
   take swing_arrow_fire
 
-verb hit_arrow_fire__wait_hi "Fire arrow hits (Ganondorf floats and waits)" by world priority 80 in hits at 3140 2250
+verb hit_arrow_fire__wait_hi "Fire arrow hits (Ganondorf floats and waits)" by world priority 80 in hits at 3000 2040
   take swing_arrow_fire
   take phase_wait_hi
   give phase_block_hi
   give timer_block_hi
 
-verb hit_arrow_fire__downed_hi "Fire arrow hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 2320
+verb hit_arrow_fire__wait_hit_hi "Fire arrow hits (Ganondorf floats after his light ball hit Link)" by world priority 80 in hits at 3140 2040
   take swing_arrow_fire
-  need phase_downed_hi
+  take phase_wait_hit_hi
+  give phase_block_hi
+  give timer_block_hi
+
+verb hit_arrow_fire__down_lying_hi "Fire arrow hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 2110
+  take swing_arrow_fire
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_arrow_fire__rising_hi "Fire arrow hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3140 2320
-  take swing_arrow_fire
-  need phase_rising_hi
-  give 2 dmg_body
-
-verb hit_arrow_fire__wait_lo "Fire arrow hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3000 2390
+verb hit_arrow_fire__wait_lo "Fire arrow hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3140 2110
   take swing_arrow_fire
   take phase_wait_lo
   give phase_block_lo
   give timer_block_lo
 
-verb hit_arrow_fire__downed_lo "Fire arrow hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 2390
+verb hit_arrow_fire__wait_hit_lo "Fire arrow hits (Ganondorf floats after his light ball hit Link (health under 20))" by world priority 80 in hits at 3000 2180
   take swing_arrow_fire
-  need phase_downed_lo
+  take phase_wait_hit_lo
+  give phase_block_lo
+  give timer_block_lo
+
+verb hit_arrow_fire__down_lying_lo "Fire arrow hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 2180
+  take swing_arrow_fire
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_arrow_fire__rising_lo "Fire arrow hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 2460
-  take swing_arrow_fire
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb hit_arrow_fire__wait_fl "Fire arrow hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3140 2460
+verb hit_arrow_fire__wait_fl "Fire arrow hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 2250
   take swing_arrow_fire
   take phase_wait_fl
   give phase_block_fl
   give timer_block_fl
 
-verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3140 2530
+verb hit_arrow_fire__wait_hit_fl "Fire arrow hits (Ganondorf floats after his light ball hit Link (health 2 or less))" by world priority 80 in hits at 3140 2250
+  take swing_arrow_fire
+  take phase_wait_hit_fl
+  give phase_block_fl
+  give timer_block_fl
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3140 2320
   take swing_arrow_ice
 
-verb hit_arrow_ice__wait_hi "Ice arrow hits (Ganondorf floats and waits)" by world priority 80 in hits at 3000 2600
+verb hit_arrow_ice__wait_hi "Ice arrow hits (Ganondorf floats and waits)" by world priority 80 in hits at 3000 2390
   take swing_arrow_ice
   take phase_wait_hi
   give phase_block_hi
   give timer_block_hi
 
-verb hit_arrow_ice__downed_hi "Ice arrow hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 2600
+verb hit_arrow_ice__wait_hit_hi "Ice arrow hits (Ganondorf floats after his light ball hit Link)" by world priority 80 in hits at 3140 2390
   take swing_arrow_ice
-  need phase_downed_hi
+  take phase_wait_hit_hi
+  give phase_block_hi
+  give timer_block_hi
+
+verb hit_arrow_ice__down_lying_hi "Ice arrow hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 2460
+  take swing_arrow_ice
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_arrow_ice__rising_hi "Ice arrow hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3000 2670
-  take swing_arrow_ice
-  need phase_rising_hi
-  give 2 dmg_body
-
-verb hit_arrow_ice__wait_lo "Ice arrow hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3140 2670
+verb hit_arrow_ice__wait_lo "Ice arrow hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3140 2460
   take swing_arrow_ice
   take phase_wait_lo
   give phase_block_lo
   give timer_block_lo
 
-verb hit_arrow_ice__downed_lo "Ice arrow hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 2740
+verb hit_arrow_ice__wait_hit_lo "Ice arrow hits (Ganondorf floats after his light ball hit Link (health under 20))" by world priority 80 in hits at 3000 2530
   take swing_arrow_ice
-  need phase_downed_lo
+  take phase_wait_hit_lo
+  give phase_block_lo
+  give timer_block_lo
+
+verb hit_arrow_ice__down_lying_lo "Ice arrow hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 2530
+  take swing_arrow_ice
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_arrow_ice__rising_lo "Ice arrow hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3140 2740
-  take swing_arrow_ice
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb hit_arrow_ice__wait_fl "Ice arrow hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 2810
+verb hit_arrow_ice__wait_fl "Ice arrow hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 2600
   take swing_arrow_ice
   take phase_wait_fl
   give phase_block_fl
   give timer_block_fl
 
-verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3000 2880
+verb hit_arrow_ice__wait_hit_fl "Ice arrow hits (Ganondorf floats after his light ball hit Link (health 2 or less))" by world priority 80 in hits at 3140 2600
+  take swing_arrow_ice
+  take phase_wait_hit_fl
+  give phase_block_fl
+  give timer_block_fl
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3140 2670
   take swing_arrow_light
 
-verb hit_arrow_light__wait_hi "Light arrow hits (Ganondorf floats and waits)" by world priority 80 in hits at 3140 2880
+verb hit_arrow_light__wait_hi "Light arrow hits (Ganondorf floats and waits)" by world priority 80 in hits at 3000 2740
   take swing_arrow_light
   take phase_wait_hi
   give phase_block_hi
   give timer_block_hi
 
-verb hit_arrow_light__stunned_hi "Light arrow hits (Ganondorf reels from his own light)" by world priority 80 in hits at 3000 2950
+verb hit_arrow_light__wait_hit_hi "Light arrow hits (Ganondorf floats after his light ball hit Link)" by world priority 80 in hits at 3140 2740
+  take swing_arrow_light
+  take phase_wait_hit_hi
+  give phase_block_hi
+  give timer_block_hi
+
+verb hit_arrow_light__stunned_hi "Light arrow hits (Ganondorf reels from his own light)" by world priority 80 in hits at 3000 2810
   take swing_arrow_light
   take phase_stunned_hi
-  give phase_falling_hi
+  give phase_down_falling_hi
 
-verb hit_arrow_light__downed_hi "Light arrow hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 2950
+verb hit_arrow_light__down_lying_hi "Light arrow hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 2810
   take swing_arrow_light
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_arrow_light__rising_hi "Light arrow hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3000 3020
-  take swing_arrow_light
-  need phase_rising_hi
-  give 2 dmg_body
-
-verb hit_arrow_light__wait_lo "Light arrow hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3140 3020
+verb hit_arrow_light__wait_lo "Light arrow hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3000 2880
   take swing_arrow_light
   take phase_wait_lo
   give phase_block_lo
   give timer_block_lo
 
-verb hit_arrow_light__stunned_lo "Light arrow hits (Ganondorf reels from his own light (health under 20))" by world priority 80 in hits at 3000 3090
+verb hit_arrow_light__wait_hit_lo "Light arrow hits (Ganondorf floats after his light ball hit Link (health under 20))" by world priority 80 in hits at 3140 2880
+  take swing_arrow_light
+  take phase_wait_hit_lo
+  give phase_block_lo
+  give timer_block_lo
+
+verb hit_arrow_light__stunned_lo "Light arrow hits (Ganondorf reels from his own light (health under 20))" by world priority 80 in hits at 3000 2950
   take swing_arrow_light
   take phase_stunned_lo
-  give phase_falling_lo
+  give phase_down_falling_lo
 
-verb hit_arrow_light__downed_lo "Light arrow hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 3090
+verb hit_arrow_light__down_lying_lo "Light arrow hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 2950
   take swing_arrow_light
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_arrow_light__rising_lo "Light arrow hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 3160
-  take swing_arrow_light
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb hit_arrow_light__magic_start_lo "Light arrow hits (Ganondorf starts to charge his big magic (health under 20))" by world priority 80 in hits at 3140 3160
+verb hit_arrow_light__magic_start_lo "Light arrow hits (Ganondorf starts to charge his big magic (health under 20))" by world priority 80 in hits at 3000 3020
   take swing_arrow_light
   take phase_magic_start_lo
-  give phase_falling_lo
+  give phase_down_falling_lo
 
-verb hit_arrow_light__magic_hold_lo "Light arrow hits (Ganondorf holds his big magic (health under 20))" by world priority 80 in hits at 3000 3230
+verb hit_arrow_light__magic_hold_lo "Light arrow hits (Ganondorf holds his big magic (health under 20))" by world priority 80 in hits at 3140 3020
   take swing_arrow_light
   take phase_magic_hold_lo
-  give phase_falling_lo
+  give phase_down_falling_lo
 
-verb hit_arrow_light__magic_out_lo "Light arrow hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 3230
+verb hit_arrow_light__magic_out_lo "Light arrow hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 3090
   take swing_arrow_light
   take phase_magic_out_lo
-  give phase_falling_lo
+  give phase_down_falling_lo
 
-verb hit_arrow_light__wait_fl "Light arrow hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 3300
+verb hit_arrow_light__wait_fl "Light arrow hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3140 3090
   take swing_arrow_light
   take phase_wait_fl
   give phase_block_fl
   give timer_block_fl
 
-verb hit_arrow_light__stunned_fl "Light arrow hits (Ganondorf reels from his own light (health 2 or less))" by world priority 80 in hits at 3140 3300
+verb hit_arrow_light__wait_hit_fl "Light arrow hits (Ganondorf floats after his light ball hit Link (health 2 or less))" by world priority 80 in hits at 3000 3160
+  take swing_arrow_light
+  take phase_wait_hit_fl
+  give phase_block_fl
+  give timer_block_fl
+
+verb hit_arrow_light__stunned_fl "Light arrow hits (Ganondorf reels from his own light (health 2 or less))" by world priority 80 in hits at 3140 3160
   take swing_arrow_light
   take phase_stunned_fl
-  give phase_falling_fl
+  give phase_down_falling_fl
 
-verb hit_arrow_light__magic_start_fl "Light arrow hits (Ganondorf starts to charge his big magic (health 2 or less))" by world priority 80 in hits at 3000 3370
+verb hit_arrow_light__magic_start_fl "Light arrow hits (Ganondorf starts to charge his big magic (health 2 or less))" by world priority 80 in hits at 3000 3230
   take swing_arrow_light
   take phase_magic_start_fl
-  give phase_falling_fl
+  give phase_down_falling_fl
 
-verb hit_arrow_light__magic_hold_fl "Light arrow hits (Ganondorf holds his big magic (health 2 or less))" by world priority 80 in hits at 3140 3370
+verb hit_arrow_light__magic_hold_fl "Light arrow hits (Ganondorf holds his big magic (health 2 or less))" by world priority 80 in hits at 3140 3230
   take swing_arrow_light
   take phase_magic_hold_fl
-  give phase_falling_fl
+  give phase_down_falling_fl
 
-verb hit_arrow_light__magic_out_fl "Light arrow hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3000 3440
+verb hit_arrow_light__magic_out_fl "Light arrow hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3000 3300
   take swing_arrow_light
   take phase_magic_out_fl
-  give phase_falling_fl
+  give phase_down_falling_fl
 
-verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 3510
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 3370
   take swing_magic_fire
 
-verb hit_magic_fire__downed_hi "Din's Fire hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 3510
+verb hit_magic_fire__down_lying_hi "Din's Fire hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 3370
   take swing_magic_fire
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_magic_fire__rising_hi "Din's Fire hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3000 3580
+verb hit_magic_fire__down_lying_lo "Din's Fire hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 3440
   take swing_magic_fire
-  need phase_rising_hi
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_magic_fire__downed_lo "Din's Fire hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 3580
-  take swing_magic_fire
-  need phase_downed_lo
-  give 2 dmg_body
-
-verb hit_magic_fire__rising_lo "Din's Fire hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 3650
-  take swing_magic_fire
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 3650
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 3440
   take swing_magic_fire
   need range_far
 
-verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 3720
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 3510
   take swing_shield
 
-verb hit_shield__ball_out_hi "Shield hits (The light ball flies at Link)" by world priority 80 in hits at 3000 3790
+verb hit_shield__ball_out_hi "Shield hits (The light ball flies at Link)" by world priority 80 in hits at 3000 3580
   take swing_shield
   take phase_ball_out_hi
   give phase_wait_hi
   give 3 timer_wait_hi
 
-verb hit_shield__ball_out_lo "Shield hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3140 3790
+verb hit_shield__ball_out_lo "Shield hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3140 3580
   take swing_shield
   take phase_ball_out_lo
   give phase_wait_lo
   give 3 timer_wait_lo
 
-verb hit_shield__ball_out_fl "Shield hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 3860
+verb hit_shield__ball_out_fl "Shield hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 3650
   take swing_shield
   take phase_ball_out_fl
   give phase_wait_fl
   give 3 timer_wait_fl
 
-verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3000 3930
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3000 3720
   take swing_spin_giant
 
-verb hit_spin_giant__ball_out_hi "Two-handed spin attack hits (The light ball flies at Link)" by world priority 80 in hits at 3140 3930
+verb hit_spin_giant__ball_out_hi "Two-handed spin attack hits (The light ball flies at Link)" by world priority 80 in hits at 3140 3720
   take swing_spin_giant
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_spin_giant__downed_hi "Two-handed spin attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 4000
+verb hit_spin_giant__down_lying_hi "Two-handed spin attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 3790
   take swing_spin_giant
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 4 dmg_body
 
-verb hit_spin_giant__rising_hi "Two-handed spin attack hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3140 4000
-  take swing_spin_giant
-  need phase_rising_hi
-  give 4 dmg_body
-
-verb hit_spin_giant__ball_out_lo "Two-handed spin attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 4070
+verb hit_spin_giant__ball_out_lo "Two-handed spin attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3140 3790
   take swing_spin_giant
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_spin_giant__downed_lo "Two-handed spin attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 4070
+verb hit_spin_giant__down_lying_lo "Two-handed spin attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 3860
   take swing_spin_giant
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 4 dmg_body
 
-verb hit_spin_giant__rising_lo "Two-handed spin attack hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 4140
-  take swing_spin_giant
-  need phase_rising_lo
-  give 4 dmg_body
-
-verb hit_spin_giant__magic_out_lo "Two-handed spin attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 4140
+verb hit_spin_giant__magic_out_lo "Two-handed spin attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 3860
   take swing_spin_giant
   take phase_magic_out_lo
   give phase_stunned_lo
   give 4 timer_stunned_lo
 
-verb hit_spin_giant__ball_out_fl "Two-handed spin attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 4210
+verb hit_spin_giant__ball_out_fl "Two-handed spin attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 3930
   take swing_spin_giant
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_spin_giant__downed_fl "Two-handed spin attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 4210
+verb hit_spin_giant__down_lying_fl "Two-handed spin attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 3930
   take swing_spin_giant
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 4 dmg_body
 
-verb hit_spin_giant__rising_fl "Two-handed spin attack hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3000 4280
-  take swing_spin_giant
-  need phase_rising_fl
-  give 4 dmg_body
-
-verb hit_spin_giant__magic_out_fl "Two-handed spin attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 4280
+verb hit_spin_giant__magic_out_fl "Two-handed spin attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3000 4000
   take swing_spin_giant
   take phase_magic_out_fl
   give phase_stunned_fl
   give 4 timer_stunned_fl
 
-verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 4350
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3140 4000
   take swing_spin_giant
   need range_far
 
-verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3000 4420
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3140 4070
   take swing_spin_master
 
-verb hit_spin_master__ball_out_hi "Master Sword spin attack hits (The light ball flies at Link)" by world priority 80 in hits at 3140 4420
+verb hit_spin_master__ball_out_hi "Master Sword spin attack hits (The light ball flies at Link)" by world priority 80 in hits at 3000 4140
   take swing_spin_master
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_spin_master__downed_hi "Master Sword spin attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 4490
+verb hit_spin_master__down_lying_hi "Master Sword spin attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 4140
   take swing_spin_master
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 2 dmg_body
 
-verb hit_spin_master__rising_hi "Master Sword spin attack hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3140 4490
-  take swing_spin_master
-  need phase_rising_hi
-  give 2 dmg_body
-
-verb hit_spin_master__ball_out_lo "Master Sword spin attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 4560
+verb hit_spin_master__ball_out_lo "Master Sword spin attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 4210
   take swing_spin_master
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_spin_master__downed_lo "Master Sword spin attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 4560
+verb hit_spin_master__down_lying_lo "Master Sword spin attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 4210
   take swing_spin_master
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 2 dmg_body
 
-verb hit_spin_master__rising_lo "Master Sword spin attack hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 4630
-  take swing_spin_master
-  need phase_rising_lo
-  give 2 dmg_body
-
-verb hit_spin_master__magic_out_lo "Master Sword spin attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 4630
+verb hit_spin_master__magic_out_lo "Master Sword spin attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 4280
   take swing_spin_master
   take phase_magic_out_lo
   give phase_stunned_lo
   give 4 timer_stunned_lo
 
-verb hit_spin_master__ball_out_fl "Master Sword spin attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 4700
+verb hit_spin_master__ball_out_fl "Master Sword spin attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 4280
   take swing_spin_master
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_spin_master__downed_fl "Master Sword spin attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 4700
+verb hit_spin_master__down_lying_fl "Master Sword spin attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 4350
   take swing_spin_master
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 2 dmg_body
 
-verb hit_spin_master__rising_fl "Master Sword spin attack hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3000 4770
-  take swing_spin_master
-  need phase_rising_fl
-  give 2 dmg_body
-
-verb hit_spin_master__magic_out_fl "Master Sword spin attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 4770
+verb hit_spin_master__magic_out_fl "Master Sword spin attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 4350
   take swing_spin_master
   take phase_magic_out_fl
   give phase_stunned_fl
   give 4 timer_stunned_fl
 
-verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3000 4840
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3000 4420
   take swing_spin_master
   need range_far
 
-verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 4910
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 4490
   take swing_jump_giant
 
-verb hit_jump_giant__ball_out_hi "Two-handed jump attack hits (The light ball flies at Link)" by world priority 80 in hits at 3140 4910
+verb hit_jump_giant__ball_out_hi "Two-handed jump attack hits (The light ball flies at Link)" by world priority 80 in hits at 3140 4490
   take swing_jump_giant
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_jump_giant__downed_hi "Two-handed jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 4980
+verb hit_jump_giant__down_lying_hi "Two-handed jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 4560
   take swing_jump_giant
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 8 dmg_body
 
-verb hit_jump_giant__rising_hi "Two-handed jump attack hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3140 4980
-  take swing_jump_giant
-  need phase_rising_hi
-  give 8 dmg_body
-
-verb hit_jump_giant__ball_out_lo "Two-handed jump attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 5050
+verb hit_jump_giant__ball_out_lo "Two-handed jump attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3140 4560
   take swing_jump_giant
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_jump_giant__downed_lo "Two-handed jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 5050
+verb hit_jump_giant__down_lying_lo "Two-handed jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 4630
   take swing_jump_giant
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 8 dmg_body
 
-verb hit_jump_giant__rising_lo "Two-handed jump attack hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 5120
-  take swing_jump_giant
-  need phase_rising_lo
-  give 8 dmg_body
-
-verb hit_jump_giant__magic_out_lo "Two-handed jump attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 5120
+verb hit_jump_giant__magic_out_lo "Two-handed jump attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 4630
   take swing_jump_giant
   take phase_magic_out_lo
-  give phase_stunned_lo
-  give 4 timer_stunned_lo
+  give phase_wait_lo
+  give 3 timer_wait_lo
 
-verb hit_jump_giant__ball_out_fl "Two-handed jump attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 5190
+verb hit_jump_giant__ball_out_fl "Two-handed jump attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 4700
   take swing_jump_giant
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_jump_giant__downed_fl "Two-handed jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 5190
+verb hit_jump_giant__down_lying_fl "Two-handed jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 4700
   take swing_jump_giant
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 8 dmg_body
 
-verb hit_jump_giant__rising_fl "Two-handed jump attack hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3000 5260
-  take swing_jump_giant
-  need phase_rising_fl
-  give 8 dmg_body
-
-verb hit_jump_giant__magic_out_fl "Two-handed jump attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 5260
+verb hit_jump_giant__magic_out_fl "Two-handed jump attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3000 4770
   take swing_jump_giant
   take phase_magic_out_fl
-  give phase_stunned_fl
-  give 4 timer_stunned_fl
+  give phase_wait_fl
+  give 3 timer_wait_fl
 
-verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3140 5330
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 4840
   take swing_jump_giant_self
 
-verb hit_jump_giant_self__ball_out_hi "Two-handed jump attack hits (The light ball flies at Link)" by world priority 80 in hits at 3000 5400
+verb hit_jump_giant_self__ball_out_hi "Two-handed jump attack hits (The light ball flies at Link)" by world priority 80 in hits at 3140 4840
   take swing_jump_giant_self
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_jump_giant_self__downed_hi "Two-handed jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 5400
+verb hit_jump_giant_self__down_lying_hi "Two-handed jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 4910
   take swing_jump_giant_self
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 8 dmg_body
 
-verb hit_jump_giant_self__rising_hi "Two-handed jump attack hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3000 5470
-  take swing_jump_giant_self
-  need phase_rising_hi
-  give 8 dmg_body
-
-verb hit_jump_giant_self__ball_out_lo "Two-handed jump attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3140 5470
+verb hit_jump_giant_self__ball_out_lo "Two-handed jump attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3140 4910
   take swing_jump_giant_self
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_jump_giant_self__downed_lo "Two-handed jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 5540
+verb hit_jump_giant_self__down_lying_lo "Two-handed jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 4980
   take swing_jump_giant_self
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 8 dmg_body
 
-verb hit_jump_giant_self__rising_lo "Two-handed jump attack hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3140 5540
-  take swing_jump_giant_self
-  need phase_rising_lo
-  give 8 dmg_body
-
-verb hit_jump_giant_self__magic_out_lo "Two-handed jump attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 5610
+verb hit_jump_giant_self__magic_out_lo "Two-handed jump attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 4980
   take swing_jump_giant_self
   take phase_magic_out_lo
-  give phase_stunned_lo
-  give 4 timer_stunned_lo
+  give phase_wait_lo
+  give 3 timer_wait_lo
 
-verb hit_jump_giant_self__ball_out_fl "Two-handed jump attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 5610
+verb hit_jump_giant_self__ball_out_fl "Two-handed jump attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 5050
   take swing_jump_giant_self
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_jump_giant_self__downed_fl "Two-handed jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 5680
+verb hit_jump_giant_self__down_lying_fl "Two-handed jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 5050
   take swing_jump_giant_self
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 8 dmg_body
 
-verb hit_jump_giant_self__rising_fl "Two-handed jump attack hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3140 5680
-  take swing_jump_giant_self
-  need phase_rising_fl
-  give 8 dmg_body
-
-verb hit_jump_giant_self__magic_out_fl "Two-handed jump attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3000 5750
+verb hit_jump_giant_self__magic_out_fl "Two-handed jump attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3000 5120
   take swing_jump_giant_self
   take phase_magic_out_fl
-  give phase_stunned_fl
-  give 4 timer_stunned_fl
+  give phase_wait_fl
+  give 3 timer_wait_fl
 
-verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 5750
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 5120
   take swing_jump_giant_self
   need range_far
 
-verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 5820
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 5190
   take swing_jump_master
 
-verb hit_jump_master__ball_out_hi "Master Sword jump attack hits (The light ball flies at Link)" by world priority 80 in hits at 3000 5890
+verb hit_jump_master__ball_out_hi "Master Sword jump attack hits (The light ball flies at Link)" by world priority 80 in hits at 3000 5260
   take swing_jump_master
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_jump_master__downed_hi "Master Sword jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 5890
+verb hit_jump_master__down_lying_hi "Master Sword jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 5260
   take swing_jump_master
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 4 dmg_body
 
-verb hit_jump_master__rising_hi "Master Sword jump attack hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3000 5960
-  take swing_jump_master
-  need phase_rising_hi
-  give 4 dmg_body
-
-verb hit_jump_master__ball_out_lo "Master Sword jump attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3140 5960
+verb hit_jump_master__ball_out_lo "Master Sword jump attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 5330
   take swing_jump_master
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_jump_master__downed_lo "Master Sword jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 6030
+verb hit_jump_master__down_lying_lo "Master Sword jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 5330
   take swing_jump_master
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 4 dmg_body
 
-verb hit_jump_master__rising_lo "Master Sword jump attack hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3140 6030
-  take swing_jump_master
-  need phase_rising_lo
-  give 4 dmg_body
-
-verb hit_jump_master__magic_out_lo "Master Sword jump attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 6100
+verb hit_jump_master__magic_out_lo "Master Sword jump attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 5400
   take swing_jump_master
   take phase_magic_out_lo
-  give phase_stunned_lo
-  give 4 timer_stunned_lo
+  give phase_wait_lo
+  give 3 timer_wait_lo
 
-verb hit_jump_master__ball_out_fl "Master Sword jump attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 6100
+verb hit_jump_master__ball_out_fl "Master Sword jump attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 5400
   take swing_jump_master
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_jump_master__downed_fl "Master Sword jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 6170
+verb hit_jump_master__down_lying_fl "Master Sword jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 5470
   take swing_jump_master
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 4 dmg_body
 
-verb hit_jump_master__rising_fl "Master Sword jump attack hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3140 6170
-  take swing_jump_master
-  need phase_rising_fl
-  give 4 dmg_body
-
-verb hit_jump_master__magic_out_fl "Master Sword jump attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3000 6240
+verb hit_jump_master__magic_out_fl "Master Sword jump attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 5470
   take swing_jump_master
   take phase_magic_out_fl
-  give phase_stunned_fl
-  give 4 timer_stunned_fl
+  give phase_wait_fl
+  give 3 timer_wait_fl
 
-verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 6310
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 5540
   take swing_jump_master_self
 
-verb hit_jump_master_self__ball_out_hi "Master Sword jump attack hits (The light ball flies at Link)" by world priority 80 in hits at 3140 6310
+verb hit_jump_master_self__ball_out_hi "Master Sword jump attack hits (The light ball flies at Link)" by world priority 80 in hits at 3000 5610
   take swing_jump_master_self
   take phase_ball_out_hi
   give phase_ball_back_hi
 
-verb hit_jump_master_self__downed_hi "Master Sword jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3000 6380
+verb hit_jump_master_self__down_lying_hi "Master Sword jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 5610
   take swing_jump_master_self
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 4 dmg_body
 
-verb hit_jump_master_self__rising_hi "Master Sword jump attack hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3140 6380
-  take swing_jump_master_self
-  need phase_rising_hi
-  give 4 dmg_body
-
-verb hit_jump_master_self__ball_out_lo "Master Sword jump attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 6450
+verb hit_jump_master_self__ball_out_lo "Master Sword jump attack hits (The light ball flies at Link (health under 20))" by world priority 80 in hits at 3000 5680
   take swing_jump_master_self
   take phase_ball_out_lo
   give phase_ball_back_lo
 
-verb hit_jump_master_self__downed_lo "Master Sword jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 6450
+verb hit_jump_master_self__down_lying_lo "Master Sword jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 5680
   take swing_jump_master_self
-  need phase_downed_lo
+  need phase_down_lying_lo
   give 4 dmg_body
 
-verb hit_jump_master_self__rising_lo "Master Sword jump attack hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 6520
-  take swing_jump_master_self
-  need phase_rising_lo
-  give 4 dmg_body
-
-verb hit_jump_master_self__magic_out_lo "Master Sword jump attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3140 6520
+verb hit_jump_master_self__magic_out_lo "Master Sword jump attack hits (Five big magic balls fly at Link (health under 20))" by world priority 80 in hits at 3000 5750
   take swing_jump_master_self
   take phase_magic_out_lo
-  give phase_stunned_lo
-  give 4 timer_stunned_lo
+  give phase_wait_lo
+  give 3 timer_wait_lo
 
-verb hit_jump_master_self__ball_out_fl "Master Sword jump attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3000 6590
+verb hit_jump_master_self__ball_out_fl "Master Sword jump attack hits (The light ball flies at Link (health 2 or less))" by world priority 80 in hits at 3140 5750
   take swing_jump_master_self
   take phase_ball_out_fl
   give phase_ball_back_fl
 
-verb hit_jump_master_self__downed_fl "Master Sword jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 6590
+verb hit_jump_master_self__down_lying_fl "Master Sword jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3000 5820
   take swing_jump_master_self
-  need phase_downed_fl
+  need phase_down_lying_fl
   give 4 dmg_body
 
-verb hit_jump_master_self__rising_fl "Master Sword jump attack hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3000 6660
-  take swing_jump_master_self
-  need phase_rising_fl
-  give 4 dmg_body
-
-verb hit_jump_master_self__magic_out_fl "Master Sword jump attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 6660
+verb hit_jump_master_self__magic_out_fl "Master Sword jump attack hits (Five big magic balls fly at Link (health 2 or less))" by world priority 80 in hits at 3140 5820
   take swing_jump_master_self
   take phase_magic_out_fl
-  give phase_stunned_fl
-  give 4 timer_stunned_fl
+  give phase_wait_fl
+  give 3 timer_wait_fl
 
-verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 6730
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 5890
   take swing_jump_master_self
   need range_far
 
-verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3000 6800
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3000 5960
   take swing_hammer_jump
 
-verb hit_hammer_jump__downed_hi "Hammer jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 6800
+verb hit_hammer_jump__down_lying_hi "Hammer jump attack hits (Ganondorf is down and open to the sword)" by world priority 80 in hits at 3140 5960
   take swing_hammer_jump
-  need phase_downed_hi
+  need phase_down_lying_hi
   give 4 dmg_body
 
-verb hit_hammer_jump__rising_hi "Hammer jump attack hits (Ganondorf gets back up, still open)" by world priority 80 in hits at 3000 6870
+verb hit_hammer_jump__down_lying_lo "Hammer jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3000 6030
   take swing_hammer_jump
-  need phase_rising_hi
+  need phase_down_lying_lo
   give 4 dmg_body
 
-verb hit_hammer_jump__downed_lo "Hammer jump attack hits (Ganondorf is down and open to the sword (health under 20))" by world priority 80 in hits at 3140 6870
+verb hit_hammer_jump__down_lying_fl "Hammer jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 6030
   take swing_hammer_jump
-  need phase_downed_lo
+  need phase_down_lying_fl
   give 4 dmg_body
 
-verb hit_hammer_jump__rising_lo "Hammer jump attack hits (Ganondorf gets back up, still open (health under 20))" by world priority 80 in hits at 3000 6940
-  take swing_hammer_jump
-  need phase_rising_lo
-  give 4 dmg_body
-
-verb hit_hammer_jump__downed_fl "Hammer jump attack hits (Ganondorf is down and open to the sword (health 2 or less))" by world priority 80 in hits at 3140 6940
-  take swing_hammer_jump
-  need phase_downed_fl
-  give 4 dmg_body
-
-verb hit_hammer_jump__rising_fl "Hammer jump attack hits (Ganondorf gets back up, still open (health 2 or less))" by world priority 80 in hits at 3000 7010
-  take swing_hammer_jump
-  need phase_rising_fl
-  give 4 dmg_body
-
-verb miss_reflect_big_magic "Big magic ball (Actor_SetPlayerKnockbackLarge, 0x50 damage), sent back has no effect" by world priority 79 in hits at 3000 7080
+verb miss_reflect_big_magic "Big magic ball (Actor_SetPlayerKnockbackLarge, 0x50 damage), sent back has no effect" by world priority 79 in hits at 3140 6100
   take swing_reflect_big_magic
 
-verb hit_reflect_big_magic__wait_lo "Big magic ball (Actor_SetPlayerKnockbackLarge, 0x50 damage), sent back hits (Ganondorf floats and waits (health under 20))" by world priority 80 in hits at 3140 7080
-  take swing_reflect_big_magic
-  take phase_wait_lo
-  give phase_stunned_lo
-  give 4 timer_stunned_lo
-
-verb hit_reflect_big_magic__wait_fl "Big magic ball (Actor_SetPlayerKnockbackLarge, 0x50 damage), sent back hits (Ganondorf floats and waits (health 2 or less))" by world priority 80 in hits at 3000 7150
-  take swing_reflect_big_magic
-  take phase_wait_fl
-  give phase_stunned_fl
-  give 4 timer_stunned_fl
-
-verb body_empty_in_downed_hi "Ganondorf runs out (Ganondorf is down and open to the sword)" by world priority 92 in enemy_health at 2500 430
+verb body_empty_in_down_lying_hi "Ganondorf runs out (Ganondorf is down and open to the sword)" by world priority 90 in enemy_health at 2500 430
   unless hp_body
   unless hp_body_19
   unless hp_body_2
   take alive_body
-  take phase_downed_hi
+  take phase_down_lying_hi
   give link_wins
 
-verb body_empty_in_rising_hi "Ganondorf runs out (Ganondorf gets back up, still open)" by world priority 92 in enemy_health at 2360 500
+verb body_empty_in_down_lying_lo "Ganondorf runs out (Ganondorf is down and open to the sword (health under 20))" by world priority 90 in enemy_health at 2360 500
   unless hp_body
   unless hp_body_19
   unless hp_body_2
   take alive_body
-  take phase_rising_hi
+  take phase_down_lying_lo
   give link_wins
 
-verb body_empty_in_downed_lo "Ganondorf runs out (Ganondorf is down and open to the sword (health under 20))" by world priority 92 in enemy_health at 2500 500
+verb body_empty_in_down_lying_fl "Ganondorf runs out (Ganondorf is down and open to the sword (health 2 or less))" by world priority 90 in enemy_health at 2500 500
   unless hp_body
   unless hp_body_19
   unless hp_body_2
   take alive_body
-  take phase_downed_lo
+  take phase_down_lying_fl
   give link_wins
 
-verb body_empty_in_rising_lo "Ganondorf runs out (Ganondorf gets back up, still open (health under 20))" by world priority 92 in enemy_health at 2360 570
-  unless hp_body
-  unless hp_body_19
-  unless hp_body_2
-  take alive_body
-  take phase_rising_lo
-  give link_wins
-
-verb body_empty_in_downed_fl "Ganondorf runs out (Ganondorf is down and open to the sword (health 2 or less))" by world priority 92 in enemy_health at 2500 570
-  unless hp_body
-  unless hp_body_19
-  unless hp_body_2
-  take alive_body
-  take phase_downed_fl
-  give link_wins
-
-verb body_empty_in_rising_fl "Ganondorf runs out (Ganondorf gets back up, still open (health 2 or less))" by world priority 92 in enemy_health at 2360 640
-  unless hp_body
-  unless hp_body_19
-  unless hp_body_2
-  take alive_body
-  take phase_rising_fl
-  give link_wins
-
-verb body_falls_to_19_in_downed_hi "Ganondorf drops to 19 (Ganondorf is down and open to the sword)" by world priority 91 in enemy_health at 2500 640
+verb body_falls_to_19_in_down_lying_hi "Ganondorf drops to 19 (Ganondorf is down and open to the sword)" by world priority 89 in enemy_health at 2360 570
   take above_body_19
   need alive_body
   unless hp_body
-  take phase_downed_hi
-  give phase_downed_lo
-  give 4 timer_downed_lo
+  take phase_down_lying_hi
+  give phase_down_lying_lo
+  give 4 timer_down_lying_lo
 
-verb body_falls_to_19_in_rising_hi "Ganondorf drops to 19 (Ganondorf gets back up, still open)" by world priority 91 in enemy_health at 2360 710
-  take above_body_19
-  need alive_body
-  unless hp_body
-  take phase_rising_hi
-  give phase_rising_lo
-
-verb body_falls_to_2_in_downed_lo "Ganondorf drops to 2 (Ganondorf is down and open to the sword (health under 20))" by world priority 91 in enemy_health at 2500 710
+verb body_falls_to_2_in_down_lying_lo "Ganondorf drops to 2 (Ganondorf is down and open to the sword (health under 20))" by world priority 89 in enemy_health at 2500 570
   take above_body_2
   need alive_body
   unless hp_body
   unless hp_body_19
-  take phase_downed_lo
-  give phase_downed_fl
-  give 4 timer_downed_fl
-
-verb body_falls_to_2_in_rising_lo "Ganondorf drops to 2 (Ganondorf gets back up, still open (health under 20))" by world priority 91 in enemy_health at 2360 780
-  take above_body_2
-  need alive_body
-  unless hp_body
-  unless hp_body_19
-  take phase_rising_lo
-  give phase_rising_fl
+  take phase_down_lying_lo
+  give phase_down_lying_fl
+  give 4 timer_down_lying_fl
 
 verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1060
   take link_turn
@@ -1780,17 +1627,17 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 1410
   take lens_on
   give link_turn
 
-verb enemy_ready "Ganondorf gets ready" by world priority 70 in enemy at 2180 3160
+verb enemy_ready "Ganondorf gets ready" by world priority 70 in enemy at 2040 3510
   take enemy_turn
   give enemy_act
 
-verb wait_hi_ticks "Ganondorf floats and waits: a beat passes" by world priority 71 in enemy at 2040 3230
+verb wait_hi_ticks "Ganondorf floats and waits: a beat passes" by world priority 71 in enemy at 2180 3510
   take enemy_turn
   need phase_wait_hi
   take timer_wait_hi
   give enemy_act
 
-verb wait_hi_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2180 3230
+verb wait_hi_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2040 3580
   take enemy_act
   take phase_wait_hi
   give phase_pound_hi
@@ -1798,7 +1645,7 @@ verb wait_hi_step_1 "Link stands under Ganondorf: he pounds the floor" by world 
   give beat_end
   need range_near
 
-verb wait_hi_step_2 "Ganondorf readies a light ball" by world priority 69 in enemy at 2040 3300
+verb wait_hi_step_2 "Ganondorf readies a light ball" by world priority 69 in enemy at 2180 3580
   take enemy_act
   take phase_wait_hi
   give phase_charge_hi
@@ -1807,18 +1654,46 @@ verb wait_hi_step_2 "Ganondorf readies a light ball" by world priority 69 in ene
   give beat_end
   need range_far
 
-verb wait_hi_holds "Ganondorf floats and waits: nothing changes" by world priority 68 in enemy at 2180 3300
+verb wait_hi_holds "Ganondorf floats and waits: nothing changes" by world priority 68 in enemy at 2040 3650
   take enemy_act
   need phase_wait_hi
   give beat_end
 
-verb block_hi_ticks "Ganondorf blocks a shot with his cape: a beat passes" by world priority 71 in enemy at 2040 3370
+verb wait_hit_hi_ticks "Ganondorf floats after his light ball hit Link: a beat passes" by world priority 71 in enemy at 2180 3650
+  take enemy_turn
+  need phase_wait_hit_hi
+  take timer_wait_hit_hi
+  give enemy_act
+
+verb wait_hit_hi_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2040 3720
+  take enemy_act
+  take phase_wait_hit_hi
+  give phase_pound_hi
+  give 2 timer_pound_hi
+  give beat_end
+  need range_near
+
+verb wait_hit_hi_step_2 "Ganondorf readies a light ball" by world priority 69 in enemy at 2180 3720
+  take enemy_act
+  take phase_wait_hit_hi
+  give phase_charge_hi
+  give timer_charge_hi
+  unless timer_wait_hit_hi
+  give beat_end
+  need range_far
+
+verb wait_hit_hi_holds "Ganondorf floats after his light ball hit Link: nothing changes" by world priority 68 in enemy at 2040 3790
+  take enemy_act
+  need phase_wait_hit_hi
+  give beat_end
+
+verb block_hi_ticks "Ganondorf blocks a shot with his cape: a beat passes" by world priority 71 in enemy at 2180 3790
   take enemy_turn
   need phase_block_hi
   take timer_block_hi
   give enemy_act
 
-verb block_hi_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy at 2180 3370
+verb block_hi_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy at 2040 3860
   take enemy_act
   take phase_block_hi
   give phase_wait_hi
@@ -1826,57 +1701,57 @@ verb block_hi_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy a
   unless timer_block_hi
   give beat_end
 
-verb charge_hi_ticks "Ganondorf charges a light ball: a beat passes" by world priority 71 in enemy at 2040 3440
+verb charge_hi_ticks "Ganondorf charges a light ball: a beat passes" by world priority 71 in enemy at 2180 3860
   take enemy_turn
   need phase_charge_hi
   take timer_charge_hi
   give enemy_act
 
-verb charge_hi_step_1 "Ganondorf throws the light ball" by world priority 69 in enemy at 2180 3440
+verb charge_hi_step_1 "Ganondorf throws the light ball" by world priority 69 in enemy at 2040 3930
   take enemy_act
   take phase_charge_hi
   give phase_ball_out_hi
   unless timer_charge_hi
   give beat_end
 
-verb ball_out_hi_step_1 "The light ball reaches Link" by world priority 69 in enemy at 2040 3510
+verb ball_out_hi_step_1 "The light ball reaches Link" by world priority 69 in enemy at 2180 3930
   take enemy_act
   take phase_ball_out_hi
-  give phase_wait_hi
-  give 3 timer_wait_hi
+  give phase_wait_hit_hi
+  give 6 timer_wait_hit_hi
   give incoming_light_ball
   give beat_end
 
-verb ball_back_hi_step_1 "Ganondorf volleys the ball back" by world priority 69 weight 7 in enemy at 2180 3510
+verb ball_back_hi_step_1 "Ganondorf volleys the ball back" by world priority 69 weight 7 in enemy at 2040 4000
   take enemy_act
   take phase_ball_back_hi
   give phase_ball_out_hi
   give beat_end
 
-verb ball_back_hi_step_2 "Ganondorf misses, and the ball strikes him" by world priority 69 weight 3 in enemy at 2040 3580
+verb ball_back_hi_step_2 "Ganondorf misses, and the ball strikes him" by world priority 69 weight 3 in enemy at 2180 4000
   take enemy_act
   take phase_ball_back_hi
   give phase_stunned_hi
   give 4 timer_stunned_hi
   give beat_end
 
-verb pound_hi_ticks "Ganondorf rises to pound the floor: a beat passes" by world priority 71 in enemy at 2180 3580
+verb pound_hi_ticks "Ganondorf rises to pound the floor: a beat passes" by world priority 71 in enemy at 2040 4070
   take enemy_turn
   need phase_pound_hi
   take timer_pound_hi
   give enemy_act
 
-verb pound_hi_step_1 "Ganondorf crashes down on Link" by world priority 69 in enemy at 2040 3650
+verb pound_hi_step_1 "Ganondorf crashes down, and a shockwave rolls out under Link" by world priority 69 in enemy at 2180 4070
   take enemy_act
   take phase_pound_hi
   give phase_pound_end_hi
   give timer_pound_end_hi
   unless timer_pound_hi
-  give incoming_body
+  give incoming_shockwave
   give beat_end
   need range_near
 
-verb pound_hi_step_2 "Ganondorf crashes down, and a shockwave rolls out" by world priority 69 in enemy at 2180 3650
+verb pound_hi_step_2 "Ganondorf crashes down, and a shockwave rolls out" by world priority 69 in enemy at 2040 4140
   take enemy_act
   take phase_pound_hi
   give phase_pound_end_hi
@@ -1886,32 +1761,43 @@ verb pound_hi_step_2 "Ganondorf crashes down, and a shockwave rolls out" by worl
   give beat_end
   need range_far
 
-verb pound_hi_holds "Ganondorf rises to pound the floor: nothing changes" by world priority 68 in enemy at 2040 3720
+verb pound_hi_holds "Ganondorf rises to pound the floor: nothing changes" by world priority 68 in enemy at 2180 4140
   take enemy_act
   need phase_pound_hi
   give beat_end
 
-verb pound_end_hi_ticks "Ganondorf lands and gets back up: a beat passes" by world priority 71 in enemy at 2180 3720
+verb pound_end_hi_ticks "Ganondorf lands and gets back up: a beat passes" by world priority 71 in enemy at 2040 4210
   take enemy_turn
   need phase_pound_end_hi
   take timer_pound_end_hi
   give enemy_act
 
-verb pound_end_hi_step_1 "Ganondorf floats back up" by world priority 69 in enemy at 2040 3790
+verb pound_end_hi_step_1 "Ganondorf rises from the landing into Link (his collider is AT here, line 2919)" by world priority 69 in enemy at 2180 4210
+  take enemy_act
+  take phase_pound_end_hi
+  give phase_wait_hi
+  give 3 timer_wait_hi
+  unless timer_pound_end_hi
+  give incoming_body
+  give beat_end
+  need range_near
+
+verb pound_end_hi_step_2 "Ganondorf floats back up" by world priority 69 in enemy at 2040 4280
   take enemy_act
   take phase_pound_end_hi
   give phase_wait_hi
   give 3 timer_wait_hi
   unless timer_pound_end_hi
   give beat_end
+  need range_far
 
-verb stunned_hi_ticks "Ganondorf reels from his own light: a beat passes" by world priority 71 in enemy at 2180 3790
+verb stunned_hi_ticks "Ganondorf reels from his own light: a beat passes" by world priority 71 in enemy at 2180 4280
   take enemy_turn
   need phase_stunned_hi
   take timer_stunned_hi
   give enemy_act
 
-verb stunned_hi_step_1 "Ganondorf shakes off the shock" by world priority 69 in enemy at 2040 3860
+verb stunned_hi_step_1 "Ganondorf shakes off the shock" by world priority 69 in enemy at 2040 4350
   take enemy_act
   take phase_stunned_hi
   give phase_wait_hi
@@ -1919,50 +1805,50 @@ verb stunned_hi_step_1 "Ganondorf shakes off the shock" by world priority 69 in 
   unless timer_stunned_hi
   give beat_end
 
-verb stunned_hi_holds "Ganondorf reels from his own light: nothing changes" by world priority 68 in enemy at 2180 3860
+verb stunned_hi_holds "Ganondorf reels from his own light: nothing changes" by world priority 68 in enemy at 2180 4350
   take enemy_act
   need phase_stunned_hi
   give beat_end
 
-verb falling_hi_step_1 "Ganondorf hits the floor" by world priority 69 in enemy at 2040 3930
+verb down_falling_hi_step_1 "Ganondorf hits the floor" by world priority 69 in enemy at 2040 4420
   take enemy_act
-  take phase_falling_hi
-  give phase_downed_hi
-  give 4 timer_downed_hi
+  take phase_down_falling_hi
+  give phase_down_lying_hi
+  give 4 timer_down_lying_hi
   give beat_end
 
-verb downed_hi_ticks "Ganondorf is down and open to the sword: a beat passes" by world priority 71 in enemy at 2180 3930
+verb down_lying_hi_ticks "Ganondorf is down and open to the sword: a beat passes" by world priority 71 in enemy at 2180 4420
   take enemy_turn
-  need phase_downed_hi
-  take timer_downed_hi
+  need phase_down_lying_hi
+  take timer_down_lying_hi
   give enemy_act
 
-verb downed_hi_step_1 "Ganondorf starts to get up" by world priority 69 in enemy at 2040 4000
+verb down_lying_hi_step_1 "Ganondorf starts to get up" by world priority 69 in enemy at 2040 4490
   take enemy_act
-  take phase_downed_hi
-  give phase_rising_hi
-  unless timer_downed_hi
+  take phase_down_lying_hi
+  give phase_down_rising_hi
+  unless timer_down_lying_hi
   give beat_end
 
-verb downed_hi_holds "Ganondorf is down and open to the sword: nothing changes" by world priority 68 in enemy at 2180 4000
+verb down_lying_hi_holds "Ganondorf is down and open to the sword: nothing changes" by world priority 68 in enemy at 2180 4490
   take enemy_act
-  need phase_downed_hi
+  need phase_down_lying_hi
   give beat_end
 
-verb rising_hi_step_1 "Ganondorf floats again" by world priority 69 in enemy at 2040 4070
+verb down_rising_hi_step_1 "Ganondorf floats again" by world priority 69 in enemy at 2040 4560
   take enemy_act
-  take phase_rising_hi
+  take phase_down_rising_hi
   give phase_wait_hi
   give 3 timer_wait_hi
   give beat_end
 
-verb wait_lo_ticks "Ganondorf floats and waits (health under 20): a beat passes" by world priority 71 in enemy at 2180 4070
+verb wait_lo_ticks "Ganondorf floats and waits (health under 20): a beat passes" by world priority 71 in enemy at 2180 4560
   take enemy_turn
   need phase_wait_lo
   take timer_wait_lo
   give enemy_act
 
-verb wait_lo_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2040 4140
+verb wait_lo_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2040 4630
   take enemy_act
   take phase_wait_lo
   give phase_pound_lo
@@ -1970,7 +1856,7 @@ verb wait_lo_step_1 "Link stands under Ganondorf: he pounds the floor" by world 
   give beat_end
   need range_near
 
-verb wait_lo_step_2 "Ganondorf readies a light ball" by world priority 69 weight 2 in enemy at 2180 4140
+verb wait_lo_step_2 "Ganondorf readies a light ball" by world priority 69 weight 2 in enemy at 2180 4630
   take enemy_act
   take phase_wait_lo
   give phase_charge_lo
@@ -1979,7 +1865,7 @@ verb wait_lo_step_2 "Ganondorf readies a light ball" by world priority 69 weight
   give beat_end
   need range_far
 
-verb wait_lo_step_3 "Ganondorf readies his big magic" by world priority 69 in enemy at 2040 4210
+verb wait_lo_step_3 "Ganondorf readies his big magic" by world priority 69 in enemy at 2040 4700
   take enemy_act
   take phase_wait_lo
   give phase_magic_start_lo
@@ -1988,7 +1874,7 @@ verb wait_lo_step_3 "Ganondorf readies his big magic" by world priority 69 in en
   give beat_end
   need range_far
 
-verb wait_lo_step_4 "Ganondorf rises to pound the floor" by world priority 69 in enemy at 2180 4210
+verb wait_lo_step_4 "Ganondorf rises to pound the floor" by world priority 69 in enemy at 2180 4700
   take enemy_act
   take phase_wait_lo
   give phase_pound_lo
@@ -1997,18 +1883,64 @@ verb wait_lo_step_4 "Ganondorf rises to pound the floor" by world priority 69 in
   give beat_end
   need range_far
 
-verb wait_lo_holds "Ganondorf floats and waits (health under 20): nothing changes" by world priority 68 in enemy at 2040 4280
+verb wait_lo_holds "Ganondorf floats and waits (health under 20): nothing changes" by world priority 68 in enemy at 2040 4770
   take enemy_act
   need phase_wait_lo
   give beat_end
 
-verb block_lo_ticks "Ganondorf blocks a shot with his cape (health under 20): a beat passes" by world priority 71 in enemy at 2180 4280
+verb wait_hit_lo_ticks "Ganondorf floats after his light ball hit Link (health under 20): a beat passes" by world priority 71 in enemy at 2180 4770
+  take enemy_turn
+  need phase_wait_hit_lo
+  take timer_wait_hit_lo
+  give enemy_act
+
+verb wait_hit_lo_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2040 4840
+  take enemy_act
+  take phase_wait_hit_lo
+  give phase_pound_lo
+  give 2 timer_pound_lo
+  give beat_end
+  need range_near
+
+verb wait_hit_lo_step_2 "Ganondorf readies a light ball" by world priority 69 weight 2 in enemy at 2180 4840
+  take enemy_act
+  take phase_wait_hit_lo
+  give phase_charge_lo
+  give timer_charge_lo
+  unless timer_wait_hit_lo
+  give beat_end
+  need range_far
+
+verb wait_hit_lo_step_3 "Ganondorf readies his big magic" by world priority 69 in enemy at 2040 4910
+  take enemy_act
+  take phase_wait_hit_lo
+  give phase_magic_start_lo
+  give 2 timer_magic_start_lo
+  unless timer_wait_hit_lo
+  give beat_end
+  need range_far
+
+verb wait_hit_lo_step_4 "Ganondorf rises to pound the floor" by world priority 69 in enemy at 2180 4910
+  take enemy_act
+  take phase_wait_hit_lo
+  give phase_pound_lo
+  give 2 timer_pound_lo
+  unless timer_wait_hit_lo
+  give beat_end
+  need range_far
+
+verb wait_hit_lo_holds "Ganondorf floats after his light ball hit Link (health under 20): nothing changes" by world priority 68 in enemy at 2040 4980
+  take enemy_act
+  need phase_wait_hit_lo
+  give beat_end
+
+verb block_lo_ticks "Ganondorf blocks a shot with his cape (health under 20): a beat passes" by world priority 71 in enemy at 2180 4980
   take enemy_turn
   need phase_block_lo
   take timer_block_lo
   give enemy_act
 
-verb block_lo_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy at 2040 4350
+verb block_lo_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy at 2040 5050
   take enemy_act
   take phase_block_lo
   give phase_wait_lo
@@ -2016,57 +1948,57 @@ verb block_lo_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy a
   unless timer_block_lo
   give beat_end
 
-verb charge_lo_ticks "Ganondorf charges a light ball (health under 20): a beat passes" by world priority 71 in enemy at 2180 4350
+verb charge_lo_ticks "Ganondorf charges a light ball (health under 20): a beat passes" by world priority 71 in enemy at 2180 5050
   take enemy_turn
   need phase_charge_lo
   take timer_charge_lo
   give enemy_act
 
-verb charge_lo_step_1 "Ganondorf throws the light ball" by world priority 69 in enemy at 2040 4420
+verb charge_lo_step_1 "Ganondorf throws the light ball" by world priority 69 in enemy at 2040 5120
   take enemy_act
   take phase_charge_lo
   give phase_ball_out_lo
   unless timer_charge_lo
   give beat_end
 
-verb ball_out_lo_step_1 "The light ball reaches Link" by world priority 69 in enemy at 2180 4420
+verb ball_out_lo_step_1 "The light ball reaches Link" by world priority 69 in enemy at 2180 5120
   take enemy_act
   take phase_ball_out_lo
-  give phase_wait_lo
-  give 3 timer_wait_lo
+  give phase_wait_hit_lo
+  give 6 timer_wait_hit_lo
   give incoming_light_ball
   give beat_end
 
-verb ball_back_lo_step_1 "Ganondorf volleys the ball back" by world priority 69 weight 7 in enemy at 2040 4490
+verb ball_back_lo_step_1 "Ganondorf volleys the ball back" by world priority 69 weight 7 in enemy at 2040 5190
   take enemy_act
   take phase_ball_back_lo
   give phase_ball_out_lo
   give beat_end
 
-verb ball_back_lo_step_2 "Ganondorf misses, and the ball strikes him" by world priority 69 weight 3 in enemy at 2180 4490
+verb ball_back_lo_step_2 "Ganondorf misses, and the ball strikes him" by world priority 69 weight 3 in enemy at 2180 5190
   take enemy_act
   take phase_ball_back_lo
   give phase_stunned_lo
   give 4 timer_stunned_lo
   give beat_end
 
-verb pound_lo_ticks "Ganondorf rises to pound the floor (health under 20): a beat passes" by world priority 71 in enemy at 2040 4560
+verb pound_lo_ticks "Ganondorf rises to pound the floor (health under 20): a beat passes" by world priority 71 in enemy at 2040 5260
   take enemy_turn
   need phase_pound_lo
   take timer_pound_lo
   give enemy_act
 
-verb pound_lo_step_1 "Ganondorf crashes down on Link" by world priority 69 in enemy at 2180 4560
+verb pound_lo_step_1 "Ganondorf crashes down, and a shockwave rolls out under Link" by world priority 69 in enemy at 2180 5260
   take enemy_act
   take phase_pound_lo
   give phase_pound_end_lo
   give timer_pound_end_lo
   unless timer_pound_lo
-  give incoming_body
+  give incoming_shockwave
   give beat_end
   need range_near
 
-verb pound_lo_step_2 "Ganondorf crashes down, and a shockwave rolls out" by world priority 69 in enemy at 2040 4630
+verb pound_lo_step_2 "Ganondorf crashes down, and a shockwave rolls out" by world priority 69 in enemy at 2040 5330
   take enemy_act
   take phase_pound_lo
   give phase_pound_end_lo
@@ -2076,32 +2008,43 @@ verb pound_lo_step_2 "Ganondorf crashes down, and a shockwave rolls out" by worl
   give beat_end
   need range_far
 
-verb pound_lo_holds "Ganondorf rises to pound the floor (health under 20): nothing changes" by world priority 68 in enemy at 2180 4630
+verb pound_lo_holds "Ganondorf rises to pound the floor (health under 20): nothing changes" by world priority 68 in enemy at 2180 5330
   take enemy_act
   need phase_pound_lo
   give beat_end
 
-verb pound_end_lo_ticks "Ganondorf lands and gets back up (health under 20): a beat passes" by world priority 71 in enemy at 2040 4700
+verb pound_end_lo_ticks "Ganondorf lands and gets back up (health under 20): a beat passes" by world priority 71 in enemy at 2040 5400
   take enemy_turn
   need phase_pound_end_lo
   take timer_pound_end_lo
   give enemy_act
 
-verb pound_end_lo_step_1 "Ganondorf floats back up" by world priority 69 in enemy at 2180 4700
+verb pound_end_lo_step_1 "Ganondorf rises from the landing into Link (his collider is AT here, line 2919)" by world priority 69 in enemy at 2180 5400
+  take enemy_act
+  take phase_pound_end_lo
+  give phase_wait_lo
+  give 3 timer_wait_lo
+  unless timer_pound_end_lo
+  give incoming_body
+  give beat_end
+  need range_near
+
+verb pound_end_lo_step_2 "Ganondorf floats back up" by world priority 69 in enemy at 2040 5470
   take enemy_act
   take phase_pound_end_lo
   give phase_wait_lo
   give 3 timer_wait_lo
   unless timer_pound_end_lo
   give beat_end
+  need range_far
 
-verb stunned_lo_ticks "Ganondorf reels from his own light (health under 20): a beat passes" by world priority 71 in enemy at 2040 4770
+verb stunned_lo_ticks "Ganondorf reels from his own light (health under 20): a beat passes" by world priority 71 in enemy at 2180 5470
   take enemy_turn
   need phase_stunned_lo
   take timer_stunned_lo
   give enemy_act
 
-verb stunned_lo_step_1 "Ganondorf shakes off the shock" by world priority 69 in enemy at 2180 4770
+verb stunned_lo_step_1 "Ganondorf shakes off the shock" by world priority 69 in enemy at 2040 5540
   take enemy_act
   take phase_stunned_lo
   give phase_wait_lo
@@ -2109,50 +2052,50 @@ verb stunned_lo_step_1 "Ganondorf shakes off the shock" by world priority 69 in 
   unless timer_stunned_lo
   give beat_end
 
-verb stunned_lo_holds "Ganondorf reels from his own light (health under 20): nothing changes" by world priority 68 in enemy at 2040 4840
+verb stunned_lo_holds "Ganondorf reels from his own light (health under 20): nothing changes" by world priority 68 in enemy at 2180 5540
   take enemy_act
   need phase_stunned_lo
   give beat_end
 
-verb falling_lo_step_1 "Ganondorf hits the floor" by world priority 69 in enemy at 2180 4840
+verb down_falling_lo_step_1 "Ganondorf hits the floor" by world priority 69 in enemy at 2040 5610
   take enemy_act
-  take phase_falling_lo
-  give phase_downed_lo
-  give 4 timer_downed_lo
+  take phase_down_falling_lo
+  give phase_down_lying_lo
+  give 4 timer_down_lying_lo
   give beat_end
 
-verb downed_lo_ticks "Ganondorf is down and open to the sword (health under 20): a beat passes" by world priority 71 in enemy at 2040 4910
+verb down_lying_lo_ticks "Ganondorf is down and open to the sword (health under 20): a beat passes" by world priority 71 in enemy at 2180 5610
   take enemy_turn
-  need phase_downed_lo
-  take timer_downed_lo
+  need phase_down_lying_lo
+  take timer_down_lying_lo
   give enemy_act
 
-verb downed_lo_step_1 "Ganondorf starts to get up" by world priority 69 in enemy at 2180 4910
+verb down_lying_lo_step_1 "Ganondorf starts to get up" by world priority 69 in enemy at 2040 5680
   take enemy_act
-  take phase_downed_lo
-  give phase_rising_lo
-  unless timer_downed_lo
+  take phase_down_lying_lo
+  give phase_down_rising_lo
+  unless timer_down_lying_lo
   give beat_end
 
-verb downed_lo_holds "Ganondorf is down and open to the sword (health under 20): nothing changes" by world priority 68 in enemy at 2040 4980
+verb down_lying_lo_holds "Ganondorf is down and open to the sword (health under 20): nothing changes" by world priority 68 in enemy at 2180 5680
   take enemy_act
-  need phase_downed_lo
+  need phase_down_lying_lo
   give beat_end
 
-verb rising_lo_step_1 "Ganondorf floats again" by world priority 69 in enemy at 2180 4980
+verb down_rising_lo_step_1 "Ganondorf floats again" by world priority 69 in enemy at 2040 5750
   take enemy_act
-  take phase_rising_lo
+  take phase_down_rising_lo
   give phase_wait_lo
   give 3 timer_wait_lo
   give beat_end
 
-verb magic_start_lo_ticks "Ganondorf starts to charge his big magic (health under 20): a beat passes" by world priority 71 in enemy at 2040 5050
+verb magic_start_lo_ticks "Ganondorf starts to charge his big magic (health under 20): a beat passes" by world priority 71 in enemy at 2180 5750
   take enemy_turn
   need phase_magic_start_lo
   take timer_magic_start_lo
   give enemy_act
 
-verb magic_start_lo_step_1 "Ganondorf gathers the big magic" by world priority 69 in enemy at 2180 5050
+verb magic_start_lo_step_1 "Ganondorf gathers the big magic" by world priority 69 in enemy at 2040 5820
   take enemy_act
   take phase_magic_start_lo
   give phase_magic_hold_lo
@@ -2160,30 +2103,30 @@ verb magic_start_lo_step_1 "Ganondorf gathers the big magic" by world priority 6
   unless timer_magic_start_lo
   give beat_end
 
-verb magic_start_lo_holds "Ganondorf starts to charge his big magic (health under 20): nothing changes" by world priority 68 in enemy at 2040 5120
+verb magic_start_lo_holds "Ganondorf starts to charge his big magic (health under 20): nothing changes" by world priority 68 in enemy at 2180 5820
   take enemy_act
   need phase_magic_start_lo
   give beat_end
 
-verb magic_hold_lo_ticks "Ganondorf holds his big magic (health under 20): a beat passes" by world priority 71 in enemy at 2180 5120
+verb magic_hold_lo_ticks "Ganondorf holds his big magic (health under 20): a beat passes" by world priority 71 in enemy at 2040 5890
   take enemy_turn
   need phase_magic_hold_lo
   take timer_magic_hold_lo
   give enemy_act
 
-verb magic_hold_lo_step_1 "Ganondorf hurls the big magic" by world priority 69 in enemy at 2040 5190
+verb magic_hold_lo_step_1 "Ganondorf hurls the big magic" by world priority 69 in enemy at 2180 5890
   take enemy_act
   take phase_magic_hold_lo
   give phase_magic_out_lo
   unless timer_magic_hold_lo
   give beat_end
 
-verb magic_hold_lo_holds "Ganondorf holds his big magic (health under 20): nothing changes" by world priority 68 in enemy at 2180 5190
+verb magic_hold_lo_holds "Ganondorf holds his big magic (health under 20): nothing changes" by world priority 68 in enemy at 2040 5960
   take enemy_act
   need phase_magic_hold_lo
   give beat_end
 
-verb magic_out_lo_step_1 "The big magic reaches Link" by world priority 69 in enemy at 2040 5260
+verb magic_out_lo_step_1 "The big magic reaches Link" by world priority 69 in enemy at 2180 5960
   take enemy_act
   take phase_magic_out_lo
   give phase_wait_lo
@@ -2191,13 +2134,13 @@ verb magic_out_lo_step_1 "The big magic reaches Link" by world priority 69 in en
   give incoming_big_magic
   give beat_end
 
-verb wait_fl_ticks "Ganondorf floats and waits (health 2 or less): a beat passes" by world priority 71 in enemy at 2180 5260
+verb wait_fl_ticks "Ganondorf floats and waits (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 6030
   take enemy_turn
   need phase_wait_fl
   take timer_wait_fl
   give enemy_act
 
-verb wait_fl_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2040 5330
+verb wait_fl_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2180 6030
   take enemy_act
   take phase_wait_fl
   give phase_pound_fl
@@ -2205,7 +2148,7 @@ verb wait_fl_step_1 "Link stands under Ganondorf: he pounds the floor" by world 
   give beat_end
   need range_near
 
-verb wait_fl_step_2 "Ganondorf readies a light ball" by world priority 69 weight 2 in enemy at 2180 5330
+verb wait_fl_step_2 "Ganondorf readies a light ball" by world priority 69 weight 2 in enemy at 2040 6100
   take enemy_act
   take phase_wait_fl
   give phase_charge_fl
@@ -2214,7 +2157,7 @@ verb wait_fl_step_2 "Ganondorf readies a light ball" by world priority 69 weight
   give beat_end
   need range_far
 
-verb wait_fl_step_3 "Ganondorf readies his big magic" by world priority 69 in enemy at 2040 5400
+verb wait_fl_step_3 "Ganondorf readies his big magic" by world priority 69 in enemy at 2180 6100
   take enemy_act
   take phase_wait_fl
   give phase_magic_start_fl
@@ -2223,7 +2166,7 @@ verb wait_fl_step_3 "Ganondorf readies his big magic" by world priority 69 in en
   give beat_end
   need range_far
 
-verb wait_fl_step_4 "Ganondorf rises to pound the floor" by world priority 69 in enemy at 2180 5400
+verb wait_fl_step_4 "Ganondorf rises to pound the floor" by world priority 69 in enemy at 2040 6170
   take enemy_act
   take phase_wait_fl
   give phase_pound_fl
@@ -2232,18 +2175,64 @@ verb wait_fl_step_4 "Ganondorf rises to pound the floor" by world priority 69 in
   give beat_end
   need range_far
 
-verb wait_fl_holds "Ganondorf floats and waits (health 2 or less): nothing changes" by world priority 68 in enemy at 2040 5470
+verb wait_fl_holds "Ganondorf floats and waits (health 2 or less): nothing changes" by world priority 68 in enemy at 2180 6170
   take enemy_act
   need phase_wait_fl
   give beat_end
 
-verb block_fl_ticks "Ganondorf blocks a shot with his cape (health 2 or less): a beat passes" by world priority 71 in enemy at 2180 5470
+verb wait_hit_fl_ticks "Ganondorf floats after his light ball hit Link (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 6240
+  take enemy_turn
+  need phase_wait_hit_fl
+  take timer_wait_hit_fl
+  give enemy_act
+
+verb wait_hit_fl_step_1 "Link stands under Ganondorf: he pounds the floor" by world priority 69 in enemy at 2180 6240
+  take enemy_act
+  take phase_wait_hit_fl
+  give phase_pound_fl
+  give 2 timer_pound_fl
+  give beat_end
+  need range_near
+
+verb wait_hit_fl_step_2 "Ganondorf readies a light ball" by world priority 69 weight 2 in enemy at 2040 6310
+  take enemy_act
+  take phase_wait_hit_fl
+  give phase_charge_fl
+  give timer_charge_fl
+  unless timer_wait_hit_fl
+  give beat_end
+  need range_far
+
+verb wait_hit_fl_step_3 "Ganondorf readies his big magic" by world priority 69 in enemy at 2180 6310
+  take enemy_act
+  take phase_wait_hit_fl
+  give phase_magic_start_fl
+  give 2 timer_magic_start_fl
+  unless timer_wait_hit_fl
+  give beat_end
+  need range_far
+
+verb wait_hit_fl_step_4 "Ganondorf rises to pound the floor" by world priority 69 in enemy at 2040 6380
+  take enemy_act
+  take phase_wait_hit_fl
+  give phase_pound_fl
+  give 2 timer_pound_fl
+  unless timer_wait_hit_fl
+  give beat_end
+  need range_far
+
+verb wait_hit_fl_holds "Ganondorf floats after his light ball hit Link (health 2 or less): nothing changes" by world priority 68 in enemy at 2180 6380
+  take enemy_act
+  need phase_wait_hit_fl
+  give beat_end
+
+verb block_fl_ticks "Ganondorf blocks a shot with his cape (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 6450
   take enemy_turn
   need phase_block_fl
   take timer_block_fl
   give enemy_act
 
-verb block_fl_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy at 2040 5540
+verb block_fl_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy at 2180 6450
   take enemy_act
   take phase_block_fl
   give phase_wait_fl
@@ -2251,57 +2240,57 @@ verb block_fl_step_1 "Ganondorf lowers his cape" by world priority 69 in enemy a
   unless timer_block_fl
   give beat_end
 
-verb charge_fl_ticks "Ganondorf charges a light ball (health 2 or less): a beat passes" by world priority 71 in enemy at 2180 5540
+verb charge_fl_ticks "Ganondorf charges a light ball (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 6520
   take enemy_turn
   need phase_charge_fl
   take timer_charge_fl
   give enemy_act
 
-verb charge_fl_step_1 "Ganondorf throws the light ball" by world priority 69 in enemy at 2040 5610
+verb charge_fl_step_1 "Ganondorf throws the light ball" by world priority 69 in enemy at 2180 6520
   take enemy_act
   take phase_charge_fl
   give phase_ball_out_fl
   unless timer_charge_fl
   give beat_end
 
-verb ball_out_fl_step_1 "The light ball reaches Link" by world priority 69 in enemy at 2180 5610
+verb ball_out_fl_step_1 "The light ball reaches Link" by world priority 69 in enemy at 2040 6590
   take enemy_act
   take phase_ball_out_fl
-  give phase_wait_fl
-  give 3 timer_wait_fl
+  give phase_wait_hit_fl
+  give 6 timer_wait_hit_fl
   give incoming_light_ball
   give beat_end
 
-verb ball_back_fl_step_1 "Ganondorf volleys the ball back" by world priority 69 weight 7 in enemy at 2040 5680
+verb ball_back_fl_step_1 "Ganondorf volleys the ball back" by world priority 69 weight 7 in enemy at 2180 6590
   take enemy_act
   take phase_ball_back_fl
   give phase_ball_out_fl
   give beat_end
 
-verb ball_back_fl_step_2 "Ganondorf misses, and the ball strikes him" by world priority 69 weight 3 in enemy at 2180 5680
+verb ball_back_fl_step_2 "Ganondorf misses, and the ball strikes him" by world priority 69 weight 3 in enemy at 2040 6660
   take enemy_act
   take phase_ball_back_fl
   give phase_stunned_fl
   give 4 timer_stunned_fl
   give beat_end
 
-verb pound_fl_ticks "Ganondorf rises to pound the floor (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 5750
+verb pound_fl_ticks "Ganondorf rises to pound the floor (health 2 or less): a beat passes" by world priority 71 in enemy at 2180 6660
   take enemy_turn
   need phase_pound_fl
   take timer_pound_fl
   give enemy_act
 
-verb pound_fl_step_1 "Ganondorf crashes down on Link" by world priority 69 in enemy at 2180 5750
+verb pound_fl_step_1 "Ganondorf crashes down, and a shockwave rolls out under Link" by world priority 69 in enemy at 2040 6730
   take enemy_act
   take phase_pound_fl
   give phase_pound_end_fl
   give timer_pound_end_fl
   unless timer_pound_fl
-  give incoming_body
+  give incoming_shockwave
   give beat_end
   need range_near
 
-verb pound_fl_step_2 "Ganondorf crashes down, and a shockwave rolls out" by world priority 69 in enemy at 2040 5820
+verb pound_fl_step_2 "Ganondorf crashes down, and a shockwave rolls out" by world priority 69 in enemy at 2180 6730
   take enemy_act
   take phase_pound_fl
   give phase_pound_end_fl
@@ -2311,32 +2300,43 @@ verb pound_fl_step_2 "Ganondorf crashes down, and a shockwave rolls out" by worl
   give beat_end
   need range_far
 
-verb pound_fl_holds "Ganondorf rises to pound the floor (health 2 or less): nothing changes" by world priority 68 in enemy at 2180 5820
+verb pound_fl_holds "Ganondorf rises to pound the floor (health 2 or less): nothing changes" by world priority 68 in enemy at 2040 6800
   take enemy_act
   need phase_pound_fl
   give beat_end
 
-verb pound_end_fl_ticks "Ganondorf lands and gets back up (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 5890
+verb pound_end_fl_ticks "Ganondorf lands and gets back up (health 2 or less): a beat passes" by world priority 71 in enemy at 2180 6800
   take enemy_turn
   need phase_pound_end_fl
   take timer_pound_end_fl
   give enemy_act
 
-verb pound_end_fl_step_1 "Ganondorf floats back up" by world priority 69 in enemy at 2180 5890
+verb pound_end_fl_step_1 "Ganondorf rises from the landing into Link (his collider is AT here, line 2919)" by world priority 69 in enemy at 2040 6870
+  take enemy_act
+  take phase_pound_end_fl
+  give phase_wait_fl
+  give 3 timer_wait_fl
+  unless timer_pound_end_fl
+  give incoming_body
+  give beat_end
+  need range_near
+
+verb pound_end_fl_step_2 "Ganondorf floats back up" by world priority 69 in enemy at 2180 6870
   take enemy_act
   take phase_pound_end_fl
   give phase_wait_fl
   give 3 timer_wait_fl
   unless timer_pound_end_fl
   give beat_end
+  need range_far
 
-verb stunned_fl_ticks "Ganondorf reels from his own light (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 5960
+verb stunned_fl_ticks "Ganondorf reels from his own light (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 6940
   take enemy_turn
   need phase_stunned_fl
   take timer_stunned_fl
   give enemy_act
 
-verb stunned_fl_step_1 "Ganondorf shakes off the shock" by world priority 69 in enemy at 2180 5960
+verb stunned_fl_step_1 "Ganondorf shakes off the shock" by world priority 69 in enemy at 2180 6940
   take enemy_act
   take phase_stunned_fl
   give phase_wait_fl
@@ -2344,50 +2344,50 @@ verb stunned_fl_step_1 "Ganondorf shakes off the shock" by world priority 69 in 
   unless timer_stunned_fl
   give beat_end
 
-verb stunned_fl_holds "Ganondorf reels from his own light (health 2 or less): nothing changes" by world priority 68 in enemy at 2040 6030
+verb stunned_fl_holds "Ganondorf reels from his own light (health 2 or less): nothing changes" by world priority 68 in enemy at 2040 7010
   take enemy_act
   need phase_stunned_fl
   give beat_end
 
-verb falling_fl_step_1 "Ganondorf hits the floor" by world priority 69 in enemy at 2180 6030
+verb down_falling_fl_step_1 "Ganondorf hits the floor" by world priority 69 in enemy at 2180 7010
   take enemy_act
-  take phase_falling_fl
-  give phase_downed_fl
-  give 4 timer_downed_fl
+  take phase_down_falling_fl
+  give phase_down_lying_fl
+  give 4 timer_down_lying_fl
   give beat_end
 
-verb downed_fl_ticks "Ganondorf is down and open to the sword (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 6100
+verb down_lying_fl_ticks "Ganondorf is down and open to the sword (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 7080
   take enemy_turn
-  need phase_downed_fl
-  take timer_downed_fl
+  need phase_down_lying_fl
+  take timer_down_lying_fl
   give enemy_act
 
-verb downed_fl_step_1 "Ganondorf starts to get up" by world priority 69 in enemy at 2180 6100
+verb down_lying_fl_step_1 "Ganondorf starts to get up" by world priority 69 in enemy at 2180 7080
   take enemy_act
-  take phase_downed_fl
-  give phase_rising_fl
-  unless timer_downed_fl
+  take phase_down_lying_fl
+  give phase_down_rising_fl
+  unless timer_down_lying_fl
   give beat_end
 
-verb downed_fl_holds "Ganondorf is down and open to the sword (health 2 or less): nothing changes" by world priority 68 in enemy at 2040 6170
+verb down_lying_fl_holds "Ganondorf is down and open to the sword (health 2 or less): nothing changes" by world priority 68 in enemy at 2040 7150
   take enemy_act
-  need phase_downed_fl
+  need phase_down_lying_fl
   give beat_end
 
-verb rising_fl_step_1 "Ganondorf floats again" by world priority 69 in enemy at 2180 6170
+verb down_rising_fl_step_1 "Ganondorf floats again" by world priority 69 in enemy at 2180 7150
   take enemy_act
-  take phase_rising_fl
+  take phase_down_rising_fl
   give phase_wait_fl
   give 3 timer_wait_fl
   give beat_end
 
-verb magic_start_fl_ticks "Ganondorf starts to charge his big magic (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 6240
+verb magic_start_fl_ticks "Ganondorf starts to charge his big magic (health 2 or less): a beat passes" by world priority 71 in enemy at 2040 7220
   take enemy_turn
   need phase_magic_start_fl
   take timer_magic_start_fl
   give enemy_act
 
-verb magic_start_fl_step_1 "Ganondorf gathers the big magic" by world priority 69 in enemy at 2180 6240
+verb magic_start_fl_step_1 "Ganondorf gathers the big magic" by world priority 69 in enemy at 2180 7220
   take enemy_act
   take phase_magic_start_fl
   give phase_magic_hold_fl
@@ -2395,30 +2395,30 @@ verb magic_start_fl_step_1 "Ganondorf gathers the big magic" by world priority 6
   unless timer_magic_start_fl
   give beat_end
 
-verb magic_start_fl_holds "Ganondorf starts to charge his big magic (health 2 or less): nothing changes" by world priority 68 in enemy at 2040 6310
+verb magic_start_fl_holds "Ganondorf starts to charge his big magic (health 2 or less): nothing changes" by world priority 68 in enemy at 2040 7290
   take enemy_act
   need phase_magic_start_fl
   give beat_end
 
-verb magic_hold_fl_ticks "Ganondorf holds his big magic (health 2 or less): a beat passes" by world priority 71 in enemy at 2180 6310
+verb magic_hold_fl_ticks "Ganondorf holds his big magic (health 2 or less): a beat passes" by world priority 71 in enemy at 2180 7290
   take enemy_turn
   need phase_magic_hold_fl
   take timer_magic_hold_fl
   give enemy_act
 
-verb magic_hold_fl_step_1 "Ganondorf hurls the big magic" by world priority 69 in enemy at 2040 6380
+verb magic_hold_fl_step_1 "Ganondorf hurls the big magic" by world priority 69 in enemy at 2040 7360
   take enemy_act
   take phase_magic_hold_fl
   give phase_magic_out_fl
   unless timer_magic_hold_fl
   give beat_end
 
-verb magic_hold_fl_holds "Ganondorf holds his big magic (health 2 or less): nothing changes" by world priority 68 in enemy at 2180 6380
+verb magic_hold_fl_holds "Ganondorf holds his big magic (health 2 or less): nothing changes" by world priority 68 in enemy at 2180 7360
   take enemy_act
   need phase_magic_hold_fl
   give beat_end
 
-verb magic_out_fl_step_1 "The big magic reaches Link" by world priority 69 in enemy at 2040 6450
+verb magic_out_fl_step_1 "The big magic reaches Link" by world priority 69 in enemy at 2040 7430
   take enemy_act
   take phase_magic_out_fl
   give phase_wait_fl
@@ -2587,13 +2587,29 @@ verb shockwave_dodged "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 dama
   take incoming_shockwave
   need link_dodge
 
-verb shockwave_nayru_far "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage): Nayru's Love holds" by world priority 60 in attacks at 3320 1060
+verb shockwave_nayru_near "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage): Nayru's Love holds, Link is knocked back" by world priority 60 in attacks at 3320 1060
+  take incoming_shockwave
+  need status_nayru
+  unless link_dodge
+  take range_near
+  give range_far
+
+verb shockwave_nayru_far "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage): Nayru's Love holds" by world priority 60 in attacks at 3460 1060
   take incoming_shockwave
   need status_nayru
   unless link_dodge
   need range_far
 
-verb shockwave_lands_far "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage) hits Link" by world priority 60 in attacks at 3460 1060
+verb shockwave_lands_near "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage) hits Link, knocking him back" by world priority 60 in attacks at 3320 1130
+  take incoming_shockwave
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 4 link_dmg
+  take range_near
+  give range_far
+
+verb shockwave_lands_far "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage) hits Link" by world priority 60 in attacks at 3460 1130
   take incoming_shockwave
   unless link_dodge
   unless status_nayru
@@ -2601,7 +2617,16 @@ verb shockwave_lands_far "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 d
   give 4 link_dmg
   need range_far
 
-verb shockwave_lands_dd_far "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage) hits Link" by world priority 60 in attacks at 3320 1130
+verb shockwave_lands_dd_near "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage) hits Link, knocking him back" by world priority 60 in attacks at 3320 1200
+  take incoming_shockwave
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 2 link_dmg
+  take range_near
+  give range_far
+
+verb shockwave_lands_dd_far "Floor shockwave (Actor_SetPlayerKnockbackLarge, 0x20 damage) hits Link" by world priority 60 in attacks at 3460 1200
   take incoming_shockwave
   unless link_dodge
   unless status_nayru
@@ -2663,6 +2688,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 580 570
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 640
   take lens_count
   unless lens_on

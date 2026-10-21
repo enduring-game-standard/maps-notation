@@ -67,19 +67,23 @@ state phase_top_lift "The block hangs at the top" in enemy at 2040 500
 state timer_top_lift "The block hangs at the top: beats left" in enemy at 2180 500
 state phase_falling_lift "The block falls as the pillar dies" in enemy at 2180 570
 state timer_falling_lift "The block falls as the pillar dies: beats left" in enemy at 2040 640
-state phase_resting_lift "The block rests on the vent" in enemy at 2040 710
-state timer_resting_lift "The block rests on the vent: beats left" in enemy at 2180 710
-state phase_idle_block "The block waits for Link to step on" in enemy at 2180 780
-state phase_shaking_block "The block shakes" in enemy at 2040 850
-state timer_shaking_block "The block shakes: beats left" in enemy at 2180 850
-state phase_rising_block "The pillar lifts the block" in enemy at 2180 920
-state timer_rising_block "The pillar lifts the block: beats left" in enemy at 2040 990
-state phase_top_block "The block hangs at the top" in enemy at 2040 1060
-state timer_top_block "The block hangs at the top: beats left" in enemy at 2180 1060
-state phase_falling_block "The block falls as the pillar dies" in enemy at 2180 1130
-state timer_falling_block "The block falls as the pillar dies: beats left" in enemy at 2040 1200
-state phase_settling_block "The block settles into place" in enemy at 2040 1270
-state timer_settling_block "The block settles into place: beats left" in enemy at 2180 1270
+state phase_falling_lift_dark "The block falls on with the pillar out" in enemy at 2040 710
+state timer_falling_lift_dark "The block falls on with the pillar out: beats left" in enemy at 2180 710
+state phase_resting_lift "The block rests on the vent" in enemy at 2180 780
+state timer_resting_lift "The block rests on the vent: beats left" in enemy at 2040 850
+state phase_idle_block "The block waits for Link to step on" in enemy at 2040 920
+state phase_shaking_block "The block shakes" in enemy at 2180 920
+state timer_shaking_block "The block shakes: beats left" in enemy at 2040 990
+state phase_rising_block "The pillar lifts the block" in enemy at 2040 1060
+state timer_rising_block "The pillar lifts the block: beats left" in enemy at 2180 1060
+state phase_top_block "The block hangs at the top" in enemy at 2180 1130
+state timer_top_block "The block hangs at the top: beats left" in enemy at 2040 1200
+state phase_falling_block "The block falls as the pillar dies" in enemy at 2040 1270
+state timer_falling_block "The block falls as the pillar dies: beats left" in enemy at 2180 1270
+state phase_falling_block_dark "The block falls on with the pillar out" in enemy at 2180 1340
+state timer_falling_block_dark "The block falls on with the pillar out: beats left" in enemy at 2040 1410
+state phase_settling_block "The block settles into place" in enemy at 2040 1480
+state timer_settling_block "The block settles into place: beats left" in enemy at 2180 1480
 state status_burn "Link: burn (beats left)" in link_state at 1220 290
 state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
 state lens_on "Lens of Truth on" in link_state at 1220 360
@@ -112,51 +116,59 @@ state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state burn_count "Link: burn: beats toward the next cost" in beat at 440 430
 state lens_count "The Lens: beats toward the next cost" in beat at 580 640
 
-verb vent_burning_timer_clears "The vent's pillar burns is over" by world priority 99 in enemy at 2040 150
+verb vent_burning_timer_clears "The vent's pillar burns is over" by world priority 100 in enemy at 2040 150
   take timer_vent_burning
   unless phase_vent_burning
 
-verb vent_dying_timer_clears "The vent's pillar shrinks away is over" by world priority 99 in enemy at 2180 220
+verb vent_dying_timer_clears "The vent's pillar shrinks away is over" by world priority 100 in enemy at 2180 220
   take timer_vent_dying
   unless phase_vent_dying
 
-verb vent_quiet_timer_clears "The vent is quiet is over" by world priority 99 in enemy at 2040 360
+verb vent_quiet_timer_clears "The vent is quiet is over" by world priority 100 in enemy at 2040 360
   take timer_vent_quiet
   unless phase_vent_quiet
 
-verb rising_lift_timer_clears "The pillar lifts the block high is over" by world priority 99 in enemy at 2180 430
+verb rising_lift_timer_clears "The pillar lifts the block high is over" by world priority 100 in enemy at 2180 430
   take timer_rising_lift
   unless phase_rising_lift
 
-verb top_lift_timer_clears "The block hangs at the top is over" by world priority 99 in enemy at 2040 570
+verb top_lift_timer_clears "The block hangs at the top is over" by world priority 100 in enemy at 2040 570
   take timer_top_lift
   unless phase_top_lift
 
-verb falling_lift_timer_clears "The block falls as the pillar dies is over" by world priority 99 in enemy at 2180 640
+verb falling_lift_timer_clears "The block falls as the pillar dies is over" by world priority 100 in enemy at 2180 640
   take timer_falling_lift
   unless phase_falling_lift
 
-verb resting_lift_timer_clears "The block rests on the vent is over" by world priority 99 in enemy at 2040 780
+verb falling_lift_dark_timer_clears "The block falls on with the pillar out is over" by world priority 100 in enemy at 2040 780
+  take timer_falling_lift_dark
+  unless phase_falling_lift_dark
+
+verb resting_lift_timer_clears "The block rests on the vent is over" by world priority 100 in enemy at 2180 850
   take timer_resting_lift
   unless phase_resting_lift
 
-verb shaking_block_timer_clears "The block shakes is over" by world priority 99 in enemy at 2040 920
+verb shaking_block_timer_clears "The block shakes is over" by world priority 100 in enemy at 2180 990
   take timer_shaking_block
   unless phase_shaking_block
 
-verb rising_block_timer_clears "The pillar lifts the block is over" by world priority 99 in enemy at 2180 990
+verb rising_block_timer_clears "The pillar lifts the block is over" by world priority 100 in enemy at 2040 1130
   take timer_rising_block
   unless phase_rising_block
 
-verb top_block_timer_clears "The block hangs at the top is over" by world priority 99 in enemy at 2040 1130
+verb top_block_timer_clears "The block hangs at the top is over" by world priority 100 in enemy at 2180 1200
   take timer_top_block
   unless phase_top_block
 
-verb falling_block_timer_clears "The block falls as the pillar dies is over" by world priority 99 in enemy at 2180 1200
+verb falling_block_timer_clears "The block falls as the pillar dies is over" by world priority 100 in enemy at 2040 1340
   take timer_falling_block
   unless phase_falling_block
 
-verb settling_block_timer_clears "The block settles into place is over" by world priority 99 in enemy at 2040 1340
+verb falling_block_dark_timer_clears "The block falls on with the pillar out is over" by world priority 100 in enemy at 2180 1410
+  take timer_falling_block_dark
+  unless phase_falling_block_dark
+
+verb settling_block_timer_clears "The block settles into place is over" by world priority 100 in enemy at 2040 1550
   take timer_settling_block
   unless phase_settling_block
 
@@ -295,40 +307,40 @@ verb variant_elevator "Block that rides a pillar when stood on" by world priorit
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -726,24 +738,24 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2360 1410
   take lens_on
   give link_turn
 
-verb enemy_ready "Fire Temple stone block gets ready" by world priority 70 in enemy at 2180 1340
+verb enemy_ready "Fire Temple stone block gets ready" by world priority 70 in enemy at 2180 1550
   take enemy_turn
   give enemy_act
 
-verb vent_burning_ticks "The vent's pillar burns: a beat passes" by world priority 71 in enemy at 2040 1410
+verb vent_burning_ticks "The vent's pillar burns: a beat passes" by world priority 71 in enemy at 2040 1620
   take enemy_turn
   need phase_vent_burning
   take timer_vent_burning
   give enemy_act
 
-verb vent_burning_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 1410
+verb vent_burning_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 1620
   take enemy_act
   need phase_vent_burning
   give incoming_pillar
   give beat_end
   need range_near
 
-verb vent_burning_step_2 "The vent's pillar shrinks" by world priority 69 in enemy at 2040 1480
+verb vent_burning_step_2 "The vent's pillar shrinks" by world priority 69 in enemy at 2040 1690
   take enemy_act
   take phase_vent_burning
   give phase_vent_dying
@@ -751,25 +763,25 @@ verb vent_burning_step_2 "The vent's pillar shrinks" by world priority 69 in ene
   unless timer_vent_burning
   give beat_end
 
-verb vent_burning_holds "The vent's pillar burns: nothing changes" by world priority 68 in enemy at 2180 1480
+verb vent_burning_holds "The vent's pillar burns: nothing changes" by world priority 68 in enemy at 2180 1690
   take enemy_act
   need phase_vent_burning
   give beat_end
 
-verb vent_dying_ticks "The vent's pillar shrinks away: a beat passes" by world priority 71 in enemy at 2040 1550
+verb vent_dying_ticks "The vent's pillar shrinks away: a beat passes" by world priority 71 in enemy at 2040 1760
   take enemy_turn
   need phase_vent_dying
   take timer_vent_dying
   give enemy_act
 
-verb vent_dying_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 1550
+verb vent_dying_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 1760
   take enemy_act
   need phase_vent_dying
   give incoming_pillar
   give beat_end
   need range_near
 
-verb vent_dying_step_2 "The vent goes quiet" by world priority 69 in enemy at 2040 1620
+verb vent_dying_step_2 "The vent goes quiet" by world priority 69 in enemy at 2040 1830
   take enemy_act
   take phase_vent_dying
   give phase_vent_quiet
@@ -777,13 +789,13 @@ verb vent_dying_step_2 "The vent goes quiet" by world priority 69 in enemy at 20
   unless timer_vent_dying
   give beat_end
 
-verb vent_quiet_ticks "The vent is quiet: a beat passes" by world priority 71 in enemy at 2180 1620
+verb vent_quiet_ticks "The vent is quiet: a beat passes" by world priority 71 in enemy at 2180 1830
   take enemy_turn
   need phase_vent_quiet
   take timer_vent_quiet
   give enemy_act
 
-verb vent_quiet_step_1 "The vent's pillar grows" by world priority 69 in enemy at 2040 1690
+verb vent_quiet_step_1 "The vent's pillar grows" by world priority 69 in enemy at 2040 1900
   take enemy_act
   take phase_vent_quiet
   give phase_vent_burning
@@ -791,25 +803,25 @@ verb vent_quiet_step_1 "The vent's pillar grows" by world priority 69 in enemy a
   unless timer_vent_quiet
   give beat_end
 
-verb vent_quiet_holds "The vent is quiet: nothing changes" by world priority 68 in enemy at 2180 1690
+verb vent_quiet_holds "The vent is quiet: nothing changes" by world priority 68 in enemy at 2180 1900
   take enemy_act
   need phase_vent_quiet
   give beat_end
 
-verb rising_lift_ticks "The pillar lifts the block high: a beat passes" by world priority 71 in enemy at 2040 1760
+verb rising_lift_ticks "The pillar lifts the block high: a beat passes" by world priority 71 in enemy at 2040 1970
   take enemy_turn
   need phase_rising_lift
   take timer_rising_lift
   give enemy_act
 
-verb rising_lift_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 1760
+verb rising_lift_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 1970
   take enemy_act
   need phase_rising_lift
   give incoming_pillar
   give beat_end
   need range_near
 
-verb rising_lift_step_2 "The block reaches the top" by world priority 69 in enemy at 2040 1830
+verb rising_lift_step_2 "The block reaches the top" by world priority 69 in enemy at 2040 2040
   take enemy_act
   take phase_rising_lift
   give phase_top_lift
@@ -817,25 +829,25 @@ verb rising_lift_step_2 "The block reaches the top" by world priority 69 in enem
   unless timer_rising_lift
   give beat_end
 
-verb rising_lift_holds "The pillar lifts the block high: nothing changes" by world priority 68 in enemy at 2180 1830
+verb rising_lift_holds "The pillar lifts the block high: nothing changes" by world priority 68 in enemy at 2180 2040
   take enemy_act
   need phase_rising_lift
   give beat_end
 
-verb top_lift_ticks "The block hangs at the top: a beat passes" by world priority 71 in enemy at 2040 1900
+verb top_lift_ticks "The block hangs at the top: a beat passes" by world priority 71 in enemy at 2040 2110
   take enemy_turn
   need phase_top_lift
   take timer_top_lift
   give enemy_act
 
-verb top_lift_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 1900
+verb top_lift_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 2110
   take enemy_act
   need phase_top_lift
   give incoming_pillar
   give beat_end
   need range_near
 
-verb top_lift_step_2 "The block drops" by world priority 69 in enemy at 2040 1970
+verb top_lift_step_2 "The block drops" by world priority 69 in enemy at 2040 2180
   take enemy_act
   take phase_top_lift
   give phase_falling_lift
@@ -843,39 +855,53 @@ verb top_lift_step_2 "The block drops" by world priority 69 in enemy at 2040 197
   unless timer_top_lift
   give beat_end
 
-verb falling_lift_ticks "The block falls as the pillar dies: a beat passes" by world priority 71 in enemy at 2180 1970
+verb falling_lift_ticks "The block falls as the pillar dies: a beat passes" by world priority 71 in enemy at 2180 2180
   take enemy_turn
   need phase_falling_lift
   take timer_falling_lift
   give enemy_act
 
-verb falling_lift_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2040 2040
+verb falling_lift_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2040 2250
   take enemy_act
   need phase_falling_lift
   give incoming_pillar
   give beat_end
   need range_near
 
-verb falling_lift_step_2 "The block lands on the vent" by world priority 69 in enemy at 2180 2040
+verb falling_lift_step_2 "The pillar dies out under the falling block" by world priority 69 in enemy at 2180 2250
   take enemy_act
   take phase_falling_lift
-  give phase_resting_lift
-  give 3 timer_resting_lift
+  give phase_falling_lift_dark
+  give timer_falling_lift_dark
   unless timer_falling_lift
   give beat_end
 
-verb falling_lift_holds "The block falls as the pillar dies: nothing changes" by world priority 68 in enemy at 2040 2110
+verb falling_lift_holds "The block falls as the pillar dies: nothing changes" by world priority 68 in enemy at 2040 2320
   take enemy_act
   need phase_falling_lift
   give beat_end
 
-verb resting_lift_ticks "The block rests on the vent: a beat passes" by world priority 71 in enemy at 2180 2110
+verb falling_lift_dark_ticks "The block falls on with the pillar out: a beat passes" by world priority 71 in enemy at 2180 2320
+  take enemy_turn
+  need phase_falling_lift_dark
+  take timer_falling_lift_dark
+  give enemy_act
+
+verb falling_lift_dark_step_1 "The block lands on the vent" by world priority 69 in enemy at 2040 2390
+  take enemy_act
+  take phase_falling_lift_dark
+  give phase_resting_lift
+  give 3 timer_resting_lift
+  unless timer_falling_lift_dark
+  give beat_end
+
+verb resting_lift_ticks "The block rests on the vent: a beat passes" by world priority 71 in enemy at 2180 2390
   take enemy_turn
   need phase_resting_lift
   take timer_resting_lift
   give enemy_act
 
-verb resting_lift_step_1 "The pillar lifts the block again" by world priority 69 in enemy at 2040 2180
+verb resting_lift_step_1 "The pillar lifts the block again" by world priority 69 in enemy at 2040 2460
   take enemy_act
   take phase_resting_lift
   give phase_rising_lift
@@ -883,12 +909,12 @@ verb resting_lift_step_1 "The pillar lifts the block again" by world priority 69
   unless timer_resting_lift
   give beat_end
 
-verb resting_lift_holds "The block rests on the vent: nothing changes" by world priority 68 in enemy at 2180 2180
+verb resting_lift_holds "The block rests on the vent: nothing changes" by world priority 68 in enemy at 2180 2460
   take enemy_act
   need phase_resting_lift
   give beat_end
 
-verb idle_block_step_1 "Link steps on and the block shakes" by world priority 69 in enemy at 2040 2250
+verb idle_block_step_1 "Link steps on and the block shakes" by world priority 69 in enemy at 2040 2530
   take enemy_act
   take phase_idle_block
   give phase_shaking_block
@@ -896,18 +922,18 @@ verb idle_block_step_1 "Link steps on and the block shakes" by world priority 69
   give beat_end
   need range_near
 
-verb idle_block_holds "The block waits for Link to step on: nothing changes" by world priority 68 in enemy at 2180 2250
+verb idle_block_holds "The block waits for Link to step on: nothing changes" by world priority 68 in enemy at 2180 2530
   take enemy_act
   need phase_idle_block
   give beat_end
 
-verb shaking_block_ticks "The block shakes: a beat passes" by world priority 71 in enemy at 2040 2320
+verb shaking_block_ticks "The block shakes: a beat passes" by world priority 71 in enemy at 2040 2600
   take enemy_turn
   need phase_shaking_block
   take timer_shaking_block
   give enemy_act
 
-verb shaking_block_step_1 "The pillar lifts the block" by world priority 69 in enemy at 2180 2320
+verb shaking_block_step_1 "The pillar lifts the block" by world priority 69 in enemy at 2180 2600
   take enemy_act
   take phase_shaking_block
   give phase_rising_block
@@ -915,20 +941,20 @@ verb shaking_block_step_1 "The pillar lifts the block" by world priority 69 in e
   unless timer_shaking_block
   give beat_end
 
-verb rising_block_ticks "The pillar lifts the block: a beat passes" by world priority 71 in enemy at 2040 2390
+verb rising_block_ticks "The pillar lifts the block: a beat passes" by world priority 71 in enemy at 2040 2670
   take enemy_turn
   need phase_rising_block
   take timer_rising_block
   give enemy_act
 
-verb rising_block_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 2390
+verb rising_block_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 2670
   take enemy_act
   need phase_rising_block
   give incoming_pillar
   give beat_end
   need range_near
 
-verb rising_block_step_2 "The block reaches the top" by world priority 69 in enemy at 2040 2460
+verb rising_block_step_2 "The block reaches the top" by world priority 69 in enemy at 2040 2740
   take enemy_act
   take phase_rising_block
   give phase_top_block
@@ -936,25 +962,25 @@ verb rising_block_step_2 "The block reaches the top" by world priority 69 in ene
   unless timer_rising_block
   give beat_end
 
-verb rising_block_holds "The pillar lifts the block: nothing changes" by world priority 68 in enemy at 2180 2460
+verb rising_block_holds "The pillar lifts the block: nothing changes" by world priority 68 in enemy at 2180 2740
   take enemy_act
   need phase_rising_block
   give beat_end
 
-verb top_block_ticks "The block hangs at the top: a beat passes" by world priority 71 in enemy at 2040 2530
+verb top_block_ticks "The block hangs at the top: a beat passes" by world priority 71 in enemy at 2040 2810
   take enemy_turn
   need phase_top_block
   take timer_top_block
   give enemy_act
 
-verb top_block_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 2530
+verb top_block_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2180 2810
   take enemy_act
   need phase_top_block
   give incoming_pillar
   give beat_end
   need range_near
 
-verb top_block_step_2 "The block drops" by world priority 69 in enemy at 2040 2600
+verb top_block_step_2 "The block drops" by world priority 69 in enemy at 2040 2880
   take enemy_act
   take phase_top_block
   give phase_falling_block
@@ -962,34 +988,48 @@ verb top_block_step_2 "The block drops" by world priority 69 in enemy at 2040 26
   unless timer_top_block
   give beat_end
 
-verb falling_block_ticks "The block falls as the pillar dies: a beat passes" by world priority 71 in enemy at 2180 2600
+verb falling_block_ticks "The block falls as the pillar dies: a beat passes" by world priority 71 in enemy at 2180 2880
   take enemy_turn
   need phase_falling_block
   take timer_falling_block
   give enemy_act
 
-verb falling_block_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2040 2670
+verb falling_block_step_1 "The fire pillar burns Link" by world priority 69 in enemy at 2040 2950
   take enemy_act
   need phase_falling_block
   give incoming_pillar
   give beat_end
   need range_near
 
-verb falling_block_step_2 "The block lands" by world priority 69 in enemy at 2180 2670
+verb falling_block_step_2 "The pillar dies out under the falling block" by world priority 69 in enemy at 2180 2950
   take enemy_act
   take phase_falling_block
-  give phase_settling_block
-  give timer_settling_block
+  give phase_falling_block_dark
+  give timer_falling_block_dark
   unless timer_falling_block
   give beat_end
 
-verb settling_block_ticks "The block settles into place: a beat passes" by world priority 71 in enemy at 2040 2740
+verb falling_block_dark_ticks "The block falls on with the pillar out: a beat passes" by world priority 71 in enemy at 2040 3020
+  take enemy_turn
+  need phase_falling_block_dark
+  take timer_falling_block_dark
+  give enemy_act
+
+verb falling_block_dark_step_1 "The block lands" by world priority 69 in enemy at 2180 3020
+  take enemy_act
+  take phase_falling_block_dark
+  give phase_settling_block
+  give timer_settling_block
+  unless timer_falling_block_dark
+  give beat_end
+
+verb settling_block_ticks "The block settles into place: a beat passes" by world priority 71 in enemy at 2040 3090
   take enemy_turn
   need phase_settling_block
   take timer_settling_block
   give enemy_act
 
-verb settling_block_step_1 "The block settles back in place" by world priority 69 in enemy at 2180 2740
+verb settling_block_step_1 "The block settles back in place" by world priority 69 in enemy at 2180 3090
   take enemy_act
   take phase_settling_block
   give phase_idle_block
@@ -1069,7 +1109,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 440 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 580 500
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 580 500
   take burn_count
   unless status_burn
 
@@ -1116,6 +1156,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 580 780
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 850
   take lens_count
   unless lens_on

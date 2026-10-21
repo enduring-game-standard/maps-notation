@@ -35,8 +35,8 @@ export const enBubble: ActorSpec = {
   range: 'far',
   steps: [
     { from: 'drift', to: 'popping', label: 'Shabom bumps into Link and pops', range: 'near', attack: 'touch', cite: at(320) },
-    { from: 'drift', to: 'drift', label: 'Shabom drifts toward Link', move: 'near', cite: at(289) },
-    { from: 'drift', to: 'drift', label: 'Shabom drifts away', move: 'far', cite: at(289) },
+    { from: 'drift', to: 'drift', label: 'Shabom\'s random bounce carries it into Link\'s reach', move: 'near', cite: at(289) },
+    { from: 'drift', to: 'drift', label: 'Shabom\'s random bounce carries it out of reach', move: 'far', cite: at(289) },
     { from: 'popping', to: 'defeated', label: 'Shabom bursts and is gone', afterTimer: true, cite: at(386) },
   ],
   attacks: [

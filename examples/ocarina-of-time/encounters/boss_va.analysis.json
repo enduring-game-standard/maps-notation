@@ -1,5 +1,5 @@
 {
- "positions": 22147,
+ "positions": 32424,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -13,8 +13,12 @@
   "p4_sink_1_timer_clears",
   "p4_dive_2_timer_clears",
   "p4_sink_2_timer_clears",
-  "p4_stun_3_timer_clears",
   "p4_dive_3_timer_clears",
+  "core_overkill",
+  "core_empty_in_p4_stun_1",
+  "core_empty_in_p4_restun_1",
+  "core_empty_in_p4_stun_2",
+  "core_empty_in_p4_restun_2",
   "body_touch_lands_again",
   "bari_touch_lands_again",
   "lightning_lands_again",
@@ -145,13 +149,25 @@
    "swing_spin_kokiri",
    "phase_p4_stun_1"
   ],
+  "hit_spin_kokiri__p4_restun_1": [
+   "swing_spin_kokiri",
+   "phase_p4_restun_1"
+  ],
   "hit_spin_kokiri__p4_stun_2": [
    "swing_spin_kokiri",
    "phase_p4_stun_2"
   ],
+  "hit_spin_kokiri__p4_restun_2": [
+   "swing_spin_kokiri",
+   "phase_p4_restun_2"
+  ],
   "hit_spin_kokiri__p4_stun_3": [
    "swing_spin_kokiri",
    "phase_p4_stun_3"
+  ],
+  "hit_spin_kokiri__p4_restun_3": [
+   "swing_spin_kokiri",
+   "phase_p4_restun_3"
   ],
   "hit_jump_kokiri_self__p2_pause_5": [
    "swing_jump_kokiri_self",
@@ -217,13 +233,25 @@
    "swing_jump_kokiri_self",
    "phase_p4_stun_1"
   ],
+  "hit_jump_kokiri_self__p4_restun_1": [
+   "swing_jump_kokiri_self",
+   "phase_p4_restun_1"
+  ],
   "hit_jump_kokiri_self__p4_stun_2": [
    "swing_jump_kokiri_self",
    "phase_p4_stun_2"
   ],
+  "hit_jump_kokiri_self__p4_restun_2": [
+   "swing_jump_kokiri_self",
+   "phase_p4_restun_2"
+  ],
   "hit_jump_kokiri_self__p4_stun_3": [
    "swing_jump_kokiri_self",
    "phase_p4_stun_3"
+  ],
+  "hit_jump_kokiri_self__p4_restun_3": [
+   "swing_jump_kokiri_self",
+   "phase_p4_restun_3"
   ],
   "bari_touch_blocked_hylian_shield": [
    "incoming_bari_touch",
@@ -238,16 +266,16 @@
   {
    "kit": "child_blade",
    "variant": "",
-   "positions": 18656,
+   "positions": 28933,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 5440,
-    "Link falls": 2245,
-    "Link wins": 64
+    "Link withdraws": 8288,
+    "Link falls": 3476,
+    "Link wins": 496
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 46325
+   "ms": 68118
   },
   {
    "kit": "child_bottles",
@@ -260,7 +288,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 230
+   "ms": 239
   },
   {
    "kit": "child_dins",
@@ -273,7 +301,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 495
+   "ms": 520
   },
   {
    "kit": "child_lens",
@@ -286,7 +314,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1396
+   "ms": 1418
   },
   {
    "kit": "child_nayru",
@@ -299,7 +327,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2440
+   "ms": 2395
   },
   {
    "kit": "child_spin",
@@ -312,7 +340,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2017
+   "ms": 1868
   }
  ]
 }

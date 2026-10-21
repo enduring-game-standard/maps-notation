@@ -66,8 +66,8 @@ state phase_roll "The boulder rolls along its path" in enemy at 2040 80
 state phase_stop "The boulder stops after hitting Link" in enemy at 2180 80
 state timer_stop "The boulder stops after hitting Link: beats left" in enemy at 2040 150
 state phase_roll_t "The boulder rolls along its path (hit pause variant)" in enemy at 2040 220
-state phase_pause_t "The boulder stops, then rolls on with its attack off" in enemy at 2180 220
-state timer_pause_t "The boulder stops, then rolls on with its attack off: beats left" in enemy at 2040 290
+state phase_stop_t "The boulder stops, then rolls on with its attack off" in enemy at 2180 220
+state timer_stop_t "The boulder stops, then rolls on with its attack off: beats left" in enemy at 2040 290
 state phase_slope "The boulder climbs or descends a slope" in enemy at 2040 360
 state phase_slope_t "The boulder climbs or descends a slope (hit pause variant)" in enemy at 2180 360
 state phase_slope_pause_t "The boulder keeps rolling with its attack off" in enemy at 2040 430
@@ -77,8 +77,8 @@ state phase_fall_b "The bouncing boulder hops off Link and falls" in enemy at 20
 state phase_stop_b "The bouncing boulder stops" in enemy at 2180 570
 state timer_stop_b "The bouncing boulder stops: beats left" in enemy at 2040 640
 state phase_roll_bt "The bouncing boulder rolls and falls along its path (hit pause variant)" in enemy at 2040 710
-state phase_pause_bt "The bouncing boulder hops, falls, and stops with its attack off" in enemy at 2180 710
-state timer_pause_bt "The bouncing boulder hops, falls, and stops with its attack off: beats left" in enemy at 2040 780
+state phase_stop_bt "The bouncing boulder hops, falls, and stops with its attack off" in enemy at 2180 710
+state timer_stop_bt "The bouncing boulder hops, falls, and stops with its attack off: beats left" in enemy at 2040 780
 state status_nayru "Link: nayru (beats left)" in link_state at 1220 290
 state lens_on "Lens of Truth on" in link_state at 1080 360
 state link_guard "Link holds up his shield" in link_state at 1220 360
@@ -116,25 +116,25 @@ state incoming_boulder "Rolling boulder incoming" in attacks at 3000 80
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb stop_timer_clears "The boulder stops after hitting Link is over" by world priority 99 in enemy at 2180 150
+verb stop_timer_clears "The boulder stops after hitting Link is over" by world priority 100 in enemy at 2180 150
   take timer_stop
   unless phase_stop
 
-verb pause_t_timer_clears "The boulder stops, then rolls on with its attack off is over" by world priority 99 in enemy at 2180 290
-  take timer_pause_t
-  unless phase_pause_t
+verb stop_t_timer_clears "The boulder stops, then rolls on with its attack off is over" by world priority 100 in enemy at 2180 290
+  take timer_stop_t
+  unless phase_stop_t
 
-verb slope_pause_t_timer_clears "The boulder keeps rolling with its attack off is over" by world priority 99 in enemy at 2040 500
+verb slope_pause_t_timer_clears "The boulder keeps rolling with its attack off is over" by world priority 100 in enemy at 2040 500
   take timer_slope_pause_t
   unless phase_slope_pause_t
 
-verb stop_b_timer_clears "The bouncing boulder stops is over" by world priority 99 in enemy at 2180 640
+verb stop_b_timer_clears "The bouncing boulder stops is over" by world priority 100 in enemy at 2180 640
   take timer_stop_b
   unless phase_stop_b
 
-verb pause_bt_timer_clears "The bouncing boulder hops, falls, and stops with its attack off is over" by world priority 99 in enemy at 2180 780
-  take timer_pause_bt
-  unless phase_pause_bt
+verb stop_bt_timer_clears "The bouncing boulder hops, falls, and stops with its attack off is over" by world priority 100 in enemy at 2180 780
+  take timer_stop_bt
+  unless phase_stop_bt
 
 verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 260 220
   take choose_age
@@ -333,7 +333,7 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give has_double_defense
   give choose_variant
 
-verb variant_ground "Ground boulder on a level stretch (params bit 10 clear)" by world priority 30 in setup at 260 710
+verb variant_ground "Ground boulder (params bit 10 clear)" by world priority 30 in setup at 260 710
   take choose_variant
   give phase_roll
   give range_far
@@ -345,64 +345,52 @@ verb variant_ground_pause "Ground boulder with a hit pause (home.rot.z bit 0 set
   give range_far
   give link_turn
 
-verb variant_slope "Ground boulder on a sloped stretch" by world priority 30 in setup at 260 780
-  take choose_variant
-  give phase_slope
-  give range_far
-  give link_turn
-
-verb variant_slope_pause "Ground boulder on a sloped stretch, with a hit pause" by world priority 30 in setup at 120 850
-  take choose_variant
-  give phase_slope_t
-  give range_far
-  give link_turn
-
-verb variant_bouncing "Bouncing boulder (params bit 10 set)" by world priority 30 in setup at 260 850
+verb variant_bouncing "Bouncing boulder (params bit 10 set)" by world priority 30 in setup at 260 780
   take choose_variant
   give phase_roll_b
   give range_far
   give link_turn
 
-verb variant_bouncing_pause "Bouncing boulder with a hit pause" by world priority 30 in setup at 120 920
+verb variant_bouncing_pause "Bouncing boulder with a hit pause" by world priority 30 in setup at 120 850
   take choose_variant
   give phase_roll_bt
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 16 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -978,10 +966,12 @@ verb roll_step_1 "The boulder runs Link down and stops" by world priority 69 in 
   give beat_end
   need range_near
 
-verb roll_holds "The boulder rolls along its path: nothing changes" by world priority 68 in enemy at 2040 920
+verb roll_step_2 "The boulder reaches a waypoint and starts up or down a slope" by world priority 69 in enemy at 2040 920
   take enemy_act
-  need phase_roll
+  take phase_roll
+  give phase_slope
   give beat_end
+  need range_far
 
 verb stop_ticks "The boulder stops after hitting Link: a beat passes" by world priority 71 in enemy at 2180 920
   take enemy_turn
@@ -999,48 +989,59 @@ verb stop_step_1 "The boulder rolls on" by world priority 69 in enemy at 2040 99
 verb roll_t_step_1 "The boulder runs Link down and stops" by world priority 69 in enemy at 2180 990
   take enemy_act
   take phase_roll_t
-  give phase_pause_t
-  give 3 timer_pause_t
+  give phase_stop_t
+  give 3 timer_stop_t
   give incoming_boulder
   give beat_end
   need range_near
 
-verb roll_t_holds "The boulder rolls along its path (hit pause variant): nothing changes" by world priority 68 in enemy at 2040 1060
+verb roll_t_step_2 "The boulder reaches a waypoint and starts up or down a slope" by world priority 69 in enemy at 2040 1060
   take enemy_act
-  need phase_roll_t
+  take phase_roll_t
+  give phase_slope_t
   give beat_end
+  need range_far
 
-verb pause_t_ticks "The boulder stops, then rolls on with its attack off: a beat passes" by world priority 71 in enemy at 2180 1060
+verb stop_t_ticks "The boulder stops, then rolls on with its attack off: a beat passes" by world priority 71 in enemy at 2180 1060
   take enemy_turn
-  need phase_pause_t
-  take timer_pause_t
+  need phase_stop_t
+  take timer_stop_t
   give enemy_act
 
-verb pause_t_step_1 "The boulder can hit again" by world priority 69 in enemy at 2040 1130
+verb stop_t_step_1 "The boulder can hit again" by world priority 69 in enemy at 2040 1130
   take enemy_act
-  take phase_pause_t
+  take phase_stop_t
   give phase_roll_t
-  unless timer_pause_t
+  unless timer_stop_t
   give beat_end
 
-verb pause_t_holds "The boulder stops, then rolls on with its attack off: nothing changes" by world priority 68 in enemy at 2180 1130
+verb stop_t_holds "The boulder stops, then rolls on with its attack off: nothing changes" by world priority 68 in enemy at 2180 1130
   take enemy_act
-  need phase_pause_t
+  need phase_stop_t
   give beat_end
 
-verb slope_step_1 "The boulder runs Link down and keeps rolling" by world priority 69 in enemy at 2040 1200
+verb slope_step_1 "The boulder reaches a waypoint and rolls on level ground" by world priority 69 in enemy at 2040 1200
+  take enemy_act
+  take phase_slope
+  give phase_roll
+  give beat_end
+  need range_far
+
+verb slope_step_2 "The boulder runs Link down and keeps rolling" by world priority 69 in enemy at 2180 1200
   take enemy_act
   need phase_slope
   give incoming_boulder
   give beat_end
   need range_near
 
-verb slope_holds "The boulder climbs or descends a slope: nothing changes" by world priority 68 in enemy at 2180 1200
+verb slope_t_step_1 "The boulder reaches a waypoint and rolls on level ground" by world priority 69 in enemy at 2040 1270
   take enemy_act
-  need phase_slope
+  take phase_slope_t
+  give phase_roll_t
   give beat_end
+  need range_far
 
-verb slope_t_step_1 "The boulder runs Link down and keeps rolling" by world priority 69 in enemy at 2040 1270
+verb slope_t_step_2 "The boulder runs Link down and keeps rolling" by world priority 69 in enemy at 2180 1270
   take enemy_act
   take phase_slope_t
   give phase_slope_pause_t
@@ -1048,11 +1049,6 @@ verb slope_t_step_1 "The boulder runs Link down and keeps rolling" by world prio
   give incoming_boulder
   give beat_end
   need range_near
-
-verb slope_t_holds "The boulder climbs or descends a slope (hit pause variant): nothing changes" by world priority 68 in enemy at 2180 1270
-  take enemy_act
-  need phase_slope_t
-  give beat_end
 
 verb slope_pause_t_ticks "The boulder keeps rolling with its attack off: a beat passes" by world priority 71 in enemy at 2040 1340
   take enemy_turn
@@ -1108,8 +1104,8 @@ verb stop_b_step_1 "The boulder rolls on" by world priority 69 in enemy at 2180 
 verb roll_bt_step_1 "The boulder runs Link down and hops" by world priority 69 in enemy at 2040 1620
   take enemy_act
   take phase_roll_bt
-  give phase_pause_bt
-  give 3 timer_pause_bt
+  give phase_stop_bt
+  give 3 timer_stop_bt
   give incoming_boulder
   give beat_end
   need range_near
@@ -1119,22 +1115,22 @@ verb roll_bt_holds "The bouncing boulder rolls and falls along its path (hit pau
   need phase_roll_bt
   give beat_end
 
-verb pause_bt_ticks "The bouncing boulder hops, falls, and stops with its attack off: a beat passes" by world priority 71 in enemy at 2040 1690
+verb stop_bt_ticks "The bouncing boulder hops, falls, and stops with its attack off: a beat passes" by world priority 71 in enemy at 2040 1690
   take enemy_turn
-  need phase_pause_bt
-  take timer_pause_bt
+  need phase_stop_bt
+  take timer_stop_bt
   give enemy_act
 
-verb pause_bt_step_1 "The boulder can hit again" by world priority 69 in enemy at 2180 1690
+verb stop_bt_step_1 "The boulder can hit again" by world priority 69 in enemy at 2180 1690
   take enemy_act
-  take phase_pause_bt
+  take phase_stop_bt
   give phase_roll_bt
-  unless timer_pause_bt
+  unless timer_stop_bt
   give beat_end
 
-verb pause_bt_holds "The bouncing boulder hops, falls, and stops with its attack off: nothing changes" by world priority 68 in enemy at 2040 1760
+verb stop_bt_holds "The bouncing boulder hops, falls, and stops with its attack off: nothing changes" by world priority 68 in enemy at 2040 1760
   take enemy_act
-  need phase_pause_bt
+  need phase_stop_bt
   give beat_end
 
 verb boulder_dodged "Rolling boulder: dodged" by world priority 60 in attacks at 3140 80
@@ -1224,6 +1220,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

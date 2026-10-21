@@ -333,50 +333,50 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb scrub_hurt "Business Scrub loses health" by world priority 96 in enemy_health at 2500 150
+verb scrub_hurt "Business Scrub loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_scrub
   take hp_scrub
 
-verb scrub_overkill "Business Scrub has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb scrub_overkill "Business Scrub has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_scrub
   unless hp_scrub
 
@@ -967,31 +967,31 @@ verb miss_reflect_nut__hidden "Spat Deku Nut, sent back has no effect (Scrub hid
   take swing_reflect_nut
   need phase_hidden
 
-verb scrub_empty_in_hidden "Business Scrub runs out (Scrub hides in the ground)" by world priority 92 in enemy_health at 2500 220
+verb scrub_empty_in_hidden "Business Scrub runs out (Scrub hides in the ground)" by world priority 90 in enemy_health at 2500 220
   unless hp_scrub
   take alive_scrub
   take phase_hidden
   give link_wins
 
-verb scrub_empty_in_peek "Business Scrub runs out (Scrub peeks out and turns to Link)" by world priority 92 in enemy_health at 2360 290
+verb scrub_empty_in_peek "Business Scrub runs out (Scrub peeks out and turns to Link)" by world priority 90 in enemy_health at 2360 290
   unless hp_scrub
   take alive_scrub
   take phase_peek
   give link_wins
 
-verb scrub_empty_in_throw "Business Scrub runs out (Scrub spits a Deku Nut)" by world priority 92 in enemy_health at 2500 290
+verb scrub_empty_in_throw "Business Scrub runs out (Scrub spits a Deku Nut)" by world priority 90 in enemy_health at 2500 290
   unless hp_scrub
   take alive_scrub
   take phase_throw
   give link_wins
 
-verb scrub_empty_in_peek_after "Business Scrub runs out (Scrub watches after spitting)" by world priority 92 in enemy_health at 2360 360
+verb scrub_empty_in_peek_after "Business Scrub runs out (Scrub watches after spitting)" by world priority 90 in enemy_health at 2360 360
   unless hp_scrub
   take alive_scrub
   take phase_peek_after
   give link_wins
 
-verb scrub_empty_in_look_around "Business Scrub runs out (Scrub looks around)" by world priority 92 in enemy_health at 2500 360
+verb scrub_empty_in_look_around "Business Scrub runs out (Scrub looks around)" by world priority 90 in enemy_health at 2500 360
   unless hp_scrub
   take alive_scrub
   take phase_look_around
@@ -1264,6 +1264,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

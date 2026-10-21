@@ -1,5 +1,5 @@
 {
- "positions": 58347,
+ "positions": 76159,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -29,81 +29,81 @@
   {
    "kit": "child_blade",
    "variant": "",
-   "positions": 7499,
+   "positions": 8841,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 2385,
-    "Link falls": 88,
+    "Link withdraws": 2781,
+    "Link falls": 110,
     "Link wins": 36
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 5942
+   "ms": 5744
   },
   {
    "kit": "child_bottles",
    "variant": "",
-   "positions": 2831,
+   "positions": 3675,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 891,
-    "Link falls": 16
+    "Link withdraws": 1143,
+    "Link falls": 20
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2052
+   "ms": 2192
   },
   {
    "kit": "child_dins",
    "variant": "",
-   "positions": 2821,
+   "positions": 3675,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 876,
-    "Link falls": 56
+    "Link withdraws": 1128,
+    "Link falls": 70
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2116
+   "ms": 2335
   },
   {
    "kit": "child_lens",
    "variant": "",
-   "positions": 8864,
+   "positions": 11554,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 2745,
-    "Link falls": 194
+    "Link withdraws": 3537,
+    "Link falls": 244
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 6211
+   "ms": 7022
   },
   {
    "kit": "child_nayru",
    "variant": "",
-   "positions": 25109,
+   "positions": 33775,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 8005,
-    "Link falls": 111
+    "Link withdraws": 10597,
+    "Link falls": 137
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 13232
+   "ms": 16419
   },
   {
    "kit": "child_spin",
    "variant": "",
-   "positions": 11223,
+   "positions": 14639,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 3481,
-    "Link falls": 224
+    "Link withdraws": 4489,
+    "Link falls": 280
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 8576
+   "ms": 9720
   }
  ]
 }

@@ -11,6 +11,7 @@ import {
   type LinkSpec,
   type Loadout,
   type Pool,
+  type Age,
   type Phase,
   type Rate,
   type Step,
@@ -569,8 +570,15 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     out.forEach((s, i) => stepVerbs(s, i))
     const gated = (st: Step) => (st.gear ?? []).some((g) => has(g.gear) || g.has)
     const always = (st: Step) => !gated(st) && (!st.afterTimer || (p.frames && beatsOf(p.frames) === 1))
-    const unconditional = out.some((st) => always(st) && !st.range) || (['near', 'far'] as const).every((r) => out.some((st) => always(st) && st.range === r))
-    if (!unconditional) b.verb(`${p.id}_holds`, `${p.label}: nothing changes`, WORLD, 'enemy', P.hold, [['take', 'enemy_act'], ['need', `phase_${p.id}`], ['give', 'beat_end']])
+    const unconditional = (age: Age) => {
+      const mine = out.filter((st) => always(st) && (!st.age || st.age === age))
+      return mine.some((st) => !st.range) || (['near', 'far'] as const).every((r) => mine.some((st) => st.range === r))
+    }
+    const open = ages.filter((age) => !unconditional(age))
+    const hold = (id: string, extra: [ArcKind, string][]) =>
+      b.verb(id, `${p.label}: nothing changes`, WORLD, 'enemy', P.hold, [['take', 'enemy_act'], ['need', `phase_${p.id}`], ...extra, ['give', 'beat_end']])
+    if (open.length === ages.length) hold(`${p.id}_holds`, [])
+    else for (const age of open) hold(`${p.id}_holds_${age}`, [['need', `age_${age}`]])
   }
   function stepVerbs(s: Step, i: number) {
     const base: [ArcKind, string, number?][] = [

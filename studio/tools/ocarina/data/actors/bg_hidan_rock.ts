@@ -16,8 +16,13 @@ const at = (line: number): Cite => `${F}:${line}`
  * - Type 1 is a block that shakes when Link stands on it, then rides a pillar up and falls back.
  * Rising follows Math_SmoothStepToF(0.25, 20, 0.5) over 1820 or 480 units (lines 317-319): simulated, about
  * 101 and 34 frames. Falling, the pillar shrinks by 0.5 a frame (line 273) from (rise + 90) / 80 (line 328):
- * about 48 frames for type 0 and 14 for type 1. The rest of the fall, with the pillar out, is folded into the
- * next phase.
+ * about 48 frames for type 0 and 14 for type 1. The fall itself runs on gravity -0.6 (line 80) to a floor
+ * velocity of -20 (src/code/z_actor.c:950, 1003-1004), each frame moving velocity * R_UPDATE_RATE * 0.5 = 1.5
+ * (src/code/z_actor.c:989-991, R_UPDATE_RATE 3 at src/code/game.c:497), and ends on ground touch (line 257).
+ * Simulated, it takes 77 frames from 1820 up and 33 from 480, so the block falls on
+ * with the pillar out for 29 frames (type 0) and 19 frames (type 1) before it lands.
+ * The vent's pillar reaches 0 about frame 250 of its cycle, so it is out 6 frames before bit 0x100 sets (line 199).
+ * vent_quiet keeps the 256 of that bit; 262 frames round to the same 13 beats.
  * The Fire Temple is visited as adult: `src/overlays/actors/ovl_En_Du/z_en_du.c:173` gates Darunia's
  * Fire Temple appearance on LINK_IS_ADULT.
  */
@@ -30,13 +35,15 @@ const steps: Step[] = [
   { from: 'vent_quiet', to: 'vent_burning', label: 'The vent\'s pillar grows', afterTimer: true, cite: at(202) },
   { from: 'rising_lift', to: 'top_lift', label: 'The block reaches the top', afterTimer: true, cite: at(325) },
   { from: 'top_lift', to: 'falling_lift', label: 'The block drops', afterTimer: true, cite: at(303) },
-  { from: 'falling_lift', to: 'resting_lift', label: 'The block lands on the vent', afterTimer: true, cite: at(260) },
+  { from: 'falling_lift', to: 'falling_lift_dark', label: 'The pillar dies out under the falling block', afterTimer: true, cite: at(274) },
+  { from: 'falling_lift_dark', to: 'resting_lift', label: 'The block lands on the vent', afterTimer: true, cite: at(260) },
   { from: 'resting_lift', to: 'rising_lift', label: 'The pillar lifts the block again', afterTimer: true, cite: at(221) },
   { from: 'idle_block', to: 'shaking_block', label: 'Link steps on and the block shakes', range: 'near', cite: at(229) },
   { from: 'shaking_block', to: 'rising_block', label: 'The pillar lifts the block', afterTimer: true, cite: at(246) },
   { from: 'rising_block', to: 'top_block', label: 'The block reaches the top', afterTimer: true, cite: at(325) },
   { from: 'top_block', to: 'falling_block', label: 'The block drops', afterTimer: true, cite: at(303) },
-  { from: 'falling_block', to: 'settling_block', label: 'The block lands', afterTimer: true, cite: at(263) },
+  { from: 'falling_block', to: 'falling_block_dark', label: 'The pillar dies out under the falling block', afterTimer: true, cite: at(274) },
+  { from: 'falling_block_dark', to: 'settling_block', label: 'The block lands', afterTimer: true, cite: at(263) },
   { from: 'settling_block', to: 'idle_block', label: 'The block settles back in place', afterTimer: true, cite: at(293) },
 ]
 
@@ -47,12 +54,14 @@ const phases: Phase[] = [
   { id: 'rising_lift', label: 'The pillar lifts the block high', frames: { value: 101, cite: at(317) }, cite: at(308) },
   { id: 'top_lift', label: 'The block hangs at the top', frames: { value: 20, cite: at(324) }, cite: at(297) },
   { id: 'falling_lift', label: 'The block falls as the pillar dies', frames: { value: 48, cite: at(273) }, cite: at(255) },
+  { id: 'falling_lift_dark', label: 'The block falls on with the pillar out', frames: { value: 29, cite: at(80) }, cite: at(257) },
   { id: 'resting_lift', label: 'The block rests on the vent', frames: { value: 60, cite: at(259) }, cite: at(215) },
   { id: 'idle_block', label: 'The block waits for Link to step on', cite: at(225) },
   { id: 'shaking_block', label: 'The block shakes', frames: { value: 20, cite: at(227) }, cite: at(233) },
   { id: 'rising_block', label: 'The pillar lifts the block', frames: { value: 34, cite: at(319) }, cite: at(308) },
   { id: 'top_block', label: 'The block hangs at the top', frames: { value: 20, cite: at(324) }, cite: at(297) },
   { id: 'falling_block', label: 'The block falls as the pillar dies', frames: { value: 14, cite: at(273) }, cite: at(255) },
+  { id: 'falling_block_dark', label: 'The block falls on with the pillar out', frames: { value: 19, cite: at(80) }, cite: at(257) },
   { id: 'settling_block', label: 'The block settles into place', frames: { value: 15, cite: at(262) }, cite: at(291) },
 ]
 

@@ -2,6 +2,17 @@ import { standardLoadouts } from '../loadouts'
 import { DMG_TYPES } from '../../inventory'
 import type { ActorSpec, Cite } from '../../spec'
 
+// Reported gaps (z_en_shopnuts.c unless named):
+// - The Megaton Hammer quake defeats the scrub at any distance: ColliderCheck tests play->actorCtx.unk_02 with no
+//   distance check (267-268), set by any hammer ground strike (z_player.c:8989, 9100, 14720). Link's hammer attacks
+//   have melee reach in data/link.ts, so the model only lets the hammer reach it near.
+// - Idle's exit is chosen by distance and a timer, not chance: LookAround only when the Rand_S16Offset(100, 50) timer
+//   (109) is 0 and Link is beyond 320 (174-175), else Peek (177); the timer runs only while the rise is held (158-160),
+//   and the rise is released only beyond 160 (181-183). The model has one near/far line at the duck distance 120
+//   (169, 172), so it draws hidden->peek and hidden->look_around at even odds and lets the scrub rise anywhere past 120.
+// - Sub-beat collider windows: AC is on from Idle frame 9 (162-163) until the rise ends in Peek or LookAround (171-178),
+//   and stays on for Burrow's first 4 frames (246-247). The rise window is folded into the far step to peek or
+//   look_around, both hittable phases; the 4 burrow frames are under one 20-frame beat, so hidden is hammer-only.
 const F = 'src/overlays/actors/ovl_En_Shopnuts/z_en_shopnuts.c'
 const at = (line: number): Cite => `${F}:${line}`
 
@@ -14,7 +25,10 @@ export const enShopnuts: ActorSpec = {
   pools: [{ id: 'scrub', label: 'Business Scrub', hp: { value: 1, cite: at(68) }, then: 'defeated' }],
   damage: {
     kind: 'custom',
-    entries: Object.fromEntries(DMG_TYPES.map((d) => [d, { damage: 1, cite: at(266) }])),
+    // The AC mask 0xFFCFFFFF (line 60) leaves out SHIELD and MIR_RAY.
+    entries: Object.fromEntries(
+      DMG_TYPES.filter((d) => d !== 'SHIELD' && d !== 'MIR_RAY').map((d) => [d, { damage: 1, cite: at(266) }]),
+    ),
   },
   phases: [
     {

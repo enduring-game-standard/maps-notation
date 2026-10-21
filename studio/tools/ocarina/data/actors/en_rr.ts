@@ -4,6 +4,17 @@ import type { ActorSpec, Attack, Cite, Gear, Phase, Reaction, Step } from '../..
 const F = 'src/overlays/actors/ovl_En_Rr/z_en_rr.c'
 const at = (line: number): Cite => `${F}:${line}`
 
+/*
+ * Reported gaps (z_en_rr.c):
+ * - The 110-frame grab lockout after a release (316, checked at 531) is a timer of its own that keeps running through a wound
+ *   (40 frames, 478) or a stun (80 frames, 526) and through a reach; nothing resets it (360-376, 409-434, decrement at 805-807).
+ *   The model ties it to the spat phases, so a hit during the lockout, or the end of a reach made in it, lets it grab up to about
+ *   3 beats early.
+ * - The reach phase's 20 frames are the EXTEND timer (242); the STOP, OPEN and GAPE steps add 5 and 2 more (624, 631) before the
+ *   20-frame close (638). 27 frames is still one beat.
+ * - The mouth cylinder is AC_HARD (131): a hit that lands there bounces with no damage (440-446). Which cylinder a hit finds is
+ *   geometry, so the model lets every hit reach the body.
+ */
 /**
  * `retreat` is set when a release eats something (lines 326, 333) and cleared when the retreat ends (line 766).
  * It decides where the next reach leads (line 266), so every phase it can outlive comes in both kinds.
@@ -17,9 +28,11 @@ const EDIBLE: Gear[] = ['deku_shield', 'hylian_shield', 'goron_tunic', 'zora_tun
 const phases: Phase[] = [
   ...FED.flatMap((f): Phase[] => [
     { id: `approach${f}`, label: `${who(f)} creeps toward Link`, cite: at(603) },
-    { id: `reach${f}`, label: `${who(f)} stretches up to swallow Link`, frames: { value: 20, cite: at(242) }, cite: at(613) },
+    { id: `reach${f}`, label: `${who(f)} stretches up, opens and gapes to swallow Link`, frames: { value: 20, cite: at(242) }, cite: at(613) },
     { id: `gape${f}`, label: `${who(f)} closes its gaping mouth`, frames: { value: 20, cite: at(638) }, cite: at(643) },
     { id: `approach_spat${f}`, label: `${who(f)} has just spat Link out and cannot grab yet`, frames: { value: 110, cite: at(316) }, cite: at(531) },
+    { id: `reach_spat${f}`, label: `${who(f)} reaches for Link, but cannot grab yet`, frames: { value: 20, cite: at(242) }, cite: at(613) },
+    { id: `gape_spat${f}`, label: `${who(f)} closes its mouth, but cannot grab yet`, frames: { value: 20, cite: at(638) }, cite: at(643) },
     { id: `damage${f}`, label: `${who(f)} reels from a wound`, hittable: 'none', frames: { value: 40, cite: at(478) }, cite: at(832) },
     { id: `stunned${f}`, label: `${who(f)} is stunned`, frames: { value: 80, cite: at(526) }, cite: at(777) },
   ]),
@@ -56,6 +69,9 @@ const steps: Step[] = [
     { from: `gape${f}`, to: f ? 'retreat' : 'approach_wait', label: f ? 'Like Like settles and backs away' : 'Like Like settles', afterTimer: true, cite: at(f ? 268 : 271) },
     { from: `approach_spat${f}`, to: `approach_spat${f}`, label: 'Like Like creeps closer', range: 'far', move: 'near', cite: at(609) },
     { from: `approach_spat${f}`, to: `approach${f}`, label: 'Like Like can grab again', afterTimer: true, cite: at(531) },
+    { from: `approach_spat${f}`, to: `reach_spat${f}`, label: 'Like Like rears up, its grab still locked out', range: 'near', cite: at(607) },
+    { from: `reach_spat${f}`, to: `gape_spat${f}`, label: 'Like Like gapes, then closes its mouth', afterTimer: true, cite: at(640) },
+    { from: `gape_spat${f}`, to: f ? 'retreat' : 'approach_wait', label: f ? 'Like Like settles and backs away' : 'Like Like settles', afterTimer: true, cite: at(f ? 268 : 271) },
     { from: `damage${f}`, to: `approach${f}`, label: 'Like Like recovers', afterTimer: true, cite: at(673) },
     { from: `stunned${f}`, to: `approach${f}`, label: 'Like Like recovers', afterTimer: true, cite: at(783) },
   ]),
@@ -82,7 +98,7 @@ const attacks: Attack[] = [
 const allTo = (to: (f: Fed) => string) => {
   const m: Record<string, string> = {}
   for (const f of FED)
-    for (const p of ['approach', 'reach', 'gape', 'approach_spat', 'damage', 'stunned']) m[`${p}${f}`] = to(f)
+    for (const p of ['approach', 'reach', 'gape', 'approach_spat', 'reach_spat', 'gape_spat', 'damage', 'stunned']) m[`${p}${f}`] = to(f)
   m.approach_wait = to('')
   m.retreat = to('_fed')
   return m
@@ -124,7 +140,7 @@ export const enRr: ActorSpec = {
     EnRr_Reach: 'reach*',
     EnRr_GrabPlayer: {
       excluded:
-        'the hold is folded into the swallow attack: grabPlayer leaves Link helpless and nothing else happens until the release steals and throws him (line 660); the grab has no AT source to carry its own attack, and one attack carries one effect, so the theft is carried and the up-to-100-frame hold is not',
+        'the hold is folded into the swallow attack, which lands the release at once: the hold ends in the release that steals and throws him (line 660) when its 100 frames run out or Link breaks free (line 659), when a damaging hit lands (lines 481-482), or when a stun wears off (lines 780-781), and a killing hit still throws him first (lines 349, 353-357); the grab has no AT source to carry its own attack, and one attack carries one effect, so the theft is carried and the hold is not',
       cite: at(659),
     },
     EnRr_Damage: 'damage*',

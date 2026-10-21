@@ -72,7 +72,7 @@ state incoming_touch "Shabom bump: damagePlayer with element 0's 4 damage, then 
 state tick_nayru "Beat ends: nayru checked" in beat at 440 360
 state lens_count "The Lens: beats toward the next cost" in beat at 580 430
 
-verb popping_timer_clears "Shabom pops is over" by world priority 99 in enemy at 2180 150
+verb popping_timer_clears "Shabom pops is over" by world priority 100 in enemy at 2180 150
   take timer_popping
   unless phase_popping
 
@@ -182,40 +182,40 @@ verb fight_child_quarter_heart "Fight as child Link: child quarter heart (0.25 h
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 16 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -522,27 +522,27 @@ verb drift_step_1 "Shabom bumps into Link and pops" by world priority 69 in enem
   give beat_end
   need range_near
 
-verb drift_step_2_near "Shabom drifts toward Link" by world priority 69 in enemy at 2040 290
+verb drift_step_2_near "Shabom's random bounce carries it into Link's reach" by world priority 69 in enemy at 2040 290
   take enemy_act
   need phase_drift
   give beat_end
   need range_near
 
-verb drift_step_2_far "Shabom drifts toward Link" by world priority 69 in enemy at 2180 290
+verb drift_step_2_far "Shabom's random bounce carries it into Link's reach" by world priority 69 in enemy at 2180 290
   take enemy_act
   need phase_drift
   give beat_end
   take range_far
   give range_near
 
-verb drift_step_3_near "Shabom drifts away" by world priority 69 in enemy at 2040 360
+verb drift_step_3_near "Shabom's random bounce carries it out of reach" by world priority 69 in enemy at 2040 360
   take enemy_act
   need phase_drift
   give beat_end
   take range_near
   give range_far
 
-verb drift_step_3_far "Shabom drifts away" by world priority 69 in enemy at 2180 360
+verb drift_step_3_far "Shabom's random bounce carries it out of reach" by world priority 69 in enemy at 2180 360
   take enemy_act
   need phase_drift
   give beat_end
@@ -634,6 +634,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 580 570
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 640
   take lens_count
   unless lens_on

@@ -79,15 +79,22 @@ state phase_landed_fs "Downed flying Peahat rests on the ground" in enemy at 204
 state timer_landed_fs "Downed flying Peahat rests on the ground: beats left" in enemy at 2180 640
 state phase_stunned_fs "Downed flying Peahat is stunned on the ground" in enemy at 2180 710
 state timer_stunned_fs "Downed flying Peahat is stunned on the ground: beats left" in enemy at 2040 780
-state phase_recoil_g "Peahat bounces back from Link" in enemy at 2040 850
-state phase_grounded_f "Flying Peahat sits on the ground" in enemy at 2180 850
-state phase_rise_f "Flying Peahat climbs high" in enemy at 2040 920
-state phase_fly "Flying Peahat circles high, dropping larvae" in enemy at 2180 920
-state phase_fly_veer "Flying Peahat circles high; its larva veers off" in enemy at 2040 990
-state timer_fly_veer "Flying Peahat circles high; its larva veers off: beats left" in enemy at 2180 990
-state phase_larva "Peahat larva homes in on Link" in enemy at 2180 1060
-state phase_larva_veer "Peahat larva veers off" in enemy at 2040 1130
-state timer_larva_veer "Peahat larva veers off: beats left" in enemy at 2180 1130
+state phase_stunned_burn_g "Stunned Peahat burns, untouchable" in enemy at 2040 850
+state timer_stunned_burn_g "Stunned Peahat burns, untouchable: beats left" in enemy at 2180 850
+state phase_stunned_burn_fs "Stunned downed flying Peahat burns, untouchable" in enemy at 2180 920
+state timer_stunned_burn_fs "Stunned downed flying Peahat burns, untouchable: beats left" in enemy at 2040 990
+state phase_rise_fs2 "Downed flying Peahat rises again" in enemy at 2040 1060
+state phase_seek_fs2 "Downed flying Peahat hunts Link again" in enemy at 2180 1060
+state timer_seek_fs2 "Downed flying Peahat hunts Link again: beats left" in enemy at 2040 1130
+state phase_recoil_g "Peahat bounces back from Link" in enemy at 2040 1200
+state phase_grounded_f "Flying Peahat sits on the ground" in enemy at 2180 1200
+state phase_rise_f "Flying Peahat climbs high" in enemy at 2040 1270
+state phase_fly "Flying Peahat circles high, dropping larvae" in enemy at 2180 1270
+state phase_fly_veer "Flying Peahat circles high; its larva veers off" in enemy at 2040 1340
+state timer_fly_veer "Flying Peahat circles high; its larva veers off: beats left" in enemy at 2180 1340
+state phase_larva "Peahat larva homes in on Link" in enemy at 2180 1410
+state phase_larva_veer "Peahat larva veers off" in enemy at 2040 1480
+state timer_larva_veer "Peahat larva veers off: beats left" in enemy at 2180 1480
 state hp_body "Peahat: health" marks 6 in enemy_health at 2360 80
 state alive_body "Peahat: standing" marks 1 in enemy_health at 2500 80
 state dmg_body "Peahat: damage" in enemy_health at 2360 150
@@ -97,66 +104,80 @@ state link_guard "Link holds up his shield" in link_state at 1220 360
 state link_dodge "Link dodges" in link_state at 1080 430
 state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
 state swing_deku_stick "Deku Stick on its way" in hits at 3000 150
-state swing_slingshot "Slingshot seed on its way" in hits at 3000 430
-state swing_explosive "Explosion on its way" in hits at 3000 570
-state swing_boomerang "Boomerang on its way" in hits at 3000 850
-state swing_arrow_normal "Arrow on its way" in hits at 3140 1340
-state swing_hammer_swing "Hammer swing on its way" in hits at 3140 1480
-state swing_hookshot "Hookshot on its way" in hits at 3140 1760
-state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 2390
-state swing_slash_master "Master Sword slash on its way" in hits at 3000 2670
-state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 2950
-state swing_arrow_fire "Fire arrow on its way" in hits at 3000 3230
-state swing_arrow_ice "Ice arrow on its way" in hits at 3000 3370
-state swing_arrow_light "Light arrow on its way" in hits at 3000 3510
-state swing_magic_fire "Din's Fire on its way" in hits at 3000 3650
-state swing_shield "Shield on its way" in hits at 3140 3930
-state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 4000
-state swing_spin_giant "Two-handed spin attack on its way" in hits at 3000 4350
-state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 4630
-state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 4980
-state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 5260
-state swing_jump_giant "Two-handed jump attack on its way" in hits at 3140 5540
-state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 5820
-state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 6170
-state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 6450
-state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 6730
+state swing_slingshot "Slingshot seed on its way" in hits at 3000 570
+state swing_explosive "Explosion on its way" in hits at 3000 850
+state swing_boomerang "Boomerang on its way" in hits at 3000 1270
+state swing_arrow_normal "Arrow on its way" in hits at 3140 1830
+state swing_hammer_swing "Hammer swing on its way" in hits at 3140 2110
+state swing_hookshot "Hookshot on its way" in hits at 3140 2530
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 3230
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 3650
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 4070
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 4490
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 4770
+state swing_arrow_light "Light arrow on its way" in hits at 3000 5050
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 5330
+state swing_shield "Shield on its way" in hits at 3140 5750
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 5820
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3000 6310
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 6730
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 7220
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 7640
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3140 8060
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 8480
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 8970
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 9390
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 9810
 state guard_with_deku_shield "Shield up: deku shield" in link_state at 1080 710
 state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1220 710
 state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1080 780
 state incoming_blade "Peahat blade incoming" in attacks at 3320 80
+state incoming_larva_blade "Larva blade incoming" in attacks at 3320 360
+state incoming_dropped_larva_blade "Blade of a larva the flying Peahat drops incoming" in attacks at 3320 640
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb seek_g_timer_clears "Peahat hunts Link is over" by world priority 99 in enemy at 2180 150
+verb seek_g_timer_clears "Peahat hunts Link is over" by world priority 100 in enemy at 2180 150
   take timer_seek_g
   unless phase_seek_g
 
-verb landed_g_timer_clears "Peahat rests on the ground is over" by world priority 99 in enemy at 2180 290
+verb landed_g_timer_clears "Peahat rests on the ground is over" by world priority 100 in enemy at 2180 290
   take timer_landed_g
   unless phase_landed_g
 
-verb stunned_g_timer_clears "Peahat is stunned on the ground is over" by world priority 99 in enemy at 2040 430
+verb stunned_g_timer_clears "Peahat is stunned on the ground is over" by world priority 100 in enemy at 2040 430
   take timer_stunned_g
   unless phase_stunned_g
 
-verb seek_fs_timer_clears "Downed flying Peahat hunts Link is over" by world priority 99 in enemy at 2040 570
+verb seek_fs_timer_clears "Downed flying Peahat hunts Link is over" by world priority 100 in enemy at 2040 570
   take timer_seek_fs
   unless phase_seek_fs
 
-verb landed_fs_timer_clears "Downed flying Peahat rests on the ground is over" by world priority 99 in enemy at 2040 710
+verb landed_fs_timer_clears "Downed flying Peahat rests on the ground is over" by world priority 100 in enemy at 2040 710
   take timer_landed_fs
   unless phase_landed_fs
 
-verb stunned_fs_timer_clears "Downed flying Peahat is stunned on the ground is over" by world priority 99 in enemy at 2180 780
+verb stunned_fs_timer_clears "Downed flying Peahat is stunned on the ground is over" by world priority 100 in enemy at 2180 780
   take timer_stunned_fs
   unless phase_stunned_fs
 
-verb fly_veer_timer_clears "Flying Peahat circles high; its larva veers off is over" by world priority 99 in enemy at 2040 1060
+verb stunned_burn_g_timer_clears "Stunned Peahat burns, untouchable is over" by world priority 100 in enemy at 2040 920
+  take timer_stunned_burn_g
+  unless phase_stunned_burn_g
+
+verb stunned_burn_fs_timer_clears "Stunned downed flying Peahat burns, untouchable is over" by world priority 100 in enemy at 2180 990
+  take timer_stunned_burn_fs
+  unless phase_stunned_burn_fs
+
+verb seek_fs2_timer_clears "Downed flying Peahat hunts Link again is over" by world priority 100 in enemy at 2180 1130
+  take timer_seek_fs2
+  unless phase_seek_fs2
+
+verb fly_veer_timer_clears "Flying Peahat circles high; its larva veers off is over" by world priority 100 in enemy at 2040 1410
   take timer_fly_veer
   unless phase_fly_veer
 
-verb larva_veer_timer_clears "Peahat larva veers off is over" by world priority 99 in enemy at 2040 1200
+verb larva_veer_timer_clears "Peahat larva veers off is over" by world priority 100 in enemy at 2040 1550
   take timer_larva_veer
   unless phase_larva_veer
 
@@ -198,6 +219,7 @@ verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in se
   give has_deku_shield
   give has_magic
   give has_dins_fire
+  give has_boomerang
   give 12 magic
   give 36 magic_spent
   give choose_variant
@@ -375,50 +397,50 @@ verb variant_larva "Peahat larva" by world priority 30 in setup at 260 780
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 4 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Peahat loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Peahat loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Peahat has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Peahat has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -789,819 +811,1297 @@ verb miss_deku_stick__seek_g "Deku Stick has no effect (Peahat hunts Link)" by w
   take swing_deku_stick
   need phase_seek_g
 
-verb miss_deku_stick__rise_f "Deku Stick has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 220
+verb hit_deku_stick__stunned_g "Deku Stick hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 220
+  take swing_deku_stick
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_deku_stick__stunned_fs "Deku Stick hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 290
+  take swing_deku_stick
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_deku_stick__stunned_burn_g "Deku Stick has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 290
+  take swing_deku_stick
+  need phase_stunned_burn_g
+
+verb miss_deku_stick__stunned_burn_fs "Deku Stick has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 360
+  take swing_deku_stick
+  need phase_stunned_burn_fs
+
+verb miss_deku_stick__rise_f "Deku Stick has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 360
   take swing_deku_stick
   need phase_rise_f
 
-verb miss_deku_stick__fly "Deku Stick has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 290
+verb miss_deku_stick__fly "Deku Stick has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 430
   take swing_deku_stick
   need phase_fly
 
-verb miss_deku_stick__fly_veer "Deku Stick has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 290
+verb miss_deku_stick__fly_veer "Deku Stick has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 430
   take swing_deku_stick
   need phase_fly_veer
 
-verb miss_deku_stick__larva "Deku Stick has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 360
+verb miss_deku_stick__larva "Deku Stick has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 500
   take swing_deku_stick
   need phase_larva
 
-verb miss_deku_stick__larva_veer "Deku Stick has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 360
+verb miss_deku_stick__larva_veer "Deku Stick has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 500
   take swing_deku_stick
   need phase_larva_veer
 
-verb hit_slingshot "Slingshot seed hits" by world priority 79 in hits at 3140 430
+verb hit_slingshot "Slingshot seed hits" by world priority 79 in hits at 3140 570
   take swing_slingshot
   give dmg_body
 
-verb hit_slingshot__larva "Slingshot seed hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 500
+verb hit_slingshot__stunned_g "Slingshot seed hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 640
+  take swing_slingshot
+  take phase_stunned_g
+  give phase_rise_g
+  give dmg_body
+
+verb hit_slingshot__stunned_fs "Slingshot seed hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 640
+  take swing_slingshot
+  take phase_stunned_fs
+  give phase_rise_fs
+  give dmg_body
+
+verb miss_slingshot__stunned_burn_g "Slingshot seed has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 710
+  take swing_slingshot
+  need phase_stunned_burn_g
+
+verb miss_slingshot__stunned_burn_fs "Slingshot seed has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 710
+  take swing_slingshot
+  need phase_stunned_burn_fs
+
+verb hit_slingshot__larva "Slingshot seed hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 780
   take swing_slingshot
   take phase_larva
   give link_wins
 
-verb hit_slingshot__larva_veer "Slingshot seed hits (Peahat larva veers off)" by world priority 80 in hits at 3140 500
+verb hit_slingshot__larva_veer "Slingshot seed hits (Peahat larva veers off)" by world priority 80 in hits at 3140 780
   take swing_slingshot
   take phase_larva_veer
   give link_wins
 
-verb hit_explosive "Explosion hits" by world priority 79 in hits at 3140 570
+verb hit_explosive "Explosion hits" by world priority 79 in hits at 3140 850
   take swing_explosive
   give 2 dmg_body
 
-verb miss_explosive__seek_g "Explosion has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 640
+verb miss_explosive__seek_g "Explosion has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 920
   take swing_explosive
   need phase_seek_g
 
-verb miss_explosive__rise_f "Explosion has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 640
+verb hit_explosive__stunned_g "Explosion hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 920
+  take swing_explosive
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_explosive__stunned_fs "Explosion hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 990
+  take swing_explosive
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_explosive__stunned_burn_g "Explosion has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 990
+  take swing_explosive
+  need phase_stunned_burn_g
+
+verb miss_explosive__stunned_burn_fs "Explosion has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 1060
+  take swing_explosive
+  need phase_stunned_burn_fs
+
+verb miss_explosive__rise_f "Explosion has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 1060
   take swing_explosive
   need phase_rise_f
 
-verb miss_explosive__fly "Explosion has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 710
+verb miss_explosive__fly "Explosion has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 1130
   take swing_explosive
   need phase_fly
 
-verb miss_explosive__fly_veer "Explosion has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 710
+verb miss_explosive__fly_veer "Explosion has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 1130
   take swing_explosive
   need phase_fly_veer
 
-verb miss_explosive__larva "Explosion has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 780
+verb miss_explosive__larva "Explosion has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 1200
   take swing_explosive
   need phase_larva
 
-verb miss_explosive__larva_veer "Explosion has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 780
+verb miss_explosive__larva_veer "Explosion has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 1200
   take swing_explosive
   need phase_larva_veer
 
-verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3140 850
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3140 1270
   take swing_boomerang
 
-verb hit_boomerang__rise_g "Boomerang hits (Peahat rises from the ground)" by world priority 80 in hits at 3000 920
+verb hit_boomerang__rise_g "Boomerang hits (Peahat rises from the ground)" by world priority 80 in hits at 3000 1340
   take swing_boomerang
   take phase_rise_g
   give phase_stunned_g
   give 4 timer_stunned_g
 
-verb hit_boomerang__seek_g "Boomerang hits (Peahat hunts Link)" by world priority 80 in hits at 3140 920
+verb hit_boomerang__seek_g "Boomerang hits (Peahat hunts Link)" by world priority 80 in hits at 3140 1340
   take swing_boomerang
   take phase_seek_g
   give phase_stunned_g
   give 4 timer_stunned_g
 
-verb hit_boomerang__landing_g "Boomerang hits (Peahat lands)" by world priority 80 in hits at 3000 990
+verb hit_boomerang__landing_g "Boomerang hits (Peahat lands)" by world priority 80 in hits at 3000 1410
   take swing_boomerang
   take phase_landing_g
   give phase_stunned_g
   give 4 timer_stunned_g
 
-verb hit_boomerang__landed_g "Boomerang hits (Peahat rests on the ground)" by world priority 80 in hits at 3140 990
+verb hit_boomerang__landed_g "Boomerang hits (Peahat rests on the ground)" by world priority 80 in hits at 3140 1410
   take swing_boomerang
   take phase_landed_g
   give phase_stunned_g
   give 4 timer_stunned_g
 
-verb hit_boomerang__rise_fs "Boomerang hits (Downed flying Peahat rises from the ground)" by world priority 80 in hits at 3000 1060
+verb hit_boomerang__rise_fs "Boomerang hits (Downed flying Peahat rises from the ground)" by world priority 80 in hits at 3000 1480
   take swing_boomerang
   take phase_rise_fs
   give phase_stunned_fs
   give 4 timer_stunned_fs
 
-verb hit_boomerang__seek_fs "Boomerang hits (Downed flying Peahat hunts Link)" by world priority 80 in hits at 3140 1060
+verb hit_boomerang__seek_fs "Boomerang hits (Downed flying Peahat hunts Link)" by world priority 80 in hits at 3140 1480
   take swing_boomerang
   take phase_seek_fs
   give phase_stunned_fs
   give 4 timer_stunned_fs
 
-verb hit_boomerang__landing_fs "Boomerang hits (Downed flying Peahat lands)" by world priority 80 in hits at 3000 1130
+verb hit_boomerang__landing_fs "Boomerang hits (Downed flying Peahat lands)" by world priority 80 in hits at 3000 1550
   take swing_boomerang
   take phase_landing_fs
   give phase_stunned_fs
   give 4 timer_stunned_fs
 
-verb hit_boomerang__landed_fs "Boomerang hits (Downed flying Peahat rests on the ground)" by world priority 80 in hits at 3140 1130
+verb hit_boomerang__landed_fs "Boomerang hits (Downed flying Peahat rests on the ground)" by world priority 80 in hits at 3140 1550
   take swing_boomerang
   take phase_landed_fs
   give phase_stunned_fs
   give 4 timer_stunned_fs
 
-verb hit_boomerang__recoil_g "Boomerang hits (Peahat bounces back from Link)" by world priority 80 in hits at 3000 1200
+verb hit_boomerang__rise_fs2 "Boomerang hits (Downed flying Peahat rises again)" by world priority 80 in hits at 3000 1620
+  take swing_boomerang
+  take phase_rise_fs2
+  give phase_stunned_fs
+  give 4 timer_stunned_fs
+
+verb hit_boomerang__seek_fs2 "Boomerang hits (Downed flying Peahat hunts Link again)" by world priority 80 in hits at 3140 1620
+  take swing_boomerang
+  take phase_seek_fs2
+  give phase_stunned_fs
+  give 4 timer_stunned_fs
+
+verb hit_boomerang__recoil_g "Boomerang hits (Peahat bounces back from Link)" by world priority 80 in hits at 3000 1690
   take swing_boomerang
   take phase_recoil_g
   give phase_stunned_g
   give 4 timer_stunned_g
 
-verb hit_boomerang__grounded_f "Boomerang hits (Flying Peahat sits on the ground)" by world priority 80 in hits at 3140 1200
+verb hit_boomerang__grounded_f "Boomerang hits (Flying Peahat sits on the ground)" by world priority 80 in hits at 3140 1690
   take swing_boomerang
   take phase_grounded_f
   give phase_stunned_fs
   give 4 timer_stunned_fs
 
-verb hit_boomerang__rise_f "Boomerang hits (Flying Peahat climbs high)" by world priority 80 in hits at 3000 1270
+verb hit_boomerang__rise_f "Boomerang hits (Flying Peahat climbs high)" by world priority 80 in hits at 3000 1760
   take swing_boomerang
   take phase_rise_f
   give phase_stunned_fs
   give 4 timer_stunned_fs
 
-verb hit_boomerang__fly "Boomerang hits (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 1270
+verb hit_boomerang__fly "Boomerang hits (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 1760
   take swing_boomerang
   take phase_fly
   give phase_stunned_fs
   give 4 timer_stunned_fs
 
-verb hit_boomerang__fly_veer "Boomerang hits (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 1340
+verb hit_boomerang__fly_veer "Boomerang hits (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 1830
   take swing_boomerang
   take phase_fly_veer
   give phase_stunned_fs
   give 4 timer_stunned_fs
 
-verb hit_arrow_normal "Arrow hits" by world priority 79 in hits at 3000 1410
+verb hit_arrow_normal "Arrow hits" by world priority 79 in hits at 3000 1900
   take swing_arrow_normal
   give 2 dmg_body
 
-verb hit_arrow_normal__larva "Arrow hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 1410
+verb hit_arrow_normal__stunned_g "Arrow hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 1900
+  take swing_arrow_normal
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_arrow_normal__stunned_fs "Arrow hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 1970
+  take swing_arrow_normal
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_arrow_normal__stunned_burn_g "Arrow has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 1970
+  take swing_arrow_normal
+  need phase_stunned_burn_g
+
+verb miss_arrow_normal__stunned_burn_fs "Arrow has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 2040
+  take swing_arrow_normal
+  need phase_stunned_burn_fs
+
+verb hit_arrow_normal__larva "Arrow hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 2040
   take swing_arrow_normal
   take phase_larva
   give link_wins
 
-verb hit_arrow_normal__larva_veer "Arrow hits (Peahat larva veers off)" by world priority 80 in hits at 3000 1480
+verb hit_arrow_normal__larva_veer "Arrow hits (Peahat larva veers off)" by world priority 80 in hits at 3000 2110
   take swing_arrow_normal
   take phase_larva_veer
   give link_wins
 
-verb hit_hammer_swing "Hammer swing hits" by world priority 79 in hits at 3000 1550
+verb hit_hammer_swing "Hammer swing hits" by world priority 79 in hits at 3000 2180
   take swing_hammer_swing
   give 2 dmg_body
 
-verb miss_hammer_swing__seek_g "Hammer swing has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 1550
+verb miss_hammer_swing__seek_g "Hammer swing has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 2180
   take swing_hammer_swing
   need phase_seek_g
 
-verb miss_hammer_swing__rise_f "Hammer swing has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 1620
+verb hit_hammer_swing__stunned_g "Hammer swing hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 2250
+  take swing_hammer_swing
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned_fs "Hammer swing hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 2250
+  take swing_hammer_swing
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_hammer_swing__stunned_burn_g "Hammer swing has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 2320
+  take swing_hammer_swing
+  need phase_stunned_burn_g
+
+verb miss_hammer_swing__stunned_burn_fs "Hammer swing has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 2320
+  take swing_hammer_swing
+  need phase_stunned_burn_fs
+
+verb miss_hammer_swing__rise_f "Hammer swing has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 2390
   take swing_hammer_swing
   need phase_rise_f
 
-verb miss_hammer_swing__fly "Hammer swing has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 1620
+verb miss_hammer_swing__fly "Hammer swing has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 2390
   take swing_hammer_swing
   need phase_fly
 
-verb miss_hammer_swing__fly_veer "Hammer swing has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 1690
+verb miss_hammer_swing__fly_veer "Hammer swing has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 2460
   take swing_hammer_swing
   need phase_fly_veer
 
-verb miss_hammer_swing__larva "Hammer swing has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 1690
+verb miss_hammer_swing__larva "Hammer swing has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 2460
   take swing_hammer_swing
   need phase_larva
 
-verb miss_hammer_swing__larva_veer "Hammer swing has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 1760
+verb miss_hammer_swing__larva_veer "Hammer swing has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 2530
   take swing_hammer_swing
   need phase_larva_veer
 
-verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3000 1830
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3000 2600
   take swing_hookshot
 
-verb hit_hookshot__rise_g "Hookshot hits (Peahat rises from the ground)" by world priority 80 in hits at 3140 1830
+verb hit_hookshot__rise_g "Hookshot hits (Peahat rises from the ground)" by world priority 80 in hits at 3140 2600
   take swing_hookshot
   take phase_rise_g
   give link_wins
 
-verb hit_hookshot__seek_g "Hookshot hits (Peahat hunts Link)" by world priority 80 in hits at 3000 1900
+verb hit_hookshot__seek_g "Hookshot hits (Peahat hunts Link)" by world priority 80 in hits at 3000 2670
   take swing_hookshot
   take phase_seek_g
   give link_wins
 
-verb hit_hookshot__landing_g "Hookshot hits (Peahat lands)" by world priority 80 in hits at 3140 1900
+verb hit_hookshot__landing_g "Hookshot hits (Peahat lands)" by world priority 80 in hits at 3140 2670
   take swing_hookshot
   take phase_landing_g
   give link_wins
 
-verb hit_hookshot__landed_g "Hookshot hits (Peahat rests on the ground)" by world priority 80 in hits at 3000 1970
+verb hit_hookshot__landed_g "Hookshot hits (Peahat rests on the ground)" by world priority 80 in hits at 3000 2740
   take swing_hookshot
   take phase_landed_g
   give link_wins
 
-verb hit_hookshot__stunned_g "Hookshot hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 1970
+verb hit_hookshot__stunned_g "Hookshot hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 2740
   take swing_hookshot
   take phase_stunned_g
   give link_wins
 
-verb hit_hookshot__rise_fs "Hookshot hits (Downed flying Peahat rises from the ground)" by world priority 80 in hits at 3000 2040
+verb hit_hookshot__rise_fs "Hookshot hits (Downed flying Peahat rises from the ground)" by world priority 80 in hits at 3000 2810
   take swing_hookshot
   take phase_rise_fs
   give link_wins
 
-verb hit_hookshot__seek_fs "Hookshot hits (Downed flying Peahat hunts Link)" by world priority 80 in hits at 3140 2040
+verb hit_hookshot__seek_fs "Hookshot hits (Downed flying Peahat hunts Link)" by world priority 80 in hits at 3140 2810
   take swing_hookshot
   take phase_seek_fs
   give link_wins
 
-verb hit_hookshot__landing_fs "Hookshot hits (Downed flying Peahat lands)" by world priority 80 in hits at 3000 2110
+verb hit_hookshot__landing_fs "Hookshot hits (Downed flying Peahat lands)" by world priority 80 in hits at 3000 2880
   take swing_hookshot
   take phase_landing_fs
   give link_wins
 
-verb hit_hookshot__landed_fs "Hookshot hits (Downed flying Peahat rests on the ground)" by world priority 80 in hits at 3140 2110
+verb hit_hookshot__landed_fs "Hookshot hits (Downed flying Peahat rests on the ground)" by world priority 80 in hits at 3140 2880
   take swing_hookshot
   take phase_landed_fs
   give link_wins
 
-verb hit_hookshot__stunned_fs "Hookshot hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 2180
+verb hit_hookshot__stunned_fs "Hookshot hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 2950
   take swing_hookshot
   take phase_stunned_fs
   give link_wins
 
-verb hit_hookshot__recoil_g "Hookshot hits (Peahat bounces back from Link)" by world priority 80 in hits at 3140 2180
+verb hit_hookshot__rise_fs2 "Hookshot hits (Downed flying Peahat rises again)" by world priority 80 in hits at 3140 2950
+  take swing_hookshot
+  take phase_rise_fs2
+  give link_wins
+
+verb hit_hookshot__seek_fs2 "Hookshot hits (Downed flying Peahat hunts Link again)" by world priority 80 in hits at 3000 3020
+  take swing_hookshot
+  take phase_seek_fs2
+  give link_wins
+
+verb hit_hookshot__recoil_g "Hookshot hits (Peahat bounces back from Link)" by world priority 80 in hits at 3140 3020
   take swing_hookshot
   take phase_recoil_g
   give link_wins
 
-verb hit_hookshot__grounded_f "Hookshot hits (Flying Peahat sits on the ground)" by world priority 80 in hits at 3000 2250
+verb hit_hookshot__grounded_f "Hookshot hits (Flying Peahat sits on the ground)" by world priority 80 in hits at 3000 3090
   take swing_hookshot
   take phase_grounded_f
   give link_wins
 
-verb hit_hookshot__rise_f "Hookshot hits (Flying Peahat climbs high)" by world priority 80 in hits at 3140 2250
+verb hit_hookshot__rise_f "Hookshot hits (Flying Peahat climbs high)" by world priority 80 in hits at 3140 3090
   take swing_hookshot
   take phase_rise_f
   give link_wins
 
-verb hit_hookshot__fly "Hookshot hits (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 2320
+verb hit_hookshot__fly "Hookshot hits (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 3160
   take swing_hookshot
   take phase_fly
   give link_wins
 
-verb hit_hookshot__fly_veer "Hookshot hits (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 2320
+verb hit_hookshot__fly_veer "Hookshot hits (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 3160
   take swing_hookshot
   take phase_fly_veer
   give link_wins
 
-verb hit_slash_kokiri "Kokiri Sword slash hits" by world priority 79 in hits at 3140 2390
+verb hit_slash_kokiri "Kokiri Sword slash hits" by world priority 79 in hits at 3140 3230
   take swing_slash_kokiri
   give dmg_body
 
-verb miss_slash_kokiri__seek_g "Kokiri Sword slash has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 2460
+verb miss_slash_kokiri__seek_g "Kokiri Sword slash has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 3300
   take swing_slash_kokiri
   need phase_seek_g
 
-verb miss_slash_kokiri__rise_f "Kokiri Sword slash has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 2460
+verb hit_slash_kokiri__stunned_g "Kokiri Sword slash hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 3300
+  take swing_slash_kokiri
+  take phase_stunned_g
+  give phase_rise_g
+  give dmg_body
+
+verb hit_slash_kokiri__stunned_fs "Kokiri Sword slash hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 3370
+  take swing_slash_kokiri
+  take phase_stunned_fs
+  give phase_rise_fs
+  give dmg_body
+
+verb miss_slash_kokiri__stunned_burn_g "Kokiri Sword slash has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 3370
+  take swing_slash_kokiri
+  need phase_stunned_burn_g
+
+verb miss_slash_kokiri__stunned_burn_fs "Kokiri Sword slash has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 3440
+  take swing_slash_kokiri
+  need phase_stunned_burn_fs
+
+verb miss_slash_kokiri__rise_f "Kokiri Sword slash has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 3440
   take swing_slash_kokiri
   need phase_rise_f
 
-verb miss_slash_kokiri__fly "Kokiri Sword slash has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 2530
+verb miss_slash_kokiri__fly "Kokiri Sword slash has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 3510
   take swing_slash_kokiri
   need phase_fly
 
-verb miss_slash_kokiri__fly_veer "Kokiri Sword slash has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 2530
+verb miss_slash_kokiri__fly_veer "Kokiri Sword slash has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 3510
   take swing_slash_kokiri
   need phase_fly_veer
 
-verb miss_slash_kokiri__larva "Kokiri Sword slash has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 2600
+verb miss_slash_kokiri__larva "Kokiri Sword slash has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 3580
   take swing_slash_kokiri
   need phase_larva
 
-verb miss_slash_kokiri__larva_veer "Kokiri Sword slash has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 2600
+verb miss_slash_kokiri__larva_veer "Kokiri Sword slash has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 3580
   take swing_slash_kokiri
   need phase_larva_veer
 
-verb hit_slash_master "Master Sword slash hits" by world priority 79 in hits at 3140 2670
+verb hit_slash_master "Master Sword slash hits" by world priority 79 in hits at 3140 3650
   take swing_slash_master
   give 2 dmg_body
 
-verb miss_slash_master__seek_g "Master Sword slash has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 2740
+verb miss_slash_master__seek_g "Master Sword slash has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 3720
   take swing_slash_master
   need phase_seek_g
 
-verb miss_slash_master__rise_f "Master Sword slash has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 2740
+verb hit_slash_master__stunned_g "Master Sword slash hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 3720
+  take swing_slash_master
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_slash_master__stunned_fs "Master Sword slash hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 3790
+  take swing_slash_master
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_slash_master__stunned_burn_g "Master Sword slash has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 3790
+  take swing_slash_master
+  need phase_stunned_burn_g
+
+verb miss_slash_master__stunned_burn_fs "Master Sword slash has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 3860
+  take swing_slash_master
+  need phase_stunned_burn_fs
+
+verb miss_slash_master__rise_f "Master Sword slash has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 3860
   take swing_slash_master
   need phase_rise_f
 
-verb miss_slash_master__fly "Master Sword slash has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 2810
+verb miss_slash_master__fly "Master Sword slash has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 3930
   take swing_slash_master
   need phase_fly
 
-verb miss_slash_master__fly_veer "Master Sword slash has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 2810
+verb miss_slash_master__fly_veer "Master Sword slash has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 3930
   take swing_slash_master
   need phase_fly_veer
 
-verb miss_slash_master__larva "Master Sword slash has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 2880
+verb miss_slash_master__larva "Master Sword slash has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 4000
   take swing_slash_master
   need phase_larva
 
-verb miss_slash_master__larva_veer "Master Sword slash has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 2880
+verb miss_slash_master__larva_veer "Master Sword slash has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 4000
   take swing_slash_master
   need phase_larva_veer
 
-verb hit_slash_giant "Two-handed sword slash hits" by world priority 79 in hits at 3140 2950
+verb hit_slash_giant "Two-handed sword slash hits" by world priority 79 in hits at 3140 4070
   take swing_slash_giant
   give 4 dmg_body
 
-verb miss_slash_giant__seek_g "Two-handed sword slash has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 3020
+verb miss_slash_giant__seek_g "Two-handed sword slash has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 4140
   take swing_slash_giant
   need phase_seek_g
 
-verb miss_slash_giant__rise_f "Two-handed sword slash has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 3020
+verb hit_slash_giant__stunned_g "Two-handed sword slash hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 4140
+  take swing_slash_giant
+  take phase_stunned_g
+  give phase_rise_g
+  give 4 dmg_body
+
+verb hit_slash_giant__stunned_fs "Two-handed sword slash hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 4210
+  take swing_slash_giant
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 4 dmg_body
+
+verb miss_slash_giant__stunned_burn_g "Two-handed sword slash has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 4210
+  take swing_slash_giant
+  need phase_stunned_burn_g
+
+verb miss_slash_giant__stunned_burn_fs "Two-handed sword slash has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 4280
+  take swing_slash_giant
+  need phase_stunned_burn_fs
+
+verb miss_slash_giant__rise_f "Two-handed sword slash has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 4280
   take swing_slash_giant
   need phase_rise_f
 
-verb miss_slash_giant__fly "Two-handed sword slash has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 3090
+verb miss_slash_giant__fly "Two-handed sword slash has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 4350
   take swing_slash_giant
   need phase_fly
 
-verb miss_slash_giant__fly_veer "Two-handed sword slash has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 3090
+verb miss_slash_giant__fly_veer "Two-handed sword slash has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 4350
   take swing_slash_giant
   need phase_fly_veer
 
-verb miss_slash_giant__larva "Two-handed sword slash has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 3160
+verb miss_slash_giant__larva "Two-handed sword slash has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 4420
   take swing_slash_giant
   need phase_larva
 
-verb miss_slash_giant__larva_veer "Two-handed sword slash has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 3160
+verb miss_slash_giant__larva_veer "Two-handed sword slash has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 4420
   take swing_slash_giant
   need phase_larva_veer
 
-verb hit_arrow_fire "Fire arrow hits" by world priority 79 in hits at 3140 3230
+verb hit_arrow_fire "Fire arrow hits" by world priority 79 in hits at 3140 4490
   take swing_arrow_fire
   give 4 dmg_body
 
-verb hit_arrow_fire__larva "Fire arrow hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 3300
+verb hit_arrow_fire__stunned_g "Fire arrow hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 4560
+  take swing_arrow_fire
+  take phase_stunned_g
+  give phase_stunned_burn_g
+  give 5 timer_stunned_burn_g
+  give 4 dmg_body
+
+verb hit_arrow_fire__stunned_fs "Fire arrow hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 4560
+  take swing_arrow_fire
+  take phase_stunned_fs
+  give phase_stunned_burn_fs
+  give 5 timer_stunned_burn_fs
+  give 4 dmg_body
+
+verb miss_arrow_fire__stunned_burn_g "Fire arrow has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 4630
+  take swing_arrow_fire
+  need phase_stunned_burn_g
+
+verb miss_arrow_fire__stunned_burn_fs "Fire arrow has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 4630
+  take swing_arrow_fire
+  need phase_stunned_burn_fs
+
+verb hit_arrow_fire__larva "Fire arrow hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 4700
   take swing_arrow_fire
   take phase_larva
   give link_wins
 
-verb hit_arrow_fire__larva_veer "Fire arrow hits (Peahat larva veers off)" by world priority 80 in hits at 3140 3300
+verb hit_arrow_fire__larva_veer "Fire arrow hits (Peahat larva veers off)" by world priority 80 in hits at 3140 4700
   take swing_arrow_fire
   take phase_larva_veer
   give link_wins
 
-verb hit_arrow_ice "Ice arrow hits" by world priority 79 in hits at 3140 3370
+verb hit_arrow_ice "Ice arrow hits" by world priority 79 in hits at 3140 4770
   take swing_arrow_ice
   give 2 dmg_body
 
-verb hit_arrow_ice__larva "Ice arrow hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 3440
+verb hit_arrow_ice__stunned_g "Ice arrow hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 4840
+  take swing_arrow_ice
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_arrow_ice__stunned_fs "Ice arrow hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 4840
+  take swing_arrow_ice
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_arrow_ice__stunned_burn_g "Ice arrow has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 4910
+  take swing_arrow_ice
+  need phase_stunned_burn_g
+
+verb miss_arrow_ice__stunned_burn_fs "Ice arrow has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 4910
+  take swing_arrow_ice
+  need phase_stunned_burn_fs
+
+verb hit_arrow_ice__larva "Ice arrow hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 4980
   take swing_arrow_ice
   take phase_larva
   give link_wins
 
-verb hit_arrow_ice__larva_veer "Ice arrow hits (Peahat larva veers off)" by world priority 80 in hits at 3140 3440
+verb hit_arrow_ice__larva_veer "Ice arrow hits (Peahat larva veers off)" by world priority 80 in hits at 3140 4980
   take swing_arrow_ice
   take phase_larva_veer
   give link_wins
 
-verb hit_arrow_light "Light arrow hits" by world priority 79 in hits at 3140 3510
+verb hit_arrow_light "Light arrow hits" by world priority 79 in hits at 3140 5050
   take swing_arrow_light
   give 2 dmg_body
 
-verb hit_arrow_light__larva "Light arrow hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 3580
+verb hit_arrow_light__stunned_g "Light arrow hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 5120
+  take swing_arrow_light
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_arrow_light__stunned_fs "Light arrow hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 5120
+  take swing_arrow_light
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_arrow_light__stunned_burn_g "Light arrow has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 5190
+  take swing_arrow_light
+  need phase_stunned_burn_g
+
+verb miss_arrow_light__stunned_burn_fs "Light arrow has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 5190
+  take swing_arrow_light
+  need phase_stunned_burn_fs
+
+verb hit_arrow_light__larva "Light arrow hits (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 5260
   take swing_arrow_light
   take phase_larva
   give link_wins
 
-verb hit_arrow_light__larva_veer "Light arrow hits (Peahat larva veers off)" by world priority 80 in hits at 3140 3580
+verb hit_arrow_light__larva_veer "Light arrow hits (Peahat larva veers off)" by world priority 80 in hits at 3140 5260
   take swing_arrow_light
   take phase_larva_veer
   give link_wins
 
-verb hit_magic_fire "Din's Fire hits" by world priority 79 in hits at 3140 3650
+verb hit_magic_fire "Din's Fire hits" by world priority 79 in hits at 3140 5330
   take swing_magic_fire
   give 3 dmg_body
 
-verb miss_magic_fire__seek_g "Din's Fire has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 3720
+verb miss_magic_fire__seek_g "Din's Fire has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 5400
   take swing_magic_fire
   need phase_seek_g
 
-verb miss_magic_fire__rise_f "Din's Fire has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 3720
+verb hit_magic_fire__stunned_g "Din's Fire hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 5400
+  take swing_magic_fire
+  take phase_stunned_g
+  give phase_stunned_burn_g
+  give 5 timer_stunned_burn_g
+  give 3 dmg_body
+
+verb hit_magic_fire__stunned_fs "Din's Fire hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 5470
+  take swing_magic_fire
+  take phase_stunned_fs
+  give phase_stunned_burn_fs
+  give 5 timer_stunned_burn_fs
+  give 3 dmg_body
+
+verb miss_magic_fire__stunned_burn_g "Din's Fire has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 5470
+  take swing_magic_fire
+  need phase_stunned_burn_g
+
+verb miss_magic_fire__stunned_burn_fs "Din's Fire has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 5540
+  take swing_magic_fire
+  need phase_stunned_burn_fs
+
+verb miss_magic_fire__rise_f "Din's Fire has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 5540
   take swing_magic_fire
   need phase_rise_f
 
-verb miss_magic_fire__fly "Din's Fire has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 3790
+verb miss_magic_fire__fly "Din's Fire has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 5610
   take swing_magic_fire
   need phase_fly
 
-verb miss_magic_fire__fly_veer "Din's Fire has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 3790
+verb miss_magic_fire__fly_veer "Din's Fire has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 5610
   take swing_magic_fire
   need phase_fly_veer
 
-verb miss_magic_fire__larva "Din's Fire has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 3860
+verb miss_magic_fire__larva "Din's Fire has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 5680
   take swing_magic_fire
   need phase_larva
 
-verb miss_magic_fire__larva_veer "Din's Fire has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 3860
+verb miss_magic_fire__larva_veer "Din's Fire has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 5680
   take swing_magic_fire
   need phase_larva_veer
 
-verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 3930
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 5750
   take swing_magic_fire
   need range_far
 
-verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 4000
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 5820
   take swing_shield
 
-verb hit_spin_kokiri "Kokiri spin attack hits" by world priority 79 in hits at 3000 4070
+verb hit_spin_kokiri "Kokiri spin attack hits" by world priority 79 in hits at 3000 5890
   take swing_spin_kokiri
   give dmg_body
 
-verb miss_spin_kokiri__seek_g "Kokiri spin attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 4070
+verb miss_spin_kokiri__seek_g "Kokiri spin attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 5890
   take swing_spin_kokiri
   need phase_seek_g
 
-verb miss_spin_kokiri__rise_f "Kokiri spin attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 4140
+verb hit_spin_kokiri__stunned_g "Kokiri spin attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 5960
+  take swing_spin_kokiri
+  take phase_stunned_g
+  give phase_rise_g
+  give dmg_body
+
+verb hit_spin_kokiri__stunned_fs "Kokiri spin attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 5960
+  take swing_spin_kokiri
+  take phase_stunned_fs
+  give phase_rise_fs
+  give dmg_body
+
+verb miss_spin_kokiri__stunned_burn_g "Kokiri spin attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 6030
+  take swing_spin_kokiri
+  need phase_stunned_burn_g
+
+verb miss_spin_kokiri__stunned_burn_fs "Kokiri spin attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 6030
+  take swing_spin_kokiri
+  need phase_stunned_burn_fs
+
+verb miss_spin_kokiri__rise_f "Kokiri spin attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 6100
   take swing_spin_kokiri
   need phase_rise_f
 
-verb miss_spin_kokiri__fly "Kokiri spin attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 4140
+verb miss_spin_kokiri__fly "Kokiri spin attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 6100
   take swing_spin_kokiri
   need phase_fly
 
-verb miss_spin_kokiri__fly_veer "Kokiri spin attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 4210
+verb miss_spin_kokiri__fly_veer "Kokiri spin attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 6170
   take swing_spin_kokiri
   need phase_fly_veer
 
-verb miss_spin_kokiri__larva "Kokiri spin attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 4210
+verb miss_spin_kokiri__larva "Kokiri spin attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 6170
   take swing_spin_kokiri
   need phase_larva
 
-verb miss_spin_kokiri__larva_veer "Kokiri spin attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 4280
+verb miss_spin_kokiri__larva_veer "Kokiri spin attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 6240
   take swing_spin_kokiri
   need phase_larva_veer
 
-verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 4280
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 6240
   take swing_spin_kokiri
   need range_far
 
-verb hit_spin_giant "Two-handed spin attack hits" by world priority 79 in hits at 3140 4350
+verb hit_spin_giant "Two-handed spin attack hits" by world priority 79 in hits at 3140 6310
   take swing_spin_giant
   give 4 dmg_body
 
-verb miss_spin_giant__seek_g "Two-handed spin attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 4420
+verb miss_spin_giant__seek_g "Two-handed spin attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 6380
   take swing_spin_giant
   need phase_seek_g
 
-verb miss_spin_giant__rise_f "Two-handed spin attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 4420
+verb hit_spin_giant__stunned_g "Two-handed spin attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 6380
+  take swing_spin_giant
+  take phase_stunned_g
+  give phase_rise_g
+  give 4 dmg_body
+
+verb hit_spin_giant__stunned_fs "Two-handed spin attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 6450
+  take swing_spin_giant
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 4 dmg_body
+
+verb miss_spin_giant__stunned_burn_g "Two-handed spin attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 6450
+  take swing_spin_giant
+  need phase_stunned_burn_g
+
+verb miss_spin_giant__stunned_burn_fs "Two-handed spin attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 6520
+  take swing_spin_giant
+  need phase_stunned_burn_fs
+
+verb miss_spin_giant__rise_f "Two-handed spin attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 6520
   take swing_spin_giant
   need phase_rise_f
 
-verb miss_spin_giant__fly "Two-handed spin attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 4490
+verb miss_spin_giant__fly "Two-handed spin attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 6590
   take swing_spin_giant
   need phase_fly
 
-verb miss_spin_giant__fly_veer "Two-handed spin attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 4490
+verb miss_spin_giant__fly_veer "Two-handed spin attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 6590
   take swing_spin_giant
   need phase_fly_veer
 
-verb miss_spin_giant__larva "Two-handed spin attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 4560
+verb miss_spin_giant__larva "Two-handed spin attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 6660
   take swing_spin_giant
   need phase_larva
 
-verb miss_spin_giant__larva_veer "Two-handed spin attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 4560
+verb miss_spin_giant__larva_veer "Two-handed spin attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 6660
   take swing_spin_giant
   need phase_larva_veer
 
-verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 4630
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 6730
   take swing_spin_giant
   need range_far
 
-verb hit_spin_master "Master Sword spin attack hits" by world priority 79 in hits at 3000 4700
+verb hit_spin_master "Master Sword spin attack hits" by world priority 79 in hits at 3000 6800
   take swing_spin_master
   give 2 dmg_body
 
-verb miss_spin_master__seek_g "Master Sword spin attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 4700
+verb miss_spin_master__seek_g "Master Sword spin attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 6800
   take swing_spin_master
   need phase_seek_g
 
-verb miss_spin_master__rise_f "Master Sword spin attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 4770
+verb hit_spin_master__stunned_g "Master Sword spin attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 6870
+  take swing_spin_master
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_spin_master__stunned_fs "Master Sword spin attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 6870
+  take swing_spin_master
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_spin_master__stunned_burn_g "Master Sword spin attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 6940
+  take swing_spin_master
+  need phase_stunned_burn_g
+
+verb miss_spin_master__stunned_burn_fs "Master Sword spin attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 6940
+  take swing_spin_master
+  need phase_stunned_burn_fs
+
+verb miss_spin_master__rise_f "Master Sword spin attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 7010
   take swing_spin_master
   need phase_rise_f
 
-verb miss_spin_master__fly "Master Sword spin attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 4770
+verb miss_spin_master__fly "Master Sword spin attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 7010
   take swing_spin_master
   need phase_fly
 
-verb miss_spin_master__fly_veer "Master Sword spin attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 4840
+verb miss_spin_master__fly_veer "Master Sword spin attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 7080
   take swing_spin_master
   need phase_fly_veer
 
-verb miss_spin_master__larva "Master Sword spin attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 4840
+verb miss_spin_master__larva "Master Sword spin attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 7080
   take swing_spin_master
   need phase_larva
 
-verb miss_spin_master__larva_veer "Master Sword spin attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 4910
+verb miss_spin_master__larva_veer "Master Sword spin attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 7150
   take swing_spin_master
   need phase_larva_veer
 
-verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 4910
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 7150
   take swing_spin_master
   need range_far
 
-verb hit_jump_kokiri "Kokiri jump attack hits" by world priority 79 in hits at 3140 4980
+verb hit_jump_kokiri "Kokiri jump attack hits" by world priority 79 in hits at 3140 7220
   take swing_jump_kokiri
   give 2 dmg_body
 
-verb miss_jump_kokiri__seek_g "Kokiri jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 5050
+verb miss_jump_kokiri__seek_g "Kokiri jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 7290
   take swing_jump_kokiri
   need phase_seek_g
 
-verb miss_jump_kokiri__rise_f "Kokiri jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 5050
+verb hit_jump_kokiri__stunned_g "Kokiri jump attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 7290
+  take swing_jump_kokiri
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_fs "Kokiri jump attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 7360
+  take swing_jump_kokiri
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_jump_kokiri__stunned_burn_g "Kokiri jump attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 7360
+  take swing_jump_kokiri
+  need phase_stunned_burn_g
+
+verb miss_jump_kokiri__stunned_burn_fs "Kokiri jump attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 7430
+  take swing_jump_kokiri
+  need phase_stunned_burn_fs
+
+verb miss_jump_kokiri__rise_f "Kokiri jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 7430
   take swing_jump_kokiri
   need phase_rise_f
 
-verb miss_jump_kokiri__fly "Kokiri jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 5120
+verb miss_jump_kokiri__fly "Kokiri jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 7500
   take swing_jump_kokiri
   need phase_fly
 
-verb miss_jump_kokiri__fly_veer "Kokiri jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 5120
+verb miss_jump_kokiri__fly_veer "Kokiri jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 7500
   take swing_jump_kokiri
   need phase_fly_veer
 
-verb miss_jump_kokiri__larva "Kokiri jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 5190
+verb miss_jump_kokiri__larva "Kokiri jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 7570
   take swing_jump_kokiri
   need phase_larva
 
-verb miss_jump_kokiri__larva_veer "Kokiri jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 5190
+verb miss_jump_kokiri__larva_veer "Kokiri jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 7570
   take swing_jump_kokiri
   need phase_larva_veer
 
-verb hit_jump_kokiri_self "Kokiri jump attack hits" by world priority 79 in hits at 3140 5260
+verb hit_jump_kokiri_self "Kokiri jump attack hits" by world priority 79 in hits at 3140 7640
   take swing_jump_kokiri_self
   give 2 dmg_body
 
-verb miss_jump_kokiri_self__seek_g "Kokiri jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 5330
+verb miss_jump_kokiri_self__seek_g "Kokiri jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 7710
   take swing_jump_kokiri_self
   need phase_seek_g
 
-verb miss_jump_kokiri_self__rise_f "Kokiri jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 5330
+verb hit_jump_kokiri_self__stunned_g "Kokiri jump attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 7710
+  take swing_jump_kokiri_self
+  take phase_stunned_g
+  give phase_rise_g
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_fs "Kokiri jump attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 7780
+  take swing_jump_kokiri_self
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self__stunned_burn_g "Kokiri jump attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 7780
+  take swing_jump_kokiri_self
+  need phase_stunned_burn_g
+
+verb miss_jump_kokiri_self__stunned_burn_fs "Kokiri jump attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 7850
+  take swing_jump_kokiri_self
+  need phase_stunned_burn_fs
+
+verb miss_jump_kokiri_self__rise_f "Kokiri jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 7850
   take swing_jump_kokiri_self
   need phase_rise_f
 
-verb miss_jump_kokiri_self__fly "Kokiri jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 5400
+verb miss_jump_kokiri_self__fly "Kokiri jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 7920
   take swing_jump_kokiri_self
   need phase_fly
 
-verb miss_jump_kokiri_self__fly_veer "Kokiri jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 5400
+verb miss_jump_kokiri_self__fly_veer "Kokiri jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 7920
   take swing_jump_kokiri_self
   need phase_fly_veer
 
-verb miss_jump_kokiri_self__larva "Kokiri jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 5470
+verb miss_jump_kokiri_self__larva "Kokiri jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 7990
   take swing_jump_kokiri_self
   need phase_larva
 
-verb miss_jump_kokiri_self__larva_veer "Kokiri jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 5470
+verb miss_jump_kokiri_self__larva_veer "Kokiri jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 7990
   take swing_jump_kokiri_self
   need phase_larva_veer
 
-verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 5540
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 8060
   take swing_jump_kokiri_self
   need range_far
 
-verb hit_jump_giant "Two-handed jump attack hits" by world priority 79 in hits at 3000 5610
+verb hit_jump_giant "Two-handed jump attack hits" by world priority 79 in hits at 3000 8130
   take swing_jump_giant
   give 8 dmg_body
 
-verb miss_jump_giant__seek_g "Two-handed jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 5610
+verb miss_jump_giant__seek_g "Two-handed jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 8130
   take swing_jump_giant
   need phase_seek_g
 
-verb miss_jump_giant__rise_f "Two-handed jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 5680
+verb hit_jump_giant__stunned_g "Two-handed jump attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 8200
+  take swing_jump_giant
+  take phase_stunned_g
+  give phase_rise_g
+  give 8 dmg_body
+
+verb hit_jump_giant__stunned_fs "Two-handed jump attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 8200
+  take swing_jump_giant
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 8 dmg_body
+
+verb miss_jump_giant__stunned_burn_g "Two-handed jump attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 8270
+  take swing_jump_giant
+  need phase_stunned_burn_g
+
+verb miss_jump_giant__stunned_burn_fs "Two-handed jump attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 8270
+  take swing_jump_giant
+  need phase_stunned_burn_fs
+
+verb miss_jump_giant__rise_f "Two-handed jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 8340
   take swing_jump_giant
   need phase_rise_f
 
-verb miss_jump_giant__fly "Two-handed jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 5680
+verb miss_jump_giant__fly "Two-handed jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 8340
   take swing_jump_giant
   need phase_fly
 
-verb miss_jump_giant__fly_veer "Two-handed jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 5750
+verb miss_jump_giant__fly_veer "Two-handed jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 8410
   take swing_jump_giant
   need phase_fly_veer
 
-verb miss_jump_giant__larva "Two-handed jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 5750
+verb miss_jump_giant__larva "Two-handed jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 8410
   take swing_jump_giant
   need phase_larva
 
-verb miss_jump_giant__larva_veer "Two-handed jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 5820
+verb miss_jump_giant__larva_veer "Two-handed jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 8480
   take swing_jump_giant
   need phase_larva_veer
 
-verb hit_jump_giant_self "Two-handed jump attack hits" by world priority 79 in hits at 3000 5890
+verb hit_jump_giant_self "Two-handed jump attack hits" by world priority 79 in hits at 3000 8550
   take swing_jump_giant_self
   give 8 dmg_body
 
-verb miss_jump_giant_self__seek_g "Two-handed jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 5890
+verb miss_jump_giant_self__seek_g "Two-handed jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 8550
   take swing_jump_giant_self
   need phase_seek_g
 
-verb miss_jump_giant_self__rise_f "Two-handed jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 5960
+verb hit_jump_giant_self__stunned_g "Two-handed jump attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 8620
+  take swing_jump_giant_self
+  take phase_stunned_g
+  give phase_rise_g
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stunned_fs "Two-handed jump attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 8620
+  take swing_jump_giant_self
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 8 dmg_body
+
+verb miss_jump_giant_self__stunned_burn_g "Two-handed jump attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 8690
+  take swing_jump_giant_self
+  need phase_stunned_burn_g
+
+verb miss_jump_giant_self__stunned_burn_fs "Two-handed jump attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 8690
+  take swing_jump_giant_self
+  need phase_stunned_burn_fs
+
+verb miss_jump_giant_self__rise_f "Two-handed jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 8760
   take swing_jump_giant_self
   need phase_rise_f
 
-verb miss_jump_giant_self__fly "Two-handed jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 5960
+verb miss_jump_giant_self__fly "Two-handed jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 8760
   take swing_jump_giant_self
   need phase_fly
 
-verb miss_jump_giant_self__fly_veer "Two-handed jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 6030
+verb miss_jump_giant_self__fly_veer "Two-handed jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 8830
   take swing_jump_giant_self
   need phase_fly_veer
 
-verb miss_jump_giant_self__larva "Two-handed jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 6030
+verb miss_jump_giant_self__larva "Two-handed jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 8830
   take swing_jump_giant_self
   need phase_larva
 
-verb miss_jump_giant_self__larva_veer "Two-handed jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 6100
+verb miss_jump_giant_self__larva_veer "Two-handed jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 8900
   take swing_jump_giant_self
   need phase_larva_veer
 
-verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 6100
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 8900
   take swing_jump_giant_self
   need range_far
 
-verb hit_jump_master "Master Sword jump attack hits" by world priority 79 in hits at 3140 6170
+verb hit_jump_master "Master Sword jump attack hits" by world priority 79 in hits at 3140 8970
   take swing_jump_master
   give 4 dmg_body
 
-verb miss_jump_master__seek_g "Master Sword jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 6240
+verb miss_jump_master__seek_g "Master Sword jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 9040
   take swing_jump_master
   need phase_seek_g
 
-verb miss_jump_master__rise_f "Master Sword jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 6240
+verb hit_jump_master__stunned_g "Master Sword jump attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 9040
+  take swing_jump_master
+  take phase_stunned_g
+  give phase_rise_g
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_fs "Master Sword jump attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 9110
+  take swing_jump_master
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 4 dmg_body
+
+verb miss_jump_master__stunned_burn_g "Master Sword jump attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 9110
+  take swing_jump_master
+  need phase_stunned_burn_g
+
+verb miss_jump_master__stunned_burn_fs "Master Sword jump attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 9180
+  take swing_jump_master
+  need phase_stunned_burn_fs
+
+verb miss_jump_master__rise_f "Master Sword jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 9180
   take swing_jump_master
   need phase_rise_f
 
-verb miss_jump_master__fly "Master Sword jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 6310
+verb miss_jump_master__fly "Master Sword jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 9250
   take swing_jump_master
   need phase_fly
 
-verb miss_jump_master__fly_veer "Master Sword jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 6310
+verb miss_jump_master__fly_veer "Master Sword jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 9250
   take swing_jump_master
   need phase_fly_veer
 
-verb miss_jump_master__larva "Master Sword jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 6380
+verb miss_jump_master__larva "Master Sword jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 9320
   take swing_jump_master
   need phase_larva
 
-verb miss_jump_master__larva_veer "Master Sword jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 6380
+verb miss_jump_master__larva_veer "Master Sword jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 9320
   take swing_jump_master
   need phase_larva_veer
 
-verb hit_jump_master_self "Master Sword jump attack hits" by world priority 79 in hits at 3140 6450
+verb hit_jump_master_self "Master Sword jump attack hits" by world priority 79 in hits at 3140 9390
   take swing_jump_master_self
   give 4 dmg_body
 
-verb miss_jump_master_self__seek_g "Master Sword jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 6520
+verb miss_jump_master_self__seek_g "Master Sword jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3000 9460
   take swing_jump_master_self
   need phase_seek_g
 
-verb miss_jump_master_self__rise_f "Master Sword jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 6520
+verb hit_jump_master_self__stunned_g "Master Sword jump attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3140 9460
+  take swing_jump_master_self
+  take phase_stunned_g
+  give phase_rise_g
+  give 4 dmg_body
+
+verb hit_jump_master_self__stunned_fs "Master Sword jump attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3000 9530
+  take swing_jump_master_self
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 4 dmg_body
+
+verb miss_jump_master_self__stunned_burn_g "Master Sword jump attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3140 9530
+  take swing_jump_master_self
+  need phase_stunned_burn_g
+
+verb miss_jump_master_self__stunned_burn_fs "Master Sword jump attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3000 9600
+  take swing_jump_master_self
+  need phase_stunned_burn_fs
+
+verb miss_jump_master_self__rise_f "Master Sword jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3140 9600
   take swing_jump_master_self
   need phase_rise_f
 
-verb miss_jump_master_self__fly "Master Sword jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 6590
+verb miss_jump_master_self__fly "Master Sword jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3000 9670
   take swing_jump_master_self
   need phase_fly
 
-verb miss_jump_master_self__fly_veer "Master Sword jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 6590
+verb miss_jump_master_self__fly_veer "Master Sword jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3140 9670
   take swing_jump_master_self
   need phase_fly_veer
 
-verb miss_jump_master_self__larva "Master Sword jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 6660
+verb miss_jump_master_self__larva "Master Sword jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3000 9740
   take swing_jump_master_self
   need phase_larva
 
-verb miss_jump_master_self__larva_veer "Master Sword jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 6660
+verb miss_jump_master_self__larva_veer "Master Sword jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3140 9740
   take swing_jump_master_self
   need phase_larva_veer
 
-verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 6730
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 9810
   take swing_jump_master_self
   need range_far
 
-verb hit_hammer_jump "Hammer jump attack hits" by world priority 79 in hits at 3000 6800
+verb hit_hammer_jump "Hammer jump attack hits" by world priority 79 in hits at 3000 9880
   take swing_hammer_jump
   give 4 dmg_body
 
-verb miss_hammer_jump__seek_g "Hammer jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 6800
+verb miss_hammer_jump__seek_g "Hammer jump attack has no effect (Peahat hunts Link)" by world priority 80 in hits at 3140 9880
   take swing_hammer_jump
   need phase_seek_g
 
-verb miss_hammer_jump__rise_f "Hammer jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 6870
+verb hit_hammer_jump__stunned_g "Hammer jump attack hits (Peahat is stunned on the ground)" by world priority 80 in hits at 3000 9950
+  take swing_hammer_jump
+  take phase_stunned_g
+  give phase_rise_g
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned_fs "Hammer jump attack hits (Downed flying Peahat is stunned on the ground)" by world priority 80 in hits at 3140 9950
+  take swing_hammer_jump
+  take phase_stunned_fs
+  give phase_rise_fs
+  give 4 dmg_body
+
+verb miss_hammer_jump__stunned_burn_g "Hammer jump attack has no effect (Stunned Peahat burns, untouchable)" by world priority 80 in hits at 3000 10020
+  take swing_hammer_jump
+  need phase_stunned_burn_g
+
+verb miss_hammer_jump__stunned_burn_fs "Hammer jump attack has no effect (Stunned downed flying Peahat burns, untouchable)" by world priority 80 in hits at 3140 10020
+  take swing_hammer_jump
+  need phase_stunned_burn_fs
+
+verb miss_hammer_jump__rise_f "Hammer jump attack has no effect (Flying Peahat climbs high)" by world priority 80 in hits at 3000 10090
   take swing_hammer_jump
   need phase_rise_f
 
-verb miss_hammer_jump__fly "Hammer jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 6870
+verb miss_hammer_jump__fly "Hammer jump attack has no effect (Flying Peahat circles high, dropping larvae)" by world priority 80 in hits at 3140 10090
   take swing_hammer_jump
   need phase_fly
 
-verb miss_hammer_jump__fly_veer "Hammer jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 6940
+verb miss_hammer_jump__fly_veer "Hammer jump attack has no effect (Flying Peahat circles high; its larva veers off)" by world priority 80 in hits at 3000 10160
   take swing_hammer_jump
   need phase_fly_veer
 
-verb miss_hammer_jump__larva "Hammer jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 6940
+verb miss_hammer_jump__larva "Hammer jump attack has no effect (Peahat larva homes in on Link)" by world priority 80 in hits at 3140 10160
   take swing_hammer_jump
   need phase_larva
 
-verb miss_hammer_jump__larva_veer "Hammer jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 7010
+verb miss_hammer_jump__larva_veer "Hammer jump attack has no effect (Peahat larva veers off)" by world priority 80 in hits at 3000 10230
   take swing_hammer_jump
   need phase_larva_veer
 
-verb body_empty_in_rise_g "Peahat runs out (Peahat rises from the ground)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_rise_g "Peahat runs out (Peahat rises from the ground)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_rise_g
   give link_wins
 
-verb body_empty_in_seek_g "Peahat runs out (Peahat hunts Link)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_seek_g "Peahat runs out (Peahat hunts Link)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_seek_g
   give link_wins
 
-verb body_empty_in_landing_g "Peahat runs out (Peahat lands)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_landing_g "Peahat runs out (Peahat lands)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_landing_g
   give link_wins
 
-verb body_empty_in_landed_g "Peahat runs out (Peahat rests on the ground)" by world priority 92 in enemy_health at 2360 360
+verb body_empty_in_landed_g "Peahat runs out (Peahat rests on the ground)" by world priority 90 in enemy_health at 2360 360
   unless hp_body
   take alive_body
   take phase_landed_g
   give link_wins
 
-verb body_empty_in_stunned_g "Peahat runs out (Peahat is stunned on the ground)" by world priority 92 in enemy_health at 2500 360
-  unless hp_body
-  take alive_body
-  take phase_stunned_g
-  give link_wins
-
-verb body_empty_in_rise_fs "Peahat runs out (Downed flying Peahat rises from the ground)" by world priority 92 in enemy_health at 2360 430
+verb body_empty_in_rise_fs "Peahat runs out (Downed flying Peahat rises from the ground)" by world priority 90 in enemy_health at 2500 360
   unless hp_body
   take alive_body
   take phase_rise_fs
   give link_wins
 
-verb body_empty_in_seek_fs "Peahat runs out (Downed flying Peahat hunts Link)" by world priority 92 in enemy_health at 2500 430
+verb body_empty_in_seek_fs "Peahat runs out (Downed flying Peahat hunts Link)" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_seek_fs
   give link_wins
 
-verb body_empty_in_landing_fs "Peahat runs out (Downed flying Peahat lands)" by world priority 92 in enemy_health at 2360 500
+verb body_empty_in_landing_fs "Peahat runs out (Downed flying Peahat lands)" by world priority 90 in enemy_health at 2500 430
   unless hp_body
   take alive_body
   take phase_landing_fs
   give link_wins
 
-verb body_empty_in_landed_fs "Peahat runs out (Downed flying Peahat rests on the ground)" by world priority 92 in enemy_health at 2500 500
+verb body_empty_in_landed_fs "Peahat runs out (Downed flying Peahat rests on the ground)" by world priority 90 in enemy_health at 2360 500
   unless hp_body
   take alive_body
   take phase_landed_fs
   give link_wins
 
-verb body_empty_in_stunned_fs "Peahat runs out (Downed flying Peahat is stunned on the ground)" by world priority 92 in enemy_health at 2360 570
+verb body_empty_in_stunned_burn_g "Peahat runs out (Stunned Peahat burns, untouchable)" by world priority 90 in enemy_health at 2500 500
   unless hp_body
   take alive_body
-  take phase_stunned_fs
+  take phase_stunned_burn_g
   give link_wins
 
-verb body_empty_in_recoil_g "Peahat runs out (Peahat bounces back from Link)" by world priority 92 in enemy_health at 2500 570
+verb body_empty_in_stunned_burn_fs "Peahat runs out (Stunned downed flying Peahat burns, untouchable)" by world priority 90 in enemy_health at 2360 570
+  unless hp_body
+  take alive_body
+  take phase_stunned_burn_fs
+  give link_wins
+
+verb body_empty_in_rise_fs2 "Peahat runs out (Downed flying Peahat rises again)" by world priority 90 in enemy_health at 2500 570
+  unless hp_body
+  take alive_body
+  take phase_rise_fs2
+  give link_wins
+
+verb body_empty_in_seek_fs2 "Peahat runs out (Downed flying Peahat hunts Link again)" by world priority 90 in enemy_health at 2360 640
+  unless hp_body
+  take alive_body
+  take phase_seek_fs2
+  give link_wins
+
+verb body_empty_in_recoil_g "Peahat runs out (Peahat bounces back from Link)" by world priority 90 in enemy_health at 2500 640
   unless hp_body
   take alive_body
   take phase_recoil_g
   give link_wins
 
-verb body_empty_in_grounded_f "Peahat runs out (Flying Peahat sits on the ground)" by world priority 92 in enemy_health at 2360 640
+verb body_empty_in_grounded_f "Peahat runs out (Flying Peahat sits on the ground)" by world priority 90 in enemy_health at 2360 710
   unless hp_body
   take alive_body
   take phase_grounded_f
   give link_wins
 
-verb body_empty_in_rise_f "Peahat runs out (Flying Peahat climbs high)" by world priority 92 in enemy_health at 2500 640
+verb body_empty_in_rise_f "Peahat runs out (Flying Peahat climbs high)" by world priority 90 in enemy_health at 2500 710
   unless hp_body
   take alive_body
   take phase_rise_f
   give link_wins
 
-verb body_empty_in_fly "Peahat runs out (Flying Peahat circles high, dropping larvae)" by world priority 92 in enemy_health at 2360 710
+verb body_empty_in_fly "Peahat runs out (Flying Peahat circles high, dropping larvae)" by world priority 90 in enemy_health at 2360 780
   unless hp_body
   take alive_body
   take phase_fly
   give link_wins
 
-verb body_empty_in_fly_veer "Peahat runs out (Flying Peahat circles high; its larva veers off)" by world priority 92 in enemy_health at 2500 710
+verb body_empty_in_fly_veer "Peahat runs out (Flying Peahat circles high; its larva veers off)" by world priority 90 in enemy_health at 2500 780
   unless hp_body
   take alive_body
   take phase_fly_veer
@@ -1702,38 +2202,38 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
   take lens_on
   give link_turn
 
-verb enemy_ready "Peahat gets ready" by world priority 70 in enemy at 2180 1200
+verb enemy_ready "Peahat gets ready" by world priority 70 in enemy at 2180 1550
   take enemy_turn
   give enemy_act
 
-verb rise_g_step_1 "Peahat is aloft" by world priority 69 in enemy at 2040 1270
+verb rise_g_step_1 "Peahat is aloft" by world priority 69 in enemy at 2040 1620
   take enemy_act
   take phase_rise_g
   give phase_seek_g
   give 30 timer_seek_g
   give beat_end
 
-verb seek_g_ticks "Peahat hunts Link: a beat passes" by world priority 71 in enemy at 2180 1270
+verb seek_g_ticks "Peahat hunts Link: a beat passes" by world priority 71 in enemy at 2180 1620
   take enemy_turn
   need phase_seek_g
   take timer_seek_g
   give enemy_act
 
-verb seek_g_step_1 "Peahat flies at Link" by world priority 69 in enemy at 2040 1340
+verb seek_g_step_1 "Peahat flies at Link" by world priority 69 in enemy at 2040 1690
   take enemy_act
   need phase_seek_g
   give beat_end
   take range_far
   give range_near
 
-verb seek_g_step_2 "Peahat tires and comes down" by world priority 69 in enemy at 2180 1340
+verb seek_g_step_2 "Peahat tires and comes down" by world priority 69 in enemy at 2180 1690
   take enemy_act
   take phase_seek_g
   give phase_landing_g
   unless timer_seek_g
   give beat_end
 
-verb seek_g_step_3 "Peahat cuts Link with its blades" by world priority 69 in enemy at 2040 1410
+verb seek_g_step_3 "Peahat cuts Link with its blades" by world priority 69 in enemy at 2040 1760
   take enemy_act
   take phase_seek_g
   give phase_recoil_g
@@ -1741,199 +2241,267 @@ verb seek_g_step_3 "Peahat cuts Link with its blades" by world priority 69 in en
   give beat_end
   need range_near
 
-verb landing_g_step_1 "Peahat touches down" by world priority 69 in enemy at 2180 1410
+verb landing_g_step_1 "Peahat touches down" by world priority 69 in enemy at 2180 1760
   take enemy_act
   take phase_landing_g
   give phase_landed_g
   give 2 timer_landed_g
   give beat_end
 
-verb landed_g_ticks "Peahat rests on the ground: a beat passes" by world priority 71 in enemy at 2040 1480
+verb landed_g_ticks "Peahat rests on the ground: a beat passes" by world priority 71 in enemy at 2040 1830
   take enemy_turn
   need phase_landed_g
   take timer_landed_g
   give enemy_act
 
-verb landed_g_step_1 "Peahat spins up again" by world priority 69 in enemy at 2180 1480
+verb landed_g_step_1 "Peahat spins up again" by world priority 69 in enemy at 2180 1830
   take enemy_act
   take phase_landed_g
   give phase_rise_g
   unless timer_landed_g
   give beat_end
 
-verb landed_g_holds "Peahat rests on the ground: nothing changes" by world priority 68 in enemy at 2040 1550
+verb landed_g_holds "Peahat rests on the ground: nothing changes" by world priority 68 in enemy at 2040 1900
   take enemy_act
   need phase_landed_g
   give beat_end
 
-verb stunned_g_ticks "Peahat is stunned on the ground: a beat passes" by world priority 71 in enemy at 2180 1550
+verb stunned_g_ticks "Peahat is stunned on the ground: a beat passes" by world priority 71 in enemy at 2180 1900
   take enemy_turn
   need phase_stunned_g
   take timer_stunned_g
   give enemy_act
 
-verb stunned_g_step_1 "Peahat recovers and rises" by world priority 69 in enemy at 2040 1620
+verb stunned_g_step_1 "Peahat recovers and rises" by world priority 69 in enemy at 2040 1970
   take enemy_act
   take phase_stunned_g
   give phase_rise_g
   unless timer_stunned_g
   give beat_end
 
-verb stunned_g_holds "Peahat is stunned on the ground: nothing changes" by world priority 68 in enemy at 2180 1620
+verb stunned_g_holds "Peahat is stunned on the ground: nothing changes" by world priority 68 in enemy at 2180 1970
   take enemy_act
   need phase_stunned_g
   give beat_end
 
-verb rise_fs_step_1 "Downed flying Peahat is aloft" by world priority 69 in enemy at 2040 1690
+verb rise_fs_step_1 "Downed flying Peahat is aloft" by world priority 69 in enemy at 2040 2040
   take enemy_act
   take phase_rise_fs
   give phase_seek_fs
   give 20 timer_seek_fs
   give beat_end
 
-verb seek_fs_ticks "Downed flying Peahat hunts Link: a beat passes" by world priority 71 in enemy at 2180 1690
+verb seek_fs_ticks "Downed flying Peahat hunts Link: a beat passes" by world priority 71 in enemy at 2180 2040
   take enemy_turn
   need phase_seek_fs
   take timer_seek_fs
   give enemy_act
 
-verb seek_fs_step_1 "Downed flying Peahat flies at Link" by world priority 69 in enemy at 2040 1760
+verb seek_fs_step_1 "Downed flying Peahat flies at Link" by world priority 69 in enemy at 2040 2110
   take enemy_act
   need phase_seek_fs
   give beat_end
   take range_far
   give range_near
 
-verb seek_fs_step_2 "Downed flying Peahat tires and comes down" by world priority 69 in enemy at 2180 1760
+verb seek_fs_step_2 "Downed flying Peahat tires and comes down" by world priority 69 in enemy at 2180 2110
   take enemy_act
   take phase_seek_fs
   give phase_landing_fs
   unless timer_seek_fs
   give beat_end
 
-verb seek_fs_holds "Downed flying Peahat hunts Link: nothing changes" by world priority 68 in enemy at 2040 1830
+verb seek_fs_holds "Downed flying Peahat hunts Link: nothing changes" by world priority 68 in enemy at 2040 2180
   take enemy_act
   need phase_seek_fs
   give beat_end
 
-verb landing_fs_step_1 "Downed flying Peahat touches down" by world priority 69 in enemy at 2180 1830
+verb landing_fs_step_1 "Downed flying Peahat touches down" by world priority 69 in enemy at 2180 2180
   take enemy_act
   take phase_landing_fs
   give phase_landed_fs
   give 2 timer_landed_fs
   give beat_end
 
-verb landed_fs_ticks "Downed flying Peahat rests on the ground: a beat passes" by world priority 71 in enemy at 2040 1900
+verb landed_fs_ticks "Downed flying Peahat rests on the ground: a beat passes" by world priority 71 in enemy at 2040 2250
   take enemy_turn
   need phase_landed_fs
   take timer_landed_fs
   give enemy_act
 
-verb landed_fs_step_1 "Downed flying Peahat spins up again" by world priority 69 in enemy at 2180 1900
+verb landed_fs_step_1 "Downed flying Peahat spins up again" by world priority 69 in enemy at 2180 2250
   take enemy_act
   take phase_landed_fs
-  give phase_rise_fs
+  give phase_rise_fs2
   unless timer_landed_fs
   give beat_end
 
-verb landed_fs_holds "Downed flying Peahat rests on the ground: nothing changes" by world priority 68 in enemy at 2040 1970
+verb landed_fs_holds "Downed flying Peahat rests on the ground: nothing changes" by world priority 68 in enemy at 2040 2320
   take enemy_act
   need phase_landed_fs
   give beat_end
 
-verb stunned_fs_ticks "Downed flying Peahat is stunned on the ground: a beat passes" by world priority 71 in enemy at 2180 1970
+verb stunned_fs_ticks "Downed flying Peahat is stunned on the ground: a beat passes" by world priority 71 in enemy at 2180 2320
   take enemy_turn
   need phase_stunned_fs
   take timer_stunned_fs
   give enemy_act
 
-verb stunned_fs_step_1 "Downed flying Peahat recovers and rises" by world priority 69 in enemy at 2040 2040
+verb stunned_fs_step_1 "Downed flying Peahat recovers and rises" by world priority 69 in enemy at 2040 2390
   take enemy_act
   take phase_stunned_fs
   give phase_rise_fs
   unless timer_stunned_fs
   give beat_end
 
-verb stunned_fs_holds "Downed flying Peahat is stunned on the ground: nothing changes" by world priority 68 in enemy at 2180 2040
+verb stunned_fs_holds "Downed flying Peahat is stunned on the ground: nothing changes" by world priority 68 in enemy at 2180 2390
   take enemy_act
   need phase_stunned_fs
   give beat_end
 
-verb recoil_g_step_1 "Peahat comes back for Link" by world priority 69 in enemy at 2040 2110
+verb stunned_burn_g_ticks "Stunned Peahat burns, untouchable: a beat passes" by world priority 71 in enemy at 2040 2460
+  take enemy_turn
+  need phase_stunned_burn_g
+  take timer_stunned_burn_g
+  give enemy_act
+
+verb stunned_burn_g_step_1 "Peahat stops burning and rises" by world priority 69 in enemy at 2180 2460
+  take enemy_act
+  take phase_stunned_burn_g
+  give phase_rise_g
+  unless timer_stunned_burn_g
+  give beat_end
+
+verb stunned_burn_g_holds "Stunned Peahat burns, untouchable: nothing changes" by world priority 68 in enemy at 2040 2530
+  take enemy_act
+  need phase_stunned_burn_g
+  give beat_end
+
+verb stunned_burn_fs_ticks "Stunned downed flying Peahat burns, untouchable: a beat passes" by world priority 71 in enemy at 2180 2530
+  take enemy_turn
+  need phase_stunned_burn_fs
+  take timer_stunned_burn_fs
+  give enemy_act
+
+verb stunned_burn_fs_step_1 "Downed flying Peahat stops burning and rises" by world priority 69 in enemy at 2040 2600
+  take enemy_act
+  take phase_stunned_burn_fs
+  give phase_rise_fs
+  unless timer_stunned_burn_fs
+  give beat_end
+
+verb stunned_burn_fs_holds "Stunned downed flying Peahat burns, untouchable: nothing changes" by world priority 68 in enemy at 2180 2600
+  take enemy_act
+  need phase_stunned_burn_fs
+  give beat_end
+
+verb rise_fs2_step_1 "Downed flying Peahat is aloft" by world priority 69 in enemy at 2040 2670
+  take enemy_act
+  take phase_rise_fs2
+  give phase_seek_fs2
+  give 30 timer_seek_fs2
+  give beat_end
+
+verb seek_fs2_ticks "Downed flying Peahat hunts Link again: a beat passes" by world priority 71 in enemy at 2180 2670
+  take enemy_turn
+  need phase_seek_fs2
+  take timer_seek_fs2
+  give enemy_act
+
+verb seek_fs2_step_1 "Downed flying Peahat flies at Link" by world priority 69 in enemy at 2040 2740
+  take enemy_act
+  need phase_seek_fs2
+  give beat_end
+  take range_far
+  give range_near
+
+verb seek_fs2_step_2 "Downed flying Peahat tires and comes down" by world priority 69 in enemy at 2180 2740
+  take enemy_act
+  take phase_seek_fs2
+  give phase_landing_fs
+  unless timer_seek_fs2
+  give beat_end
+
+verb seek_fs2_holds "Downed flying Peahat hunts Link again: nothing changes" by world priority 68 in enemy at 2040 2810
+  take enemy_act
+  need phase_seek_fs2
+  give beat_end
+
+verb recoil_g_step_1 "Peahat comes back for Link" by world priority 69 in enemy at 2180 2810
   take enemy_act
   take phase_recoil_g
   give phase_seek_g
   give 30 timer_seek_g
   give beat_end
 
-verb grounded_f_step_1 "Flying Peahat takes off" by world priority 69 in enemy at 2180 2110
+verb grounded_f_step_1 "Flying Peahat takes off" by world priority 69 in enemy at 2040 2880
   take enemy_act
   take phase_grounded_f
   give phase_rise_f
   give beat_end
 
-verb rise_f_step_1 "Flying Peahat is high up" by world priority 69 in enemy at 2040 2180
+verb rise_f_step_1 "Flying Peahat is high up" by world priority 69 in enemy at 2180 2880
   take enemy_act
   take phase_rise_f
   give phase_fly
   give beat_end
 
-verb fly_step_1 "A larva it dropped cuts Link" by world priority 69 in enemy at 2180 2180
+verb fly_step_1 "A larva it dropped cuts Link" by world priority 69 in enemy at 2040 2950
   take enemy_act
   take phase_fly
   give phase_fly_veer
   give 2 timer_fly_veer
-  give incoming_blade
+  give incoming_dropped_larva_blade
   give beat_end
 
-verb fly_veer_ticks "Flying Peahat circles high; its larva veers off: a beat passes" by world priority 71 in enemy at 2040 2250
+verb fly_veer_ticks "Flying Peahat circles high; its larva veers off: a beat passes" by world priority 71 in enemy at 2180 2950
   take enemy_turn
   need phase_fly_veer
   take timer_fly_veer
   give enemy_act
 
-verb fly_veer_step_1 "The larva homes in again" by world priority 69 in enemy at 2180 2250
+verb fly_veer_step_1 "The larva homes in again" by world priority 69 in enemy at 2040 3020
   take enemy_act
   take phase_fly_veer
   give phase_fly
   unless timer_fly_veer
   give beat_end
 
-verb fly_veer_holds "Flying Peahat circles high; its larva veers off: nothing changes" by world priority 68 in enemy at 2040 2320
+verb fly_veer_holds "Flying Peahat circles high; its larva veers off: nothing changes" by world priority 68 in enemy at 2180 3020
   take enemy_act
   need phase_fly_veer
   give beat_end
 
-verb larva_step_1 "Larva cuts Link" by world priority 69 in enemy at 2180 2320
+verb larva_step_1 "Larva cuts Link" by world priority 69 in enemy at 2040 3090
   take enemy_act
   take phase_larva
   give phase_larva_veer
   give 2 timer_larva_veer
-  give incoming_blade
+  give incoming_larva_blade
   give beat_end
   need range_near
 
-verb larva_step_2 "Larva flies at Link" by world priority 69 in enemy at 2040 2390
+verb larva_step_2 "Larva flies at Link" by world priority 69 in enemy at 2180 3090
   take enemy_act
   need phase_larva
   give beat_end
   take range_far
   give range_near
 
-verb larva_veer_ticks "Peahat larva veers off: a beat passes" by world priority 71 in enemy at 2180 2390
+verb larva_veer_ticks "Peahat larva veers off: a beat passes" by world priority 71 in enemy at 2040 3160
   take enemy_turn
   need phase_larva_veer
   take timer_larva_veer
   give enemy_act
 
-verb larva_veer_step_1 "Larva homes in again" by world priority 69 in enemy at 2040 2460
+verb larva_veer_step_1 "Larva homes in again" by world priority 69 in enemy at 2180 3160
   take enemy_act
   take phase_larva_veer
   give phase_larva
   unless timer_larva_veer
   give beat_end
 
-verb larva_veer_holds "Peahat larva veers off: nothing changes" by world priority 68 in enemy at 2180 2460
+verb larva_veer_holds "Peahat larva veers off: nothing changes" by world priority 68 in enemy at 2040 3230
   take enemy_act
   need phase_larva_veer
   give beat_end
@@ -1971,6 +2539,96 @@ verb blade_lands "Peahat blade hits Link" by world priority 60 in attacks at 332
 
 verb blade_lands_dd "Peahat blade hits Link" by world priority 60 in attacks at 3460 290
   take incoming_blade
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+
+verb larva_blade_blocked_deku_shield__larva_veer "Larva blade: blocked by the deku shield" by world priority 60 in attacks at 3460 360
+  take incoming_larva_blade
+  need guard_with_deku_shield
+  take phase_larva_veer
+  give link_wins
+
+verb larva_blade_blocked_hylian_shield__larva_veer "Larva blade: blocked by the hylian shield" by world priority 60 in attacks at 3320 430
+  take incoming_larva_blade
+  need guard_with_hylian_shield
+  take phase_larva_veer
+  give link_wins
+
+verb larva_blade_blocked_mirror_shield__larva_veer "Larva blade: blocked by the mirror shield" by world priority 60 in attacks at 3460 430
+  take incoming_larva_blade
+  need guard_with_mirror_shield
+  take phase_larva_veer
+  give link_wins
+
+verb larva_blade_dodged "Larva blade: dodged" by world priority 60 in attacks at 3320 500
+  take incoming_larva_blade
+  need link_dodge
+  unless link_guard
+
+verb larva_blade_nayru "Larva blade: Nayru's Love holds" by world priority 60 in attacks at 3460 500
+  take incoming_larva_blade
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb larva_blade_lands "Larva blade hits Link" by world priority 60 in attacks at 3320 570
+  take incoming_larva_blade
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+
+verb larva_blade_lands_dd "Larva blade hits Link" by world priority 60 in attacks at 3460 570
+  take incoming_larva_blade
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+
+verb dropped_larva_blade_blocked_deku_shield__fly_veer "Blade of a larva the flying Peahat drops: blocked by the deku shield" by world priority 60 in attacks at 3460 640
+  take incoming_dropped_larva_blade
+  need guard_with_deku_shield
+  take phase_fly_veer
+  give phase_fly
+
+verb dropped_larva_blade_blocked_hylian_shield__fly_veer "Blade of a larva the flying Peahat drops: blocked by the hylian shield" by world priority 60 in attacks at 3320 710
+  take incoming_dropped_larva_blade
+  need guard_with_hylian_shield
+  take phase_fly_veer
+  give phase_fly
+
+verb dropped_larva_blade_blocked_mirror_shield__fly_veer "Blade of a larva the flying Peahat drops: blocked by the mirror shield" by world priority 60 in attacks at 3460 710
+  take incoming_dropped_larva_blade
+  need guard_with_mirror_shield
+  take phase_fly_veer
+  give phase_fly
+
+verb dropped_larva_blade_dodged "Blade of a larva the flying Peahat drops: dodged" by world priority 60 in attacks at 3320 780
+  take incoming_dropped_larva_blade
+  need link_dodge
+  unless link_guard
+
+verb dropped_larva_blade_nayru "Blade of a larva the flying Peahat drops: Nayru's Love holds" by world priority 60 in attacks at 3460 780
+  take incoming_dropped_larva_blade
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb dropped_larva_blade_lands "Blade of a larva the flying Peahat drops hits Link" by world priority 60 in attacks at 3320 850
+  take incoming_dropped_larva_blade
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+
+verb dropped_larva_blade_lands_dd "Blade of a larva the flying Peahat drops hits Link" by world priority 60 in attacks at 3460 850
+  take incoming_dropped_larva_blade
   unless link_guard
   unless link_dodge
   unless status_nayru
@@ -2035,6 +2693,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

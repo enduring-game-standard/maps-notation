@@ -1,5 +1,5 @@
 {
- "positions": 114679,
+ "positions": 124045,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -9,13 +9,73 @@
  "stalls": 0,
  "livelocks": 0,
  "deadVerbs": [
-  "stunned_g_timer_clears",
-  "stunned_fs_timer_clears",
+  "stunned_burn_g_timer_clears",
+  "stunned_burn_fs_timer_clears",
   "larva_veer_timer_clears",
   "link_hurt_overkill",
+  "miss_magic_fire__stunned_burn_g",
+  "miss_magic_fire__stunned_burn_fs",
+  "miss_jump_kokiri_self__stunned_burn_g",
+  "miss_jump_kokiri_self__stunned_burn_fs",
   "body_empty_in_grounded_f"
  ],
  "kitSplit": {
+  "miss_deku_stick__stunned_burn_g": [
+   "swing_deku_stick",
+   "phase_stunned_burn_g"
+  ],
+  "miss_deku_stick__stunned_burn_fs": [
+   "swing_deku_stick",
+   "phase_stunned_burn_fs"
+  ],
+  "miss_slingshot__stunned_burn_g": [
+   "swing_slingshot",
+   "phase_stunned_burn_g"
+  ],
+  "miss_slingshot__stunned_burn_fs": [
+   "swing_slingshot",
+   "phase_stunned_burn_fs"
+  ],
+  "miss_explosive__stunned_burn_g": [
+   "swing_explosive",
+   "phase_stunned_burn_g"
+  ],
+  "miss_explosive__stunned_burn_fs": [
+   "swing_explosive",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_arrow_normal__stunned_g": [
+   "swing_arrow_normal",
+   "phase_stunned_g"
+  ],
+  "hit_arrow_normal__stunned_fs": [
+   "swing_arrow_normal",
+   "phase_stunned_fs"
+  ],
+  "miss_arrow_normal__stunned_burn_g": [
+   "swing_arrow_normal",
+   "phase_stunned_burn_g"
+  ],
+  "miss_arrow_normal__stunned_burn_fs": [
+   "swing_arrow_normal",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_hammer_swing__stunned_g": [
+   "swing_hammer_swing",
+   "phase_stunned_g"
+  ],
+  "hit_hammer_swing__stunned_fs": [
+   "swing_hammer_swing",
+   "phase_stunned_fs"
+  ],
+  "miss_hammer_swing__stunned_burn_g": [
+   "swing_hammer_swing",
+   "phase_stunned_burn_g"
+  ],
+  "miss_hammer_swing__stunned_burn_fs": [
+   "swing_hammer_swing",
+   "phase_stunned_burn_fs"
+  ],
   "hit_hookshot__stunned_g": [
    "swing_hookshot",
    "phase_stunned_g"
@@ -39,6 +99,198 @@
   "hit_hookshot__stunned_fs": [
    "swing_hookshot",
    "phase_stunned_fs"
+  ],
+  "hit_hookshot__rise_fs2": [
+   "swing_hookshot",
+   "phase_rise_fs2"
+  ],
+  "hit_hookshot__seek_fs2": [
+   "swing_hookshot",
+   "phase_seek_fs2"
+  ],
+  "hit_slash_master__stunned_g": [
+   "swing_slash_master",
+   "phase_stunned_g"
+  ],
+  "hit_slash_master__stunned_fs": [
+   "swing_slash_master",
+   "phase_stunned_fs"
+  ],
+  "miss_slash_master__stunned_burn_g": [
+   "swing_slash_master",
+   "phase_stunned_burn_g"
+  ],
+  "miss_slash_master__stunned_burn_fs": [
+   "swing_slash_master",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_slash_giant__stunned_g": [
+   "swing_slash_giant",
+   "phase_stunned_g"
+  ],
+  "hit_slash_giant__stunned_fs": [
+   "swing_slash_giant",
+   "phase_stunned_fs"
+  ],
+  "miss_slash_giant__stunned_burn_g": [
+   "swing_slash_giant",
+   "phase_stunned_burn_g"
+  ],
+  "miss_slash_giant__stunned_burn_fs": [
+   "swing_slash_giant",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_arrow_fire__stunned_g": [
+   "swing_arrow_fire",
+   "phase_stunned_g"
+  ],
+  "hit_arrow_fire__stunned_fs": [
+   "swing_arrow_fire",
+   "phase_stunned_fs"
+  ],
+  "miss_arrow_fire__stunned_burn_g": [
+   "swing_arrow_fire",
+   "phase_stunned_burn_g"
+  ],
+  "miss_arrow_fire__stunned_burn_fs": [
+   "swing_arrow_fire",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_arrow_ice__stunned_g": [
+   "swing_arrow_ice",
+   "phase_stunned_g"
+  ],
+  "hit_arrow_ice__stunned_fs": [
+   "swing_arrow_ice",
+   "phase_stunned_fs"
+  ],
+  "miss_arrow_ice__stunned_burn_g": [
+   "swing_arrow_ice",
+   "phase_stunned_burn_g"
+  ],
+  "miss_arrow_ice__stunned_burn_fs": [
+   "swing_arrow_ice",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_arrow_light__stunned_g": [
+   "swing_arrow_light",
+   "phase_stunned_g"
+  ],
+  "hit_arrow_light__stunned_fs": [
+   "swing_arrow_light",
+   "phase_stunned_fs"
+  ],
+  "miss_arrow_light__stunned_burn_g": [
+   "swing_arrow_light",
+   "phase_stunned_burn_g"
+  ],
+  "miss_arrow_light__stunned_burn_fs": [
+   "swing_arrow_light",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_spin_giant__stunned_g": [
+   "swing_spin_giant",
+   "phase_stunned_g"
+  ],
+  "hit_spin_giant__stunned_fs": [
+   "swing_spin_giant",
+   "phase_stunned_fs"
+  ],
+  "miss_spin_giant__stunned_burn_g": [
+   "swing_spin_giant",
+   "phase_stunned_burn_g"
+  ],
+  "miss_spin_giant__stunned_burn_fs": [
+   "swing_spin_giant",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_spin_master__stunned_g": [
+   "swing_spin_master",
+   "phase_stunned_g"
+  ],
+  "hit_spin_master__stunned_fs": [
+   "swing_spin_master",
+   "phase_stunned_fs"
+  ],
+  "miss_spin_master__stunned_burn_g": [
+   "swing_spin_master",
+   "phase_stunned_burn_g"
+  ],
+  "miss_spin_master__stunned_burn_fs": [
+   "swing_spin_master",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_jump_giant__stunned_g": [
+   "swing_jump_giant",
+   "phase_stunned_g"
+  ],
+  "hit_jump_giant__stunned_fs": [
+   "swing_jump_giant",
+   "phase_stunned_fs"
+  ],
+  "miss_jump_giant__stunned_burn_g": [
+   "swing_jump_giant",
+   "phase_stunned_burn_g"
+  ],
+  "miss_jump_giant__stunned_burn_fs": [
+   "swing_jump_giant",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_jump_giant_self__stunned_g": [
+   "swing_jump_giant_self",
+   "phase_stunned_g"
+  ],
+  "hit_jump_giant_self__stunned_fs": [
+   "swing_jump_giant_self",
+   "phase_stunned_fs"
+  ],
+  "miss_jump_giant_self__stunned_burn_g": [
+   "swing_jump_giant_self",
+   "phase_stunned_burn_g"
+  ],
+  "miss_jump_giant_self__stunned_burn_fs": [
+   "swing_jump_giant_self",
+   "phase_stunned_burn_fs"
+  ],
+  "miss_jump_master__stunned_burn_g": [
+   "swing_jump_master",
+   "phase_stunned_burn_g"
+  ],
+  "miss_jump_master__stunned_burn_fs": [
+   "swing_jump_master",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_jump_master_self__stunned_g": [
+   "swing_jump_master_self",
+   "phase_stunned_g"
+  ],
+  "hit_jump_master_self__stunned_fs": [
+   "swing_jump_master_self",
+   "phase_stunned_fs"
+  ],
+  "miss_jump_master_self__stunned_burn_g": [
+   "swing_jump_master_self",
+   "phase_stunned_burn_g"
+  ],
+  "miss_jump_master_self__stunned_burn_fs": [
+   "swing_jump_master_self",
+   "phase_stunned_burn_fs"
+  ],
+  "hit_hammer_jump__stunned_g": [
+   "swing_hammer_jump",
+   "phase_stunned_g"
+  ],
+  "hit_hammer_jump__stunned_fs": [
+   "swing_hammer_jump",
+   "phase_stunned_fs"
+  ],
+  "miss_hammer_jump__stunned_burn_g": [
+   "swing_hammer_jump",
+   "phase_stunned_burn_g"
+  ],
+  "miss_hammer_jump__stunned_burn_fs": [
+   "swing_hammer_jump",
+   "phase_stunned_burn_fs"
   ]
  },
  "slices": [
@@ -54,7 +306,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1226
+   "ms": 434
   },
   {
    "kit": "adult_arrows",
@@ -68,21 +320,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 13291
+   "ms": 4564
   },
   {
    "kit": "adult_arrows",
    "variant": "larva",
-   "positions": 126,
+   "positions": 136,
    "complete": true,
    "outcomes": {
     "Link withdraws": 20,
-    "Link falls": 5,
-    "Link wins": 50
+    "Link wins": 60,
+    "Link falls": 5
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 375
+   "ms": 116
   },
   {
    "kit": "adult_blade",
@@ -96,7 +348,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 231
+   "ms": 91
   },
   {
    "kit": "adult_blade",
@@ -110,21 +362,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2983
+   "ms": 1133
   },
   {
    "kit": "adult_blade",
    "variant": "larva",
-   "positions": 26,
+   "positions": 28,
    "complete": true,
    "outcomes": {
     "Link withdraws": 4,
-    "Link falls": 1,
-    "Link wins": 10
+    "Link wins": 12,
+    "Link falls": 1
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 131
+   "ms": 21
   },
   {
    "kit": "adult_bottles",
@@ -137,7 +389,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 452
+   "ms": 152
   },
   {
    "kit": "adult_bottles",
@@ -151,20 +403,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 12583
+   "ms": 5358
   },
   {
    "kit": "adult_bottles",
    "variant": "larva",
-   "positions": 115,
+   "positions": 131,
    "complete": true,
    "outcomes": {
     "Link withdraws": 32,
+    "Link wins": 16,
     "Link falls": 2
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 390
+   "ms": 168
   },
   {
    "kit": "adult_dins",
@@ -177,7 +430,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 322
+   "ms": 169
   },
   {
    "kit": "adult_dins",
@@ -191,20 +444,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 17459
+   "ms": 5589
   },
   {
    "kit": "adult_dins",
    "variant": "larva",
-   "positions": 106,
+   "positions": 120,
    "complete": true,
    "outcomes": {
     "Link withdraws": 28,
+    "Link wins": 14,
     "Link falls": 7
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 286
+   "ms": 119
   },
   {
    "kit": "adult_giant",
@@ -217,7 +471,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 528
+   "ms": 168
   },
   {
    "kit": "adult_giant",
@@ -231,7 +485,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 12897
+   "ms": 3345
   },
   {
    "kit": "adult_giant",
@@ -244,7 +498,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 546
+   "ms": 126
   },
   {
    "kit": "adult_lens",
@@ -257,7 +511,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1727
+   "ms": 313
   },
   {
    "kit": "adult_lens",
@@ -271,20 +525,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 40456
+   "ms": 15538
   },
   {
    "kit": "adult_lens",
    "variant": "larva",
-   "positions": 334,
+   "positions": 378,
    "complete": true,
    "outcomes": {
     "Link withdraws": 88,
+    "Link wins": 44,
     "Link falls": 25
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 858
+   "ms": 258
   },
   {
    "kit": "adult_nayru",
@@ -297,7 +552,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2316
+   "ms": 730
   },
   {
    "kit": "adult_nayru",
@@ -311,20 +566,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 103075
+   "ms": 35696
   },
   {
    "kit": "adult_nayru",
    "variant": "larva",
-   "positions": 1018,
+   "positions": 1162,
    "complete": true,
    "outcomes": {
     "Link withdraws": 286,
+    "Link wins": 144,
     "Link falls": 13
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3651
+   "ms": 600
   },
   {
    "kit": "adult_spin",
@@ -337,7 +593,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1642
+   "ms": 638
   },
   {
    "kit": "adult_spin",
@@ -351,62 +607,63 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 77266
+   "ms": 21044
   },
   {
    "kit": "adult_spin",
    "variant": "larva",
-   "positions": 421,
+   "positions": 477,
    "complete": true,
    "outcomes": {
     "Link withdraws": 112,
+    "Link wins": 56,
     "Link falls": 28
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1698
+   "ms": 350
   },
   {
    "kit": "child_blade",
    "variant": "flying",
-   "positions": 732,
+   "positions": 1214,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 136,
+    "Link withdraws": 160,
     "Link falls": 12,
-    "Link wins": 74
+    "Link wins": 124
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2348
+   "ms": 1515
   },
   {
    "kit": "child_blade",
    "variant": "grounded",
-   "positions": 753,
+   "positions": 741,
    "complete": true,
    "outcomes": {
     "Link withdraws": 96,
     "Link falls": 6,
-    "Link wins": 86
+    "Link wins": 74
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3933
+   "ms": 1862
   },
   {
    "kit": "child_blade",
    "variant": "larva",
-   "positions": 26,
+   "positions": 28,
    "complete": true,
    "outcomes": {
     "Link withdraws": 4,
-    "Link falls": 1,
-    "Link wins": 10
+    "Link wins": 12,
+    "Link falls": 1
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 96
+   "ms": 31
   },
   {
    "kit": "child_bottles",
@@ -419,7 +676,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 226
+   "ms": 78
   },
   {
    "kit": "child_bottles",
@@ -433,60 +690,63 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 16063
+   "ms": 5359
   },
   {
    "kit": "child_bottles",
    "variant": "larva",
-   "positions": 59,
+   "positions": 67,
    "complete": true,
    "outcomes": {
     "Link withdraws": 16,
+    "Link wins": 8,
     "Link falls": 2
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 155
+   "ms": 54
   },
   {
    "kit": "child_dins",
    "variant": "flying",
-   "positions": 150,
+   "positions": 7674,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 46,
-    "Link falls": 14
+    "Link withdraws": 904,
+    "Link falls": 14,
+    "Link wins": 744
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 476
+   "ms": 8811
   },
   {
    "kit": "child_dins",
    "variant": "grounded",
-   "positions": 3949,
+   "positions": 4767,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 420,
+    "Link withdraws": 690,
     "Link falls": 42,
-    "Link wins": 42
+    "Link wins": 44
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 32663
+   "ms": 12681
   },
   {
    "kit": "child_dins",
    "variant": "larva",
-   "positions": 106,
+   "positions": 120,
    "complete": true,
    "outcomes": {
     "Link withdraws": 28,
+    "Link wins": 14,
     "Link falls": 7
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 323
+   "ms": 156
   },
   {
    "kit": "child_lens",
@@ -499,7 +759,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1138
+   "ms": 354
   },
   {
    "kit": "child_lens",
@@ -513,20 +773,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 59008
+   "ms": 30947
   },
   {
    "kit": "child_lens",
    "variant": "larva",
-   "positions": 334,
+   "positions": 378,
    "complete": true,
    "outcomes": {
     "Link withdraws": 88,
+    "Link wins": 44,
     "Link falls": 25
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 668
+   "ms": 315
   },
   {
    "kit": "child_nayru",
@@ -539,7 +800,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2273
+   "ms": 933
   },
   {
    "kit": "child_nayru",
@@ -553,20 +814,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 181716
+   "ms": 71198
   },
   {
    "kit": "child_nayru",
    "variant": "larva",
-   "positions": 1018,
+   "positions": 1162,
    "complete": true,
    "outcomes": {
     "Link withdraws": 286,
+    "Link wins": 144,
     "Link falls": 13
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2021
+   "ms": 658
   },
   {
    "kit": "child_spin",
@@ -579,7 +841,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1321
+   "ms": 471
   },
   {
    "kit": "child_spin",
@@ -593,20 +855,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 84874
+   "ms": 42244
   },
   {
    "kit": "child_spin",
    "variant": "larva",
-   "positions": 421,
+   "positions": 477,
    "complete": true,
    "outcomes": {
     "Link withdraws": 112,
+    "Link wins": 56,
     "Link falls": 28
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1201
+   "ms": 393
   }
  ]
 }

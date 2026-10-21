@@ -50,19 +50,26 @@ state has_fairy "Has fairy" in gear at 1860 500
 state has_red_potion "Has red potion" in gear at 1720 570
 state phase_walk_recover "King Dodongo plods along the wall, not yet deciding" in enemy at 2040 80
 state timer_walk_recover "King Dodongo plods along the wall, not yet deciding: beats left" in enemy at 2180 80
-state phase_walk_free "King Dodongo plods along the wall, watching Link" in enemy at 2180 150
-state phase_inhale "King Dodongo inhales" in enemy at 2040 220
-state timer_inhale "King Dodongo inhales: beats left" in enemy at 2180 220
-state phase_blow "King Dodongo breathes fire" in enemy at 2180 290
-state timer_blow "King Dodongo breathes fire: beats left" in enemy at 2040 360
-state phase_explode "The bomb goes off in his belly" in enemy at 2040 430
-state timer_explode "The bomb goes off in his belly: beats left" in enemy at 2180 430
-state phase_down "King Dodongo lies stunned" in enemy at 2180 500
-state timer_down "King Dodongo lies stunned: beats left" in enemy at 2040 570
-state phase_getup "King Dodongo gets up" in enemy at 2040 640
-state phase_damaged "King Dodongo reels from the sword" in enemy at 2180 640
-state phase_roll "King Dodongo curls up and rolls around the arena" in enemy at 2040 710
-state timer_roll "King Dodongo curls up and rolls around the arena: beats left" in enemy at 2180 710
+state phase_walk_corner "King Dodongo walks out of the corner he rolled into" in enemy at 2180 150
+state phase_walk_free "King Dodongo plods along the wall, watching Link" in enemy at 2040 220
+state phase_inhale_early "King Dodongo starts to inhale" in enemy at 2180 220
+state timer_inhale_early "King Dodongo starts to inhale: beats left" in enemy at 2040 290
+state phase_inhale_open "King Dodongo inhales hard, mouth open to a bomb" in enemy at 2040 360
+state timer_inhale_open "King Dodongo inhales hard, mouth open to a bomb: beats left" in enemy at 2180 360
+state phase_inhale_late "King Dodongo finishes inhaling" in enemy at 2180 430
+state timer_inhale_late "King Dodongo finishes inhaling: beats left" in enemy at 2040 500
+state phase_blow "King Dodongo breathes fire" in enemy at 2040 570
+state timer_blow "King Dodongo breathes fire: beats left" in enemy at 2180 570
+state phase_explode "The bomb goes off in his belly" in enemy at 2180 640
+state timer_explode "The bomb goes off in his belly: beats left" in enemy at 2040 710
+state phase_down "King Dodongo lies stunned" in enemy at 2040 780
+state timer_down "King Dodongo lies stunned: beats left" in enemy at 2180 780
+state phase_getup "King Dodongo gets up" in enemy at 2180 850
+state phase_damaged "King Dodongo reels from the sword" in enemy at 2040 920
+state phase_roll "King Dodongo curls up to roll" in enemy at 2180 920
+state timer_roll "King Dodongo curls up to roll: beats left" in enemy at 2040 990
+state phase_roll_1 "King Dodongo rolls toward the next corner" in enemy at 2040 1060
+state phase_roll_2 "King Dodongo rolls on toward the corner after" in enemy at 2180 1060
 state hp_body "King Dodongo: health" marks 12 in enemy_health at 2360 80
 state alive_body "King Dodongo: standing" marks 1 in enemy_health at 2500 80
 state dmg_body "King Dodongo: damage" in enemy_health at 2360 150
@@ -74,15 +81,15 @@ state link_dodge "Link dodges" in link_state at 1220 430
 state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
 state swing_deku_stick "Deku Stick on its way" in hits at 3000 150
 state swing_slingshot "Slingshot seed on its way" in hits at 3140 220
-state swing_explosive "Explosion on its way" in hits at 3000 360
-state swing_boomerang "Boomerang on its way" in hits at 3140 430
-state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 570
-state swing_magic_fire "Din's Fire on its way" in hits at 3140 640
-state swing_shield "Shield on its way" in hits at 3000 780
-state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3000 850
-state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 990
-state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3140 1060
-state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 1200
+state swing_explosive "Explosion on its way" in hits at 3000 430
+state swing_boomerang "Boomerang on its way" in hits at 3140 500
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 710
+state swing_magic_fire "Din's Fire on its way" in hits at 3140 780
+state swing_shield "Shield on its way" in hits at 3000 920
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3000 990
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 1130
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3140 1200
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 1340
 state guard_with_deku_shield "Shield up: deku shield" in link_state at 1220 710
 state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
 state incoming_roll "King Dodongo rolls into Link incoming" in attacks at 3320 80
@@ -92,27 +99,35 @@ state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state burn_count "Link: burn: beats toward the next cost" in beat at 440 430
 state lens_count "The Lens: beats toward the next cost" in beat at 580 640
 
-verb walk_recover_timer_clears "King Dodongo plods along the wall, not yet deciding is over" by world priority 99 in enemy at 2040 150
+verb walk_recover_timer_clears "King Dodongo plods along the wall, not yet deciding is over" by world priority 100 in enemy at 2040 150
   take timer_walk_recover
   unless phase_walk_recover
 
-verb inhale_timer_clears "King Dodongo inhales is over" by world priority 99 in enemy at 2040 290
-  take timer_inhale
-  unless phase_inhale
+verb inhale_early_timer_clears "King Dodongo starts to inhale is over" by world priority 100 in enemy at 2180 290
+  take timer_inhale_early
+  unless phase_inhale_early
 
-verb blow_timer_clears "King Dodongo breathes fire is over" by world priority 99 in enemy at 2180 360
+verb inhale_open_timer_clears "King Dodongo inhales hard, mouth open to a bomb is over" by world priority 100 in enemy at 2040 430
+  take timer_inhale_open
+  unless phase_inhale_open
+
+verb inhale_late_timer_clears "King Dodongo finishes inhaling is over" by world priority 100 in enemy at 2180 500
+  take timer_inhale_late
+  unless phase_inhale_late
+
+verb blow_timer_clears "King Dodongo breathes fire is over" by world priority 100 in enemy at 2040 640
   take timer_blow
   unless phase_blow
 
-verb explode_timer_clears "The bomb goes off in his belly is over" by world priority 99 in enemy at 2040 500
+verb explode_timer_clears "The bomb goes off in his belly is over" by world priority 100 in enemy at 2180 710
   take timer_explode
   unless phase_explode
 
-verb down_timer_clears "King Dodongo lies stunned is over" by world priority 99 in enemy at 2180 570
+verb down_timer_clears "King Dodongo lies stunned is over" by world priority 100 in enemy at 2040 850
   take timer_down
   unless phase_down
 
-verb roll_timer_clears "King Dodongo curls up and rolls around the arena is over" by world priority 99 in enemy at 2040 780
+verb roll_timer_clears "King Dodongo curls up to roll is over" by world priority 100 in enemy at 2180 990
   take timer_roll
   unless phase_roll
 
@@ -216,50 +231,50 @@ verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "King Dodongo loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "King Dodongo loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "King Dodongo has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "King Dodongo has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -392,101 +407,125 @@ verb hit_deku_stick__down "Deku Stick hits (King Dodongo lies stunned)" by world
 verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3000 290
   take swing_slingshot
 
-verb hit_slingshot__inhale "Slingshot seed hits (King Dodongo inhales)" by world priority 80 in hits at 3140 290
+verb hit_slingshot__inhale_early "Slingshot seed hits (King Dodongo starts to inhale)" by world priority 80 in hits at 3140 290
   take swing_slingshot
-  take phase_inhale
+  take phase_inhale_early
   give phase_walk_recover
   give 3 timer_walk_recover
 
-verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 360
+verb hit_slingshot__inhale_open "Slingshot seed hits (King Dodongo inhales hard, mouth open to a bomb)" by world priority 80 in hits at 3000 360
+  take swing_slingshot
+  take phase_inhale_open
+  give phase_walk_recover
+  give 3 timer_walk_recover
+
+verb hit_slingshot__inhale_late "Slingshot seed hits (King Dodongo finishes inhaling)" by world priority 80 in hits at 3140 360
+  take swing_slingshot
+  take phase_inhale_late
+  give phase_walk_recover
+  give 3 timer_walk_recover
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 430
   take swing_explosive
 
-verb hit_explosive__inhale "Explosion hits (King Dodongo inhales)" by world priority 80 in hits at 3000 430
+verb hit_explosive__inhale_open "Explosion hits (King Dodongo inhales hard, mouth open to a bomb)" by world priority 80 in hits at 3000 500
   take swing_explosive
-  take phase_inhale
+  take phase_inhale_open
   give phase_explode
   give 2 timer_explode
   give 2 dmg_body
 
-verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3000 500
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3000 570
   take swing_boomerang
 
-verb hit_boomerang__inhale "Boomerang hits (King Dodongo inhales)" by world priority 80 in hits at 3140 500
+verb hit_boomerang__inhale_early "Boomerang hits (King Dodongo starts to inhale)" by world priority 80 in hits at 3140 570
   take swing_boomerang
-  take phase_inhale
+  take phase_inhale_early
   give phase_walk_recover
   give 3 timer_walk_recover
 
-verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3140 570
+verb hit_boomerang__inhale_open "Boomerang hits (King Dodongo inhales hard, mouth open to a bomb)" by world priority 80 in hits at 3000 640
+  take swing_boomerang
+  take phase_inhale_open
+  give phase_walk_recover
+  give 3 timer_walk_recover
+
+verb hit_boomerang__inhale_late "Boomerang hits (King Dodongo finishes inhaling)" by world priority 80 in hits at 3140 640
+  take swing_boomerang
+  take phase_inhale_late
+  give phase_walk_recover
+  give 3 timer_walk_recover
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3140 710
   take swing_slash_kokiri
 
-verb hit_slash_kokiri__down "Kokiri Sword slash hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 640
+verb hit_slash_kokiri__down "Kokiri Sword slash hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 780
   take swing_slash_kokiri
   take phase_down
   give phase_damaged
   give dmg_body
 
-verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 710
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 850
   take swing_magic_fire
 
-verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 710
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 850
   take swing_magic_fire
   need range_far
 
-verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 780
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 920
   take swing_shield
 
-verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3140 850
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3140 990
   take swing_spin_kokiri
 
-verb hit_spin_kokiri__down "Kokiri spin attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 920
+verb hit_spin_kokiri__down "Kokiri spin attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 1060
   take swing_spin_kokiri
   take phase_down
   give phase_damaged
   give dmg_body
 
-verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 920
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 1060
   take swing_spin_kokiri
   need range_far
 
-verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 990
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 1130
   take swing_jump_kokiri
 
-verb hit_jump_kokiri__down "Kokiri jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 1060
+verb hit_jump_kokiri__down "Kokiri jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 1200
   take swing_jump_kokiri
   take phase_down
   give phase_damaged
   give 2 dmg_body
 
-verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 1130
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 1270
   take swing_jump_kokiri_self
 
-verb hit_jump_kokiri_self__down "Kokiri jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3140 1130
+verb hit_jump_kokiri_self__down "Kokiri jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3140 1270
   take swing_jump_kokiri_self
   take phase_down
   give phase_damaged
   give 2 dmg_body
 
-verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 1200
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 1340
   take swing_jump_kokiri_self
   need range_far
 
-verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 1270
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 1410
   take swing_jump_master
 
-verb hit_jump_master__down "Master Sword jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3140 1270
+verb hit_jump_master__down "Master Sword jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3140 1410
   take swing_jump_master
   take phase_down
   give phase_damaged
   give 4 dmg_body
 
-verb body_empty_in_explode "King Dodongo runs out (The bomb goes off in his belly)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_explode "King Dodongo runs out (The bomb goes off in his belly)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_explode
   give link_wins
 
-verb body_empty_in_damaged "King Dodongo runs out (King Dodongo reels from the sword)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_damaged "King Dodongo runs out (King Dodongo reels from the sword)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_damaged
@@ -564,37 +603,51 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 920
   take lens_on
   give link_turn
 
-verb enemy_ready "King Dodongo gets ready" by world priority 70 in enemy at 2180 780
+verb enemy_ready "King Dodongo gets ready" by world priority 70 in enemy at 2040 1130
   take enemy_turn
   give enemy_act
 
-verb walk_recover_ticks "King Dodongo plods along the wall, not yet deciding: a beat passes" by world priority 71 in enemy at 2040 850
+verb walk_recover_ticks "King Dodongo plods along the wall, not yet deciding: a beat passes" by world priority 71 in enemy at 2180 1130
   take enemy_turn
   need phase_walk_recover
   take timer_walk_recover
   give enemy_act
 
-verb walk_recover_step_1 "King Dodongo looks for Link" by world priority 69 in enemy at 2180 850
+verb walk_recover_step_1 "King Dodongo looks for Link" by world priority 69 in enemy at 2040 1200
   take enemy_act
   take phase_walk_recover
   give phase_walk_free
   unless timer_walk_recover
   give beat_end
 
-verb walk_recover_holds "King Dodongo plods along the wall, not yet deciding: nothing changes" by world priority 68 in enemy at 2040 920
+verb walk_recover_holds "King Dodongo plods along the wall, not yet deciding: nothing changes" by world priority 68 in enemy at 2180 1200
   take enemy_act
   need phase_walk_recover
   give beat_end
 
-verb walk_free_step_1 "Link is ahead of him; he draws breath" by world priority 69 in enemy at 2180 920
+verb walk_corner_step_1 "King Dodongo is clear of the corner" by world priority 69 in enemy at 2040 1270
+  take enemy_act
+  take phase_walk_corner
+  give phase_walk_free
+  give beat_end
+
+verb walk_free_step_1 "Link is in front of him; he draws breath" by world priority 69 in enemy at 2180 1270
   take enemy_act
   take phase_walk_free
-  give phase_inhale
-  give 5 timer_inhale
+  give phase_inhale_early
+  give timer_inhale_early
   give beat_end
   need range_near
 
-verb walk_free_step_2 "Link is off to the side; he rolls" by world priority 69 in enemy at 2040 990
+verb walk_free_step_2 "Link is beside or behind him; he rolls" by world priority 69 in enemy at 2040 1340
+  take enemy_act
+  take phase_walk_free
+  give phase_roll
+  give timer_roll
+  give beat_end
+  need range_near
+
+verb walk_free_step_3 "Link is off to the side; he rolls" by world priority 69 in enemy at 2180 1340
   take enemy_act
   take phase_walk_free
   give phase_roll
@@ -602,43 +655,76 @@ verb walk_free_step_2 "Link is off to the side; he rolls" by world priority 69 i
   give beat_end
   need range_far
 
-verb inhale_ticks "King Dodongo inhales: a beat passes" by world priority 71 in enemy at 2180 990
+verb walk_free_step_4 "Link is ahead of him but off his breath's line, or he is near a corner; he walks on" by world priority 69 in enemy at 2040 1410
+  take enemy_act
+  need phase_walk_free
+  give beat_end
+
+verb inhale_early_ticks "King Dodongo starts to inhale: a beat passes" by world priority 71 in enemy at 2180 1410
   take enemy_turn
-  need phase_inhale
-  take timer_inhale
+  need phase_inhale_early
+  take timer_inhale_early
   give enemy_act
 
-verb inhale_step_1 "King Dodongo breathes fire over Link" by world priority 69 in enemy at 2040 1060
+verb inhale_early_step_1 "King Dodongo draws in hard" by world priority 69 in enemy at 2040 1480
   take enemy_act
-  take phase_inhale
+  take phase_inhale_early
+  give phase_inhale_open
+  give 3 timer_inhale_open
+  unless timer_inhale_early
+  give beat_end
+
+verb inhale_open_ticks "King Dodongo inhales hard, mouth open to a bomb: a beat passes" by world priority 71 in enemy at 2180 1480
+  take enemy_turn
+  need phase_inhale_open
+  take timer_inhale_open
+  give enemy_act
+
+verb inhale_open_step_1 "King Dodongo stops drawing in" by world priority 69 in enemy at 2040 1550
+  take enemy_act
+  take phase_inhale_open
+  give phase_inhale_late
+  give timer_inhale_late
+  unless timer_inhale_open
+  give beat_end
+
+verb inhale_open_holds "King Dodongo inhales hard, mouth open to a bomb: nothing changes" by world priority 68 in enemy at 2180 1550
+  take enemy_act
+  need phase_inhale_open
+  give beat_end
+
+verb inhale_late_ticks "King Dodongo finishes inhaling: a beat passes" by world priority 71 in enemy at 2040 1620
+  take enemy_turn
+  need phase_inhale_late
+  take timer_inhale_late
+  give enemy_act
+
+verb inhale_late_step_1 "King Dodongo breathes fire over Link" by world priority 69 in enemy at 2180 1620
+  take enemy_act
+  take phase_inhale_late
   give phase_blow
   give 3 timer_blow
-  unless timer_inhale
+  unless timer_inhale_late
   give incoming_fire
   give beat_end
   need range_near
 
-verb inhale_step_2 "King Dodongo breathes fire, out of Link's way" by world priority 69 in enemy at 2180 1060
+verb inhale_late_step_2 "King Dodongo breathes fire, out of Link's way" by world priority 69 in enemy at 2040 1690
   take enemy_act
-  take phase_inhale
+  take phase_inhale_late
   give phase_blow
   give 3 timer_blow
-  unless timer_inhale
+  unless timer_inhale_late
   give beat_end
   need range_far
 
-verb inhale_holds "King Dodongo inhales: nothing changes" by world priority 68 in enemy at 2040 1130
-  take enemy_act
-  need phase_inhale
-  give beat_end
-
-verb blow_ticks "King Dodongo breathes fire: a beat passes" by world priority 71 in enemy at 2180 1130
+verb blow_ticks "King Dodongo breathes fire: a beat passes" by world priority 71 in enemy at 2180 1690
   take enemy_turn
   need phase_blow
   take timer_blow
   give enemy_act
 
-verb blow_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2040 1200
+verb blow_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2040 1760
   take enemy_act
   take phase_blow
   give phase_roll
@@ -646,18 +732,18 @@ verb blow_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2040 1200
   unless timer_blow
   give beat_end
 
-verb blow_holds "King Dodongo breathes fire: nothing changes" by world priority 68 in enemy at 2180 1200
+verb blow_holds "King Dodongo breathes fire: nothing changes" by world priority 68 in enemy at 2180 1760
   take enemy_act
   need phase_blow
   give beat_end
 
-verb explode_ticks "The bomb goes off in his belly: a beat passes" by world priority 71 in enemy at 2040 1270
+verb explode_ticks "The bomb goes off in his belly: a beat passes" by world priority 71 in enemy at 2040 1830
   take enemy_turn
   need phase_explode
   take timer_explode
   give enemy_act
 
-verb explode_step_1 "King Dodongo slumps" by world priority 69 in enemy at 2180 1270
+verb explode_step_1 "King Dodongo slumps" by world priority 69 in enemy at 2180 1830
   take enemy_act
   take phase_explode
   give phase_down
@@ -665,65 +751,88 @@ verb explode_step_1 "King Dodongo slumps" by world priority 69 in enemy at 2180 
   unless timer_explode
   give beat_end
 
-verb explode_holds "The bomb goes off in his belly: nothing changes" by world priority 68 in enemy at 2040 1340
+verb explode_holds "The bomb goes off in his belly: nothing changes" by world priority 68 in enemy at 2040 1900
   take enemy_act
   need phase_explode
   give beat_end
 
-verb down_ticks "King Dodongo lies stunned: a beat passes" by world priority 71 in enemy at 2180 1340
+verb down_ticks "King Dodongo lies stunned: a beat passes" by world priority 71 in enemy at 2180 1900
   take enemy_turn
   need phase_down
   take timer_down
   give enemy_act
 
-verb down_step_1 "King Dodongo stirs" by world priority 69 in enemy at 2040 1410
+verb down_step_1 "King Dodongo stirs" by world priority 69 in enemy at 2040 1970
   take enemy_act
   take phase_down
   give phase_getup
   unless timer_down
   give beat_end
 
-verb down_holds "King Dodongo lies stunned: nothing changes" by world priority 68 in enemy at 2180 1410
+verb down_holds "King Dodongo lies stunned: nothing changes" by world priority 68 in enemy at 2180 1970
   take enemy_act
   need phase_down
   give beat_end
 
-verb getup_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2040 1480
+verb getup_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2040 2040
   take enemy_act
   take phase_getup
   give phase_roll
   give timer_roll
   give beat_end
 
-verb damaged_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2180 1480
+verb damaged_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2180 2040
   take enemy_act
   take phase_damaged
   give phase_roll
   give timer_roll
   give beat_end
 
-verb roll_ticks "King Dodongo curls up and rolls around the arena: a beat passes" by world priority 71 in enemy at 2040 1550
+verb roll_ticks "King Dodongo curls up to roll: a beat passes" by world priority 71 in enemy at 2040 2110
   take enemy_turn
   need phase_roll
   take timer_roll
   give enemy_act
 
-verb roll_step_1 "King Dodongo rolls over Link" by world priority 69 in enemy at 2180 1550
+verb roll_step_1 "King Dodongo rolls over Link" by world priority 69 in enemy at 2180 2110
   take enemy_act
-  take phase_roll
-  give phase_walk_free
-  unless timer_roll
+  need phase_roll
   give incoming_roll
   give beat_end
   need range_near
 
-verb roll_step_2 "King Dodongo rolls into the wall" by world priority 69 in enemy at 2040 1620
+verb roll_step_2 "King Dodongo starts rolling" by world priority 69 in enemy at 2040 2180
   take enemy_act
   take phase_roll
-  give phase_walk_free
+  give phase_roll_1
   unless timer_roll
   give beat_end
-  need range_far
+
+verb roll_1_step_1 "King Dodongo rolls over Link" by world priority 69 in enemy at 2180 2180
+  take enemy_act
+  need phase_roll_1
+  give incoming_roll
+  give beat_end
+  need range_near
+
+verb roll_1_step_2 "King Dodongo bounces off a corner" by world priority 69 in enemy at 2040 2250
+  take enemy_act
+  take phase_roll_1
+  give phase_roll_2
+  give beat_end
+
+verb roll_2_step_1 "King Dodongo rolls over Link" by world priority 69 in enemy at 2180 2250
+  take enemy_act
+  need phase_roll_2
+  give incoming_roll
+  give beat_end
+  need range_near
+
+verb roll_2_step_2 "King Dodongo hits the second corner and stands up" by world priority 69 in enemy at 2040 2320
+  take enemy_act
+  take phase_roll_2
+  give phase_walk_corner
+  give beat_end
 
 verb roll_blocked_deku_shield "King Dodongo rolls into Link: blocked by the deku shield" by world priority 60 in attacks at 3460 80
   take incoming_roll
@@ -805,7 +914,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 440 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 580 500
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 580 500
   take burn_count
   unless status_burn
 
@@ -852,6 +961,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 580 780
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 850
   take lens_count
   unless lens_on

@@ -1,5 +1,5 @@
 {
- "positions": 57550,
+ "positions": 64284,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -10,13 +10,14 @@
  "deadVerbs": [
   "eruption_timer_clears",
   "quiet_timer_clears",
+  "eruption_collapse_wait_timer_clears",
   "link_hurt_overkill"
  ],
  "kitSplit": {},
  "slices": [
   {
    "kit": "adult_arrows",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 1061,
    "complete": true,
    "outcomes": {
@@ -25,11 +26,24 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1484
+   "ms": 959
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "ganons_tower",
+   "positions": 191,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 60,
+    "Link falls": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 220
   },
   {
    "kit": "adult_blade",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 213,
    "complete": true,
    "outcomes": {
@@ -38,11 +52,24 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 465
+   "ms": 316
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "ganons_tower",
+   "positions": 39,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 12,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 46
   },
   {
    "kit": "adult_bottles",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 1577,
    "complete": true,
    "outcomes": {
@@ -51,11 +78,24 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1737
+   "ms": 1401
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "ganons_tower",
+   "positions": 293,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 96,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 276
   },
   {
    "kit": "adult_dins",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 1485,
    "complete": true,
    "outcomes": {
@@ -64,11 +104,24 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1357
+   "ms": 974
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "ganons_tower",
+   "positions": 267,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 84,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 229
   },
   {
    "kit": "adult_giant",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 1213,
    "complete": true,
    "outcomes": {
@@ -77,11 +130,24 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1713
+   "ms": 1062
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "ganons_tower",
+   "positions": 223,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 72,
+    "Link falls": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 246
   },
   {
    "kit": "adult_lens",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 4725,
    "complete": true,
    "outcomes": {
@@ -90,11 +156,24 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3884
+   "ms": 3273
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "ganons_tower",
+   "positions": 843,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 264,
+    "Link falls": 50
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 642
   },
   {
    "kit": "adult_nayru",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 14085,
    "complete": true,
    "outcomes": {
@@ -103,11 +182,24 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 9573
+   "ms": 7713
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "ganons_tower",
+   "positions": 2619,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 864,
+    "Link falls": 26
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1410
   },
   {
    "kit": "adult_spin",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 5937,
    "complete": true,
    "outcomes": {
@@ -116,11 +208,24 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 6038
+   "ms": 4436
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "ganons_tower",
+   "positions": 1065,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 336,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 868
   },
   {
    "kit": "child_blade",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 213,
    "complete": true,
    "outcomes": {
@@ -129,11 +234,23 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 377
+   "ms": 261
+  },
+  {
+   "kit": "child_blade",
+   "variant": "ganons_tower",
+   "positions": 10,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16
   },
   {
    "kit": "child_bottles",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 809,
    "complete": true,
    "outcomes": {
@@ -142,11 +259,23 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 840
+   "ms": 542
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "ganons_tower",
+   "positions": 19,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 18
   },
   {
    "kit": "child_dins",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 1485,
    "complete": true,
    "outcomes": {
@@ -155,11 +284,23 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2326
+   "ms": 1127
+  },
+  {
+   "kit": "child_dins",
+   "variant": "ganons_tower",
+   "positions": 64,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 21
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 78
   },
   {
    "kit": "child_lens",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 4725,
    "complete": true,
    "outcomes": {
@@ -168,11 +309,23 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 4512
+   "ms": 3135
+  },
+  {
+   "kit": "child_lens",
+   "variant": "ganons_tower",
+   "positions": 199,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 66
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 154
   },
   {
    "kit": "child_nayru",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 14085,
    "complete": true,
    "outcomes": {
@@ -181,11 +334,23 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 10717
+   "ms": 8179
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "ganons_tower",
+   "positions": 649,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 216
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 454
   },
   {
    "kit": "child_spin",
-   "variant": "",
+   "variant": "death_mountain",
    "positions": 5937,
    "complete": true,
    "outcomes": {
@@ -194,7 +359,19 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 5431
+   "ms": 4428
+  },
+  {
+   "kit": "child_spin",
+   "variant": "ganons_tower",
+   "positions": 253,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 84
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 231
   }
  ]
 }

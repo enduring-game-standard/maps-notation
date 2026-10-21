@@ -14,6 +14,17 @@ const at = (line: number): Cite => `${F}:${line}`
  * (scale 0.15, line 109), so 24 or 36 frames.
  * The chasing sweep turns 0x6390 at 0x20 scaled by R_UPDATE_RATE * 0.5 (src/code/z_lib.c:55), with
  * R_UPDATE_RATE 3 (src/code/game.c:497): 0x6390 / 0x30 = 531 frames.
+ * Reported gaps:
+ * - On contact the wall also knocks Link back with no damage (Actor_SetPlayerKnockbackLargeNoDamage, line 239). The
+ *   attack carries the burn, which costs health; the knockback is reported, not modeled.
+ * - After a touch the chasing wall rises again 0x1800 back (line 169) and keeps its progress toward the same end
+ *   angle (line 201), so a resumed sweep is shorter than 531 frames: (end - angle) / 0x30. The phase timer cannot
+ *   carry the angle reached, so every sweep is modeled as a full 531. Only a finished sweep restarts from home
+ *   (lines 202, 172).
+ * - The sweep advances only while Link is not in a cutscene (Player_InCsMode, line 200). Cutscenes are outside the
+ *   beat model.
+ * - Leaving the room kills the chasing wall (lines 244-247, 165-166). That is Link's own leave verb, which ends the
+ *   encounter, so no step stands for it.
  * The Fire Temple is visited as adult: `src/overlays/actors/ovl_En_Du/z_en_du.c:173` gates Darunia's
  * Fire Temple appearance on LINK_IS_ADULT.
  */

@@ -6,13 +6,31 @@ const F = 'src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c'
 const at = (line: number): Cite => `${F}:${line}`
 
 /**
- * What the fight has reached. `pre`: Link has no Master Sword and Ganon's health is above 20. `re`: Ganon got up
- * without Link taking the sword back. `ms`: Link has the Master Sword again (unk_334 set, line 1674). `last`: health 1,
- * where only a Master Sword hit still counts (line 2294).
+ * Ganon (z_boss_ganon2.c). Reported gaps, none expressible in the types:
+ * - Facing is fixed per phase. unk_313 is recomputed from yaw every frame (line 1333), and the head (line 2240) and tail
+ *   (line 2273) branches run in every phase not gated at 2233 or 2241. Each phase carries the exposure its turning
+ *   implies: idle, walk, the right swing and the post-sword left swing turn to Link (lines 1395, 1527, 1579), so they
+ *   show the head; the pre-sword left swing (line 1576), the guard (no turn call, lines 1404-1421) and the stun show the
+ *   tail. The other exposure of each phase is left out.
+ * - One near band serves the 150-unit swing start (line 1343) and the 250-unit follow-up swing (line 1567).
+ * - The wall swing (lines 1348-1350) needs DEMO_GJ scene props (line 1261) the checkout has no scene list for.
+ * - After a tail hit every hit is discarded for 60 frames (lines 2277, 2233), across damaged and the walk that follows.
+ *   The damaged animation's length is in the object binary, so damaged has no timer and the window is not modeled.
+ * - Ganon gets up only while Link is within 784 of the arena center (line 1725); the arena edge has no range band.
+ * - In idle, at timer 0 the walk wins over the swing test (lines 1388-1391). Steps have no "before the timer" gate, so a
+ *   near Link after the timer sees walk and swing tie.
+ * - In down_rising_ms a Master Sword hit costs 2 on the head (line 2256) and 2 or 4 on the tail (line 2285); one phase
+ *   holds one cost per type, so the head's 2 is used.
  */
-type Band = 'pre' | 're' | 'ms' | 'last'
-const BANDS: Band[] = ['pre', 're', 'ms', 'last']
-const BAND_NAME: Record<Band, string> = { pre: '', re: ' (risen without the sword taken back)', ms: ' (Link has the Master Sword)', last: ' (one health left)' }
+
+/**
+ * What the fight has reached. `pre`: Link has no Master Sword and Ganon's health is above 20, also after Ganon gets up
+ * with health 25 (line 1742), since nothing else differs while unk_334 is 0. `ms`: Link has the Master Sword again
+ * (unk_334 set, line 1674). `last`: health 1, where only a Master Sword hit still counts (line 2294).
+ */
+type Band = 'pre' | 'ms' | 'last'
+const BANDS: Band[] = ['pre', 'ms', 'last']
+const BAND_NAME: Record<Band, string> = { pre: '', ms: ' (Link has the Master Sword)', last: ' (one health left)' }
 const POST = (b: Band) => b === 'ms' || b === 'last'
 
 /** Elements 0 and 15 of the body spheres take 0xFFCFFFFF (lines 116 and 281): every type but the shield and reflected light. */
@@ -31,7 +49,6 @@ const tailHits = (b: Band): Pick<Phase, 'hittable' | 'overrides'> => {
   return {
     hittable: types,
     overrides: Object.fromEntries(types.map((d) => {
-      if (b === 're') return [d, { damage: 0, to: 'collapse', cite: at(2293) }]
       if (b === 'last' && !MASTER.includes(d)) return [d, { damage: 0, to: 'damaged_last', cite: at(2298) }]
       return [d, { damage: tail(d), to: `damaged_${b}`, cite: tailCite(d) }]
     })),
@@ -55,15 +72,16 @@ const bandPhases = (b: Band): Phase[] => {
     { id: `walk_${b}`, label: `Ganon stalks Link${n}`, ...frontHits(b), frames: { value: 100, cite: at(1476) }, cite: at(1474) },
     { id: `swing_l_${b}`, label: `Ganon swings his left sword${n}`, ...(POST(b) ? frontHits(b) : tailHits(b)), cite: at(1541) },
     { id: `swing_r_${b}`, label: `Ganon follows with his right sword${n}`, ...frontHits(b), cite: at(1568) },
-    { id: `guard_${b}`, label: `Ganon guards his face${n}`, hittable: 'none', frames: { value: 40, cite: at(1401) }, cite: at(1400) },
+    /** Head hits are ignored here (line 2241), and the guard never turns (lines 1404-1421), so Link can reach the tail. */
+    { id: `guard_${b}`, label: `Ganon guards his face${n}`, ...tailHits(b), frames: { value: 40, cite: at(1401) }, cite: at(1400) },
     { id: `stunned_${b}`, label: `A light arrow stuns Ganon${n}`, ...tailHits(b), frames: { value: 80, cite: at(1439) }, cite: at(1427) },
-    ...(b === 're' ? [] : [{ id: `damaged_${b}`, label: `Ganon recoils from a tail hit${n}`, hittable: 'none' as const, cite: at(1460) }]),
+    { id: `damaged_${b}`, label: `Ganon recoils from a tail hit${n}`, hittable: 'none', cite: at(1460) },
   ]
 }
 
 const bandSteps = (b: Band): Step[] => [
   { from: `idle_${b}`, to: `swing_l_${b}`, label: 'Link is close in front: Ganon swings', range: 'near', cite: at(1346) },
-  { from: `idle_${b}`, to: `walk_${b}`, label: 'Ganon starts to walk', range: 'far', afterTimer: true, cite: at(1389) },
+  { from: `idle_${b}`, to: `walk_${b}`, label: 'Ganon starts to walk', afterTimer: true, cite: at(1389) },
   { from: `walk_${b}`, to: `swing_l_${b}`, label: 'Link is close in front: Ganon swings', range: 'near', cite: at(1346) },
   { from: `walk_${b}`, to: `walk_${b}`, label: 'Ganon walks Link down', range: 'far', move: 'near', cite: at(1518) },
   { from: `walk_${b}`, to: `idle_${b}`, label: 'Ganon stops walking', afterTimer: true, cite: at(1521) },
@@ -73,7 +91,7 @@ const bandSteps = (b: Band): Step[] => [
   { from: `swing_r_${b}`, to: `idle_${b}`, label: 'The right sword cuts the air', range: 'far', cite: at(1570) },
   { from: `guard_${b}`, to: `walk_${b}`, label: 'Ganon lowers his guard', afterTimer: true, cite: at(1411) },
   { from: `stunned_${b}`, to: `walk_${b}`, label: 'Ganon shakes off the stun', afterTimer: true, cite: at(1451) },
-  ...(b === 're' ? [] : [{ from: `damaged_${b}`, to: `walk_${b}`, label: 'Ganon recovers', cite: at(1468) }]),
+  { from: `damaged_${b}`, to: `walk_${b}`, label: 'Ganon recovers', cite: at(1468) },
 ]
 
 const cut = (why: string, line: number): Excluded => ({ excluded: why, cite: at(line) })
@@ -89,18 +107,27 @@ export const bossGanon2: ActorSpec = {
   pools: [{
     id: 'body', label: 'Ganon', hp: { value: 30, cite: at(457) }, then: 'held',
     thresholds: [
-      { at: 20, to: { damaged_pre: 'collapse' }, cite: at(2293) },
+      { at: 20, to: { damaged_pre: 'down_collapse' }, cite: at(2293) },
       { at: 1, to: { damaged_ms: 'damaged_last' }, cite: at(2298) },
     ],
   }],
   damage: { kind: 'custom', entries: Object.fromEntries(ALL.map((d) => [d, { damage: tail(d), cite: tailCite(d) }])) },
   phases: [
+    /** The first idle after the intro: unk_1A2[1] = 50 (line 1198) gates the swing test past the 40-frame timer. */
+    { id: 'idle_intro', label: 'Ganon stands guard after the intro', ...frontHits('pre'), frames: { value: 40, cite: at(1367) }, cite: at(1198) },
     ...BANDS.flatMap(bandPhases),
-    { id: 'collapse', label: 'Ganon collapses at 20 health', hittable: 'none', cite: at(1584) },
-    { id: 'downed', label: 'Ganon is down; the Master Sword lies on the floor', hittable: 'none', frames: { value: 300, cite: at(1642) }, cite: at(1586) },
+    { id: 'down_collapse', label: 'Ganon collapses at 20 health', hittable: 'none', cite: at(1584) },
+    { id: 'down_lying', label: 'Ganon is down; the Master Sword lies on the floor', hittable: 'none', frames: { value: 300, cite: at(1642) }, cite: at(1586) },
+    /**
+     * With unk_334 set, hits are no longer cleared (line 2233). A Master Sword hit on the head costs 2 (line 2256); any
+     * other type only connects on the tail, for 1 (line 2282), since the head branch ignores it here (line 2267).
+     */
     {
-      id: 'rising_ms', label: 'Ganon gets up as Link raises the Master Sword',
-      hittable: MASTER, overrides: Object.fromEntries(MASTER.map((d) => [d, { damage: 2, to: 'damaged_ms', cite: at(2256) }])),
+      id: 'down_rising_ms', label: 'Ganon gets up as Link raises the Master Sword',
+      hittable: ALL,
+      overrides: Object.fromEntries(ALL.map((d) => [d, MASTER.includes(d)
+        ? { damage: 2, to: 'damaged_ms', cite: at(2256) }
+        : { damage: 1, to: 'damaged_ms', cite: at(2282) }])),
       cite: at(1730),
     },
     {
@@ -109,14 +136,18 @@ export const bossGanon2: ActorSpec = {
       cite: at(1755),
     },
   ],
-  start: 'idle_pre',
+  start: 'idle_intro',
   range: 'far',
   steps: [
+    { from: 'idle_intro', to: 'walk_pre', label: 'Ganon starts to walk', afterTimer: true, cite: at(1389) },
     ...BANDS.flatMap(bandSteps),
-    { from: 'collapse', to: 'downed', label: 'Ganon lies still; the Master Sword can be reached', cite: at(1710) },
-    { from: 'downed', to: 'rising_ms', label: 'Link takes back the Master Sword', range: 'near', cite: at(3248) },
-    { from: 'downed', to: 'idle_re', label: 'Ganon gets up with his health restored to 25', range: 'far', afterTimer: true, cite: at(1742) },
-    { from: 'rising_ms', to: 'idle_ms', label: 'Ganon is back on his feet', cite: at(1740) },
+    { from: 'down_collapse', to: 'down_lying', label: 'Ganon lies still; the Master Sword can be reached', cite: at(1710) },
+    { from: 'down_lying', to: 'down_rising_ms', label: 'Link takes back the Master Sword', range: 'near', cite: at(3248) },
+    {
+      from: 'down_lying', to: 'idle_pre', label: 'Ganon gets up with his health restored to 25', range: 'far', afterTimer: true,
+      restore: { pool: 'body', to: 25, cite: at(1742) }, cite: at(1740),
+    },
+    { from: 'down_rising_ms', to: 'idle_ms', label: 'Ganon is back on his feet', cite: at(1740) },
   ],
   attacks: [
     { id: 'sword', label: 'Ganon\'s great sword', damage: 64, effect: { kind: 'knockback' }, blockable: true, dodgeable: true, source: at(307) },
@@ -129,7 +160,7 @@ export const bossGanon2: ActorSpec = {
     func_808FFFE0: 'guard_*',
     func_80900104: 'stunned_*',
     func_8090026C: 'damaged_*',
-    func_80900890: 'downed',
+    func_80900890: 'down_*',
     func_8090120C: 'held',
     func_808FD5F4: cut('the intro cutscene: the tower falls, Ganondorf transforms, and Ganon knocks the Master Sword away. Link is in a cutscene', 491),
   },
@@ -146,11 +177,10 @@ export const bossGanon2: ActorSpec = {
   ],
   expected: {
     deadVerbs: {
-      guard_pre_timer_clears: 'no hit moves Ganon out of a guard (line 2241), so he leaves it only by the step that waits for its timer',
-      guard_re_timer_clears: 'as guard_pre_timer_clears',
-      guard_ms_timer_clears: 'as guard_pre_timer_clears',
-      guard_last_timer_clears: 'as guard_pre_timer_clears',
-      body_empty_in_damaged_pre: 'in the pre band health is above 20 and a tail hit costs 1 (no Master Sword yet), so health never runs out there; the threshold at 20 moves him to collapse first',
+      body_resets_hp_body: 'Ganon gets up with health 25 only from down_lying, which he reaches at 20 or less (line 2292), so the health above 20 is already empty when the reset runs',
+      body_rearms_1: 'the reset runs only before the sword is taken back, where health stays above 20 (line 2292), so the threshold at 1 is still armed',
+      body_stands_again: 'the reset runs at health 20 or so, never at 0: before the sword is taken back a hit at 20 or less collapses him (line 2292) and cannot empty the pool',
+      body_empty_in_damaged_pre: 'in the pre band health is above 20 and a tail hit costs 1 (no Master Sword yet), so health never runs out there; the threshold at 20 moves him to down_collapse first',
     },
   },
 }

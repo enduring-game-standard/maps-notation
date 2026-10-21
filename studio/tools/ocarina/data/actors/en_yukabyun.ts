@@ -13,6 +13,14 @@ const breaks = Object.fromEntries(
 /**
  * The tile has no health: any AC hit, any AT hit, or a wall sends it to EnYukabyun_Break. Link starts at a quarter
  * heart so its single 4-unit strike can make him fall.
+ * Its AT, AC and OC colliders are live in every action function but the dormant one and Break (lines 145-153), so it
+ * already strikes a near Link while it spins up. EnYukabyun_Break follows its own strike on Link (AT_HIT, line 131)
+ * as well as Link's hits, so it is the tile's spent end, mapped to shattered, not a death after a finishing blow.
+ * Reported gaps:
+ * - The dormant delay is (u8)params * 10 + 20 frames after params++ (lines 79-81), from 20 up to 2570. The checkout
+ *   has no scene params, so no mean can be chosen; dormant is modeled untimed and can lift off any beat.
+ * - In flight the tile breaks on a wall with no strike (line 133), and despawns once Link is 5000 away (lines
+ *   114-116). Link's dodge stands for the miss, and his leave verb for the despawn; the wall break is not modeled.
  */
 export const enYukabyun: ActorSpec = {
   overlay: 'ovl_En_Yukabyun',
@@ -35,6 +43,7 @@ export const enYukabyun: ActorSpec = {
   steps: [
     { from: 'dormant', to: 'rising', label: 'The tile lifts off', cite: at(96) },
     { from: 'rising', to: 'flying', label: 'The tile launches at Link', afterTimer: true, cite: at(106) },
+    { from: 'rising', to: 'shattered', label: 'The spinning tile strikes Link beside it and shatters', range: 'near', attack: 'tile', cite: at(131) },
     { from: 'flying', to: 'shattered', label: 'The tile strikes and shatters', attack: 'tile', cite: at(139) },
   ],
   attacks: [{ id: 'tile', label: 'Flying tile', damage: 4, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(56) }],
@@ -48,7 +57,6 @@ export const enYukabyun: ActorSpec = {
   loadouts: standardLoadouts(['child', 'adult'], 0.25),
   expected: {
     deadVerbs: {
-      rising_timer_clears: 'rising is left only once its timer has run out, or by a hit that breaks the tile and ends the encounter, so no timer marks are ever left behind',
       link_hurt_overkill: 'the one strike deals 4, exactly the quarter heart Link starts with, and nothing else can hurt him, so no hit finds him already empty',
     },
   },

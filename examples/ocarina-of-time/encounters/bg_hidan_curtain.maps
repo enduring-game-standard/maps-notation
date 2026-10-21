@@ -65,18 +65,23 @@ state phase_turnoff_lower_t3 "The fire ring sinks (type 3)" in enemy at 2040 360
 state timer_turnoff_lower_t3 "The fire ring sinks (type 3): beats left" in enemy at 2180 360
 state phase_turnoff_raise_t4 "The fire ring rises (type 4)" in enemy at 2180 430
 state timer_turnoff_raise_t4 "The fire ring rises (type 4): beats left" in enemy at 2040 500
-state phase_timer_open_t1 "The fire ring is out for a while (type 1)" in enemy at 2040 570
-state timer_timer_open_t1 "The fire ring is out for a while (type 1): beats left" in enemy at 2180 570
-state phase_timer_open_t2 "The fire ring is out for a while (type 2)" in enemy at 2180 640
-state timer_timer_open_t2 "The fire ring is out for a while (type 2): beats left" in enemy at 2040 710
-state phase_timer_open_t3 "The fire ring is out for a while (type 3)" in enemy at 2040 780
-state timer_timer_open_t3 "The fire ring is out for a while (type 3): beats left" in enemy at 2180 780
-state phase_timer_lit_t4 "The fire ring burns for a while (type 4)" in enemy at 2180 850
-state timer_timer_lit_t4 "The fire ring burns for a while (type 4): beats left" in enemy at 2040 920
-state phase_turnon_raise "The fire ring rises again" in enemy at 2040 990
-state timer_turnon_raise "The fire ring rises again: beats left" in enemy at 2180 990
-state phase_turnon_lower "The fire ring sinks again (type 4)" in enemy at 2180 1060
-state timer_turnon_lower "The fire ring sinks again (type 4): beats left" in enemy at 2040 1130
+state phase_turnoff_raise_t5 "The fire ring rises (type 5)" in enemy at 2040 570
+state timer_turnoff_raise_t5 "The fire ring rises (type 5): beats left" in enemy at 2180 570
+state phase_turnoff_lower_t0 "The fire ring sinks for good (types 0, 6)" in enemy at 2180 640
+state timer_turnoff_lower_t0 "The fire ring sinks for good (types 0, 6): beats left" in enemy at 2040 710
+state phase_gone "The fire ring is gone" in enemy at 2040 780
+state phase_timer_open_t1 "The fire ring is out for a while (type 1)" in enemy at 2180 780
+state timer_timer_open_t1 "The fire ring is out for a while (type 1): beats left" in enemy at 2040 850
+state phase_timer_open_t2 "The fire ring is out for a while (type 2)" in enemy at 2040 920
+state timer_timer_open_t2 "The fire ring is out for a while (type 2): beats left" in enemy at 2180 920
+state phase_timer_open_t3 "The fire ring is out for a while (type 3)" in enemy at 2180 990
+state timer_timer_open_t3 "The fire ring is out for a while (type 3): beats left" in enemy at 2040 1060
+state phase_timer_lit_t4 "The fire ring burns for a while (type 4)" in enemy at 2040 1130
+state timer_timer_lit_t4 "The fire ring burns for a while (type 4): beats left" in enemy at 2180 1130
+state phase_turnon_raise "The fire ring rises again" in enemy at 2180 1200
+state timer_turnon_raise "The fire ring rises again: beats left" in enemy at 2040 1270
+state phase_turnon_lower "The fire ring sinks again (type 4)" in enemy at 2040 1340
+state timer_turnon_lower "The fire ring sinks again (type 4): beats left" in enemy at 2180 1340
 state status_burn "Link: burn (beats left)" in link_state at 1220 290
 state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
 state lens_on "Lens of Truth on" in link_state at 1220 360
@@ -109,43 +114,51 @@ state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state burn_count "Link: burn: beats toward the next cost" in beat at 440 430
 state lens_count "The Lens: beats toward the next cost" in beat at 580 640
 
-verb turnoff_lower_t1_timer_clears "The fire ring sinks (type 1) is over" by world priority 99 in enemy at 2040 220
+verb turnoff_lower_t1_timer_clears "The fire ring sinks (type 1) is over" by world priority 100 in enemy at 2040 220
   take timer_turnoff_lower_t1
   unless phase_turnoff_lower_t1
 
-verb turnoff_lower_t2_timer_clears "The fire ring sinks (type 2) is over" by world priority 99 in enemy at 2180 290
+verb turnoff_lower_t2_timer_clears "The fire ring sinks (type 2) is over" by world priority 100 in enemy at 2180 290
   take timer_turnoff_lower_t2
   unless phase_turnoff_lower_t2
 
-verb turnoff_lower_t3_timer_clears "The fire ring sinks (type 3) is over" by world priority 99 in enemy at 2040 430
+verb turnoff_lower_t3_timer_clears "The fire ring sinks (type 3) is over" by world priority 100 in enemy at 2040 430
   take timer_turnoff_lower_t3
   unless phase_turnoff_lower_t3
 
-verb turnoff_raise_t4_timer_clears "The fire ring rises (type 4) is over" by world priority 99 in enemy at 2180 500
+verb turnoff_raise_t4_timer_clears "The fire ring rises (type 4) is over" by world priority 100 in enemy at 2180 500
   take timer_turnoff_raise_t4
   unless phase_turnoff_raise_t4
 
-verb timer_open_t1_timer_clears "The fire ring is out for a while (type 1) is over" by world priority 99 in enemy at 2040 640
+verb turnoff_raise_t5_timer_clears "The fire ring rises (type 5) is over" by world priority 100 in enemy at 2040 640
+  take timer_turnoff_raise_t5
+  unless phase_turnoff_raise_t5
+
+verb turnoff_lower_t0_timer_clears "The fire ring sinks for good (types 0, 6) is over" by world priority 100 in enemy at 2180 710
+  take timer_turnoff_lower_t0
+  unless phase_turnoff_lower_t0
+
+verb timer_open_t1_timer_clears "The fire ring is out for a while (type 1) is over" by world priority 100 in enemy at 2180 850
   take timer_timer_open_t1
   unless phase_timer_open_t1
 
-verb timer_open_t2_timer_clears "The fire ring is out for a while (type 2) is over" by world priority 99 in enemy at 2180 710
+verb timer_open_t2_timer_clears "The fire ring is out for a while (type 2) is over" by world priority 100 in enemy at 2040 990
   take timer_timer_open_t2
   unless phase_timer_open_t2
 
-verb timer_open_t3_timer_clears "The fire ring is out for a while (type 3) is over" by world priority 99 in enemy at 2040 850
+verb timer_open_t3_timer_clears "The fire ring is out for a while (type 3) is over" by world priority 100 in enemy at 2180 1060
   take timer_timer_open_t3
   unless phase_timer_open_t3
 
-verb timer_lit_t4_timer_clears "The fire ring burns for a while (type 4) is over" by world priority 99 in enemy at 2180 920
+verb timer_lit_t4_timer_clears "The fire ring burns for a while (type 4) is over" by world priority 100 in enemy at 2040 1200
   take timer_timer_lit_t4
   unless phase_timer_lit_t4
 
-verb turnon_raise_timer_clears "The fire ring rises again is over" by world priority 99 in enemy at 2040 1060
+verb turnon_raise_timer_clears "The fire ring rises again is over" by world priority 100 in enemy at 2180 1270
   take timer_turnon_raise
   unless phase_turnon_raise
 
-verb turnon_lower_timer_clears "The fire ring sinks again (type 4) is over" by world priority 99 in enemy at 2180 1130
+verb turnon_lower_timer_clears "The fire ring sinks again (type 4) is over" by world priority 100 in enemy at 2040 1410
   take timer_turnon_lower
   unless phase_turnon_lower
 
@@ -304,40 +317,54 @@ verb variant_switched_t4 "A type 4 fire ring just switched on" by world priority
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb variant_switched_t5 "A type 5 fire ring just switched on" by world priority 30 in setup at 120 710
+  take choose_variant
+  give phase_turnoff_raise_t5
+  give timer_turnoff_raise_t5
+  give range_far
+  give link_turn
+
+verb variant_cleared_t0 "A type 0 or 6 fire ring just lowered for good" by world priority 30 in setup at 260 710
+  take choose_variant
+  give phase_turnoff_lower_t0
+  give timer_turnoff_lower_t0
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -735,41 +762,41 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2360 1410
   take lens_on
   give link_turn
 
-verb enemy_ready "Fire Temple fire ring gets ready" by world priority 70 in enemy at 2040 1200
+verb enemy_ready "Fire Temple fire ring gets ready" by world priority 70 in enemy at 2180 1410
   take enemy_turn
   give enemy_act
 
-verb rest_up_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2180 1200
+verb rest_up_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 1480
   take enemy_act
   need phase_rest_up
   give incoming_flame
   give beat_end
   need range_near
 
-verb rest_up_holds "The fire ring burns, waiting for a switch: nothing changes" by world priority 68 in enemy at 2040 1270
+verb rest_up_holds "The fire ring burns, waiting for a switch: nothing changes" by world priority 68 in enemy at 2180 1480
   take enemy_act
   need phase_rest_up
   give beat_end
 
-verb rest_down_holds "The fire ring is out, waiting for a switch: nothing changes" by world priority 68 in enemy at 2180 1270
+verb rest_down_holds "The fire ring is out, waiting for a switch: nothing changes" by world priority 68 in enemy at 2040 1550
   take enemy_act
   need phase_rest_down
   give beat_end
 
-verb turnoff_lower_t1_ticks "The fire ring sinks (type 1): a beat passes" by world priority 71 in enemy at 2040 1340
+verb turnoff_lower_t1_ticks "The fire ring sinks (type 1): a beat passes" by world priority 71 in enemy at 2180 1550
   take enemy_turn
   need phase_turnoff_lower_t1
   take timer_turnoff_lower_t1
   give enemy_act
 
-verb turnoff_lower_t1_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2180 1340
+verb turnoff_lower_t1_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 1620
   take enemy_act
   need phase_turnoff_lower_t1
   give incoming_flame
   give beat_end
   need range_near
 
-verb turnoff_lower_t1_step_2 "The fire ring is down" by world priority 69 in enemy at 2040 1410
+verb turnoff_lower_t1_step_2 "The fire ring is down" by world priority 69 in enemy at 2180 1620
   take enemy_act
   take phase_turnoff_lower_t1
   give phase_timer_open_t1
@@ -777,20 +804,20 @@ verb turnoff_lower_t1_step_2 "The fire ring is down" by world priority 69 in ene
   unless timer_turnoff_lower_t1
   give beat_end
 
-verb turnoff_lower_t2_ticks "The fire ring sinks (type 2): a beat passes" by world priority 71 in enemy at 2180 1410
+verb turnoff_lower_t2_ticks "The fire ring sinks (type 2): a beat passes" by world priority 71 in enemy at 2040 1690
   take enemy_turn
   need phase_turnoff_lower_t2
   take timer_turnoff_lower_t2
   give enemy_act
 
-verb turnoff_lower_t2_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 1480
+verb turnoff_lower_t2_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2180 1690
   take enemy_act
   need phase_turnoff_lower_t2
   give incoming_flame
   give beat_end
   need range_near
 
-verb turnoff_lower_t2_step_2 "The fire ring is down" by world priority 69 in enemy at 2180 1480
+verb turnoff_lower_t2_step_2 "The fire ring is down" by world priority 69 in enemy at 2040 1760
   take enemy_act
   take phase_turnoff_lower_t2
   give phase_timer_open_t2
@@ -798,20 +825,20 @@ verb turnoff_lower_t2_step_2 "The fire ring is down" by world priority 69 in ene
   unless timer_turnoff_lower_t2
   give beat_end
 
-verb turnoff_lower_t3_ticks "The fire ring sinks (type 3): a beat passes" by world priority 71 in enemy at 2040 1550
+verb turnoff_lower_t3_ticks "The fire ring sinks (type 3): a beat passes" by world priority 71 in enemy at 2180 1760
   take enemy_turn
   need phase_turnoff_lower_t3
   take timer_turnoff_lower_t3
   give enemy_act
 
-verb turnoff_lower_t3_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2180 1550
+verb turnoff_lower_t3_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 1830
   take enemy_act
   need phase_turnoff_lower_t3
   give incoming_flame
   give beat_end
   need range_near
 
-verb turnoff_lower_t3_step_2 "The fire ring is down" by world priority 69 in enemy at 2040 1620
+verb turnoff_lower_t3_step_2 "The fire ring is down" by world priority 69 in enemy at 2180 1830
   take enemy_act
   take phase_turnoff_lower_t3
   give phase_timer_open_t3
@@ -819,20 +846,20 @@ verb turnoff_lower_t3_step_2 "The fire ring is down" by world priority 69 in ene
   unless timer_turnoff_lower_t3
   give beat_end
 
-verb turnoff_raise_t4_ticks "The fire ring rises (type 4): a beat passes" by world priority 71 in enemy at 2180 1620
+verb turnoff_raise_t4_ticks "The fire ring rises (type 4): a beat passes" by world priority 71 in enemy at 2040 1900
   take enemy_turn
   need phase_turnoff_raise_t4
   take timer_turnoff_raise_t4
   give enemy_act
 
-verb turnoff_raise_t4_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 1690
+verb turnoff_raise_t4_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2180 1900
   take enemy_act
   need phase_turnoff_raise_t4
   give incoming_flame
   give beat_end
   need range_near
 
-verb turnoff_raise_t4_step_2 "The fire ring is up" by world priority 69 in enemy at 2180 1690
+verb turnoff_raise_t4_step_2 "The fire ring is up" by world priority 69 in enemy at 2040 1970
   take enemy_act
   take phase_turnoff_raise_t4
   give phase_timer_lit_t4
@@ -840,13 +867,58 @@ verb turnoff_raise_t4_step_2 "The fire ring is up" by world priority 69 in enemy
   unless timer_turnoff_raise_t4
   give beat_end
 
-verb timer_open_t1_ticks "The fire ring is out for a while (type 1): a beat passes" by world priority 71 in enemy at 2040 1760
+verb turnoff_raise_t5_ticks "The fire ring rises (type 5): a beat passes" by world priority 71 in enemy at 2180 1970
+  take enemy_turn
+  need phase_turnoff_raise_t5
+  take timer_turnoff_raise_t5
+  give enemy_act
+
+verb turnoff_raise_t5_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 2040
+  take enemy_act
+  need phase_turnoff_raise_t5
+  give incoming_flame
+  give beat_end
+  need range_near
+
+verb turnoff_raise_t5_step_2 "The fire ring is up until its switch is unset" by world priority 69 in enemy at 2180 2040
+  take enemy_act
+  take phase_turnoff_raise_t5
+  give phase_rest_up
+  unless timer_turnoff_raise_t5
+  give beat_end
+
+verb turnoff_lower_t0_ticks "The fire ring sinks for good (types 0, 6): a beat passes" by world priority 71 in enemy at 2040 2110
+  take enemy_turn
+  need phase_turnoff_lower_t0
+  take timer_turnoff_lower_t0
+  give enemy_act
+
+verb turnoff_lower_t0_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2180 2110
+  take enemy_act
+  need phase_turnoff_lower_t0
+  give incoming_flame
+  give beat_end
+  need range_near
+
+verb turnoff_lower_t0_step_2 "The fire ring is down and gone" by world priority 69 in enemy at 2040 2180
+  take enemy_act
+  take phase_turnoff_lower_t0
+  give phase_gone
+  unless timer_turnoff_lower_t0
+  give beat_end
+
+verb gone_holds "The fire ring is gone: nothing changes" by world priority 68 in enemy at 2180 2180
+  take enemy_act
+  need phase_gone
+  give beat_end
+
+verb timer_open_t1_ticks "The fire ring is out for a while (type 1): a beat passes" by world priority 71 in enemy at 2040 2250
   take enemy_turn
   need phase_timer_open_t1
   take timer_timer_open_t1
   give enemy_act
 
-verb timer_open_t1_step_1 "Time is up and the fire ring returns" by world priority 69 in enemy at 2180 1760
+verb timer_open_t1_step_1 "Time is up and the fire ring returns" by world priority 69 in enemy at 2180 2250
   take enemy_act
   take phase_timer_open_t1
   give phase_turnon_raise
@@ -854,18 +926,18 @@ verb timer_open_t1_step_1 "Time is up and the fire ring returns" by world priori
   unless timer_timer_open_t1
   give beat_end
 
-verb timer_open_t1_holds "The fire ring is out for a while (type 1): nothing changes" by world priority 68 in enemy at 2040 1830
+verb timer_open_t1_holds "The fire ring is out for a while (type 1): nothing changes" by world priority 68 in enemy at 2040 2320
   take enemy_act
   need phase_timer_open_t1
   give beat_end
 
-verb timer_open_t2_ticks "The fire ring is out for a while (type 2): a beat passes" by world priority 71 in enemy at 2180 1830
+verb timer_open_t2_ticks "The fire ring is out for a while (type 2): a beat passes" by world priority 71 in enemy at 2180 2320
   take enemy_turn
   need phase_timer_open_t2
   take timer_timer_open_t2
   give enemy_act
 
-verb timer_open_t2_step_1 "Time is up and the fire ring returns" by world priority 69 in enemy at 2040 1900
+verb timer_open_t2_step_1 "Time is up and the fire ring returns" by world priority 69 in enemy at 2040 2390
   take enemy_act
   take phase_timer_open_t2
   give phase_turnon_raise
@@ -873,18 +945,18 @@ verb timer_open_t2_step_1 "Time is up and the fire ring returns" by world priori
   unless timer_timer_open_t2
   give beat_end
 
-verb timer_open_t2_holds "The fire ring is out for a while (type 2): nothing changes" by world priority 68 in enemy at 2180 1900
+verb timer_open_t2_holds "The fire ring is out for a while (type 2): nothing changes" by world priority 68 in enemy at 2180 2390
   take enemy_act
   need phase_timer_open_t2
   give beat_end
 
-verb timer_open_t3_ticks "The fire ring is out for a while (type 3): a beat passes" by world priority 71 in enemy at 2040 1970
+verb timer_open_t3_ticks "The fire ring is out for a while (type 3): a beat passes" by world priority 71 in enemy at 2040 2460
   take enemy_turn
   need phase_timer_open_t3
   take timer_timer_open_t3
   give enemy_act
 
-verb timer_open_t3_step_1 "Time is up and the fire ring returns" by world priority 69 in enemy at 2180 1970
+verb timer_open_t3_step_1 "Time is up and the fire ring returns" by world priority 69 in enemy at 2180 2460
   take enemy_act
   take phase_timer_open_t3
   give phase_turnon_raise
@@ -892,25 +964,25 @@ verb timer_open_t3_step_1 "Time is up and the fire ring returns" by world priori
   unless timer_timer_open_t3
   give beat_end
 
-verb timer_open_t3_holds "The fire ring is out for a while (type 3): nothing changes" by world priority 68 in enemy at 2040 2040
+verb timer_open_t3_holds "The fire ring is out for a while (type 3): nothing changes" by world priority 68 in enemy at 2040 2530
   take enemy_act
   need phase_timer_open_t3
   give beat_end
 
-verb timer_lit_t4_ticks "The fire ring burns for a while (type 4): a beat passes" by world priority 71 in enemy at 2180 2040
+verb timer_lit_t4_ticks "The fire ring burns for a while (type 4): a beat passes" by world priority 71 in enemy at 2180 2530
   take enemy_turn
   need phase_timer_lit_t4
   take timer_timer_lit_t4
   give enemy_act
 
-verb timer_lit_t4_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 2110
+verb timer_lit_t4_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 2600
   take enemy_act
   need phase_timer_lit_t4
   give incoming_flame
   give beat_end
   need range_near
 
-verb timer_lit_t4_step_2 "Time is up and the fire ring sinks" by world priority 69 in enemy at 2180 2110
+verb timer_lit_t4_step_2 "Time is up and the fire ring sinks" by world priority 69 in enemy at 2180 2600
   take enemy_act
   take phase_timer_lit_t4
   give phase_turnon_lower
@@ -918,45 +990,45 @@ verb timer_lit_t4_step_2 "Time is up and the fire ring sinks" by world priority 
   unless timer_timer_lit_t4
   give beat_end
 
-verb timer_lit_t4_holds "The fire ring burns for a while (type 4): nothing changes" by world priority 68 in enemy at 2040 2180
+verb timer_lit_t4_holds "The fire ring burns for a while (type 4): nothing changes" by world priority 68 in enemy at 2040 2670
   take enemy_act
   need phase_timer_lit_t4
   give beat_end
 
-verb turnon_raise_ticks "The fire ring rises again: a beat passes" by world priority 71 in enemy at 2180 2180
+verb turnon_raise_ticks "The fire ring rises again: a beat passes" by world priority 71 in enemy at 2180 2670
   take enemy_turn
   need phase_turnon_raise
   take timer_turnon_raise
   give enemy_act
 
-verb turnon_raise_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 2250
+verb turnon_raise_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2040 2740
   take enemy_act
   need phase_turnon_raise
   give incoming_flame
   give beat_end
   need range_near
 
-verb turnon_raise_step_2 "The fire ring stands again" by world priority 69 in enemy at 2180 2250
+verb turnon_raise_step_2 "The fire ring stands again" by world priority 69 in enemy at 2180 2740
   take enemy_act
   take phase_turnon_raise
   give phase_rest_up
   unless timer_turnon_raise
   give beat_end
 
-verb turnon_lower_ticks "The fire ring sinks again (type 4): a beat passes" by world priority 71 in enemy at 2040 2320
+verb turnon_lower_ticks "The fire ring sinks again (type 4): a beat passes" by world priority 71 in enemy at 2040 2810
   take enemy_turn
   need phase_turnon_lower
   take timer_turnon_lower
   give enemy_act
 
-verb turnon_lower_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2180 2320
+verb turnon_lower_step_1 "The fire ring burns Link" by world priority 69 in enemy at 2180 2810
   take enemy_act
   need phase_turnon_lower
   give incoming_flame
   give beat_end
   need range_near
 
-verb turnon_lower_step_2 "The fire ring is out again" by world priority 69 in enemy at 2040 2390
+verb turnon_lower_step_2 "The fire ring is out again" by world priority 69 in enemy at 2040 2880
   take enemy_act
   take phase_turnon_lower
   give phase_rest_down
@@ -1036,7 +1108,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 440 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 580 500
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 580 500
   take burn_count
   unless status_burn
 
@@ -1083,6 +1155,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 580 780
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 850
   take lens_count
   unless lens_on

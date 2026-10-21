@@ -1,5 +1,5 @@
 {
- "positions": 169789,
+ "positions": 282492,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -9,10 +9,9 @@
  "stalls": 0,
  "livelocks": 0,
  "deadVerbs": [
-  "guard_pre_timer_clears",
-  "guard_re_timer_clears",
-  "guard_ms_timer_clears",
-  "guard_last_timer_clears",
+  "body_resets_hp_body",
+  "body_rearms_1",
+  "body_stands_again",
   "body_empty_in_damaged_pre"
  ],
  "kitSplit": {
@@ -20,29 +19,9 @@
    "swing_explosive",
    "phase_stunned_pre"
   ],
-  "hit_explosive__stunned_re": [
-   "swing_explosive",
-   "phase_stunned_re"
-  ],
   "hit_explosive__stunned_ms": [
    "swing_explosive",
    "phase_stunned_ms"
-  ],
-  "hit_explosive__idle_last": [
-   "swing_explosive",
-   "phase_idle_last"
-  ],
-  "hit_explosive__walk_last": [
-   "swing_explosive",
-   "phase_walk_last"
-  ],
-  "hit_explosive__swing_l_last": [
-   "swing_explosive",
-   "phase_swing_l_last"
-  ],
-  "hit_explosive__swing_r_last": [
-   "swing_explosive",
-   "phase_swing_r_last"
   ],
   "hit_explosive__stunned_last": [
    "swing_explosive",
@@ -52,29 +31,9 @@
    "swing_hammer_swing",
    "phase_stunned_pre"
   ],
-  "hit_hammer_swing__stunned_re": [
-   "swing_hammer_swing",
-   "phase_stunned_re"
-  ],
   "hit_hammer_swing__stunned_ms": [
    "swing_hammer_swing",
    "phase_stunned_ms"
-  ],
-  "hit_hammer_swing__idle_last": [
-   "swing_hammer_swing",
-   "phase_idle_last"
-  ],
-  "hit_hammer_swing__walk_last": [
-   "swing_hammer_swing",
-   "phase_walk_last"
-  ],
-  "hit_hammer_swing__swing_l_last": [
-   "swing_hammer_swing",
-   "phase_swing_l_last"
-  ],
-  "hit_hammer_swing__swing_r_last": [
-   "swing_hammer_swing",
-   "phase_swing_r_last"
   ],
   "hit_hammer_swing__stunned_last": [
    "swing_hammer_swing",
@@ -84,29 +43,9 @@
    "swing_hookshot",
    "phase_stunned_pre"
   ],
-  "hit_hookshot__stunned_re": [
-   "swing_hookshot",
-   "phase_stunned_re"
-  ],
   "hit_hookshot__stunned_ms": [
    "swing_hookshot",
    "phase_stunned_ms"
-  ],
-  "hit_hookshot__idle_last": [
-   "swing_hookshot",
-   "phase_idle_last"
-  ],
-  "hit_hookshot__walk_last": [
-   "swing_hookshot",
-   "phase_walk_last"
-  ],
-  "hit_hookshot__swing_l_last": [
-   "swing_hookshot",
-   "phase_swing_l_last"
-  ],
-  "hit_hookshot__swing_r_last": [
-   "swing_hookshot",
-   "phase_swing_r_last"
   ],
   "hit_hookshot__stunned_last": [
    "swing_hookshot",
@@ -116,29 +55,9 @@
    "swing_slash_giant",
    "phase_stunned_pre"
   ],
-  "hit_slash_giant__stunned_re": [
-   "swing_slash_giant",
-   "phase_stunned_re"
-  ],
   "hit_slash_giant__stunned_ms": [
    "swing_slash_giant",
    "phase_stunned_ms"
-  ],
-  "hit_slash_giant__idle_last": [
-   "swing_slash_giant",
-   "phase_idle_last"
-  ],
-  "hit_slash_giant__walk_last": [
-   "swing_slash_giant",
-   "phase_walk_last"
-  ],
-  "hit_slash_giant__swing_l_last": [
-   "swing_slash_giant",
-   "phase_swing_l_last"
-  ],
-  "hit_slash_giant__swing_r_last": [
-   "swing_slash_giant",
-   "phase_swing_r_last"
   ],
   "hit_slash_giant__stunned_last": [
    "swing_slash_giant",
@@ -148,29 +67,9 @@
    "swing_magic_fire",
    "phase_stunned_pre"
   ],
-  "hit_magic_fire__stunned_re": [
-   "swing_magic_fire",
-   "phase_stunned_re"
-  ],
   "hit_magic_fire__stunned_ms": [
    "swing_magic_fire",
    "phase_stunned_ms"
-  ],
-  "hit_magic_fire__idle_last": [
-   "swing_magic_fire",
-   "phase_idle_last"
-  ],
-  "hit_magic_fire__walk_last": [
-   "swing_magic_fire",
-   "phase_walk_last"
-  ],
-  "hit_magic_fire__swing_l_last": [
-   "swing_magic_fire",
-   "phase_swing_l_last"
-  ],
-  "hit_magic_fire__swing_r_last": [
-   "swing_magic_fire",
-   "phase_swing_r_last"
   ],
   "hit_magic_fire__stunned_last": [
    "swing_magic_fire",
@@ -180,29 +79,9 @@
    "swing_spin_giant",
    "phase_stunned_pre"
   ],
-  "hit_spin_giant__stunned_re": [
-   "swing_spin_giant",
-   "phase_stunned_re"
-  ],
   "hit_spin_giant__stunned_ms": [
    "swing_spin_giant",
    "phase_stunned_ms"
-  ],
-  "hit_spin_giant__idle_last": [
-   "swing_spin_giant",
-   "phase_idle_last"
-  ],
-  "hit_spin_giant__walk_last": [
-   "swing_spin_giant",
-   "phase_walk_last"
-  ],
-  "hit_spin_giant__swing_l_last": [
-   "swing_spin_giant",
-   "phase_swing_l_last"
-  ],
-  "hit_spin_giant__swing_r_last": [
-   "swing_spin_giant",
-   "phase_swing_r_last"
   ],
   "hit_spin_giant__stunned_last": [
    "swing_spin_giant",
@@ -212,29 +91,9 @@
    "swing_jump_giant",
    "phase_stunned_pre"
   ],
-  "hit_jump_giant__stunned_re": [
-   "swing_jump_giant",
-   "phase_stunned_re"
-  ],
   "hit_jump_giant__stunned_ms": [
    "swing_jump_giant",
    "phase_stunned_ms"
-  ],
-  "hit_jump_giant__idle_last": [
-   "swing_jump_giant",
-   "phase_idle_last"
-  ],
-  "hit_jump_giant__walk_last": [
-   "swing_jump_giant",
-   "phase_walk_last"
-  ],
-  "hit_jump_giant__swing_l_last": [
-   "swing_jump_giant",
-   "phase_swing_l_last"
-  ],
-  "hit_jump_giant__swing_r_last": [
-   "swing_jump_giant",
-   "phase_swing_r_last"
   ],
   "hit_jump_giant__stunned_last": [
    "swing_jump_giant",
@@ -244,29 +103,9 @@
    "swing_jump_giant_self",
    "phase_stunned_pre"
   ],
-  "hit_jump_giant_self__stunned_re": [
-   "swing_jump_giant_self",
-   "phase_stunned_re"
-  ],
   "hit_jump_giant_self__stunned_ms": [
    "swing_jump_giant_self",
    "phase_stunned_ms"
-  ],
-  "hit_jump_giant_self__idle_last": [
-   "swing_jump_giant_self",
-   "phase_idle_last"
-  ],
-  "hit_jump_giant_self__walk_last": [
-   "swing_jump_giant_self",
-   "phase_walk_last"
-  ],
-  "hit_jump_giant_self__swing_l_last": [
-   "swing_jump_giant_self",
-   "phase_swing_l_last"
-  ],
-  "hit_jump_giant_self__swing_r_last": [
-   "swing_jump_giant_self",
-   "phase_swing_r_last"
   ],
   "hit_jump_giant_self__stunned_last": [
    "swing_jump_giant_self",
@@ -276,29 +115,9 @@
    "swing_hammer_jump",
    "phase_stunned_pre"
   ],
-  "hit_hammer_jump__stunned_re": [
-   "swing_hammer_jump",
-   "phase_stunned_re"
-  ],
   "hit_hammer_jump__stunned_ms": [
    "swing_hammer_jump",
    "phase_stunned_ms"
-  ],
-  "hit_hammer_jump__idle_last": [
-   "swing_hammer_jump",
-   "phase_idle_last"
-  ],
-  "hit_hammer_jump__walk_last": [
-   "swing_hammer_jump",
-   "phase_walk_last"
-  ],
-  "hit_hammer_jump__swing_l_last": [
-   "swing_hammer_jump",
-   "phase_swing_l_last"
-  ],
-  "hit_hammer_jump__swing_r_last": [
-   "swing_hammer_jump",
-   "phase_swing_r_last"
   ],
   "hit_hammer_jump__stunned_last": [
    "swing_hammer_jump",
@@ -309,119 +128,126 @@
   {
    "kit": "adult_arrows",
    "variant": "",
-   "positions": 3243,
+   "positions": 6548,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 813,
-    "Link falls": 138
+    "Link withdraws": 1503,
+    "Link wins": 20,
+    "Link falls": 300
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 15519
+   "ms": 6843
   },
   {
    "kit": "adult_blade",
    "variant": "",
-   "positions": 573,
+   "positions": 1206,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 141,
-    "Link falls": 26
+    "Link withdraws": 266,
+    "Link wins": 4,
+    "Link falls": 60
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1644
+   "ms": 1365
   },
   {
    "kit": "adult_bottles",
    "variant": "",
-   "positions": 3433,
+   "positions": 7208,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 898,
-    "Link falls": 52
+    "Link withdraws": 1707,
+    "Link wins": 24,
+    "Link falls": 120
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 18314
+   "ms": 9630
   },
   {
    "kit": "adult_dins",
    "variant": "",
-   "positions": 4005,
+   "positions": 8410,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 987,
-    "Link falls": 182
+    "Link withdraws": 1852,
+    "Link wins": 28,
+    "Link falls": 420
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 15727
+   "ms": 7245
   },
   {
    "kit": "adult_giant",
    "variant": "",
-   "positions": 733,
+   "positions": 1604,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 183
+    "Link withdraws": 348
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 4260
+   "ms": 1702
   },
   {
    "kit": "adult_lens",
    "variant": "",
-   "positions": 12651,
+   "positions": 26492,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 3102,
-    "Link falls": 638
+    "Link withdraws": 5816,
+    "Link wins": 100,
+    "Link falls": 1380
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 28270
+   "ms": 22629
   },
   {
    "kit": "adult_light_arrows",
    "variant": "",
-   "positions": 74703,
+   "positions": 83108,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 19051,
-    "Link falls": 2638,
-    "Link wins": 108
+    "Link withdraws": 21039,
+    "Link wins": 196,
+    "Link falls": 2940
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 210518
+   "ms": 99216
   },
   {
    "kit": "adult_nayru",
    "variant": "",
-   "positions": 40703,
+   "positions": 85506,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 10850,
-    "Link falls": 338
+    "Link withdraws": 20720,
+    "Link wins": 288,
+    "Link falls": 780
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 85544
+   "ms": 61611
   },
   {
    "kit": "adult_spin",
    "variant": "",
-   "positions": 29745,
+   "positions": 62410,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 7332,
-    "Link falls": 1352
+    "Link withdraws": 13732,
+    "Link wins": 208,
+    "Link falls": 3120
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 92632
+   "ms": 58504
   }
  ]
 }

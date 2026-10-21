@@ -54,26 +54,32 @@ state phase_posture "Gohma rears up, eye red" in enemy at 2180 150
 state phase_attack "Gohma swipes" in enemy at 2040 220
 state phase_rest "Gohma rests after her swipe, eye red" in enemy at 2180 220
 state timer_rest "Gohma rests after her swipe, eye red: beats left" in enemy at 2040 290
-state phase_stunned_nut "Gohma reels from a Deku Nut" in enemy at 2040 360
-state timer_stunned_nut "Gohma reels from a Deku Nut: beats left" in enemy at 2180 360
-state phase_stunned_seed "Gohma reels from a seed in the eye" in enemy at 2180 430
-state timer_stunned_seed "Gohma reels from a seed in the eye: beats left" in enemy at 2040 500
-state phase_stunned_struck "Gohma lies stunned after her fall" in enemy at 2040 570
-state timer_stunned_struck "Gohma lies stunned after her fall: beats left" in enemy at 2180 570
-state phase_floor_main_retreat "Gohma backs away from Link, out of patience" in enemy at 2180 640
-state phase_wall_climb "Gohma climbs the wall" in enemy at 2040 710
-state phase_ceiling_move "Gohma crawls to the middle of the ceiling" in enemy at 2180 710
-state timer_ceiling_move "Gohma crawls to the middle of the ceiling: beats left" in enemy at 2040 780
-state phase_ceiling_idle_fresh "Gohma hangs from the ceiling" in enemy at 2040 850
-state timer_ceiling_idle_fresh "Gohma hangs from the ceiling: beats left" in enemy at 2180 850
-state phase_ceiling_prepare "Gohma readies her eggs, eye red" in enemy at 2180 920
-state timer_ceiling_prepare "Gohma readies her eggs, eye red: beats left" in enemy at 2040 990
-state phase_ceiling_laying "Gohma lays three eggs" in enemy at 2040 1060
-state timer_ceiling_laying "Gohma lays three eggs: beats left" in enemy at 2180 1060
-state phase_ceiling_idle_larvae "Gohma waits on the ceiling, eye shut, while her larvae live" in enemy at 2180 1130
-state timer_ceiling_idle_larvae "Gohma waits on the ceiling, eye shut, while her larvae live: beats left" in enemy at 2040 1200
-state phase_fall "Gohma drops to the floor" in enemy at 2040 1270
-state phase_crash "Gohma crashes down from the ceiling" in enemy at 2180 1270
+state phase_stunned_nut "Gohma reels from a Deku Nut, patience left" in enemy at 2040 360
+state timer_stunned_nut "Gohma reels from a Deku Nut, patience left: beats left" in enemy at 2180 360
+state phase_stunned_seed "Gohma reels from a seed in the eye, patience left" in enemy at 2180 430
+state timer_stunned_seed "Gohma reels from a seed in the eye, patience left: beats left" in enemy at 2040 500
+state phase_stunned_nut_spent "Gohma reels from a Deku Nut, struck and out of patience" in enemy at 2040 570
+state timer_stunned_nut_spent "Gohma reels from a Deku Nut, struck and out of patience: beats left" in enemy at 2180 570
+state phase_stunned_seed_spent "Gohma reels from a seed, struck and out of patience" in enemy at 2180 640
+state timer_stunned_seed_spent "Gohma reels from a seed, struck and out of patience: beats left" in enemy at 2040 710
+state phase_stunned_struck "Gohma lies stunned after her fall" in enemy at 2040 780
+state timer_stunned_struck "Gohma lies stunned after her fall: beats left" in enemy at 2180 780
+state phase_floor_main_retreat "Gohma backs away from Link, out of patience" in enemy at 2180 850
+state phase_wall_climb "Gohma climbs the wall" in enemy at 2040 920
+state phase_ceiling_move "Gohma crawls to the middle of the ceiling" in enemy at 2180 920
+state timer_ceiling_move "Gohma crawls to the middle of the ceiling: beats left" in enemy at 2040 990
+state phase_ceiling_idle_fresh "Gohma hangs from the ceiling" in enemy at 2040 1060
+state timer_ceiling_idle_fresh "Gohma hangs from the ceiling: beats left" in enemy at 2180 1060
+state phase_ceiling_prepare "Gohma readies her eggs, eye red" in enemy at 2180 1130
+state timer_ceiling_prepare "Gohma readies her eggs, eye red: beats left" in enemy at 2040 1200
+state phase_ceiling_laying "Gohma lays three eggs" in enemy at 2040 1270
+state timer_ceiling_laying "Gohma lays three eggs: beats left" in enemy at 2180 1270
+state phase_ceiling_idle_clear "Her larvae are dead; Gohma lingers on the ceiling, eye open" in enemy at 2180 1340
+state timer_ceiling_idle_clear "Her larvae are dead; Gohma lingers on the ceiling, eye open: beats left" in enemy at 2040 1410
+state phase_ceiling_idle_larvae "Gohma waits on the ceiling, eye shut, while her larvae live" in enemy at 2040 1480
+state timer_ceiling_idle_larvae "Gohma waits on the ceiling, eye shut, while her larvae live: beats left" in enemy at 2180 1480
+state phase_fall "Gohma drops to the floor" in enemy at 2180 1550
+state phase_crash "Gohma crashes down from the ceiling" in enemy at 2040 1620
 state hp_body "Queen Gohma: health" marks 10 in enemy_health at 2360 80
 state alive_body "Queen Gohma: standing" marks 1 in enemy_health at 2500 80
 state dmg_body "Queen Gohma: damage" in enemy_health at 2360 150
@@ -82,60 +88,72 @@ state lens_on "Lens of Truth on" in link_state at 1080 360
 state link_guard "Link holds up his shield" in link_state at 1220 360
 state link_dodge "Link dodges" in link_state at 1080 430
 state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
-state swing_deku_stick "Deku Stick on its way" in hits at 3140 360
-state swing_slingshot "Slingshot seed on its way" in hits at 3000 570
-state swing_explosive "Explosion on its way" in hits at 3000 780
-state swing_boomerang "Boomerang on its way" in hits at 3000 850
-state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3140 920
-state swing_magic_fire "Din's Fire on its way" in hits at 3000 1130
-state swing_shield "Shield on its way" in hits at 3140 1200
-state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 1270
-state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3140 1480
-state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 1690
-state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 1900
+state swing_deku_stick "Deku Stick on its way" in hits at 3000 430
+state swing_slingshot "Slingshot seed on its way" in hits at 3140 640
+state swing_explosive "Explosion on its way" in hits at 3140 850
+state swing_boomerang "Boomerang on its way" in hits at 3140 920
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 1060
+state swing_magic_fire "Din's Fire on its way" in hits at 3140 1270
+state swing_shield "Shield on its way" in hits at 3000 1410
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3000 1480
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 1760
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3140 1970
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 2250
 state guard_with_deku_shield "Shield up: deku shield" in link_state at 1080 710
 state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1220 710
-state incoming_claw "Gohma claw swipe incoming" in attacks at 3320 80
+state incoming_contact "Gohma's body or claws incoming" in attacks at 3320 80
 state tick_nayru "Beat ends: nayru checked" in beat at 440 360
 state lens_count "The Lens: beats toward the next cost" in beat at 580 430
 
-verb floor_main_patient_timer_clears "Gohma stalks Link on the floor, eye open is over" by world priority 99 in enemy at 2040 150
+verb floor_main_patient_timer_clears "Gohma stalks Link on the floor, eye open is over" by world priority 100 in enemy at 2040 150
   take timer_floor_main_patient
   unless phase_floor_main_patient
 
-verb rest_timer_clears "Gohma rests after her swipe, eye red is over" by world priority 99 in enemy at 2180 290
+verb rest_timer_clears "Gohma rests after her swipe, eye red is over" by world priority 100 in enemy at 2180 290
   take timer_rest
   unless phase_rest
 
-verb stunned_nut_timer_clears "Gohma reels from a Deku Nut is over" by world priority 99 in enemy at 2040 430
+verb stunned_nut_timer_clears "Gohma reels from a Deku Nut, patience left is over" by world priority 100 in enemy at 2040 430
   take timer_stunned_nut
   unless phase_stunned_nut
 
-verb stunned_seed_timer_clears "Gohma reels from a seed in the eye is over" by world priority 99 in enemy at 2180 500
+verb stunned_seed_timer_clears "Gohma reels from a seed in the eye, patience left is over" by world priority 100 in enemy at 2180 500
   take timer_stunned_seed
   unless phase_stunned_seed
 
-verb stunned_struck_timer_clears "Gohma lies stunned after her fall is over" by world priority 99 in enemy at 2040 640
+verb stunned_nut_spent_timer_clears "Gohma reels from a Deku Nut, struck and out of patience is over" by world priority 100 in enemy at 2040 640
+  take timer_stunned_nut_spent
+  unless phase_stunned_nut_spent
+
+verb stunned_seed_spent_timer_clears "Gohma reels from a seed, struck and out of patience is over" by world priority 100 in enemy at 2180 710
+  take timer_stunned_seed_spent
+  unless phase_stunned_seed_spent
+
+verb stunned_struck_timer_clears "Gohma lies stunned after her fall is over" by world priority 100 in enemy at 2040 850
   take timer_stunned_struck
   unless phase_stunned_struck
 
-verb ceiling_move_timer_clears "Gohma crawls to the middle of the ceiling is over" by world priority 99 in enemy at 2180 780
+verb ceiling_move_timer_clears "Gohma crawls to the middle of the ceiling is over" by world priority 100 in enemy at 2180 990
   take timer_ceiling_move
   unless phase_ceiling_move
 
-verb ceiling_idle_fresh_timer_clears "Gohma hangs from the ceiling is over" by world priority 99 in enemy at 2040 920
+verb ceiling_idle_fresh_timer_clears "Gohma hangs from the ceiling is over" by world priority 100 in enemy at 2040 1130
   take timer_ceiling_idle_fresh
   unless phase_ceiling_idle_fresh
 
-verb ceiling_prepare_timer_clears "Gohma readies her eggs, eye red is over" by world priority 99 in enemy at 2180 990
+verb ceiling_prepare_timer_clears "Gohma readies her eggs, eye red is over" by world priority 100 in enemy at 2180 1200
   take timer_ceiling_prepare
   unless phase_ceiling_prepare
 
-verb ceiling_laying_timer_clears "Gohma lays three eggs is over" by world priority 99 in enemy at 2040 1130
+verb ceiling_laying_timer_clears "Gohma lays three eggs is over" by world priority 100 in enemy at 2040 1340
   take timer_ceiling_laying
   unless phase_ceiling_laying
 
-verb ceiling_idle_larvae_timer_clears "Gohma waits on the ceiling, eye shut, while her larvae live is over" by world priority 99 in enemy at 2180 1200
+verb ceiling_idle_clear_timer_clears "Her larvae are dead; Gohma lingers on the ceiling, eye open is over" by world priority 100 in enemy at 2180 1410
+  take timer_ceiling_idle_clear
+  unless phase_ceiling_idle_clear
+
+verb ceiling_idle_larvae_timer_clears "Gohma waits on the ceiling, eye shut, while her larvae live is over" by world priority 100 in enemy at 2040 1550
   take timer_ceiling_idle_larvae
   unless phase_ceiling_idle_larvae
 
@@ -239,50 +257,50 @@ verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Queen Gohma loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Queen Gohma loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Queen Gohma has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Queen Gohma has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -442,182 +460,271 @@ verb hit_deku_nut__ceiling_prepare "Deku Nut flash hits (Gohma readies her eggs,
   take phase_ceiling_prepare
   give phase_crash
 
-verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3000 430
+verb hit_deku_nut__ceiling_idle_clear "Deku Nut flash hits (Her larvae are dead; Gohma lingers on the ceiling, eye open)" by world priority 80 in hits at 3140 360
+  take swing_deku_nut
+  take phase_ceiling_idle_clear
+  give phase_crash
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3140 430
   take swing_deku_stick
 
-verb hit_deku_stick__stunned_nut "Deku Stick hits (Gohma reels from a Deku Nut)" by world priority 80 in hits at 3140 430
+verb hit_deku_stick__stunned_nut "Deku Stick hits (Gohma reels from a Deku Nut, patience left)" by world priority 80 in hits at 3000 500
   take swing_deku_stick
-  need phase_stunned_nut
+  take phase_stunned_nut
+  give phase_stunned_nut_spent
+  give 2 timer_stunned_nut_spent
   give 2 dmg_body
 
-verb hit_deku_stick__stunned_seed "Deku Stick hits (Gohma reels from a seed in the eye)" by world priority 80 in hits at 3000 500
+verb hit_deku_stick__stunned_seed "Deku Stick hits (Gohma reels from a seed in the eye, patience left)" by world priority 80 in hits at 3140 500
   take swing_deku_stick
-  need phase_stunned_seed
+  take phase_stunned_seed
+  give phase_stunned_seed_spent
+  give 5 timer_stunned_seed_spent
   give 2 dmg_body
 
-verb hit_deku_stick__stunned_struck "Deku Stick hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3140 500
+verb hit_deku_stick__stunned_nut_spent "Deku Stick hits (Gohma reels from a Deku Nut, struck and out of patience)" by world priority 80 in hits at 3000 570
+  take swing_deku_stick
+  need phase_stunned_nut_spent
+  give 2 dmg_body
+
+verb hit_deku_stick__stunned_seed_spent "Deku Stick hits (Gohma reels from a seed, struck and out of patience)" by world priority 80 in hits at 3140 570
+  take swing_deku_stick
+  need phase_stunned_seed_spent
+  give 2 dmg_body
+
+verb hit_deku_stick__stunned_struck "Deku Stick hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3000 640
   take swing_deku_stick
   need phase_stunned_struck
   give 2 dmg_body
 
-verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3140 570
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3000 710
   take swing_slingshot
 
-verb hit_slingshot__posture "Slingshot seed hits (Gohma rears up, eye red)" by world priority 80 in hits at 3000 640
+verb hit_slingshot__posture "Slingshot seed hits (Gohma rears up, eye red)" by world priority 80 in hits at 3140 710
   take swing_slingshot
   take phase_posture
   give phase_stunned_seed
   give 5 timer_stunned_seed
 
-verb hit_slingshot__attack "Slingshot seed hits (Gohma swipes)" by world priority 80 in hits at 3140 640
+verb hit_slingshot__attack "Slingshot seed hits (Gohma swipes)" by world priority 80 in hits at 3000 780
   take swing_slingshot
   take phase_attack
   give phase_stunned_seed
   give 5 timer_stunned_seed
 
-verb hit_slingshot__rest "Slingshot seed hits (Gohma rests after her swipe, eye red)" by world priority 80 in hits at 3000 710
+verb hit_slingshot__rest "Slingshot seed hits (Gohma rests after her swipe, eye red)" by world priority 80 in hits at 3140 780
   take swing_slingshot
   take phase_rest
   give phase_stunned_seed
   give 5 timer_stunned_seed
 
-verb hit_slingshot__ceiling_prepare "Slingshot seed hits (Gohma readies her eggs, eye red)" by world priority 80 in hits at 3140 710
+verb hit_slingshot__ceiling_prepare "Slingshot seed hits (Gohma readies her eggs, eye red)" by world priority 80 in hits at 3000 850
   take swing_slingshot
   take phase_ceiling_prepare
   give phase_crash
 
-verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 780
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3000 920
   take swing_explosive
 
-verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3140 850
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3000 990
   take swing_boomerang
 
-verb hit_boomerang__ceiling_prepare "Boomerang hits (Gohma readies her eggs, eye red)" by world priority 80 in hits at 3000 920
+verb hit_boomerang__ceiling_prepare "Boomerang hits (Gohma readies her eggs, eye red)" by world priority 80 in hits at 3140 990
   take swing_boomerang
   take phase_ceiling_prepare
   give phase_crash
 
-verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3000 990
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3140 1060
   take swing_slash_kokiri
 
-verb hit_slash_kokiri__stunned_nut "Kokiri Sword slash hits (Gohma reels from a Deku Nut)" by world priority 80 in hits at 3140 990
+verb hit_slash_kokiri__stunned_nut "Kokiri Sword slash hits (Gohma reels from a Deku Nut, patience left)" by world priority 80 in hits at 3000 1130
   take swing_slash_kokiri
-  need phase_stunned_nut
+  take phase_stunned_nut
+  give phase_stunned_nut_spent
+  give 2 timer_stunned_nut_spent
   give dmg_body
 
-verb hit_slash_kokiri__stunned_seed "Kokiri Sword slash hits (Gohma reels from a seed in the eye)" by world priority 80 in hits at 3000 1060
+verb hit_slash_kokiri__stunned_seed "Kokiri Sword slash hits (Gohma reels from a seed in the eye, patience left)" by world priority 80 in hits at 3140 1130
   take swing_slash_kokiri
-  need phase_stunned_seed
+  take phase_stunned_seed
+  give phase_stunned_seed_spent
+  give 5 timer_stunned_seed_spent
   give dmg_body
 
-verb hit_slash_kokiri__stunned_struck "Kokiri Sword slash hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3140 1060
+verb hit_slash_kokiri__stunned_nut_spent "Kokiri Sword slash hits (Gohma reels from a Deku Nut, struck and out of patience)" by world priority 80 in hits at 3000 1200
+  take swing_slash_kokiri
+  need phase_stunned_nut_spent
+  give dmg_body
+
+verb hit_slash_kokiri__stunned_seed_spent "Kokiri Sword slash hits (Gohma reels from a seed, struck and out of patience)" by world priority 80 in hits at 3140 1200
+  take swing_slash_kokiri
+  need phase_stunned_seed_spent
+  give dmg_body
+
+verb hit_slash_kokiri__stunned_struck "Kokiri Sword slash hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3000 1270
   take swing_slash_kokiri
   need phase_stunned_struck
   give dmg_body
 
-verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 1130
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 1340
   take swing_magic_fire
 
-verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 1200
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 1340
   take swing_magic_fire
   need range_far
 
-verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 1270
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 1410
   take swing_shield
 
-verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3000 1340
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3140 1480
   take swing_spin_kokiri
 
-verb hit_spin_kokiri__stunned_nut "Kokiri spin attack hits (Gohma reels from a Deku Nut)" by world priority 80 in hits at 3140 1340
+verb hit_spin_kokiri__stunned_nut "Kokiri spin attack hits (Gohma reels from a Deku Nut, patience left)" by world priority 80 in hits at 3000 1550
   take swing_spin_kokiri
-  need phase_stunned_nut
-  give dmg_body
-
-verb hit_spin_kokiri__stunned_seed "Kokiri spin attack hits (Gohma reels from a seed in the eye)" by world priority 80 in hits at 3000 1410
-  take swing_spin_kokiri
-  need phase_stunned_seed
-  give dmg_body
-
-verb hit_spin_kokiri__stunned_struck "Kokiri spin attack hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3140 1410
-  take swing_spin_kokiri
-  need phase_stunned_struck
-  give dmg_body
-
-verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3000 1480
-  take swing_spin_kokiri
-  need range_far
-
-verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 1550
-  take swing_jump_kokiri
-
-verb hit_jump_kokiri__stunned_nut "Kokiri jump attack hits (Gohma reels from a Deku Nut)" by world priority 80 in hits at 3140 1550
-  take swing_jump_kokiri
-  need phase_stunned_nut
-  give 2 dmg_body
-
-verb hit_jump_kokiri__stunned_seed "Kokiri jump attack hits (Gohma reels from a seed in the eye)" by world priority 80 in hits at 3000 1620
-  take swing_jump_kokiri
-  need phase_stunned_seed
-  give 2 dmg_body
-
-verb hit_jump_kokiri__stunned_struck "Kokiri jump attack hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3140 1620
-  take swing_jump_kokiri
-  need phase_stunned_struck
-  give 2 dmg_body
-
-verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 1690
-  take swing_jump_kokiri_self
-
-verb hit_jump_kokiri_self__stunned_nut "Kokiri jump attack hits (Gohma reels from a Deku Nut)" by world priority 80 in hits at 3000 1760
-  take swing_jump_kokiri_self
-  need phase_stunned_nut
-  give 2 dmg_body
-
-verb hit_jump_kokiri_self__stunned_seed "Kokiri jump attack hits (Gohma reels from a seed in the eye)" by world priority 80 in hits at 3140 1760
-  take swing_jump_kokiri_self
-  need phase_stunned_seed
-  give 2 dmg_body
-
-verb hit_jump_kokiri_self__stunned_struck "Kokiri jump attack hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3000 1830
-  take swing_jump_kokiri_self
-  need phase_stunned_struck
-  give 2 dmg_body
-
-verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3140 1830
-  take swing_jump_kokiri_self
-  need range_far
-
-verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 1900
-  take swing_jump_master
-
-verb hit_jump_master__stunned_nut "Master Sword jump attack hits (Gohma reels from a Deku Nut)" by world priority 80 in hits at 3000 1970
-  take swing_jump_master
-  need phase_stunned_nut
-  give 4 dmg_body
-
-verb hit_jump_master__stunned_seed "Master Sword jump attack hits (Gohma reels from a seed in the eye)" by world priority 80 in hits at 3140 1970
-  take swing_jump_master
-  need phase_stunned_seed
-  give 4 dmg_body
-
-verb hit_jump_master__stunned_struck "Master Sword jump attack hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3000 2040
-  take swing_jump_master
-  need phase_stunned_struck
-  give 4 dmg_body
-
-verb body_empty_in_stunned_nut "Queen Gohma runs out (Gohma reels from a Deku Nut)" by world priority 92 in enemy_health at 2500 220
-  unless hp_body
-  take alive_body
   take phase_stunned_nut
-  give link_wins
+  give phase_stunned_nut_spent
+  give 2 timer_stunned_nut_spent
+  give dmg_body
 
-verb body_empty_in_stunned_seed "Queen Gohma runs out (Gohma reels from a seed in the eye)" by world priority 92 in enemy_health at 2360 290
+verb hit_spin_kokiri__stunned_seed "Kokiri spin attack hits (Gohma reels from a seed in the eye, patience left)" by world priority 80 in hits at 3140 1550
+  take swing_spin_kokiri
+  take phase_stunned_seed
+  give phase_stunned_seed_spent
+  give 5 timer_stunned_seed_spent
+  give dmg_body
+
+verb hit_spin_kokiri__stunned_nut_spent "Kokiri spin attack hits (Gohma reels from a Deku Nut, struck and out of patience)" by world priority 80 in hits at 3000 1620
+  take swing_spin_kokiri
+  need phase_stunned_nut_spent
+  give dmg_body
+
+verb hit_spin_kokiri__stunned_seed_spent "Kokiri spin attack hits (Gohma reels from a seed, struck and out of patience)" by world priority 80 in hits at 3140 1620
+  take swing_spin_kokiri
+  need phase_stunned_seed_spent
+  give dmg_body
+
+verb hit_spin_kokiri__stunned_struck "Kokiri spin attack hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3000 1690
+  take swing_spin_kokiri
+  need phase_stunned_struck
+  give dmg_body
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 1690
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 1760
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__stunned_nut "Kokiri jump attack hits (Gohma reels from a Deku Nut, patience left)" by world priority 80 in hits at 3000 1830
+  take swing_jump_kokiri
+  take phase_stunned_nut
+  give phase_stunned_nut_spent
+  give 2 timer_stunned_nut_spent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_seed "Kokiri jump attack hits (Gohma reels from a seed in the eye, patience left)" by world priority 80 in hits at 3140 1830
+  take swing_jump_kokiri
+  take phase_stunned_seed
+  give phase_stunned_seed_spent
+  give 5 timer_stunned_seed_spent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_nut_spent "Kokiri jump attack hits (Gohma reels from a Deku Nut, struck and out of patience)" by world priority 80 in hits at 3000 1900
+  take swing_jump_kokiri
+  need phase_stunned_nut_spent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_seed_spent "Kokiri jump attack hits (Gohma reels from a seed, struck and out of patience)" by world priority 80 in hits at 3140 1900
+  take swing_jump_kokiri
+  need phase_stunned_seed_spent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_struck "Kokiri jump attack hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3000 1970
+  take swing_jump_kokiri
+  need phase_stunned_struck
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 2040
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__stunned_nut "Kokiri jump attack hits (Gohma reels from a Deku Nut, patience left)" by world priority 80 in hits at 3140 2040
+  take swing_jump_kokiri_self
+  take phase_stunned_nut
+  give phase_stunned_nut_spent
+  give 2 timer_stunned_nut_spent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_seed "Kokiri jump attack hits (Gohma reels from a seed in the eye, patience left)" by world priority 80 in hits at 3000 2110
+  take swing_jump_kokiri_self
+  take phase_stunned_seed
+  give phase_stunned_seed_spent
+  give 5 timer_stunned_seed_spent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_nut_spent "Kokiri jump attack hits (Gohma reels from a Deku Nut, struck and out of patience)" by world priority 80 in hits at 3140 2110
+  take swing_jump_kokiri_self
+  need phase_stunned_nut_spent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_seed_spent "Kokiri jump attack hits (Gohma reels from a seed, struck and out of patience)" by world priority 80 in hits at 3000 2180
+  take swing_jump_kokiri_self
+  need phase_stunned_seed_spent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_struck "Kokiri jump attack hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3140 2180
+  take swing_jump_kokiri_self
+  need phase_stunned_struck
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 2250
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 2320
+  take swing_jump_master
+
+verb hit_jump_master__stunned_nut "Master Sword jump attack hits (Gohma reels from a Deku Nut, patience left)" by world priority 80 in hits at 3140 2320
+  take swing_jump_master
+  take phase_stunned_nut
+  give phase_stunned_nut_spent
+  give 2 timer_stunned_nut_spent
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_seed "Master Sword jump attack hits (Gohma reels from a seed in the eye, patience left)" by world priority 80 in hits at 3000 2390
+  take swing_jump_master
+  take phase_stunned_seed
+  give phase_stunned_seed_spent
+  give 5 timer_stunned_seed_spent
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_nut_spent "Master Sword jump attack hits (Gohma reels from a Deku Nut, struck and out of patience)" by world priority 80 in hits at 3140 2390
+  take swing_jump_master
+  need phase_stunned_nut_spent
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_seed_spent "Master Sword jump attack hits (Gohma reels from a seed, struck and out of patience)" by world priority 80 in hits at 3000 2460
+  take swing_jump_master
+  need phase_stunned_seed_spent
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_struck "Master Sword jump attack hits (Gohma lies stunned after her fall)" by world priority 80 in hits at 3140 2460
+  take swing_jump_master
+  need phase_stunned_struck
+  give 4 dmg_body
+
+verb body_empty_in_stunned_nut_spent "Queen Gohma runs out (Gohma reels from a Deku Nut, struck and out of patience)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
-  take phase_stunned_seed
+  take phase_stunned_nut_spent
   give link_wins
 
-verb body_empty_in_stunned_struck "Queen Gohma runs out (Gohma lies stunned after her fall)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_stunned_seed_spent "Queen Gohma runs out (Gohma reels from a seed, struck and out of patience)" by world priority 90 in enemy_health at 2360 290
+  unless hp_body
+  take alive_body
+  take phase_stunned_seed_spent
+  give link_wins
+
+verb body_empty_in_stunned_struck "Queen Gohma runs out (Gohma lies stunned after her fall)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_stunned_struck
@@ -695,43 +802,45 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 920
   take lens_on
   give link_turn
 
-verb enemy_ready "Queen Gohma gets ready" by world priority 70 in enemy at 2040 1340
+verb enemy_ready "Queen Gohma gets ready" by world priority 70 in enemy at 2180 1620
   take enemy_turn
   give enemy_act
 
-verb floor_main_patient_ticks "Gohma stalks Link on the floor, eye open: a beat passes" by world priority 71 in enemy at 2180 1340
+verb floor_main_patient_ticks "Gohma stalks Link on the floor, eye open: a beat passes" by world priority 71 in enemy at 2040 1690
   take enemy_turn
   need phase_floor_main_patient
   take timer_floor_main_patient
   give enemy_act
 
-verb floor_main_patient_step_1 "Gohma closes on Link and rears up" by world priority 69 in enemy at 2040 1410
+verb floor_main_patient_step_1 "Gohma closes on Link, bumps him and rears up" by world priority 69 in enemy at 2180 1690
   take enemy_act
   take phase_floor_main_patient
   give phase_posture
+  give incoming_contact
   give beat_end
   need range_near
 
-verb floor_main_patient_step_2 "Gohma runs out of patience" by world priority 69 in enemy at 2180 1410
+verb floor_main_patient_step_2 "Gohma runs out of patience" by world priority 69 in enemy at 2040 1760
   take enemy_act
   take phase_floor_main_patient
   give phase_floor_main_retreat
   unless timer_floor_main_patient
   give beat_end
 
-verb floor_main_patient_holds "Gohma stalks Link on the floor, eye open: nothing changes" by world priority 68 in enemy at 2040 1480
+verb floor_main_patient_holds "Gohma stalks Link on the floor, eye open: nothing changes" by world priority 68 in enemy at 2180 1760
   take enemy_act
   need phase_floor_main_patient
   give beat_end
 
-verb posture_step_1 "Gohma strikes at Link" by world priority 69 in enemy at 2180 1480
+verb posture_step_1 "Gohma bumps Link and strikes" by world priority 69 in enemy at 2040 1830
   take enemy_act
   take phase_posture
   give phase_attack
+  give incoming_contact
   give beat_end
   need range_near
 
-verb posture_step_2 "Link is out of reach; Gohma walks on" by world priority 69 in enemy at 2040 1550
+verb posture_step_2 "Link is out of reach; Gohma walks on" by world priority 69 in enemy at 2180 1830
   take enemy_act
   take phase_posture
   give phase_floor_main_patient
@@ -739,16 +848,16 @@ verb posture_step_2 "Link is out of reach; Gohma walks on" by world priority 69 
   give beat_end
   need range_far
 
-verb attack_step_1 "Gohma swipes Link" by world priority 69 in enemy at 2180 1550
+verb attack_step_1 "Gohma swipes Link" by world priority 69 in enemy at 2040 1900
   take enemy_act
   take phase_attack
   give phase_rest
   give 2 timer_rest
-  give incoming_claw
+  give incoming_contact
   give beat_end
   need range_near
 
-verb attack_step_2 "Gohma swipes at empty air" by world priority 69 in enemy at 2040 1620
+verb attack_step_2 "Gohma swipes at empty air" by world priority 69 in enemy at 2180 1900
   take enemy_act
   take phase_attack
   give phase_rest
@@ -756,13 +865,20 @@ verb attack_step_2 "Gohma swipes at empty air" by world priority 69 in enemy at 
   give beat_end
   need range_far
 
-verb rest_ticks "Gohma rests after her swipe, eye red: a beat passes" by world priority 71 in enemy at 2180 1620
+verb rest_ticks "Gohma rests after her swipe, eye red: a beat passes" by world priority 71 in enemy at 2040 1970
   take enemy_turn
   need phase_rest
   take timer_rest
   give enemy_act
 
-verb rest_step_1 "Gohma recovers" by world priority 69 in enemy at 2040 1690
+verb rest_step_1 "Link runs into the resting Gohma" by world priority 69 in enemy at 2180 1970
+  take enemy_act
+  need phase_rest
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb rest_step_2 "Gohma recovers" by world priority 69 in enemy at 2040 2040
   take enemy_act
   take phase_rest
   give phase_floor_main_patient
@@ -770,81 +886,129 @@ verb rest_step_1 "Gohma recovers" by world priority 69 in enemy at 2040 1690
   unless timer_rest
   give beat_end
 
-verb rest_holds "Gohma rests after her swipe, eye red: nothing changes" by world priority 68 in enemy at 2180 1690
+verb rest_holds "Gohma rests after her swipe, eye red: nothing changes" by world priority 68 in enemy at 2180 2040
   take enemy_act
   need phase_rest
   give beat_end
 
-verb stunned_nut_ticks "Gohma reels from a Deku Nut: a beat passes" by world priority 71 in enemy at 2040 1760
+verb stunned_nut_ticks "Gohma reels from a Deku Nut, patience left: a beat passes" by world priority 71 in enemy at 2040 2110
   take enemy_turn
   need phase_stunned_nut
   take timer_stunned_nut
   give enemy_act
 
-verb stunned_nut_step_1 "Gohma comes to" by world priority 69 in enemy at 2180 1760
+verb stunned_nut_step_1 "Gohma comes to, patience left" by world priority 69 in enemy at 2180 2110
   take enemy_act
   take phase_stunned_nut
-  give phase_floor_main_retreat
+  give phase_floor_main_patient
+  give 10 timer_floor_main_patient
   unless timer_stunned_nut
   give beat_end
 
-verb stunned_nut_holds "Gohma reels from a Deku Nut: nothing changes" by world priority 68 in enemy at 2040 1830
+verb stunned_nut_holds "Gohma reels from a Deku Nut, patience left: nothing changes" by world priority 68 in enemy at 2040 2180
   take enemy_act
   need phase_stunned_nut
   give beat_end
 
-verb stunned_seed_ticks "Gohma reels from a seed in the eye: a beat passes" by world priority 71 in enemy at 2180 1830
+verb stunned_seed_ticks "Gohma reels from a seed in the eye, patience left: a beat passes" by world priority 71 in enemy at 2180 2180
   take enemy_turn
   need phase_stunned_seed
   take timer_stunned_seed
   give enemy_act
 
-verb stunned_seed_step_1 "Gohma comes to" by world priority 69 in enemy at 2040 1900
+verb stunned_seed_step_1 "Gohma comes to, patience left" by world priority 69 in enemy at 2040 2250
   take enemy_act
   take phase_stunned_seed
-  give phase_floor_main_retreat
+  give phase_floor_main_patient
+  give 10 timer_floor_main_patient
   unless timer_stunned_seed
   give beat_end
 
-verb stunned_seed_holds "Gohma reels from a seed in the eye: nothing changes" by world priority 68 in enemy at 2180 1900
+verb stunned_seed_holds "Gohma reels from a seed in the eye, patience left: nothing changes" by world priority 68 in enemy at 2180 2250
   take enemy_act
   need phase_stunned_seed
   give beat_end
 
-verb stunned_struck_ticks "Gohma lies stunned after her fall: a beat passes" by world priority 71 in enemy at 2040 1970
+verb stunned_nut_spent_ticks "Gohma reels from a Deku Nut, struck and out of patience: a beat passes" by world priority 71 in enemy at 2040 2320
+  take enemy_turn
+  need phase_stunned_nut_spent
+  take timer_stunned_nut_spent
+  give enemy_act
+
+verb stunned_nut_spent_step_1 "Gohma comes to" by world priority 69 in enemy at 2180 2320
+  take enemy_act
+  take phase_stunned_nut_spent
+  give phase_floor_main_retreat
+  unless timer_stunned_nut_spent
+  give beat_end
+
+verb stunned_nut_spent_holds "Gohma reels from a Deku Nut, struck and out of patience: nothing changes" by world priority 68 in enemy at 2040 2390
+  take enemy_act
+  need phase_stunned_nut_spent
+  give beat_end
+
+verb stunned_seed_spent_ticks "Gohma reels from a seed, struck and out of patience: a beat passes" by world priority 71 in enemy at 2180 2390
+  take enemy_turn
+  need phase_stunned_seed_spent
+  take timer_stunned_seed_spent
+  give enemy_act
+
+verb stunned_seed_spent_step_1 "Gohma comes to" by world priority 69 in enemy at 2040 2460
+  take enemy_act
+  take phase_stunned_seed_spent
+  give phase_floor_main_retreat
+  unless timer_stunned_seed_spent
+  give beat_end
+
+verb stunned_seed_spent_holds "Gohma reels from a seed, struck and out of patience: nothing changes" by world priority 68 in enemy at 2180 2460
+  take enemy_act
+  need phase_stunned_seed_spent
+  give beat_end
+
+verb stunned_struck_ticks "Gohma lies stunned after her fall: a beat passes" by world priority 71 in enemy at 2040 2530
   take enemy_turn
   need phase_stunned_struck
   take timer_stunned_struck
   give enemy_act
 
-verb stunned_struck_step_1 "Gohma comes to" by world priority 69 in enemy at 2180 1970
+verb stunned_struck_step_1 "Gohma comes to" by world priority 69 in enemy at 2180 2530
   take enemy_act
   take phase_stunned_struck
   give phase_floor_main_retreat
   unless timer_stunned_struck
   give beat_end
 
-verb stunned_struck_holds "Gohma lies stunned after her fall: nothing changes" by world priority 68 in enemy at 2040 2040
+verb stunned_struck_holds "Gohma lies stunned after her fall: nothing changes" by world priority 68 in enemy at 2040 2600
   take enemy_act
   need phase_stunned_struck
   give beat_end
 
-verb floor_main_retreat_step_1 "Gohma backs into a wall and climbs" by world priority 69 in enemy at 2180 2040
+verb floor_main_retreat_step_1 "Gohma bumps Link, backs into a wall and climbs" by world priority 69 in enemy at 2180 2600
+  take enemy_act
+  take phase_floor_main_retreat
+  give phase_wall_climb
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb floor_main_retreat_step_2 "Gohma backs into a wall and climbs" by world priority 69 in enemy at 2040 2670
   take enemy_act
   take phase_floor_main_retreat
   give phase_wall_climb
   give beat_end
+  need range_far
 
-verb wall_climb_step_1_near "Gohma reaches the ceiling" by world priority 69 in enemy at 2040 2110
+verb wall_climb_step_1 "Gohma knocks Link off as she climbs to the ceiling" by world priority 69 in enemy at 2180 2670
   take enemy_act
   take phase_wall_climb
   give phase_ceiling_move
   give 3 timer_ceiling_move
+  give incoming_contact
   give beat_end
   take range_near
   give range_far
 
-verb wall_climb_step_1_far "Gohma reaches the ceiling" by world priority 69 in enemy at 2180 2110
+verb wall_climb_step_2 "Gohma reaches the ceiling" by world priority 69 in enemy at 2040 2740
   take enemy_act
   take phase_wall_climb
   give phase_ceiling_move
@@ -852,13 +1016,13 @@ verb wall_climb_step_1_far "Gohma reaches the ceiling" by world priority 69 in e
   give beat_end
   need range_far
 
-verb ceiling_move_ticks "Gohma crawls to the middle of the ceiling: a beat passes" by world priority 71 in enemy at 2040 2180
+verb ceiling_move_ticks "Gohma crawls to the middle of the ceiling: a beat passes" by world priority 71 in enemy at 2180 2740
   take enemy_turn
   need phase_ceiling_move
   take timer_ceiling_move
   give enemy_act
 
-verb ceiling_move_step_1 "Gohma settles at the middle of the ceiling" by world priority 69 in enemy at 2180 2180
+verb ceiling_move_step_1 "Gohma settles at the middle of the ceiling" by world priority 69 in enemy at 2040 2810
   take enemy_act
   take phase_ceiling_move
   give phase_ceiling_idle_fresh
@@ -866,18 +1030,18 @@ verb ceiling_move_step_1 "Gohma settles at the middle of the ceiling" by world p
   unless timer_ceiling_move
   give beat_end
 
-verb ceiling_move_holds "Gohma crawls to the middle of the ceiling: nothing changes" by world priority 68 in enemy at 2040 2250
+verb ceiling_move_holds "Gohma crawls to the middle of the ceiling: nothing changes" by world priority 68 in enemy at 2180 2810
   take enemy_act
   need phase_ceiling_move
   give beat_end
 
-verb ceiling_idle_fresh_ticks "Gohma hangs from the ceiling: a beat passes" by world priority 71 in enemy at 2180 2250
+verb ceiling_idle_fresh_ticks "Gohma hangs from the ceiling: a beat passes" by world priority 71 in enemy at 2040 2880
   take enemy_turn
   need phase_ceiling_idle_fresh
   take timer_ceiling_idle_fresh
   give enemy_act
 
-verb ceiling_idle_fresh_step_1 "Gohma gets ready to lay" by world priority 69 in enemy at 2040 2320
+verb ceiling_idle_fresh_step_1 "Gohma gets ready to lay" by world priority 69 in enemy at 2180 2880
   take enemy_act
   take phase_ceiling_idle_fresh
   give phase_ceiling_prepare
@@ -885,37 +1049,37 @@ verb ceiling_idle_fresh_step_1 "Gohma gets ready to lay" by world priority 69 in
   unless timer_ceiling_idle_fresh
   give beat_end
 
-verb ceiling_idle_fresh_holds "Gohma hangs from the ceiling: nothing changes" by world priority 68 in enemy at 2180 2320
+verb ceiling_idle_fresh_holds "Gohma hangs from the ceiling: nothing changes" by world priority 68 in enemy at 2040 2950
   take enemy_act
   need phase_ceiling_idle_fresh
   give beat_end
 
-verb ceiling_prepare_ticks "Gohma readies her eggs, eye red: a beat passes" by world priority 71 in enemy at 2040 2390
+verb ceiling_prepare_ticks "Gohma readies her eggs, eye red: a beat passes" by world priority 71 in enemy at 2180 2950
   take enemy_turn
   need phase_ceiling_prepare
   take timer_ceiling_prepare
   give enemy_act
 
-verb ceiling_prepare_step_1 "Gohma lays" by world priority 69 in enemy at 2180 2390
+verb ceiling_prepare_step_1 "Gohma lays" by world priority 69 in enemy at 2040 3020
   take enemy_act
   take phase_ceiling_prepare
   give phase_ceiling_laying
-  give 3 timer_ceiling_laying
+  give 7 timer_ceiling_laying
   unless timer_ceiling_prepare
   give beat_end
 
-verb ceiling_prepare_holds "Gohma readies her eggs, eye red: nothing changes" by world priority 68 in enemy at 2040 2460
+verb ceiling_prepare_holds "Gohma readies her eggs, eye red: nothing changes" by world priority 68 in enemy at 2180 3020
   take enemy_act
   need phase_ceiling_prepare
   give beat_end
 
-verb ceiling_laying_ticks "Gohma lays three eggs: a beat passes" by world priority 71 in enemy at 2180 2460
+verb ceiling_laying_ticks "Gohma lays three eggs: a beat passes" by world priority 71 in enemy at 2040 3090
   take enemy_turn
   need phase_ceiling_laying
   take timer_ceiling_laying
   give enemy_act
 
-verb ceiling_laying_step_1 "The eggs are down" by world priority 69 in enemy at 2040 2530
+verb ceiling_laying_step_1 "The eggs are down" by world priority 69 in enemy at 2180 3090
   take enemy_act
   take phase_ceiling_laying
   give phase_ceiling_idle_larvae
@@ -923,64 +1087,103 @@ verb ceiling_laying_step_1 "The eggs are down" by world priority 69 in enemy at 
   unless timer_ceiling_laying
   give beat_end
 
-verb ceiling_laying_holds "Gohma lays three eggs: nothing changes" by world priority 68 in enemy at 2180 2530
+verb ceiling_laying_holds "Gohma lays three eggs: nothing changes" by world priority 68 in enemy at 2040 3160
   take enemy_act
   need phase_ceiling_laying
   give beat_end
 
-verb ceiling_idle_larvae_ticks "Gohma waits on the ceiling, eye shut, while her larvae live: a beat passes" by world priority 71 in enemy at 2040 2600
+verb ceiling_idle_clear_ticks "Her larvae are dead; Gohma lingers on the ceiling, eye open: a beat passes" by world priority 71 in enemy at 2180 3160
+  take enemy_turn
+  need phase_ceiling_idle_clear
+  take timer_ceiling_idle_clear
+  give enemy_act
+
+verb ceiling_idle_clear_step_1 "Gohma jumps down" by world priority 69 in enemy at 2040 3230
+  take enemy_act
+  take phase_ceiling_idle_clear
+  give phase_fall
+  unless timer_ceiling_idle_clear
+  give beat_end
+
+verb ceiling_idle_clear_holds "Her larvae are dead; Gohma lingers on the ceiling, eye open: nothing changes" by world priority 68 in enemy at 2180 3230
+  take enemy_act
+  need phase_ceiling_idle_clear
+  give beat_end
+
+verb ceiling_idle_larvae_ticks "Gohma waits on the ceiling, eye shut, while her larvae live: a beat passes" by world priority 71 in enemy at 2040 3300
   take enemy_turn
   need phase_ceiling_idle_larvae
   take timer_ceiling_idle_larvae
   give enemy_act
 
-verb ceiling_idle_larvae_step_1 "Her larvae are dead (their own encounter); Gohma jumps down" by world priority 69 in enemy at 2180 2600
+verb ceiling_idle_larvae_step_1 "Her larvae are dead (their own encounter); the eye opens" by world priority 69 in enemy at 2180 3300
   take enemy_act
   take phase_ceiling_idle_larvae
-  give phase_fall
+  give phase_ceiling_idle_clear
+  give 2 timer_ceiling_idle_clear
   unless timer_ceiling_idle_larvae
   give beat_end
 
-verb ceiling_idle_larvae_holds "Gohma waits on the ceiling, eye shut, while her larvae live: nothing changes" by world priority 68 in enemy at 2040 2670
+verb ceiling_idle_larvae_holds "Gohma waits on the ceiling, eye shut, while her larvae live: nothing changes" by world priority 68 in enemy at 2040 3370
   take enemy_act
   need phase_ceiling_idle_larvae
   give beat_end
 
-verb fall_step_1 "Gohma lands, patience renewed" by world priority 69 in enemy at 2180 2670
+verb fall_step_1 "Gohma lands on Link, patience renewed" by world priority 69 in enemy at 2180 3370
+  take enemy_act
+  take phase_fall
+  give phase_floor_main_patient
+  give 10 timer_floor_main_patient
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb fall_step_2 "Gohma lands, patience renewed" by world priority 69 in enemy at 2040 3440
   take enemy_act
   take phase_fall
   give phase_floor_main_patient
   give 10 timer_floor_main_patient
   give beat_end
+  need range_far
 
-verb crash_step_1 "Gohma hits the floor" by world priority 69 in enemy at 2040 2740
+verb crash_step_1 "Gohma crashes onto Link" by world priority 69 in enemy at 2180 3440
+  take enemy_act
+  take phase_crash
+  give phase_stunned_struck
+  give 8 timer_stunned_struck
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb crash_step_2 "Gohma hits the floor" by world priority 69 in enemy at 2040 3510
   take enemy_act
   take phase_crash
   give phase_stunned_struck
   give 8 timer_stunned_struck
   give beat_end
+  need range_far
 
-verb claw_blocked_deku_shield "Gohma claw swipe: blocked by the deku shield" by world priority 60 in attacks at 3460 80
-  take incoming_claw
+verb contact_blocked_deku_shield "Gohma's body or claws: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+  take incoming_contact
   need guard_with_deku_shield
 
-verb claw_blocked_hylian_shield "Gohma claw swipe: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
-  take incoming_claw
+verb contact_blocked_hylian_shield "Gohma's body or claws: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_contact
   need guard_with_hylian_shield
 
-verb claw_dodged "Gohma claw swipe: dodged" by world priority 60 in attacks at 3460 150
-  take incoming_claw
+verb contact_dodged "Gohma's body or claws: dodged" by world priority 60 in attacks at 3460 150
+  take incoming_contact
   need link_dodge
   unless link_guard
 
-verb claw_nayru "Gohma claw swipe: Nayru's Love holds" by world priority 60 in attacks at 3320 220
-  take incoming_claw
+verb contact_nayru "Gohma's body or claws: Nayru's Love holds" by world priority 60 in attacks at 3320 220
+  take incoming_contact
   need status_nayru
   unless link_guard
   unless link_dodge
 
-verb claw_lands "Gohma claw swipe hits Link" by world priority 60 in attacks at 3460 220
-  take incoming_claw
+verb contact_lands "Gohma's body or claws hits Link" by world priority 60 in attacks at 3460 220
+  take incoming_contact
   unless link_guard
   unless link_dodge
   unless status_nayru
@@ -1040,6 +1243,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 580 570
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 640
   take lens_count
   unless lens_on

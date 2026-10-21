@@ -66,17 +66,16 @@ state phase_idle "Dodongo stands still" in enemy at 2040 80
 state timer_idle "Dodongo stands still: beats left" in enemy at 2180 80
 state phase_idle_short "Dodongo pauses after breathing fire" in enemy at 2180 150
 state timer_idle_short "Dodongo pauses after breathing fire: beats left" in enemy at 2040 220
-state phase_walk "Dodongo walks" in enemy at 2040 290
-state timer_walk "Dodongo walks: beats left" in enemy at 2180 290
-state phase_fire "Dodongo breathes fire" in enemy at 2180 360
-state phase_fire_end "Dodongo closes its mouth" in enemy at 2040 430
-state phase_hurt "Dodongo reels from the hit" in enemy at 2180 430
-state phase_sweep "Dodongo sweeps its tail" in enemy at 2040 500
-state timer_sweep "Dodongo sweeps its tail: beats left" in enemy at 2180 500
-state phase_stunned "Dodongo is stunned" in enemy at 2180 570
-state timer_stunned "Dodongo is stunned: beats left" in enemy at 2040 640
-state phase_swallow "Dodongo swallows a bomb" in enemy at 2040 710
-state timer_swallow "Dodongo swallows a bomb: beats left" in enemy at 2180 710
+state phase_walk "Dodongo walks toward Link" in enemy at 2040 290
+state phase_fire "Dodongo breathes fire" in enemy at 2180 290
+state phase_fire_end "Dodongo closes its mouth" in enemy at 2040 360
+state phase_sweep_reel "Dodongo reels from the hit" in enemy at 2180 360
+state phase_sweep_tail "Dodongo sweeps its tail" in enemy at 2040 430
+state timer_sweep_tail "Dodongo sweeps its tail: beats left" in enemy at 2180 430
+state phase_stunned "Dodongo is stunned" in enemy at 2180 500
+state timer_stunned "Dodongo is stunned: beats left" in enemy at 2040 570
+state phase_swallow "Dodongo swallows a bomb" in enemy at 2040 640
+state timer_swallow "Dodongo swallows a bomb: beats left" in enemy at 2180 640
 state hp_body "Dodongo: health" marks 4 in enemy_health at 2360 80
 state alive_body "Dodongo: standing" marks 1 in enemy_health at 2500 80
 state dmg_body "Dodongo: damage" in enemy_health at 2360 150
@@ -121,27 +120,23 @@ state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
 state lens_count "The Lens: beats toward the next cost" in beat at 440 710
 
-verb idle_timer_clears "Dodongo stands still is over" by world priority 99 in enemy at 2040 150
+verb idle_timer_clears "Dodongo stands still is over" by world priority 100 in enemy at 2040 150
   take timer_idle
   unless phase_idle
 
-verb idle_short_timer_clears "Dodongo pauses after breathing fire is over" by world priority 99 in enemy at 2180 220
+verb idle_short_timer_clears "Dodongo pauses after breathing fire is over" by world priority 100 in enemy at 2180 220
   take timer_idle_short
   unless phase_idle_short
 
-verb walk_timer_clears "Dodongo walks is over" by world priority 99 in enemy at 2040 360
-  take timer_walk
-  unless phase_walk
+verb sweep_tail_timer_clears "Dodongo sweeps its tail is over" by world priority 100 in enemy at 2040 500
+  take timer_sweep_tail
+  unless phase_sweep_tail
 
-verb sweep_timer_clears "Dodongo sweeps its tail is over" by world priority 99 in enemy at 2040 570
-  take timer_sweep
-  unless phase_sweep
-
-verb stunned_timer_clears "Dodongo is stunned is over" by world priority 99 in enemy at 2180 640
+verb stunned_timer_clears "Dodongo is stunned is over" by world priority 100 in enemy at 2180 570
   take timer_stunned
   unless phase_stunned
 
-verb swallow_timer_clears "Dodongo swallows a bomb is over" by world priority 99 in enemy at 2040 780
+verb swallow_timer_clears "Dodongo swallows a bomb is over" by world priority 100 in enemy at 2040 710
   take timer_swallow
   unless phase_swallow
 
@@ -384,50 +379,50 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Dodongo loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Dodongo loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Dodongo has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Dodongo has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -802,7 +797,7 @@ verb hit_deku_nut__idle_short "Deku Nut flash hits (Dodongo pauses after breathi
   give phase_stunned
   give 4 timer_stunned
 
-verb hit_deku_nut__walk "Deku Nut flash hits (Dodongo walks)" by world priority 80 in hits at 3000 220
+verb hit_deku_nut__walk "Deku Nut flash hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 220
   take swing_deku_nut
   take phase_walk
   give phase_stunned
@@ -826,37 +821,37 @@ verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 
 verb hit_deku_stick__idle "Deku Stick hits (Dodongo stands still)" by world priority 80 in hits at 3140 360
   take swing_deku_stick
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_deku_stick__idle_short "Deku Stick hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 430
   take swing_deku_stick
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
-verb hit_deku_stick__walk "Deku Stick hits (Dodongo walks)" by world priority 80 in hits at 3140 430
+verb hit_deku_stick__walk "Deku Stick hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 430
   take swing_deku_stick
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_deku_stick__fire "Deku Stick hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 500
   take swing_deku_stick
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_deku_stick__fire_end "Deku Stick hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 500
   take swing_deku_stick
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_deku_stick__stunned "Deku Stick hits (Dodongo is stunned)" by world priority 80 in hits at 3000 570
   take swing_deku_stick
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3000 640
@@ -865,37 +860,37 @@ verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits 
 verb hit_slingshot__idle "Slingshot seed hits (Dodongo stands still)" by world priority 80 in hits at 3140 640
   take swing_slingshot
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_slingshot__idle_short "Slingshot seed hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 710
   take swing_slingshot
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
-verb hit_slingshot__walk "Slingshot seed hits (Dodongo walks)" by world priority 80 in hits at 3140 710
+verb hit_slingshot__walk "Slingshot seed hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 710
   take swing_slingshot
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_slingshot__fire "Slingshot seed hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 780
   take swing_slingshot
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_slingshot__fire_end "Slingshot seed hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 780
   take swing_slingshot
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_slingshot__stunned "Slingshot seed hits (Dodongo is stunned)" by world priority 80 in hits at 3000 850
   take swing_slingshot
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3000 920
@@ -913,7 +908,7 @@ verb hit_explosive__idle_short "Explosion hits (Dodongo pauses after breathing f
   give phase_swallow
   give timer_swallow
 
-verb hit_explosive__walk "Explosion hits (Dodongo walks)" by world priority 80 in hits at 3140 990
+verb hit_explosive__walk "Explosion hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 990
   take swing_explosive
   take phase_walk
   give phase_swallow
@@ -922,7 +917,7 @@ verb hit_explosive__walk "Explosion hits (Dodongo walks)" by world priority 80 i
 verb hit_explosive__fire "Explosion hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 1060
   take swing_explosive
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_explosive__fire_end "Explosion hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 1060
@@ -952,7 +947,7 @@ verb hit_boomerang__idle_short "Boomerang hits (Dodongo pauses after breathing f
   give phase_stunned
   give 4 timer_stunned
 
-verb hit_boomerang__walk "Boomerang hits (Dodongo walks)" by world priority 80 in hits at 3140 1270
+verb hit_boomerang__walk "Boomerang hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 1270
   take swing_boomerang
   take phase_walk
   give phase_stunned
@@ -976,37 +971,37 @@ verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 314
 verb hit_arrow_normal__idle "Arrow hits (Dodongo stands still)" by world priority 80 in hits at 3000 1480
   take swing_arrow_normal
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_arrow_normal__idle_short "Arrow hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 1480
   take swing_arrow_normal
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
-verb hit_arrow_normal__walk "Arrow hits (Dodongo walks)" by world priority 80 in hits at 3000 1550
+verb hit_arrow_normal__walk "Arrow hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 1550
   take swing_arrow_normal
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_arrow_normal__fire "Arrow hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 1550
   take swing_arrow_normal
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_arrow_normal__fire_end "Arrow hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 1620
   take swing_arrow_normal
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_arrow_normal__stunned "Arrow hits (Dodongo is stunned)" by world priority 80 in hits at 3140 1620
   take swing_arrow_normal
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 1690
@@ -1015,37 +1010,37 @@ verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits
 verb hit_hammer_swing__idle "Hammer swing hits (Dodongo stands still)" by world priority 80 in hits at 3000 1760
   take swing_hammer_swing
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_hammer_swing__idle_short "Hammer swing hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 1760
   take swing_hammer_swing
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
-verb hit_hammer_swing__walk "Hammer swing hits (Dodongo walks)" by world priority 80 in hits at 3000 1830
+verb hit_hammer_swing__walk "Hammer swing hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 1830
   take swing_hammer_swing
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_hammer_swing__fire "Hammer swing hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 1830
   take swing_hammer_swing
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_hammer_swing__fire_end "Hammer swing hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 1900
   take swing_hammer_swing
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_hammer_swing__stunned "Hammer swing hits (Dodongo is stunned)" by world priority 80 in hits at 3140 1900
   take swing_hammer_swing
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 1970
@@ -1063,7 +1058,7 @@ verb hit_hookshot__idle_short "Hookshot hits (Dodongo pauses after breathing fir
   give phase_stunned
   give 4 timer_stunned
 
-verb hit_hookshot__walk "Hookshot hits (Dodongo walks)" by world priority 80 in hits at 3000 2110
+verb hit_hookshot__walk "Hookshot hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 2110
   take swing_hookshot
   take phase_walk
   give phase_stunned
@@ -1087,37 +1082,37 @@ verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 i
 verb hit_slash_kokiri__idle "Kokiri Sword slash hits (Dodongo stands still)" by world priority 80 in hits at 3140 2250
   take swing_slash_kokiri
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_slash_kokiri__idle_short "Kokiri Sword slash hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 2320
   take swing_slash_kokiri
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
-verb hit_slash_kokiri__walk "Kokiri Sword slash hits (Dodongo walks)" by world priority 80 in hits at 3140 2320
+verb hit_slash_kokiri__walk "Kokiri Sword slash hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 2320
   take swing_slash_kokiri
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_slash_kokiri__fire "Kokiri Sword slash hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 2390
   take swing_slash_kokiri
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_slash_kokiri__fire_end "Kokiri Sword slash hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 2390
   take swing_slash_kokiri
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_slash_kokiri__stunned "Kokiri Sword slash hits (Dodongo is stunned)" by world priority 80 in hits at 3000 2460
   take swing_slash_kokiri
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3000 2530
@@ -1126,37 +1121,37 @@ verb miss_slash_master "Master Sword slash has no effect" by world priority 79 i
 verb hit_slash_master__idle "Master Sword slash hits (Dodongo stands still)" by world priority 80 in hits at 3140 2530
   take swing_slash_master
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_slash_master__idle_short "Master Sword slash hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 2600
   take swing_slash_master
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
-verb hit_slash_master__walk "Master Sword slash hits (Dodongo walks)" by world priority 80 in hits at 3140 2600
+verb hit_slash_master__walk "Master Sword slash hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 2600
   take swing_slash_master
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_slash_master__fire "Master Sword slash hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 2670
   take swing_slash_master
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_slash_master__fire_end "Master Sword slash hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 2670
   take swing_slash_master
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_slash_master__stunned "Master Sword slash hits (Dodongo is stunned)" by world priority 80 in hits at 3000 2740
   take swing_slash_master
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3000 2810
@@ -1165,37 +1160,37 @@ verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 7
 verb hit_slash_giant__idle "Two-handed sword slash hits (Dodongo stands still)" by world priority 80 in hits at 3140 2810
   take swing_slash_giant
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_slash_giant__idle_short "Two-handed sword slash hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 2880
   take swing_slash_giant
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
-verb hit_slash_giant__walk "Two-handed sword slash hits (Dodongo walks)" by world priority 80 in hits at 3140 2880
+verb hit_slash_giant__walk "Two-handed sword slash hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 2880
   take swing_slash_giant
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_slash_giant__fire "Two-handed sword slash hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 2950
   take swing_slash_giant
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_slash_giant__fire_end "Two-handed sword slash hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 2950
   take swing_slash_giant
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_slash_giant__stunned "Two-handed sword slash hits (Dodongo is stunned)" by world priority 80 in hits at 3000 3020
   take swing_slash_giant
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3000 3090
@@ -1204,37 +1199,37 @@ verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 
 verb hit_arrow_fire__idle "Fire arrow hits (Dodongo stands still)" by world priority 80 in hits at 3140 3090
   take swing_arrow_fire
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_arrow_fire__idle_short "Fire arrow hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 3160
   take swing_arrow_fire
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
-verb hit_arrow_fire__walk "Fire arrow hits (Dodongo walks)" by world priority 80 in hits at 3140 3160
+verb hit_arrow_fire__walk "Fire arrow hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 3160
   take swing_arrow_fire
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_arrow_fire__fire "Fire arrow hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 3230
   take swing_arrow_fire
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_arrow_fire__fire_end "Fire arrow hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 3230
   take swing_arrow_fire
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_arrow_fire__stunned "Fire arrow hits (Dodongo is stunned)" by world priority 80 in hits at 3000 3300
   take swing_arrow_fire
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3000 3370
@@ -1254,7 +1249,7 @@ verb hit_arrow_ice__idle_short "Ice arrow hits (Dodongo pauses after breathing f
   give 4 timer_stunned
   give 4 dmg_body
 
-verb hit_arrow_ice__walk "Ice arrow hits (Dodongo walks)" by world priority 80 in hits at 3140 3440
+verb hit_arrow_ice__walk "Ice arrow hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 3440
   take swing_arrow_ice
   take phase_walk
   give phase_stunned
@@ -1281,37 +1276,37 @@ verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits a
 verb hit_arrow_light__idle "Light arrow hits (Dodongo stands still)" by world priority 80 in hits at 3000 3650
   take swing_arrow_light
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_arrow_light__idle_short "Light arrow hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 3650
   take swing_arrow_light
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
-verb hit_arrow_light__walk "Light arrow hits (Dodongo walks)" by world priority 80 in hits at 3000 3720
+verb hit_arrow_light__walk "Light arrow hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 3720
   take swing_arrow_light
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_arrow_light__fire "Light arrow hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 3720
   take swing_arrow_light
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_arrow_light__fire_end "Light arrow hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 3790
   take swing_arrow_light
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_arrow_light__stunned "Light arrow hits (Dodongo is stunned)" by world priority 80 in hits at 3140 3790
   take swing_arrow_light
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 3860
@@ -1320,32 +1315,32 @@ verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 
 verb hit_magic_fire__idle "Din's Fire hits (Dodongo stands still)" by world priority 80 in hits at 3000 3930
   take swing_magic_fire
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
 
 verb hit_magic_fire__idle_short "Din's Fire hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 3930
   take swing_magic_fire
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
 
-verb hit_magic_fire__walk "Din's Fire hits (Dodongo walks)" by world priority 80 in hits at 3000 4000
+verb hit_magic_fire__walk "Din's Fire hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 4000
   take swing_magic_fire
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
 
 verb hit_magic_fire__fire "Din's Fire hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 4000
   take swing_magic_fire
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
 
 verb hit_magic_fire__fire_end "Din's Fire hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 4070
   take swing_magic_fire
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
 
 verb hit_magic_fire__stunned "Din's Fire hits (Dodongo is stunned)" by world priority 80 in hits at 3140 4070
   take swing_magic_fire
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
 
 verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 4140
   take swing_magic_fire
@@ -1360,37 +1355,37 @@ verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in
 verb hit_spin_kokiri__idle "Kokiri spin attack hits (Dodongo stands still)" by world priority 80 in hits at 3140 4280
   take swing_spin_kokiri
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_spin_kokiri__idle_short "Kokiri spin attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 4350
   take swing_spin_kokiri
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
-verb hit_spin_kokiri__walk "Kokiri spin attack hits (Dodongo walks)" by world priority 80 in hits at 3140 4350
+verb hit_spin_kokiri__walk "Kokiri spin attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 4350
   take swing_spin_kokiri
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_spin_kokiri__fire "Kokiri spin attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 4420
   take swing_spin_kokiri
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_spin_kokiri__fire_end "Kokiri spin attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 4420
   take swing_spin_kokiri
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb hit_spin_kokiri__stunned "Kokiri spin attack hits (Dodongo is stunned)" by world priority 80 in hits at 3000 4490
   take swing_spin_kokiri
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give dmg_body
 
 verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 4490
@@ -1403,37 +1398,37 @@ verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79
 verb hit_spin_giant__idle "Two-handed spin attack hits (Dodongo stands still)" by world priority 80 in hits at 3000 4630
   take swing_spin_giant
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_spin_giant__idle_short "Two-handed spin attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 4630
   take swing_spin_giant
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
-verb hit_spin_giant__walk "Two-handed spin attack hits (Dodongo walks)" by world priority 80 in hits at 3000 4700
+verb hit_spin_giant__walk "Two-handed spin attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 4700
   take swing_spin_giant
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_spin_giant__fire "Two-handed spin attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 4700
   take swing_spin_giant
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_spin_giant__fire_end "Two-handed spin attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 4770
   take swing_spin_giant
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_spin_giant__stunned "Two-handed spin attack hits (Dodongo is stunned)" by world priority 80 in hits at 3140 4770
   take swing_spin_giant
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 4840
@@ -1446,37 +1441,37 @@ verb miss_spin_master "Master Sword spin attack has no effect" by world priority
 verb hit_spin_master__idle "Master Sword spin attack hits (Dodongo stands still)" by world priority 80 in hits at 3140 4910
   take swing_spin_master
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_spin_master__idle_short "Master Sword spin attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 4980
   take swing_spin_master
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
-verb hit_spin_master__walk "Master Sword spin attack hits (Dodongo walks)" by world priority 80 in hits at 3140 4980
+verb hit_spin_master__walk "Master Sword spin attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 4980
   take swing_spin_master
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_spin_master__fire "Master Sword spin attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 5050
   take swing_spin_master
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_spin_master__fire_end "Master Sword spin attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 5050
   take swing_spin_master
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_spin_master__stunned "Master Sword spin attack hits (Dodongo is stunned)" by world priority 80 in hits at 3000 5120
   take swing_spin_master
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 5120
@@ -1489,37 +1484,37 @@ verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in
 verb hit_jump_kokiri__idle "Kokiri jump attack hits (Dodongo stands still)" by world priority 80 in hits at 3000 5260
   take swing_jump_kokiri
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_jump_kokiri__idle_short "Kokiri jump attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 5260
   take swing_jump_kokiri
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
-verb hit_jump_kokiri__walk "Kokiri jump attack hits (Dodongo walks)" by world priority 80 in hits at 3000 5330
+verb hit_jump_kokiri__walk "Kokiri jump attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 5330
   take swing_jump_kokiri
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_jump_kokiri__fire "Kokiri jump attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 5330
   take swing_jump_kokiri
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_jump_kokiri__fire_end "Kokiri jump attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 5400
   take swing_jump_kokiri
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_jump_kokiri__stunned "Kokiri jump attack hits (Dodongo is stunned)" by world priority 80 in hits at 3140 5400
   take swing_jump_kokiri
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 5470
@@ -1528,37 +1523,37 @@ verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 
 verb hit_jump_kokiri_self__idle "Kokiri jump attack hits (Dodongo stands still)" by world priority 80 in hits at 3000 5540
   take swing_jump_kokiri_self
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_jump_kokiri_self__idle_short "Kokiri jump attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 5540
   take swing_jump_kokiri_self
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
-verb hit_jump_kokiri_self__walk "Kokiri jump attack hits (Dodongo walks)" by world priority 80 in hits at 3000 5610
+verb hit_jump_kokiri_self__walk "Kokiri jump attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 5610
   take swing_jump_kokiri_self
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_jump_kokiri_self__fire "Kokiri jump attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 5610
   take swing_jump_kokiri_self
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_jump_kokiri_self__fire_end "Kokiri jump attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 5680
   take swing_jump_kokiri_self
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb hit_jump_kokiri_self__stunned "Kokiri jump attack hits (Dodongo is stunned)" by world priority 80 in hits at 3140 5680
   take swing_jump_kokiri_self
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 2 dmg_body
 
 verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 5750
@@ -1571,37 +1566,37 @@ verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79
 verb hit_jump_giant__idle "Two-handed jump attack hits (Dodongo stands still)" by world priority 80 in hits at 3140 5820
   take swing_jump_giant
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb hit_jump_giant__idle_short "Two-handed jump attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 5890
   take swing_jump_giant
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
-verb hit_jump_giant__walk "Two-handed jump attack hits (Dodongo walks)" by world priority 80 in hits at 3140 5890
+verb hit_jump_giant__walk "Two-handed jump attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 5890
   take swing_jump_giant
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb hit_jump_giant__fire "Two-handed jump attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 5960
   take swing_jump_giant
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb hit_jump_giant__fire_end "Two-handed jump attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 5960
   take swing_jump_giant
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb hit_jump_giant__stunned "Two-handed jump attack hits (Dodongo is stunned)" by world priority 80 in hits at 3000 6030
   take swing_jump_giant
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 6100
@@ -1610,37 +1605,37 @@ verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priori
 verb hit_jump_giant_self__idle "Two-handed jump attack hits (Dodongo stands still)" by world priority 80 in hits at 3140 6100
   take swing_jump_giant_self
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb hit_jump_giant_self__idle_short "Two-handed jump attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 6170
   take swing_jump_giant_self
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
-verb hit_jump_giant_self__walk "Two-handed jump attack hits (Dodongo walks)" by world priority 80 in hits at 3140 6170
+verb hit_jump_giant_self__walk "Two-handed jump attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 6170
   take swing_jump_giant_self
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb hit_jump_giant_self__fire "Two-handed jump attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 6240
   take swing_jump_giant_self
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb hit_jump_giant_self__fire_end "Two-handed jump attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 6240
   take swing_jump_giant_self
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb hit_jump_giant_self__stunned "Two-handed jump attack hits (Dodongo is stunned)" by world priority 80 in hits at 3000 6310
   take swing_jump_giant_self
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 8 dmg_body
 
 verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 6310
@@ -1653,37 +1648,37 @@ verb miss_jump_master "Master Sword jump attack has no effect" by world priority
 verb hit_jump_master__idle "Master Sword jump attack hits (Dodongo stands still)" by world priority 80 in hits at 3000 6450
   take swing_jump_master
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_jump_master__idle_short "Master Sword jump attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 6450
   take swing_jump_master
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
-verb hit_jump_master__walk "Master Sword jump attack hits (Dodongo walks)" by world priority 80 in hits at 3000 6520
+verb hit_jump_master__walk "Master Sword jump attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 6520
   take swing_jump_master
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_jump_master__fire "Master Sword jump attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 6520
   take swing_jump_master
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_jump_master__fire_end "Master Sword jump attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 6590
   take swing_jump_master
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_jump_master__stunned "Master Sword jump attack hits (Dodongo is stunned)" by world priority 80 in hits at 3140 6590
   take swing_jump_master
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 6660
@@ -1692,37 +1687,37 @@ verb miss_jump_master_self "Master Sword jump attack has no effect" by world pri
 verb hit_jump_master_self__idle "Master Sword jump attack hits (Dodongo stands still)" by world priority 80 in hits at 3000 6730
   take swing_jump_master_self
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_jump_master_self__idle_short "Master Sword jump attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3140 6730
   take swing_jump_master_self
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
-verb hit_jump_master_self__walk "Master Sword jump attack hits (Dodongo walks)" by world priority 80 in hits at 3000 6800
+verb hit_jump_master_self__walk "Master Sword jump attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3000 6800
   take swing_jump_master_self
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_jump_master_self__fire "Master Sword jump attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3140 6800
   take swing_jump_master_self
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_jump_master_self__fire_end "Master Sword jump attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3000 6870
   take swing_jump_master_self
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_jump_master_self__stunned "Master Sword jump attack hits (Dodongo is stunned)" by world priority 80 in hits at 3140 6870
   take swing_jump_master_self
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 6940
@@ -1735,46 +1730,46 @@ verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in
 verb hit_hammer_jump__idle "Hammer jump attack hits (Dodongo stands still)" by world priority 80 in hits at 3140 7010
   take swing_hammer_jump
   take phase_idle
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_hammer_jump__idle_short "Hammer jump attack hits (Dodongo pauses after breathing fire)" by world priority 80 in hits at 3000 7080
   take swing_hammer_jump
   take phase_idle_short
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
-verb hit_hammer_jump__walk "Hammer jump attack hits (Dodongo walks)" by world priority 80 in hits at 3140 7080
+verb hit_hammer_jump__walk "Hammer jump attack hits (Dodongo walks toward Link)" by world priority 80 in hits at 3140 7080
   take swing_hammer_jump
   take phase_walk
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_hammer_jump__fire "Hammer jump attack hits (Dodongo breathes fire)" by world priority 80 in hits at 3000 7150
   take swing_hammer_jump
   take phase_fire
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_hammer_jump__fire_end "Hammer jump attack hits (Dodongo closes its mouth)" by world priority 80 in hits at 3140 7150
   take swing_hammer_jump
   take phase_fire_end
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
 verb hit_hammer_jump__stunned "Hammer jump attack hits (Dodongo is stunned)" by world priority 80 in hits at 3000 7220
   take swing_hammer_jump
   take phase_stunned
-  give phase_hurt
+  give phase_sweep_reel
   give 4 dmg_body
 
-verb body_empty_in_hurt "Dodongo runs out (Dodongo reels from the hit)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_sweep_reel "Dodongo runs out (Dodongo reels from the hit)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
-  take phase_hurt
+  take phase_sweep_reel
   give link_wins
 
-verb body_empty_in_stunned "Dodongo runs out (Dodongo is stunned)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_stunned "Dodongo runs out (Dodongo is stunned)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_stunned
@@ -1875,78 +1870,54 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
   take lens_on
   give link_turn
 
-verb enemy_ready "Dodongo gets ready" by world priority 70 in enemy at 2180 780
+verb enemy_ready "Dodongo gets ready" by world priority 70 in enemy at 2180 710
   take enemy_turn
   give enemy_act
 
-verb idle_ticks "Dodongo stands still: a beat passes" by world priority 71 in enemy at 2040 850
+verb idle_ticks "Dodongo stands still: a beat passes" by world priority 71 in enemy at 2040 780
   take enemy_turn
   need phase_idle
   take timer_idle
   give enemy_act
 
-verb idle_step_1 "Dodongo starts walking" by world priority 69 in enemy at 2180 850
+verb idle_step_1 "Dodongo starts walking" by world priority 69 in enemy at 2180 780
   take enemy_act
   take phase_idle
   give phase_walk
-  give 4 timer_walk
   unless timer_idle
   give beat_end
 
-verb idle_holds "Dodongo stands still: nothing changes" by world priority 68 in enemy at 2040 920
+verb idle_holds "Dodongo stands still: nothing changes" by world priority 68 in enemy at 2040 850
   take enemy_act
   need phase_idle
   give beat_end
 
-verb idle_short_ticks "Dodongo pauses after breathing fire: a beat passes" by world priority 71 in enemy at 2180 920
+verb idle_short_ticks "Dodongo pauses after breathing fire: a beat passes" by world priority 71 in enemy at 2180 850
   take enemy_turn
   need phase_idle_short
   take timer_idle_short
   give enemy_act
 
-verb idle_short_step_1 "Dodongo starts walking" by world priority 69 in enemy at 2040 990
+verb idle_short_step_1 "Dodongo starts walking" by world priority 69 in enemy at 2040 920
   take enemy_act
   take phase_idle_short
   give phase_walk
-  give 4 timer_walk
   unless timer_idle_short
   give beat_end
 
-verb walk_ticks "Dodongo walks: a beat passes" by world priority 71 in enemy at 2180 990
-  take enemy_turn
-  need phase_walk
-  take timer_walk
-  give enemy_act
-
-verb walk_step_1 "Dodongo faces Link and draws breath" by world priority 69 in enemy at 2040 1060
+verb walk_step_1 "Dodongo faces Link and draws breath" by world priority 69 in enemy at 2180 920
   take enemy_act
   take phase_walk
   give phase_fire
   give beat_end
   need range_near
 
-verb walk_step_2 "Dodongo stops to rest" by world priority 69 weight 7 in enemy at 2180 1060
-  take enemy_act
-  take phase_walk
-  give phase_idle
-  give 3 timer_idle
-  unless timer_walk
-  give beat_end
-  need range_far
-
-verb walk_step_3 "Dodongo wanders on" by world priority 69 weight 3 in enemy at 2040 1130
-  take enemy_act
-  need phase_walk
-  unless timer_walk
-  give beat_end
-  need range_far
-
-verb walk_holds "Dodongo walks: nothing changes" by world priority 68 in enemy at 2180 1130
+verb walk_holds "Dodongo walks toward Link: nothing changes" by world priority 68 in enemy at 2040 990
   take enemy_act
   need phase_walk
   give beat_end
 
-verb fire_step_1 "Dodongo breathes fire on Link" by world priority 69 in enemy at 2040 1200
+verb fire_step_1 "Dodongo breathes fire on Link" by world priority 69 in enemy at 2180 990
   take enemy_act
   take phase_fire
   give phase_fire_end
@@ -1954,63 +1925,63 @@ verb fire_step_1 "Dodongo breathes fire on Link" by world priority 69 in enemy a
   give beat_end
   need range_near
 
-verb fire_step_2 "Dodongo breathes fire at nothing" by world priority 69 in enemy at 2180 1200
+verb fire_step_2 "Dodongo breathes fire at nothing" by world priority 69 in enemy at 2040 1060
   take enemy_act
   take phase_fire
   give phase_fire_end
   give beat_end
   need range_far
 
-verb fire_end_step_1 "Dodongo settles" by world priority 69 in enemy at 2040 1270
+verb fire_end_step_1 "Dodongo settles" by world priority 69 in enemy at 2180 1060
   take enemy_act
   take phase_fire_end
   give phase_idle_short
   give timer_idle_short
   give beat_end
 
-verb hurt_step_1 "Link is in front: Dodongo breathes fire" by world priority 69 in enemy at 2180 1270
+verb sweep_reel_step_1 "Link is in front: Dodongo breathes fire" by world priority 69 in enemy at 2040 1130
   take enemy_act
-  take phase_hurt
+  take phase_sweep_reel
   give phase_fire
   give beat_end
 
-verb hurt_step_2 "Link is behind: Dodongo whips its tail around" by world priority 69 in enemy at 2040 1340
+verb sweep_reel_step_2 "Link is behind: Dodongo whips its tail around" by world priority 69 in enemy at 2180 1130
   take enemy_act
-  take phase_hurt
-  give phase_sweep
-  give timer_sweep
+  take phase_sweep_reel
+  give phase_sweep_tail
+  give timer_sweep_tail
   give beat_end
 
-verb sweep_ticks "Dodongo sweeps its tail: a beat passes" by world priority 71 in enemy at 2180 1340
+verb sweep_tail_ticks "Dodongo sweeps its tail: a beat passes" by world priority 71 in enemy at 2040 1200
   take enemy_turn
-  need phase_sweep
-  take timer_sweep
+  need phase_sweep_tail
+  take timer_sweep_tail
   give enemy_act
 
-verb sweep_step_1 "The tail catches Link" by world priority 69 in enemy at 2040 1410
+verb sweep_tail_step_1 "The tail catches Link" by world priority 69 in enemy at 2180 1200
   take enemy_act
-  take phase_sweep
+  take phase_sweep_tail
   give phase_fire
-  unless timer_sweep
+  unless timer_sweep_tail
   give incoming_tail_sweep
   give beat_end
   need range_near
 
-verb sweep_step_2 "The tail sweeps empty air" by world priority 69 in enemy at 2180 1410
+verb sweep_tail_step_2 "The tail sweeps empty air" by world priority 69 in enemy at 2040 1270
   take enemy_act
-  take phase_sweep
+  take phase_sweep_tail
   give phase_fire
-  unless timer_sweep
+  unless timer_sweep_tail
   give beat_end
   need range_far
 
-verb stunned_ticks "Dodongo is stunned: a beat passes" by world priority 71 in enemy at 2040 1480
+verb stunned_ticks "Dodongo is stunned: a beat passes" by world priority 71 in enemy at 2180 1270
   take enemy_turn
   need phase_stunned
   take timer_stunned
   give enemy_act
 
-verb stunned_step_1 "Dodongo recovers" by world priority 69 in enemy at 2180 1480
+verb stunned_step_1 "Dodongo recovers" by world priority 69 in enemy at 2040 1340
   take enemy_act
   take phase_stunned
   give phase_idle
@@ -2018,18 +1989,18 @@ verb stunned_step_1 "Dodongo recovers" by world priority 69 in enemy at 2180 148
   unless timer_stunned
   give beat_end
 
-verb stunned_holds "Dodongo is stunned: nothing changes" by world priority 68 in enemy at 2040 1550
+verb stunned_holds "Dodongo is stunned: nothing changes" by world priority 68 in enemy at 2180 1340
   take enemy_act
   need phase_stunned
   give beat_end
 
-verb swallow_ticks "Dodongo swallows a bomb: a beat passes" by world priority 71 in enemy at 2180 1550
+verb swallow_ticks "Dodongo swallows a bomb: a beat passes" by world priority 71 in enemy at 2040 1410
   take enemy_turn
   need phase_swallow
   take timer_swallow
   give enemy_act
 
-verb swallow_step_1 "The bomb goes off inside the Dodongo" by world priority 69 in enemy at 2040 1620
+verb swallow_step_1 "The bomb goes off inside the Dodongo" by world priority 69 in enemy at 2180 1410
   take enemy_act
   take phase_swallow
   give link_wins
@@ -2152,7 +2123,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 580 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 440 570
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 440 570
   take burn_count
   unless status_burn
 
@@ -2199,6 +2170,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 440 850
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 850
   take lens_count
   unless lens_on

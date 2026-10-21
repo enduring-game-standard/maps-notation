@@ -7,6 +7,11 @@ const at = (line: number): Cite => `${F}:${line}`
 /**
  * The statue turns 0x180 a frame (line 179) and carries two opposed flame arms (elements at +z and -z),
  * so an arm sweeps over any spot within reach every half turn: 0x8000 / 0x180 = 85 frames.
+ * That period is turning plus the one beat of arm_over, so turning runs 85 - 20 = 65 frames (3 beats): a 4-beat
+ * period, 80 frames, the nearest whole number of beats to 85. The burn lasts 5 beats (100 frames), so a Link who
+ * stays near is still burning when the next arm comes around.
+ * The statue has no action function or state variable: its only state is its yaw, shape.rot.y (line 179), so
+ * `states` names the two yaw ranges, an arm away from Link's spot and an arm over it.
  * The Fire Temple is visited as adult: `src/overlays/actors/ovl_En_Du/z_en_du.c:173` gates Darunia's
  * Fire Temple appearance on LINK_IS_ADULT.
  */
@@ -19,7 +24,7 @@ export const bgHidanRsekizou: ActorSpec = {
   pools: [],
   damage: { kind: 'none' },
   phases: [
-    { id: 'turning', label: 'The flame arms swing around', frames: { value: 85, cite: at(179) }, cite: at(179) },
+    { id: 'turning', label: 'The flame arms swing around', frames: { value: 65, cite: at(179) }, cite: at(179) },
     { id: 'arm_over', label: 'A flame arm sweeps over Link\'s spot', cite: at(194) },
   ],
   start: 'turning',
@@ -34,8 +39,8 @@ export const bgHidanRsekizou: ActorSpec = {
   ],
   actionFuncs: {},
   states: {
-    arm_away: { phase: 'turning', cite: at(179) },
-    arm_over: { phase: 'arm_over', cite: at(194) },
+    'shape.rot.y with both arms away from Link': { phase: 'turning', cite: at(179) },
+    'shape.rot.y with an arm over Link': { phase: 'arm_over', cite: at(179) },
   },
   atSources: {
     [at(45)]: 'flame',
@@ -49,8 +54,6 @@ export const bgHidanRsekizou: ActorSpec = {
   expected: {
     deadVerbs: {
       turning_timer_clears: 'turning is left only by a step that waits for its timer, so the timer is always spent when it is left',
-      flame_lands_again: 'an arm can reach Link only every 5 beats (4 turning plus 1 over him), and the burn it sets lasts 5 beats, so it is out before the next arm',
-      flame_lands_dd_again: 'as flame_lands_again',
     },
   },
 }
