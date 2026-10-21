@@ -1,3 +1,23 @@
+/*
+ * Reported gaps (the types cannot express these; each is modeled as the closest honest thing):
+ * - An actionFuncs entry names one phase or one prefix glob, so functions that run in several groups are mapped to
+ *   the main one. BossSst_HeadWait also runs through down1_* (HeadDamagedHand ends in HeadSetupWait, z_boss_sst.c:723).
+ *   BossSst_HandWait also runs as the other hand's wait in down1_* (z_boss_sst.c:1455). BossSst_HeadDamagedHand also
+ *   runs in down2_flinch and ice_open (z_boss_sst.c:711).
+ * - After a hit in Vulnerable the eye's AC is off until the damage animation ends (z_boss_sst.c:946, :956-957), while the
+ *   stun timer keeps counting (z_boss_sst.c:952-953). A phase timer cannot carry across phases, so a hurt phase would
+ *   restart the 50-frame window; and the animation's length is not in the decomp source. stun_open stays hittable.
+ * - The hookshot holds the stun timer up while attached, +2 a frame capped at 50 (z_boss_sst.c:923-924). The model
+ *   refills it to the cap (stun_hooked re-enters stun_open); a short pull refills it less.
+ * - The sweep's AT is on only while Link stands taller than 40 or is airborne (z_boss_sst.c:1622). The model's dodge is
+ *   its only low-profile stance; crouching under the sweep is not a stance the model has.
+ * - The swing's helpless time is derived, not stated: four swings at steps of (timer * 0xE4 + 0x1C8) * 1.5 per frame
+ *   (z_boss_sst.c:1946, src/code/z_lib.c:55) take 16+16, 12+12, 10+10 and 12 frames to the release, about 92 frames
+ *   assuming the hand starts level. The clap's hold is at least the 30-frame timer (z_boss_sst.c:1762); the closing
+ *   swing before it depends on the hands' angle and is left out.
+ * - The fist charge: the head (48) and either fist (32, z_boss_sst.c:748-749) can connect first, by geometry; the two
+ *   steps tie.
+ */
 import { standardLoadouts } from '../loadouts'
 import { DMG_TYPES, type DmgType } from '../../inventory'
 import type { ActorSpec, Attack, Cite, Excluded, Phase, Reaction, Step } from '../../spec'
@@ -50,7 +70,7 @@ const ODDS: Record<Kind, { w: number; cite: Cite }> = {
 const READY_CITE: Record<Kind, Cite> = { slam: at(1478), sweep: at(1569), punch: at(1640), grab: at(1816), clap: at(1697) }
 const STRIKE_CITE: Record<Kind, Cite> = { slam: at(1512), sweep: at(1598), punch: at(1657), grab: at(1838), clap: at(1734) }
 const GO_CITE: Record<Kind, Cite> = { slam: at(1486), sweep: at(1581), punch: at(1644), grab: at(1824), clap: at(1704) }
-const END_CITE: Record<Kind, Cite> = { slam: at(1532), sweep: at(1607), punch: at(1674), grab: at(1862), clap: at(1752) }
+const END_CITE: Record<Kind, Cite> = { slam: at(1546), sweep: at(1607), punch: at(1674), grab: at(1862), clap: at(1752) }
 const HEALTHY: Kind[] = ['slam', 'sweep', 'punch', 'grab', 'clap']
 const ONE_DOWN: Kind[] = ['slam', 'sweep', 'punch', 'grab']
 
@@ -59,13 +79,19 @@ const strikePhase = (id: string, k: Kind, label: string, reelTo: string): Phase 
   k === 'punch' ? { id, label, guards: AC_TYPES, cite: at(1651) } : { id, label, overrides: handHits(reelTo), cite: STRIKE_CITE[k] }
 
 /** The strike out of a phase: the slam hits Link under it, and its shockwave reaches him if he backed away. */
+const slamSteps = (from: string, to: string, who: string): Step[] => [
+  { from, to, label: `${who} slams down on Link`, range: 'near', attack: 'slam', cite: END_CITE.slam },
+  { from, to, label: `${who} slams down; the shockwave rolls out`, range: 'far', attack: 'shockwave', cite: at(1539) },
+]
 const strikeSteps = (from: string, to: string, k: Kind, who: string): Step[] =>
   k === 'slam'
-    ? [
-        { from, to, label: `${who} slams down on Link`, range: 'near', attack: 'slam', cite: END_CITE.slam },
-        { from, to, label: `${who} slams down; the shockwave rolls out`, range: 'far', attack: 'shockwave', cite: at(1539) },
-      ]
-    : [{ from, to, label: `${who} ${VERB[k]} Link`, attack: k, cite: END_CITE[k] }]
+    ? slamSteps(from, to, who)
+    : k === 'grab'
+      ? [
+          { from, to, label: `${who} grabs Link and crushes him`, attack: 'grab', cite: at(1855) },
+          { from, to, label: `${who} grabs Link and swings him`, attack: 'grab_swing', cite: at(1857) },
+        ]
+      : [{ from, to, label: `${who} ${VERB[k]} Link`, attack: k, cite: END_CITE[k] }]
 
 /**
  * One hand down: the hit hand reels for 36 frames and then shakes for 200, 12 beats in all. The other hand attacks
@@ -84,22 +110,28 @@ const phases: Phase[] = [
   { id: 'atk_slam_down', label: 'The slamming hand lies on the floor', frames: { value: 30, cite: at(1532) }, overrides: handHits('down1_1_wait'), cite: at(1517) },
   { id: 'atk_retreat', label: 'The hands fly back to the drum', overrides: handHits('down1_1_wait'), cite: at(1438) },
   ...Array.from({ length: CYCLES }, (_, i) => i + 1).flatMap((c): Phase[] => [
-    { id: d1(c, 'wait'), label: `One hand reels or shakes (cycle ${c}); the other waits`, overrides: handHits('down2_ready'), cite: at(1266) },
+    { id: d1(c, 'wait'), label: `One hand reels or shakes (cycle ${c}); the other waits`, overrides: handHits('down2_flinch'), cite: at(1266) },
     ...ONE_DOWN.flatMap((k): Phase[] => [
-      { id: d1(c, `${k}_ready`), label: `One hand down (cycle ${c}); the other winds up to ${KIND_NAME[k]}`, overrides: handHits('down2_ready'), cite: READY_CITE[k] },
+      { id: d1(c, `${k}_ready`), label: `One hand down (cycle ${c}); the other winds up to ${KIND_NAME[k]}`, overrides: handHits('down2_flinch'), cite: READY_CITE[k] },
       strikePhase(d1(c, k), k, `One hand down (cycle ${c}); the other ${k === 'punch' ? 'punches, hardened' : VERB[k].split(' ')[0]}`, 'down2_ready'),
     ]),
-    { id: d1(c, 'retreat'), label: `One hand down (cycle ${c}); the other flies back`, overrides: handHits('down2_ready'), cite: at(1438) },
+    { id: d1(c, 'retreat'), label: `One hand down (cycle ${c}); the other flies back`, overrides: handHits('down2_flinch'), cite: at(1438) },
   ]),
-  { id: 'down2_ready', label: 'Both hands down: the eye opens and Bongo Bongo readies its charge', invisible: true, frames: { value: 36, cite: at(2001) }, overrides: eyeHits, cite: at(735) },
-  { id: 'down2_charge', label: 'Bongo Bongo charges across the room, eye open', invisible: true, overrides: eyeHits, cite: at(757) },
+  { id: 'down1_slam', label: 'The shaking hand gives up and lies slammed on the floor, unhittable; the other hand waits', frames: { value: 30, cite: at(1532) }, overrides: handHits('down1_1_wait'), cite: at(1526) },
+  { id: 'down2_flinch', label: 'Both hands down: Bongo Bongo flinches and opens its eye', hittable: 'none', cite: at(707) },
+  { id: 'down2_ready', label: 'Both hands down: the eye is open and Bongo Bongo readies its charge', frames: { value: 36, cite: at(2001) }, overrides: eyeHits, cite: at(735) },
+  { id: 'down2_charge', label: 'Bongo Bongo charges across the room, eye open', overrides: eyeHits, cite: at(757) },
   { id: 'down2_end', label: 'Bongo Bongo turns back after its charge', hittable: 'none', cite: at(807) },
   { id: 'ice_open', label: 'A hand is frozen; Bongo Bongo flinches', hittable: 'none', cite: at(714) },
-  { id: 'ice_ready', label: 'The eye is open; the other hand moves in to break the ice', invisible: true, overrides: eyeHits, cite: at(824) },
-  { id: 'ice_break', label: 'The eye is open; the other hand smashes the ice', invisible: true, overrides: eyeHits, cite: at(2402) },
+  { id: 'ice_ready', label: 'The eye is open; the other hand moves in to break the ice', overrides: eyeHits, cite: at(824) },
+  { id: 'ice_break', label: 'The eye is open; the other hand smashes the ice', overrides: eyeHits, cite: at(2402) },
   { id: 'stun_knockout', label: 'Bongo Bongo is knocked out and falls', hittable: 'none', cite: at(852) },
-  { id: 'stun_open', label: 'Bongo Bongo lies stunned, its eye open to blades', hittable: SWORD_STICK, frames: { value: 50, cite: at(910) }, cite: at(905) },
-  { id: 'stun_recover', label: 'Bongo Bongo recovers and vanishes again', hittable: 'none', cite: at(963) },
+  {
+    id: 'stun_open', label: 'Bongo Bongo lies stunned, its eye open to blades', hittable: [...SWORD_STICK, 'HOOKSHOT'], frames: { value: 50, cite: at(910) },
+    overrides: { HOOKSHOT: { damage: 0, to: 'stun_hooked', cite: at(907) } }, cite: at(905),
+  },
+  { id: 'stun_hooked', label: 'Link hookshots the stunned head; its stun timer climbs while he is attached', hittable: 'none', cite: at(922) },
+  { id: 'recover', label: 'Bongo Bongo recovers and vanishes again', hittable: 'none', cite: at(963) },
 ]
 
 const steps: Step[] = [
@@ -110,25 +142,30 @@ const steps: Step[] = [
   ...HEALTHY.filter((k) => k !== 'slam').flatMap((k) => strikeSteps(`atk_${k}`, 'atk_retreat', k, 'The hand')),
   { from: 'atk_retreat', to: 'drum', label: 'The hands are back; the drumming starts again', cite: at(663) },
   ...Array.from({ length: CYCLES }, (_, i) => i + 1).flatMap((c): Step[] => {
-    const next = c < CYCLES ? d1(c + 1, 'wait') : 'drum'
+    const next = c < CYCLES ? d1(c + 1, 'wait') : 'down1_slam'
     return [
       ...ONE_DOWN.map((k): Step => ({ from: d1(c, 'wait'), to: d1(c, `${k}_ready`), label: `The other hand flies at Link to ${KIND_NAME[k]}`, weight: ODDS[k].w, cite: ODDS[k].cite })),
       ...ONE_DOWN.map((k): Step => ({ from: d1(c, `${k}_ready`), to: d1(c, k), label: `The other hand begins its ${KIND_NAME[k]}`, cite: GO_CITE[k] })),
       ...ONE_DOWN.flatMap((k) => strikeSteps(d1(c, k), d1(c, 'retreat'), k, 'The other hand')),
       c < CYCLES
         ? { from: d1(c, 'retreat'), to: next, label: 'The other hand is back and waits', cite: at(1455) }
-        : { from: d1(c, 'retreat'), to: next, label: 'The shaking hand gives up and slams back into place', cite: at(2087) },
-    ]
+        : null,
+    ].filter((s): s is Step => s !== null)
   }),
+  ...slamSteps(d1(CYCLES, 'retreat'), 'down1_slam', 'The shaking hand gives up and'),
+  { from: 'down1_slam', to: 'drum', label: 'The fallen hand turns hittable again and waits; the drumming starts again', afterTimer: true, cite: at(1527) },
+  { from: 'down2_flinch', to: 'down2_ready', label: 'The flinch ends; Bongo Bongo opens its eye to charge', cite: at(717) },
   { from: 'down2_ready', to: 'down2_charge', label: 'Both fists are set: Bongo Bongo charges', afterTimer: true, cite: at(739) },
   { from: 'down2_charge', to: 'down2_end', label: 'Bongo Bongo rams Link', attack: 'charge', cite: at(773) },
+  { from: 'down2_charge', to: 'down2_end', label: 'A fist rams Link in the charge', attack: 'fist_charge', cite: at(2109) },
   { from: 'down2_end', to: 'atk_retreat', label: 'The hands fly home', cite: at(815) },
   { from: 'ice_open', to: 'ice_ready', label: 'Bongo Bongo opens its eye on the frozen hand', cite: at(719) },
   { from: 'ice_ready', to: 'ice_break', label: 'The other hand starts smashing', cite: at(2392) },
   { from: 'ice_break', to: 'atk_retreat', label: 'The ice shatters and the hands fly home', cite: at(2434) },
   { from: 'stun_knockout', to: 'stun_open', label: 'Bongo Bongo lands, stunned', cite: at(898) },
-  { from: 'stun_open', to: 'stun_recover', label: 'Bongo Bongo comes to', afterTimer: true, cite: at(933) },
-  { from: 'stun_recover', to: 'atk_retreat', label: 'Bongo Bongo rises; the hands fly home', cite: at(993) },
+  { from: 'stun_open', to: 'recover', label: 'Bongo Bongo comes to', afterTimer: true, cite: at(933) },
+  { from: 'stun_hooked', to: 'stun_open', label: 'The hookshot lets go; the stun timer has climbed back toward its cap', cite: at(924) },
+  { from: 'recover', to: 'atk_retreat', label: 'Bongo Bongo rises; the hands fly home', cite: at(993) },
 ]
 
 const HAND_RUNTIME = at(2533)
@@ -142,7 +179,12 @@ const attacks: Attack[] = [
     effect: { kind: 'grab', frames: { value: 21, cite: `${PL}:14249` }, damagePerBeat: { value: { units: 8, frames: 20 }, cite: at(1914) }, release: 'escape' },
     blockable: false, dodgeable: true, source: HAND_RUNTIME,
   },
-  { id: 'clap', label: 'Clap', damage: 32, effect: { kind: 'knockback' }, blockable: false, dodgeable: true, source: HAND_RUNTIME },
+  {
+    id: 'grab_swing', label: 'Fist grab and swing', damage: 32, effect: { kind: 'paralyze', frames: { value: 92, cite: at(1946) } },
+    blockable: false, dodgeable: true, source: HAND_RUNTIME,
+  },
+  { id: 'clap', label: 'Clap: the hands catch and hold Link', damage: 32, effect: { kind: 'paralyze', frames: { value: 30, cite: at(1762) } }, blockable: false, dodgeable: true, source: HAND_RUNTIME },
+  { id: 'fist_charge', label: 'Fist in the head charge', damage: 32, effect: { kind: 'knockback' }, blockable: false, dodgeable: true, source: HAND_RUNTIME },
   { id: 'charge', label: 'Head charge', damage: 48, effect: { kind: 'knockback' }, blockable: false, dodgeable: true, source: col(145) },
 ]
 
@@ -162,7 +204,7 @@ export const bossSst: ActorSpec = {
   role: 'boss',
   summary:
     'A headless drummer and its two giant hands. Hitting a hand sends it reeling; hitting the other before the first recovers opens the eye, ' +
-    'and an ice hit freezes a hand and opens it too. The eye is visible only through the Lens. A hit on the open eye knocks Bongo Bongo out, ' +
+    'and an ice hit freezes a hand and opens it too. The Lens only shows the eye; a blind hit still lands. A hit on the open eye knocks Bongo Bongo out, ' +
     'and only then do swords and sticks hurt it.',
   cite: at(295),
   pools: [{ id: 'head', label: 'Bongo Bongo', hp: { value: 36, cite: col(318) }, then: 'defeated' }],
@@ -173,7 +215,7 @@ export const bossSst: ActorSpec = {
   steps,
   attacks,
   actionFuncs: {
-    BossSst_HeadLurk: post('before the fight: the head waits undrawn for Link to drop in, and no collider is checked', 381),
+    BossSst_HeadLurk: post('before the fight: the head waits undrawn for Link to drop in, and from NTSC 1.2 on its AC colliders are not checked while it lurks', 2705),
     BossSst_HeadIntro: post('intro cutscene: Link is held in a cutscene action and no AC collider is checked', 2705),
     BossSst_HeadNeutral: 'drum',
     BossSst_HeadWait: 'atk_*',
@@ -186,7 +228,7 @@ export const bossSst: ActorSpec = {
     BossSst_HeadStunned: 'stun_knockout',
     BossSst_HeadVulnerable: 'stun_open',
     BossSst_HeadDamage: 'stun_open',
-    BossSst_HeadRecover: 'stun_recover',
+    BossSst_HeadRecover: 'recover',
     BossSst_HeadDeath: post(AFTER, 1065),
     BossSst_HeadThrash: post(AFTER, 1107),
     BossSst_HeadDarken: post(AFTER, 1126),
@@ -221,9 +263,9 @@ export const bossSst: ActorSpec = {
     BossSst_HandFrozen: 'ice_*',
     BossSst_HandReadyBreakIce: 'ice_ready',
     BossSst_HandBreakIce: 'ice_break',
-    BossSst_HandStunned: 'stun_knockout',
+    BossSst_HandStunned: 'stun_*',
     BossSst_HandDamage: 'stun_open',
-    BossSst_HandRecover: 'stun_recover',
+    BossSst_HandRecover: 'recover',
     BossSst_HandThrash: post(AFTER, 2198),
     BossSst_HandDarken: post(AFTER, 2236),
     BossSst_HandFall: post(AFTER, 2250),
@@ -246,25 +288,22 @@ export const bossSst: ActorSpec = {
         ].map((k) => [`hit_${k}__down1_1_wait`, 'down1_1_wait is entered only by Link hitting a hand, and its one step leaves it that same beat, so no later swing finds it']),
       ),
       ...Object.fromEntries(
-        ['explosive', 'hammer_swing', 'hookshot', 'slash_giant', 'arrow_fire', 'arrow_light', 'spin_giant', 'jump_giant', 'jump_giant_self', 'hammer_jump'].flatMap((k) =>
-          ['down2_ready', 'down2_charge'].map((p) => [`hit_${k}__${p}`, `the eye is invisible in ${p}, and no kit that carries this attack carries the Lens of Truth`]),
-        ),
-      ),
-      ...Object.fromEntries(
-        ['ice_ready', 'ice_break'].flatMap((p) => [
-          [`hit_arrow_fire__${p}`, 'the ice phases need an ice hit first, and neither kit with ice arrows pairs fire arrows with the Lens the invisible eye needs'],
-          [`hit_arrow_light__${p}`, 'the ice phases need an ice hit first, and neither kit with ice arrows pairs light arrows with the Lens the invisible eye needs'],
-          [`unseen_arrow_light__${p}`, 'adult_arrows arrives with 8 magic and spends 4 on the ice arrow that reaches this phase, leaving too little for an 8-magic light arrow'],
+        ['ice_ready', 'ice_break'].map((p) => [
+          `hit_arrow_light__${p}`,
+          'only adult_arrows carries ice and light arrows; it arrives with 8 magic and spends 4 on the ice arrow that reaches this phase, leaving too little for an 8-magic light arrow',
         ]),
       ),
-      stun_open_timer_clears: 'stun_open is left early only when its health runs out, and that defeat ends the encounter before the timer is cleaned up',
       grab_lands_again: 'the grab holds Link for one beat (21 frames), which ends before the hand can grab again',
       grab_lands_dd_again: 'as grab_lands_again',
+      clap_lands_again: 'the clap holds Link two beats (30 frames), and the next clap is at least a retreat and a 127-frame drum away',
+      clap_lands_dd_again: 'as clap_lands_again',
       link_helpless_grab: "the fastest escape (21 frames) is one beat, so the grab ends at that beat's end before Link's next move",
     },
   },
-  loadouts: [
-    ...standardLoadouts(['adult'], 4),
-    { id: 'adult_ice_lens', age: 'adult', hearts: 4, gear: ['deku_nuts', 'master_sword', 'bow', 'ice_arrows', 'magic', 'lens_of_truth'], magic: 8 },
-  ],
+  /**
+   * adult_nayru fights without its sword: Nayru's Love lasts 60 beats (link.ts nayruFrames), and that timer across a
+   * 36-health fight passes the 1M-position slice limit. Its kit still tests Nayru's Love against every attack; the
+   * other kits carry the swords and the wins.
+   */
+  loadouts: standardLoadouts(['adult'], 4).map((lo) => (lo.id === 'adult_nayru' ? { ...lo, gear: lo.gear.filter((g) => g !== 'master_sword') } : lo)),
 }
