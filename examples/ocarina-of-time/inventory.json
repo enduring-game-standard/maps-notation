@@ -46,7 +46,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Bdan_Objects/z_bg_bdan_objects.c",
-     "line": 82,
+     "line": 84,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -94,7 +94,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Sgami/z_bg_haka_sgami.c",
-     "line": 52,
+     "line": 54,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -104,7 +104,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Sgami/z_bg_haka_sgami.c",
-     "line": 63,
+     "line": 65,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -114,7 +114,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Sgami/z_bg_haka_sgami.c",
-     "line": 74,
+     "line": 76,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -124,7 +124,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Sgami/z_bg_haka_sgami.c",
-     "line": 85,
+     "line": 87,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -134,7 +134,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Sgami/z_bg_haka_sgami.c",
-     "line": 119,
+     "line": 121,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -167,7 +167,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Trap/z_bg_haka_trap.c",
-     "line": 84,
+     "line": 86,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -177,7 +177,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Trap/z_bg_haka_trap.c",
-     "line": 97,
+     "line": 99,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -187,7 +187,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Trap/z_bg_haka_trap.c",
-     "line": 114,
+     "line": 116,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -220,7 +220,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Tubo/z_bg_haka_tubo.c",
-     "line": 56,
+     "line": 58,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -230,7 +230,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Haka_Tubo/z_bg_haka_tubo.c",
-     "line": 76,
+     "line": 78,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -263,7 +263,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Curtain/z_bg_hidan_curtain.c",
-     "line": 55,
+     "line": 57,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -301,7 +301,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Firewall/z_bg_hidan_firewall.c",
-     "line": 56,
+     "line": 58,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -328,7 +328,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Fwbig/z_bg_hidan_fwbig.c",
-     "line": 69,
+     "line": 71,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -359,7 +359,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Rock/z_bg_hidan_rock.c",
-     "line": 67,
+     "line": 69,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -391,7 +391,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Rsekizou/z_bg_hidan_rsekizou.c",
-     "line": 43,
+     "line": 45,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -401,7 +401,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Rsekizou/z_bg_hidan_rsekizou.c",
-     "line": 54,
+     "line": 56,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -411,7 +411,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Rsekizou/z_bg_hidan_rsekizou.c",
-     "line": 65,
+     "line": 67,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -421,7 +421,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Rsekizou/z_bg_hidan_rsekizou.c",
-     "line": 76,
+     "line": 78,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -431,7 +431,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Rsekizou/z_bg_hidan_rsekizou.c",
-     "line": 87,
+     "line": 89,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -441,7 +441,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Rsekizou/z_bg_hidan_rsekizou.c",
-     "line": 98,
+     "line": 100,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -471,7 +471,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Sekizou/z_bg_hidan_sekizou.c",
-     "line": 47,
+     "line": 49,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -481,7 +481,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Sekizou/z_bg_hidan_sekizou.c",
-     "line": 58,
+     "line": 60,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -491,7 +491,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Sekizou/z_bg_hidan_sekizou.c",
-     "line": 69,
+     "line": 71,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -501,7 +501,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Sekizou/z_bg_hidan_sekizou.c",
-     "line": 80,
+     "line": 82,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -511,7 +511,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Sekizou/z_bg_hidan_sekizou.c",
-     "line": 91,
+     "line": 93,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -521,7 +521,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Sekizou/z_bg_hidan_sekizou.c",
-     "line": 102,
+     "line": 104,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -544,7 +544,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Sima/z_bg_hidan_sima.c",
-     "line": 51,
+     "line": 53,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -554,7 +554,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Hidan_Sima/z_bg_hidan_sima.c",
-     "line": 62,
+     "line": 64,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -583,7 +583,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Ice_Turara/z_bg_ice_turara.c",
-     "line": 42,
+     "line": 44,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -619,7 +619,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Jya_Goroiwa/z_bg_jya_goroiwa.c",
-     "line": 49,
+     "line": 51,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -645,7 +645,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Jya_Haheniron/z_bg_jya_haheniron.c",
-     "line": 49,
+     "line": 51,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -672,7 +672,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Bg_Ydan_Maruta/z_bg_ydan_maruta.c",
-     "line": 46,
+     "line": 48,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -682,7 +682,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Bg_Ydan_Maruta/z_bg_ydan_maruta.c",
-     "line": 57,
+     "line": 59,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -712,7 +712,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 17,
+     "line": 19,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -722,7 +722,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 28,
+     "line": 30,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -732,7 +732,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 39,
+     "line": 41,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -742,7 +742,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 50,
+     "line": 52,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -752,7 +752,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 61,
+     "line": 63,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -762,7 +762,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 72,
+     "line": 74,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -772,7 +772,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 83,
+     "line": 85,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -782,7 +782,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 94,
+     "line": 96,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -792,7 +792,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 105,
+     "line": 107,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -802,7 +802,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 116,
+     "line": 118,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -812,7 +812,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 127,
+     "line": 129,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -822,7 +822,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 138,
+     "line": 140,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -832,7 +832,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 149,
+     "line": 151,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -842,7 +842,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 160,
+     "line": 162,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -852,7 +852,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 171,
+     "line": 173,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -862,7 +862,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 182,
+     "line": 184,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -872,7 +872,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 193,
+     "line": 195,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -882,7 +882,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 204,
+     "line": 206,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -892,7 +892,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
-     "line": 215,
+     "line": 217,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -941,7 +941,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 5,
+     "line": 7,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -951,7 +951,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 16,
+     "line": 18,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -961,7 +961,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 27,
+     "line": 29,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -971,7 +971,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 38,
+     "line": 40,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -981,7 +981,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 49,
+     "line": 51,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -991,7 +991,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 60,
+     "line": 62,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1001,7 +1001,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 71,
+     "line": 73,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1011,7 +1011,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 82,
+     "line": 84,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1021,7 +1021,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 93,
+     "line": 95,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1031,7 +1031,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 104,
+     "line": 106,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1041,7 +1041,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 115,
+     "line": 117,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1051,7 +1051,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 126,
+     "line": 128,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1061,7 +1061,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 137,
+     "line": 139,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1071,7 +1071,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 148,
+     "line": 150,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1081,7 +1081,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 159,
+     "line": 161,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1091,7 +1091,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 170,
+     "line": 172,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1101,7 +1101,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 181,
+     "line": 183,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1111,7 +1111,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 192,
+     "line": 194,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1121,7 +1121,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd_colchk.inc.c",
-     "line": 203,
+     "line": 205,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1161,7 +1161,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 5,
+     "line": 7,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1171,7 +1171,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 16,
+     "line": 18,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1181,7 +1181,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 27,
+     "line": 29,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1191,7 +1191,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 38,
+     "line": 40,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1201,7 +1201,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 49,
+     "line": 51,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1211,7 +1211,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 60,
+     "line": 62,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1221,7 +1221,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 71,
+     "line": 73,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1231,7 +1231,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 82,
+     "line": 84,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1241,7 +1241,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2_colchk.inc.c",
-     "line": 93,
+     "line": 95,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -1282,7 +1282,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon/z_boss_ganon.c",
-     "line": 95,
+     "line": 97,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1292,7 +1292,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon/z_boss_ganon.c",
-     "line": 115,
+     "line": 117,
      "atFlags": 1050368,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1349,7 +1349,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 113,
+     "line": 115,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1359,7 +1359,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 124,
+     "line": 126,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1369,7 +1369,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 135,
+     "line": 137,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1379,7 +1379,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 146,
+     "line": 148,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1389,7 +1389,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 157,
+     "line": 159,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1399,7 +1399,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 168,
+     "line": 170,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1409,7 +1409,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 179,
+     "line": 181,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1419,7 +1419,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 190,
+     "line": 192,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1429,7 +1429,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 201,
+     "line": 203,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1439,7 +1439,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 212,
+     "line": 214,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1449,7 +1449,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 223,
+     "line": 225,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1459,7 +1459,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 234,
+     "line": 236,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1469,7 +1469,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 245,
+     "line": 247,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1479,7 +1479,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 256,
+     "line": 258,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1489,7 +1489,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 267,
+     "line": 269,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1499,7 +1499,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 278,
+     "line": 280,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -1509,7 +1509,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 305,
+     "line": 307,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 64,
@@ -1519,7 +1519,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
-     "line": 316,
+     "line": 318,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 64,
@@ -1561,7 +1561,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Ganondrof/z_boss_ganondrof.c",
-     "line": 117,
+     "line": 119,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1571,7 +1571,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Ganondrof/z_boss_ganondrof.c",
-     "line": 137,
+     "line": 139,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -1612,7 +1612,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 98,
+     "line": 100,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1622,7 +1622,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 109,
+     "line": 111,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1632,7 +1632,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 120,
+     "line": 122,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1642,7 +1642,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 131,
+     "line": 133,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1652,7 +1652,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 142,
+     "line": 144,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1662,7 +1662,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 153,
+     "line": 155,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1672,7 +1672,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 164,
+     "line": 166,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1682,7 +1682,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 175,
+     "line": 177,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1692,7 +1692,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 186,
+     "line": 188,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1702,7 +1702,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 197,
+     "line": 199,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1712,7 +1712,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 208,
+     "line": 210,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1722,7 +1722,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 219,
+     "line": 221,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1732,7 +1732,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Goma/z_boss_goma.c",
-     "line": 230,
+     "line": 232,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -1788,7 +1788,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 5,
+     "line": 7,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1798,7 +1798,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 16,
+     "line": 18,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1808,7 +1808,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 27,
+     "line": 29,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1818,7 +1818,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 38,
+     "line": 40,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1828,7 +1828,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 49,
+     "line": 51,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1838,7 +1838,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 60,
+     "line": 62,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1848,7 +1848,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 71,
+     "line": 73,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1858,7 +1858,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 82,
+     "line": 84,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1868,7 +1868,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 93,
+     "line": 95,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1878,7 +1878,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 104,
+     "line": 106,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1888,7 +1888,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 115,
+     "line": 117,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1898,7 +1898,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 126,
+     "line": 128,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1908,7 +1908,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 137,
+     "line": 139,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1918,7 +1918,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 148,
+     "line": 150,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1928,7 +1928,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 159,
+     "line": 161,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1938,7 +1938,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 170,
+     "line": 172,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1948,7 +1948,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 181,
+     "line": 183,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1958,7 +1958,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 192,
+     "line": 194,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1968,7 +1968,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 203,
+     "line": 205,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -1978,7 +1978,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo_colchk.inc.c",
-     "line": 237,
+     "line": 239,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -2147,7 +2147,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 6,
+     "line": 8,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2157,7 +2157,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 17,
+     "line": 19,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2167,7 +2167,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 28,
+     "line": 30,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2177,7 +2177,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 39,
+     "line": 41,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2187,7 +2187,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 50,
+     "line": 52,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2197,7 +2197,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 61,
+     "line": 63,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2207,7 +2207,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 72,
+     "line": 74,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2217,7 +2217,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 83,
+     "line": 85,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2227,7 +2227,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 94,
+     "line": 96,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2237,7 +2237,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 105,
+     "line": 107,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2247,7 +2247,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 116,
+     "line": 118,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2257,7 +2257,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 143,
+     "line": 145,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2267,7 +2267,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 154,
+     "line": 156,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2277,7 +2277,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 165,
+     "line": 167,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2287,7 +2287,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 176,
+     "line": 178,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2297,7 +2297,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 187,
+     "line": 189,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2307,7 +2307,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 198,
+     "line": 200,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2317,7 +2317,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 209,
+     "line": 211,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2327,7 +2327,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 220,
+     "line": 222,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2337,7 +2337,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 231,
+     "line": 233,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2347,7 +2347,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 242,
+     "line": 244,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2357,7 +2357,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 253,
+     "line": 255,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2367,7 +2367,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 287,
+     "line": 289,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2377,7 +2377,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst_colchk.inc.c",
-     "line": 307,
+     "line": 309,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_KNOCKBACK",
      "atDamage": 16,
@@ -2483,7 +2483,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Tw/z_boss_tw.c",
-     "line": 172,
+     "line": 174,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 48,
@@ -2493,7 +2493,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Tw/z_boss_tw.c",
-     "line": 192,
+     "line": 194,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -2503,7 +2503,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Tw/z_boss_tw.c",
-     "line": 212,
+     "line": 214,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -2512,7 +2512,13 @@
      "acOn": true
     }
    ],
-   "runtimeAt": [],
+   "runtimeAt": [
+    {
+     "text": "this->collider.elem.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_FIRE;",
+     "file": "src/overlays/actors/ovl_Boss_Tw/z_boss_tw.c",
+     "line": 496
+    }
+   ],
    "actionFuncs": [
     "BossTw_BlastFire",
     "BossTw_BlastIce",
@@ -2554,7 +2560,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Va/z_boss_va.c",
-     "line": 238,
+     "line": 240,
      "atFlags": 4291821551,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 8,
@@ -2564,7 +2570,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Va/z_boss_va.c",
-     "line": 251,
+     "line": 253,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2574,7 +2580,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Va/z_boss_va.c",
-     "line": 278,
+     "line": 280,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 4,
@@ -2584,7 +2590,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Boss_Va/z_boss_va.c",
-     "line": 312,
+     "line": 314,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 4,
@@ -2643,7 +2649,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Demo_Kekkai/z_demo_kekkai.c",
-     "line": 61,
+     "line": 63,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_7",
      "atDamage": 4,
@@ -2666,7 +2672,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Door_Killer/z_door_killer.c",
-     "line": 66,
+     "line": 68,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -2676,7 +2682,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Door_Killer/z_door_killer.c",
-     "line": 79,
+     "line": 81,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2871,7 +2877,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Am/z_en_am.c",
-     "line": 81,
+     "line": 83,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2881,7 +2887,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Am/z_en_am.c",
-     "line": 101,
+     "line": 103,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2891,7 +2897,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Am/z_en_am.c",
-     "line": 121,
+     "line": 123,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -2926,7 +2932,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Anubice/z_en_anubice.c",
-     "line": 66,
+     "line": 68,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -2959,7 +2965,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Anubice_Fire/z_en_anubice_fire.c",
-     "line": 57,
+     "line": 59,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -2992,7 +2998,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Arrow/z_en_arrow.c",
-     "line": 62,
+     "line": 64,
      "atFlags": 32,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 1,
@@ -3051,7 +3057,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Ba/z_en_ba.c",
-     "line": 59,
+     "line": 61,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -3061,7 +3067,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Ba/z_en_ba.c",
-     "line": 70,
+     "line": 72,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -3518,7 +3524,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Bb/z_en_bb.c",
-     "line": 232,
+     "line": 234,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -3537,6 +3543,11 @@
      "text": "this->collider.elements[0].base.atDmgInfo.damage = 8;",
      "file": "src/overlays/actors/ovl_En_Bb/z_en_bb.c",
      "line": 356
+    },
+    {
+     "text": "this->collider.elements[0].base.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_FIRE;",
+     "file": "src/overlays/actors/ovl_En_Bb/z_en_bb.c",
+     "line": 374
     }
    ],
    "actionFuncs": [
@@ -3717,7 +3728,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Bigokuta/z_en_bigokuta.c",
-     "line": 69,
+     "line": 71,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -3727,7 +3738,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Bigokuta/z_en_bigokuta.c",
-     "line": 103,
+     "line": 105,
      "atFlags": 536870912,
      "atEffect": "0x00",
      "atDamage": 8,
@@ -3737,7 +3748,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Bigokuta/z_en_bigokuta.c",
-     "line": 120,
+     "line": 122,
      "atFlags": 536870912,
      "atEffect": "0x00",
      "atDamage": 8,
@@ -3919,7 +3930,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Bili/z_en_bili.c",
-     "line": 63,
+     "line": 65,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 8,
@@ -3962,7 +3973,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Brob/z_en_brob.c",
-     "line": 56,
+     "line": 58,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 8,
@@ -4000,7 +4011,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Bubble/z_en_bubble.c",
-     "line": 43,
+     "line": 45,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -4010,7 +4021,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Bubble/z_en_bubble.c",
-     "line": 54,
+     "line": 56,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -4024,6 +4035,11 @@
      "text": "elem->atDmgInfo.dmgFlags = DMG_EXPLOSIVE;",
      "file": "src/overlays/actors/ovl_En_Bubble/z_en_bubble.c",
      "line": 114
+    },
+    {
+     "text": "elem->atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_NONE;",
+     "file": "src/overlays/actors/ovl_En_Bubble/z_en_bubble.c",
+     "line": 115
     },
     {
      "text": "elem->atDmgInfo.damage = 4;",
@@ -4193,7 +4209,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Bw/z_en_bw.c",
-     "line": 76,
+     "line": 78,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 8,
@@ -4203,7 +4219,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Bw/z_en_bw.c",
-     "line": 96,
+     "line": 98,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -4212,7 +4228,18 @@
      "acOn": true
     }
    ],
-   "runtimeAt": [],
+   "runtimeAt": [
+    {
+     "text": "this->collider1.elem.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_NONE;",
+     "file": "src/overlays/actors/ovl_En_Bw/z_en_bw.c",
+     "line": 794
+    },
+    {
+     "text": "this->collider1.elem.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_FIRE;",
+     "file": "src/overlays/actors/ovl_En_Bw/z_en_bw.c",
+     "line": 814
+    }
+   ],
    "actionFuncs": [
     "actionFunc",
     "func_809CE884",
@@ -4238,7 +4265,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Bx/z_en_bx.c",
-     "line": 53,
+     "line": 55,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 4,
@@ -4248,7 +4275,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Bx/z_en_bx.c",
-     "line": 73,
+     "line": 75,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 4,
@@ -4279,7 +4306,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Clear_Tag/z_en_clear_tag.c",
-     "line": 62,
+     "line": 64,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -4289,7 +4316,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Clear_Tag/z_en_clear_tag.c",
-     "line": 82,
+     "line": 84,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -4463,7 +4490,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Crow/z_en_crow.c",
-     "line": 50,
+     "line": 52,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -4636,7 +4663,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Daiku/z_en_daiku.c",
-     "line": 85,
+     "line": 87,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -4809,7 +4836,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Daiku_Kakariko/z_en_daiku_kakariko.c",
-     "line": 67,
+     "line": 69,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5129,7 +5156,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Dekubaba/z_en_dekubaba.c",
-     "line": 59,
+     "line": 61,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -5139,7 +5166,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dekubaba/z_en_dekubaba.c",
-     "line": 70,
+     "line": 72,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5149,7 +5176,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dekubaba/z_en_dekubaba.c",
-     "line": 81,
+     "line": 83,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5159,7 +5186,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dekubaba/z_en_dekubaba.c",
-     "line": 92,
+     "line": 94,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5169,7 +5196,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dekubaba/z_en_dekubaba.c",
-     "line": 103,
+     "line": 105,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5179,7 +5206,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dekubaba/z_en_dekubaba.c",
-     "line": 114,
+     "line": 116,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5189,7 +5216,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dekubaba/z_en_dekubaba.c",
-     "line": 125,
+     "line": 127,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5371,7 +5398,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Dekunuts/z_en_dekunuts.c",
-     "line": 64,
+     "line": 66,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5544,7 +5571,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Dh/z_en_dh.c",
-     "line": 84,
+     "line": 86,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5554,7 +5581,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dh/z_en_dh.c",
-     "line": 97,
+     "line": 99,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5802,7 +5829,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Dha/z_en_dha.c",
-     "line": 92,
+     "line": 94,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5812,7 +5839,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dha/z_en_dha.c",
-     "line": 103,
+     "line": 105,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5822,7 +5849,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dha/z_en_dha.c",
-     "line": 114,
+     "line": 116,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5832,7 +5859,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dha/z_en_dha.c",
-     "line": 125,
+     "line": 127,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5842,7 +5869,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dha/z_en_dha.c",
-     "line": 136,
+     "line": 138,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -5878,7 +5905,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Dodojr/z_en_dodojr.c",
-     "line": 68,
+     "line": 70,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -6062,7 +6089,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 70,
+     "line": 72,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6072,7 +6099,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 81,
+     "line": 83,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6082,7 +6109,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 92,
+     "line": 94,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6092,7 +6119,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 103,
+     "line": 105,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6102,7 +6129,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 114,
+     "line": 116,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6112,7 +6139,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 125,
+     "line": 127,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6122,7 +6149,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 152,
+     "line": 154,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6132,7 +6159,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 163,
+     "line": 165,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6142,7 +6169,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 174,
+     "line": 176,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -6152,7 +6179,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Dodongo/z_en_dodongo.c",
-     "line": 208,
+     "line": 210,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 16,
@@ -6366,7 +6393,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Eiyer/z_en_eiyer.c",
-     "line": 78,
+     "line": 80,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_KNOCKBACK",
      "atDamage": 8,
@@ -6432,7 +6459,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 70,
+     "line": 72,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6442,7 +6469,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 81,
+     "line": 83,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6452,7 +6479,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 92,
+     "line": 94,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6462,7 +6489,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 103,
+     "line": 105,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6472,7 +6499,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 114,
+     "line": 116,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6482,7 +6509,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 125,
+     "line": 127,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6492,7 +6519,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 136,
+     "line": 138,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6502,7 +6529,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 147,
+     "line": 149,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6512,7 +6539,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 158,
+     "line": 160,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6522,7 +6549,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 169,
+     "line": 171,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6532,7 +6559,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 180,
+     "line": 182,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6542,7 +6569,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fd/z_en_fd.c",
-     "line": 191,
+     "line": 193,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -6718,7 +6745,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Fd_Fire/z_en_fd_fire.c",
-     "line": 48,
+     "line": 50,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 8,
@@ -6747,7 +6774,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Fhg_Fire/z_en_fhg_fire.c",
-     "line": 87,
+     "line": 89,
      "atFlags": 1050368,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 32,
@@ -6771,7 +6798,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Fire_Rock/z_en_fire_rock.c",
-     "line": 56,
+     "line": 58,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_9",
      "atDamage": 8,
@@ -6781,7 +6808,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fire_Rock/z_en_fire_rock.c",
-     "line": 76,
+     "line": 78,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 8,
@@ -6960,7 +6987,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Firefly/z_en_firefly.c",
-     "line": 66,
+     "line": 68,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 8,
@@ -6969,7 +6996,28 @@
      "acOn": true
     }
    ],
-   "runtimeAt": [],
+   "runtimeAt": [
+    {
+     "text": "this->collider.elements[0].base.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_NONE;",
+     "file": "src/overlays/actors/ovl_En_Firefly/z_en_firefly.c",
+     "line": 144
+    },
+    {
+     "text": "this->collider.elements[0].base.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_FIRE;",
+     "file": "src/overlays/actors/ovl_En_Firefly/z_en_firefly.c",
+     "line": 156
+    },
+    {
+     "text": "this->collider.elements[0].base.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_ICE;",
+     "file": "src/overlays/actors/ovl_En_Firefly/z_en_firefly.c",
+     "line": 196
+    },
+    {
+     "text": "this->collider.elements[0].base.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_NONE;",
+     "file": "src/overlays/actors/ovl_En_Firefly/z_en_firefly.c",
+     "line": 199
+    }
+   ],
    "actionFuncs": [
     "EnFirefly_Attack",
     "EnFirefly_AttackFromPerched",
@@ -7139,7 +7187,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Floormas/z_en_floormas.c",
-     "line": 82,
+     "line": 84,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_KNOCKBACK",
      "atDamage": 16,
@@ -7198,7 +7246,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Fw/z_en_fw.c",
-     "line": 57,
+     "line": 59,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -7371,7 +7419,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Fz/z_en_fz.c",
-     "line": 84,
+     "line": 86,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -7381,7 +7429,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fz/z_en_fz.c",
-     "line": 103,
+     "line": 105,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -7391,7 +7439,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Fz/z_en_fz.c",
-     "line": 122,
+     "line": 124,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_ICE",
      "atDamage": 8,
@@ -7594,7 +7642,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_GeldB/z_en_geldb.c",
-     "line": 114,
+     "line": 116,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -7604,7 +7652,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_GeldB/z_en_geldb.c",
-     "line": 127,
+     "line": 129,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -7614,7 +7662,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_GeldB/z_en_geldb.c",
-     "line": 138,
+     "line": 140,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -7624,7 +7672,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_GeldB/z_en_geldb.c",
-     "line": 172,
+     "line": 174,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -7674,7 +7722,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Goma/z_en_goma.c",
-     "line": 90,
+     "line": 92,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -7684,7 +7732,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Goma/z_en_goma.c",
-     "line": 110,
+     "line": 112,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -7730,7 +7778,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Goroiwa/z_en_goroiwa.c",
-     "line": 78,
+     "line": 80,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -7902,7 +7950,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Gs/z_en_gs.c",
-     "line": 60,
+     "line": 62,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -7940,7 +7988,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Hintnuts/z_en_hintnuts.c",
-     "line": 59,
+     "line": 61,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -7982,7 +8030,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Honotrap/z_en_honotrap.c",
-     "line": 83,
+     "line": 85,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -7992,7 +8040,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Honotrap/z_en_honotrap.c",
-     "line": 94,
+     "line": 96,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8002,7 +8050,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Honotrap/z_en_honotrap.c",
-     "line": 128,
+     "line": 130,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -8180,7 +8228,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Ik/z_en_ik.c",
-     "line": 101,
+     "line": 103,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8190,7 +8238,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Ik/z_en_ik.c",
-     "line": 114,
+     "line": 116,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8200,7 +8248,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Ik/z_en_ik.c",
-     "line": 125,
+     "line": 127,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8210,7 +8258,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Ik/z_en_ik.c",
-     "line": 159,
+     "line": 161,
      "atFlags": 536870912,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 64,
@@ -8246,7 +8294,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Kanban/z_en_kanban.c",
-     "line": 119,
+     "line": 121,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8277,7 +8325,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Karebaba/z_en_karebaba.c",
-     "line": 66,
+     "line": 68,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8287,7 +8335,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Karebaba/z_en_karebaba.c",
-     "line": 86,
+     "line": 88,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -8613,7 +8661,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Mb/z_en_mb.c",
-     "line": 121,
+     "line": 123,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8623,7 +8671,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Mb/z_en_mb.c",
-     "line": 134,
+     "line": 136,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8633,7 +8681,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Mb/z_en_mb.c",
-     "line": 145,
+     "line": 147,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8643,7 +8691,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Mb/z_en_mb.c",
-     "line": 179,
+     "line": 181,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -8828,7 +8876,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Mm/z_en_mm.c",
-     "line": 78,
+     "line": 80,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -8856,7 +8904,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Nutsball/z_en_nutsball.c",
-     "line": 57,
+     "line": 59,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -9033,7 +9081,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Ny/z_en_ny.c",
-     "line": 58,
+     "line": 60,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_KNOCKBACK",
      "atDamage": 8,
@@ -9216,7 +9264,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Okuta/z_en_okuta.c",
-     "line": 58,
+     "line": 60,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -9226,7 +9274,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Okuta/z_en_okuta.c",
-     "line": 78,
+     "line": 80,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -9422,7 +9470,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Peehat/z_en_peehat.c",
-     "line": 84,
+     "line": 86,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -9432,7 +9480,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Peehat/z_en_peehat.c",
-     "line": 97,
+     "line": 99,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -9442,7 +9490,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Peehat/z_en_peehat.c",
-     "line": 131,
+     "line": 133,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -9627,7 +9675,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Po_Field/z_en_po_field.c",
-     "line": 75,
+     "line": 77,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -9637,7 +9685,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Po_Field/z_en_po_field.c",
-     "line": 95,
+     "line": 97,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_FIRE",
      "atDamage": 4,
@@ -9818,7 +9866,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Po_Sisters/z_en_po_sisters.c",
-     "line": 106,
+     "line": 108,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -10012,7 +10060,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Poh/z_en_poh.c",
-     "line": 84,
+     "line": 86,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -10022,7 +10070,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Poh/z_en_poh.c",
-     "line": 97,
+     "line": 99,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -10209,7 +10257,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Rd/z_en_rd.c",
-     "line": 101,
+     "line": 103,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -10396,7 +10444,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Reeba/z_en_reeba.c",
-     "line": 119,
+     "line": 121,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_8",
      "atDamage": 8,
@@ -10406,6 +10454,11 @@
     }
    ],
    "runtimeAt": [
+    {
+     "text": "this->collider.elem.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_KNOCKBACK;",
+     "file": "src/overlays/actors/ovl_En_Reeba/z_en_reeba.c",
+     "line": 155
+    },
     {
      "text": "this->collider.elem.atDmgInfo.damage = 16;",
      "file": "src/overlays/actors/ovl_En_Reeba/z_en_reeba.c",
@@ -10569,7 +10622,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Rr/z_en_rr.c",
-     "line": 116,
+     "line": 118,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -10579,7 +10632,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Rr/z_en_rr.c",
-     "line": 135,
+     "line": 137,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -10618,7 +10671,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Sb/z_en_sb.c",
-     "line": 61,
+     "line": 63,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_KNOCKBACK",
      "atDamage": 8,
@@ -10668,7 +10721,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Shopnuts/z_en_shopnuts.c",
-     "line": 57,
+     "line": 59,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -10849,7 +10902,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Skb/z_en_skb.c",
-     "line": 62,
+     "line": 64,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -10859,7 +10912,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Skb/z_en_skb.c",
-     "line": 73,
+     "line": 75,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -11037,7 +11090,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Skj/z_en_skj.c",
-     "line": 206,
+     "line": 208,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -11103,7 +11156,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Skjneedle/z_en_skjneedle.c",
-     "line": 47,
+     "line": 49,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -11133,7 +11186,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Ssh/z_en_ssh.c",
-     "line": 70,
+     "line": 72,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -11143,7 +11196,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Ssh/z_en_ssh.c",
-     "line": 92,
+     "line": 94,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -11153,7 +11206,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Ssh/z_en_ssh.c",
-     "line": 105,
+     "line": 107,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -11193,7 +11246,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_St/z_en_st.c",
-     "line": 69,
+     "line": 71,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -11203,7 +11256,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_St/z_en_st.c",
-     "line": 91,
+     "line": 93,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -11213,7 +11266,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_St/z_en_st.c",
-     "line": 104,
+     "line": 106,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -11254,7 +11307,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Sw/z_en_sw.c",
-     "line": 55,
+     "line": 57,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -11439,7 +11492,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Test/z_en_test.c",
-     "line": 165,
+     "line": 167,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -11449,7 +11502,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Test/z_en_test.c",
-     "line": 185,
+     "line": 187,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -11459,7 +11512,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Test/z_en_test.c",
-     "line": 205,
+     "line": 207,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -11540,7 +11593,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Tite/z_en_tite.c",
-     "line": 109,
+     "line": 111,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -11874,7 +11927,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Toryo/z_en_toryo.c",
-     "line": 54,
+     "line": 56,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -12056,7 +12109,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Tp/z_en_tp.c",
-     "line": 73,
+     "line": 75,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_ELECTRIC",
      "atDamage": 8,
@@ -12088,7 +12141,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Tubo_Trap/z_en_tubo_trap.c",
-     "line": 46,
+     "line": 48,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -12260,7 +12313,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Vali/z_en_vali.c",
-     "line": 67,
+     "line": 69,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_7",
      "atDamage": 8,
@@ -12270,7 +12323,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Vali/z_en_vali.c",
-     "line": 87,
+     "line": 89,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_7",
      "atDamage": 8,
@@ -12306,7 +12359,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Vb_Ball/z_en_vb_ball.c",
-     "line": 53,
+     "line": 55,
      "atFlags": 1050368,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 32,
@@ -12343,7 +12396,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Vm/z_en_vm.c",
-     "line": 63,
+     "line": 65,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -12353,7 +12406,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Vm/z_en_vm.c",
-     "line": 83,
+     "line": 85,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 16,
@@ -12363,7 +12416,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Vm/z_en_vm.c",
-     "line": 103,
+     "line": 105,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -12536,7 +12589,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Wallmas/z_en_wallmas.c",
-     "line": 73,
+     "line": 75,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -12718,7 +12771,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Weiyer/z_en_weiyer.c",
-     "line": 63,
+     "line": 65,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -12898,7 +12951,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Wf/z_en_wf.c",
-     "line": 85,
+     "line": 87,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -12908,7 +12961,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Wf/z_en_wf.c",
-     "line": 96,
+     "line": 98,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -12918,7 +12971,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Wf/z_en_wf.c",
-     "line": 107,
+     "line": 109,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -12928,7 +12981,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Wf/z_en_wf.c",
-     "line": 118,
+     "line": 120,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -12938,7 +12991,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Wf/z_en_wf.c",
-     "line": 152,
+     "line": 154,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -12948,7 +13001,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Wf/z_en_wf.c",
-     "line": 172,
+     "line": 174,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -12999,7 +13052,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Yukabyun/z_en_yukabyun.c",
-     "line": 54,
+     "line": 56,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 4,
@@ -13185,7 +13238,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Zf/z_en_zf.c",
-     "line": 162,
+     "line": 164,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,
@@ -13195,7 +13248,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_En_Zf/z_en_zf.c",
-     "line": 182,
+     "line": 184,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 8,
@@ -13238,7 +13291,7 @@
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Obj_Ice_Poly/z_obj_ice_poly.c",
-     "line": 53,
+     "line": 55,
      "atFlags": 4291821567,
      "atEffect": "HIT_SPECIAL_EFFECT_ICE",
      "atDamage": 0,
@@ -13248,7 +13301,7 @@
     },
     {
      "file": "src/overlays/actors/ovl_Obj_Ice_Poly/z_obj_ice_poly.c",
-     "line": 73,
+     "line": 75,
      "atFlags": 0,
      "atEffect": "HIT_SPECIAL_EFFECT_NONE",
      "atDamage": 0,

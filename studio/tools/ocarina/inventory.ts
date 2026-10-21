@@ -58,11 +58,11 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       actor.health.push({ value: num(m[1]), via: 'assignment', file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/\{\s*(ELEM_MATERIAL_\w+),\s*\{\s*([^,]+),\s*(HIT_SPECIAL_EFFECT_\w+|[\w]+),\s*([^}]+)\},\s*\{\s*([^,]+),\s*[^,]+,\s*[^}]+\},\s*([^,]+),\s*([^,]+),/g))
       actor.elements.push({
-        file: rel, line: lineOf(src, m.index!),
+        file: rel, line: lineOf(src, m.index! + m[0].indexOf(m[2])),
         atFlags: num(m[2]), atEffect: m[3], atDamage: num(m[4]), acFlags: num(m[5]),
         atOn: /ATELEM_ON/.test(m[6]), acOn: /ACELEM_ON/.test(m[7]),
       })
-    for (const m of src.matchAll(/[^\n]*atDmgInfo\.(?:damage|effect|dmgFlags)\s*=[^\n]*/g))
+    for (const m of src.matchAll(/[^\n]*atDmgInfo\.(?:damage|effect|hitSpecialEffect|dmgFlags)\s*=[^\n]*/g))
       actor.runtimeAt.push({ text: m[0].trim(), file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/actionFunc\s*=\s*(\w+)\s*;/g)) funcs.add(m[1])
     for (const m of src.matchAll(/\w+_SetupAction\(\s*this\s*,\s*(\w+)\s*\)/g)) funcs.add(m[1])
