@@ -99,7 +99,9 @@ for (const spec of modeled()) {
         it(`${a.label} costs Link ${dd ? doubleDefense(a.damage) : a.damage} health${dd ? ' with Double Defense' : ''}`, () => {
           const base: Marking = Object.fromEntries(net.states.map((s) => [s.id, 0]))
           const hp = 40 * 16
-          const m = quiet(c, { ...base, in_fight: 1, range_near: 1, link_hp: hp / unit, has_double_defense: dd ? 1 : 0, [`incoming_${a.id}`]: 1 })
+          // A knockback that only lands from far has no near verb, so Link stands where the attack can reach him.
+          const range = a.effect.kind === 'knockback' && !verbIds.has(`${a.id}_lands_near`) ? 'range_far' : 'range_near'
+          const m = quiet(c, { ...base, in_fight: 1, [range]: 1, link_hp: hp / unit, has_double_defense: dd ? 1 : 0, [`incoming_${a.id}`]: 1 })
           expect((hp / unit - m.link_hp) * unit).toBe(dd ? doubleDefense(a.damage) : a.damage)
         })
       if (a.blockable)
