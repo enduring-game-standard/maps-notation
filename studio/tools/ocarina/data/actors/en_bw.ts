@@ -19,8 +19,6 @@ const SHELL_STOPS: DmgType[] = [
 const HAMMER = { HAMMER_SWING: 2, HAMMER_JUMP: 4 } as const
 
 const LIT = ['crawl_wander', 'crawl_cooldown', 'aim', 'crawl_chase', 'jump_lunge']
-const UNLIT_UPRIGHT = ['hurt', 'crawl_flee', 'stunned_upright']
-const FLIPPED = ['flipped', 'stunned_flipped']
 
 type Overrides = NonNullable<Phase['overrides']>
 const litOverrides: Overrides = {

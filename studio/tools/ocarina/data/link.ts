@@ -100,7 +100,7 @@ export const link: LinkSpec = {
       shieldAttack('hylian_shield', 'Hylian Shield', ['child', 'adult']),
       shieldAttack('mirror_shield', 'Mirror Shield', ['adult']),
     ],
-    MIR_RAY: [{ ...attack('MIR_RAY', 'Mirror Shield reflecting a scene light beam: Mir_Ray is spawned only by Spirit Temple and Ganon\'s Castle room actors (Bg_Jya_*, Bg_Gnd_Soulmeiro), not by Link', ['adult'], ['mirror_shield'], 'ranged', { value: 0, cite: 'src/overlays/actors/ovl_Mir_Ray/z_mir_ray.c:75' }, 'src/overlays/actors/ovl_Mir_Ray/z_mir_ray.c:271'), room: 'light_beam' }],
+    MIR_RAY: { excluded: 'only Bg_Jya_Megami (z_bg_jya_megami.c:55) and Obj_Lightswitch (z_obj_lightswitch.c:72) accept bit 0x00200000, and both are puzzle objects outside the inventory; no in-scope collider takes it', cite: 'src/overlays/actors/ovl_Mir_Ray/z_mir_ray.c:75' },
     SPIN_KOKIRI: spins('SPIN_KOKIRI'),
     SPIN_GIANT: spins('SPIN_GIANT'),
     SPIN_MASTER: spins('SPIN_MASTER'),

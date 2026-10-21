@@ -31,7 +31,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3729
+   "ms": 2155
   },
   {
    "kit": "adult_arrows",
@@ -45,7 +45,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3448
+   "ms": 1847
   },
   {
    "kit": "adult_blade",
@@ -59,7 +59,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1461
+   "ms": 479
   },
   {
    "kit": "adult_blade",
@@ -73,7 +73,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1006
+   "ms": 412
   },
   {
    "kit": "adult_bottles",
@@ -87,7 +87,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 6290
+   "ms": 3854
   },
   {
    "kit": "adult_bottles",
@@ -101,7 +101,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 4940
+   "ms": 3275
   },
   {
    "kit": "adult_dins",
@@ -115,7 +115,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 4096
+   "ms": 2359
   },
   {
    "kit": "adult_dins",
@@ -129,7 +129,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3748
+   "ms": 2000
   },
   {
    "kit": "adult_giant",
@@ -143,7 +143,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2324
+   "ms": 924
   },
   {
    "kit": "adult_giant",
@@ -157,7 +157,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1962
+   "ms": 839
   },
   {
    "kit": "adult_lens",
@@ -171,7 +171,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 11498
+   "ms": 7180
   },
   {
    "kit": "adult_lens",
@@ -185,7 +185,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 9640
+   "ms": 6149
   },
   {
    "kit": "adult_nayru",
@@ -199,7 +199,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 22816
+   "ms": 14861
   },
   {
    "kit": "adult_nayru",
@@ -213,7 +213,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 19491
+   "ms": 12758
   },
   {
    "kit": "adult_spin",
@@ -227,7 +227,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 16582
+   "ms": 9770
   },
   {
    "kit": "adult_spin",
@@ -241,7 +241,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 13785
+   "ms": 8420
   }
  ]
 }

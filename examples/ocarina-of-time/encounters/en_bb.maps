@@ -135,39 +135,39 @@ state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
 state lens_count "The Lens: beats toward the next cost" in beat at 440 710
 
-verb down_blue_timer_clears "Blue Bubble is down, flame out is over" by world priority 99 in enemy at 2040 220
+verb down_blue_timer_clears "Blue Bubble is down, flame out is over" by world priority 100 in enemy at 2040 220
   take timer_down_blue
   unless phase_down_blue
 
-verb stunned_blue_timer_clears "Blue Bubble is stunned, flame out is over" by world priority 99 in enemy at 2180 290
+verb stunned_blue_timer_clears "Blue Bubble is stunned, flame out is over" by world priority 100 in enemy at 2180 290
   take timer_stunned_blue
   unless phase_stunned_blue
 
-verb red_hide_timer_clears "Fire Bubble sinks into the floor is over" by world priority 99 in enemy at 2040 500
+verb red_hide_timer_clears "Fire Bubble sinks into the floor is over" by world priority 100 in enemy at 2040 500
   take timer_red_hide
   unless phase_red_hide
 
-verb red_rest_timer_clears "Fire Bubble rests below the floor is over" by world priority 99 in enemy at 2180 570
+verb red_rest_timer_clears "Fire Bubble rests below the floor is over" by world priority 100 in enemy at 2180 570
   take timer_red_rest
   unless phase_red_rest
 
-verb down_red_timer_clears "Fire Bubble is down, flame out is over" by world priority 99 in enemy at 2180 710
+verb down_red_timer_clears "Fire Bubble is down, flame out is over" by world priority 100 in enemy at 2180 710
   take timer_down_red
   unless phase_down_red
 
-verb stunned_white_timer_clears "White Bubble is stunned is over" by world priority 99 in enemy at 2180 850
+verb stunned_white_timer_clears "White Bubble is stunned is over" by world priority 100 in enemy at 2180 850
   take timer_stunned_white
   unless phase_stunned_white
 
-verb green_on_timer_clears "Green Bubble circles, flame lit is over" by world priority 99 in enemy at 2040 990
+verb green_on_timer_clears "Green Bubble circles, flame lit is over" by world priority 100 in enemy at 2040 990
   take timer_green_on
   unless phase_green_on
 
-verb green_off_timer_clears "Green Bubble circles, flame out is over" by world priority 99 in enemy at 2180 1060
+verb green_off_timer_clears "Green Bubble circles, flame out is over" by world priority 100 in enemy at 2180 1060
   take timer_green_off
   unless phase_green_off
 
-verb stunned_green_timer_clears "Green Bubble is stunned, flame out is over" by world priority 99 in enemy at 2040 1200
+verb stunned_green_timer_clears "Green Bubble is stunned, flame out is over" by world priority 100 in enemy at 2040 1200
   take timer_stunned_green
   unless phase_stunned_green
 
@@ -393,58 +393,58 @@ verb variant_green "Green Bubble (small or big; size and path only)" by world pr
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Bubble loses health" by world priority 96 in enemy_health at 2360 290
+verb body_hurt "Bubble loses health" by world priority 97 in enemy_health at 2360 290
   take dmg_body
   take hp_body
 
-verb body_overkill "Bubble has no health left to lose" by world priority 95 in enemy_health at 2500 290
+verb body_overkill "Bubble has no health left to lose" by world priority 96 in enemy_health at 2500 290
   take dmg_body
   unless hp_body
 
-verb green_hurt "Green Bubble loses health" by world priority 96 in enemy_health at 2360 360
+verb green_hurt "Green Bubble loses health" by world priority 97 in enemy_health at 2360 360
   take dmg_green
   take hp_green
 
-verb green_overkill "Green Bubble has no health left to lose" by world priority 95 in enemy_health at 2500 360
+verb green_overkill "Green Bubble has no health left to lose" by world priority 96 in enemy_health at 2500 360
   take dmg_green
   unless hp_green
 
@@ -2190,49 +2190,49 @@ verb hit_hammer_jump__stunned_green "Hammer jump attack hits (Green Bubble is st
   need phase_stunned_green
   give 4 dmg_green
 
-verb body_empty_in_damage_blue "Bubble runs out (Blue Bubble reels from a hit)" by world priority 92 in enemy_health at 2360 430
+verb body_empty_in_damage_blue "Bubble runs out (Blue Bubble reels from a hit)" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_damage_blue
   give link_wins
 
-verb body_empty_in_red_attack "Bubble runs out (Fire Bubble bounces about, flame lit)" by world priority 92 in enemy_health at 2500 430
+verb body_empty_in_red_attack "Bubble runs out (Fire Bubble bounces about, flame lit)" by world priority 90 in enemy_health at 2500 430
   unless hp_body
   take alive_body
   take phase_red_attack
   give link_wins
 
-verb body_empty_in_damage_red "Bubble runs out (Fire Bubble reels from a hit)" by world priority 92 in enemy_health at 2360 500
+verb body_empty_in_damage_red "Bubble runs out (Fire Bubble reels from a hit)" by world priority 90 in enemy_health at 2360 500
   unless hp_body
   take alive_body
   take phase_damage_red
   give link_wins
 
-verb body_empty_in_down_red "Bubble runs out (Fire Bubble is down, flame out)" by world priority 92 in enemy_health at 2500 500
+verb body_empty_in_down_red "Bubble runs out (Fire Bubble is down, flame out)" by world priority 90 in enemy_health at 2500 500
   unless hp_body
   take alive_body
   take phase_down_red
   give link_wins
 
-verb body_empty_in_white_fly "Bubble runs out (White Bubble flies its path)" by world priority 92 in enemy_health at 2360 570
+verb body_empty_in_white_fly "Bubble runs out (White Bubble flies its path)" by world priority 90 in enemy_health at 2360 570
   unless hp_body
   take alive_body
   take phase_white_fly
   give link_wins
 
-verb green_empty_in_green_on "Green Bubble runs out (Green Bubble circles, flame lit)" by world priority 92 in enemy_health at 2500 570
+verb green_empty_in_green_on "Green Bubble runs out (Green Bubble circles, flame lit)" by world priority 90 in enemy_health at 2500 570
   unless hp_green
   take alive_green
   take phase_green_on
   give link_wins
 
-verb green_empty_in_green_off "Green Bubble runs out (Green Bubble circles, flame out)" by world priority 92 in enemy_health at 2360 640
+verb green_empty_in_green_off "Green Bubble runs out (Green Bubble circles, flame out)" by world priority 90 in enemy_health at 2360 640
   unless hp_green
   take alive_green
   take phase_green_off
   give link_wins
 
-verb green_empty_in_stunned_green "Green Bubble runs out (Green Bubble is stunned, flame out)" by world priority 92 in enemy_health at 2500 640
+verb green_empty_in_stunned_green "Green Bubble runs out (Green Bubble is stunned, flame out)" by world priority 90 in enemy_health at 2500 640
   unless hp_green
   take alive_green
   take phase_stunned_green
@@ -2839,7 +2839,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 580 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 440 570
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 440 570
   take burn_count
   unless status_burn
 
@@ -2886,6 +2886,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 440 850
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 850
   take lens_count
   unless lens_on

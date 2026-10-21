@@ -116,23 +116,23 @@ state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
 state lens_count "The Lens: beats toward the next cost" in beat at 440 710
 
-verb eye_wait_timer_clears "The eye is shut and recovering is over" by world priority 99 in enemy at 2180 150
+verb eye_wait_timer_clears "The eye is shut and recovering is over" by world priority 100 in enemy at 2180 150
   take timer_eye_wait
   unless phase_eye_wait
 
-verb eye_open_timer_clears "The eye is open and its flame flies at Link is over" by world priority 99 in enemy at 2040 290
+verb eye_open_timer_clears "The eye is open and its flame flies at Link is over" by world priority 100 in enemy at 2040 290
   take timer_eye_open
   unless phase_eye_open
 
-verb eye_chase_timer_clears "The eye has shut; its flame chases Link is over" by world priority 99 in enemy at 2040 430
+verb eye_chase_timer_clears "The eye has shut; its flame chases Link is over" by world priority 100 in enemy at 2040 430
   take timer_eye_chase
   unless phase_eye_chase
 
-verb flame_out_timer_clears "The eye is destroyed; its flame still chases Link is over" by world priority 99 in enemy at 2180 500
+verb flame_out_timer_clears "The eye is destroyed; its flame still chases Link is over" by world priority 100 in enemy at 2180 500
   take timer_flame_out
   unless phase_flame_out
 
-verb drop_timer_clears "Dampé's flame burns where it fell is over" by world priority 99 in enemy at 2040 640
+verb drop_timer_clears "Dampé's flame burns where it fell is over" by world priority 100 in enemy at 2040 640
   take timer_drop
   unless phase_drop
 
@@ -346,40 +346,40 @@ verb variant_drop "Dampé's dropped flame (HONOTRAP_TYPE_FLAME_DROP)" by world p
   give range_near
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -1315,7 +1315,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 580 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 440 570
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 440 570
   take burn_count
   unless status_burn
 
@@ -1362,6 +1362,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 440 850
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 850
   take lens_count
   unless lens_on

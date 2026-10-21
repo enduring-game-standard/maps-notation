@@ -106,31 +106,31 @@ state tick_freeze "Beat ends: freeze checked" in beat at 440 360
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 570
 
-verb wait_timer_clears "Freezard hides in the ice is over" by world priority 99 in enemy at 2040 150
+verb wait_timer_clears "Freezard hides in the ice is over" by world priority 100 in enemy at 2040 150
   take timer_wait
   unless phase_wait
 
-verb appear_timer_clears "Freezard rises out of the ice is over" by world priority 99 in enemy at 2180 220
+verb appear_timer_clears "Freezard rises out of the ice is over" by world priority 100 in enemy at 2180 220
   take timer_appear
   unless phase_appear
 
-verb aim_move_timer_clears "Freezard turns toward Link is over" by world priority 99 in enemy at 2040 360
+verb aim_move_timer_clears "Freezard turns toward Link is over" by world priority 100 in enemy at 2040 360
   take timer_aim_move
   unless phase_aim_move
 
-verb aim_freeze_timer_clears "Freezard turns to breathe on Link is over" by world priority 99 in enemy at 2040 500
+verb aim_freeze_timer_clears "Freezard turns to breathe on Link is over" by world priority 100 in enemy at 2040 500
   take timer_aim_freeze
   unless phase_aim_freeze
 
-verb blow_timer_clears "Freezard breathes freezing mist is over" by world priority 99 in enemy at 2180 570
+verb blow_timer_clears "Freezard breathes freezing mist is over" by world priority 100 in enemy at 2180 570
   take timer_blow
   unless phase_blow
 
-verb still_turn_timer_clears "Rooted Freezard turns toward Link is over" by world priority 99 in enemy at 2180 710
+verb still_turn_timer_clears "Rooted Freezard turns toward Link is over" by world priority 100 in enemy at 2180 710
   take timer_still_turn
   unless phase_still_turn
 
-verb still_blow_timer_clears "Rooted Freezard breathes freezing mist is over" by world priority 99 in enemy at 2040 850
+verb still_blow_timer_clears "Rooted Freezard breathes freezing mist is over" by world priority 100 in enemy at 2040 850
   take timer_still_blow
   unless phase_still_blow
 
@@ -263,50 +263,50 @@ verb variant_rooted "Freezard that stays in place (params 0 and up)" by world pr
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Freezard loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Freezard loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Freezard has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Freezard has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -826,37 +826,37 @@ verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by wor
 verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3140 2880
   take swing_hammer_jump
 
-verb body_empty_in_aim_move "Freezard runs out (Freezard turns toward Link)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_aim_move "Freezard runs out (Freezard turns toward Link)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_aim_move
   give link_wins
 
-verb body_empty_in_move "Freezard runs out (Freezard slides toward Link)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_move "Freezard runs out (Freezard slides toward Link)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_move
   give link_wins
 
-verb body_empty_in_aim_freeze "Freezard runs out (Freezard turns to breathe on Link)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_aim_freeze "Freezard runs out (Freezard turns to breathe on Link)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_aim_freeze
   give link_wins
 
-verb body_empty_in_blow "Freezard runs out (Freezard breathes freezing mist)" by world priority 92 in enemy_health at 2360 360
+verb body_empty_in_blow "Freezard runs out (Freezard breathes freezing mist)" by world priority 90 in enemy_health at 2360 360
   unless hp_body
   take alive_body
   take phase_blow
   give link_wins
 
-verb body_empty_in_still_turn "Freezard runs out (Rooted Freezard turns toward Link)" by world priority 92 in enemy_health at 2500 360
+verb body_empty_in_still_turn "Freezard runs out (Rooted Freezard turns toward Link)" by world priority 90 in enemy_health at 2500 360
   unless hp_body
   take alive_body
   take phase_still_turn
   give link_wins
 
-verb body_empty_in_still_blow "Freezard runs out (Rooted Freezard breathes freezing mist)" by world priority 92 in enemy_health at 2360 430
+verb body_empty_in_still_blow "Freezard runs out (Rooted Freezard breathes freezing mist)" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_still_blow
@@ -1220,7 +1220,7 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 440 710
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 710
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 710
   take lens_count
   unless lens_on
 

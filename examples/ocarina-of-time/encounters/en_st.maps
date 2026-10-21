@@ -124,35 +124,35 @@ state incoming_contact "Skulltula body slam incoming" in attacks at 3320 80
 state tick_nayru "Beat ends: nayru checked" in beat at 900 360
 state lens_count "The Lens: beats toward the next cost" in beat at 760 500
 
-verb ground_front_timer_clears "Skulltula faces Link at the bottom of its thread is over" by world priority 99 in enemy at 440 290
+verb ground_front_timer_clears "Skulltula faces Link at the bottom of its thread is over" by world priority 100 in enemy at 440 290
   take timer_ground_front
   unless phase_ground_front
 
-verb ground_back_timer_clears "Skulltula turns its back to Link is over" by world priority 99 in enemy at 580 360
+verb ground_back_timer_clears "Skulltula turns its back to Link is over" by world priority 100 in enemy at 580 360
   take timer_ground_back
   unless phase_ground_back
 
-verb sway_timer_clears "Skulltula sways from a blow to its front is over" by world priority 99 in enemy at 440 500
+verb sway_timer_clears "Skulltula sways from a blow to its front is over" by world priority 100 in enemy at 440 500
   take timer_sway
   unless phase_sway
 
-verb stunned_ceiling_timer_clears "Skulltula is stunned (ceiling) is over" by world priority 99 in enemy at 440 640
+verb stunned_ceiling_timer_clears "Skulltula is stunned (ceiling) is over" by world priority 100 in enemy at 440 640
   take timer_stunned_ceiling
   unless phase_stunned_ceiling
 
-verb stunned_drop_timer_clears "Skulltula is stunned (drop) is over" by world priority 99 in enemy at 580 710
+verb stunned_drop_timer_clears "Skulltula is stunned (drop) is over" by world priority 100 in enemy at 580 710
   take timer_stunned_drop
   unless phase_stunned_drop
 
-verb stunned_rise_timer_clears "Skulltula is stunned (rise) is over" by world priority 99 in enemy at 440 850
+verb stunned_rise_timer_clears "Skulltula is stunned (rise) is over" by world priority 100 in enemy at 440 850
   take timer_stunned_rise
   unless phase_stunned_rise
 
-verb stunned_front_timer_clears "Skulltula is stunned (ground front) is over" by world priority 99 in enemy at 580 920
+verb stunned_front_timer_clears "Skulltula is stunned (ground front) is over" by world priority 100 in enemy at 580 920
   take timer_stunned_front
   unless phase_stunned_front
 
-verb stunned_back_timer_clears "Skulltula is stunned (ground back) is over" by world priority 99 in enemy at 440 1060
+verb stunned_back_timer_clears "Skulltula is stunned (ground back) is over" by world priority 100 in enemy at 440 1060
   take timer_stunned_back
   unless phase_stunned_back
 
@@ -394,50 +394,50 @@ verb variant_invisible_ground "Skulltula visible only through the Lens (params 2
   give link_turn
   give enemy_unseen
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1540 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1540 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1400 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1400 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1540 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1540 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1400 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1400 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1540 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1540 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1400 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1400 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1540 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1540 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1860 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1860 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Skulltula loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Skulltula loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Skulltula has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Skulltula has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -1901,7 +1901,7 @@ verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by worl
   need enemy_unseen
   unless lens_on
 
-verb body_empty_in_spin "Skulltula runs out (Skulltula spins from damage)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_spin "Skulltula runs out (Skulltula spins from damage)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_spin
@@ -2322,6 +2322,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 760 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 900 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 900 640
   take lens_count
   unless lens_on

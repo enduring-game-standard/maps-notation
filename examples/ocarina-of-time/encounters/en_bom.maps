@@ -352,13 +352,13 @@ verb link_hurt_overkill "Link has no health left to lose" by world priority 94 i
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy

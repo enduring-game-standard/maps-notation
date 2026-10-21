@@ -154,75 +154,75 @@ state incoming_bite "Deku Baba bite incoming" in attacks at 3320 80
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb buried_small_timer_clears "Deku Baba lies hidden, resettling is over" by world priority 99 in enemy at 2180 150
+verb buried_small_timer_clears "Deku Baba lies hidden, resettling is over" by world priority 100 in enemy at 2180 150
   take timer_buried_small
   unless phase_buried_small
 
-verb emerge_small_timer_clears "Deku Baba rises out of the ground is over" by world priority 99 in enemy at 2040 290
+verb emerge_small_timer_clears "Deku Baba rises out of the ground is over" by world priority 100 in enemy at 2040 290
   take timer_emerge_small
   unless phase_emerge_small
 
-verb retract_small_timer_clears "Deku Baba sinks back into the ground is over" by world priority 99 in enemy at 2180 360
+verb retract_small_timer_clears "Deku Baba sinks back into the ground is over" by world priority 100 in enemy at 2180 360
   take timer_retract_small
   unless phase_retract_small
 
-verb prepare_small_timer_clears "Deku Baba rears back is over" by world priority 99 in enemy at 2040 500
+verb prepare_small_timer_clears "Deku Baba rears back is over" by world priority 100 in enemy at 2040 500
   take timer_prepare_small
   unless phase_prepare_small
 
-verb lunge_small_timer_clears "Deku Baba lunges at Link is over" by world priority 99 in enemy at 2180 570
+verb lunge_small_timer_clears "Deku Baba lunges at Link is over" by world priority 100 in enemy at 2180 570
   take timer_lunge_small
   unless phase_lunge_small
 
-verb recover_small_timer_clears "Deku Baba lies on the ground after missing is over" by world priority 99 in enemy at 2040 710
+verb recover_small_timer_clears "Deku Baba lies on the ground after missing is over" by world priority 100 in enemy at 2040 710
   take timer_recover_small
   unless phase_recover_small
 
-verb soothe_small_timer_clears "Deku Baba straightens up is over" by world priority 99 in enemy at 2180 780
+verb soothe_small_timer_clears "Deku Baba straightens up is over" by world priority 100 in enemy at 2180 780
   take timer_soothe_small
   unless phase_soothe_small
 
-verb vulnerable_weak_small_timer_clears "Deku Baba stands stiff, stalk exposed is over" by world priority 99 in enemy at 2040 1060
+verb vulnerable_weak_small_timer_clears "Deku Baba stands stiff, stalk exposed is over" by world priority 100 in enemy at 2040 1060
   take timer_vulnerable_weak_small
   unless phase_vulnerable_weak_small
 
-verb vulnerable_stun_small_timer_clears "Deku Baba stands stunned, stalk exposed is over" by world priority 99 in enemy at 2180 1130
+verb vulnerable_stun_small_timer_clears "Deku Baba stands stunned, stalk exposed is over" by world priority 100 in enemy at 2180 1130
   take timer_vulnerable_stun_small
   unless phase_vulnerable_stun_small
 
-verb buried_big_timer_clears "Big Deku Baba lies hidden, resettling is over" by world priority 99 in enemy at 2040 1340
+verb buried_big_timer_clears "Big Deku Baba lies hidden, resettling is over" by world priority 100 in enemy at 2040 1340
   take timer_buried_big
   unless phase_buried_big
 
-verb emerge_big_timer_clears "Big Deku Baba rises out of the ground is over" by world priority 99 in enemy at 2180 1410
+verb emerge_big_timer_clears "Big Deku Baba rises out of the ground is over" by world priority 100 in enemy at 2180 1410
   take timer_emerge_big
   unless phase_emerge_big
 
-verb retract_big_timer_clears "Big Deku Baba sinks back into the ground is over" by world priority 99 in enemy at 2040 1550
+verb retract_big_timer_clears "Big Deku Baba sinks back into the ground is over" by world priority 100 in enemy at 2040 1550
   take timer_retract_big
   unless phase_retract_big
 
-verb prepare_big_timer_clears "Big Deku Baba rears back is over" by world priority 99 in enemy at 2180 1620
+verb prepare_big_timer_clears "Big Deku Baba rears back is over" by world priority 100 in enemy at 2180 1620
   take timer_prepare_big
   unless phase_prepare_big
 
-verb lunge_big_timer_clears "Big Deku Baba lunges at Link is over" by world priority 99 in enemy at 2040 1760
+verb lunge_big_timer_clears "Big Deku Baba lunges at Link is over" by world priority 100 in enemy at 2040 1760
   take timer_lunge_big
   unless phase_lunge_big
 
-verb recover_big_timer_clears "Big Deku Baba lies on the ground after missing is over" by world priority 99 in enemy at 2180 1830
+verb recover_big_timer_clears "Big Deku Baba lies on the ground after missing is over" by world priority 100 in enemy at 2180 1830
   take timer_recover_big
   unless phase_recover_big
 
-verb soothe_big_timer_clears "Big Deku Baba straightens up is over" by world priority 99 in enemy at 2040 1970
+verb soothe_big_timer_clears "Big Deku Baba straightens up is over" by world priority 100 in enemy at 2040 1970
   take timer_soothe_big
   unless phase_soothe_big
 
-verb vulnerable_weak_big_timer_clears "Big Deku Baba stands stiff, stalk exposed is over" by world priority 99 in enemy at 2180 2180
+verb vulnerable_weak_big_timer_clears "Big Deku Baba stands stiff, stalk exposed is over" by world priority 100 in enemy at 2180 2180
   take timer_vulnerable_weak_big
   unless phase_vulnerable_weak_big
 
-verb vulnerable_stun_big_timer_clears "Big Deku Baba stands stunned, stalk exposed is over" by world priority 99 in enemy at 2040 2320
+verb vulnerable_stun_big_timer_clears "Big Deku Baba stands stunned, stalk exposed is over" by world priority 100 in enemy at 2040 2320
   take timer_vulnerable_stun_big
   unless phase_vulnerable_stun_big
 
@@ -435,58 +435,58 @@ verb variant_big "Big Deku Baba" by world priority 30 in setup at 120 780
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_small_hurt "Deku Baba loses health" by world priority 96 in enemy_health at 2360 290
+verb body_small_hurt "Deku Baba loses health" by world priority 97 in enemy_health at 2360 290
   take dmg_body_small
   take hp_body_small
 
-verb body_small_overkill "Deku Baba has no health left to lose" by world priority 95 in enemy_health at 2500 290
+verb body_small_overkill "Deku Baba has no health left to lose" by world priority 96 in enemy_health at 2500 290
   take dmg_body_small
   unless hp_body_small
 
-verb body_big_hurt "Big Deku Baba loses health" by world priority 96 in enemy_health at 2360 360
+verb body_big_hurt "Big Deku Baba loses health" by world priority 97 in enemy_health at 2360 360
   take dmg_body_big
   take hp_body_big
 
-verb body_big_overkill "Big Deku Baba has no health left to lose" by world priority 95 in enemy_health at 2500 360
+verb body_big_overkill "Big Deku Baba has no health left to lose" by world priority 96 in enemy_health at 2500 360
   take dmg_body_big
   unless hp_body_big
 
@@ -3581,37 +3581,37 @@ verb hit_hammer_jump__vulnerable_stun_big "Hammer jump attack hits (Big Deku Bab
   give phase_attacked_strong_big
   give 4 dmg_body_big
 
-verb body_small_empty_in_attacked_strong_small "Deku Baba runs out (Deku Baba recoils from a hit)" by world priority 92 in enemy_health at 2360 430
+verb body_small_empty_in_attacked_strong_small "Deku Baba runs out (Deku Baba recoils from a hit)" by world priority 90 in enemy_health at 2360 430
   unless hp_body_small
   take alive_body_small
   take phase_attacked_strong_small
   give link_wins
 
-verb body_small_empty_in_attacked_weak_small "Deku Baba runs out (Deku Baba is knocked upright, weakened)" by world priority 92 in enemy_health at 2500 430
+verb body_small_empty_in_attacked_weak_small "Deku Baba runs out (Deku Baba is knocked upright, weakened)" by world priority 90 in enemy_health at 2500 430
   unless hp_body_small
   take alive_body_small
   take phase_attacked_weak_small
   give link_wins
 
-verb body_small_empty_in_wobble_small "Deku Baba runs out (Deku Baba wobbles from a stalk cut)" by world priority 92 in enemy_health at 2360 500
+verb body_small_empty_in_wobble_small "Deku Baba runs out (Deku Baba wobbles from a stalk cut)" by world priority 90 in enemy_health at 2360 500
   unless hp_body_small
   take alive_body_small
   take phase_wobble_small
   give link_wins
 
-verb body_big_empty_in_attacked_strong_big "Big Deku Baba runs out (Big Deku Baba recoils from a hit)" by world priority 92 in enemy_health at 2500 500
+verb body_big_empty_in_attacked_strong_big "Big Deku Baba runs out (Big Deku Baba recoils from a hit)" by world priority 90 in enemy_health at 2500 500
   unless hp_body_big
   take alive_body_big
   take phase_attacked_strong_big
   give link_wins
 
-verb body_big_empty_in_attacked_weak_big "Big Deku Baba runs out (Big Deku Baba is knocked upright, weakened)" by world priority 92 in enemy_health at 2360 570
+verb body_big_empty_in_attacked_weak_big "Big Deku Baba runs out (Big Deku Baba is knocked upright, weakened)" by world priority 90 in enemy_health at 2360 570
   unless hp_body_big
   take alive_body_big
   take phase_attacked_weak_big
   give link_wins
 
-verb body_big_empty_in_wobble_big "Big Deku Baba runs out (Big Deku Baba wobbles from a stalk cut)" by world priority 92 in enemy_health at 2500 570
+verb body_big_empty_in_wobble_big "Big Deku Baba runs out (Big Deku Baba wobbles from a stalk cut)" by world priority 90 in enemy_health at 2500 570
   unless hp_body_big
   take alive_body_big
   take phase_wobble_big
@@ -4353,6 +4353,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

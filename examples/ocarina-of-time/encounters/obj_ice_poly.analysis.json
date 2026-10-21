@@ -26,7 +26,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 99
+   "ms": 84
   },
   {
    "kit": "adult_blade",
@@ -39,7 +39,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 27
+   "ms": 30
   },
   {
    "kit": "adult_bottles",
@@ -52,7 +52,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 89
+   "ms": 82
   },
   {
    "kit": "adult_dins",
@@ -66,7 +66,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 113
+   "ms": 76
   },
   {
    "kit": "adult_giant",
@@ -79,7 +79,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 55
+   "ms": 42
   },
   {
    "kit": "adult_lens",
@@ -92,7 +92,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 217
+   "ms": 184
   },
   {
    "kit": "adult_nayru",
@@ -105,7 +105,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 404
+   "ms": 314
   },
   {
    "kit": "adult_spin",
@@ -118,7 +118,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 282
+   "ms": 209
   }
  ]
 }

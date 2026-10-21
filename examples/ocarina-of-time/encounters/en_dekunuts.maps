@@ -346,50 +346,50 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Mad Deku Scrub loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Mad Deku Scrub loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Mad Deku Scrub has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Mad Deku Scrub has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -1770,67 +1770,67 @@ verb miss_reflect_nut__begin_run "Spat Deku Nut, sent back has no effect (Scrub 
   take swing_reflect_nut
   need phase_begin_run
 
-verb body_empty_in_run_3 "Mad Deku Scrub runs out (Scrub runs away (3 gasps left))" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_run_3 "Mad Deku Scrub runs out (Scrub runs away (3 gasps left))" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_run_3
   give link_wins
 
-verb body_empty_in_run_2 "Mad Deku Scrub runs out (Scrub runs away (2 gasps left))" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_run_2 "Mad Deku Scrub runs out (Scrub runs away (2 gasps left))" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_run_2
   give link_wins
 
-verb body_empty_in_run_1 "Mad Deku Scrub runs out (Scrub runs away (1 gasps left))" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_run_1 "Mad Deku Scrub runs out (Scrub runs away (1 gasps left))" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_run_1
   give link_wins
 
-verb body_empty_in_run_0 "Mad Deku Scrub runs out (Scrub runs home)" by world priority 92 in enemy_health at 2360 360
+verb body_empty_in_run_0 "Mad Deku Scrub runs out (Scrub runs home)" by world priority 90 in enemy_health at 2360 360
   unless hp_body
   take alive_body
   take phase_run_0
   give link_wins
 
-verb body_empty_in_gasp_2 "Mad Deku Scrub runs out (Scrub stops to gasp (2 left))" by world priority 92 in enemy_health at 2500 360
+verb body_empty_in_gasp_2 "Mad Deku Scrub runs out (Scrub stops to gasp (2 left))" by world priority 90 in enemy_health at 2500 360
   unless hp_body
   take alive_body
   take phase_gasp_2
   give link_wins
 
-verb body_empty_in_gasp_1 "Mad Deku Scrub runs out (Scrub stops to gasp (1 left))" by world priority 92 in enemy_health at 2360 430
+verb body_empty_in_gasp_1 "Mad Deku Scrub runs out (Scrub stops to gasp (1 left))" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_gasp_1
   give link_wins
 
-verb body_empty_in_gasp_0 "Mad Deku Scrub runs out (Scrub stops to gasp (0 left))" by world priority 92 in enemy_health at 2500 430
+verb body_empty_in_gasp_0 "Mad Deku Scrub runs out (Scrub stops to gasp (0 left))" by world priority 90 in enemy_health at 2500 430
   unless hp_body
   take alive_body
   take phase_gasp_0
   give link_wins
 
-verb body_empty_in_stunned_3 "Mad Deku Scrub runs out (Scrub is stunned (3 gasps left))" by world priority 92 in enemy_health at 2360 500
+verb body_empty_in_stunned_3 "Mad Deku Scrub runs out (Scrub is stunned (3 gasps left))" by world priority 90 in enemy_health at 2360 500
   unless hp_body
   take alive_body
   take phase_stunned_3
   give link_wins
 
-verb body_empty_in_stunned_2 "Mad Deku Scrub runs out (Scrub is stunned (2 gasps left))" by world priority 92 in enemy_health at 2500 500
+verb body_empty_in_stunned_2 "Mad Deku Scrub runs out (Scrub is stunned (2 gasps left))" by world priority 90 in enemy_health at 2500 500
   unless hp_body
   take alive_body
   take phase_stunned_2
   give link_wins
 
-verb body_empty_in_stunned_1 "Mad Deku Scrub runs out (Scrub is stunned (1 gasps left))" by world priority 92 in enemy_health at 2360 570
+verb body_empty_in_stunned_1 "Mad Deku Scrub runs out (Scrub is stunned (1 gasps left))" by world priority 90 in enemy_health at 2360 570
   unless hp_body
   take alive_body
   take phase_stunned_1
   give link_wins
 
-verb body_empty_in_stunned_0 "Mad Deku Scrub runs out (Scrub is stunned (0 gasps left))" by world priority 92 in enemy_health at 2500 570
+verb body_empty_in_stunned_0 "Mad Deku Scrub runs out (Scrub is stunned (0 gasps left))" by world priority 90 in enemy_health at 2500 570
   unless hp_body
   take alive_body
   take phase_stunned_0
@@ -2187,6 +2187,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

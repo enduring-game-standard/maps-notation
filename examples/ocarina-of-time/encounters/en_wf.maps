@@ -136,35 +136,35 @@ state incoming_claw_white "White Wolfos claws incoming" in attacks at 3320 360
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb idle_gray_timer_clears "Wolfos watches Link is over" by world priority 99 in enemy at 2040 220
+verb idle_gray_timer_clears "Wolfos watches Link is over" by world priority 100 in enemy at 2040 220
   take timer_idle_gray
   unless phase_idle_gray
 
-verb circle_gray_timer_clears "Wolfos circles Link is over" by world priority 99 in enemy at 2040 360
+verb circle_gray_timer_clears "Wolfos circles Link is over" by world priority 100 in enemy at 2040 360
   take timer_circle_gray
   unless phase_circle_gray
 
-verb short_gray_timer_clears "Wolfos darts sideways is over" by world priority 99 in enemy at 2180 430
+verb short_gray_timer_clears "Wolfos darts sideways is over" by world priority 100 in enemy at 2180 430
   take timer_short_gray
   unless phase_short_gray
 
-verb stunned_gray_timer_clears "Wolfos is stunned is over" by world priority 99 in enemy at 2180 710
+verb stunned_gray_timer_clears "Wolfos is stunned is over" by world priority 100 in enemy at 2180 710
   take timer_stunned_gray
   unless phase_stunned_gray
 
-verb idle_white_timer_clears "White Wolfos watches Link is over" by world priority 99 in enemy at 2040 920
+verb idle_white_timer_clears "White Wolfos watches Link is over" by world priority 100 in enemy at 2040 920
   take timer_idle_white
   unless phase_idle_white
 
-verb circle_white_timer_clears "White Wolfos circles Link is over" by world priority 99 in enemy at 2040 1060
+verb circle_white_timer_clears "White Wolfos circles Link is over" by world priority 100 in enemy at 2040 1060
   take timer_circle_white
   unless phase_circle_white
 
-verb short_white_timer_clears "White Wolfos darts sideways is over" by world priority 99 in enemy at 2180 1130
+verb short_white_timer_clears "White Wolfos darts sideways is over" by world priority 100 in enemy at 2180 1130
   take timer_short_white
   unless phase_short_white
 
-verb stunned_white_timer_clears "White Wolfos is stunned is over" by world priority 99 in enemy at 2180 1410
+verb stunned_white_timer_clears "White Wolfos is stunned is over" by world priority 100 in enemy at 2180 1410
   take timer_stunned_white
   unless phase_stunned_white
 
@@ -377,50 +377,50 @@ verb variant_white "White Wolfos" by world priority 30 in setup at 120 780
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 16 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Wolfos loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Wolfos loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Wolfos has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Wolfos has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -2792,13 +2792,13 @@ verb hit_hammer_jump__stunned_white "Hammer jump attack hits (White Wolfos is st
   give phase_damaged_white
   give 4 dmg_body
 
-verb body_empty_in_damaged_gray "Wolfos runs out (Wolfos reels from the hit)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_damaged_gray "Wolfos runs out (Wolfos reels from the hit)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_damaged_gray
   give link_wins
 
-verb body_empty_in_damaged_white "Wolfos runs out (White Wolfos reels from the hit)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_damaged_white "Wolfos runs out (White Wolfos reels from the hit)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_damaged_white
@@ -3529,6 +3529,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

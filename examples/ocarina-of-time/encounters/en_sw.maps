@@ -115,11 +115,11 @@ state incoming_ram_gold "Gold Skulltula contact incoming" in attacks at 3320 360
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb wall_spot_timer_clears "Skullwalltula laughs and turns toward climbing Link is over" by world priority 99 in enemy at 2180 150
+verb wall_spot_timer_clears "Skullwalltula laughs and turns toward climbing Link is over" by world priority 100 in enemy at 2180 150
   take timer_wall_spot
   unless phase_wall_spot
 
-verb gold_emerge_timer_clears "Gold Skulltula bursts out and leaps is over" by world priority 99 in enemy at 2180 360
+verb gold_emerge_timer_clears "Gold Skulltula bursts out and leaps is over" by world priority 100 in enemy at 2180 360
   take timer_gold_emerge
   unless phase_gold_emerge
 
@@ -339,58 +339,58 @@ verb variant_gold_emerging "Gold Skulltula that bursts out of the ground" by wor
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Skullwalltula loses health" by world priority 96 in enemy_health at 2360 290
+verb body_hurt "Skullwalltula loses health" by world priority 97 in enemy_health at 2360 290
   take dmg_body
   take hp_body
 
-verb body_overkill "Skullwalltula has no health left to lose" by world priority 95 in enemy_health at 2500 290
+verb body_overkill "Skullwalltula has no health left to lose" by world priority 96 in enemy_health at 2500 290
   take dmg_body
   unless hp_body
 
-verb gold_hurt "Gold Skulltula loses health" by world priority 96 in enemy_health at 2360 360
+verb gold_hurt "Gold Skulltula loses health" by world priority 97 in enemy_health at 2360 360
   take dmg_gold
   take hp_gold
 
-verb gold_overkill "Gold Skulltula has no health left to lose" by world priority 95 in enemy_health at 2500 360
+verb gold_overkill "Gold Skulltula has no health left to lose" by world priority 96 in enemy_health at 2500 360
   take dmg_gold
   unless hp_gold
 
@@ -1095,31 +1095,31 @@ verb miss_hammer_jump__gold_emerge "Hammer jump attack has no effect (Gold Skull
   take swing_hammer_jump
   need phase_gold_emerge
 
-verb body_empty_in_wall_idle "Skullwalltula runs out (Skullwalltula turns about on its wall)" by world priority 92 in enemy_health at 2360 430
+verb body_empty_in_wall_idle "Skullwalltula runs out (Skullwalltula turns about on its wall)" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_wall_idle
   give link_wins
 
-verb body_empty_in_wall_spot "Skullwalltula runs out (Skullwalltula laughs and turns toward climbing Link)" by world priority 92 in enemy_health at 2500 430
+verb body_empty_in_wall_spot "Skullwalltula runs out (Skullwalltula laughs and turns toward climbing Link)" by world priority 90 in enemy_health at 2500 430
   unless hp_body
   take alive_body
   take phase_wall_spot
   give link_wins
 
-verb body_empty_in_wall_dash "Skullwalltula runs out (Skullwalltula dashes at Link)" by world priority 92 in enemy_health at 2360 500
+verb body_empty_in_wall_dash "Skullwalltula runs out (Skullwalltula dashes at Link)" by world priority 90 in enemy_health at 2360 500
   unless hp_body
   take alive_body
   take phase_wall_dash
   give link_wins
 
-verb body_empty_in_wall_return "Skullwalltula runs out (Skullwalltula stops and crawls home)" by world priority 92 in enemy_health at 2500 500
+verb body_empty_in_wall_return "Skullwalltula runs out (Skullwalltula stops and crawls home)" by world priority 90 in enemy_health at 2500 500
   unless hp_body
   take alive_body
   take phase_wall_return
   give link_wins
 
-verb gold_empty_in_gold_crawl "Gold Skulltula runs out (Gold Skulltula crawls on its wall)" by world priority 92 in enemy_health at 2360 570
+verb gold_empty_in_gold_crawl "Gold Skulltula runs out (Gold Skulltula crawls on its wall)" by world priority 90 in enemy_health at 2360 570
   unless hp_gold
   take alive_gold
   take phase_gold_crawl
@@ -1440,6 +1440,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

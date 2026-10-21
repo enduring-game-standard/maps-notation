@@ -78,7 +78,7 @@ const phases: Phase[] = [
     ...STUNS.map((s): Phase => ({ id: `${s}_${k}`, label: `Barinade is stunned, its core open (round ${k}${s === 'p4_restun' ? ', stunned again' : ''})`, frames: { value: [140, 180], cite: at(1424) }, hittable: BODY_OPEN, cite: at(1464) })),
     { id: `p4_dive_${k}`, label: `Barinade dives under the floor (round ${k})`, frames: { value: [220, 420], cite: at(1439) }, hittable: ['BOOMERANG'], guards: ['BOOMERANG'], cite: at(1477) },
     ...(k < 3
-      ? [{ id: `p4_sink_${k}`, label: `Barinade sinks away after a beating (round ${k})`, frames: { value: [170, 320], cite: at(1421) }, hittable: ['BOOMERANG'] as DmgType[], guards: ['BOOMERANG'] as DmgType[], cite: at(1420) }]
+      ? [{ id: `p4_sink_${k}`, label: `Barinade sinks away after a beating (round ${k})`, frames: { value: [170, 320], cite: at(1421) }, hittable: ['BOOMERANG'], guards: ['BOOMERANG'], cite: at(1420) } satisfies Phase]
       : []),
   ]),
 ]

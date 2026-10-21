@@ -80,15 +80,15 @@ state incoming_lash "Tentacle lash incoming" in attacks at 3320 80
 state tick_nayru "Beat ends: nayru checked" in beat at 440 360
 state lens_count "The Lens: beats toward the next cost" in beat at 580 430
 
-verb swing_windup_timer_clears "Tentacle rears back over Link is over" by world priority 99 in enemy at 2180 150
+verb swing_windup_timer_clears "Tentacle rears back over Link is over" by world priority 100 in enemy at 2180 150
   take timer_swing_windup
   unless phase_swing_windup
 
-verb swing_lash_timer_clears "Tentacle lashes down is over" by world priority 99 in enemy at 2040 290
+verb swing_lash_timer_clears "Tentacle lashes down is over" by world priority 100 in enemy at 2040 290
   take timer_swing_lash
   unless phase_swing_lash
 
-verb recoil_timer_clears "Tentacle recoils out of reach is over" by world priority 99 in enemy at 2180 360
+verb recoil_timer_clears "Tentacle recoils out of reach is over" by world priority 100 in enemy at 2180 360
   take timer_recoil
   unless phase_recoil
 
@@ -186,50 +186,50 @@ verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 16 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Tentacle loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Tentacle loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Tentacle has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Tentacle has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -416,7 +416,7 @@ verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world pri
 verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 1060
   take swing_jump_master
 
-verb body_empty_in_recoil "Tentacle runs out (Tentacle recoils out of reach)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_recoil "Tentacle runs out (Tentacle recoils out of reach)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_recoil
@@ -654,6 +654,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 580 570
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 640
   take lens_count
   unless lens_on

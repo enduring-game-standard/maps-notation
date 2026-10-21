@@ -153,71 +153,71 @@ state incoming_jumpslash_c "Stalfos jumpslash incoming" in attacks at 3460 1060
 state tick_nayru "Beat ends: nayru checked" in beat at 760 360
 state lens_count "The Lens: beats toward the next cost" in beat at 900 430
 
-verb emerge_timer_clears "Stalfos rises from the floor is over" by world priority 99 in enemy at 580 150
+verb emerge_timer_clears "Stalfos rises from the floor is over" by world priority 100 in enemy at 580 150
   take timer_emerge
   unless phase_emerge
 
-verb idle_o_timer_clears "Stalfos stands guard (shield down) is over" by world priority 99 in enemy at 440 360
+verb idle_o_timer_clears "Stalfos stands guard (shield down) is over" by world priority 100 in enemy at 440 360
   take timer_idle_o
   unless phase_idle_o
 
-verb circle_o_timer_clears "Stalfos circles Link (shield down) is over" by world priority 99 in enemy at 440 500
+verb circle_o_timer_clears "Stalfos circles Link (shield down) is over" by world priority 100 in enemy at 440 500
   take timer_circle_o
   unless phase_circle_o
 
-verb idle_g_timer_clears "Stalfos stands guard (shield up) is over" by world priority 99 in enemy at 580 570
+verb idle_g_timer_clears "Stalfos stands guard (shield up) is over" by world priority 100 in enemy at 580 570
   take timer_idle_g
   unless phase_idle_g
 
-verb circle_g_timer_clears "Stalfos circles Link (shield up) is over" by world priority 99 in enemy at 580 710
+verb circle_g_timer_clears "Stalfos circles Link (shield up) is over" by world priority 100 in enemy at 580 710
   take timer_circle_g
   unless phase_circle_g
 
-verb sidestep_timer_clears "Stalfos sidesteps behind its shield is over" by world priority 99 in enemy at 580 850
+verb sidestep_timer_clears "Stalfos sidesteps behind its shield is over" by world priority 100 in enemy at 580 850
   take timer_sidestep
   unless phase_sidestep
 
-verb block_timer_clears "Stalfos stops and blocks is over" by world priority 99 in enemy at 440 990
+verb block_timer_clears "Stalfos stops and blocks is over" by world priority 100 in enemy at 440 990
   take timer_block
   unless phase_block
 
-verb frozen_timer_clears "Stalfos is frozen is over" by world priority 99 in enemy at 580 1340
+verb frozen_timer_clears "Stalfos is frozen is over" by world priority 100 in enemy at 580 1340
   take timer_frozen
   unless phase_frozen
 
-verb stunned_timer_clears "Stalfos is stunned is over" by world priority 99 in enemy at 440 1480
+verb stunned_timer_clears "Stalfos is stunned is over" by world priority 100 in enemy at 440 1480
   take timer_stunned
   unless phase_stunned
 
-verb idle_o_c_timer_clears "Ceiling Stalfos stands guard (shield down) is over" by world priority 99 in enemy at 440 1690
+verb idle_o_c_timer_clears "Ceiling Stalfos stands guard (shield down) is over" by world priority 100 in enemy at 440 1690
   take timer_idle_o_c
   unless phase_idle_o_c
 
-verb circle_o_c_timer_clears "Ceiling Stalfos circles Link (shield down) is over" by world priority 99 in enemy at 440 1830
+verb circle_o_c_timer_clears "Ceiling Stalfos circles Link (shield down) is over" by world priority 100 in enemy at 440 1830
   take timer_circle_o_c
   unless phase_circle_o_c
 
-verb idle_g_c_timer_clears "Ceiling Stalfos stands guard (shield up) is over" by world priority 99 in enemy at 580 1900
+verb idle_g_c_timer_clears "Ceiling Stalfos stands guard (shield up) is over" by world priority 100 in enemy at 580 1900
   take timer_idle_g_c
   unless phase_idle_g_c
 
-verb circle_g_c_timer_clears "Ceiling Stalfos circles Link (shield up) is over" by world priority 99 in enemy at 580 2040
+verb circle_g_c_timer_clears "Ceiling Stalfos circles Link (shield up) is over" by world priority 100 in enemy at 580 2040
   take timer_circle_g_c
   unless phase_circle_g_c
 
-verb sidestep_c_timer_clears "Ceiling Stalfos sidesteps behind its shield is over" by world priority 99 in enemy at 580 2180
+verb sidestep_c_timer_clears "Ceiling Stalfos sidesteps behind its shield is over" by world priority 100 in enemy at 580 2180
   take timer_sidestep_c
   unless phase_sidestep_c
 
-verb block_c_timer_clears "Ceiling Stalfos stops and blocks is over" by world priority 99 in enemy at 440 2320
+verb block_c_timer_clears "Ceiling Stalfos stops and blocks is over" by world priority 100 in enemy at 440 2320
   take timer_block_c
   unless phase_block_c
 
-verb frozen_c_timer_clears "Ceiling Stalfos is frozen is over" by world priority 99 in enemy at 580 2670
+verb frozen_c_timer_clears "Ceiling Stalfos is frozen is over" by world priority 100 in enemy at 580 2670
   take timer_frozen_c
   unless phase_frozen_c
 
-verb stunned_c_timer_clears "Ceiling Stalfos is stunned is over" by world priority 99 in enemy at 440 2810
+verb stunned_c_timer_clears "Ceiling Stalfos is stunned is over" by world priority 100 in enemy at 440 2810
   take timer_stunned_c
   unless phase_stunned_c
 
@@ -357,50 +357,50 @@ verb variant_ceiling "Stalfos that drops from the ceiling" by world priority 30 
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1540 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1540 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1400 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1400 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1540 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1540 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1400 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1400 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1540 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1540 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1400 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1400 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1540 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1540 640
   need in_fight
   unless link_hp
   take has_fairy
   give 4 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1860 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1860 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Stalfos loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Stalfos loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Stalfos has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Stalfos has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -3106,37 +3106,37 @@ verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by worl
   need enemy_unseen
   unless lens_on
 
-verb body_empty_in_flinch "Stalfos runs out (Stalfos flinches)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_flinch "Stalfos runs out (Stalfos flinches)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_flinch
   give link_wins
 
-verb body_empty_in_frozen "Stalfos runs out (Stalfos is frozen)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_frozen "Stalfos runs out (Stalfos is frozen)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_frozen
   give link_wins
 
-verb body_empty_in_stunned "Stalfos runs out (Stalfos is stunned)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_stunned "Stalfos runs out (Stalfos is stunned)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_stunned
   give link_wins
 
-verb body_empty_in_flinch_c "Stalfos runs out (Ceiling Stalfos flinches)" by world priority 92 in enemy_health at 2360 360
+verb body_empty_in_flinch_c "Stalfos runs out (Ceiling Stalfos flinches)" by world priority 90 in enemy_health at 2360 360
   unless hp_body
   take alive_body
   take phase_flinch_c
   give link_wins
 
-verb body_empty_in_frozen_c "Stalfos runs out (Ceiling Stalfos is frozen)" by world priority 92 in enemy_health at 2500 360
+verb body_empty_in_frozen_c "Stalfos runs out (Ceiling Stalfos is frozen)" by world priority 90 in enemy_health at 2500 360
   unless hp_body
   take alive_body
   take phase_frozen_c
   give link_wins
 
-verb body_empty_in_stunned_c "Stalfos runs out (Ceiling Stalfos is stunned)" by world priority 92 in enemy_health at 2360 430
+verb body_empty_in_stunned_c "Stalfos runs out (Ceiling Stalfos is stunned)" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_stunned_c
@@ -5830,6 +5830,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 900 570
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 760 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 760 640
   take lens_count
   unless lens_on

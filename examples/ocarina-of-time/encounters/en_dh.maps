@@ -138,19 +138,19 @@ state incoming_dirt_wave "Dead Hand dirt wave incoming" in attacks at 3320 360
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb walk_adult_timer_clears "Dead Hand shambles toward Link (adult Link) is over" by world priority 99 in enemy at 2040 290
+verb walk_adult_timer_clears "Dead Hand shambles toward Link (adult Link) is over" by world priority 100 in enemy at 2040 290
   take timer_walk_adult
   unless phase_walk_adult
 
-verb retreat_adult_timer_clears "Dead Hand backs away (adult Link) is over" by world priority 99 in enemy at 2180 500
+verb retreat_adult_timer_clears "Dead Hand backs away (adult Link) is over" by world priority 100 in enemy at 2180 500
   take timer_retreat_adult
   unless phase_retreat_adult
 
-verb walk_child_timer_clears "Dead Hand shambles toward Link (child Link) is over" by world priority 99 in enemy at 2040 710
+verb walk_child_timer_clears "Dead Hand shambles toward Link (child Link) is over" by world priority 100 in enemy at 2040 710
   take timer_walk_child
   unless phase_walk_child
 
-verb retreat_child_timer_clears "Dead Hand backs away (child Link) is over" by world priority 99 in enemy at 2180 920
+verb retreat_child_timer_clears "Dead Hand backs away (child Link) is over" by world priority 100 in enemy at 2180 920
   take timer_retreat_child
   unless phase_retreat_child
 
@@ -379,89 +379,89 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 16 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb adult_hurt "Dead Hand (adult Link) loses health" by world priority 96 in enemy_health at 2360 640
+verb adult_hurt "Dead Hand (adult Link) loses health" by world priority 97 in enemy_health at 2360 640
   take dmg_adult
   take hp_adult
 
-verb adult_hurt_8 "Dead Hand (adult Link) loses health (8 or less)" by world priority 96 in enemy_health at 2500 640
+verb adult_hurt_8 "Dead Hand (adult Link) loses health (8 or less)" by world priority 97 in enemy_health at 2500 640
   take dmg_adult
   take hp_adult_8
   unless hp_adult
 
-verb adult_hurt_2 "Dead Hand (adult Link) loses health (2 or less)" by world priority 96 in enemy_health at 2360 710
+verb adult_hurt_2 "Dead Hand (adult Link) loses health (2 or less)" by world priority 97 in enemy_health at 2360 710
   take dmg_adult
   take hp_adult_2
   unless hp_adult
   unless hp_adult_8
 
-verb adult_overkill "Dead Hand (adult Link) has no health left to lose" by world priority 95 in enemy_health at 2500 710
+verb adult_overkill "Dead Hand (adult Link) has no health left to lose" by world priority 96 in enemy_health at 2500 710
   take dmg_adult
   unless hp_adult
   unless hp_adult_8
   unless hp_adult_2
 
-verb child_hurt "Dead Hand (child Link) loses health" by world priority 96 in enemy_health at 2360 780
+verb child_hurt "Dead Hand (child Link) loses health" by world priority 97 in enemy_health at 2360 780
   take dmg_child
   take hp_child
 
-verb child_hurt_14 "Dead Hand (child Link) loses health (14 or less)" by world priority 96 in enemy_health at 2500 780
+verb child_hurt_14 "Dead Hand (child Link) loses health (14 or less)" by world priority 97 in enemy_health at 2500 780
   take dmg_child
   take hp_child_14
   unless hp_child
 
-verb child_hurt_8 "Dead Hand (child Link) loses health (8 or less)" by world priority 96 in enemy_health at 2360 850
+verb child_hurt_8 "Dead Hand (child Link) loses health (8 or less)" by world priority 97 in enemy_health at 2360 850
   take dmg_child
   take hp_child_8
   unless hp_child
   unless hp_child_14
 
-verb child_hurt_2 "Dead Hand (child Link) loses health (2 or less)" by world priority 96 in enemy_health at 2500 850
+verb child_hurt_2 "Dead Hand (child Link) loses health (2 or less)" by world priority 97 in enemy_health at 2500 850
   take dmg_child
   take hp_child_2
   unless hp_child
   unless hp_child_14
   unless hp_child_8
 
-verb child_overkill "Dead Hand (child Link) has no health left to lose" by world priority 95 in enemy_health at 2360 920
+verb child_overkill "Dead Hand (child Link) has no health left to lose" by world priority 96 in enemy_health at 2360 920
   take dmg_child
   unless hp_child
   unless hp_child_14
@@ -1589,7 +1589,7 @@ verb hit_hammer_jump__burrow_child "Hammer jump attack hits (Dead Hand sinks int
   give phase_damage_child
   give 4 dmg_child
 
-verb adult_empty_in_damage_adult "Dead Hand (adult Link) runs out (Dead Hand reels from a wound (adult Link))" by world priority 92 in enemy_health at 2500 920
+verb adult_empty_in_damage_adult "Dead Hand (adult Link) runs out (Dead Hand reels from a wound (adult Link))" by world priority 90 in enemy_health at 2500 920
   unless hp_adult
   unless hp_adult_8
   unless hp_adult_2
@@ -1597,7 +1597,7 @@ verb adult_empty_in_damage_adult "Dead Hand (adult Link) runs out (Dead Hand ree
   take phase_damage_adult
   give link_wins
 
-verb child_empty_in_damage_child "Dead Hand (child Link) runs out (Dead Hand reels from a wound (child Link))" by world priority 92 in enemy_health at 2360 990
+verb child_empty_in_damage_child "Dead Hand (child Link) runs out (Dead Hand reels from a wound (child Link))" by world priority 90 in enemy_health at 2360 990
   unless hp_child
   unless hp_child_14
   unless hp_child_8
@@ -1606,14 +1606,14 @@ verb child_empty_in_damage_child "Dead Hand (child Link) runs out (Dead Hand ree
   take phase_damage_child
   give link_wins
 
-verb adult_falls_to_8_in_damage_adult "Dead Hand (adult Link) drops to 8 (Dead Hand reels from a wound (adult Link))" by world priority 91 in enemy_health at 2500 990
+verb adult_falls_to_8_in_damage_adult "Dead Hand (adult Link) drops to 8 (Dead Hand reels from a wound (adult Link))" by world priority 89 in enemy_health at 2500 990
   take above_adult_8
   need alive_adult
   unless hp_adult
   take phase_damage_adult
   give phase_reel_adult
 
-verb adult_falls_to_2_in_damage_adult "Dead Hand (adult Link) drops to 2 (Dead Hand reels from a wound (adult Link))" by world priority 91 in enemy_health at 2360 1060
+verb adult_falls_to_2_in_damage_adult "Dead Hand (adult Link) drops to 2 (Dead Hand reels from a wound (adult Link))" by world priority 89 in enemy_health at 2360 1060
   take above_adult_2
   need alive_adult
   unless hp_adult
@@ -1621,14 +1621,14 @@ verb adult_falls_to_2_in_damage_adult "Dead Hand (adult Link) drops to 2 (Dead H
   take phase_damage_adult
   give phase_reel_adult
 
-verb child_falls_to_14_in_damage_child "Dead Hand (child Link) drops to 14 (Dead Hand reels from a wound (child Link))" by world priority 91 in enemy_health at 2500 1060
+verb child_falls_to_14_in_damage_child "Dead Hand (child Link) drops to 14 (Dead Hand reels from a wound (child Link))" by world priority 89 in enemy_health at 2500 1060
   take above_child_14
   need alive_child
   unless hp_child
   take phase_damage_child
   give phase_reel_child
 
-verb child_falls_to_8_in_damage_child "Dead Hand (child Link) drops to 8 (Dead Hand reels from a wound (child Link))" by world priority 91 in enemy_health at 2360 1130
+verb child_falls_to_8_in_damage_child "Dead Hand (child Link) drops to 8 (Dead Hand reels from a wound (child Link))" by world priority 89 in enemy_health at 2360 1130
   take above_child_8
   need alive_child
   unless hp_child
@@ -1636,7 +1636,7 @@ verb child_falls_to_8_in_damage_child "Dead Hand (child Link) drops to 8 (Dead H
   take phase_damage_child
   give phase_reel_child
 
-verb child_falls_to_2_in_damage_child "Dead Hand (child Link) drops to 2 (Dead Hand reels from a wound (child Link))" by world priority 91 in enemy_health at 2500 1130
+verb child_falls_to_2_in_damage_child "Dead Hand (child Link) drops to 2 (Dead Hand reels from a wound (child Link))" by world priority 89 in enemy_health at 2500 1130
   take above_child_2
   need alive_child
   unless hp_child
@@ -2142,6 +2142,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

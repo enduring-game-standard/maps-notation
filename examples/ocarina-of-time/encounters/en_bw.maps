@@ -123,31 +123,31 @@ state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
 state lens_count "The Lens: beats toward the next cost" in beat at 440 710
 
-verb crawl_cooldown_timer_clears "Torch Slug crawls about after a chase is over" by world priority 99 in enemy at 2180 150
+verb crawl_cooldown_timer_clears "Torch Slug crawls about after a chase is over" by world priority 100 in enemy at 2180 150
   take timer_crawl_cooldown
   unless phase_crawl_cooldown
 
-verb crawl_chase_timer_clears "Torch Slug chases Link is over" by world priority 99 in enemy at 2180 290
+verb crawl_chase_timer_clears "Torch Slug chases Link is over" by world priority 100 in enemy at 2180 290
   take timer_crawl_chase
   unless phase_crawl_chase
 
-verb hurt_timer_clears "Torch Slug reels, flame out is over" by world priority 99 in enemy at 2180 430
+verb hurt_timer_clears "Torch Slug reels, flame out is over" by world priority 100 in enemy at 2180 430
   take timer_hurt
   unless phase_hurt
 
-verb crawl_flee_timer_clears "Torch Slug crawls away from Link, flame out is over" by world priority 99 in enemy at 2040 570
+verb crawl_flee_timer_clears "Torch Slug crawls away from Link, flame out is over" by world priority 100 in enemy at 2040 570
   take timer_crawl_flee
   unless phase_crawl_flee
 
-verb stunned_upright_timer_clears "Torch Slug is stunned, flame out is over" by world priority 99 in enemy at 2180 640
+verb stunned_upright_timer_clears "Torch Slug is stunned, flame out is over" by world priority 100 in enemy at 2180 640
   take timer_stunned_upright
   unless phase_stunned_upright
 
-verb flipped_timer_clears "Torch Slug is flipped on its back, flame out is over" by world priority 99 in enemy at 2040 780
+verb flipped_timer_clears "Torch Slug is flipped on its back, flame out is over" by world priority 100 in enemy at 2040 780
   take timer_flipped
   unless phase_flipped
 
-verb stunned_flipped_timer_clears "Torch Slug is stunned on its back is over" by world priority 99 in enemy at 2180 850
+verb stunned_flipped_timer_clears "Torch Slug is stunned on its back is over" by world priority 100 in enemy at 2180 850
   take timer_stunned_flipped
   unless phase_stunned_flipped
 
@@ -380,50 +380,50 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Torch Slug loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Torch Slug loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Torch Slug has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Torch Slug has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -1944,31 +1944,31 @@ verb hit_hammer_jump__stunned_flipped "Hammer jump attack hits (Torch Slug is st
   give phase_jump_righting
   give 4 dmg_body
 
-verb body_empty_in_hurt "Torch Slug runs out (Torch Slug reels, flame out)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_hurt "Torch Slug runs out (Torch Slug reels, flame out)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_hurt
   give link_wins
 
-verb body_empty_in_stunned_upright "Torch Slug runs out (Torch Slug is stunned, flame out)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_stunned_upright "Torch Slug runs out (Torch Slug is stunned, flame out)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_stunned_upright
   give link_wins
 
-verb body_empty_in_flipped "Torch Slug runs out (Torch Slug is flipped on its back, flame out)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_flipped "Torch Slug runs out (Torch Slug is flipped on its back, flame out)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_flipped
   give link_wins
 
-verb body_empty_in_stunned_flipped "Torch Slug runs out (Torch Slug is stunned on its back)" by world priority 92 in enemy_health at 2360 360
+verb body_empty_in_stunned_flipped "Torch Slug runs out (Torch Slug is stunned on its back)" by world priority 90 in enemy_health at 2360 360
   unless hp_body
   take alive_body
   take phase_stunned_flipped
   give link_wins
 
-verb body_empty_in_jump_righting "Torch Slug runs out (Torch Slug flips itself upright)" by world priority 92 in enemy_health at 2500 360
+verb body_empty_in_jump_righting "Torch Slug runs out (Torch Slug flips itself upright)" by world priority 90 in enemy_health at 2500 360
   unless hp_body
   take alive_body
   take phase_jump_righting
@@ -2351,7 +2351,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 580 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 440 570
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 440 570
   take burn_count
   unless status_burn
 
@@ -2398,6 +2398,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 440 850
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 850
   take lens_count
   unless lens_on

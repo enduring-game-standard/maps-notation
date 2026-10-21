@@ -8,7 +8,6 @@ const at = (line: number): Cite => `${F}:${line}`
 const BLUE = ['blue_fly', 'damage_blue', 'down_blue', 'stunned_blue']
 const RED_EXPOSED = ['red_attack', 'damage_red', 'down_red']
 const WHITE = ['white_fly', 'stunned_white']
-const GREEN = ['green_on', 'green_off', 'stunned_green']
 
 /** Reaction 0 entries: damage lands only while the flame is out (`flameScaleX < 20`) or the Bubble is down, else the hit bounces off. */
 const BLUE_GREEN_FLAME_GUARDED: DmgType[] = [

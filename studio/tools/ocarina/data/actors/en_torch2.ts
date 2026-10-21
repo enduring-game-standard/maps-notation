@@ -5,7 +5,6 @@ import type { ActorSpec, Cite, Phase, Reaction, Step } from '../../spec'
 
 const F = 'src/overlays/actors/ovl_En_Torch2/z_en_torch2.c'
 const at = (line: number): Cite => `${F}:${line}`
-const PLAYER_CYLINDER: Cite = 'src/overlays/actors/ovl_player_actor/z_player.c:10478'
 
 /** Dark Link is a Player actor (playerInit, line 124): his body is the player cylinder, whose AC mask 0xFFCFFFFF leaves out SHIELD and MIR_RAY. */
 const BODY: DmgType[] = DMG_TYPES.filter((d) => d !== 'SHIELD' && d !== 'MIR_RAY')

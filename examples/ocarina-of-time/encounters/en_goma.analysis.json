@@ -53,7 +53,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 291
+   "ms": 198
   },
   {
    "kit": "child_blade",
@@ -67,7 +67,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 225
+   "ms": 209
   },
   {
    "kit": "child_blade",
@@ -81,7 +81,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 224
+   "ms": 139
   },
   {
    "kit": "child_bottles",
@@ -95,7 +95,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 659
+   "ms": 464
   },
   {
    "kit": "child_bottles",
@@ -109,7 +109,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 663
+   "ms": 447
   },
   {
    "kit": "child_bottles",
@@ -123,7 +123,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 580
+   "ms": 431
   },
   {
    "kit": "child_dins",
@@ -137,7 +137,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 952
+   "ms": 829
   },
   {
    "kit": "child_dins",
@@ -151,7 +151,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1038
+   "ms": 810
   },
   {
    "kit": "child_dins",
@@ -165,7 +165,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 785
+   "ms": 573
   },
   {
    "kit": "child_lens",
@@ -179,7 +179,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3449
+   "ms": 2532
   },
   {
    "kit": "child_lens",
@@ -193,7 +193,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3385
+   "ms": 2444
   },
   {
    "kit": "child_lens",
@@ -207,7 +207,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2461
+   "ms": 1716
   },
   {
    "kit": "child_nayru",
@@ -221,7 +221,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 10030
+   "ms": 7460
   },
   {
    "kit": "child_nayru",
@@ -235,7 +235,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 9757
+   "ms": 7366
   },
   {
    "kit": "child_nayru",
@@ -249,7 +249,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 9248
+   "ms": 6848
   },
   {
    "kit": "child_spin",
@@ -263,7 +263,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 4489
+   "ms": 3357
   },
   {
    "kit": "child_spin",
@@ -277,7 +277,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 4278
+   "ms": 3335
   },
   {
    "kit": "child_spin",
@@ -291,7 +291,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3170
+   "ms": 2418
   }
  ]
 }

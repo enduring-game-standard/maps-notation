@@ -118,19 +118,19 @@ state incoming_beam "Beamos beam incoming" in attacks at 3320 80
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb wait_scan_large_timer_clears "Beamos (large) sweeps its eye is over" by world priority 99 in enemy at 2040 150
+verb wait_scan_large_timer_clears "Beamos (large) sweeps its eye is over" by world priority 100 in enemy at 2040 150
   take timer_wait_scan_large
   unless phase_wait_scan_large
 
-verb stun_large_timer_clears "Beamos (large) is stunned is over" by world priority 99 in enemy at 2180 290
+verb stun_large_timer_clears "Beamos (large) is stunned is over" by world priority 100 in enemy at 2180 290
   take timer_stun_large
   unless phase_stun_large
 
-verb wait_scan_small_timer_clears "Beamos (small) sweeps its eye is over" by world priority 99 in enemy at 2040 430
+verb wait_scan_small_timer_clears "Beamos (small) sweeps its eye is over" by world priority 100 in enemy at 2040 430
   take timer_wait_scan_small
   unless phase_wait_scan_small
 
-verb stun_small_timer_clears "Beamos (small) is stunned is over" by world priority 99 in enemy at 2180 570
+verb stun_small_timer_clears "Beamos (small) is stunned is over" by world priority 100 in enemy at 2180 570
   take timer_stun_small
   unless phase_stun_small
 
@@ -345,58 +345,58 @@ verb variant_small "Small Beamos" by world priority 30 in setup at 120 780
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 4 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb large_hurt "Large Beamos loses health" by world priority 96 in enemy_health at 2360 290
+verb large_hurt "Large Beamos loses health" by world priority 97 in enemy_health at 2360 290
   take dmg_large
   take hp_large
 
-verb large_overkill "Large Beamos has no health left to lose" by world priority 95 in enemy_health at 2500 290
+verb large_overkill "Large Beamos has no health left to lose" by world priority 96 in enemy_health at 2500 290
   take dmg_large
   unless hp_large
 
-verb small_hurt "Small Beamos loses health" by world priority 96 in enemy_health at 2360 360
+verb small_hurt "Small Beamos loses health" by world priority 97 in enemy_health at 2360 360
   take dmg_small
   take hp_small
 
-verb small_overkill "Small Beamos has no health left to lose" by world priority 95 in enemy_health at 2500 360
+verb small_overkill "Small Beamos has no health left to lose" by world priority 96 in enemy_health at 2500 360
   take dmg_small
   unless hp_small
 
@@ -1774,13 +1774,13 @@ verb hit_hammer_jump__beam_small "Hammer jump attack hits (Beamos (small) fires 
   give phase_stun_small
   give 9 timer_stun_small
 
-verb large_empty_in_stun_large "Large Beamos runs out (Beamos (large) is stunned)" by world priority 92 in enemy_health at 2360 430
+verb large_empty_in_stun_large "Large Beamos runs out (Beamos (large) is stunned)" by world priority 90 in enemy_health at 2360 430
   unless hp_large
   take alive_large
   take phase_stun_large
   give link_wins
 
-verb small_empty_in_stun_small "Small Beamos runs out (Beamos (small) is stunned)" by world priority 92 in enemy_health at 2500 430
+verb small_empty_in_stun_small "Small Beamos runs out (Beamos (small) is stunned)" by world priority 90 in enemy_health at 2500 430
   unless hp_small
   take alive_small
   take phase_stun_small
@@ -2122,6 +2122,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

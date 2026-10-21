@@ -143,39 +143,39 @@ state incoming_shockwave "Club Moblin shockwave incoming" in attacks at 3460 780
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb guard_look_timer_clears "Spear Moblin looks around is over" by world priority 99 in enemy at 2040 150
+verb guard_look_timer_clears "Spear Moblin looks around is over" by world priority 100 in enemy at 2040 150
   take timer_guard_look
   unless phase_guard_look
 
-verb guard_walk_cooldown_timer_clears "Spear Moblin wanders after a charge is over" by world priority 99 in enemy at 2040 290
+verb guard_walk_cooldown_timer_clears "Spear Moblin wanders after a charge is over" by world priority 100 in enemy at 2040 290
   take timer_guard_walk_cooldown
   unless phase_guard_walk_cooldown
 
-verb stunned_guard_timer_clears "Spear Moblin is stunned is over" by world priority 99 in enemy at 2040 500
+verb stunned_guard_timer_clears "Spear Moblin is stunned is over" by world priority 100 in enemy at 2040 500
   take timer_stunned_guard
   unless phase_stunned_guard
 
-verb patrol_turn_timer_clears "Patrol Moblin turns to its next waypoint is over" by world priority 99 in enemy at 2180 570
+verb patrol_turn_timer_clears "Patrol Moblin turns to its next waypoint is over" by world priority 100 in enemy at 2180 570
   take timer_patrol_turn
   unless phase_patrol_turn
 
-verb patrol_end_charge_timer_clears "Patrol Moblin lands and eyes Link is over" by world priority 99 in enemy at 2040 780
+verb patrol_end_charge_timer_clears "Patrol Moblin lands and eyes Link is over" by world priority 100 in enemy at 2040 780
   take timer_patrol_end_charge
   unless phase_patrol_end_charge
 
-verb patrol_end_rebound_timer_clears "Patrol Moblin throws Link off and turns is over" by world priority 99 in enemy at 2180 850
+verb patrol_end_rebound_timer_clears "Patrol Moblin throws Link off and turns is over" by world priority 100 in enemy at 2180 850
   take timer_patrol_end_rebound
   unless phase_patrol_end_rebound
 
-verb stunned_patrol_timer_clears "Patrol Moblin is stunned is over" by world priority 99 in enemy at 2180 1060
+verb stunned_patrol_timer_clears "Patrol Moblin is stunned is over" by world priority 100 in enemy at 2180 1060
   take timer_stunned_patrol
   unless phase_stunned_patrol
 
-verb stunned_ice_club_timer_clears "Club Moblin is frozen in ice is over" by world priority 99 in enemy at 2040 1340
+verb stunned_ice_club_timer_clears "Club Moblin is frozen in ice is over" by world priority 100 in enemy at 2040 1340
   take timer_stunned_ice_club
   unless phase_stunned_ice_club
 
-verb stunned_club_timer_clears "Club Moblin is stunned is over" by world priority 99 in enemy at 2180 1410
+verb stunned_club_timer_clears "Club Moblin is stunned is over" by world priority 100 in enemy at 2180 1410
   take timer_stunned_club
   unless phase_stunned_club
 
@@ -396,66 +396,66 @@ verb variant_club "Club Moblin" by world priority 30 in setup at 260 780
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb guard_hurt "Spear Moblin loses health" by world priority 96 in enemy_health at 2500 360
+verb guard_hurt "Spear Moblin loses health" by world priority 97 in enemy_health at 2500 360
   take dmg_guard
   take hp_guard
 
-verb guard_overkill "Spear Moblin has no health left to lose" by world priority 95 in enemy_health at 2360 430
+verb guard_overkill "Spear Moblin has no health left to lose" by world priority 96 in enemy_health at 2360 430
   take dmg_guard
   unless hp_guard
 
-verb patrol_hurt "Patrol Moblin loses health" by world priority 96 in enemy_health at 2500 430
+verb patrol_hurt "Patrol Moblin loses health" by world priority 97 in enemy_health at 2500 430
   take dmg_patrol
   take hp_patrol
 
-verb patrol_overkill "Patrol Moblin has no health left to lose" by world priority 95 in enemy_health at 2360 500
+verb patrol_overkill "Patrol Moblin has no health left to lose" by world priority 96 in enemy_health at 2360 500
   take dmg_patrol
   unless hp_patrol
 
-verb club_hurt "Club Moblin loses health" by world priority 96 in enemy_health at 2500 500
+verb club_hurt "Club Moblin loses health" by world priority 97 in enemy_health at 2500 500
   take dmg_club
   take hp_club
 
-verb club_overkill "Club Moblin has no health left to lose" by world priority 95 in enemy_health at 2360 570
+verb club_overkill "Club Moblin has no health left to lose" by world priority 96 in enemy_health at 2360 570
   take dmg_club
   unless hp_club
 
@@ -3015,79 +3015,79 @@ verb hit_hammer_jump__stunned_club "Hammer jump attack hits (Club Moblin is stun
   give phase_club_kneel
   give 4 dmg_club
 
-verb guard_empty_in_guard_look "Spear Moblin runs out (Spear Moblin looks around)" by world priority 92 in enemy_health at 2500 570
+verb guard_empty_in_guard_look "Spear Moblin runs out (Spear Moblin looks around)" by world priority 90 in enemy_health at 2500 570
   unless hp_guard
   take alive_guard
   take phase_guard_look
   give link_wins
 
-verb guard_empty_in_guard_walk "Spear Moblin runs out (Spear Moblin turns toward Link)" by world priority 92 in enemy_health at 2360 640
+verb guard_empty_in_guard_walk "Spear Moblin runs out (Spear Moblin turns toward Link)" by world priority 90 in enemy_health at 2360 640
   unless hp_guard
   take alive_guard
   take phase_guard_walk
   give link_wins
 
-verb guard_empty_in_guard_walk_cooldown "Spear Moblin runs out (Spear Moblin wanders after a charge)" by world priority 92 in enemy_health at 2500 640
+verb guard_empty_in_guard_walk_cooldown "Spear Moblin runs out (Spear Moblin wanders after a charge)" by world priority 90 in enemy_health at 2500 640
   unless hp_guard
   take alive_guard
   take phase_guard_walk_cooldown
   give link_wins
 
-verb guard_empty_in_end_quick_guard "Spear Moblin runs out (Spear Moblin skids to a stop)" by world priority 92 in enemy_health at 2360 710
+verb guard_empty_in_end_quick_guard "Spear Moblin runs out (Spear Moblin skids to a stop)" by world priority 90 in enemy_health at 2360 710
   unless hp_guard
   take alive_guard
   take phase_end_quick_guard
   give link_wins
 
-verb guard_empty_in_damaged_guard "Spear Moblin runs out (Spear Moblin staggers)" by world priority 92 in enemy_health at 2500 710
+verb guard_empty_in_damaged_guard "Spear Moblin runs out (Spear Moblin staggers)" by world priority 90 in enemy_health at 2500 710
   unless hp_guard
   take alive_guard
   take phase_damaged_guard
   give link_wins
 
-verb patrol_empty_in_patrol_turn "Patrol Moblin runs out (Patrol Moblin turns to its next waypoint)" by world priority 92 in enemy_health at 2360 780
+verb patrol_empty_in_patrol_turn "Patrol Moblin runs out (Patrol Moblin turns to its next waypoint)" by world priority 90 in enemy_health at 2360 780
   unless hp_patrol
   take alive_patrol
   take phase_patrol_turn
   give link_wins
 
-verb patrol_empty_in_patrol_walk "Patrol Moblin runs out (Patrol Moblin walks its path)" by world priority 92 in enemy_health at 2500 780
+verb patrol_empty_in_patrol_walk "Patrol Moblin runs out (Patrol Moblin walks its path)" by world priority 90 in enemy_health at 2500 780
   unless hp_patrol
   take alive_patrol
   take phase_patrol_walk
   give link_wins
 
-verb patrol_empty_in_patrol_end_charge "Patrol Moblin runs out (Patrol Moblin lands and eyes Link)" by world priority 92 in enemy_health at 2360 850
+verb patrol_empty_in_patrol_end_charge "Patrol Moblin runs out (Patrol Moblin lands and eyes Link)" by world priority 90 in enemy_health at 2360 850
   unless hp_patrol
   take alive_patrol
   take phase_patrol_end_charge
   give link_wins
 
-verb patrol_empty_in_patrol_end_rebound "Patrol Moblin runs out (Patrol Moblin throws Link off and turns)" by world priority 92 in enemy_health at 2500 850
+verb patrol_empty_in_patrol_end_rebound "Patrol Moblin runs out (Patrol Moblin throws Link off and turns)" by world priority 90 in enemy_health at 2500 850
   unless hp_patrol
   take alive_patrol
   take phase_patrol_end_rebound
   give link_wins
 
-verb patrol_empty_in_end_quick_patrol "Patrol Moblin runs out (Patrol Moblin skids to a stop)" by world priority 92 in enemy_health at 2360 920
+verb patrol_empty_in_end_quick_patrol "Patrol Moblin runs out (Patrol Moblin skids to a stop)" by world priority 90 in enemy_health at 2360 920
   unless hp_patrol
   take alive_patrol
   take phase_end_quick_patrol
   give link_wins
 
-verb patrol_empty_in_damaged_patrol "Patrol Moblin runs out (Patrol Moblin staggers)" by world priority 92 in enemy_health at 2500 920
+verb patrol_empty_in_damaged_patrol "Patrol Moblin runs out (Patrol Moblin staggers)" by world priority 90 in enemy_health at 2500 920
   unless hp_patrol
   take alive_patrol
   take phase_damaged_patrol
   give link_wins
 
-verb club_empty_in_club_kneel "Club Moblin runs out (Club Moblin kneels from a hit)" by world priority 92 in enemy_health at 2360 990
+verb club_empty_in_club_kneel "Club Moblin runs out (Club Moblin kneels from a hit)" by world priority 90 in enemy_health at 2360 990
   unless hp_club
   take alive_club
   take phase_club_kneel
   give link_wins
 
-verb club_empty_in_stunned_ice_club "Club Moblin runs out (Club Moblin is frozen in ice)" by world priority 92 in enemy_health at 2500 990
+verb club_empty_in_stunned_ice_club "Club Moblin runs out (Club Moblin is frozen in ice)" by world priority 90 in enemy_health at 2500 990
   unless hp_club
   take alive_club
   take phase_stunned_ice_club
@@ -3712,6 +3712,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

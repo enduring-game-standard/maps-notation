@@ -115,19 +115,19 @@ state incoming_sting "Stinger dive incoming" in attacks at 3320 80
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb glide_timer_clears "Stinger glides above the floor is over" by world priority 99 in enemy at 2180 220
+verb glide_timer_clears "Stinger glides above the floor is over" by world priority 100 in enemy at 2180 220
   take timer_glide
   unless phase_glide
 
-verb land_timer_clears "Stinger plunges back into the floor is over" by world priority 99 in enemy at 2180 360
+verb land_timer_clears "Stinger plunges back into the floor is over" by world priority 100 in enemy at 2180 360
   take timer_land
   unless phase_land
 
-verb hurt_timer_clears "Stinger reels from a hit is over" by world priority 99 in enemy at 2040 500
+verb hurt_timer_clears "Stinger reels from a hit is over" by world priority 100 in enemy at 2040 500
   take timer_hurt
   unless phase_hurt
 
-verb stunned_timer_clears "Stinger is stunned is over" by world priority 99 in enemy at 2180 570
+verb stunned_timer_clears "Stinger is stunned is over" by world priority 100 in enemy at 2180 570
   take timer_stunned
   unless phase_stunned
 
@@ -340,50 +340,50 @@ verb variant_wandering "Stinger wandering near its spawn point (params 10)" by w
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Stinger loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Stinger loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Stinger has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Stinger has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -1517,7 +1517,7 @@ verb hit_hammer_jump__stunned "Hammer jump attack hits (Stinger is stunned)" by 
   give 2 timer_hurt
   give 4 dmg_body
 
-verb body_empty_in_hurt "Stinger runs out (Stinger reels from a hit)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_hurt "Stinger runs out (Stinger reels from a hit)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_hurt
@@ -1837,6 +1837,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

@@ -21,7 +21,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 40
+   "ms": 20
   },
   {
    "kit": "adult_arrows",
@@ -34,7 +34,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 48
+   "ms": 18
   },
   {
    "kit": "adult_arrows",
@@ -47,277 +47,10 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 175
+   "ms": 58
   },
   {
    "kit": "adult_blade",
-   "variant": "enemy_bomb",
-   "positions": 6,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 1,
-    "Link falls": 1
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 16
-  },
-  {
-   "kit": "adult_blade",
-   "variant": "enemy_bomb_strong",
-   "positions": 6,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 1,
-    "Link falls": 1
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 25
-  },
-  {
-   "kit": "adult_blade",
-   "variant": "link_bomb",
-   "positions": 18,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 5,
-    "Link falls": 1
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 44
-  },
-  {
-   "kit": "adult_bottles",
-   "variant": "enemy_bomb",
-   "positions": 14,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 4
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 36
-  },
-  {
-   "kit": "adult_bottles",
-   "variant": "enemy_bomb_strong",
-   "positions": 14,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 4
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 36
-  },
-  {
-   "kit": "adult_bottles",
-   "variant": "link_bomb",
-   "positions": 36,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 11
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 83
-  },
-  {
-   "kit": "adult_dins",
-   "variant": "enemy_bomb",
-   "positions": 26,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 7,
-    "Link falls": 3
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 37
-  },
-  {
-   "kit": "adult_dins",
-   "variant": "enemy_bomb_strong",
-   "positions": 26,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 7,
-    "Link falls": 3
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 35
-  },
-  {
-   "kit": "adult_dins",
-   "variant": "link_bomb",
-   "positions": 72,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 20,
-    "Link falls": 7
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 102
-  },
-  {
-   "kit": "adult_giant",
-   "variant": "enemy_bomb",
-   "positions": 20,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 6
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 47
-  },
-  {
-   "kit": "adult_giant",
-   "variant": "enemy_bomb_strong",
-   "positions": 20,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 6
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 51
-  },
-  {
-   "kit": "adult_giant",
-   "variant": "link_bomb",
-   "positions": 49,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 15
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 107
-  },
-  {
-   "kit": "adult_lens",
-   "variant": "enemy_bomb",
-   "positions": 73,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 22,
-    "Link falls": 4
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 112
-  },
-  {
-   "kit": "adult_lens",
-   "variant": "enemy_bomb_strong",
-   "positions": 73,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 22,
-    "Link falls": 4
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 107
-  },
-  {
-   "kit": "adult_lens",
-   "variant": "link_bomb",
-   "positions": 203,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 59,
-    "Link falls": 19
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 274
-  },
-  {
-   "kit": "adult_nayru",
-   "variant": "enemy_bomb",
-   "positions": 220,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 72,
-    "Link falls": 2
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 211
-  },
-  {
-   "kit": "adult_nayru",
-   "variant": "enemy_bomb_strong",
-   "positions": 220,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 72,
-    "Link falls": 2
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 199
-  },
-  {
-   "kit": "adult_nayru",
-   "variant": "link_bomb",
-   "positions": 286,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 91,
-    "Link falls": 6
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 238
-  },
-  {
-   "kit": "adult_spin",
-   "variant": "enemy_bomb",
-   "positions": 89,
-   "complete": true,
-   "outcomes": {
-    "Link falls": 3,
-    "Link withdraws": 28
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 117
-  },
-  {
-   "kit": "adult_spin",
-   "variant": "enemy_bomb_strong",
-   "positions": 89,
-   "complete": true,
-   "outcomes": {
-    "Link falls": 3,
-    "Link withdraws": 28
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 136
-  },
-  {
-   "kit": "adult_spin",
-   "variant": "link_bomb",
-   "positions": 145,
-   "complete": true,
-   "outcomes": {
-    "Link withdraws": 43,
-    "Link falls": 8
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 192
-  },
-  {
-   "kit": "child_blade",
    "variant": "enemy_bomb",
    "positions": 6,
    "complete": true,
@@ -330,6 +63,273 @@
    "ms": 9
   },
   {
+   "kit": "adult_blade",
+   "variant": "enemy_bomb_strong",
+   "positions": 6,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 17
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "link_bomb",
+   "positions": 18,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 20
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "enemy_bomb",
+   "positions": 14,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "enemy_bomb_strong",
+   "positions": 14,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "link_bomb",
+   "positions": 36,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 11
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 34
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "enemy_bomb",
+   "positions": 26,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 7,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 24
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "enemy_bomb_strong",
+   "positions": 26,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 7,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 21
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "link_bomb",
+   "positions": 72,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 20,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 55
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "enemy_bomb",
+   "positions": 20,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 20
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "enemy_bomb_strong",
+   "positions": 20,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 19
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "link_bomb",
+   "positions": 49,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 15
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 39
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "enemy_bomb",
+   "positions": 73,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 22,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 50
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "enemy_bomb_strong",
+   "positions": 73,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 22,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 48
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "link_bomb",
+   "positions": 203,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 59,
+    "Link falls": 19
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 131
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "enemy_bomb",
+   "positions": 220,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 72,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 102
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "enemy_bomb_strong",
+   "positions": 220,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 72,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 95
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "link_bomb",
+   "positions": 286,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 91,
+    "Link falls": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 128
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "enemy_bomb",
+   "positions": 89,
+   "complete": true,
+   "outcomes": {
+    "Link falls": 3,
+    "Link withdraws": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 89
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "enemy_bomb_strong",
+   "positions": 89,
+   "complete": true,
+   "outcomes": {
+    "Link falls": 3,
+    "Link withdraws": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 86
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "link_bomb",
+   "positions": 145,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 43,
+    "Link falls": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 102
+  },
+  {
+   "kit": "child_blade",
+   "variant": "enemy_bomb",
+   "positions": 6,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7
+  },
+  {
    "kit": "child_blade",
    "variant": "enemy_bomb_strong",
    "positions": 6,
@@ -340,7 +340,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 14
+   "ms": 9
   },
   {
    "kit": "child_blade",
@@ -353,7 +353,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 28
+   "ms": 17
   },
   {
    "kit": "child_bottles",
@@ -365,7 +365,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 24
+   "ms": 12
   },
   {
    "kit": "child_bottles",
@@ -377,7 +377,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 29
+   "ms": 12
   },
   {
    "kit": "child_bottles",
@@ -389,7 +389,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 88
+   "ms": 27
   },
   {
    "kit": "child_dins",
@@ -402,7 +402,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 48
+   "ms": 19
   },
   {
    "kit": "child_dins",
@@ -415,7 +415,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 36
+   "ms": 21
   },
   {
    "kit": "child_dins",
@@ -428,7 +428,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 122
+   "ms": 59
   },
   {
    "kit": "child_lens",
@@ -441,7 +441,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 140
+   "ms": 55
   },
   {
    "kit": "child_lens",
@@ -454,7 +454,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 106
+   "ms": 47
   },
   {
    "kit": "child_lens",
@@ -467,7 +467,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 246
+   "ms": 118
   },
   {
    "kit": "child_nayru",
@@ -480,7 +480,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 195
+   "ms": 109
   },
   {
    "kit": "child_nayru",
@@ -493,7 +493,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 204
+   "ms": 101
   },
   {
    "kit": "child_nayru",
@@ -506,7 +506,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 224
+   "ms": 128
   },
   {
    "kit": "child_spin",
@@ -519,7 +519,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 132
+   "ms": 66
   },
   {
    "kit": "child_spin",
@@ -532,7 +532,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 153
+   "ms": 55
   },
   {
    "kit": "child_spin",
@@ -545,7 +545,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 166
+   "ms": 114
   }
  ]
 }

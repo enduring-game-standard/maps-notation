@@ -49,6 +49,7 @@ export const enBx: ActorSpec = {
   loadouts: standardLoadouts(['child']),
   expected: {
     deadVerbs: {
+      backlash_lands_again: 'the backlash resolves on Link\'s own hit, before any enemy step that beat, and the shock lasts 20 frames, one beat, wearing off at the end of the beat; a second backlash needs a second hit on a later beat',
       link_helpless_shock: 'the shock lasts 20 frames, one beat, and wears off at the end of the beat it lands, so it is spent before Link\'s next move',
     },
   },

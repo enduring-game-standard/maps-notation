@@ -147,43 +147,43 @@ state incoming_slash "Sword slash incoming" in attacks at 3320 80
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb idle_lizalfos_timer_clears "Lizalfos stands ready is over" by world priority 99 in enemy at 2040 150
+verb idle_lizalfos_timer_clears "Lizalfos stands ready is over" by world priority 100 in enemy at 2040 150
   take timer_idle_lizalfos
   unless phase_idle_lizalfos
 
-verb circle_lizalfos_timer_clears "Lizalfos circles Link is over" by world priority 99 in enemy at 2040 290
+verb circle_lizalfos_timer_clears "Lizalfos circles Link is over" by world priority 100 in enemy at 2040 290
   take timer_circle_lizalfos
   unless phase_circle_lizalfos
 
-verb stunned_lizalfos_timer_clears "Lizalfos is stunned is over" by world priority 99 in enemy at 2180 500
+verb stunned_lizalfos_timer_clears "Lizalfos is stunned is over" by world priority 100 in enemy at 2180 500
   take timer_stunned_lizalfos
   unless phase_stunned_lizalfos
 
-verb idle_dinolfos_timer_clears "Dinolfos stands ready is over" by world priority 99 in enemy at 2040 640
+verb idle_dinolfos_timer_clears "Dinolfos stands ready is over" by world priority 100 in enemy at 2040 640
   take timer_idle_dinolfos
   unless phase_idle_dinolfos
 
-verb circle_dinolfos_timer_clears "Dinolfos circles Link is over" by world priority 99 in enemy at 2040 780
+verb circle_dinolfos_timer_clears "Dinolfos circles Link is over" by world priority 100 in enemy at 2040 780
   take timer_circle_dinolfos
   unless phase_circle_dinolfos
 
-verb stunned_dinolfos_timer_clears "Dinolfos is stunned is over" by world priority 99 in enemy at 2180 990
+verb stunned_dinolfos_timer_clears "Dinolfos is stunned is over" by world priority 100 in enemy at 2180 990
   take timer_stunned_dinolfos
   unless phase_stunned_dinolfos
 
-verb idle_paired_timer_clears "Paired Lizalfos stands ready is over" by world priority 99 in enemy at 2180 1130
+verb idle_paired_timer_clears "Paired Lizalfos stands ready is over" by world priority 100 in enemy at 2180 1130
   take timer_idle_paired
   unless phase_idle_paired
 
-verb circle_paired_timer_clears "Paired Lizalfos circles Link is over" by world priority 99 in enemy at 2180 1270
+verb circle_paired_timer_clears "Paired Lizalfos circles Link is over" by world priority 100 in enemy at 2180 1270
   take timer_circle_paired
   unless phase_circle_paired
 
-verb stunned_paired_timer_clears "Paired Lizalfos is stunned is over" by world priority 99 in enemy at 2040 1550
+verb stunned_paired_timer_clears "Paired Lizalfos is stunned is over" by world priority 100 in enemy at 2040 1550
   take timer_stunned_paired
   unless phase_stunned_paired
 
-verb away_paired_timer_clears "Paired Lizalfos retreats while its partner fights is over" by world priority 99 in enemy at 2180 1620
+verb away_paired_timer_clears "Paired Lizalfos retreats while its partner fights is over" by world priority 100 in enemy at 2180 1620
   take timer_away_paired
   unless phase_away_paired
 
@@ -412,71 +412,71 @@ verb variant_paired_b "Paired Lizalfos that waits its turn" by world priority 30
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb lizalfos_hurt "Lizalfos loses health" by world priority 96 in enemy_health at 2500 430
+verb lizalfos_hurt "Lizalfos loses health" by world priority 97 in enemy_health at 2500 430
   take dmg_lizalfos
   take hp_lizalfos
 
-verb lizalfos_overkill "Lizalfos has no health left to lose" by world priority 95 in enemy_health at 2360 500
+verb lizalfos_overkill "Lizalfos has no health left to lose" by world priority 96 in enemy_health at 2360 500
   take dmg_lizalfos
   unless hp_lizalfos
 
-verb dinolfos_hurt "Dinolfos loses health" by world priority 96 in enemy_health at 2500 500
+verb dinolfos_hurt "Dinolfos loses health" by world priority 97 in enemy_health at 2500 500
   take dmg_dinolfos
   take hp_dinolfos
 
-verb dinolfos_overkill "Dinolfos has no health left to lose" by world priority 95 in enemy_health at 2360 570
+verb dinolfos_overkill "Dinolfos has no health left to lose" by world priority 96 in enemy_health at 2360 570
   take dmg_dinolfos
   unless hp_dinolfos
 
-verb paired_hurt "Paired Lizalfos loses health" by world priority 96 in enemy_health at 2500 570
+verb paired_hurt "Paired Lizalfos loses health" by world priority 97 in enemy_health at 2500 570
   take dmg_paired
   take hp_paired
 
-verb paired_hurt_3 "Paired Lizalfos loses health (3 or less)" by world priority 96 in enemy_health at 2360 640
+verb paired_hurt_3 "Paired Lizalfos loses health (3 or less)" by world priority 97 in enemy_health at 2360 640
   take dmg_paired
   take hp_paired_3
   unless hp_paired
 
-verb paired_overkill "Paired Lizalfos has no health left to lose" by world priority 95 in enemy_health at 2500 640
+verb paired_overkill "Paired Lizalfos has no health left to lose" by world priority 96 in enemy_health at 2500 640
   take dmg_paired
   unless hp_paired
   unless hp_paired_3
@@ -3590,52 +3590,52 @@ verb hit_hammer_jump__stunned_paired "Hammer jump attack hits (Paired Lizalfos i
   give phase_damaged_paired
   give 4 dmg_paired
 
-verb lizalfos_empty_in_damaged_lizalfos "Lizalfos runs out (Lizalfos reels from a hit)" by world priority 92 in enemy_health at 2360 710
+verb lizalfos_empty_in_damaged_lizalfos "Lizalfos runs out (Lizalfos reels from a hit)" by world priority 90 in enemy_health at 2360 710
   unless hp_lizalfos
   take alive_lizalfos
   take phase_damaged_lizalfos
   give link_wins
 
-verb lizalfos_empty_in_stunned_lizalfos "Lizalfos runs out (Lizalfos is stunned)" by world priority 92 in enemy_health at 2500 710
+verb lizalfos_empty_in_stunned_lizalfos "Lizalfos runs out (Lizalfos is stunned)" by world priority 90 in enemy_health at 2500 710
   unless hp_lizalfos
   take alive_lizalfos
   take phase_stunned_lizalfos
   give link_wins
 
-verb dinolfos_empty_in_damaged_dinolfos "Dinolfos runs out (Dinolfos reels from a hit)" by world priority 92 in enemy_health at 2360 780
+verb dinolfos_empty_in_damaged_dinolfos "Dinolfos runs out (Dinolfos reels from a hit)" by world priority 90 in enemy_health at 2360 780
   unless hp_dinolfos
   take alive_dinolfos
   take phase_damaged_dinolfos
   give link_wins
 
-verb dinolfos_empty_in_stunned_dinolfos "Dinolfos runs out (Dinolfos is stunned)" by world priority 92 in enemy_health at 2500 780
+verb dinolfos_empty_in_stunned_dinolfos "Dinolfos runs out (Dinolfos is stunned)" by world priority 90 in enemy_health at 2500 780
   unless hp_dinolfos
   take alive_dinolfos
   take phase_stunned_dinolfos
   give link_wins
 
-verb paired_empty_in_damaged_paired "Paired Lizalfos runs out (Paired Lizalfos reels from a hit)" by world priority 92 in enemy_health at 2360 850
+verb paired_empty_in_damaged_paired "Paired Lizalfos runs out (Paired Lizalfos reels from a hit)" by world priority 90 in enemy_health at 2360 850
   unless hp_paired
   unless hp_paired_3
   take alive_paired
   take phase_damaged_paired
   give link_wins
 
-verb paired_empty_in_stunned_paired "Paired Lizalfos runs out (Paired Lizalfos is stunned)" by world priority 92 in enemy_health at 2500 850
+verb paired_empty_in_stunned_paired "Paired Lizalfos runs out (Paired Lizalfos is stunned)" by world priority 90 in enemy_health at 2500 850
   unless hp_paired
   unless hp_paired_3
   take alive_paired
   take phase_stunned_paired
   give link_wins
 
-verb paired_empty_in_away_paired "Paired Lizalfos runs out (Paired Lizalfos retreats while its partner fights)" by world priority 92 in enemy_health at 2360 920
+verb paired_empty_in_away_paired "Paired Lizalfos runs out (Paired Lizalfos retreats while its partner fights)" by world priority 90 in enemy_health at 2360 920
   unless hp_paired
   unless hp_paired_3
   take alive_paired
   take phase_away_paired
   give link_wins
 
-verb paired_falls_to_3_in_damaged_paired "Paired Lizalfos drops to 3 (Paired Lizalfos reels from a hit)" by world priority 91 in enemy_health at 2500 920
+verb paired_falls_to_3_in_damaged_paired "Paired Lizalfos drops to 3 (Paired Lizalfos reels from a hit)" by world priority 89 in enemy_health at 2500 920
   take above_paired_3
   need alive_paired
   unless hp_paired
@@ -3643,7 +3643,7 @@ verb paired_falls_to_3_in_damaged_paired "Paired Lizalfos drops to 3 (Paired Liz
   give phase_away_paired
   give 5 timer_away_paired
 
-verb paired_falls_to_3_in_stunned_paired "Paired Lizalfos drops to 3 (Paired Lizalfos is stunned)" by world priority 91 in enemy_health at 2360 990
+verb paired_falls_to_3_in_stunned_paired "Paired Lizalfos drops to 3 (Paired Lizalfos is stunned)" by world priority 89 in enemy_health at 2360 990
   take above_paired_3
   need alive_paired
   unless hp_paired
@@ -4610,6 +4610,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

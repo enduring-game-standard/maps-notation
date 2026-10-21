@@ -131,47 +131,47 @@ state incoming_spin_big "Big Leever spin incoming" in attacks at 3320 360
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb surface_small_timer_clears "Leever rises out of the sand is over" by world priority 99 in enemy at 2040 150
+verb surface_small_timer_clears "Leever rises out of the sand is over" by world priority 100 in enemy at 2040 150
   take timer_surface_small
   unless phase_surface_small
 
-verb move_small_timer_clears "Leever spins across the sand at Link is over" by world priority 99 in enemy at 2180 220
+verb move_small_timer_clears "Leever spins across the sand at Link is over" by world priority 100 in enemy at 2180 220
   take timer_move_small
   unless phase_move_small
 
-verb damaged_small_timer_clears "Leever reels from a hit is over" by world priority 99 in enemy at 2040 360
+verb damaged_small_timer_clears "Leever reels from a hit is over" by world priority 100 in enemy at 2040 360
   take timer_damaged_small
   unless phase_damaged_small
 
-verb stunned_small_timer_clears "Leever is knocked back, stunned is over" by world priority 99 in enemy at 2180 430
+verb stunned_small_timer_clears "Leever is knocked back, stunned is over" by world priority 100 in enemy at 2180 430
   take timer_stunned_small
   unless phase_stunned_small
 
-verb recover_small_timer_clears "Leever shakes off the stun is over" by world priority 99 in enemy at 2040 570
+verb recover_small_timer_clears "Leever shakes off the stun is over" by world priority 100 in enemy at 2040 570
   take timer_recover_small
   unless phase_recover_small
 
-verb recoiled_small_timer_clears "Leever bounces off Link's shield is over" by world priority 99 in enemy at 2180 640
+verb recoiled_small_timer_clears "Leever bounces off Link's shield is over" by world priority 100 in enemy at 2180 640
   take timer_recoiled_small
   unless phase_recoiled_small
 
-verb surface_big_timer_clears "Big Leever rises out of the sand is over" by world priority 99 in enemy at 2040 780
+verb surface_big_timer_clears "Big Leever rises out of the sand is over" by world priority 100 in enemy at 2040 780
   take timer_surface_big
   unless phase_surface_big
 
-verb damaged_big_timer_clears "Big Leever reels from a hit is over" by world priority 99 in enemy at 2040 920
+verb damaged_big_timer_clears "Big Leever reels from a hit is over" by world priority 100 in enemy at 2040 920
   take timer_damaged_big
   unless phase_damaged_big
 
-verb stunned_big_timer_clears "Big Leever is knocked back, stunned is over" by world priority 99 in enemy at 2180 990
+verb stunned_big_timer_clears "Big Leever is knocked back, stunned is over" by world priority 100 in enemy at 2180 990
   take timer_stunned_big
   unless phase_stunned_big
 
-verb recover_big_timer_clears "Big Leever shakes off the stun is over" by world priority 99 in enemy at 2040 1130
+verb recover_big_timer_clears "Big Leever shakes off the stun is over" by world priority 100 in enemy at 2040 1130
   take timer_recover_big
   unless phase_recover_big
 
-verb recoiled_big_timer_clears "Big Leever bounces off Link's shield is over" by world priority 99 in enemy at 2180 1200
+verb recoiled_big_timer_clears "Big Leever bounces off Link's shield is over" by world priority 100 in enemy at 2180 1200
   take timer_recoiled_big
   unless phase_recoiled_big
 
@@ -386,58 +386,58 @@ verb variant_big "Big Leever" by world priority 30 in setup at 120 780
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb small_hurt "Leever loses health" by world priority 96 in enemy_health at 2360 290
+verb small_hurt "Leever loses health" by world priority 97 in enemy_health at 2360 290
   take dmg_small
   take hp_small
 
-verb small_overkill "Leever has no health left to lose" by world priority 95 in enemy_health at 2500 290
+verb small_overkill "Leever has no health left to lose" by world priority 96 in enemy_health at 2500 290
   take dmg_small
   unless hp_small
 
-verb big_hurt "Big Leever loses health" by world priority 96 in enemy_health at 2360 360
+verb big_hurt "Big Leever loses health" by world priority 97 in enemy_health at 2360 360
   take dmg_big
   take hp_big
 
-verb big_overkill "Big Leever has no health left to lose" by world priority 95 in enemy_health at 2500 360
+verb big_overkill "Big Leever has no health left to lose" by world priority 96 in enemy_health at 2500 360
   take dmg_big
   unless hp_big
 
@@ -2107,25 +2107,25 @@ verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by wor
 verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3000 8270
   take swing_hammer_jump
 
-verb small_empty_in_damaged_small "Leever runs out (Leever reels from a hit)" by world priority 92 in enemy_health at 2360 430
+verb small_empty_in_damaged_small "Leever runs out (Leever reels from a hit)" by world priority 90 in enemy_health at 2360 430
   unless hp_small
   take alive_small
   take phase_damaged_small
   give link_wins
 
-verb small_empty_in_stunned_small "Leever runs out (Leever is knocked back, stunned)" by world priority 92 in enemy_health at 2500 430
+verb small_empty_in_stunned_small "Leever runs out (Leever is knocked back, stunned)" by world priority 90 in enemy_health at 2500 430
   unless hp_small
   take alive_small
   take phase_stunned_small
   give link_wins
 
-verb big_empty_in_damaged_big "Big Leever runs out (Big Leever reels from a hit)" by world priority 92 in enemy_health at 2360 500
+verb big_empty_in_damaged_big "Big Leever runs out (Big Leever reels from a hit)" by world priority 90 in enemy_health at 2360 500
   unless hp_big
   take alive_big
   take phase_damaged_big
   give link_wins
 
-verb big_empty_in_stunned_big "Big Leever runs out (Big Leever is knocked back, stunned)" by world priority 92 in enemy_health at 2500 500
+verb big_empty_in_stunned_big "Big Leever runs out (Big Leever is knocked back, stunned)" by world priority 90 in enemy_health at 2500 500
   unless hp_big
   take alive_big
   take phase_stunned_big
@@ -2580,6 +2580,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

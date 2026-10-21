@@ -127,39 +127,39 @@ state incoming_spin "Cursed Skulltula person spins into Link incoming" in attack
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 500
 
-verb sway_timer_clears "Cursed Skulltula person sways from a hit to its front is over" by world priority 99 in enemy at 2040 430
+verb sway_timer_clears "Cursed Skulltula person sways from a hit to its front is over" by world priority 100 in enemy at 2040 430
   take timer_sway
   unless phase_sway
 
-verb sway_armed_timer_clears "Cursed Skulltula person sways from a hit to its front, primed to spin into Link is over" by world priority 99 in enemy at 2180 500
+verb sway_armed_timer_clears "Cursed Skulltula person sways from a hit to its front, primed to spin into Link is over" by world priority 100 in enemy at 2180 500
   take timer_sway_armed
   unless phase_sway_armed
 
-verb stunned_hang_timer_clears "Cursed Skulltula person is stunned (hangs at its ceiling) is over" by world priority 99 in enemy at 2040 640
+verb stunned_hang_timer_clears "Cursed Skulltula person is stunned (hangs at its ceiling) is over" by world priority 100 in enemy at 2040 640
   take timer_stunned_hang
   unless phase_stunned_hang
 
-verb stunned_drop_timer_clears "Cursed Skulltula person is stunned (drops toward Link) is over" by world priority 99 in enemy at 2180 710
+verb stunned_drop_timer_clears "Cursed Skulltula person is stunned (drops toward Link) is over" by world priority 100 in enemy at 2180 710
   take timer_stunned_drop
   unless phase_stunned_drop
 
-verb stunned_down_timer_clears "Cursed Skulltula person is stunned (hangs at Link's height) is over" by world priority 99 in enemy at 2040 850
+verb stunned_down_timer_clears "Cursed Skulltula person is stunned (hangs at Link's height) is over" by world priority 100 in enemy at 2040 850
   take timer_stunned_down
   unless phase_stunned_down
 
-verb stunned_rise_timer_clears "Cursed Skulltula person is stunned (climbs back to its ceiling) is over" by world priority 99 in enemy at 2180 920
+verb stunned_rise_timer_clears "Cursed Skulltula person is stunned (climbs back to its ceiling) is over" by world priority 100 in enemy at 2180 920
   take timer_stunned_rise
   unless phase_stunned_rise
 
-verb ground_sway_timer_clears "Grounded cursed Skulltula person sways from a hit to its front is over" by world priority 99 in enemy at 2040 1130
+verb ground_sway_timer_clears "Grounded cursed Skulltula person sways from a hit to its front is over" by world priority 100 in enemy at 2040 1130
   take timer_ground_sway
   unless phase_ground_sway
 
-verb ground_sway_armed_timer_clears "Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link is over" by world priority 99 in enemy at 2180 1200
+verb ground_sway_armed_timer_clears "Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link is over" by world priority 100 in enemy at 2180 1200
   take timer_ground_sway_armed
   unless phase_ground_sway_armed
 
-verb ground_stunned_timer_clears "Grounded cursed Skulltula person is stunned is over" by world priority 99 in enemy at 2040 1340
+verb ground_stunned_timer_clears "Grounded cursed Skulltula person is stunned is over" by world priority 100 in enemy at 2040 1340
   take timer_ground_stunned
   unless phase_ground_stunned
 
@@ -372,40 +372,40 @@ verb variant_grounded "Cursed Skulltula person spawned near the floor, which nev
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -3104,6 +3104,6 @@ verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
   take lens_count
   unless lens_on

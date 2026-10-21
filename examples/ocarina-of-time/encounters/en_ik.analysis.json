@@ -46,7 +46,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2571
+   "ms": 1618
   },
   {
    "kit": "adult_arrows",
@@ -60,7 +60,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3430
+   "ms": 2244
   },
   {
    "kit": "adult_blade",
@@ -74,7 +74,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 571
+   "ms": 362
   },
   {
    "kit": "adult_blade",
@@ -88,7 +88,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 748
+   "ms": 487
   },
   {
    "kit": "adult_bottles",
@@ -102,7 +102,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2536
+   "ms": 1666
   },
   {
    "kit": "adult_bottles",
@@ -116,7 +116,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3527
+   "ms": 2242
   },
   {
    "kit": "adult_dins",
@@ -130,7 +130,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2858
+   "ms": 1813
   },
   {
    "kit": "adult_dins",
@@ -144,7 +144,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3825
+   "ms": 2540
   },
   {
    "kit": "adult_giant",
@@ -158,7 +158,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1318
+   "ms": 827
   },
   {
    "kit": "adult_giant",
@@ -172,7 +172,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1699
+   "ms": 1039
   },
   {
    "kit": "adult_lens",
@@ -186,7 +186,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 8725
+   "ms": 5626
   },
   {
    "kit": "adult_lens",
@@ -200,7 +200,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 12353
+   "ms": 7620
   },
   {
    "kit": "adult_nayru",
@@ -214,7 +214,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 22760
+   "ms": 14003
   },
   {
    "kit": "adult_nayru",
@@ -228,7 +228,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 30495
+   "ms": 19503
   },
   {
    "kit": "adult_spin",
@@ -242,7 +242,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 11785
+   "ms": 7651
   },
   {
    "kit": "adult_spin",
@@ -256,7 +256,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 15971
+   "ms": 10452
   }
  ]
 }

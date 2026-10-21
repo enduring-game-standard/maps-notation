@@ -167,111 +167,111 @@ state tick_nayru "Beat ends: nayru checked" in beat at 900 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 760 500
 state lens_count "The Lens: beats toward the next cost" in beat at 900 780
 
-verb idle_fire_timer_clears "fire Keese circles is over" by world priority 99 in enemy at 580 150
+verb idle_fire_timer_clears "fire Keese circles is over" by world priority 100 in enemy at 580 150
   take timer_idle_fire
   unless phase_idle_fire
 
-verb attack_fire_timer_clears "fire Keese dives at Link is over" by world priority 99 in enemy at 440 290
+verb attack_fire_timer_clears "fire Keese dives at Link is over" by world priority 100 in enemy at 440 290
   take timer_attack_fire
   unless phase_attack_fire
 
-verb home_fire_timer_clears "fire Keese flies home is over" by world priority 99 in enemy at 580 360
+verb home_fire_timer_clears "fire Keese flies home is over" by world priority 100 in enemy at 580 360
   take timer_home_fire
   unless phase_home_fire
 
-verb stunned_fire_timer_clears "fire Keese is stunned is over" by world priority 99 in enemy at 440 500
+verb stunned_fire_timer_clears "fire Keese is stunned is over" by world priority 100 in enemy at 440 500
   take timer_stunned_fire
   unless phase_stunned_fire
 
-verb idle_fire_p_timer_clears "fire Keese (can perch) circles is over" by world priority 99 in enemy at 580 570
+verb idle_fire_p_timer_clears "fire Keese (can perch) circles is over" by world priority 100 in enemy at 580 570
   take timer_idle_fire_p
   unless phase_idle_fire_p
 
-verb attack_fire_p_timer_clears "fire Keese (can perch) dives at Link is over" by world priority 99 in enemy at 440 710
+verb attack_fire_p_timer_clears "fire Keese (can perch) dives at Link is over" by world priority 100 in enemy at 440 710
   take timer_attack_fire_p
   unless phase_attack_fire_p
 
-verb home_fire_p_timer_clears "fire Keese (can perch) flies home is over" by world priority 99 in enemy at 580 780
+verb home_fire_p_timer_clears "fire Keese (can perch) flies home is over" by world priority 100 in enemy at 580 780
   take timer_home_fire_p
   unless phase_home_fire_p
 
-verb stunned_fire_p_timer_clears "fire Keese (can perch) is stunned is over" by world priority 99 in enemy at 440 920
+verb stunned_fire_p_timer_clears "fire Keese (can perch) is stunned is over" by world priority 100 in enemy at 440 920
   take timer_stunned_fire_p
   unless phase_stunned_fire_p
 
-verb idle_normal_timer_clears "Keese circles is over" by world priority 99 in enemy at 580 990
+verb idle_normal_timer_clears "Keese circles is over" by world priority 100 in enemy at 580 990
   take timer_idle_normal
   unless phase_idle_normal
 
-verb attack_normal_timer_clears "Keese dives at Link is over" by world priority 99 in enemy at 440 1130
+verb attack_normal_timer_clears "Keese dives at Link is over" by world priority 100 in enemy at 440 1130
   take timer_attack_normal
   unless phase_attack_normal
 
-verb home_normal_timer_clears "Keese flies home is over" by world priority 99 in enemy at 580 1200
+verb home_normal_timer_clears "Keese flies home is over" by world priority 100 in enemy at 580 1200
   take timer_home_normal
   unless phase_home_normal
 
-verb stunned_normal_timer_clears "Keese is stunned is over" by world priority 99 in enemy at 440 1340
+verb stunned_normal_timer_clears "Keese is stunned is over" by world priority 100 in enemy at 440 1340
   take timer_stunned_normal
   unless phase_stunned_normal
 
-verb idle_normal_p_timer_clears "Keese (perches) circles is over" by world priority 99 in enemy at 580 1410
+verb idle_normal_p_timer_clears "Keese (perches) circles is over" by world priority 100 in enemy at 580 1410
   take timer_idle_normal_p
   unless phase_idle_normal_p
 
-verb attack_normal_p_timer_clears "Keese (perches) dives at Link is over" by world priority 99 in enemy at 440 1550
+verb attack_normal_p_timer_clears "Keese (perches) dives at Link is over" by world priority 100 in enemy at 440 1550
   take timer_attack_normal_p
   unless phase_attack_normal_p
 
-verb home_normal_p_timer_clears "Keese (perches) flies home is over" by world priority 99 in enemy at 580 1620
+verb home_normal_p_timer_clears "Keese (perches) flies home is over" by world priority 100 in enemy at 580 1620
   take timer_home_normal_p
   unless phase_home_normal_p
 
-verb stunned_normal_p_timer_clears "Keese (perches) is stunned is over" by world priority 99 in enemy at 440 1760
+verb stunned_normal_p_timer_clears "Keese (perches) is stunned is over" by world priority 100 in enemy at 440 1760
   take timer_stunned_normal_p
   unless phase_stunned_normal_p
 
-verb idle_ice_timer_clears "ice Keese circles is over" by world priority 99 in enemy at 580 1830
+verb idle_ice_timer_clears "ice Keese circles is over" by world priority 100 in enemy at 580 1830
   take timer_idle_ice
   unless phase_idle_ice
 
-verb attack_ice_timer_clears "ice Keese dives at Link is over" by world priority 99 in enemy at 440 1970
+verb attack_ice_timer_clears "ice Keese dives at Link is over" by world priority 100 in enemy at 440 1970
   take timer_attack_ice
   unless phase_attack_ice
 
-verb home_ice_timer_clears "ice Keese flies home is over" by world priority 99 in enemy at 580 2040
+verb home_ice_timer_clears "ice Keese flies home is over" by world priority 100 in enemy at 580 2040
   take timer_home_ice
   unless phase_home_ice
 
-verb stunned_ice_timer_clears "ice Keese is stunned is over" by world priority 99 in enemy at 440 2180
+verb stunned_ice_timer_clears "ice Keese is stunned is over" by world priority 100 in enemy at 440 2180
   take timer_stunned_ice
   unless phase_stunned_ice
 
-verb stay_fire_timer_clears "fire Keese bounces off is over" by world priority 99 in enemy at 580 2250
+verb stay_fire_timer_clears "fire Keese bounces off is over" by world priority 100 in enemy at 580 2250
   take timer_stay_fire
   unless phase_stay_fire
 
-verb stay_fire_p_timer_clears "fire Keese (can perch) bounces off is over" by world priority 99 in enemy at 440 2390
+verb stay_fire_p_timer_clears "fire Keese (can perch) bounces off is over" by world priority 100 in enemy at 440 2390
   take timer_stay_fire_p
   unless phase_stay_fire_p
 
-verb stay_normal_timer_clears "Keese bounces off is over" by world priority 99 in enemy at 580 2460
+verb stay_normal_timer_clears "Keese bounces off is over" by world priority 100 in enemy at 580 2460
   take timer_stay_normal
   unless phase_stay_normal
 
-verb stay_normal_p_timer_clears "Keese (perches) bounces off is over" by world priority 99 in enemy at 440 2600
+verb stay_normal_p_timer_clears "Keese (perches) bounces off is over" by world priority 100 in enemy at 440 2600
   take timer_stay_normal_p
   unless phase_stay_normal_p
 
-verb stay_ice_timer_clears "ice Keese bounces off is over" by world priority 99 in enemy at 580 2670
+verb stay_ice_timer_clears "ice Keese bounces off is over" by world priority 100 in enemy at 580 2670
   take timer_stay_ice
   unless phase_stay_ice
 
-verb from_perch_normal_timer_clears "Keese drops from its perch at Link is over" by world priority 99 in enemy at 580 2810
+verb from_perch_normal_timer_clears "Keese drops from its perch at Link is over" by world priority 100 in enemy at 580 2810
   take timer_from_perch_normal
   unless phase_from_perch_normal
 
-verb from_perch_fire_timer_clears "Lit Keese drops from its perch at Link is over" by world priority 99 in enemy at 440 2950
+verb from_perch_fire_timer_clears "Lit Keese drops from its perch at Link is over" by world priority 100 in enemy at 440 2950
   take timer_from_perch_fire
   unless phase_from_perch_fire
 
@@ -555,50 +555,50 @@ verb variant_ice_unseen "Ice Keese, visible only through the Lens" by world prio
   give link_turn
   give enemy_unseen
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1540 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1540 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1400 570
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1400 570
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1540 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1540 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1400 640
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1400 640
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1540 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1540 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1400 710
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1400 710
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1540 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1540 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1860 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1860 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Keese loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Keese loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Keese has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Keese has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -1822,169 +1822,169 @@ verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by worl
   need enemy_unseen
   unless lens_on
 
-verb body_empty_in_idle_fire "Keese runs out (fire Keese circles)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_idle_fire "Keese runs out (fire Keese circles)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_idle_fire
   give link_wins
 
-verb body_empty_in_attack_fire "Keese runs out (fire Keese dives at Link)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_attack_fire "Keese runs out (fire Keese dives at Link)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_attack_fire
   give link_wins
 
-verb body_empty_in_home_fire "Keese runs out (fire Keese flies home)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_home_fire "Keese runs out (fire Keese flies home)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_home_fire
   give link_wins
 
-verb body_empty_in_stunned_fire "Keese runs out (fire Keese is stunned)" by world priority 92 in enemy_health at 2360 360
+verb body_empty_in_stunned_fire "Keese runs out (fire Keese is stunned)" by world priority 90 in enemy_health at 2360 360
   unless hp_body
   take alive_body
   take phase_stunned_fire
   give link_wins
 
-verb body_empty_in_idle_fire_p "Keese runs out (fire Keese (can perch) circles)" by world priority 92 in enemy_health at 2500 360
+verb body_empty_in_idle_fire_p "Keese runs out (fire Keese (can perch) circles)" by world priority 90 in enemy_health at 2500 360
   unless hp_body
   take alive_body
   take phase_idle_fire_p
   give link_wins
 
-verb body_empty_in_attack_fire_p "Keese runs out (fire Keese (can perch) dives at Link)" by world priority 92 in enemy_health at 2360 430
+verb body_empty_in_attack_fire_p "Keese runs out (fire Keese (can perch) dives at Link)" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_attack_fire_p
   give link_wins
 
-verb body_empty_in_home_fire_p "Keese runs out (fire Keese (can perch) flies home)" by world priority 92 in enemy_health at 2500 430
+verb body_empty_in_home_fire_p "Keese runs out (fire Keese (can perch) flies home)" by world priority 90 in enemy_health at 2500 430
   unless hp_body
   take alive_body
   take phase_home_fire_p
   give link_wins
 
-verb body_empty_in_stunned_fire_p "Keese runs out (fire Keese (can perch) is stunned)" by world priority 92 in enemy_health at 2360 500
+verb body_empty_in_stunned_fire_p "Keese runs out (fire Keese (can perch) is stunned)" by world priority 90 in enemy_health at 2360 500
   unless hp_body
   take alive_body
   take phase_stunned_fire_p
   give link_wins
 
-verb body_empty_in_idle_normal "Keese runs out (Keese circles)" by world priority 92 in enemy_health at 2500 500
+verb body_empty_in_idle_normal "Keese runs out (Keese circles)" by world priority 90 in enemy_health at 2500 500
   unless hp_body
   take alive_body
   take phase_idle_normal
   give link_wins
 
-verb body_empty_in_attack_normal "Keese runs out (Keese dives at Link)" by world priority 92 in enemy_health at 2360 570
+verb body_empty_in_attack_normal "Keese runs out (Keese dives at Link)" by world priority 90 in enemy_health at 2360 570
   unless hp_body
   take alive_body
   take phase_attack_normal
   give link_wins
 
-verb body_empty_in_home_normal "Keese runs out (Keese flies home)" by world priority 92 in enemy_health at 2500 570
+verb body_empty_in_home_normal "Keese runs out (Keese flies home)" by world priority 90 in enemy_health at 2500 570
   unless hp_body
   take alive_body
   take phase_home_normal
   give link_wins
 
-verb body_empty_in_stunned_normal "Keese runs out (Keese is stunned)" by world priority 92 in enemy_health at 2360 640
+verb body_empty_in_stunned_normal "Keese runs out (Keese is stunned)" by world priority 90 in enemy_health at 2360 640
   unless hp_body
   take alive_body
   take phase_stunned_normal
   give link_wins
 
-verb body_empty_in_idle_normal_p "Keese runs out (Keese (perches) circles)" by world priority 92 in enemy_health at 2500 640
+verb body_empty_in_idle_normal_p "Keese runs out (Keese (perches) circles)" by world priority 90 in enemy_health at 2500 640
   unless hp_body
   take alive_body
   take phase_idle_normal_p
   give link_wins
 
-verb body_empty_in_attack_normal_p "Keese runs out (Keese (perches) dives at Link)" by world priority 92 in enemy_health at 2360 710
+verb body_empty_in_attack_normal_p "Keese runs out (Keese (perches) dives at Link)" by world priority 90 in enemy_health at 2360 710
   unless hp_body
   take alive_body
   take phase_attack_normal_p
   give link_wins
 
-verb body_empty_in_home_normal_p "Keese runs out (Keese (perches) flies home)" by world priority 92 in enemy_health at 2500 710
+verb body_empty_in_home_normal_p "Keese runs out (Keese (perches) flies home)" by world priority 90 in enemy_health at 2500 710
   unless hp_body
   take alive_body
   take phase_home_normal_p
   give link_wins
 
-verb body_empty_in_stunned_normal_p "Keese runs out (Keese (perches) is stunned)" by world priority 92 in enemy_health at 2360 780
+verb body_empty_in_stunned_normal_p "Keese runs out (Keese (perches) is stunned)" by world priority 90 in enemy_health at 2360 780
   unless hp_body
   take alive_body
   take phase_stunned_normal_p
   give link_wins
 
-verb body_empty_in_idle_ice "Keese runs out (ice Keese circles)" by world priority 92 in enemy_health at 2500 780
+verb body_empty_in_idle_ice "Keese runs out (ice Keese circles)" by world priority 90 in enemy_health at 2500 780
   unless hp_body
   take alive_body
   take phase_idle_ice
   give link_wins
 
-verb body_empty_in_attack_ice "Keese runs out (ice Keese dives at Link)" by world priority 92 in enemy_health at 2360 850
+verb body_empty_in_attack_ice "Keese runs out (ice Keese dives at Link)" by world priority 90 in enemy_health at 2360 850
   unless hp_body
   take alive_body
   take phase_attack_ice
   give link_wins
 
-verb body_empty_in_home_ice "Keese runs out (ice Keese flies home)" by world priority 92 in enemy_health at 2500 850
+verb body_empty_in_home_ice "Keese runs out (ice Keese flies home)" by world priority 90 in enemy_health at 2500 850
   unless hp_body
   take alive_body
   take phase_home_ice
   give link_wins
 
-verb body_empty_in_stunned_ice "Keese runs out (ice Keese is stunned)" by world priority 92 in enemy_health at 2360 920
+verb body_empty_in_stunned_ice "Keese runs out (ice Keese is stunned)" by world priority 90 in enemy_health at 2360 920
   unless hp_body
   take alive_body
   take phase_stunned_ice
   give link_wins
 
-verb body_empty_in_stay_fire "Keese runs out (fire Keese bounces off)" by world priority 92 in enemy_health at 2500 920
+verb body_empty_in_stay_fire "Keese runs out (fire Keese bounces off)" by world priority 90 in enemy_health at 2500 920
   unless hp_body
   take alive_body
   take phase_stay_fire
   give link_wins
 
-verb body_empty_in_stay_fire_p "Keese runs out (fire Keese (can perch) bounces off)" by world priority 92 in enemy_health at 2360 990
+verb body_empty_in_stay_fire_p "Keese runs out (fire Keese (can perch) bounces off)" by world priority 90 in enemy_health at 2360 990
   unless hp_body
   take alive_body
   take phase_stay_fire_p
   give link_wins
 
-verb body_empty_in_stay_normal "Keese runs out (Keese bounces off)" by world priority 92 in enemy_health at 2500 990
+verb body_empty_in_stay_normal "Keese runs out (Keese bounces off)" by world priority 90 in enemy_health at 2500 990
   unless hp_body
   take alive_body
   take phase_stay_normal
   give link_wins
 
-verb body_empty_in_stay_normal_p "Keese runs out (Keese (perches) bounces off)" by world priority 92 in enemy_health at 2360 1060
+verb body_empty_in_stay_normal_p "Keese runs out (Keese (perches) bounces off)" by world priority 90 in enemy_health at 2360 1060
   unless hp_body
   take alive_body
   take phase_stay_normal_p
   give link_wins
 
-verb body_empty_in_stay_ice "Keese runs out (ice Keese bounces off)" by world priority 92 in enemy_health at 2500 1060
+verb body_empty_in_stay_ice "Keese runs out (ice Keese bounces off)" by world priority 90 in enemy_health at 2500 1060
   unless hp_body
   take alive_body
   take phase_stay_ice
   give link_wins
 
-verb body_empty_in_perched "Keese runs out (Keese hangs on its perch)" by world priority 92 in enemy_health at 2360 1130
+verb body_empty_in_perched "Keese runs out (Keese hangs on its perch)" by world priority 90 in enemy_health at 2360 1130
   unless hp_body
   take alive_body
   take phase_perched
   give link_wins
 
-verb body_empty_in_from_perch_normal "Keese runs out (Keese drops from its perch at Link)" by world priority 92 in enemy_health at 2500 1130
+verb body_empty_in_from_perch_normal "Keese runs out (Keese drops from its perch at Link)" by world priority 90 in enemy_health at 2500 1130
   unless hp_body
   take alive_body
   take phase_from_perch_normal
   give link_wins
 
-verb body_empty_in_from_perch_fire "Keese runs out (Lit Keese drops from its perch at Link)" by world priority 92 in enemy_health at 2360 1200
+verb body_empty_in_from_perch_fire "Keese runs out (Lit Keese drops from its perch at Link)" by world priority 90 in enemy_health at 2360 1200
   unless hp_body
   take alive_body
   take phase_from_perch_fire
@@ -2876,7 +2876,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 760 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 900 570
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 900 570
   take burn_count
   unless status_burn
 
@@ -2934,7 +2934,7 @@ verb lens_idle "The Lens is off" by world priority 45 in beat at 900 920
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 760 990
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 760 990
   take lens_count
   unless lens_on
 
