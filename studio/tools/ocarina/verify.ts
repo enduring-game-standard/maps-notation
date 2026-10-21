@@ -7,9 +7,10 @@ import { parse, print } from '../../src/core/text'
 import { dispositions, encounterFile, modeled, OUT } from './build'
 import { link } from './data/link'
 import { doubleDefense, encounter, linkAttacks, swingKey } from './gen'
+import { buildLedger, checkLedger, CONTRACT_GEAR, FIELD_GEAR, HIT_SPECIAL_EFFECTS } from './ledger'
 import { analyzeFile } from './slice'
 import { DMG_TYPES, extract, type Actor, type DmgType, type Inventory } from './inventory'
-import { isExcluded, type ActorSpec, type Cite, type Gear } from './spec'
+import { isExcluded, type ActorSpec, type Cite } from './spec'
 
 type Verdict = 'VERIFIED' | 'NOT VERIFIED' | 'INCONCLUSIVE'
 const results = new Map<string, { verdict: Verdict; failures: string[]; notes: string[] }>()
@@ -23,19 +24,6 @@ const fail = (id: string, msg: string) => {
   r.failures.push(msg)
 }
 const note = (id: string, msg: string) => line(id).notes.push(msg)
-
-/** CONTRACT item 4, as gear: each must be read by an attack, a shield, a Link spec field, or an economy entry. */
-const CONTRACT_GEAR: Gear[] = [
-  'kokiri_sword', 'master_sword', 'giants_knife', 'biggoron_sword', 'deku_shield', 'hylian_shield', 'mirror_shield',
-  'kokiri_tunic', 'goron_tunic', 'zora_tunic', 'deku_sticks', 'deku_nuts', 'slingshot', 'bow', 'fire_arrows', 'ice_arrows',
-  'light_arrows', 'bombs', 'bombchus', 'boomerang', 'hookshot', 'megaton_hammer', 'dins_fire', 'nayrus_love', 'lens_of_truth',
-  'double_defense', 'magic', 'fairy', 'red_potion', 'green_potion', 'blue_potion', 'ocarina',
-]
-const FIELD_GEAR: Partial<Record<Gear, keyof typeof link>> = {
-  double_defense: 'doubleDefense', magic: 'magicMeter', fairy: 'fairyRevive', red_potion: 'potions', green_potion: 'potions',
-  blue_potion: 'potions', nayrus_love: 'nayruMagic', lens_of_truth: 'lensDrain', ocarina: 'songs',
-}
-const HIT_SPECIAL_EFFECTS = ['NONE', 'FIRE', 'ICE', 'ELECTRIC', 'KNOCKBACK', '7', '8', '9']
 
 /** Every cite must name a real decomp line that carries content, not a bare brace. */
 const checkCite = (root: string, cite: string, where: string) => {
@@ -244,7 +232,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (process.env.OCARINA_ONLY) note('C1', 'OCARINA_ONLY is set: C1 counts only the loaded actor and cannot pass')
   verifyCompleteness(fresh)
   for (const spec of modeled().filter((s) => !only || s.overlay === only)) await verifyEncounter(spec, fresh, limit)
-  for (const id of ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'cites', 'V1', 'V2', 'V3']) line(id)
+  const ledger = buildLedger(fresh)
+  writeFileSync(new URL('ledger.json', OUT), JSON.stringify(ledger, null, 1) + '\n')
+  for (const p of checkLedger(ledger)) fail('V5', p)
+  for (const id of ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'cites', 'V1', 'V2', 'V3', 'V5']) line(id)
   let ok = true
   for (const [id, r] of results) {
     console.log(`${id}: ${r.verdict}`)
