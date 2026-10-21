@@ -139,7 +139,7 @@ const attacks: Attack[] = [
   { id: 'punch', label: 'Fist punch', damage: 16, effect: { kind: 'knockback' }, blockable: false, dodgeable: true, source: HAND_RUNTIME },
   {
     id: 'grab', label: 'Fist grab and crush', damage: 32,
-    effect: { kind: 'grab', frames: { value: 21, cite: `${PL}:14249` }, damagePerBeat: 8, release: 'escape' },
+    effect: { kind: 'grab', frames: { value: 21, cite: `${PL}:14249` }, damagePerBeat: { value: { units: 8, frames: 20 }, cite: at(1914) }, release: 'escape' },
     blockable: false, dodgeable: true, source: HAND_RUNTIME,
   },
   { id: 'clap', label: 'Clap', damage: 32, effect: { kind: 'knockback' }, blockable: false, dodgeable: true, source: HAND_RUNTIME },
@@ -236,6 +236,32 @@ export const bossSst: ActorSpec = {
     [col(309)]: 'shockwave',
     [HAND_RUNTIME]: 'slam',
     [at(1914)]: 'grab',
+  },
+  expected: {
+    deadVerbs: {
+      ...Object.fromEntries(
+        [
+          'explosive', 'arrow_normal', 'hammer_swing', 'hookshot', 'slash_master', 'slash_giant', 'arrow_fire', 'arrow_ice', 'arrow_light',
+          'spin_giant', 'spin_master', 'jump_giant', 'jump_giant_self', 'jump_master', 'jump_master_self', 'hammer_jump',
+        ].map((k) => [`hit_${k}__down1_1_wait`, 'down1_1_wait is entered only by Link hitting a hand, and its one step leaves it that same beat, so no later swing finds it']),
+      ),
+      ...Object.fromEntries(
+        ['explosive', 'hammer_swing', 'hookshot', 'slash_giant', 'arrow_fire', 'arrow_light', 'spin_giant', 'jump_giant', 'jump_giant_self', 'hammer_jump'].flatMap((k) =>
+          ['down2_ready', 'down2_charge'].map((p) => [`hit_${k}__${p}`, `the eye is invisible in ${p}, and no kit that carries this attack carries the Lens of Truth`]),
+        ),
+      ),
+      ...Object.fromEntries(
+        ['ice_ready', 'ice_break'].flatMap((p) => [
+          [`hit_arrow_fire__${p}`, 'the ice phases need an ice hit first, and neither kit with ice arrows pairs fire arrows with the Lens the invisible eye needs'],
+          [`hit_arrow_light__${p}`, 'the ice phases need an ice hit first, and neither kit with ice arrows pairs light arrows with the Lens the invisible eye needs'],
+          [`unseen_arrow_light__${p}`, 'adult_arrows arrives with 8 magic and spends 4 on the ice arrow that reaches this phase, leaving too little for an 8-magic light arrow'],
+        ]),
+      ),
+      stun_open_timer_clears: 'stun_open is left early only when its health runs out, and that defeat ends the encounter before the timer is cleaned up',
+      grab_lands_again: 'the grab holds Link for one beat (21 frames), which ends before the hand can grab again',
+      grab_lands_dd_again: 'as grab_lands_again',
+      link_helpless_grab: "the fastest escape (21 frames) is one beat, so the grab ends at that beat's end before Link's next move",
+    },
   },
   loadouts: [
     ...standardLoadouts(['adult'], 4),
