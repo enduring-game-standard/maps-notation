@@ -19,6 +19,7 @@ import {
   shapesOf,
   union,
   verbWidth,
+  type Box,
   type Pt,
   type Shape,
 } from './geometry'
@@ -70,6 +71,9 @@ type Gesture =
 type Tool = 'state' | 'verb' | null
 
 const FRAME_MS = 280
+/** Nets with more nodes than this draw only what is on screen. */
+const CULL_ABOVE = 3000
+const overlaps = (a: Box, b: Box) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1
 /** Shorter segments are port stubs and jogs: still draggable, but a grip on them would cover the arrowhead or the node. */
 const GRIP_MIN = 16
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -96,6 +100,25 @@ export function Canvas(props: Props) {
   const hulls = useMemo(() => groupHulls(net, shapes), [net, shapes])
   const routes = useRoutes(net, shapes)
   const junctions = useMemo(() => cableJunctions(net, routes), [net, routes])
+  const [size, setSize] = useState({ w: 0, h: 0 })
+  useEffect(() => {
+    const el = wrap.current
+    if (!el) return
+    const ro = new ResizeObserver(([e]) => setSize({ w: e.contentRect.width, h: e.contentRect.height }))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+  const large = net.states.length + net.verbs.length > CULL_ABOVE
+  /** On a large net only what is on screen is drawn; everything is drawn on a small one. */
+  const onScreen = useMemo(() => {
+    if (!large) return undefined
+    const pad = 200 / view.k
+    const box = { x0: -view.x / view.k - pad, y0: -view.y / view.k - pad, x1: (size.w - view.x) / view.k + pad, y1: (size.h - view.y) / view.k + pad }
+    const ids = new Set<string>()
+    for (const [id, sh] of shapes) if (overlaps(shapeBox(sh), box)) ids.add(id)
+    return { ids, box }
+  }, [large, shapes, view, size])
+  const shown = (id: string) => !onScreen || onScreen.ids.has(id)
 
   const toWorld = (cx: number, cy: number, v = latest.current.view): Pt => {
     const r = svg.current!.getBoundingClientRect()
@@ -105,7 +128,9 @@ export function Canvas(props: Props) {
   const fit = () => {
     const el = wrap.current
     if (!el) return
-    const box = union([...shapes.values()].map(shapeBox).concat(hulls.map((h) => h.box)))
+    // A large net fits to where play starts, the marked states, rather than shrinking the whole net to nothing.
+    const start = large ? net.states.filter((p) => p.marks > 0).map((p) => shapes.get(p.id)!) : []
+    const box = start.length ? inflate(union(start.map(shapeBox))!, 400) : union([...shapes.values()].map(shapeBox).concat(hulls.map((h) => h.box)))
     const { width, height } = el.getBoundingClientRect()
     if (!box) return setView({ x: width / 2, y: height / 2, k: 1 })
     const b = inflate(box, 48)
@@ -329,7 +354,7 @@ export function Canvas(props: Props) {
     const isSelected = (a: Arc) => selection?.kind === 'arc' && sameArc(a, selection)
     const rank = (a: Arc) => (isSelected(a) ? 2 : touches(a) ? 1 : 0)
     const byKey = new Map(net.arcs.map((a) => [arcKey(a), a]))
-    const drawn = net.arcs.filter((a) => routes.has(arcKey(a))).sort((a, b) => rank(a) - rank(b))
+    const drawn = net.arcs.filter((a) => routes.has(arcKey(a)) && (shown(a.state) || shown(a.verb))).sort((a, b) => rank(a) - rank(b))
     const arcs = drawn.map((a) => {
       const pts = routes.get(arcKey(a))!
       const end = pts[pts.length - 1]
@@ -382,12 +407,12 @@ export function Canvas(props: Props) {
         </g>
       )
     })
-    const dots = junctions.map((j) => {
+    const dots = junctions.filter((j) => !onScreen || overlaps({ x0: j.at.x, y0: j.at.y, x1: j.at.x, y1: j.at.y }, onScreen.box)).map((j) => {
       const lit = j.arcs.some((k) => touches(byKey.get(k)!))
       return <circle key={`${j.arcs[0]}@${j.at.x},${j.at.y}`} className={`junction ${lit ? 'is-focus' : focus ? 'is-faded' : ''}`} cx={j.at.x} cy={j.at.y} r={2.6} />
     })
     return [...arcs, <g key="junctions">{dots}</g>]
-  }, [net, routes, junctions, focus?.id, selection, mode])
+  }, [net, routes, junctions, focus?.id, selection, mode, onScreen])
 
   const nodeCls = (id: string, extra: (string | false | undefined)[]) =>
     ['node', neighbors && !neighbors.has(id) && 'is-faded', ...extra].filter(Boolean).join(' ')
@@ -447,7 +472,7 @@ export function Canvas(props: Props) {
           </pattern>
         </defs>
         <g transform={`translate(${view.x},${view.y}) scale(${view.k})`}>
-          {hulls.map(({ group, members, box }) => (
+          {hulls.filter((h) => !onScreen || overlaps(h.box, onScreen.box)).map(({ group, members, box }) => (
             <g
               key={group.id}
               className={`hull ${isSel('group', group.id) ? 'is-selected' : ''}`}
@@ -468,7 +493,7 @@ export function Canvas(props: Props) {
           <g key={routes.size ? 'routed' : 'unrouted'} className={focus ? 'arcs has-focus' : 'arcs'}>
             {arcLayer}
           </g>
-          {net.states.map((p) => {
+          {net.states.filter((p) => shown(p.id)).map((p) => {
             const ref: NodeRef = { kind: 'state', id: p.id }
             const n = marking ? (marking[p.id] ?? 0) : p.marks
             const hidden = mode === 'play' && !canSee(p, viewer)
@@ -494,7 +519,7 @@ export function Canvas(props: Props) {
               </g>
             )
           })}
-          {net.verbs.map((v) => {
+          {net.verbs.filter((v) => shown(v.id)).map((v) => {
             const ref: NodeRef = { kind: 'verb', id: v.id }
             const chance = chanceVerbs.has(v.id)
             const w = verbWidth(v, chance)

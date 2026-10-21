@@ -1,5 +1,5 @@
 import type { Arc, Net } from '../core/model'
-import { PRIORITY_R, STATE_R, groupHulls, priorityBadge, type Pt, type Shape } from './geometry'
+import { PRIORITY_R, STATE_R, borderPoint, groupHulls, priorityBadge, type Pt, type Shape } from './geometry'
 
 /** Routes run on a grid of this pitch; hand-placed bend points snap to it. */
 export const PITCH = 5
@@ -781,7 +781,23 @@ const FIRST_CROSS = 10
  * whatever of their cable still stands; the rest keep their prior paths. That is cheap enough for every frame of
  * a drag. Without one, every cable is routed, then ripped up and routed again.
  */
+/** Past this many arcs the router's passes take minutes, so every arc is drawn straight, through its bend points. */
+export const STRAIGHT_ABOVE = 4000
+
+const straightRoutes = (net: Net, shapes: Map<string, Shape>): Map<ArcKey, Pt[]> => {
+  const out = new Map<ArcKey, Pt[]>()
+  for (const a of net.arcs) {
+    const s = shapes.get(a.state)
+    const v = shapes.get(a.verb)
+    if (!s || !v) continue
+    const via = a.via ?? []
+    out.set(arcKey(a), [borderPoint(s, via[0] ?? v), ...via, borderPoint(v, via[via.length - 1] ?? s)])
+  }
+  return out
+}
+
 export function routeArcs(net: Net, shapes: Map<string, Shape>, prior?: Prior): Map<ArcKey, Pt[]> {
+  if (net.arcs.length > STRAIGHT_ABOVE) return straightRoutes(net, shapes)
   const r = new Router(net, shapes)
   if (prior) {
     const todo: [string, Set<ArcKey> | undefined][] = []
@@ -818,7 +834,13 @@ export interface Junction {
 /** Points where a cable splits: a point that one cable leaves in three or more directions. */
 export function cableJunctions(net: Net, routes: Map<ArcKey, Pt[]>): Junction[] {
   const byCable = new Map<string, ArcKey[]>()
-  for (const a of net.arcs) if (routes.has(arcKey(a))) byCable.set(cableKey(a), [...(byCable.get(cableKey(a)) ?? []), arcKey(a)])
+  for (const a of net.arcs)
+    if (routes.has(arcKey(a))) {
+      const k = cableKey(a)
+      const list = byCable.get(k)
+      if (list) list.push(arcKey(a))
+      else byCable.set(k, [arcKey(a)])
+    }
   const out: Junction[] = []
   for (const keys of byCable.values()) {
     if (keys.length < 2) continue
@@ -889,9 +911,25 @@ export const pointAlong = (pts: Pt[], t: number): Pt => {
  * Where an arc's count badge goes: the middle of the longest stretch of its route that no cable-mate runs along, kept
  * off the end markers, so the count can't be read as a mate's. When the arc's own stretch is only its end stub, the badge goes there anyway.
  */
+const cableIndex = new WeakMap<Net, Map<string, Arc[]>>()
+const cablesOf = (net: Net) => {
+  let index = cableIndex.get(net)
+  if (!index) {
+    index = new Map()
+    for (const a of net.arcs) {
+      const k = cableKey(a)
+      const list = index.get(k)
+      if (list) list.push(a)
+      else index.set(k, [a])
+    }
+    cableIndex.set(net, index)
+  }
+  return index
+}
+
 export const countBadgeAt = (net: Net, routes: Map<ArcKey, Pt[]>, arc: Arc): Pt => {
   const own = routes.get(arcKey(arc))!
-  const mates = net.arcs.filter((b) => cableKey(b) === cableKey(arc) && arcKey(b) !== arcKey(arc)).map((b) => routes.get(arcKey(b)) ?? [])
+  const mates = (cablesOf(net).get(cableKey(arc)) ?? []).filter((b) => arcKey(b) !== arcKey(arc)).map((b) => routes.get(arcKey(b)) ?? [])
   const total = own.slice(1).reduce((n, q, i) => n + Math.hypot(q.x - own[i].x, q.y - own[i].y), 0)
   const ENDS = 12
   const BADGE_W = 16
