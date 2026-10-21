@@ -10,6 +10,24 @@ const FF = 'src/overlays/actors/ovl_En_Fhg_Fire/z_en_fhg_fire.c'
 const ff = (line: number): Cite => `${FF}:${line}`
 const CC = 'src/code/z_collision_check.c'
 
+/**
+ * Reported gaps:
+ * - The rider is hittable on the leap until the horse is within 350 of the far painting (z_en_fhg.c:573-575), about
+ *   28 of the 50 frames for the opposite paintings it always targets (z_en_fhg.c:436, 79-81). The lightning comes at
+ *   frame 26 (z_en_fhg.c:539). The model ends the window at the lightning and drops the last two frames or so.
+ * - A returned single-throw ball strikes Ganon only if its random aim error (z_en_fhg_fire.c:519-520) still puts it
+ *   inside his box (z_en_fhg_fire.c:573). No line gives odds, so the strike and the miss tie at even odds by choice.
+ * - In a volley, 80 frames without a throw or return (lines 575, 588) end the rally (lines 591-593); a hit after that
+ *   takes the single-throw branch. Ball flight time is geometry, so the rally has no such exit.
+ * - The slow throw (line 650: 10% once ten throws are made) is not modeled: the throw count stops at five here, and
+ *   the branch changes only wind-up timing and ball speed (lines 676-680, z_en_fhg_fire.c:163).
+ * - A swinging bottle also reflects the ball (z_en_fhg_fire.c:490-496). A bottle swing is not one of Link's attacks.
+ * - Ganon is back in Neutral once the throw animation ends (line 672-673), while the ball still flies. The model
+ *   holds him in the ball phase until it resolves, so a fired item cannot start Block during the ball's flight.
+ * - Both AT colliders are live through all of Charge (lines 1363-1366). Which one touches Link is geometry, so the
+ *   spear and the body tie at even odds on each contact step.
+ */
+
 /** DMG_RANGED (collision_check.h:452): the painting body takes 2 from these, and Block shrugs them off. */
 const RANGED: DmgType[] = ['ARROW_NORMAL', 'ARROW_FIRE', 'ARROW_ICE', 'ARROW_LIGHT', 'HOOKSHOT', 'SLINGSHOT']
 /** Fired items set `player->unk_A73` (z_player.c:3131, 3390), which Neutral answers with Block (line 636). */
@@ -70,7 +88,7 @@ const throwLoop = (s: string, label: string, b: Band, neutral: string): { phases
       },
       cite: ff(433),
     },
-    { id: `ball_back${s}`, label: `The ball flies back at Phantom Ganon, scattered${label}`, hittable: 'none', cite: ff(517) },
+    { id: `ball_back${s}`, label: `The ball flies back at Phantom Ganon, scattered${label}`, hittable: 'none', cite: ff(540) },
     { id: `stun${s}`, label: `Phantom Ganon lies stunned${label}`, overrides: noFinish(b), frames: { value: 50, cite: at(745) }, cite: at(758) },
   ],
   steps: [
@@ -78,7 +96,7 @@ const throwLoop = (s: string, label: string, b: Band, neutral: string): { phases
     { from: `ball${s}`, to: neutral, label: 'The ball strikes Link', attack: 'energy_ball', cite: ff(553) },
     { from: `ball_back${s}`, to: `stun${s}`, label: 'The ball strikes Phantom Ganon', cite: ff(575) },
     { from: `ball_back${s}`, to: neutral, label: 'The ball misses and bursts on a wall', cite: ff(632) },
-    { from: `stun${s}`, to: neutral, label: 'Phantom Ganon rises', afterTimer: true, cite: at(780) },
+    { from: `stun${s}`, to: `${neutral}_t30`, label: 'Phantom Ganon rises', afterTimer: true, cite: at(780) },
   ],
 })
 const block = (s: string, label: string, b: Band, neutral: string, stun: string): { phases: Phase[]; steps: Step[] } => ({
@@ -86,7 +104,7 @@ const block = (s: string, label: string, b: Band, neutral: string, stun: string)
     id: `block${s}`, label: `Phantom Ganon blocks with his spear${label}`, guards: RANGED,
     overrides: blockHits(b, stun), frames: { value: 10, cite: at(795) }, cite: at(799),
   }],
-  steps: [{ from: `block${s}`, to: neutral, label: 'Phantom Ganon lowers his spear', afterTimer: true, cite: at(808) }],
+  steps: [{ from: `block${s}`, to: `${neutral}_t10`, label: 'Phantom Ganon lowers his spear', afterTimer: true, cite: at(808) }],
 })
 
 const phases: Phase[] = [
@@ -99,34 +117,50 @@ const phases: Phase[] = [
   {
     id: 'paint_leap', label: 'Phantom Ganon leaps across the room, spear raised', hittable: RANGED,
     overrides: Object.fromEntries(RANGED.map((d) => [d, { damage: 2, to: 'paint_hit', cite: at(1302) }])),
-    frames: { value: 50, cite: hg(522) }, cite: hg(516),
+    frames: { value: 26, cite: hg(539) }, cite: hg(516),
   },
+  { id: 'paint_leap_late', label: 'Phantom Ganon lands his leap, back inside the painting', hittable: 'none', frames: { value: 24, cite: hg(539) }, cite: hg(574) },
   { id: 'paint_retreat', label: 'Phantom Ganon rides off into the paintings', hittable: 'none', frames: { value: 140, cite: hg(588) }, cite: hg(646) },
   { id: 'paint_hit', label: 'An arrow knocks Phantom Ganon back into his painting', hittable: 'none', cite: hg(596) },
 ]
 const steps: Step[] = [
   { from: 'paint_approach', to: 'paint_emerge', label: 'Phantom Ganon bursts out of the painting', afterTimer: true, cite: hg(503) },
   { from: 'paint_emerge', to: 'paint_leap', label: 'Phantom Ganon raises his spear', afterTimer: true, cite: hg(521) },
-  { from: 'paint_leap', to: 'paint_retreat', label: 'Lightning from the spear sends shocks across the floor', afterTimer: true, attack: 'lightning', cite: hg(540) },
+  { from: 'paint_leap', to: 'paint_leap_late', label: 'Lightning from the spear sends shocks across the floor', afterTimer: true, attack: 'lightning', cite: hg(540) },
+  { from: 'paint_leap_late', to: 'paint_retreat', label: 'Phantom Ganon reaches the far painting', afterTimer: true, cite: hg(589) },
   { from: 'paint_retreat', to: 'paint_approach', label: 'Phantom Ganon picks another painting', afterTimer: true, cite: hg(681) },
   { from: 'paint_hit', to: 'paint_retreat', label: 'Phantom Ganon withdraws', cite: hg(635) },
 ]
 const add = (x: { phases: Phase[]; steps: Step[] }) => (phases.push(...x.phases), steps.push(...x.steps))
 
+/**
+ * A hover phase and its two re-entries with a fixed timer: 10 frames after Block (line 809), 30 after a stun or a
+ * charge (lines 781, 902). Each copy takes the same decisions.
+ */
+const hover = (n: string, label: string, frames: Phase['frames'], block: string, decide: (from: string) => Step[]) => {
+  const copies: [string, string, Phase['frames']][] = [
+    [n, '', frames],
+    [`${n}_t10`, ', just out of a block', { value: 10, cite: at(809) }],
+    [`${n}_t30`, ', just back up', { value: 30, cite: at(781) }],
+  ]
+  for (const [id, more, f] of copies) {
+    phases.push({ id, label: `${label}${more}`, hittable: FIRED, overrides: fired(block), frames: f, cite: at(508) })
+    steps.push(...decide(id))
+  }
+}
+
 /** The high band before the fifth throw: each decision is a throw, and each throw advances the count. */
 for (const k of PRE) {
   const n = `neutral${pre(k)}`
-  phases.push({
-    id: n, label: `Phantom Ganon hovers before Link${PRE_LABEL(k)}`, hittable: FIRED, overrides: fired(`block${pre(k)}`),
-    frames: k === 0 ? { value: 100, cite: at(485) } : { value: [30, 93], cite: at(505) }, cite: at(508),
-  })
-  steps.push({ from: n, to: `throw${pre(k + 1)}`, label: 'Phantom Ganon throws (fewer than five throws so far)', afterTimer: true, cite: at(539) })
+  hover(n, `Phantom Ganon hovers before Link${PRE_LABEL(k)}`, k === 0 ? { value: 100, cite: at(485) } : { value: [30, 93], cite: at(505) }, `block${pre(k)}`, (from) => [
+    { from, to: `throw${pre(k + 1)}`, label: 'Phantom Ganon throws (fewer than five throws so far)', afterTimer: true, cite: at(539) },
+  ])
   add(block(pre(k), PRE_LABEL(k), 'hi', n, `stun${pre(k)}`))
   if (k > 0) add(throwLoop(pre(k), PRE_LABEL(k), 'hi', n))
 }
 /** stun_p0 is where a hit in Block sends him before any throw. */
 phases.push({ id: 'stun_p0', label: 'Phantom Ganon lies stunned (0 throws so far)', frames: { value: 50, cite: at(745) }, cite: at(758) })
-steps.push({ from: 'stun_p0', to: 'neutral_p0', label: 'Phantom Ganon rises', afterTimer: true, cite: at(780) })
+steps.push({ from: 'stun_p0', to: 'neutral_p0_t30', label: 'Phantom Ganon rises', afterTimer: true, cite: at(780) })
 
 const RALLY = [0, 1, 2, 3, 4]
 for (const b of BANDS) {
@@ -134,24 +168,22 @@ for (const b of BANDS) {
   const L = BAND_LABEL[b]
   const n = `neutral${s}`
   const low = b !== 'hi'
-  phases.push({ id: n, label: `Phantom Ganon hovers before Link${L}`, hittable: FIRED, overrides: fired(`block${s}`), frames: { value: [30, 93], cite: at(505) }, cite: at(508) })
-  if (low) {
-    steps.push(
-      { from: n, to: `throw${s}`, label: 'Phantom Ganon throws', weight: 5, afterTimer: true, cite: at(526) },
-      { from: n, to: `charge_wait${s}`, label: 'Phantom Ganon backs off to charge', weight: 4, afterTimer: true, cite: at(528) },
-      { from: n, to: `volley_wait${s}`, label: 'Phantom Ganon backs off for a volley', weight: 11, afterTimer: true, cite: at(533) },
-    )
-  } else {
-    steps.push(
-      { from: n, to: `throw${s}`, label: 'Phantom Ganon throws', weight: 1, afterTimer: true, cite: at(539) },
-      { from: n, to: `volley_wait${s}`, label: 'Phantom Ganon backs off for a volley', weight: 1, afterTimer: true, cite: at(541) },
-    )
-  }
+  hover(n, `Phantom Ganon hovers before Link${L}`, { value: [30, 93], cite: at(505) }, `block${s}`, (from): Step[] =>
+    low
+      ? [
+          { from, to: `throw${s}`, label: 'Phantom Ganon throws', weight: 5, afterTimer: true, cite: at(526) },
+          { from, to: `neutral_charge${s}`, label: 'Phantom Ganon backs off to charge', weight: 4, afterTimer: true, cite: at(528) },
+          { from, to: `neutral_volley${s}`, label: 'Phantom Ganon backs off for a volley', weight: 11, afterTimer: true, cite: at(533) },
+        ]
+      : [
+          { from, to: `throw${s}`, label: 'Phantom Ganon throws', weight: 1, afterTimer: true, cite: at(539) },
+          { from, to: `neutral_volley${s}`, label: 'Phantom Ganon backs off for a volley', weight: 1, afterTimer: true, cite: at(541) },
+        ])
   add(throwLoop(s, L, b, n))
   add(block(s, L, b, n, `stun${s}`))
   phases.push(
-    { id: `volley_wait${s}`, label: `Phantom Ganon hovers at the far end, readying a volley${L}`, hittable: FIRED, overrides: fired(`block${s}`), frames: { value: 60, cite: at(542) }, cite: at(564) },
-    { id: `rally_throw${s}`, label: `Phantom Ganon winds up a volley ball${L}`, hittable: 'none', frames: { value: 25, cite: at(656) }, cite: at(668) },
+    { id: `neutral_volley${s}`, label: `Phantom Ganon hovers at the far end, readying a volley${L}`, hittable: FIRED, overrides: fired(`block${s}`), frames: { value: 60, cite: at(542) }, cite: at(564) },
+    { id: `throw_rally${s}`, label: `Phantom Ganon winds up a volley ball${L}`, hittable: 'none', frames: { value: 25, cite: at(656) }, cite: at(668) },
     ...RALLY.map((c): Phase => ({
       id: `rally_ball_${c}${s}`, label: `A volley ball flies at Link (${c === 4 ? '4 or more' : c} returns)${L}`, hittable: BALL_HITS,
       overrides: {
@@ -167,28 +199,32 @@ for (const b of BANDS) {
     { id: `stun_long${s}`, label: `Phantom Ganon lies stunned by his own volley${L}`, overrides: noFinish(b), frames: { value: 120, cite: at(1292) }, cite: at(758) },
   )
   steps.push(
-    { from: `volley_wait${s}`, to: `rally_throw${s}`, label: 'Phantom Ganon throws a volley ball', afterTimer: true, cite: at(574) },
-    { from: `rally_throw${s}`, to: `rally_ball_0${s}`, label: 'Phantom Ganon hurls the ball', afterTimer: true, cite: at(696) },
+    { from: `neutral_volley${s}`, to: `throw_rally${s}`, label: 'Phantom Ganon throws a volley ball', afterTimer: true, cite: at(574) },
+    { from: `throw_rally${s}`, to: `rally_ball_0${s}`, label: 'Phantom Ganon hurls the ball', afterTimer: true, cite: at(696) },
     ...RALLY.map((c): Step => ({ from: `rally_ball_${c}${s}`, to: n, label: 'The volley ball strikes Link', attack: 'energy_ball', cite: ff(553) })),
     ...[1, 2, 3].map((c): Step => ({ from: `rally_back_${c}${s}`, to: `rally_ball_${c}${s}`, label: 'Phantom Ganon returns the ball', cite: ff(561) })),
     { from: `rally_back_spin${s}`, to: `rally_ball_4${s}`, label: 'Phantom Ganon returns the ball', cite: ff(561) },
     { from: `rally_back_coin${s}`, to: `rally_ball_4${s}`, label: 'Phantom Ganon returns the ball', weight: 1, cite: ff(561) },
     { from: `rally_back_coin${s}`, to: `stun_long${s}`, label: 'Phantom Ganon misses the return and the ball strikes him', weight: 1, cite: ff(575) },
-    { from: `stun_long${s}`, to: n, label: 'Phantom Ganon rises', afterTimer: true, cite: at(780) },
+    { from: `stun_long${s}`, to: `${n}_t30`, label: 'Phantom Ganon rises', afterTimer: true, cite: at(780) },
   )
   if (low) {
     phases.push(
-      { id: `charge_wait${s}`, label: `Phantom Ganon hovers, readying a charge${L}`, hittable: FIRED, overrides: fired(`block${s}`), frames: { value: 60, cite: at(529) }, cite: at(595) },
+      { id: `neutral_charge${s}`, label: `Phantom Ganon hovers, readying a charge${L}`, hittable: FIRED, overrides: fired(`block${s}`), frames: { value: 60, cite: at(529) }, cite: at(595) },
       { id: `charge_windup${s}`, label: `Phantom Ganon winds up his charge${L}`, hittable: 'none', frames: { value: 20, cite: at(818) }, cite: at(832) },
       { id: `charge${s}`, label: `Phantom Ganon charges at Link${L}`, hittable: 'none', cite: at(862) },
       { id: `charge_finish${s}`, label: `Phantom Ganon pulls out of his charge${L}`, hittable: 'none', frames: { value: 20, cite: at(879) }, cite: at(882) },
     )
     steps.push(
-      { from: `charge_wait${s}`, to: `charge_windup${s}`, label: 'Phantom Ganon begins his charge', afterTimer: true, cite: at(603) },
+      { from: `neutral_charge${s}`, to: `charge_windup${s}`, label: 'Phantom Ganon begins his charge', afterTimer: true, cite: at(603) },
       { from: `charge_windup${s}`, to: `charge${s}`, label: 'Phantom Ganon lunges', afterTimer: true, cite: at(846) },
       { from: `charge${s}`, to: `charge_finish${s}`, label: 'The spear strikes Link', attack: 'spear', move: 'near', cite: at(878) },
       { from: `charge${s}`, to: `charge_finish${s}`, label: 'Phantom Ganon rams Link', attack: 'charge_body', move: 'near', cite: at(878) },
-      { from: `charge_finish${s}`, to: n, label: 'Phantom Ganon floats back up', afterTimer: true, cite: at(901) },
+      { from: `charge_finish${s}`, to: `${n}_t30`, label: 'Phantom Ganon floats back up', afterTimer: true, cite: at(901) },
+      ...[`charge_windup${s}`, `charge_finish${s}`].flatMap((p): Step[] => [
+        { from: p, to: p, label: 'The spear catches Link', attack: 'spear', range: 'near', cite: at(1366) },
+        { from: p, to: p, label: 'Phantom Ganon bumps into Link', attack: 'charge_body', range: 'near', cite: at(1365) },
+      ]),
     )
   }
 }
@@ -226,8 +262,10 @@ const STUN0_WHY = 'stun_p0 is entered only by a hit in block_p0, which no hit ca
 for (const d of ['explosive', 'arrow_normal', 'arrow_fire', 'arrow_ice', 'arrow_light', 'hammer_swing', 'slash_master', 'slash_giant', 'magic_fire', 'spin_giant', 'spin_master', 'jump_giant', 'jump_giant_self', 'jump_master', 'jump_master_self', 'hammer_jump'])
   deadVerbs[`hit_${d}__stun_p0`] = STUN0_WHY
 for (const v of ['stun_p0_timer_clears', 'stun_p0_ticks', 'stun_p0_step_1', 'stun_p0_holds', 'ganon_empty_in_stun_p0', 'ganon_falls_to_4_in_stun_p0', 'ganon_falls_to_2_in_stun_p0']) deadVerbs[v] = STUN0_WHY
+for (const v of ['neutral_p0_t30_timer_clears', 'neutral_p0_t30_ticks', 'neutral_p0_t30_step_1', 'neutral_p0_t30_holds', ...['arrow_normal', 'arrow_fire', 'arrow_ice', 'arrow_light', 'hookshot'].map((d) => `hit_${d}__neutral_p0_t30`)])
+  deadVerbs[v] = 'neutral_p0_t30 is entered only when stun_p0 ends, and stun_p0 is never entered (see stun_p0_timer_clears)'
 const UNHIT = 'no hit can land in this phase (hittable none), so it is only ever left when its timer runs out'
-for (const p of ['paint_approach', 'paint_retreat', ...[1, 2, 3, 4].map((k) => `throw_p${k}`), ...BANDS.flatMap((b) => [`throw${sfx(b)}`, `rally_throw${sfx(b)}`]), ...['low', 'crit'].flatMap((b) => [`charge_windup_${b}`, `charge_finish_${b}`])])
+for (const p of ['paint_approach', 'paint_leap_late', 'paint_retreat', ...[1, 2, 3, 4].map((k) => `throw_p${k}`), ...BANDS.flatMap((b) => [`throw${sfx(b)}`, `throw_rally${sfx(b)}`]), ...['low', 'crit'].flatMap((b) => [`charge_windup_${b}`, `charge_finish_${b}`])])
   deadVerbs[`${p}_timer_clears`] = UNHIT
 deadVerbs.stun_p1_timer_clears = 'stun_p1 can be left early only by a health threshold, and health enters it at 24, more than three beats of the hardest hits in any kit that can pass the paintings (Master Sword jump, 4) can bring to 4'
 deadVerbs.ganon_falls_to_4_in_stun_p1 = 'as stun_p1_timer_clears: three hits of at most 4 from 24 cannot reach 4'
@@ -247,7 +285,7 @@ export const bossGanondrof: ActorSpec = {
   name: 'Phantom Ganon',
   role: 'boss',
   summary:
-    'Phantom Ganon (30 health) first rides out of the paintings and casts spear lightning; only a ranged shot (arrow, hookshot) at the real rider counts, 2 each, and at 24 he leaves the paintings. Then he hovers and hurls energy balls. His body takes no hits except while stunned, and the only way to stun him is his own ball: a sword sends it back. A volley turns into a rally he returns until, past four returns, each return has an even chance of getting by him, stunning him longer. Stunned, he takes sword damage, or 2 from anything else, which cannot finish him. At 4 or less he also charges with his spear.',
+    'Phantom Ganon (30 health) first rides out of the paintings and casts spear lightning; only a ranged shot (arrow, hookshot) at the real rider counts, 2 each, and at 24 he leaves the paintings. Then he hovers and hurls energy balls. His body takes no hits except while stunned, or a melee hit while he blocks a fired item, which stuns him; otherwise the way to stun him is his own ball: a sword sends it back. A volley turns into a rally he returns until, past four returns, each return has an even chance of getting by him, stunning him longer. Stunned, he takes sword damage, or 2 from anything else, which cannot finish him. At 4 or less he also charges with his spear.',
   cite: at(310),
   pools: [{
     id: 'ganon', label: 'Phantom Ganon', hp: { value: 30, cite: at(310) }, then: 'defeated',

@@ -62,26 +62,29 @@ state phase_spin_1 "Flare Dancer spins and casts fire (round 1)" in enemy at 218
 state timer_spin_1 "Flare Dancer spins and casts fire (round 1): beats left" in enemy at 2040 220
 state phase_run_1 "Flare Dancer runs circles at Link (round 1)" in enemy at 2040 290
 state timer_run_1 "Flare Dancer runs circles at Link (round 1): beats left" in enemy at 2180 290
-state phase_core_1 "Flare Dancer's core runs loose (round 1)" in enemy at 2180 360
-state timer_core_1 "Flare Dancer's core runs loose (round 1): beats left" in enemy at 2040 430
-state phase_rise_2 "Flare Dancer rises from its home (round 2)" in enemy at 2040 500
-state phase_jump_2 "Flare Dancer leaps (round 2)" in enemy at 2180 500
-state phase_land_2 "Flare Dancer lands (round 2)" in enemy at 2040 570
-state phase_spin_2 "Flare Dancer spins and casts fire (round 2)" in enemy at 2180 570
-state timer_spin_2 "Flare Dancer spins and casts fire (round 2): beats left" in enemy at 2040 640
-state phase_run_2 "Flare Dancer runs circles at Link (round 2)" in enemy at 2040 710
-state timer_run_2 "Flare Dancer runs circles at Link (round 2): beats left" in enemy at 2180 710
-state phase_core_2 "Flare Dancer's core runs loose (round 2)" in enemy at 2180 780
-state timer_core_2 "Flare Dancer's core runs loose (round 2): beats left" in enemy at 2040 850
-state phase_rise_3 "Flare Dancer rises from its home (round 3)" in enemy at 2040 920
-state phase_jump_3 "Flare Dancer leaps (round 3)" in enemy at 2180 920
-state phase_land_3 "Flare Dancer lands (round 3)" in enemy at 2040 990
-state phase_spin_3 "Flare Dancer spins and casts fire (round 3)" in enemy at 2180 990
-state timer_spin_3 "Flare Dancer spins and casts fire (round 3): beats left" in enemy at 2040 1060
-state phase_run_3 "Flare Dancer runs circles at Link (round 3)" in enemy at 2040 1130
-state timer_run_3 "Flare Dancer runs circles at Link (round 3): beats left" in enemy at 2180 1130
-state phase_core_3 "Flare Dancer's core runs loose (round 3)" in enemy at 2180 1200
-state timer_core_3 "Flare Dancer's core runs loose (round 3): beats left" in enemy at 2040 1270
+state phase_bounce_1 "The core bounces free, its AC off (round 1)" in enemy at 2180 360
+state phase_core_1 "Flare Dancer's core runs loose (round 1)" in enemy at 2040 430
+state timer_core_1 "Flare Dancer's core runs loose (round 1): beats left" in enemy at 2180 430
+state phase_rise_2 "Flare Dancer rises from its home (round 2)" in enemy at 2180 500
+state phase_jump_2 "Flare Dancer leaps (round 2)" in enemy at 2040 570
+state phase_land_2 "Flare Dancer lands (round 2)" in enemy at 2180 570
+state phase_spin_2 "Flare Dancer spins and casts fire (round 2)" in enemy at 2040 640
+state timer_spin_2 "Flare Dancer spins and casts fire (round 2): beats left" in enemy at 2180 640
+state phase_run_2 "Flare Dancer runs circles at Link (round 2)" in enemy at 2180 710
+state timer_run_2 "Flare Dancer runs circles at Link (round 2): beats left" in enemy at 2040 780
+state phase_bounce_2 "The core bounces free, its AC off (round 2)" in enemy at 2040 850
+state phase_core_2 "Flare Dancer's core runs loose (round 2)" in enemy at 2180 850
+state timer_core_2 "Flare Dancer's core runs loose (round 2): beats left" in enemy at 2040 920
+state phase_rise_3 "Flare Dancer rises from its home (round 3)" in enemy at 2040 990
+state phase_jump_3 "Flare Dancer leaps (round 3)" in enemy at 2180 990
+state phase_land_3 "Flare Dancer lands (round 3)" in enemy at 2040 1060
+state phase_spin_3 "Flare Dancer spins and casts fire (round 3)" in enemy at 2180 1060
+state timer_spin_3 "Flare Dancer spins and casts fire (round 3): beats left" in enemy at 2040 1130
+state phase_run_3 "Flare Dancer runs circles at Link (round 3)" in enemy at 2040 1200
+state timer_run_3 "Flare Dancer runs circles at Link (round 3): beats left" in enemy at 2180 1200
+state phase_bounce_3 "The core bounces free, its AC off (round 3)" in enemy at 2180 1270
+state phase_core_3 "Flare Dancer's core runs loose (round 3)" in enemy at 2040 1340
+state timer_core_3 "Flare Dancer's core runs loose (round 3): beats left" in enemy at 2180 1340
 state hp_core1 "Core, round 1: health" marks 8 in enemy_health at 2360 80
 state alive_core1 "Core, round 1: standing" marks 1 in enemy_health at 2500 80
 state dmg_core1 "Core, round 1: damage" in enemy_health at 2360 150
@@ -96,6 +99,9 @@ state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
 state lens_on "Lens of Truth on" in link_state at 1220 360
 state link_guard "Link holds up his shield" in link_state at 1080 430
 state link_dodge "Link dodges" in link_state at 1220 430
+state restore_core1 "Core, round 1: health being reset to 8" in enemy_health at 2360 430
+state restore_core2 "Core, round 2: health being reset to 8" in enemy_health at 2360 640
+state restore_core3 "Core, round 3: health being reset to 8" in enemy_health at 2360 850
 state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
 state swing_explosive "Explosion on its way" in hits at 3000 150
 state swing_arrow_normal "Arrow on its way" in hits at 3140 500
@@ -123,39 +129,39 @@ state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state burn_count "Link: burn: beats toward the next cost" in beat at 440 430
 state lens_count "The Lens: beats toward the next cost" in beat at 580 640
 
-verb spin_1_timer_clears "Flare Dancer spins and casts fire (round 1) is over" by world priority 99 in enemy at 2180 220
+verb spin_1_timer_clears "Flare Dancer spins and casts fire (round 1) is over" by world priority 100 in enemy at 2180 220
   take timer_spin_1
   unless phase_spin_1
 
-verb run_1_timer_clears "Flare Dancer runs circles at Link (round 1) is over" by world priority 99 in enemy at 2040 360
+verb run_1_timer_clears "Flare Dancer runs circles at Link (round 1) is over" by world priority 100 in enemy at 2040 360
   take timer_run_1
   unless phase_run_1
 
-verb core_1_timer_clears "Flare Dancer's core runs loose (round 1) is over" by world priority 99 in enemy at 2180 430
+verb core_1_timer_clears "Flare Dancer's core runs loose (round 1) is over" by world priority 100 in enemy at 2040 500
   take timer_core_1
   unless phase_core_1
 
-verb spin_2_timer_clears "Flare Dancer spins and casts fire (round 2) is over" by world priority 99 in enemy at 2180 640
+verb spin_2_timer_clears "Flare Dancer spins and casts fire (round 2) is over" by world priority 100 in enemy at 2040 710
   take timer_spin_2
   unless phase_spin_2
 
-verb run_2_timer_clears "Flare Dancer runs circles at Link (round 2) is over" by world priority 99 in enemy at 2040 780
+verb run_2_timer_clears "Flare Dancer runs circles at Link (round 2) is over" by world priority 100 in enemy at 2180 780
   take timer_run_2
   unless phase_run_2
 
-verb core_2_timer_clears "Flare Dancer's core runs loose (round 2) is over" by world priority 99 in enemy at 2180 850
+verb core_2_timer_clears "Flare Dancer's core runs loose (round 2) is over" by world priority 100 in enemy at 2180 920
   take timer_core_2
   unless phase_core_2
 
-verb spin_3_timer_clears "Flare Dancer spins and casts fire (round 3) is over" by world priority 99 in enemy at 2180 1060
+verb spin_3_timer_clears "Flare Dancer spins and casts fire (round 3) is over" by world priority 100 in enemy at 2180 1130
   take timer_spin_3
   unless phase_spin_3
 
-verb run_3_timer_clears "Flare Dancer runs circles at Link (round 3) is over" by world priority 99 in enemy at 2040 1200
+verb run_3_timer_clears "Flare Dancer runs circles at Link (round 3) is over" by world priority 100 in enemy at 2040 1270
   take timer_run_3
   unless phase_run_3
 
-verb core_3_timer_clears "Flare Dancer's core runs loose (round 3) is over" by world priority 99 in enemy at 2180 1270
+verb core_3_timer_clears "Flare Dancer's core runs loose (round 3) is over" by world priority 100 in enemy at 2040 1410
   take timer_core_3
   unless phase_core_3
 
@@ -290,66 +296,108 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb core1_hurt "Core, round 1 loses health" by world priority 96 in enemy_health at 2500 360
+verb core1_hurt "Core, round 1 loses health" by world priority 97 in enemy_health at 2500 360
   take dmg_core1
   take hp_core1
 
-verb core1_overkill "Core, round 1 has no health left to lose" by world priority 95 in enemy_health at 2360 430
+verb core1_resets_hp_core1 "Core, round 1: old health cleared" by world priority 99 in enemy_health at 2500 430
+  need restore_core1
+  take hp_core1
+
+verb core1_stands_again "Core, round 1 stands again" by world priority 99 in enemy_health at 2360 500
+  need restore_core1
+  unless alive_core1
+  give alive_core1
+
+verb core1_reset_to_8 "Core, round 1 has 8 health" by world priority 98 in enemy_health at 2500 500
+  take restore_core1
+  unless hp_core1
+  give 8 hp_core1
+
+verb core1_overkill "Core, round 1 has no health left to lose" by world priority 96 in enemy_health at 2360 570
   take dmg_core1
   unless hp_core1
 
-verb core2_hurt "Core, round 2 loses health" by world priority 96 in enemy_health at 2500 430
+verb core2_hurt "Core, round 2 loses health" by world priority 97 in enemy_health at 2500 570
   take dmg_core2
   take hp_core2
 
-verb core2_overkill "Core, round 2 has no health left to lose" by world priority 95 in enemy_health at 2360 500
+verb core2_resets_hp_core2 "Core, round 2: old health cleared" by world priority 99 in enemy_health at 2500 640
+  need restore_core2
+  take hp_core2
+
+verb core2_stands_again "Core, round 2 stands again" by world priority 99 in enemy_health at 2360 710
+  need restore_core2
+  unless alive_core2
+  give alive_core2
+
+verb core2_reset_to_8 "Core, round 2 has 8 health" by world priority 98 in enemy_health at 2500 710
+  take restore_core2
+  unless hp_core2
+  give 8 hp_core2
+
+verb core2_overkill "Core, round 2 has no health left to lose" by world priority 96 in enemy_health at 2360 780
   take dmg_core2
   unless hp_core2
 
-verb core3_hurt "Core, round 3 loses health" by world priority 96 in enemy_health at 2500 500
+verb core3_hurt "Core, round 3 loses health" by world priority 97 in enemy_health at 2500 780
   take dmg_core3
   take hp_core3
 
-verb core3_overkill "Core, round 3 has no health left to lose" by world priority 95 in enemy_health at 2360 570
+verb core3_resets_hp_core3 "Core, round 3: old health cleared" by world priority 99 in enemy_health at 2500 850
+  need restore_core3
+  take hp_core3
+
+verb core3_stands_again "Core, round 3 stands again" by world priority 99 in enemy_health at 2360 920
+  need restore_core3
+  unless alive_core3
+  give alive_core3
+
+verb core3_reset_to_8 "Core, round 3 has 8 health" by world priority 98 in enemy_health at 2500 920
+  take restore_core3
+  unless hp_core3
+  give 8 hp_core3
+
+verb core3_overkill "Core, round 3 has no health left to lose" by world priority 96 in enemy_health at 2360 990
   take dmg_core3
   unless hp_core3
 
@@ -604,14 +652,12 @@ verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 31
 verb hit_explosive__spin_1 "Explosion hits (Flare Dancer spins and casts fire (round 1))" by world priority 80 in hits at 3000 220
   take swing_explosive
   take phase_spin_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_explosive__run_1 "Explosion hits (Flare Dancer runs circles at Link (round 1))" by world priority 80 in hits at 3140 220
   take swing_explosive
   take phase_run_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_explosive__core_1 "Explosion hits (Flare Dancer's core runs loose (round 1))" by world priority 80 in hits at 3000 290
   take swing_explosive
@@ -621,14 +667,12 @@ verb hit_explosive__core_1 "Explosion hits (Flare Dancer's core runs loose (roun
 verb hit_explosive__spin_2 "Explosion hits (Flare Dancer spins and casts fire (round 2))" by world priority 80 in hits at 3140 290
   take swing_explosive
   take phase_spin_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_explosive__run_2 "Explosion hits (Flare Dancer runs circles at Link (round 2))" by world priority 80 in hits at 3000 360
   take swing_explosive
   take phase_run_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_explosive__core_2 "Explosion hits (Flare Dancer's core runs loose (round 2))" by world priority 80 in hits at 3140 360
   take swing_explosive
@@ -638,14 +682,12 @@ verb hit_explosive__core_2 "Explosion hits (Flare Dancer's core runs loose (roun
 verb hit_explosive__spin_3 "Explosion hits (Flare Dancer spins and casts fire (round 3))" by world priority 80 in hits at 3000 430
   take swing_explosive
   take phase_spin_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_explosive__run_3 "Explosion hits (Flare Dancer runs circles at Link (round 3))" by world priority 80 in hits at 3140 430
   take swing_explosive
   take phase_run_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_explosive__core_3 "Explosion hits (Flare Dancer's core runs loose (round 3))" by world priority 80 in hits at 3000 500
   take swing_explosive
@@ -676,20 +718,17 @@ verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits
 verb hit_hammer_swing__land_1 "Hammer swing hits (Flare Dancer lands (round 1))" by world priority 80 in hits at 3000 780
   take swing_hammer_swing
   take phase_land_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_hammer_swing__spin_1 "Hammer swing hits (Flare Dancer spins and casts fire (round 1))" by world priority 80 in hits at 3140 780
   take swing_hammer_swing
   take phase_spin_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_hammer_swing__run_1 "Hammer swing hits (Flare Dancer runs circles at Link (round 1))" by world priority 80 in hits at 3000 850
   take swing_hammer_swing
   take phase_run_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_hammer_swing__core_1 "Hammer swing hits (Flare Dancer's core runs loose (round 1))" by world priority 80 in hits at 3140 850
   take swing_hammer_swing
@@ -699,20 +738,17 @@ verb hit_hammer_swing__core_1 "Hammer swing hits (Flare Dancer's core runs loose
 verb hit_hammer_swing__land_2 "Hammer swing hits (Flare Dancer lands (round 2))" by world priority 80 in hits at 3000 920
   take swing_hammer_swing
   take phase_land_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_hammer_swing__spin_2 "Hammer swing hits (Flare Dancer spins and casts fire (round 2))" by world priority 80 in hits at 3140 920
   take swing_hammer_swing
   take phase_spin_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_hammer_swing__run_2 "Hammer swing hits (Flare Dancer runs circles at Link (round 2))" by world priority 80 in hits at 3000 990
   take swing_hammer_swing
   take phase_run_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_hammer_swing__core_2 "Hammer swing hits (Flare Dancer's core runs loose (round 2))" by world priority 80 in hits at 3140 990
   take swing_hammer_swing
@@ -722,20 +758,17 @@ verb hit_hammer_swing__core_2 "Hammer swing hits (Flare Dancer's core runs loose
 verb hit_hammer_swing__land_3 "Hammer swing hits (Flare Dancer lands (round 3))" by world priority 80 in hits at 3000 1060
   take swing_hammer_swing
   take phase_land_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_hammer_swing__spin_3 "Hammer swing hits (Flare Dancer spins and casts fire (round 3))" by world priority 80 in hits at 3140 1060
   take swing_hammer_swing
   take phase_spin_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_hammer_swing__run_3 "Hammer swing hits (Flare Dancer runs circles at Link (round 3))" by world priority 80 in hits at 3000 1130
   take swing_hammer_swing
   take phase_run_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_hammer_swing__core_3 "Hammer swing hits (Flare Dancer's core runs loose (round 3))" by world priority 80 in hits at 3140 1130
   take swing_hammer_swing
@@ -748,14 +781,12 @@ verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140
 verb hit_hookshot__spin_1 "Hookshot hits (Flare Dancer spins and casts fire (round 1))" by world priority 80 in hits at 3000 1270
   take swing_hookshot
   take phase_spin_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_hookshot__run_1 "Hookshot hits (Flare Dancer runs circles at Link (round 1))" by world priority 80 in hits at 3140 1270
   take swing_hookshot
   take phase_run_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_hookshot__core_1 "Hookshot hits (Flare Dancer's core runs loose (round 1))" by world priority 80 in hits at 3000 1340
   take swing_hookshot
@@ -765,14 +796,12 @@ verb hit_hookshot__core_1 "Hookshot hits (Flare Dancer's core runs loose (round 
 verb hit_hookshot__spin_2 "Hookshot hits (Flare Dancer spins and casts fire (round 2))" by world priority 80 in hits at 3140 1340
   take swing_hookshot
   take phase_spin_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_hookshot__run_2 "Hookshot hits (Flare Dancer runs circles at Link (round 2))" by world priority 80 in hits at 3000 1410
   take swing_hookshot
   take phase_run_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_hookshot__core_2 "Hookshot hits (Flare Dancer's core runs loose (round 2))" by world priority 80 in hits at 3140 1410
   take swing_hookshot
@@ -782,14 +811,12 @@ verb hit_hookshot__core_2 "Hookshot hits (Flare Dancer's core runs loose (round 
 verb hit_hookshot__spin_3 "Hookshot hits (Flare Dancer spins and casts fire (round 3))" by world priority 80 in hits at 3000 1480
   take swing_hookshot
   take phase_spin_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_hookshot__run_3 "Hookshot hits (Flare Dancer runs circles at Link (round 3))" by world priority 80 in hits at 3140 1480
   take swing_hookshot
   take phase_run_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_hookshot__core_3 "Hookshot hits (Flare Dancer's core runs loose (round 3))" by world priority 80 in hits at 3000 1550
   take swing_hookshot
@@ -1041,70 +1068,61 @@ verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in
 verb hit_hammer_jump__land_1 "Hammer jump attack hits (Flare Dancer lands (round 1))" by world priority 80 in hits at 3000 4000
   take swing_hammer_jump
   take phase_land_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_hammer_jump__spin_1 "Hammer jump attack hits (Flare Dancer spins and casts fire (round 1))" by world priority 80 in hits at 3140 4000
   take swing_hammer_jump
   take phase_spin_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_hammer_jump__run_1 "Hammer jump attack hits (Flare Dancer runs circles at Link (round 1))" by world priority 80 in hits at 3000 4070
   take swing_hammer_jump
   take phase_run_1
-  give phase_core_1
-  give 19 timer_core_1
+  give phase_bounce_1
 
 verb hit_hammer_jump__land_2 "Hammer jump attack hits (Flare Dancer lands (round 2))" by world priority 80 in hits at 3140 4070
   take swing_hammer_jump
   take phase_land_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_hammer_jump__spin_2 "Hammer jump attack hits (Flare Dancer spins and casts fire (round 2))" by world priority 80 in hits at 3000 4140
   take swing_hammer_jump
   take phase_spin_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_hammer_jump__run_2 "Hammer jump attack hits (Flare Dancer runs circles at Link (round 2))" by world priority 80 in hits at 3140 4140
   take swing_hammer_jump
   take phase_run_2
-  give phase_core_2
-  give 19 timer_core_2
+  give phase_bounce_2
 
 verb hit_hammer_jump__land_3 "Hammer jump attack hits (Flare Dancer lands (round 3))" by world priority 80 in hits at 3000 4210
   take swing_hammer_jump
   take phase_land_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_hammer_jump__spin_3 "Hammer jump attack hits (Flare Dancer spins and casts fire (round 3))" by world priority 80 in hits at 3140 4210
   take swing_hammer_jump
   take phase_spin_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
 verb hit_hammer_jump__run_3 "Hammer jump attack hits (Flare Dancer runs circles at Link (round 3))" by world priority 80 in hits at 3000 4280
   take swing_hammer_jump
   take phase_run_3
-  give phase_core_3
-  give 19 timer_core_3
+  give phase_bounce_3
 
-verb core1_empty_in_core_1 "Core, round 1 runs out (Flare Dancer's core runs loose (round 1))" by world priority 92 in enemy_health at 2500 570
+verb core1_empty_in_core_1 "Core, round 1 runs out (Flare Dancer's core runs loose (round 1))" by world priority 90 in enemy_health at 2500 990
   unless hp_core1
   take alive_core1
   take phase_core_1
   give phase_rise_2
 
-verb core2_empty_in_core_2 "Core, round 2 runs out (Flare Dancer's core runs loose (round 2))" by world priority 92 in enemy_health at 2360 640
+verb core2_empty_in_core_2 "Core, round 2 runs out (Flare Dancer's core runs loose (round 2))" by world priority 90 in enemy_health at 2360 1060
   unless hp_core2
   take alive_core2
   take phase_core_2
   give phase_rise_3
 
-verb core3_empty_in_core_3 "Core, round 3 runs out (Flare Dancer's core runs loose (round 3))" by world priority 92 in enemy_health at 2500 640
+verb core3_empty_in_core_3 "Core, round 3 runs out (Flare Dancer's core runs loose (round 3))" by world priority 90 in enemy_health at 2500 1060
   unless hp_core3
   take alive_core3
   take phase_core_3
@@ -1183,43 +1201,62 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 1410
   take lens_on
   give link_turn
 
-verb enemy_ready "Flare Dancer gets ready" by world priority 70 in enemy at 2040 1340
+verb enemy_ready "Flare Dancer gets ready" by world priority 70 in enemy at 2180 1410
   take enemy_turn
   give enemy_act
 
-verb rise_1_step_1 "Flare Dancer finishes growing and leaps" by world priority 69 in enemy at 2180 1340
+verb rise_1_step_1 "Flare Dancer finishes growing and leaps" by world priority 69 in enemy at 2040 1480
   take enemy_act
   take phase_rise_1
   give phase_jump_1
   give beat_end
 
-verb jump_1_step_1 "Flare Dancer touches down" by world priority 69 in enemy at 2040 1410
+verb jump_1_step_1 "Flare Dancer touches down" by world priority 69 in enemy at 2180 1480
   take enemy_act
   take phase_jump_1
   give phase_land_1
   give beat_end
+  need range_far
 
-verb land_1_step_1 "Flare Dancer gets up and spins" by world priority 69 in enemy at 2180 1410
+verb jump_1_step_2 "Flare Dancer leaps into Link and touches down" by world priority 69 in enemy at 2040 1550
+  take enemy_act
+  take phase_jump_1
+  give phase_land_1
+  give incoming_flame_body
+  give beat_end
+  need range_near
+
+verb land_1_step_1 "Flare Dancer gets up and spins" by world priority 69 in enemy at 2180 1550
   take enemy_act
   take phase_land_1
   give phase_spin_1
   give 5 timer_spin_1
   give beat_end
+  need range_far
 
-verb spin_1_ticks "Flare Dancer spins and casts fire (round 1): a beat passes" by world priority 71 in enemy at 2040 1480
+verb land_1_step_2 "Flare Dancer burns Link as it gets up and spins" by world priority 69 in enemy at 2040 1620
+  take enemy_act
+  take phase_land_1
+  give phase_spin_1
+  give 5 timer_spin_1
+  give incoming_flame_body
+  give beat_end
+  need range_near
+
+verb spin_1_ticks "Flare Dancer spins and casts fire (round 1): a beat passes" by world priority 71 in enemy at 2180 1620
   take enemy_turn
   need phase_spin_1
   take timer_spin_1
   give enemy_act
 
-verb spin_1_step_1 "Flare Dancer spins into Link" by world priority 69 in enemy at 2180 1480
+verb spin_1_step_1 "Flare Dancer spins into Link" by world priority 69 in enemy at 2040 1690
   take enemy_act
   need phase_spin_1
   give incoming_flame_body
   give beat_end
   need range_near
 
-verb spin_1_step_2 "Flare Dancer stops spinning and runs" by world priority 69 in enemy at 2040 1550
+verb spin_1_step_2 "Flare Dancer stops spinning and runs" by world priority 69 in enemy at 2180 1690
   take enemy_act
   take phase_spin_1
   give phase_run_1
@@ -1227,25 +1264,25 @@ verb spin_1_step_2 "Flare Dancer stops spinning and runs" by world priority 69 i
   unless timer_spin_1
   give beat_end
 
-verb spin_1_holds "Flare Dancer spins and casts fire (round 1): nothing changes" by world priority 68 in enemy at 2180 1550
+verb spin_1_holds "Flare Dancer spins and casts fire (round 1): nothing changes" by world priority 68 in enemy at 2040 1760
   take enemy_act
   need phase_spin_1
   give beat_end
 
-verb run_1_ticks "Flare Dancer runs circles at Link (round 1): a beat passes" by world priority 71 in enemy at 2040 1620
+verb run_1_ticks "Flare Dancer runs circles at Link (round 1): a beat passes" by world priority 71 in enemy at 2180 1760
   take enemy_turn
   need phase_run_1
   take timer_run_1
   give enemy_act
 
-verb run_1_step_1_near "Flare Dancer runs into Link" by world priority 69 in enemy at 2180 1620
+verb run_1_step_1_near "Flare Dancer runs into Link" by world priority 69 in enemy at 2040 1830
   take enemy_act
   need phase_run_1
   give incoming_flame_body
   give beat_end
   need range_near
 
-verb run_1_step_1_far "Flare Dancer runs into Link" by world priority 69 in enemy at 2040 1690
+verb run_1_step_1_far "Flare Dancer runs into Link" by world priority 69 in enemy at 2180 1830
   take enemy_act
   need phase_run_1
   give incoming_flame_body
@@ -1253,64 +1290,91 @@ verb run_1_step_1_far "Flare Dancer runs into Link" by world priority 69 in enem
   take range_far
   give range_near
 
-verb run_1_step_2 "Flare Dancer stops running and leaps" by world priority 69 in enemy at 2180 1690
+verb run_1_step_2 "Flare Dancer stops running and leaps" by world priority 69 in enemy at 2040 1900
   take enemy_act
   take phase_run_1
   give phase_jump_1
   unless timer_run_1
   give beat_end
 
-verb core_1_ticks "Flare Dancer's core runs loose (round 1): a beat passes" by world priority 71 in enemy at 2040 1760
+verb bounce_1_step_1 "The core lands and starts to run" by world priority 69 in enemy at 2180 1900
+  take enemy_act
+  take phase_bounce_1
+  give phase_core_1
+  give 19 timer_core_1
+  give beat_end
+
+verb core_1_ticks "Flare Dancer's core runs loose (round 1): a beat passes" by world priority 71 in enemy at 2040 1970
   take enemy_turn
   need phase_core_1
   take timer_core_1
   give enemy_act
 
-verb core_1_step_1 "The core gets home and the flame reappears" by world priority 69 in enemy at 2180 1760
+verb core_1_step_1 "The core gets home and the flame reappears; the next core spawns with 8 health" by world priority 69 in enemy at 2180 1970
   take enemy_act
   take phase_core_1
   give phase_rise_1
   unless timer_core_1
+  give restore_core1
   give beat_end
 
-verb core_1_holds "Flare Dancer's core runs loose (round 1): nothing changes" by world priority 68 in enemy at 2040 1830
+verb core_1_holds "Flare Dancer's core runs loose (round 1): nothing changes" by world priority 68 in enemy at 2040 2040
   take enemy_act
   need phase_core_1
   give beat_end
 
-verb rise_2_step_1 "Flare Dancer finishes growing and leaps" by world priority 69 in enemy at 2180 1830
+verb rise_2_step_1 "Flare Dancer finishes growing and leaps" by world priority 69 in enemy at 2180 2040
   take enemy_act
   take phase_rise_2
   give phase_jump_2
   give beat_end
 
-verb jump_2_step_1 "Flare Dancer touches down" by world priority 69 in enemy at 2040 1900
+verb jump_2_step_1 "Flare Dancer touches down" by world priority 69 in enemy at 2040 2110
   take enemy_act
   take phase_jump_2
   give phase_land_2
   give beat_end
+  need range_far
 
-verb land_2_step_1 "Flare Dancer gets up and spins" by world priority 69 in enemy at 2180 1900
+verb jump_2_step_2 "Flare Dancer leaps into Link and touches down" by world priority 69 in enemy at 2180 2110
+  take enemy_act
+  take phase_jump_2
+  give phase_land_2
+  give incoming_flame_body
+  give beat_end
+  need range_near
+
+verb land_2_step_1 "Flare Dancer gets up and spins" by world priority 69 in enemy at 2040 2180
   take enemy_act
   take phase_land_2
   give phase_spin_2
   give 5 timer_spin_2
   give beat_end
+  need range_far
 
-verb spin_2_ticks "Flare Dancer spins and casts fire (round 2): a beat passes" by world priority 71 in enemy at 2040 1970
+verb land_2_step_2 "Flare Dancer burns Link as it gets up and spins" by world priority 69 in enemy at 2180 2180
+  take enemy_act
+  take phase_land_2
+  give phase_spin_2
+  give 5 timer_spin_2
+  give incoming_flame_body
+  give beat_end
+  need range_near
+
+verb spin_2_ticks "Flare Dancer spins and casts fire (round 2): a beat passes" by world priority 71 in enemy at 2040 2250
   take enemy_turn
   need phase_spin_2
   take timer_spin_2
   give enemy_act
 
-verb spin_2_step_1 "Flare Dancer spins into Link" by world priority 69 in enemy at 2180 1970
+verb spin_2_step_1 "Flare Dancer spins into Link" by world priority 69 in enemy at 2180 2250
   take enemy_act
   need phase_spin_2
   give incoming_flame_body
   give beat_end
   need range_near
 
-verb spin_2_step_2 "Flare Dancer stops spinning and runs" by world priority 69 in enemy at 2040 2040
+verb spin_2_step_2 "Flare Dancer stops spinning and runs" by world priority 69 in enemy at 2040 2320
   take enemy_act
   take phase_spin_2
   give phase_run_2
@@ -1318,25 +1382,25 @@ verb spin_2_step_2 "Flare Dancer stops spinning and runs" by world priority 69 i
   unless timer_spin_2
   give beat_end
 
-verb spin_2_holds "Flare Dancer spins and casts fire (round 2): nothing changes" by world priority 68 in enemy at 2180 2040
+verb spin_2_holds "Flare Dancer spins and casts fire (round 2): nothing changes" by world priority 68 in enemy at 2180 2320
   take enemy_act
   need phase_spin_2
   give beat_end
 
-verb run_2_ticks "Flare Dancer runs circles at Link (round 2): a beat passes" by world priority 71 in enemy at 2040 2110
+verb run_2_ticks "Flare Dancer runs circles at Link (round 2): a beat passes" by world priority 71 in enemy at 2040 2390
   take enemy_turn
   need phase_run_2
   take timer_run_2
   give enemy_act
 
-verb run_2_step_1_near "Flare Dancer runs into Link" by world priority 69 in enemy at 2180 2110
+verb run_2_step_1_near "Flare Dancer runs into Link" by world priority 69 in enemy at 2180 2390
   take enemy_act
   need phase_run_2
   give incoming_flame_body
   give beat_end
   need range_near
 
-verb run_2_step_1_far "Flare Dancer runs into Link" by world priority 69 in enemy at 2040 2180
+verb run_2_step_1_far "Flare Dancer runs into Link" by world priority 69 in enemy at 2040 2460
   take enemy_act
   need phase_run_2
   give incoming_flame_body
@@ -1344,64 +1408,91 @@ verb run_2_step_1_far "Flare Dancer runs into Link" by world priority 69 in enem
   take range_far
   give range_near
 
-verb run_2_step_2 "Flare Dancer stops running and leaps" by world priority 69 in enemy at 2180 2180
+verb run_2_step_2 "Flare Dancer stops running and leaps" by world priority 69 in enemy at 2180 2460
   take enemy_act
   take phase_run_2
   give phase_jump_2
   unless timer_run_2
   give beat_end
 
-verb core_2_ticks "Flare Dancer's core runs loose (round 2): a beat passes" by world priority 71 in enemy at 2040 2250
+verb bounce_2_step_1 "The core lands and starts to run" by world priority 69 in enemy at 2040 2530
+  take enemy_act
+  take phase_bounce_2
+  give phase_core_2
+  give 19 timer_core_2
+  give beat_end
+
+verb core_2_ticks "Flare Dancer's core runs loose (round 2): a beat passes" by world priority 71 in enemy at 2180 2530
   take enemy_turn
   need phase_core_2
   take timer_core_2
   give enemy_act
 
-verb core_2_step_1 "The core gets home and the flame reappears" by world priority 69 in enemy at 2180 2250
+verb core_2_step_1 "The core gets home and the flame reappears; the next core spawns with 8 health" by world priority 69 in enemy at 2040 2600
   take enemy_act
   take phase_core_2
   give phase_rise_2
   unless timer_core_2
+  give restore_core2
   give beat_end
 
-verb core_2_holds "Flare Dancer's core runs loose (round 2): nothing changes" by world priority 68 in enemy at 2040 2320
+verb core_2_holds "Flare Dancer's core runs loose (round 2): nothing changes" by world priority 68 in enemy at 2180 2600
   take enemy_act
   need phase_core_2
   give beat_end
 
-verb rise_3_step_1 "Flare Dancer finishes growing and leaps" by world priority 69 in enemy at 2180 2320
+verb rise_3_step_1 "Flare Dancer finishes growing and leaps" by world priority 69 in enemy at 2040 2670
   take enemy_act
   take phase_rise_3
   give phase_jump_3
   give beat_end
 
-verb jump_3_step_1 "Flare Dancer touches down" by world priority 69 in enemy at 2040 2390
+verb jump_3_step_1 "Flare Dancer touches down" by world priority 69 in enemy at 2180 2670
   take enemy_act
   take phase_jump_3
   give phase_land_3
   give beat_end
+  need range_far
 
-verb land_3_step_1 "Flare Dancer gets up and spins" by world priority 69 in enemy at 2180 2390
+verb jump_3_step_2 "Flare Dancer leaps into Link and touches down" by world priority 69 in enemy at 2040 2740
+  take enemy_act
+  take phase_jump_3
+  give phase_land_3
+  give incoming_flame_body
+  give beat_end
+  need range_near
+
+verb land_3_step_1 "Flare Dancer gets up and spins" by world priority 69 in enemy at 2180 2740
   take enemy_act
   take phase_land_3
   give phase_spin_3
   give 5 timer_spin_3
   give beat_end
+  need range_far
 
-verb spin_3_ticks "Flare Dancer spins and casts fire (round 3): a beat passes" by world priority 71 in enemy at 2040 2460
+verb land_3_step_2 "Flare Dancer burns Link as it gets up and spins" by world priority 69 in enemy at 2040 2810
+  take enemy_act
+  take phase_land_3
+  give phase_spin_3
+  give 5 timer_spin_3
+  give incoming_flame_body
+  give beat_end
+  need range_near
+
+verb spin_3_ticks "Flare Dancer spins and casts fire (round 3): a beat passes" by world priority 71 in enemy at 2180 2810
   take enemy_turn
   need phase_spin_3
   take timer_spin_3
   give enemy_act
 
-verb spin_3_step_1 "Flare Dancer spins into Link" by world priority 69 in enemy at 2180 2460
+verb spin_3_step_1 "Flare Dancer spins into Link" by world priority 69 in enemy at 2040 2880
   take enemy_act
   need phase_spin_3
   give incoming_flame_body
   give beat_end
   need range_near
 
-verb spin_3_step_2 "Flare Dancer stops spinning and runs" by world priority 69 in enemy at 2040 2530
+verb spin_3_step_2 "Flare Dancer stops spinning and runs" by world priority 69 in enemy at 2180 2880
   take enemy_act
   take phase_spin_3
   give phase_run_3
@@ -1409,25 +1500,25 @@ verb spin_3_step_2 "Flare Dancer stops spinning and runs" by world priority 69 i
   unless timer_spin_3
   give beat_end
 
-verb spin_3_holds "Flare Dancer spins and casts fire (round 3): nothing changes" by world priority 68 in enemy at 2180 2530
+verb spin_3_holds "Flare Dancer spins and casts fire (round 3): nothing changes" by world priority 68 in enemy at 2040 2950
   take enemy_act
   need phase_spin_3
   give beat_end
 
-verb run_3_ticks "Flare Dancer runs circles at Link (round 3): a beat passes" by world priority 71 in enemy at 2040 2600
+verb run_3_ticks "Flare Dancer runs circles at Link (round 3): a beat passes" by world priority 71 in enemy at 2180 2950
   take enemy_turn
   need phase_run_3
   take timer_run_3
   give enemy_act
 
-verb run_3_step_1_near "Flare Dancer runs into Link" by world priority 69 in enemy at 2180 2600
+verb run_3_step_1_near "Flare Dancer runs into Link" by world priority 69 in enemy at 2040 3020
   take enemy_act
   need phase_run_3
   give incoming_flame_body
   give beat_end
   need range_near
 
-verb run_3_step_1_far "Flare Dancer runs into Link" by world priority 69 in enemy at 2040 2670
+verb run_3_step_1_far "Flare Dancer runs into Link" by world priority 69 in enemy at 2180 3020
   take enemy_act
   need phase_run_3
   give incoming_flame_body
@@ -1435,27 +1526,35 @@ verb run_3_step_1_far "Flare Dancer runs into Link" by world priority 69 in enem
   take range_far
   give range_near
 
-verb run_3_step_2 "Flare Dancer stops running and leaps" by world priority 69 in enemy at 2180 2670
+verb run_3_step_2 "Flare Dancer stops running and leaps" by world priority 69 in enemy at 2040 3090
   take enemy_act
   take phase_run_3
   give phase_jump_3
   unless timer_run_3
   give beat_end
 
-verb core_3_ticks "Flare Dancer's core runs loose (round 3): a beat passes" by world priority 71 in enemy at 2040 2740
+verb bounce_3_step_1 "The core lands and starts to run" by world priority 69 in enemy at 2180 3090
+  take enemy_act
+  take phase_bounce_3
+  give phase_core_3
+  give 19 timer_core_3
+  give beat_end
+
+verb core_3_ticks "Flare Dancer's core runs loose (round 3): a beat passes" by world priority 71 in enemy at 2040 3160
   take enemy_turn
   need phase_core_3
   take timer_core_3
   give enemy_act
 
-verb core_3_step_1 "The core gets home and the flame reappears" by world priority 69 in enemy at 2180 2740
+verb core_3_step_1 "The core gets home and the flame reappears; the next core spawns with 8 health" by world priority 69 in enemy at 2180 3160
   take enemy_act
   take phase_core_3
   give phase_rise_3
   unless timer_core_3
+  give restore_core3
   give beat_end
 
-verb core_3_holds "Flare Dancer's core runs loose (round 3): nothing changes" by world priority 68 in enemy at 2040 2810
+verb core_3_holds "Flare Dancer's core runs loose (round 3): nothing changes" by world priority 68 in enemy at 2040 3230
   take enemy_act
   need phase_core_3
   give beat_end
@@ -1547,7 +1646,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 440 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 580 500
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 580 500
   take burn_count
   unless status_burn
 
@@ -1594,6 +1693,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 580 780
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 850
   take lens_count
   unless lens_on
