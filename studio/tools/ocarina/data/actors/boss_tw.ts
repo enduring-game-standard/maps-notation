@@ -60,7 +60,8 @@ const phaseOneSteps: Step[] = [
 ]
 
 /**
- * Phase two. A sequence state says which element Twinrova fires next: r, a coin flip each blast (line 5141), and l, the
+ * Phase two. From 10 health up the code fires runs of three of one element (lines 5143-5148). That sequence is not
+ * carried: with it the adult_spin slice ran out of memory. A sequence state says which element Twinrova fires next: r, a coin flip each blast (line 5141), and l, the
  * same once health is below 3, where hits other than the sword stop counting (line 3139). A done state also remembers
  * the element just fired, which is the one the Mirror Shield can soak up.
  */
@@ -219,4 +220,46 @@ export const bossTw: ActorSpec = {
     [at(4821)]: 'beam_ice',
   },
   loadouts: standardLoadouts(['adult'], 4),
+  expected: {
+    deadVerbs: {
+      spin_0_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      shoot_charge_fire_0_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      shoot_charge_ice_0_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      spin_1_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      shoot_charge_fire_1_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      shoot_charge_ice_1_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      spin_2_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      shoot_charge_fire_2_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      shoot_charge_ice_2_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      spin_3_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      shoot_charge_fire_3_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      shoot_charge_ice_3_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      hit_1_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      hit_2_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      hit_3_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      hit_4_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      tw_getup_r_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      tw_stun_l_timer_clears: 'the last stun is left only by its timer or by the finishing blow, which ends the encounter',
+      tw_getup_l_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      miss_reflect_beam_fire: 'a sent-back beam or soaked-up blast resolves on the beat it is fired, in the phase that fired it, where it always has an effect',
+      hit_reflect_beam_fire__shoot_beam_ice_0: "Koume's beam is out only in shoot_beam_fire phases, so it is never sent back from shoot_beam_ice",
+      hit_reflect_beam_fire__shoot_beam_ice_1: "Koume's beam is out only in shoot_beam_fire phases, so it is never sent back from shoot_beam_ice",
+      hit_reflect_beam_fire__shoot_beam_ice_2: "Koume's beam is out only in shoot_beam_fire phases, so it is never sent back from shoot_beam_ice",
+      hit_reflect_beam_fire__shoot_beam_ice_3: "Koume's beam is out only in shoot_beam_fire phases, so it is never sent back from shoot_beam_ice",
+      miss_reflect_beam_ice: 'a sent-back beam or soaked-up blast resolves on the beat it is fired, in the phase that fired it, where it always has an effect',
+      hit_reflect_beam_ice__shoot_beam_fire_0: "Kotake's beam is out only in shoot_beam_ice phases, so it is never sent back from shoot_beam_fire",
+      hit_reflect_beam_ice__shoot_beam_fire_1: "Kotake's beam is out only in shoot_beam_ice phases, so it is never sent back from shoot_beam_fire",
+      hit_reflect_beam_ice__shoot_beam_fire_2: "Kotake's beam is out only in shoot_beam_ice phases, so it is never sent back from shoot_beam_fire",
+      hit_reflect_beam_ice__shoot_beam_fire_3: "Kotake's beam is out only in shoot_beam_ice phases, so it is never sent back from shoot_beam_fire",
+      miss_reflect_blast_fire: 'a sent-back beam or soaked-up blast resolves on the beat it is fired, in the phase that fired it, where it always has an effect',
+      miss_reflect_blast_ice: 'a sent-back beam or soaked-up blast resolves on the beat it is fired, in the phase that fired it, where it always has an effect',
+      beam_fire_lands_again: 'between two beams the sisters fly (3 beats) and charge (4 beats), longer than the burn (5) or freeze (3) a beam leaves',
+      beam_fire_lands_dd_again: 'between two beams the sisters fly (3 beats) and charge (4 beats), longer than the burn (5) or freeze (3) a beam leaves',
+      beam_ice_lands_again: 'between two beams the sisters fly (3 beats) and charge (4 beats), longer than the burn (5) or freeze (3) a beam leaves',
+      beam_ice_lands_dd_again: 'between two beams the sisters fly (3 beats) and charge (4 beats), longer than the burn (5) or freeze (3) a beam leaves',
+      blast_fire_blocked_mirror_shield: 'a raised Mirror Shield always soaks the blast up first (the absorb verb outranks the block)',
+      blast_ice_blocked_mirror_shield: 'a raised Mirror Shield always soaks the blast up first (the absorb verb outranks the block)',
+      blast_ice_lands_again: 'between two blasts Twinrova hovers (3 beats) and flies (1), longer than the 3-beat freeze',
+    },
+  },
 }

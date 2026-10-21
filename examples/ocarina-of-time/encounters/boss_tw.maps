@@ -208,179 +208,179 @@ state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
 state lens_count "The Lens: beats toward the next cost" in beat at 440 780
 
-verb fly_0_timer_clears "The sisters fly and turn on Link (0 hits) is over" by world priority 99 in enemy at 2040 150
+verb fly_0_timer_clears "The sisters fly and turn on Link (0 hits) is over" by world priority 100 in enemy at 2040 150
   take timer_fly_0
   unless phase_fly_0
 
-verb spin_0_timer_clears "A sister spins away from a shot (0 hits) is over" by world priority 99 in enemy at 2180 220
+verb spin_0_timer_clears "A sister spins away from a shot (0 hits) is over" by world priority 100 in enemy at 2180 220
   take timer_spin_0
   unless phase_spin_0
 
-verb shoot_charge_fire_0_timer_clears "Koume charges her fire beam (0 hits) is over" by world priority 99 in enemy at 2040 360
+verb shoot_charge_fire_0_timer_clears "Koume charges her fire beam (0 hits) is over" by world priority 100 in enemy at 2040 360
   take timer_shoot_charge_fire_0
   unless phase_shoot_charge_fire_0
 
-verb shoot_charge_ice_0_timer_clears "Kotake charges her ice beam (0 hits) is over" by world priority 99 in enemy at 2040 500
+verb shoot_charge_ice_0_timer_clears "Kotake charges her ice beam (0 hits) is over" by world priority 100 in enemy at 2040 500
   take timer_shoot_charge_ice_0
   unless phase_shoot_charge_ice_0
 
-verb fly_1_timer_clears "The sisters fly and turn on Link (1 hits) is over" by world priority 99 in enemy at 2040 640
+verb fly_1_timer_clears "The sisters fly and turn on Link (1 hits) is over" by world priority 100 in enemy at 2040 640
   take timer_fly_1
   unless phase_fly_1
 
-verb spin_1_timer_clears "A sister spins away from a shot (1 hits) is over" by world priority 99 in enemy at 2180 710
+verb spin_1_timer_clears "A sister spins away from a shot (1 hits) is over" by world priority 100 in enemy at 2180 710
   take timer_spin_1
   unless phase_spin_1
 
-verb shoot_charge_fire_1_timer_clears "Koume charges her fire beam (1 hits) is over" by world priority 99 in enemy at 2040 850
+verb shoot_charge_fire_1_timer_clears "Koume charges her fire beam (1 hits) is over" by world priority 100 in enemy at 2040 850
   take timer_shoot_charge_fire_1
   unless phase_shoot_charge_fire_1
 
-verb shoot_charge_ice_1_timer_clears "Kotake charges her ice beam (1 hits) is over" by world priority 99 in enemy at 2040 990
+verb shoot_charge_ice_1_timer_clears "Kotake charges her ice beam (1 hits) is over" by world priority 100 in enemy at 2040 990
   take timer_shoot_charge_ice_1
   unless phase_shoot_charge_ice_1
 
-verb fly_2_timer_clears "The sisters fly and turn on Link (2 hits) is over" by world priority 99 in enemy at 2040 1130
+verb fly_2_timer_clears "The sisters fly and turn on Link (2 hits) is over" by world priority 100 in enemy at 2040 1130
   take timer_fly_2
   unless phase_fly_2
 
-verb spin_2_timer_clears "A sister spins away from a shot (2 hits) is over" by world priority 99 in enemy at 2180 1200
+verb spin_2_timer_clears "A sister spins away from a shot (2 hits) is over" by world priority 100 in enemy at 2180 1200
   take timer_spin_2
   unless phase_spin_2
 
-verb shoot_charge_fire_2_timer_clears "Koume charges her fire beam (2 hits) is over" by world priority 99 in enemy at 2040 1340
+verb shoot_charge_fire_2_timer_clears "Koume charges her fire beam (2 hits) is over" by world priority 100 in enemy at 2040 1340
   take timer_shoot_charge_fire_2
   unless phase_shoot_charge_fire_2
 
-verb shoot_charge_ice_2_timer_clears "Kotake charges her ice beam (2 hits) is over" by world priority 99 in enemy at 2040 1480
+verb shoot_charge_ice_2_timer_clears "Kotake charges her ice beam (2 hits) is over" by world priority 100 in enemy at 2040 1480
   take timer_shoot_charge_ice_2
   unless phase_shoot_charge_ice_2
 
-verb fly_3_timer_clears "The sisters fly and turn on Link (3 hits) is over" by world priority 99 in enemy at 2040 1620
+verb fly_3_timer_clears "The sisters fly and turn on Link (3 hits) is over" by world priority 100 in enemy at 2040 1620
   take timer_fly_3
   unless phase_fly_3
 
-verb spin_3_timer_clears "A sister spins away from a shot (3 hits) is over" by world priority 99 in enemy at 2180 1690
+verb spin_3_timer_clears "A sister spins away from a shot (3 hits) is over" by world priority 100 in enemy at 2180 1690
   take timer_spin_3
   unless phase_spin_3
 
-verb shoot_charge_fire_3_timer_clears "Koume charges her fire beam (3 hits) is over" by world priority 99 in enemy at 2040 1830
+verb shoot_charge_fire_3_timer_clears "Koume charges her fire beam (3 hits) is over" by world priority 100 in enemy at 2040 1830
   take timer_shoot_charge_fire_3
   unless phase_shoot_charge_fire_3
 
-verb shoot_charge_ice_3_timer_clears "Kotake charges her ice beam (3 hits) is over" by world priority 99 in enemy at 2040 1970
+verb shoot_charge_ice_3_timer_clears "Kotake charges her ice beam (3 hits) is over" by world priority 100 in enemy at 2040 1970
   take timer_shoot_charge_ice_3
   unless phase_shoot_charge_ice_3
 
-verb hit_1_timer_clears "A sister reels from her twin's beam (1 hits) is over" by world priority 99 in enemy at 2040 2110
+verb hit_1_timer_clears "A sister reels from her twin's beam (1 hits) is over" by world priority 100 in enemy at 2040 2110
   take timer_hit_1
   unless phase_hit_1
 
-verb hit_2_timer_clears "A sister reels from her twin's beam (2 hits) is over" by world priority 99 in enemy at 2180 2180
+verb hit_2_timer_clears "A sister reels from her twin's beam (2 hits) is over" by world priority 100 in enemy at 2180 2180
   take timer_hit_2
   unless phase_hit_2
 
-verb hit_3_timer_clears "A sister reels from her twin's beam (3 hits) is over" by world priority 99 in enemy at 2040 2320
+verb hit_3_timer_clears "A sister reels from her twin's beam (3 hits) is over" by world priority 100 in enemy at 2040 2320
   take timer_hit_3
   unless phase_hit_3
 
-verb hit_4_timer_clears "A sister reels from her twin's beam (4 hits) is over" by world priority 99 in enemy at 2180 2390
+verb hit_4_timer_clears "A sister reels from her twin's beam (4 hits) is over" by world priority 100 in enemy at 2180 2390
   take timer_hit_4
   unless phase_hit_4
 
-verb tw_done_rf_c0_timer_clears "Twinrova hovers after her fire blast (rf, no charge) is over" by world priority 99 in enemy at 2040 2880
+verb tw_done_rf_c0_timer_clears "Twinrova hovers after her fire blast (rf, no charge) is over" by world priority 100 in enemy at 2040 2880
   take timer_tw_done_rf_c0
   unless phase_tw_done_rf_c0
 
-verb tw_done_rf_cf1_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 1 fire) is over" by world priority 99 in enemy at 2180 2950
+verb tw_done_rf_cf1_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 1 fire) is over" by world priority 100 in enemy at 2180 2950
   take timer_tw_done_rf_cf1
   unless phase_tw_done_rf_cf1
 
-verb tw_done_rf_cf2_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 2 fire) is over" by world priority 99 in enemy at 2040 3090
+verb tw_done_rf_cf2_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 2 fire) is over" by world priority 100 in enemy at 2040 3090
   take timer_tw_done_rf_cf2
   unless phase_tw_done_rf_cf2
 
-verb tw_done_rf_ci1_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 1 ice) is over" by world priority 99 in enemy at 2180 3160
+verb tw_done_rf_ci1_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 1 ice) is over" by world priority 100 in enemy at 2180 3160
   take timer_tw_done_rf_ci1
   unless phase_tw_done_rf_ci1
 
-verb tw_done_rf_ci2_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 2 ice) is over" by world priority 99 in enemy at 2040 3300
+verb tw_done_rf_ci2_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 2 ice) is over" by world priority 100 in enemy at 2040 3300
   take timer_tw_done_rf_ci2
   unless phase_tw_done_rf_ci2
 
-verb tw_done_ri_c0_timer_clears "Twinrova hovers after her ice blast (ri, no charge) is over" by world priority 99 in enemy at 2180 3370
+verb tw_done_ri_c0_timer_clears "Twinrova hovers after her ice blast (ri, no charge) is over" by world priority 100 in enemy at 2180 3370
   take timer_tw_done_ri_c0
   unless phase_tw_done_ri_c0
 
-verb tw_done_ri_cf1_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 1 fire) is over" by world priority 99 in enemy at 2040 3510
+verb tw_done_ri_cf1_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 1 fire) is over" by world priority 100 in enemy at 2040 3510
   take timer_tw_done_ri_cf1
   unless phase_tw_done_ri_cf1
 
-verb tw_done_ri_cf2_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 2 fire) is over" by world priority 99 in enemy at 2180 3580
+verb tw_done_ri_cf2_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 2 fire) is over" by world priority 100 in enemy at 2180 3580
   take timer_tw_done_ri_cf2
   unless phase_tw_done_ri_cf2
 
-verb tw_done_ri_ci1_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 1 ice) is over" by world priority 99 in enemy at 2040 3720
+verb tw_done_ri_ci1_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 1 ice) is over" by world priority 100 in enemy at 2040 3720
   take timer_tw_done_ri_ci1
   unless phase_tw_done_ri_ci1
 
-verb tw_done_ri_ci2_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 2 ice) is over" by world priority 99 in enemy at 2180 3790
+verb tw_done_ri_ci2_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 2 ice) is over" by world priority 100 in enemy at 2180 3790
   take timer_tw_done_ri_ci2
   unless phase_tw_done_ri_ci2
 
-verb tw_done_lf_c0_timer_clears "Twinrova hovers after her fire blast (lf, no charge) is over" by world priority 99 in enemy at 2040 3930
+verb tw_done_lf_c0_timer_clears "Twinrova hovers after her fire blast (lf, no charge) is over" by world priority 100 in enemy at 2040 3930
   take timer_tw_done_lf_c0
   unless phase_tw_done_lf_c0
 
-verb tw_done_lf_cf1_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 1 fire) is over" by world priority 99 in enemy at 2180 4000
+verb tw_done_lf_cf1_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 1 fire) is over" by world priority 100 in enemy at 2180 4000
   take timer_tw_done_lf_cf1
   unless phase_tw_done_lf_cf1
 
-verb tw_done_lf_cf2_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 2 fire) is over" by world priority 99 in enemy at 2040 4140
+verb tw_done_lf_cf2_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 2 fire) is over" by world priority 100 in enemy at 2040 4140
   take timer_tw_done_lf_cf2
   unless phase_tw_done_lf_cf2
 
-verb tw_done_lf_ci1_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 1 ice) is over" by world priority 99 in enemy at 2180 4210
+verb tw_done_lf_ci1_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 1 ice) is over" by world priority 100 in enemy at 2180 4210
   take timer_tw_done_lf_ci1
   unless phase_tw_done_lf_ci1
 
-verb tw_done_lf_ci2_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 2 ice) is over" by world priority 99 in enemy at 2040 4350
+verb tw_done_lf_ci2_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 2 ice) is over" by world priority 100 in enemy at 2040 4350
   take timer_tw_done_lf_ci2
   unless phase_tw_done_lf_ci2
 
-verb tw_done_li_c0_timer_clears "Twinrova hovers after her ice blast (li, no charge) is over" by world priority 99 in enemy at 2180 4420
+verb tw_done_li_c0_timer_clears "Twinrova hovers after her ice blast (li, no charge) is over" by world priority 100 in enemy at 2180 4420
   take timer_tw_done_li_c0
   unless phase_tw_done_li_c0
 
-verb tw_done_li_cf1_timer_clears "Twinrova hovers after her ice blast (li, shield holds 1 fire) is over" by world priority 99 in enemy at 2040 4560
+verb tw_done_li_cf1_timer_clears "Twinrova hovers after her ice blast (li, shield holds 1 fire) is over" by world priority 100 in enemy at 2040 4560
   take timer_tw_done_li_cf1
   unless phase_tw_done_li_cf1
 
-verb tw_done_li_cf2_timer_clears "Twinrova hovers after her ice blast (li, shield holds 2 fire) is over" by world priority 99 in enemy at 2180 4630
+verb tw_done_li_cf2_timer_clears "Twinrova hovers after her ice blast (li, shield holds 2 fire) is over" by world priority 100 in enemy at 2180 4630
   take timer_tw_done_li_cf2
   unless phase_tw_done_li_cf2
 
-verb tw_done_li_ci1_timer_clears "Twinrova hovers after her ice blast (li, shield holds 1 ice) is over" by world priority 99 in enemy at 2040 4770
+verb tw_done_li_ci1_timer_clears "Twinrova hovers after her ice blast (li, shield holds 1 ice) is over" by world priority 100 in enemy at 2040 4770
   take timer_tw_done_li_ci1
   unless phase_tw_done_li_ci1
 
-verb tw_done_li_ci2_timer_clears "Twinrova hovers after her ice blast (li, shield holds 2 ice) is over" by world priority 99 in enemy at 2180 4840
+verb tw_done_li_ci2_timer_clears "Twinrova hovers after her ice blast (li, shield holds 2 ice) is over" by world priority 100 in enemy at 2180 4840
   take timer_tw_done_li_ci2
   unless phase_tw_done_li_ci2
 
-verb tw_stun_r_timer_clears "Twinrova lies stunned on the floor (r) is over" by world priority 99 in enemy at 2040 4980
+verb tw_stun_r_timer_clears "Twinrova lies stunned on the floor (r) is over" by world priority 100 in enemy at 2040 4980
   take timer_tw_stun_r
   unless phase_tw_stun_r
 
-verb tw_getup_r_timer_clears "Twinrova gets up (r) is over" by world priority 99 in enemy at 2180 5050
+verb tw_getup_r_timer_clears "Twinrova gets up (r) is over" by world priority 100 in enemy at 2180 5050
   take timer_tw_getup_r
   unless phase_tw_getup_r
 
-verb tw_stun_l_timer_clears "Twinrova lies stunned on the floor (l) is over" by world priority 99 in enemy at 2040 5190
+verb tw_stun_l_timer_clears "Twinrova lies stunned on the floor (l) is over" by world priority 100 in enemy at 2040 5190
   take timer_tw_stun_l
   unless phase_tw_stun_l
 
-verb tw_getup_l_timer_clears "Twinrova gets up (l) is over" by world priority 99 in enemy at 2180 5260
+verb tw_getup_l_timer_clears "Twinrova gets up (l) is over" by world priority 100 in enemy at 2180 5260
   take timer_tw_getup_l
   unless phase_tw_getup_l
 
@@ -523,55 +523,55 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (4 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1220 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 570
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 570
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 640
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 640
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 710
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 710
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 710
   need in_fight
   unless link_hp
   take has_fairy
   give 64 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb twinrova_hurt "Twinrova loses health" by world priority 96 in enemy_health at 2500 220
+verb twinrova_hurt "Twinrova loses health" by world priority 97 in enemy_health at 2500 220
   take dmg_twinrova
   take hp_twinrova
 
-verb twinrova_hurt_2 "Twinrova loses health (2 or less)" by world priority 96 in enemy_health at 2360 290
+verb twinrova_hurt_2 "Twinrova loses health (2 or less)" by world priority 97 in enemy_health at 2360 290
   take dmg_twinrova
   take hp_twinrova_2
   unless hp_twinrova
 
-verb twinrova_overkill "Twinrova has no health left to lose" by world priority 95 in enemy_health at 2500 290
+verb twinrova_overkill "Twinrova has no health left to lose" by world priority 96 in enemy_health at 2500 290
   take dmg_twinrova
   unless hp_twinrova
   unless hp_twinrova_2
@@ -1896,21 +1896,21 @@ verb hit_reflect_blast_ice__tw_done_li_ci2 "Twinrova's ice blast, sent back hits
   give phase_tw_stun_l
   give 8 timer_tw_stun_l
 
-verb twinrova_empty_in_tw_stun_r "Twinrova runs out (Twinrova lies stunned on the floor (r))" by world priority 92 in enemy_health at 2360 360
+verb twinrova_empty_in_tw_stun_r "Twinrova runs out (Twinrova lies stunned on the floor (r))" by world priority 90 in enemy_health at 2360 360
   unless hp_twinrova
   unless hp_twinrova_2
   take alive_twinrova
   take phase_tw_stun_r
   give link_wins
 
-verb twinrova_empty_in_tw_stun_l "Twinrova runs out (Twinrova lies stunned on the floor (l))" by world priority 92 in enemy_health at 2500 360
+verb twinrova_empty_in_tw_stun_l "Twinrova runs out (Twinrova lies stunned on the floor (l))" by world priority 90 in enemy_health at 2500 360
   unless hp_twinrova
   unless hp_twinrova_2
   take alive_twinrova
   take phase_tw_stun_l
   give link_wins
 
-verb twinrova_falls_to_2_in_tw_stun_r "Twinrova drops to 2 (Twinrova lies stunned on the floor (r))" by world priority 91 in enemy_health at 2360 430
+verb twinrova_falls_to_2_in_tw_stun_r "Twinrova drops to 2 (Twinrova lies stunned on the floor (r))" by world priority 89 in enemy_health at 2360 430
   take above_twinrova_2
   need alive_twinrova
   unless hp_twinrova
@@ -3378,7 +3378,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 580 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 440 570
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 440 570
   take burn_count
   unless status_burn
 
@@ -3436,7 +3436,7 @@ verb lens_idle "The Lens is off" by world priority 45 in beat at 440 920
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 920
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 920
   take lens_count
   unless lens_on
 
