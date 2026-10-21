@@ -175,7 +175,7 @@ export const enBb: ActorSpec = {
       ]),
       ...reelHits('red', [
         'explosive', 'arrow_normal', 'hammer_swing', 'slash_master', 'slash_giant', 'arrow_fire', 'arrow_light', 'spin_giant',
-        'arrow_ice', 'spin_master', 'jump_kokiri', 'jump_giant', 'jump_giant_self', 'jump_master', 'jump_master_self', 'hammer_jump',
+        'arrow_ice', 'spin_master', 'spin_kokiri', 'jump_kokiri', 'jump_kokiri_self', 'jump_giant', 'jump_giant_self', 'jump_master', 'jump_master_self', 'hammer_jump',
       ]),
       red_hide_timer_clears: 'red_hide cannot be hit and has one step, after its one-beat timer, so its timer always runs out',
       red_rest_timer_clears: 'red_rest cannot be hit and is left only once its timer runs out',

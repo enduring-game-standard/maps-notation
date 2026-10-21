@@ -1,4 +1,6 @@
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { basename, resolve } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { link } from './data/link'
 import { encounter } from './gen'
 import { loadInventory } from './build'
@@ -13,7 +15,7 @@ const dir = new URL('./data/actors/', import.meta.url)
 const inv = loadInventory()
 const files = process.argv.slice(2).length ? process.argv.slice(2) : readdirSync(dir).filter((f) => f.endsWith('.ts'))
 for (const f of files) {
-  const url = new URL(f, dir)
+  const url = existsSync(f) ? pathToFileURL(resolve(f)) : new URL(basename(f), dir)
   const mod: Record<string, unknown> = await import(url.href)
   const spec = Object.values(mod).find((v): v is Disposition => !!v && typeof v === 'object' && 'overlay' in v)
   if (!spec || isExcluded(spec) || !spec.expected?.deadVerbs) continue

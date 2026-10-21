@@ -32,6 +32,8 @@ export const beatRate = (r: Rate): [number, number] => {
   const g = gcd(num, den)
   return [num / g, den / g]
 }
+/** A grab's drain as p every q beats. */
+export const grabRate = (d: number | Rate): [number, number] => (typeof d === 'number' ? [d, 1] : beatRate(d))
 export const dmgBit = (d: DmgType) => 2 ** DMG_TYPES.indexOf(d)
 const low = (d: DmgType) => d.toLowerCase()
 const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : a)
@@ -286,7 +288,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     maxHealth,
     ...spec.loadouts.map((lo) => lo.hearts * link.healthPerHeart.value),
     ...enemyAttacks.flatMap((a) => [a.damage, doubleDefense(a.damage)]),
-    ...enemyAttacks.flatMap((a) => (a.effect.kind === 'grab' ? [a.effect.damagePerBeat, doubleDefense(a.effect.damagePerBeat)] : [])),
+    ...enemyAttacks.flatMap((a) => (a.effect.kind === 'grab' ? [grabRate(a.effect.damagePerBeat)[0], doubleDefense(grabRate(a.effect.damagePerBeat)[0])] : [])),
     ...(enemyAttacks.some((a) => a.effect.kind === 'burn') ? [beatRate(link.burnDamage)[0]] : []),
     ...(enemyAttacks.some((a) => a.effect.kind === 'freeze') ? [beatRate(link.freezeDamage)[0]] : []),
     ...(has('fairy') ? [heal(link.fairyRevive.value)] : []),
@@ -661,10 +663,10 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   for (const s of shields) b.verb(`link_lowers_${s.gear}`, `Link lowers the ${s.gear.replace(/_/g, ' ')}`, WORLD, 'beat', P.stance, [['need', 'beat_end'], ['take', `guard_with_${s.gear}`]])
   b.verb('link_lands', 'Link lands from his dodge', WORLD, 'beat', P.stance, [['need', 'beat_end'], ['take', 'link_dodge']])
 
-  const grabRates = new Set(enemyAttacks.flatMap((a) => (a.effect.kind === 'grab' ? [a.effect.damagePerBeat] : [])))
+  const grabRates = new Map(enemyAttacks.flatMap((a) => (a.effect.kind === 'grab' ? [[grabRate(a.effect.damagePerBeat).join('/'), grabRate(a.effect.damagePerBeat)] as const] : [])))
   if (grabRates.size > 1) throw new Error(`${spec.overlay}: grabs with different damage per beat`)
   const perBeat = (s: Status): [number, number] =>
-    s === 'burn' ? beatRate(link.burnDamage) : s === 'freeze' ? beatRate(link.freezeDamage) : s === 'grab' ? [[...grabRates][0] ?? 0, 1] : [0, 1]
+    s === 'burn' ? beatRate(link.burnDamage) : s === 'freeze' ? beatRate(link.freezeDamage) : s === 'grab' ? ([...grabRates.values()][0] ?? [0, 1]) : [0, 1]
   const chain = [...statuses, ...(has('lens_of_truth') && hasMagic ? (['lens'] as const) : [])]
   const link_ = (i: number) => (i === 0 ? 'beat_end' : i === chain.length ? 'link_turn' : `tick_${chain[i - 1]}`)
   chain.forEach((s, i) => {

@@ -31,13 +31,16 @@ const phases: Phase[] = [
 /**
  * Contact swallows Link (line 540); the release up to 100 frames later (lines 278, 659) eats what it can (lines 322-335),
  * throws him with 8 damage (line 349), and decides `retreat` by whether it ate. One attack carries the whole swallow,
- * landing on the contact beat, so the step reads Link's gear before the theft resolves.
+ * landing on the contact beat, so the step reads Link's gear before the theft resolves. The release tries the shield
+ * (line 322) and then the tunic (line 329) in the same call, so one contact takes both; the steal effect does the same.
+ * Each edible gear gets its own step only because a step's gear guard is all-of: holding both enables two steps with
+ * the same target and attack.
  */
 const grabFrom = (from: string, fed: boolean): Step[] => {
   const base = { from, range: 'near' as const, move: 'far' as const, attack: 'swallow' }
   if (fed) return [{ ...base, to: 'approach_spat_fed', label: 'Like Like swallows Link and spits him out', cite: at(540) }]
   return [
-    ...EDIBLE.map((g): Step => ({ ...base, to: 'approach_spat_fed', label: `Like Like swallows Link and keeps his ${g.replace(/_/g, ' ')}`, gear: [{ gear: g, has: true }], cite: at(326) })),
+    ...EDIBLE.map((g): Step => ({ ...base, to: 'approach_spat_fed', label: `Like Like swallows Link and finds his ${g.replace(/_/g, ' ')} to eat`, gear: [{ gear: g, has: true }], cite: at(326) })),
     { ...base, to: 'approach_spat', label: 'Like Like swallows Link and finds nothing to eat', gear: EDIBLE.map((g) => ({ gear: g, has: false })), cite: at(351) },
   ]
 }
@@ -142,6 +145,10 @@ export const enRr: ActorSpec = {
   },
   loadouts: [
     ...standardLoadouts(['child', 'adult']),
+    /**
+     * No standard kit wears a tunic other than Kokiri, so this kit adds the Goron Tunic beside the Hylian Shield. One
+     * release deletes both (lines 323 and 330), so a single swallow strips Link of shield and tunic together.
+     */
     { id: 'adult_tunic', age: 'adult', hearts: 2, gear: ['deku_nuts', 'master_sword', 'hylian_shield', 'goron_tunic'] },
   ],
   expected: {

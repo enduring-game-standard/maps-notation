@@ -144,7 +144,6 @@ export const enDh: ActorSpec = {
       retreat_child_timer_clears: 'as retreat_adult_timer_clears',
       damage_adult_step_2: 'a wound is always a melee hit, so Link is near on the beat Dead Hand recovers and the far step never fires',
       damage_child_step_2: 'as damage_adult_step_2',
-      wait_stirring_holds: 'one of the two age steps out of stirring always fires',
     },
   },
 }

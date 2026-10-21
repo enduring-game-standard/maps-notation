@@ -75,7 +75,8 @@ export type Effect =
   | { kind: 'burn' }
   | { kind: 'freeze' }
   | { kind: 'shock' }
-  | { kind: 'grab'; frames: Frames; damagePerBeat: number; release: 'escape' | 'carried_off' }
+  /** `damagePerBeat` is a whole amount each beat, or a cited rate (units per frames) reduced by the declared rate rule. */
+  | { kind: 'grab'; frames: Frames; damagePerBeat: number | Rate; release: 'escape' | 'carried_off' }
   | { kind: 'paralyze'; frames: Frames }
   | { kind: 'curse'; frames: Frames }
   /** Takes every listed gear Link has, in order, on one contact. */

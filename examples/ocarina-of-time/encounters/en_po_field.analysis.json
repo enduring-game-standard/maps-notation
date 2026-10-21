@@ -1,6 +1,6 @@
 {
- "positions": 1993111,
- "complete": false,
+ "positions": 5243043,
+ "complete": true,
  "outcomes": [
   "Link falls",
   "Link wins",
@@ -43,7 +43,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 123276
+   "ms": 76659
   },
   {
    "kit": "adult_arrows",
@@ -57,7 +57,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 80070
+   "ms": 48357
   },
   {
    "kit": "adult_blade",
@@ -71,7 +71,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 27619
+   "ms": 18578
   },
   {
    "kit": "adult_blade",
@@ -85,7 +85,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 27840
+   "ms": 11834
   },
   {
    "kit": "adult_bottles",
@@ -99,7 +99,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 167730
+   "ms": 120415
   },
   {
    "kit": "adult_bottles",
@@ -113,7 +113,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 132570
+   "ms": 95371
   },
   {
    "kit": "adult_dins",
@@ -127,7 +127,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 87819
+   "ms": 51503
   },
   {
    "kit": "adult_dins",
@@ -141,7 +141,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 81546
+   "ms": 42282
   },
   {
    "kit": "adult_giant",
@@ -155,7 +155,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 36752
+   "ms": 26086
   },
   {
    "kit": "adult_giant",
@@ -169,21 +169,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 36864
+   "ms": 22223
   },
   {
    "kit": "adult_lens",
    "variant": "big_poe_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 153353,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 34669,
-    "Link falls": 8484,
-    "Link wins": 456
+    "Link withdraws": 54076,
+    "Link falls": 11811,
+    "Link wins": 675
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 161549
+   "ms": 161852
   },
   {
    "kit": "adult_lens",
@@ -197,63 +197,63 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 192248
+   "ms": 128976
   },
   {
    "kit": "adult_nayru",
    "variant": "big_poe_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 353798,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 36924,
-    "Link falls": 5808,
-    "Link wins": 355
+    "Link withdraws": 145059,
+    "Link falls": 7287,
+    "Link wins": 786
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 182393
+   "ms": 262140
   },
   {
    "kit": "adult_nayru",
    "variant": "taken_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 161451,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 30727,
-    "Link falls": 5928,
-    "Link wins": 494
+    "Link withdraws": 49362,
+    "Link falls": 7287,
+    "Link wins": 786
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 128571
+   "ms": 174412
   },
   {
    "kit": "adult_spin",
    "variant": "big_poe_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 194825,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 35626,
-    "Link falls": 7443,
-    "Link wins": 381
+    "Link withdraws": 68824,
+    "Link falls": 14784,
+    "Link wins": 756
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 176330
+   "ms": 234167
   },
   {
    "kit": "adult_spin",
    "variant": "taken_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 120205,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 26709,
-    "Link falls": 13200,
-    "Link wins": 599
+    "Link withdraws": 31696,
+    "Link falls": 14784,
+    "Link wins": 756
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 210611
+   "ms": 183374
   },
   {
    "kit": "child_blade",
@@ -267,7 +267,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 77490
+   "ms": 97923
   },
   {
    "kit": "child_blade",
@@ -281,147 +281,147 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 47532
+   "ms": 67427
   },
   {
    "kit": "child_bottles",
    "variant": "big_poe_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 272567,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 36332,
-    "Link falls": 2136,
-    "Link wins": 192
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 98067
-  },
-  {
-   "kit": "child_bottles",
-   "variant": "taken_spot",
-   "positions": 100000,
-   "complete": false,
-   "outcomes": {
-    "Link withdraws": 28328,
+    "Link withdraws": 99748,
     "Link falls": 4272,
-    "Link wins": 302
+    "Link wins": 513
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 145000
+   "ms": 324398
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "taken_spot",
+   "positions": 173962,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 50686,
+    "Link falls": 4272,
+    "Link wins": 513
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 268374
   },
   {
    "kit": "child_dins",
    "variant": "big_poe_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 177955,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 35383,
-    "Link falls": 8544,
-    "Link wins": 171
-   },
-   "stalls": 0,
-   "livelocks": 0,
-   "ms": 146310
-  },
-  {
-   "kit": "child_dins",
-   "variant": "taken_spot",
-   "positions": 100000,
-   "complete": false,
-   "outcomes": {
-    "Link withdraws": 26524,
+    "Link withdraws": 62846,
     "Link falls": 14952,
-    "Link wins": 281
+    "Link wins": 301
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 196818
+   "ms": 334498
+  },
+  {
+   "kit": "child_dins",
+   "variant": "taken_spot",
+   "positions": 107640,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 27860,
+    "Link falls": 14952,
+    "Link wins": 301
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 259322
   },
   {
    "kit": "child_lens",
    "variant": "big_poe_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 560212,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 33514,
-    "Link falls": 11283,
-    "Link wins": 160
+    "Link withdraws": 197516,
+    "Link falls": 47790,
+    "Link wins": 1075
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 163395
+   "ms": 662033
   },
   {
    "kit": "child_lens",
    "variant": "taken_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 339222,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 22232,
-    "Link falls": 27004,
-    "Link wins": 300
+    "Link withdraws": 87560,
+    "Link falls": 47790,
+    "Link wins": 1075
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 199446
+   "ms": 499227
   },
   {
    "kit": "child_nayru",
    "variant": "big_poe_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 681382,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 36828,
-    "Link falls": 5340,
-    "Link wins": 175
+    "Link withdraws": 279308,
+    "Link falls": 14739,
+    "Link wins": 734
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 145622
+   "ms": 704198
   },
   {
    "kit": "child_nayru",
    "variant": "taken_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 310986,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 30223,
-    "Link falls": 6775,
-    "Link wins": 304
+    "Link withdraws": 95035,
+    "Link falls": 14739,
+    "Link wins": 734
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 138658
+   "ms": 481379
   },
   {
    "kit": "child_spin",
    "variant": "big_poe_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 711817,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 35811,
-    "Link falls": 8445,
-    "Link wins": 160
+    "Link withdraws": 251384,
+    "Link falls": 59808,
+    "Link wins": 1204
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 136176
+   "ms": 1146159
   },
   {
    "kit": "child_spin",
    "variant": "taken_spot",
-   "positions": 100000,
-   "complete": false,
+   "positions": 430557,
+   "complete": true,
    "outcomes": {
-    "Link withdraws": 22624,
-    "Link falls": 29800,
-    "Link wins": 227
+    "Link withdraws": 111440,
+    "Link falls": 59808,
+    "Link wins": 1204
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 142668
+   "ms": 961925
   }
  ]
 }
