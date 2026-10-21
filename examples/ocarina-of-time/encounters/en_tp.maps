@@ -407,13 +407,13 @@ verb link_hurt_overkill "Link has no health left to lose" by world priority 94 i
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -1327,25 +1327,25 @@ verb hit_hammer_jump__sink_plunge "Hammer jump attack hits (Tailpasaran dives in
   need phase_sink_plunge
   give 4 dmg_body
 
-verb body_empty_in_wait_rising "Tailpasaran body segment runs out (Tailpasaran rises out of the floor)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_wait_rising "Tailpasaran body segment runs out (Tailpasaran rises out of the floor)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_wait_rising
   give link_wins
 
-verb body_empty_in_hover "Tailpasaran body segment runs out (Tailpasaran hovers above Link)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_hover "Tailpasaran body segment runs out (Tailpasaran hovers above Link)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_hover
   give link_wins
 
-verb body_empty_in_attack "Tailpasaran body segment runs out (Tailpasaran swoops at Link)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_attack "Tailpasaran body segment runs out (Tailpasaran swoops at Link)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_attack
   give link_wins
 
-verb body_empty_in_sink_plunge "Tailpasaran body segment runs out (Tailpasaran dives into the floor)" by world priority 92 in enemy_health at 2360 360
+verb body_empty_in_sink_plunge "Tailpasaran body segment runs out (Tailpasaran dives into the floor)" by world priority 90 in enemy_health at 2360 360
   unless hp_body
   take alive_body
   take phase_sink_plunge

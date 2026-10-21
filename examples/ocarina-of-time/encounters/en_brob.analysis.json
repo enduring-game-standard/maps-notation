@@ -1,5 +1,5 @@
 {
- "positions": 68874,
+ "positions": 69714,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -10,7 +10,7 @@
  "deadVerbs": [
   "idle_recover_timer_clears",
   "link_hurt_overkill",
-  "zap_lands_again",
+  "backlash_lands_again",
   "link_helpless_shock"
  ],
  "kitSplit": {},
@@ -18,80 +18,80 @@
   {
    "kit": "child_blade",
    "variant": "",
-   "positions": 635,
+   "positions": 643,
    "complete": true,
    "outcomes": {
     "Link withdraws": 288,
-    "Link falls": 2
+    "Link falls": 6
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3165
+   "ms": 836
   },
   {
    "kit": "child_bottles",
    "variant": "",
-   "positions": 2053,
+   "positions": 2077,
    "complete": true,
    "outcomes": {
     "Link withdraws": 992,
-    "Link falls": 4
+    "Link falls": 12
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 5510
+   "ms": 1585
   },
   {
    "kit": "child_dins",
    "variant": "",
-   "positions": 3599,
+   "positions": 3655,
    "complete": true,
    "outcomes": {
     "Link withdraws": 1736,
-    "Link falls": 14
+    "Link falls": 42
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 6509
+   "ms": 3197
   },
   {
    "kit": "child_lens",
    "variant": "",
-   "positions": 11315,
+   "positions": 11503,
    "complete": true,
    "outcomes": {
     "Link withdraws": 5456,
-    "Link falls": 50
+    "Link falls": 150
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 25173
+   "ms": 10009
   },
   {
    "kit": "child_nayru",
    "variant": "",
-   "positions": 36879,
+   "positions": 37219,
    "complete": true,
    "outcomes": {
     "Link withdraws": 17852,
-    "Link falls": 26
+    "Link falls": 78
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 27742
+   "ms": 25578
   },
   {
    "kit": "child_spin",
    "variant": "",
-   "positions": 14393,
+   "positions": 14617,
    "complete": true,
    "outcomes": {
     "Link withdraws": 6944,
-    "Link falls": 56
+    "Link falls": 168
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 32404
+   "ms": 12167
   }
  ]
 }

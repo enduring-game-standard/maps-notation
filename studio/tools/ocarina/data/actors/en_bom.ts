@@ -14,9 +14,14 @@ const at = (line: number): Cite => `${F}:${line}`
  *
  * The bomb body's collider accepts only explosions, arrows, and Din's Fire (0x0003F828, line 60). A sword or stick
  * does not set it off. Any accepted hit zeroes the timer (line 287), and it explodes on that frame (line 317). The
- * blast lasts 10 frames (line 340), one beat, and the bomb is then gone (line 232).
+ * blast lasts 10 frames (line 340), one beat, and the bomb is then gone (line 232). An enemy actor touching the bomb
+ * zeroes the timer too (lines 285-286), and a bomb 20 or more units under water is removed with no blast (lines
+ * 360-363). Neither can happen with Link alone against one bomb, so neither is modeled.
  *
- * Lifting and throwing are not Link verbs, so the held bomb (EnBom_WaitForRelease) is left out. A burning Deku Stick
+ * Lifting and throwing are not Link verbs, so the held bomb (EnBom_WaitForRelease) is left out. The fuse still burns
+ * while Link holds it (EnBom_Update counts the timer down at lines 249-250, before the action function at 262) and
+ * the blast still fires (lines 317-342, raised 30 units when held at 321-322), so a held bomb can blow up in his hands.
+ * The `fuse` phase reaches that same blast near Link. A burning Deku Stick
  * only lowers a timer above 100 (line 292), and this bomb's never is, so it does nothing here.
  * One blast hits once for 8 or 14, so the kits carry half a heart: the only way one blast can fell Link.
  */
@@ -44,7 +49,7 @@ export const enBom: ActorSpec = {
   start: 'fuse',
   variants: [
     { id: 'link_bomb', label: "Link's own bomb, set down", start: 'fuse', cite: at(113) },
-    { id: 'enemy_bomb', label: 'A bomb an enemy sets off at once', start: 'blast_normal', cite: 'src/overlays/actors/ovl_En_Dodojr/z_en_dodojr.c:600' },
+    { id: 'enemy_bomb', label: 'A bomb an enemy sets off at once', start: 'blast_normal', cite: 'src/overlays/actors/ovl_En_Dodojr/z_en_dodojr.c:601' },
     { id: 'enemy_bomb_strong', label: 'A bomb a Beamos, Peehat, or Flare Dancer sets off at once', start: 'blast_strong', cite: 'src/overlays/actors/ovl_En_Vm/z_en_vm.c:393' },
   ],
   range: 'near',
@@ -62,7 +67,7 @@ export const enBom: ActorSpec = {
   actionFuncs: {
     EnBom_Move: 'fuse',
     EnBom_Explode: 'blast_*',
-    EnBom_WaitForRelease: off('the bomb is held by Link until he lets go; lifting and throwing are not Link verbs', 178),
+    EnBom_WaitForRelease: off('the bomb is held by Link until he lets go; lifting and throwing are not Link verbs. The fuse and the blast still run while held (lines 249-250, 317-342), and `fuse` reaches the same blast near Link', 178),
     actionFunc: off('not an action function: the parameter name of EnBom_SetupAction', 102),
   },
   atSources: {

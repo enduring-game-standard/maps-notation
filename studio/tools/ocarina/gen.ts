@@ -50,9 +50,10 @@ const P = {
   linkOverkill: 94,
   /** Electric backlash lands on the hit that connects, so it resolves before a killing blow ends the fight. */
   backlash: 93,
-  poolEmpty: 92,
-  revive: 90,
-  fall: 89,
+  /** Link at zero health falls even when his last blow also empties the enemy (z_player.c:9146), so falling outranks winning. */
+  revive: 92,
+  fall: 91,
+  poolEmpty: 90,
   hit: 80,
   tick: 71,
   ready: 70,

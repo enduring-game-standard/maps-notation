@@ -60,7 +60,8 @@ for (const spec of modeled()) {
               base[`alive_${q.id}`] = 1
             }
             base.in_fight = 1
-            base.link_hp = 1
+            // Enough health that a backlash on each non-killing hit never fells Link mid-replay.
+            base.link_hp = 1000
             base.range_near = 1
             let m: Marking = { ...base, [`phase_${p.id}`]: 1 }
             const need = Math.ceil(start(pool) / d)
@@ -71,6 +72,27 @@ for (const spec of modeled()) {
               expect(down).toBe(i === need)
             }
           })
+          const shocks = net.arcs.some((a) => a.verb === vid && a.kind === 'give' && a.state === `incoming_${spec.backlash?.attack}`)
+          if (shocks)
+            it(`${key} in ${p.id}: a killing blow whose backlash takes Link's last health ends with Link fallen, not winning`, () => {
+              const base: Marking = Object.fromEntries(net.states.map((s) => [s.id, 0]))
+              for (const q of spec.pools) {
+                for (const sg of poolSegments(q)) base[sg.id] = q.hp.fromLinkHealth ? 0 : sg.marks
+                if (q.hp.fromLinkHealth) base[`hp_${q.id}`] = start(q)
+                for (const t of q.thresholds ?? []) base[`above_${q.id}_${t.at}`] = 0
+                base[`alive_${q.id}`] = 1
+              }
+              Object.assign(base, { in_fight: 1, link_hp: 1000, range_near: 1 })
+              let m: Marking = base
+              const need = Math.ceil(start(pool) / d)
+              for (let i = 1; i <= need; i++) {
+                for (const ph of spec.phases) m[`phase_${ph.id}`] = ph.id === p.id ? 1 : 0
+                if (i === need) m.link_hp = 1
+                m = quiet(c, { ...m, [`swing_${key}`]: 1 })
+              }
+              expect(m.link_falls).toBe(1)
+              expect(m.link_wins).toBe(0)
+            })
         }
 
     for (const pool of spec.pools.filter((q) => !q.hp.fromLinkHealth))

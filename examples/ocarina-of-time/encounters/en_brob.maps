@@ -53,9 +53,10 @@ state timer_idle_recover "Block recovers in the floor after a stun: beats left" 
 state phase_move_up "Block rises" in enemy at 2040 220
 state phase_wobble "Block stands and wobbles" in enemy at 2180 220
 state timer_wobble "Block stands and wobbles: beats left" in enemy at 2040 290
-state phase_shock "Block crackles with lightning" in enemy at 2040 360
-state phase_stunned "Block is stunned and sinks" in enemy at 2180 360
-state phase_move_down "Block sinks into the floor" in enemy at 2040 430
+state phase_crackle "Block crackles with lightning" in enemy at 2040 360
+state timer_crackle "Block crackles with lightning: beats left" in enemy at 2180 360
+state phase_stunned "Block is stunned and sinks" in enemy at 2180 430
+state phase_move_down "Block sinks into the floor" in enemy at 2040 500
 state status_shock "Link: shock (beats left)" in link_state at 1220 290
 state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
 state lens_on "Lens of Truth on" in link_state at 1220 360
@@ -63,30 +64,35 @@ state link_guard "Link holds up his shield" in link_state at 1080 430
 state link_dodge "Link dodges" in link_state at 1220 430
 state swing_deku_nut "Deku Nut flash on its way" in hits at 2680 80
 state swing_deku_stick "Deku Stick on its way" in hits at 2680 150
-state swing_slingshot "Slingshot seed on its way" in hits at 2680 220
-state swing_explosive "Explosion on its way" in hits at 2680 290
-state swing_boomerang "Boomerang on its way" in hits at 2680 360
-state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 2680 500
-state swing_magic_fire "Din's Fire on its way" in hits at 2680 640
-state swing_shield "Shield on its way" in hits at 2820 710
-state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 2820 780
-state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 2680 920
-state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 2680 990
-state swing_jump_master "Master Sword jump attack on its way" in hits at 2820 1060
+state swing_slingshot "Slingshot seed on its way" in hits at 2680 290
+state swing_explosive "Explosion on its way" in hits at 2680 360
+state swing_boomerang "Boomerang on its way" in hits at 2680 430
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 2680 570
+state swing_magic_fire "Din's Fire on its way" in hits at 2680 710
+state swing_shield "Shield on its way" in hits at 2820 780
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 2820 850
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 2680 1060
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 2680 1200
+state swing_jump_master "Master Sword jump attack on its way" in hits at 2820 1340
 state guard_with_deku_shield "Shield up: deku shield" in link_state at 1220 710
 state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
 state incoming_zap "Electric touch incoming" in attacks at 3000 80
+state incoming_backlash "Shock from striking the block incoming" in attacks at 3140 290
 state tick_shock "Beat ends: shock checked" in beat at 440 360
 state tick_nayru "Beat ends: nayru checked" in beat at 580 360
 state lens_count "The Lens: beats toward the next cost" in beat at 440 570
 
-verb idle_recover_timer_clears "Block recovers in the floor after a stun is over" by world priority 99 in enemy at 2180 150
+verb idle_recover_timer_clears "Block recovers in the floor after a stun is over" by world priority 100 in enemy at 2180 150
   take timer_idle_recover
   unless phase_idle_recover
 
-verb wobble_timer_clears "Block stands and wobbles is over" by world priority 99 in enemy at 2180 290
+verb wobble_timer_clears "Block stands and wobbles is over" by world priority 100 in enemy at 2180 290
   take timer_wobble
   unless phase_wobble
+
+verb crackle_timer_clears "Block crackles with lightning is over" by world priority 100 in enemy at 2040 430
+  take timer_crackle
+  unless phase_crackle
 
 verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 260 150
   take choose_age
@@ -182,40 +188,40 @@ verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -355,66 +361,119 @@ verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits a
 verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 2820 150
   take swing_deku_stick
 
-verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 2820 220
+verb hit_deku_stick__wobble "Deku Stick hits (Block stands and wobbles)" by world priority 80 in hits at 2680 220
+  take swing_deku_stick
+  need phase_wobble
+  give incoming_backlash
+
+verb hit_deku_stick__crackle "Deku Stick hits (Block crackles with lightning)" by world priority 80 in hits at 2820 220
+  take swing_deku_stick
+  need phase_crackle
+  give incoming_backlash
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 2820 290
   take swing_slingshot
 
-verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 2820 290
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 2820 360
   take swing_explosive
 
-verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 2820 360
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 2820 430
   take swing_boomerang
 
-verb hit_boomerang__wobble "Boomerang hits (Block stands and wobbles)" by world priority 80 in hits at 2680 430
+verb hit_boomerang__wobble "Boomerang hits (Block stands and wobbles)" by world priority 80 in hits at 2680 500
   take swing_boomerang
   take phase_wobble
   give phase_stunned
 
-verb hit_boomerang__shock "Boomerang hits (Block crackles with lightning)" by world priority 80 in hits at 2820 430
+verb hit_boomerang__crackle "Boomerang hits (Block crackles with lightning)" by world priority 80 in hits at 2820 500
   take swing_boomerang
-  take phase_shock
+  take phase_crackle
   give phase_stunned
 
-verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 2820 500
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 2820 570
   take swing_slash_kokiri
 
-verb hit_slash_kokiri__wobble "Kokiri Sword slash hits (Block stands and wobbles)" by world priority 80 in hits at 2680 570
+verb hit_slash_kokiri__wobble "Kokiri Sword slash hits (Block stands and wobbles)" by world priority 80 in hits at 2680 640
   take swing_slash_kokiri
   take phase_wobble
-  give phase_shock
+  give phase_crackle
+  give timer_crackle
+  give incoming_backlash
 
-verb hit_slash_kokiri__shock "Kokiri Sword slash hits (Block crackles with lightning)" by world priority 80 in hits at 2820 570
+verb hit_slash_kokiri__crackle "Kokiri Sword slash hits (Block crackles with lightning)" by world priority 80 in hits at 2820 640
   take swing_slash_kokiri
-  need phase_shock
+  need phase_crackle
+  give incoming_backlash
 
-verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 2820 640
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 2820 710
   take swing_magic_fire
 
-verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 2680 710
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 2680 780
   take swing_magic_fire
   need range_far
 
-verb miss_shield "Shield has no effect" by world priority 79 in hits at 2680 780
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 2680 850
   take swing_shield
 
-verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 2680 850
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 2680 920
   take swing_spin_kokiri
 
-verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 2820 850
+verb hit_spin_kokiri__wobble "Kokiri spin attack hits (Block stands and wobbles)" by world priority 80 in hits at 2820 920
+  take swing_spin_kokiri
+  need phase_wobble
+  give incoming_backlash
+
+verb hit_spin_kokiri__crackle "Kokiri spin attack hits (Block crackles with lightning)" by world priority 80 in hits at 2680 990
+  take swing_spin_kokiri
+  need phase_crackle
+  give incoming_backlash
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 2820 990
   take swing_spin_kokiri
   need range_far
 
-verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 2820 920
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 2820 1060
   take swing_jump_kokiri
 
-verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 2820 990
+verb hit_jump_kokiri__wobble "Kokiri jump attack hits (Block stands and wobbles)" by world priority 80 in hits at 2680 1130
+  take swing_jump_kokiri
+  need phase_wobble
+  give incoming_backlash
+
+verb hit_jump_kokiri__crackle "Kokiri jump attack hits (Block crackles with lightning)" by world priority 80 in hits at 2820 1130
+  take swing_jump_kokiri
+  need phase_crackle
+  give incoming_backlash
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 2820 1200
   take swing_jump_kokiri_self
 
-verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 2680 1060
+verb hit_jump_kokiri_self__wobble "Kokiri jump attack hits (Block stands and wobbles)" by world priority 80 in hits at 2680 1270
+  take swing_jump_kokiri_self
+  need phase_wobble
+  give incoming_backlash
+
+verb hit_jump_kokiri_self__crackle "Kokiri jump attack hits (Block crackles with lightning)" by world priority 80 in hits at 2820 1270
+  take swing_jump_kokiri_self
+  need phase_crackle
+  give incoming_backlash
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 2680 1340
   take swing_jump_kokiri_self
   need range_far
 
-verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 2680 1130
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 2680 1410
   take swing_jump_master
+
+verb hit_jump_master__wobble "Master Sword jump attack hits (Block stands and wobbles)" by world priority 80 in hits at 2820 1410
+  take swing_jump_master
+  need phase_wobble
+  give incoming_backlash
+
+verb hit_jump_master__crackle "Master Sword jump attack hits (Block crackles with lightning)" by world priority 80 in hits at 2680 1480
+  take swing_jump_master
+  need phase_crackle
+  give incoming_backlash
 
 verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2360 570
   take link_turn
@@ -497,29 +556,29 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2360 920
   take lens_on
   give link_turn
 
-verb enemy_ready "Flobbery Muscle Block gets ready" by world priority 70 in enemy at 2180 430
+verb enemy_ready "Flobbery Muscle Block gets ready" by world priority 70 in enemy at 2180 500
   take enemy_turn
   give enemy_act
 
-verb idle_step_1 "Link comes close and the block rises" by world priority 69 in enemy at 2040 500
+verb idle_step_1 "Link comes within 300 and the block rises" by world priority 69 in enemy at 2040 570
   take enemy_act
   take phase_idle
   give phase_move_up
   give beat_end
   need range_near
 
-verb idle_holds "Block waits in the floor: nothing changes" by world priority 68 in enemy at 2180 500
+verb idle_holds "Block waits in the floor: nothing changes" by world priority 68 in enemy at 2180 570
   take enemy_act
   need phase_idle
   give beat_end
 
-verb idle_recover_ticks "Block recovers in the floor after a stun: a beat passes" by world priority 71 in enemy at 2040 570
+verb idle_recover_ticks "Block recovers in the floor after a stun: a beat passes" by world priority 71 in enemy at 2040 640
   take enemy_turn
   need phase_idle_recover
   take timer_idle_recover
   give enemy_act
 
-verb idle_recover_step_1 "Block recovers and rises at Link" by world priority 69 in enemy at 2180 570
+verb idle_recover_step_1 "Block recovers and rises at Link within 300" by world priority 69 in enemy at 2180 640
   take enemy_act
   take phase_idle_recover
   give phase_move_up
@@ -527,7 +586,7 @@ verb idle_recover_step_1 "Block recovers and rises at Link" by world priority 69
   give beat_end
   need range_near
 
-verb idle_recover_step_2 "Block recovers" by world priority 69 in enemy at 2040 640
+verb idle_recover_step_2 "Block recovers with Link beyond 300" by world priority 69 in enemy at 2040 710
   take enemy_act
   take phase_idle_recover
   give phase_idle
@@ -535,42 +594,41 @@ verb idle_recover_step_2 "Block recovers" by world priority 69 in enemy at 2040 
   give beat_end
   need range_far
 
-verb idle_recover_holds "Block recovers in the floor after a stun: nothing changes" by world priority 68 in enemy at 2180 640
+verb idle_recover_holds "Block recovers in the floor after a stun: nothing changes" by world priority 68 in enemy at 2180 710
   take enemy_act
   need phase_idle_recover
   give beat_end
 
-verb move_up_step_1 "Block finishes rising" by world priority 69 in enemy at 2040 710
+verb move_up_step_1 "Block finishes rising" by world priority 69 in enemy at 2040 780
   take enemy_act
   take phase_move_up
   give phase_wobble
   give 60 timer_wobble
   give beat_end
 
-verb move_up_step_2 "Block rises into Link" by world priority 69 in enemy at 2180 710
+verb move_up_step_2 "Block rises into Link and keeps rising" by world priority 69 in enemy at 2180 780
   take enemy_act
-  take phase_move_up
-  give phase_wobble
-  give 60 timer_wobble
+  need phase_move_up
   give incoming_zap
   give beat_end
   need range_near
 
-verb wobble_ticks "Block stands and wobbles: a beat passes" by world priority 71 in enemy at 2040 780
+verb wobble_ticks "Block stands and wobbles: a beat passes" by world priority 71 in enemy at 2040 850
   take enemy_turn
   need phase_wobble
   take timer_wobble
   give enemy_act
 
-verb wobble_step_1 "Block shocks Link on contact" by world priority 69 in enemy at 2180 780
+verb wobble_step_1 "Block shocks Link on contact" by world priority 69 in enemy at 2180 850
   take enemy_act
   take phase_wobble
-  give phase_shock
+  give phase_crackle
+  give timer_crackle
   give incoming_zap
   give beat_end
   need range_near
 
-verb wobble_step_2 "Link is far and the block sinks" by world priority 69 in enemy at 2040 850
+verb wobble_step_2 "Link is beyond 500 and the block sinks" by world priority 69 in enemy at 2040 920
   take enemy_act
   take phase_wobble
   give phase_move_down
@@ -578,33 +636,40 @@ verb wobble_step_2 "Link is far and the block sinks" by world priority 69 in ene
   give beat_end
   need range_far
 
-verb wobble_holds "Block stands and wobbles: nothing changes" by world priority 68 in enemy at 2180 850
+verb wobble_holds "Block stands and wobbles: nothing changes" by world priority 68 in enemy at 2180 920
   take enemy_act
   need phase_wobble
   give beat_end
 
-verb shock_step_1 "The lightning dies down" by world priority 69 in enemy at 2040 920
+verb crackle_ticks "Block crackles with lightning: a beat passes" by world priority 71 in enemy at 2040 990
+  take enemy_turn
+  need phase_crackle
+  take timer_crackle
+  give enemy_act
+
+verb crackle_step_1 "The lightning dies down" by world priority 69 in enemy at 2180 990
   take enemy_act
-  take phase_shock
+  take phase_crackle
   give phase_wobble
   give 60 timer_wobble
+  unless timer_crackle
   give beat_end
 
-verb shock_step_2 "Block shocks Link again" by world priority 69 in enemy at 2180 920
+verb crackle_step_2 "Block shocks Link again" by world priority 69 in enemy at 2040 1060
   take enemy_act
-  need phase_shock
+  need phase_crackle
   give incoming_zap
   give beat_end
   need range_near
 
-verb stunned_step_1 "Block finishes sinking, stunned" by world priority 69 in enemy at 2040 990
+verb stunned_step_1 "Block finishes sinking, stunned" by world priority 69 in enemy at 2180 1060
   take enemy_act
   take phase_stunned
   give phase_idle_recover
   give 10 timer_idle_recover
   give beat_end
 
-verb move_down_step_1 "Block is back in the floor" by world priority 69 in enemy at 2180 990
+verb move_down_step_1 "Block is back in the floor" by world priority 69 in enemy at 2040 1130
   take enemy_act
   take phase_move_down
   give phase_idle
@@ -642,6 +707,23 @@ verb zap_lands_again "Electric touch hits Link again" by world priority 60 in at
   take incoming_zap
   unless link_guard
   unless link_dodge
+  unless status_nayru
+  give 2 link_dmg
+  need status_shock
+
+verb backlash_nayru "Shock from striking the block: Nayru's Love holds" by world priority 93 in attacks at 3000 360
+  take incoming_backlash
+  need status_nayru
+
+verb backlash_lands "Shock from striking the block hits Link" by world priority 93 in attacks at 3140 360
+  take incoming_backlash
+  unless status_nayru
+  give 2 link_dmg
+  give status_shock
+  unless status_shock
+
+verb backlash_lands_again "Shock from striking the block hits Link again" by world priority 93 in attacks at 3000 430
+  take incoming_backlash
   unless status_nayru
   give 2 link_dmg
   need status_shock
@@ -710,7 +792,7 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 440 710
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 710
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 710
   take lens_count
   unless lens_on
 

@@ -1,5 +1,5 @@
 {
- "positions": 106092,
+ "positions": 106252,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -26,198 +26,198 @@
   {
    "kit": "adult_arrows",
    "variant": "",
-   "positions": 1886,
+   "positions": 1891,
    "complete": true,
    "outcomes": {
     "Link withdraws": 440,
-    "Link wins": 320,
-    "Link falls": 5
+    "Link wins": 240,
+    "Link falls": 90
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1771
+   "ms": 2837
   },
   {
    "kit": "adult_blade",
    "variant": "",
-   "positions": 442,
+   "positions": 443,
    "complete": true,
    "outcomes": {
     "Link withdraws": 88,
-    "Link wins": 128,
-    "Link falls": 1
+    "Link wins": 112,
+    "Link falls": 18
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 343
+   "ms": 619
   },
   {
    "kit": "adult_bottles",
    "variant": "",
-   "positions": 3011,
+   "positions": 3013,
    "complete": true,
    "outcomes": {
     "Link withdraws": 704,
-    "Link wins": 512,
-    "Link falls": 2
+    "Link wins": 480,
+    "Link falls": 36
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3355
+   "ms": 3858
   },
   {
    "kit": "adult_dins",
    "variant": "",
-   "positions": 2640,
+   "positions": 2647,
    "complete": true,
    "outcomes": {
     "Link withdraws": 616,
-    "Link wins": 448,
-    "Link falls": 7
+    "Link wins": 336,
+    "Link falls": 126
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2194
+   "ms": 3338
   },
   {
    "kit": "adult_giant",
    "variant": "",
-   "positions": 2260,
+   "positions": 2263,
    "complete": true,
    "outcomes": {
     "Link withdraws": 528,
-    "Link wins": 384,
-    "Link falls": 3
+    "Link wins": 336,
+    "Link falls": 54
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2000
+   "ms": 3254
   },
   {
    "kit": "adult_lens",
    "variant": "",
-   "positions": 8487,
+   "positions": 8512,
    "complete": true,
    "outcomes": {
     "Link withdraws": 1936,
-    "Link wins": 1600,
-    "Link falls": 22
+    "Link wins": 1200,
+    "Link falls": 447
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 7318
+   "ms": 8601
   },
   {
    "kit": "adult_nayru",
    "variant": "",
-   "positions": 26578,
+   "positions": 26591,
    "complete": true,
    "outcomes": {
     "Link withdraws": 6268,
-    "Link wins": 4464,
-    "Link falls": 13
+    "Link wins": 4256,
+    "Link falls": 234
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 17365
+   "ms": 21004
   },
   {
    "kit": "adult_spin",
    "variant": "",
-   "positions": 10557,
+   "positions": 10585,
    "complete": true,
    "outcomes": {
     "Link withdraws": 2464,
-    "Link wins": 1792,
-    "Link falls": 28
+    "Link wins": 1344,
+    "Link falls": 504
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 9644
+   "ms": 12177
   },
   {
    "kit": "child_blade",
    "variant": "",
-   "positions": 462,
+   "positions": 463,
    "complete": true,
    "outcomes": {
     "Link withdraws": 88,
-    "Link wins": 148,
-    "Link falls": 1
+    "Link wins": 132,
+    "Link falls": 18
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 323
+   "ms": 786
   },
   {
    "kit": "child_bottles",
    "variant": "",
-   "positions": 1507,
+   "positions": 1509,
    "complete": true,
    "outcomes": {
     "Link withdraws": 352,
-    "Link wins": 256,
-    "Link falls": 2
+    "Link wins": 224,
+    "Link falls": 36
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 839
+   "ms": 1537
   },
   {
    "kit": "child_dins",
    "variant": "",
-   "positions": 2640,
+   "positions": 2647,
    "complete": true,
    "outcomes": {
     "Link withdraws": 616,
-    "Link wins": 448,
-    "Link falls": 7
+    "Link wins": 336,
+    "Link falls": 126
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1800
+   "ms": 3175
   },
   {
    "kit": "child_lens",
    "variant": "",
-   "positions": 8487,
+   "positions": 8512,
    "complete": true,
    "outcomes": {
     "Link withdraws": 1936,
-    "Link wins": 1600,
-    "Link falls": 22
+    "Link wins": 1200,
+    "Link falls": 447
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 7055
+   "ms": 8966
   },
   {
    "kit": "child_nayru",
    "variant": "",
-   "positions": 26578,
+   "positions": 26591,
    "complete": true,
    "outcomes": {
     "Link withdraws": 6268,
-    "Link wins": 4464,
-    "Link falls": 13
+    "Link wins": 4256,
+    "Link falls": 234
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 15987
+   "ms": 21303
   },
   {
    "kit": "child_spin",
    "variant": "",
-   "positions": 10557,
+   "positions": 10585,
    "complete": true,
    "outcomes": {
     "Link withdraws": 2464,
-    "Link wins": 1792,
-    "Link falls": 28
+    "Link wins": 1344,
+    "Link falls": 504
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 9359
+   "ms": 11591
   }
  ]
 }
