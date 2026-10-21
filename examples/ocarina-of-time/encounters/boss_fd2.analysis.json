@@ -1,5 +1,5 @@
 {
- "positions": 26326,
+ "positions": 16309,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -9,336 +9,193 @@
  "stalls": 0,
  "livelocks": 0,
  "deadVerbs": [
-  "emerge_1_timer_clears",
-  "emerge_2_timer_clears",
-  "emerge_3_timer_clears",
+  "wake_timer_clears",
+  "daze_timer_clears",
   "damaged_timer_clears",
-  "miss_hammer_swing__damaged",
-  "miss_hammer_jump__damaged"
+  "hit_hammer_swing__breath",
+  "hit_hammer_jump__breath",
+  "breath_lands_again",
+  "breath_lands_dd_again"
  ],
  "kitSplit": {
-  "hit_slash_giant__vuln_1": [
+  "hit_slash_giant__vuln": [
    "swing_slash_giant",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_slash_giant__burrow_open_1": [
+  "hit_slash_giant__burrow_open": [
    "swing_slash_giant",
-   "phase_burrow_open_1"
+   "phase_burrow_open"
   ],
-  "hit_slash_giant__vuln_2": [
-   "swing_slash_giant",
-   "phase_vuln_2"
-  ],
-  "hit_slash_giant__burrow_open_2": [
-   "swing_slash_giant",
-   "phase_burrow_open_2"
-  ],
-  "hit_slash_giant__vuln_3": [
-   "swing_slash_giant",
-   "phase_vuln_3"
-  ],
-  "hit_slash_giant__burrow_open_3": [
-   "swing_slash_giant",
-   "phase_burrow_open_3"
-  ],
-  "hit_arrow_fire__vuln_1": [
+  "hit_arrow_fire__vuln": [
    "swing_arrow_fire",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_arrow_fire__burrow_open_1": [
+  "hit_arrow_fire__burrow_open": [
    "swing_arrow_fire",
-   "phase_burrow_open_1"
+   "phase_burrow_open"
   ],
-  "hit_arrow_fire__vuln_2": [
-   "swing_arrow_fire",
-   "phase_vuln_2"
-  ],
-  "hit_arrow_fire__burrow_open_2": [
-   "swing_arrow_fire",
-   "phase_burrow_open_2"
-  ],
-  "hit_arrow_fire__vuln_3": [
-   "swing_arrow_fire",
-   "phase_vuln_3"
-  ],
-  "hit_arrow_fire__burrow_open_3": [
-   "swing_arrow_fire",
-   "phase_burrow_open_3"
-  ],
-  "hit_arrow_ice__vuln_1": [
+  "hit_arrow_ice__vuln": [
    "swing_arrow_ice",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_arrow_ice__burrow_open_1": [
+  "hit_arrow_ice__burrow_open": [
    "swing_arrow_ice",
-   "phase_burrow_open_1"
+   "phase_burrow_open"
   ],
-  "hit_arrow_ice__vuln_2": [
-   "swing_arrow_ice",
-   "phase_vuln_2"
-  ],
-  "hit_arrow_ice__burrow_open_2": [
-   "swing_arrow_ice",
-   "phase_burrow_open_2"
-  ],
-  "hit_arrow_ice__vuln_3": [
-   "swing_arrow_ice",
-   "phase_vuln_3"
-  ],
-  "hit_arrow_ice__burrow_open_3": [
-   "swing_arrow_ice",
-   "phase_burrow_open_3"
-  ],
-  "hit_arrow_light__vuln_1": [
+  "hit_arrow_light__vuln": [
    "swing_arrow_light",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_arrow_light__burrow_open_1": [
+  "hit_arrow_light__burrow_open": [
    "swing_arrow_light",
-   "phase_burrow_open_1"
+   "phase_burrow_open"
   ],
-  "hit_arrow_light__vuln_2": [
-   "swing_arrow_light",
-   "phase_vuln_2"
-  ],
-  "hit_arrow_light__burrow_open_2": [
-   "swing_arrow_light",
-   "phase_burrow_open_2"
-  ],
-  "hit_arrow_light__vuln_3": [
-   "swing_arrow_light",
-   "phase_vuln_3"
-  ],
-  "hit_arrow_light__burrow_open_3": [
-   "swing_arrow_light",
-   "phase_burrow_open_3"
-  ],
-  "hit_spin_giant__vuln_1": [
+  "hit_spin_giant__vuln": [
    "swing_spin_giant",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_spin_giant__burrow_open_1": [
+  "hit_spin_giant__burrow_open": [
    "swing_spin_giant",
-   "phase_burrow_open_1"
+   "phase_burrow_open"
   ],
-  "hit_spin_giant__vuln_2": [
-   "swing_spin_giant",
-   "phase_vuln_2"
-  ],
-  "hit_spin_giant__burrow_open_2": [
-   "swing_spin_giant",
-   "phase_burrow_open_2"
-  ],
-  "hit_spin_giant__vuln_3": [
-   "swing_spin_giant",
-   "phase_vuln_3"
-  ],
-  "hit_spin_giant__burrow_open_3": [
-   "swing_spin_giant",
-   "phase_burrow_open_3"
-  ],
-  "hit_spin_master__vuln_1": [
+  "hit_spin_master__vuln": [
    "swing_spin_master",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_spin_master__burrow_open_1": [
+  "hit_spin_master__burrow_open": [
    "swing_spin_master",
-   "phase_burrow_open_1"
+   "phase_burrow_open"
   ],
-  "hit_spin_master__vuln_2": [
-   "swing_spin_master",
-   "phase_vuln_2"
-  ],
-  "hit_spin_master__burrow_open_2": [
-   "swing_spin_master",
-   "phase_burrow_open_2"
-  ],
-  "hit_spin_master__vuln_3": [
-   "swing_spin_master",
-   "phase_vuln_3"
-  ],
-  "hit_spin_master__burrow_open_3": [
-   "swing_spin_master",
-   "phase_burrow_open_3"
-  ],
-  "hit_jump_giant__vuln_1": [
+  "hit_jump_giant__vuln": [
    "swing_jump_giant",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_jump_giant__burrow_open_1": [
+  "hit_jump_giant__burrow_open": [
    "swing_jump_giant",
-   "phase_burrow_open_1"
+   "phase_burrow_open"
   ],
-  "hit_jump_giant__vuln_2": [
-   "swing_jump_giant",
-   "phase_vuln_2"
-  ],
-  "hit_jump_giant__burrow_open_2": [
-   "swing_jump_giant",
-   "phase_burrow_open_2"
-  ],
-  "hit_jump_giant__vuln_3": [
-   "swing_jump_giant",
-   "phase_vuln_3"
-  ],
-  "hit_jump_giant__burrow_open_3": [
-   "swing_jump_giant",
-   "phase_burrow_open_3"
-  ],
-  "hit_jump_giant_self__vuln_1": [
+  "hit_jump_giant_self__vuln": [
    "swing_jump_giant_self",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_jump_giant_self__burrow_open_1": [
+  "hit_jump_giant_self__burrow_open": [
    "swing_jump_giant_self",
-   "phase_burrow_open_1"
+   "phase_burrow_open"
   ],
-  "hit_jump_giant_self__vuln_2": [
-   "swing_jump_giant_self",
-   "phase_vuln_2"
-  ],
-  "hit_jump_giant_self__burrow_open_2": [
-   "swing_jump_giant_self",
-   "phase_burrow_open_2"
-  ],
-  "hit_jump_giant_self__vuln_3": [
-   "swing_jump_giant_self",
-   "phase_vuln_3"
-  ],
-  "hit_jump_giant_self__burrow_open_3": [
-   "swing_jump_giant_self",
-   "phase_burrow_open_3"
-  ],
-  "hit_jump_master_self__vuln_1": [
+  "hit_jump_master_self__vuln": [
    "swing_jump_master_self",
-   "phase_vuln_1"
+   "phase_vuln"
   ],
-  "hit_jump_master_self__burrow_open_1": [
+  "hit_jump_master_self__burrow_open": [
    "swing_jump_master_self",
-   "phase_burrow_open_1"
-  ],
-  "hit_jump_master_self__vuln_2": [
-   "swing_jump_master_self",
-   "phase_vuln_2"
-  ],
-  "hit_jump_master_self__burrow_open_2": [
-   "swing_jump_master_self",
-   "phase_burrow_open_2"
-  ],
-  "hit_jump_master_self__vuln_3": [
-   "swing_jump_master_self",
-   "phase_vuln_3"
-  ],
-  "hit_jump_master_self__burrow_open_3": [
-   "swing_jump_master_self",
-   "phase_burrow_open_3"
+   "phase_burrow_open"
   ]
  },
  "slices": [
   {
    "kit": "adult_arrows",
    "variant": "",
-   "positions": 886,
+   "positions": 536,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 255,
-    "Link falls": 135
+    "Link withdraws": 155,
+    "Link falls": 50
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3672
+   "ms": 1203
   },
   {
    "kit": "adult_blade",
    "variant": "",
-   "positions": 287,
+   "positions": 166,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 72,
-    "Link falls": 27,
-    "Link wins": 33
+    "Link withdraws": 43,
+    "Link falls": 11,
+    "Link wins": 15
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 841
+   "ms": 309
   },
   {
    "kit": "adult_bottles",
    "variant": "",
-   "positions": 4540,
+   "positions": 2250,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 1534,
-    "Link falls": 78
+    "Link withdraws": 695,
+    "Link falls": 38
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 23107
+   "ms": 4088
   },
   {
    "kit": "adult_dins",
    "variant": "",
-   "positions": 1240,
+   "positions": 750,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 357,
-    "Link falls": 189
+    "Link withdraws": 217,
+    "Link falls": 70
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 8068
+   "ms": 1307
   },
   {
    "kit": "adult_giant",
    "variant": "",
-   "positions": 1228,
+   "positions": 694,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 399,
-    "Link falls": 66
+    "Link withdraws": 207,
+    "Link falls": 45
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 7384
+   "ms": 1060
   },
   {
    "kit": "adult_lens",
    "variant": "",
-   "positions": 3943,
+   "positions": 2373,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 1122,
-    "Link falls": 642
+    "Link withdraws": 682,
+    "Link falls": 238
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 18317
+   "ms": 3710
   },
   {
    "kit": "adult_nayru",
    "variant": "",
-   "positions": 9245,
+   "positions": 6543,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 2982,
-    "Link falls": 351
+    "Link withdraws": 2003,
+    "Link falls": 130
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 14190
+   "ms": 5615
   },
   {
    "kit": "adult_spin",
    "variant": "",
-   "positions": 4957,
+   "positions": 2997,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 1428,
-    "Link falls": 756
+    "Link withdraws": 868,
+    "Link falls": 280
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 24317
+   "ms": 5023
   }
  ]
 }

@@ -9,11 +9,26 @@ const col = (line: number): Cite => `${COL}:${line}`
 const FD = 'src/overlays/actors/ovl_Boss_Fd/z_boss_fd.c'
 const CC = 'src/code/z_collision_check.c'
 
+/*
+ * The head at its last health (1, after the hammer's clamp at line 859). At that health it makes three fakeout passes
+ * per pop (line 242), so the hole counter (line 270) reaches 4 on the first pop and every burrow hands off to the body
+ * (line 399): one pop per head turn.
+ *
+ * Reported gaps (the types or the decomp checkout cannot express them):
+ * - The animation legs: the emerge rise, the strikes, the burrow before its 25-frame timer (line 392), the knockout
+ *   before the 60-frame stun (lines 576-579) and the two hit animations before the 25-frame sink (lines 606-620) run
+ *   to `Animation_GetLastFrame`, and this checkout has no extracted object data, so their lengths are unknown.
+ * - Two near distances: the emerge knockback needs 120 (line 318), the claw 200 (line 369). The model has one near band.
+ * - Each emerge pass also waits for Link's y above 70 (line 261). The model has no height.
+ * - The breath is not a projectile actor: line 487 adds effects to Boss_Fd's effect array, and Boss_Fd's effect update
+ *   applies the hurt (z_boss_fd.c:1491-1497). The types accept a source in another overlay only with `via`, so the
+ *   attack carries `via` with the spawn line of the effect.
+ */
+
 /** Only the hammer cracks the hidden face (line 856). */
 const HAMMER: DmgType[] = ['HAMMER_SWING', 'HAMMER_JUMP']
-const K = [1, 2, 3] as const
 
-/** `CollisionCheck_GetSwordDamage` (z_collision_check.c:3716): a sword-type hit may always kill (line 890 sets canKill). */
+/** `CollisionCheck_GetSwordDamage` (z_collision_check.c:3715): a sword-type hit may always kill (line 890 sets canKill). */
 const SWORD: Partial<Record<DmgType, number>> = {
   SLASH_KOKIRI: 1, SPIN_KOKIRI: 1,
   JUMP_KOKIRI: 2, SPIN_MASTER: 2, SLASH_MASTER: 2, HAMMER_SWING: 2, DEKU_STICK: 2,
@@ -24,51 +39,60 @@ const SWORD_LINE: Record<number, number> = { 1: 3718, 2: 3720, 4: 3722, 8: 3724 
 /** Every other type the face accepts that Link emits. At health 2 or less these take nothing (line 895), yet still knock the head back down (line 912). */
 const OTHER: DmgType[] = ['SLINGSHOT', 'EXPLOSIVE', 'BOOMERANG', 'ARROW_NORMAL', 'ARROW_FIRE', 'ARROW_ICE', 'ARROW_LIGHT', 'MAGIC_ICE', 'MAGIC_LIGHT']
 
-const hidden = (id: string, label: string, cite: Cite, k: number, frames?: Phase['frames']): Phase => ({
+const hidden = (id: string, label: string, cite: Cite, frames?: Phase['frames']): Phase => ({
   id, label, cite, hittable: HAMMER,
-  overrides: Object.fromEntries(HAMMER.map((d) => [d, { damage: 0, to: `vuln_${k}`, cite: at(859) }])),
+  overrides: Object.fromEntries(HAMMER.map((d) => [d, { damage: 0, to: 'daze', cite: at(859) }])),
   ...(frames ? { frames } : {}),
 })
 
+/** First pass 20 frames after the hand-back (line 823), then four hole times of 5 (line 282) with three 10-frame re-entries (line 297). */
+const UNDERGROUND = 20 + 5 + 3 * (10 + 5)
+
 const phases: Phase[] = [
-  ...K.flatMap((k): Phase[] => [
-    { id: `emerge_${k}`, label: `The head waits under a hole and bursts out (pop ${k})`, hittable: 'none', frames: { value: 10, cite: at(232) }, cite: at(271) },
-    hidden(`idle_${k}`, `The head turns to Link, face armored (pop ${k})`, at(337), k, { value: 20, cite: at(348) }),
-    hidden(`strike_${k}`, `The head claws or breathes fire (pop ${k})`, at(370), k),
-    hidden(`burrow_${k}`, `The head sinks back into the hole (pop ${k})`, at(381), k, { value: 25, cite: at(394) }),
-    { id: `vuln_${k}`, label: `The head lies stunned, face cracked open (pop ${k})`, frames: { value: 60, cite: at(579) }, cite: at(539) },
-    { id: `burrow_open_${k}`, label: `The stunned head sinks back, face still open (pop ${k})`, frames: { value: 25, cite: at(394) }, cite: at(587) },
-  ]),
+  { id: 'wake', label: 'The head waits under the holes, faking out three times', hittable: 'none', frames: { value: UNDERGROUND, cite: at(823) }, cite: at(822) },
+  hidden('up', 'The head rears up out of a hole', at(301)),
+  hidden('idle', 'The head turns to Link, face armored', at(337), { value: 20, cite: at(348) }),
+  hidden('claw', 'The head swipes its claw', at(521)),
+  hidden('breath', 'The head breathes fire', at(412)),
+  hidden('burrow', 'The head sinks back into the hole', at(381), { value: 25, cite: at(394) }),
+  { id: 'daze', label: 'The head is knocked out, still shaking off the blow', hittable: 'none', frames: { value: 30, cite: at(863) }, cite: at(539) },
+  { id: 'vuln', label: 'The head lies stunned, face cracked open', frames: { value: 60, cite: at(579) }, cite: at(539) },
+  { id: 'burrow_open', label: 'The stunned head sinks back, face still open', frames: { value: 25, cite: at(394) }, cite: at(587) },
   { id: 'damaged', label: 'The head reels from the blow and sinks away', hittable: 'none', frames: { value: 25, cite: at(620) }, cite: at(596) },
-  { id: 'away', label: "The head waits below while Volvagia's body flies", hittable: 'none', cite: at(626) },
+  { id: 'away', label: "The head waits below while Volvagia's body flies", hittable: 'none', cite: at(817) },
 ]
 
-const afterBurrow = (k: number, from: string): Step =>
-  k < 3
-    ? { from, to: `emerge_${k + 1}`, label: 'The head pops up at another hole', afterTimer: true, cite: at(404) }
-    : { from, to: 'away', label: 'Third pop done: the body takes to the air', afterTimer: true, cite: at(402) }
+/** The AT collider is set every frame unless Vulnerable or Damaged turn it off (lines 981, 1006-1008, 547, 604). */
+const touch = (from: string): Step => ({ from, to: from, label: 'The head is up beside Link and he touches it', range: 'near', attack: 'claw', cite: at(1007) })
 
 const steps: Step[] = [
-  ...K.flatMap((k): Step[] => [
-    { from: `emerge_${k}`, to: `idle_${k}`, label: 'The head bursts up beside Link, knocking him back', range: 'near', afterTimer: true, attack: 'emerge_knock', cite: at(319) },
-    { from: `emerge_${k}`, to: `idle_${k}`, label: 'The head bursts up', range: 'far', afterTimer: true, cite: at(323) },
-    { from: `idle_${k}`, to: `strike_${k}`, label: 'The head swipes its claw', range: 'near', afterTimer: true, attack: 'claw', cite: at(370) },
-    { from: `idle_${k}`, to: `strike_${k}`, label: 'The head breathes fire', range: 'far', afterTimer: true, attack: 'breath', cite: at(372) },
-    { from: `strike_${k}`, to: `burrow_${k}`, label: 'The head finishes and burrows', cite: at(532) },
-    afterBurrow(k, `burrow_${k}`),
-    { from: `vuln_${k}`, to: `burrow_open_${k}`, label: 'The head comes to and burrows', afterTimer: true, cite: at(587) },
-    afterBurrow(k, `burrow_open_${k}`),
-  ]),
+  { from: 'wake', to: 'up', label: 'The head bursts up beside Link, knocking him back', range: 'near', afterTimer: true, attack: 'emerge_knock', cite: at(319) },
+  { from: 'wake', to: 'up', label: 'The head bursts up', range: 'far', afterTimer: true, cite: at(305) },
+  { from: 'up', to: 'idle', label: 'The head rises beside Link, touching him', range: 'near', attack: 'claw', cite: at(323) },
+  { from: 'up', to: 'idle', label: 'The head is up', range: 'far', cite: at(323) },
+  touch('idle'),
+  { from: 'idle', to: 'claw', label: 'The head rears to swipe its claw', range: 'near', afterTimer: true, cite: at(370) },
+  { from: 'idle', to: 'breath', label: 'The head breathes fire', range: 'far', afterTimer: true, attack: 'breath', cite: at(372) },
+  { from: 'claw', to: 'burrow', label: 'The claw swipe lands', range: 'near', attack: 'claw', cite: at(532) },
+  { from: 'claw', to: 'burrow', label: 'The head finishes its swipe and burrows', range: 'far', cite: at(532) },
+  { from: 'breath', to: 'burrow', label: 'The head finishes its breath beside Link, touching him', range: 'near', attack: 'claw', cite: at(432) },
+  { from: 'breath', to: 'burrow', label: 'The head finishes its breath and burrows', range: 'far', cite: at(432) },
+  touch('burrow'),
+  { from: 'burrow', to: 'away', label: 'The hole counter is past 3: the body takes to the air', afterTimer: true, cite: at(402) },
+  { from: 'daze', to: 'vuln', label: 'The head lies still, open to hits', afterTimer: true, cite: at(1001) },
+  { from: 'vuln', to: 'burrow_open', label: 'The head comes to and burrows', afterTimer: true, cite: at(587) },
+  touch('burrow_open'),
+  { from: 'burrow_open', to: 'away', label: 'The hole counter is past 3: the body takes to the air', afterTimer: true, cite: at(402) },
   { from: 'damaged', to: 'away', label: 'The head is gone: the body takes to the air', afterTimer: true, cite: at(626) },
-  { from: 'away', to: 'emerge_1', label: 'The body dives into a hole and the head rises again', cite: at(822) },
+  { from: 'away', to: 'wake', label: 'The body dives into a hole and the head rises again', cite: at(822) },
 ]
 
 const attacks: Attack[] = [
   { id: 'emerge_knock', label: 'The emerging head', damage: 32, effect: { kind: 'knockback' }, blockable: false, dodgeable: true, source: at(319) },
-  { id: 'claw', label: "The head's claw swipe", damage: 32, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: col(18) },
+  { id: 'claw', label: "The head's claws and jaws (live whenever it is up and not stunned)", damage: 32, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: col(18) },
   {
-    id: 'breath', label: "The head's fire breath", damage: 48, effect: { kind: 'burn' }, blockable: false, dodgeable: true,
-    source: `${FD}:1497`, via: { overlay: 'ovl_Boss_Fd', spawn: at(487) },
+    id: 'breath', label: "The head's fire breath", damage: 48, effect: { kind: 'burn' }, blockable: false, dodgeable: true, source: `${FD}:1497`,
+    via: { overlay: 'ovl_Boss_Fd', spawn: at(487) },
   },
 ]
 
@@ -86,23 +110,24 @@ export const bossFd2: ActorSpec = {
   role: 'boss',
   summary:
     "Volvagia's head, popping out of the lava holes. It has no health of its own: every hit drains the flying body's (Boss_Fd), and the full fight is Boss_Fd's encounter. " +
-    'This encounter is the last stand the head\'s own code decides: the hammer clamps her health to 1 (line 859), so the head pops, claws or breathes fire, and sinks; ' +
-    'a hammer blow cracks the face and stuns it, and one sword hit on the open face kills, while anything else only sends it back under.',
+    "This encounter is the last stand at health 1, where a hammer from 4 or less leaves her (line 859). The head fakes out three times, pops once, claws or breathes fire, " +
+    'hurts by touch whenever it is up and not stunned, and sinks while the body flies. A hammer blow cracks the face and stuns it; one sword hit on the open face kills, ' +
+    'while anything else only sends it back under.',
   cite: at(192),
   pools: [{ id: 'volvagia', label: 'Volvagia (last health)', hp: { value: 1, cite: at(859) }, then: 'defeated' }],
   damage: { kind: 'custom', entries },
   phases,
-  start: 'emerge_1',
+  start: 'wake',
   range: 'far',
   steps,
   attacks,
   actionFuncs: {
-    BossFd2_Emerge: 'emerge_*',
-    BossFd2_Idle: 'idle_*',
-    BossFd2_ClawSwipe: 'strike_*',
-    BossFd2_BreatheFire: 'strike_*',
-    BossFd2_Burrow: 'burrow_*',
-    BossFd2_Vulnerable: 'vuln_*',
+    BossFd2_Emerge: 'wake',
+    BossFd2_Idle: 'idle',
+    BossFd2_ClawSwipe: 'claw',
+    BossFd2_BreatheFire: 'breath',
+    BossFd2_Burrow: 'burrow',
+    BossFd2_Vulnerable: 'vuln',
     BossFd2_Damaged: 'damaged',
     BossFd2_Wait: 'away',
     BossFd2_Death: out('death sequence after the finishing blow (set up at line 905); the encounter has already ended', 635),
@@ -114,12 +139,13 @@ export const bossFd2: ActorSpec = {
   loadouts: standardLoadouts(['adult'], 4),
   expected: {
     deadVerbs: {
-      emerge_1_timer_clears: 'the head is underground and unhittable while emerging, and it leaves only by its steps that wait for the timer, so the timer is always spent',
-      emerge_2_timer_clears: 'as emerge_1_timer_clears',
-      emerge_3_timer_clears: 'as emerge_1_timer_clears',
-      damaged_timer_clears: 'damaged is unhittable and leaves only by its step that waits for the timer, so the timer is always spent',
-      miss_hammer_swing__damaged: 'damaged lasts one beat (25 frames) and is entered only by Link\'s own hit, so it is gone before his next move',
-      miss_hammer_jump__damaged: 'as miss_hammer_swing__damaged',
+      wake_timer_clears: 'wake cannot be hit and is left only by its steps that wait for the timer, so the timer is always spent',
+      daze_timer_clears: 'daze cannot be hit and is left only by its step that waits for the timer, so the timer is always spent',
+      damaged_timer_clears: 'damaged cannot be hit and is left only by its step that waits for the timer, so the timer is always spent',
+      hit_hammer_swing__breath: "breath is entered only by the idle step that needs Link far, and every step out of it fires the next beat at either range, so Link's melee hammer never finds it",
+      hit_hammer_jump__breath: 'as hit_hammer_swing__breath',
+      breath_lands_again: 'the burn lasts 5 beats (mean of 0-199 frames), and the next breath is at least 8 beats later: burrow, away, a 4-beat wake, up and idle',
+      breath_lands_dd_again: 'as breath_lands_again',
     },
   },
 }
