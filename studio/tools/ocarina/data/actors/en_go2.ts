@@ -63,6 +63,10 @@ export const enGo2: ActorSpec = {
     { from: 'roll_big', to: 'roll_big', label: 'The Goron rolls into Link', range: 'near', attack: 'roll', cite: at(925) },
     { from: 'roll_link', to: 'roll_link', label: 'Goron Link rolls into Link', range: 'near', attack: 'roll', cite: at(925) },
     { from: 'roll_small', to: 'roll_small', label: 'The Goron rolls into Link', range: 'near', attack: 'roll', cite: at(925) },
+    // The roll follows its looped path (EnGo2_Orient) whatever Link does, so it comes around to a Link standing off it.
+    { from: 'roll_big', to: 'roll_big', label: 'The Goron rolls along its path toward Link', range: 'far', move: 'near', cite: at(960) },
+    { from: 'roll_link', to: 'roll_link', label: 'Goron Link rolls along his path toward Link', range: 'far', move: 'near', cite: at(960) },
+    { from: 'roll_small', to: 'roll_small', label: 'The Goron rolls along its path toward Link', range: 'far', move: 'near', cite: at(960) },
     { from: 'roll_small', to: 'stopped_small', label: 'The Goron reaches the end of its path and stops', cite: at(1767) },
   ],
   attacks: [

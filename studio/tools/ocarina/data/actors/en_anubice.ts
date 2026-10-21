@@ -19,10 +19,12 @@ export const enAnubice: ActorSpec = {
   cite: at(45),
   pools: [],
   damage: {
-    kind: 'custom',
-    entries: {
-      ARROW_FIRE: { damage: 2, to: 'defeated', cite: at(404) },
-      MAGIC_FIRE: { damage: 3, to: 'defeated', cite: at(404) },
+    kind: 'decomp',
+    table: 'sDamageTable',
+    reactions: {
+      ANUBICE_DMG_REACT_NONE: { damage: false, note: 'no health is ever set or drained: a hit that is not fire only knocks Anubis back and keeps its action', cite: at(415) },
+      ANUBICE_DMG_REACT_0xF: { damage: false, note: 'read the same as ANUBICE_DMG_REACT_NONE: only the fire reaction is tested, so this hit only knocks Anubis back', cite: at(415) },
+      ANUBICE_DMG_REACT_FIRE: { damage: false, to: 'defeated', note: 'fire arrow or Din\'s Fire starts the finishing blow outright, with no health check', cite: at(404) },
     },
   },
   phases: [

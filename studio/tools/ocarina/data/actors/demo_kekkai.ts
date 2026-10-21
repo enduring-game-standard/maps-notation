@@ -20,6 +20,16 @@ const at = (line: number): Cite => `${F}:${line}`
  * Ganon's Castle is an adult place in the game, but the decomp here has no scene data to cite, so this is a
  * judgment: both ages are kept, and child kits simply lack Light Arrows.
  */
+/**
+ * Link starts far and closing in is his move; the barrier's touch step fires that same beat, and every outcome of it
+ * knocks him far: a hit, a Double Defense hit, and Nayru's Love too, which stops the damage but not the
+ * Actor_SetPlayerKnockbackLargeNoDamage (lines 207, 265; a large knockback ignores invincibility, z_player.c:4865;
+ * link.ts nayrus_love). So Link is near on his own turn only after a Light Arrow dispels a trial barrier, whose
+ * dispelled phase has no step, and only adult_arrows carries Light Arrows.
+ */
+const NEAR_ONLY_AFTER_DISPEL =
+  'needs Link near on his turn; the barrier knocks him far on every beat he closes in, Nayru\'s Love included (it blocks the damage, not the knockback), so he is near on his turn only after a Light Arrow dispels a trial barrier, and adult_arrows, the one kit with Light Arrows, lacks this gear'
+
 export const demoKekkai: ActorSpec = {
   overlay: 'ovl_Demo_Kekkai',
   name: "Ganon's Castle barrier",
@@ -59,25 +69,10 @@ export const demoKekkai: ActorSpec = {
   expected: {
     deadVerbs: {
       link_hurt_overkill: "every kit's health is a multiple of the barrier's 4 (2 with Double Defense), so a touch never takes more than Link has left",
-      link_deku_stick: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      link_hammer_swing: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      link_slash_giant_1: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      link_slash_giant_2: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      link_shield_1: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      link_jump_giant_1: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      link_jump_giant_3: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      link_jump_master_3: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      link_hammer_jump: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_deku_stick: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_hammer_swing: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_slash_giant: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_magic_fire: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_spin_giant: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_jump_kokiri_self: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_jump_giant: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_jump_giant_self: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_jump_master_self: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
-      miss_hammer_jump: 'needs Link near at his turn, but the barrier throws him back on the beat he closes in; only Nayru\'s Love keeps him near, and the Nayru kits carry neither this item nor this sword',
+      ...Object.fromEntries(
+        ['link_deku_stick', 'link_hammer_swing', 'link_slash_kokiri', 'link_slash_giant_1', 'link_slash_giant_2', 'link_shield_1', 'link_shield_2_1', 'link_shield_2_2', 'link_jump_kokiri_1', 'link_jump_giant_1', 'link_jump_giant_3', 'link_jump_master_3', 'link_hammer_jump', 'miss_deku_stick', 'miss_hammer_swing', 'miss_slash_kokiri', 'miss_slash_giant', 'miss_magic_fire', 'miss_spin_kokiri', 'miss_spin_giant', 'miss_jump_kokiri', 'miss_jump_kokiri_self', 'miss_jump_giant', 'miss_jump_giant_self', 'miss_jump_master_self', 'miss_hammer_jump'].map((v) => [v, NEAR_ONLY_AFTER_DISPEL]),
+      ),
+      barrier_dodged: 'a dodge is Link\'s own move, so it needs him near on his turn while the barrier stands; the barrier knocks him far on every beat he is near (NEAR_ONLY_AFTER_DISPEL), and once dispelled it has no attack',
     },
   },
 }

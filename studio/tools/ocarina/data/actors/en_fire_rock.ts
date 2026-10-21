@@ -18,6 +18,7 @@ export const enFireRock: ActorSpec = {
     { id: 'fall_pieces', label: 'Two broken pieces bounce out', cite: at(252) },
     { id: 'gone', label: 'The rock has crumbled away', hittable: 'none', cite: at(277) },
     { id: 'on_floor', label: 'A burning rock rests on the floor', cite: at(308) },
+    { id: 'on_floor_blocked', label: 'The burning rock struck Link\'s shield', cite: at(381) },
     { id: 'ceiling_armed', label: 'A ceiling spot waits for Link', hittable: 'none', cite: at(283) },
     { id: 'fall_ceiling', label: 'A rock falls from the ceiling spot', cite: at(289) },
     { id: 'fall_pieces_ceiling', label: 'Pieces of the ceiling rock bounce out', cite: at(252) },
@@ -38,6 +39,7 @@ export const enFireRock: ActorSpec = {
     { from: 'fall_pieces', to: 'gone', label: 'A piece bounces into Link', range: 'near', attack: 'rock', cite: at(255) },
     { from: 'fall_pieces', to: 'gone', label: 'The pieces land and crumble', cite: at(255) },
     { from: 'on_floor', to: 'on_floor', label: 'Link brushes the burning rock', range: 'near', attack: 'floor_burn', cite: at(380) },
+    { from: 'on_floor_blocked', to: 'on_floor', label: 'The blocked rock knocks Link back', attack: 'floor_push', cite: at(384) },
     { from: 'ceiling_armed', to: 'fall_ceiling', label: 'Link steps under the ceiling spot and a rock drops', range: 'near', cite: at(286) },
     { from: 'fall_ceiling', to: 'fall_pieces_ceiling', label: 'The ceiling rock lands on Link and breaks', range: 'near', attack: 'rock', cite: at(227) },
     { from: 'fall_ceiling', to: 'fall_pieces_ceiling', label: 'The ceiling rock lands away from Link', range: 'far', cite: at(227) },
@@ -47,7 +49,10 @@ export const enFireRock: ActorSpec = {
   ],
   attacks: [
     { id: 'rock', label: 'Falling rock', damage: 8, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(58) },
-    { id: 'floor_burn', label: 'Burning floor rock', damage: 8, effect: { kind: 'burn' }, blockable: true, dodgeable: true, source: at(78) },
+    { id: 'floor_burn', label: 'Burning floor rock', damage: 8, effect: { kind: 'burn' }, blockable: true, dodgeable: true, source: at(78), onBlock: { to: 'on_floor_blocked', cite: at(381) } },
+    // Set on any AT hit on Link, shield included; after an unshielded hit Link's 20-frame invincibility drops it
+    // (z_player.c:4865 needs invincibilityTimer == 0 for a small knockback), so only a blocked contact lands it.
+    { id: 'floor_push', label: 'Burning floor rock knocks Link back (Actor_SetPlayerKnockbackSmall, 4 damage)', damage: 4, effect: { kind: 'knockback' }, blockable: false, dodgeable: false, source: at(384) },
   ],
   actionFuncs: {
     EnFireRock_Fall: 'fall_*',
@@ -58,6 +63,7 @@ export const enFireRock: ActorSpec = {
   atSources: {
     [at(58)]: 'rock',
     [at(78)]: 'floor_burn',
+    [at(384)]: 'floor_push',
   },
   loadouts: standardLoadouts(['child', 'adult']),
   expected: {

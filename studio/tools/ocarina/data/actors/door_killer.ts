@@ -41,7 +41,7 @@ export const doorKiller: ActorSpec = {
     { from: 'rise', to: 'wait', label: 'The door stands again', afterTimer: true, cite: at(276) },
   ],
   attacks: [
-    { id: 'slam', label: 'Falling door (Actor_SetPlayerKnockbackLarge, 0x10 damage)', damage: 16, effect: { kind: 'knockback' }, blockable: false, dodgeable: true, source: at(68) },
+    { id: 'slam', label: 'Falling door (Actor_SetPlayerKnockbackLarge, 0x10 damage)', damage: 16, effect: { kind: 'knockback' }, blockable: false, dodgeable: true, source: at(369) },
   ],
   actionFuncs: {
     DoorKiller_Wait: 'wait',
@@ -54,6 +54,7 @@ export const doorKiller: ActorSpec = {
     DoorKiller_FallAsRubble: { excluded: 'the four rubble pieces spawned when the door breaks; they have no collider and despawn on a timer', cite: at(237) },
   },
   atSources: {
+    [at(369)]: 'slam',
     [at(68)]: {
       excluded: 'the cylinder is never registered as an attacker: the file calls CollisionCheck_SetAC for it (DoorKiller_SetAC) and never CollisionCheck_SetAT. The slam hurts Link by a direct distance check that calls Actor_SetPlayerKnockbackLarge with 0x10 damage, modeled as the slam attack',
       cite: at(252),

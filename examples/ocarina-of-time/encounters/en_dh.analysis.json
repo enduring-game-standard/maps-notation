@@ -252,7 +252,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 16429
+   "ms": 13973
   },
   {
    "kit": "adult_blade",
@@ -266,7 +266,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2516
+   "ms": 2949
   },
   {
    "kit": "adult_bottles",
@@ -280,7 +280,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 21150
+   "ms": 20624
   },
   {
    "kit": "adult_dins",
@@ -294,7 +294,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 16660
+   "ms": 14600
   },
   {
    "kit": "adult_giant",
@@ -308,7 +308,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 15409
+   "ms": 13590
   },
   {
    "kit": "adult_lens",
@@ -322,7 +322,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 47469
+   "ms": 44774
   },
   {
    "kit": "adult_nayru",
@@ -336,7 +336,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 125962
+   "ms": 118945
   },
   {
    "kit": "adult_spin",
@@ -350,7 +350,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 70989
+   "ms": 65869
   },
   {
    "kit": "child_blade",
@@ -364,7 +364,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 3578
+   "ms": 3289
   },
   {
    "kit": "child_bottles",
@@ -378,7 +378,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 12548
+   "ms": 9821
   },
   {
    "kit": "child_dins",
@@ -392,7 +392,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 21917
+   "ms": 21142
   },
   {
    "kit": "child_lens",
@@ -406,7 +406,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 69407
+   "ms": 66417
   },
   {
    "kit": "child_nayru",
@@ -420,7 +420,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 193364
+   "ms": 182664
   },
   {
    "kit": "child_spin",
@@ -434,7 +434,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 99803
+   "ms": 94428
   }
  ]
 }
