@@ -10,7 +10,7 @@ export const enOkuta: ActorSpec = {
   name: 'Octorok',
   role: 'enemy',
   summary:
-    'A water-dwelling octopus with one health point. It surfaces when Link is at a distance, spits rocks at him, and sinks when he comes close. Any damaging hit kills it; an ice arrow freezes it first.',
+    'A water-dwelling octopus with one health point. It surfaces when Link is at a distance, spits rocks at him, and sinks when he comes close. A Deku Shield, or an adult\'s Hylian Shield, sends a rock back at it. Any damaging hit kills it; an ice arrow freezes it first.',
   cite: at(37),
   pools: [{ id: 'body', label: 'Octorok', hp: { value: 1, cite: at(89) }, then: 'defeated' }],
   damage: {
@@ -40,7 +40,19 @@ export const enOkuta: ActorSpec = {
     { from: 'shoot', to: 'hide', label: 'Link comes close and the Octorok sinks', range: 'near', cite: at(402) },
     { from: 'hide', to: 'submerged', label: 'Octorok is under', cite: at(337) },
   ],
-  attacks: [{ id: 'rock', label: 'Octorok rock', damage: 8, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(60) }],
+  attacks: [
+    {
+      id: 'rock',
+      label: 'Octorok rock',
+      damage: 8,
+      effect: { kind: 'none' },
+      blockable: true,
+      dodgeable: true,
+      source: at(60),
+      via: { overlay: 'ovl_En_Okuta', spawn: at(285) },
+      reflect: { shields: [{ gear: 'deku_shield' }, { gear: 'hylian_shield', ages: ['adult'] }], as: 'DEKU_STICK', damage: 8, cite: at(508) },
+    },
+  ],
   actionFuncs: {
     EnOkuta_WaitToAppear: 'submerged',
     EnOkuta_Appear: 'appear',
@@ -55,13 +67,15 @@ export const enOkuta: ActorSpec = {
   atSources: {
     [at(60)]: 'rock',
     [at(508)]: post(
-      'a rock bounced off a Deku Shield (or an adult Hylian Shield) turns into a player attack (AT_TYPE_PLAYER, DMG_DEKU_STICK) that can hit the Octorok, never Link. The spec types have no way to say a blocked attack becomes a hit on the enemy, so the reflection is not modeled',
+      'a rock bounced off a Deku Shield (or an adult Hylian Shield) turns into a player attack (AT_TYPE_PLAYER, DMG_DEKU_STICK) that can hit the Octorok, never Link; it is carried as the rock\'s reflect',
       507,
     ),
   },
   loadouts: standardLoadouts(['child', 'adult']),
   expected: {
     deadVerbs: {
+      miss_reflect_rock__submerged: 'the reflected rock resolves on the beat it was spat, and spitting always leaves the Octorok floating, never under the water',
+      rock_blocked_deku_shield: 'a raised Deku Shield always sends the rock back (line 502), and the reflection outranks the plain block',
       link_hurt_overkill: 'the rock is the only damage, and in every kit Link starts at 32 health and loses 8 (4 with Double Defense) per rock, so his health reaches exactly 0 and never has damage left over',
     },
   },

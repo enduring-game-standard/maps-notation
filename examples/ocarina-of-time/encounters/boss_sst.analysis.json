@@ -1,5 +1,5 @@
 {
- "positions": 450850,
+ "positions": 1180217,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -10,15 +10,10 @@
  "livelocks": 0,
  "deadVerbs": [
   "stun_open_timer_clears",
-  "unseen_deku_nut__ice",
   "hit_explosive__down1_1_wait",
   "hit_explosive__down2_ready",
   "hit_explosive__down2_charge",
   "hit_arrow_normal__down1_1_wait",
-  "hit_arrow_normal__down2_ready",
-  "hit_arrow_normal__down2_charge",
-  "hit_arrow_normal__ice",
-  "unseen_arrow_normal__ice",
   "hit_hammer_swing__down1_1_wait",
   "hit_hammer_swing__down2_ready",
   "hit_hammer_swing__down2_charge",
@@ -26,33 +21,26 @@
   "hit_hookshot__down2_ready",
   "hit_hookshot__down2_charge",
   "hit_slash_master__down1_1_wait",
-  "hit_slash_master__ice",
-  "unseen_slash_master__ice",
   "hit_slash_giant__down1_1_wait",
   "hit_slash_giant__down2_ready",
   "hit_slash_giant__down2_charge",
   "hit_arrow_fire__down1_1_wait",
   "hit_arrow_fire__down2_ready",
   "hit_arrow_fire__down2_charge",
-  "hit_arrow_fire__ice",
-  "unseen_arrow_fire__ice",
+  "hit_arrow_fire__ice_ready",
+  "hit_arrow_fire__ice_break",
   "hit_arrow_ice__down1_1_wait",
-  "hit_arrow_ice__down2_ready",
-  "hit_arrow_ice__down2_charge",
-  "hit_arrow_ice__ice",
-  "unseen_arrow_ice__ice",
   "hit_arrow_light__down1_1_wait",
   "hit_arrow_light__down2_ready",
   "hit_arrow_light__down2_charge",
-  "hit_arrow_light__ice",
-  "unseen_arrow_light__ice",
-  "unseen_shield__ice",
+  "hit_arrow_light__ice_ready",
+  "hit_arrow_light__ice_break",
+  "unseen_arrow_light__ice_ready",
+  "unseen_arrow_light__ice_break",
   "hit_spin_giant__down1_1_wait",
   "hit_spin_giant__down2_ready",
   "hit_spin_giant__down2_charge",
   "hit_spin_master__down1_1_wait",
-  "hit_spin_master__ice",
-  "unseen_spin_master__ice",
   "hit_jump_giant__down1_1_wait",
   "hit_jump_giant__down2_ready",
   "hit_jump_giant__down2_charge",
@@ -60,121 +48,181 @@
   "hit_jump_giant_self__down2_ready",
   "hit_jump_giant_self__down2_charge",
   "hit_jump_master__down1_1_wait",
-  "hit_jump_master__ice",
-  "unseen_jump_master__ice",
   "hit_jump_master_self__down1_1_wait",
-  "hit_jump_master_self__ice",
-  "unseen_jump_master_self__ice",
   "hit_hammer_jump__down1_1_wait",
   "hit_hammer_jump__down2_ready",
   "hit_hammer_jump__down2_charge",
-  "slam_lands_far",
-  "slam_lands_dd_far",
-  "shockwave_lands_near",
-  "shockwave_lands_dd_near",
   "grab_lands_again",
   "grab_lands_dd_again",
   "link_helpless_grab"
  ],
  "kitSplit": {
-  "hit_explosive__ice": [
+  "hit_explosive__ice_ready": [
    "swing_explosive",
-   "phase_ice"
+   "phase_ice_ready"
   ],
-  "unseen_explosive__ice": [
+  "hit_explosive__ice_break": [
    "swing_explosive",
-   "phase_ice"
+   "phase_ice_break"
   ],
-  "hit_hammer_swing__ice": [
+  "unseen_explosive__ice_ready": [
+   "swing_explosive",
+   "phase_ice_ready"
+  ],
+  "unseen_explosive__ice_break": [
+   "swing_explosive",
+   "phase_ice_break"
+  ],
+  "hit_hammer_swing__ice_ready": [
    "swing_hammer_swing",
-   "phase_ice"
+   "phase_ice_ready"
   ],
-  "unseen_hammer_swing__ice": [
+  "hit_hammer_swing__ice_break": [
    "swing_hammer_swing",
-   "phase_ice"
+   "phase_ice_break"
   ],
-  "hit_hookshot__ice": [
+  "unseen_hammer_swing__ice_ready": [
+   "swing_hammer_swing",
+   "phase_ice_ready"
+  ],
+  "unseen_hammer_swing__ice_break": [
+   "swing_hammer_swing",
+   "phase_ice_break"
+  ],
+  "hit_hookshot__ice_ready": [
    "swing_hookshot",
-   "phase_ice"
+   "phase_ice_ready"
   ],
-  "unseen_hookshot__ice": [
+  "hit_hookshot__ice_break": [
    "swing_hookshot",
-   "phase_ice"
+   "phase_ice_break"
   ],
-  "hit_slash_giant__ice": [
+  "unseen_hookshot__ice_ready": [
+   "swing_hookshot",
+   "phase_ice_ready"
+  ],
+  "unseen_hookshot__ice_break": [
+   "swing_hookshot",
+   "phase_ice_break"
+  ],
+  "hit_slash_giant__ice_ready": [
    "swing_slash_giant",
-   "phase_ice"
+   "phase_ice_ready"
+  ],
+  "hit_slash_giant__ice_break": [
+   "swing_slash_giant",
+   "phase_ice_break"
   ],
   "hit_slash_giant__stun_open": [
    "swing_slash_giant",
    "phase_stun_open"
   ],
-  "unseen_slash_giant__ice": [
+  "unseen_slash_giant__ice_ready": [
    "swing_slash_giant",
-   "phase_ice"
+   "phase_ice_ready"
   ],
-  "unseen_magic_fire__ice": [
+  "unseen_slash_giant__ice_break": [
+   "swing_slash_giant",
+   "phase_ice_break"
+  ],
+  "unseen_magic_fire__ice_ready": [
    "swing_magic_fire",
-   "phase_ice"
+   "phase_ice_ready"
   ],
-  "hit_spin_giant__ice": [
+  "unseen_magic_fire__ice_break": [
+   "swing_magic_fire",
+   "phase_ice_break"
+  ],
+  "hit_spin_giant__ice_ready": [
    "swing_spin_giant",
-   "phase_ice"
+   "phase_ice_ready"
+  ],
+  "hit_spin_giant__ice_break": [
+   "swing_spin_giant",
+   "phase_ice_break"
   ],
   "hit_spin_giant__stun_open": [
    "swing_spin_giant",
    "phase_stun_open"
   ],
-  "unseen_spin_giant__ice": [
+  "unseen_spin_giant__ice_ready": [
    "swing_spin_giant",
-   "phase_ice"
+   "phase_ice_ready"
   ],
-  "hit_jump_giant__ice": [
+  "unseen_spin_giant__ice_break": [
+   "swing_spin_giant",
+   "phase_ice_break"
+  ],
+  "hit_jump_giant__ice_ready": [
    "swing_jump_giant",
-   "phase_ice"
+   "phase_ice_ready"
+  ],
+  "hit_jump_giant__ice_break": [
+   "swing_jump_giant",
+   "phase_ice_break"
   ],
   "hit_jump_giant__stun_open": [
    "swing_jump_giant",
    "phase_stun_open"
   ],
-  "unseen_jump_giant__ice": [
+  "unseen_jump_giant__ice_ready": [
    "swing_jump_giant",
-   "phase_ice"
+   "phase_ice_ready"
   ],
-  "hit_jump_giant_self__ice": [
+  "unseen_jump_giant__ice_break": [
+   "swing_jump_giant",
+   "phase_ice_break"
+  ],
+  "hit_jump_giant_self__ice_ready": [
    "swing_jump_giant_self",
-   "phase_ice"
+   "phase_ice_ready"
+  ],
+  "hit_jump_giant_self__ice_break": [
+   "swing_jump_giant_self",
+   "phase_ice_break"
   ],
   "hit_jump_giant_self__stun_open": [
    "swing_jump_giant_self",
    "phase_stun_open"
   ],
-  "unseen_jump_giant_self__ice": [
+  "unseen_jump_giant_self__ice_ready": [
    "swing_jump_giant_self",
-   "phase_ice"
+   "phase_ice_ready"
   ],
-  "hit_hammer_jump__ice": [
-   "swing_hammer_jump",
-   "phase_ice"
+  "unseen_jump_giant_self__ice_break": [
+   "swing_jump_giant_self",
+   "phase_ice_break"
   ],
-  "unseen_hammer_jump__ice": [
+  "hit_hammer_jump__ice_ready": [
    "swing_hammer_jump",
-   "phase_ice"
+   "phase_ice_ready"
+  ],
+  "hit_hammer_jump__ice_break": [
+   "swing_hammer_jump",
+   "phase_ice_break"
+  ],
+  "unseen_hammer_jump__ice_ready": [
+   "swing_hammer_jump",
+   "phase_ice_ready"
+  ],
+  "unseen_hammer_jump__ice_break": [
+   "swing_hammer_jump",
+   "phase_ice_break"
   ]
  },
  "slices": [
   {
    "kit": "adult_arrows",
    "variant": "",
-   "positions": 4431,
+   "positions": 4539,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 1380,
+    "Link withdraws": 1416,
     "Link falls": 140
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 11033
+   "ms": 22429
   },
   {
    "kit": "adult_blade",
@@ -187,7 +235,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2696
+   "ms": 2533
   },
   {
    "kit": "adult_bottles",
@@ -200,7 +248,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 8627
+   "ms": 14411
   },
   {
    "kit": "adult_dins",
@@ -213,7 +261,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 11506
+   "ms": 25271
   },
   {
    "kit": "adult_giant",
@@ -226,7 +274,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 8552
+   "ms": 17566
+  },
+  {
+   "kit": "adult_ice_lens",
+   "variant": "",
+   "positions": 729271,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 231552,
+    "Link falls": 11124,
+    "Link wins": 810
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1622650
   },
   {
    "kit": "adult_lens",
@@ -240,12 +302,12 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 902302
+   "ms": 896232
   },
   {
    "kit": "adult_nayru",
    "variant": "",
-   "positions": 57185,
+   "positions": 57173,
    "complete": true,
    "outcomes": {
     "Link withdraws": 17490,
@@ -253,7 +315,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 89722
+   "ms": 152240
   },
   {
    "kit": "adult_spin",
@@ -266,7 +328,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 55482
+   "ms": 73676
   }
  ]
 }

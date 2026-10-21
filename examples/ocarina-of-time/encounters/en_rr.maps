@@ -2869,7 +2869,7 @@ verb approach_step_2 "Like Like rears up to swallow" by world priority 69 in ene
   give beat_end
   need range_near
 
-verb approach_step_3 "Like Like swallows Link and keeps his deku shield" by world priority 69 in enemy at 2180 1480
+verb approach_step_3 "Like Like swallows Link and finds his deku shield to eat" by world priority 69 in enemy at 2180 1480
   take enemy_act
   take phase_approach
   give phase_approach_spat_fed
@@ -2880,7 +2880,7 @@ verb approach_step_3 "Like Like swallows Link and keeps his deku shield" by worl
   take range_near
   give range_far
 
-verb approach_step_4 "Like Like swallows Link and keeps his hylian shield" by world priority 69 in enemy at 2040 1550
+verb approach_step_4 "Like Like swallows Link and finds his hylian shield to eat" by world priority 69 in enemy at 2040 1550
   take enemy_act
   take phase_approach
   give phase_approach_spat_fed
@@ -2891,7 +2891,7 @@ verb approach_step_4 "Like Like swallows Link and keeps his hylian shield" by wo
   take range_near
   give range_far
 
-verb approach_step_5 "Like Like swallows Link and keeps his goron tunic" by world priority 69 in enemy at 2180 1550
+verb approach_step_5 "Like Like swallows Link and finds his goron tunic to eat" by world priority 69 in enemy at 2180 1550
   take enemy_act
   take phase_approach
   give phase_approach_spat_fed
@@ -2921,7 +2921,7 @@ verb reach_ticks "Like Like stretches up to swallow Link: a beat passes" by worl
   take timer_reach
   give enemy_act
 
-verb reach_step_1 "Like Like swallows Link and keeps his deku shield" by world priority 69 in enemy at 2040 1690
+verb reach_step_1 "Like Like swallows Link and finds his deku shield to eat" by world priority 69 in enemy at 2040 1690
   take enemy_act
   take phase_reach
   give phase_approach_spat_fed
@@ -2932,7 +2932,7 @@ verb reach_step_1 "Like Like swallows Link and keeps his deku shield" by world p
   take range_near
   give range_far
 
-verb reach_step_2 "Like Like swallows Link and keeps his hylian shield" by world priority 69 in enemy at 2180 1690
+verb reach_step_2 "Like Like swallows Link and finds his hylian shield to eat" by world priority 69 in enemy at 2180 1690
   take enemy_act
   take phase_reach
   give phase_approach_spat_fed
@@ -2943,7 +2943,7 @@ verb reach_step_2 "Like Like swallows Link and keeps his hylian shield" by world
   take range_near
   give range_far
 
-verb reach_step_3 "Like Like swallows Link and keeps his goron tunic" by world priority 69 in enemy at 2040 1760
+verb reach_step_3 "Like Like swallows Link and finds his goron tunic to eat" by world priority 69 in enemy at 2040 1760
   take enemy_act
   take phase_reach
   give phase_approach_spat_fed
@@ -2981,7 +2981,7 @@ verb gape_ticks "Like Like closes its gaping mouth: a beat passes" by world prio
   take timer_gape
   give enemy_act
 
-verb gape_step_1 "Like Like swallows Link and keeps his deku shield" by world priority 69 in enemy at 2040 1900
+verb gape_step_1 "Like Like swallows Link and finds his deku shield to eat" by world priority 69 in enemy at 2040 1900
   take enemy_act
   take phase_gape
   give phase_approach_spat_fed
@@ -2992,7 +2992,7 @@ verb gape_step_1 "Like Like swallows Link and keeps his deku shield" by world pr
   take range_near
   give range_far
 
-verb gape_step_2 "Like Like swallows Link and keeps his hylian shield" by world priority 69 in enemy at 2180 1900
+verb gape_step_2 "Like Like swallows Link and finds his hylian shield to eat" by world priority 69 in enemy at 2180 1900
   take enemy_act
   take phase_gape
   give phase_approach_spat_fed
@@ -3003,7 +3003,7 @@ verb gape_step_2 "Like Like swallows Link and keeps his hylian shield" by world 
   take range_near
   give range_far
 
-verb gape_step_3 "Like Like swallows Link and keeps his goron tunic" by world priority 69 in enemy at 2040 1970
+verb gape_step_3 "Like Like swallows Link and finds his goron tunic to eat" by world priority 69 in enemy at 2040 1970
   take enemy_act
   take phase_gape
   give phase_approach_spat_fed
@@ -3252,7 +3252,7 @@ verb approach_wait_step_2 "Like Like rears up to swallow" by world priority 69 i
   give beat_end
   need range_near
 
-verb approach_wait_step_3 "Like Like swallows Link and keeps his deku shield" by world priority 69 in enemy at 2180 3160
+verb approach_wait_step_3 "Like Like swallows Link and finds his deku shield to eat" by world priority 69 in enemy at 2180 3160
   take enemy_act
   take phase_approach_wait
   give phase_approach_spat_fed
@@ -3263,7 +3263,7 @@ verb approach_wait_step_3 "Like Like swallows Link and keeps his deku shield" by
   take range_near
   give range_far
 
-verb approach_wait_step_4 "Like Like swallows Link and keeps his hylian shield" by world priority 69 in enemy at 2040 3230
+verb approach_wait_step_4 "Like Like swallows Link and finds his hylian shield to eat" by world priority 69 in enemy at 2040 3230
   take enemy_act
   take phase_approach_wait
   give phase_approach_spat_fed
@@ -3274,7 +3274,7 @@ verb approach_wait_step_4 "Like Like swallows Link and keeps his hylian shield" 
   take range_near
   give range_far
 
-verb approach_wait_step_5 "Like Like swallows Link and keeps his goron tunic" by world priority 69 in enemy at 2180 3230
+verb approach_wait_step_5 "Like Like swallows Link and finds his goron tunic to eat" by world priority 69 in enemy at 2180 3230
   take enemy_act
   take phase_approach_wait
   give phase_approach_spat_fed

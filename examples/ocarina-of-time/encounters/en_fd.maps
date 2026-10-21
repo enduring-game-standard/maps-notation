@@ -1223,7 +1223,7 @@ verb spin_1_step_2 "Flare Dancer stops spinning and runs" by world priority 69 i
   take enemy_act
   take phase_spin_1
   give phase_run_1
-  give 5 timer_run_1
+  give 4 timer_run_1
   unless timer_spin_1
   give beat_end
 
@@ -1314,7 +1314,7 @@ verb spin_2_step_2 "Flare Dancer stops spinning and runs" by world priority 69 i
   take enemy_act
   take phase_spin_2
   give phase_run_2
-  give 5 timer_run_2
+  give 4 timer_run_2
   unless timer_spin_2
   give beat_end
 
@@ -1405,7 +1405,7 @@ verb spin_3_step_2 "Flare Dancer stops spinning and runs" by world priority 69 i
   take enemy_act
   take phase_spin_3
   give phase_run_3
-  give 5 timer_run_3
+  give 4 timer_run_3
   unless timer_spin_3
   give beat_end
 

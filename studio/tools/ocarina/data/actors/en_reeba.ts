@@ -15,6 +15,7 @@ const phases: Phase[] = [
     { id: `damaged_${s}`, label: `${NAME[s]} reels from a hit`, pool: s, hittable: 'none', frames: { value: 14, cite: at(388) }, cite: at(559) },
     { id: `stunned_${s}`, label: `${NAME[s]} is knocked back, stunned`, pool: s, frames: { value: 14, cite: at(413) }, cite: at(421) },
     { id: `recover_${s}`, label: `${NAME[s]} shakes off the stun`, pool: s, frames: { value: 66, cite: at(447) }, cite: at(540) },
+    { id: `recoiled_${s}`, label: `${NAME[s]} bounces off Link's shield`, pool: s, frames: { value: 14, cite: at(665) }, cite: at(349) },
   ]),
   { id: 'sunk', label: 'The Leever has sunk away into the sand and is gone', pool: 'small', hittable: 'none', cite: at(383) },
 ]
@@ -32,16 +33,18 @@ const steps: Step[] = [
   ...SIZES.map((s): Step => ({ from: `stunned_${s}`, to: `recover_${s}`, label: `${NAME[s]} stops sliding`, afterTimer: true, cite: at(448) })),
   { from: 'recover_small', to: 'sunk', label: 'Leever recovers and sinks', afterTimer: true, cite: at(549) },
   { from: 'recover_big', to: 'move_big', label: 'Big Leever recovers', afterTimer: true, cite: at(547) },
+  { from: 'recoiled_small', to: 'sunk', label: 'Leever stops sliding back and sinks', afterTimer: true, cite: at(356) },
+  { from: 'recoiled_big', to: 'move_big', label: 'Big Leever stops sliding back and moves again', afterTimer: true, cite: at(354) },
 ]
 /** Move times out after 130 frames. */
 phases.find((p) => p.id === 'move_small')!.frames = { value: 130, cite: at(269) }
 
 const attacks: Attack[] = [
-  { id: 'spin', label: 'Leever spin', damage: 8, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(121) },
-  { id: 'spin_big', label: 'Big Leever spin', damage: 16, effect: { kind: 'knockback' }, blockable: true, dodgeable: true, source: at(156) },
+  { id: 'spin', label: 'Leever spin', damage: 8, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(121), onBlock: { to: 'recoiled_small', cite: at(666) } },
+  { id: 'spin_big', label: 'Big Leever spin', damage: 16, effect: { kind: 'knockback' }, blockable: true, dodgeable: true, source: at(156), onBlock: { to: 'recoiled_big', cite: at(666) } },
 ]
 
-const hittableIds = (s: Size) => [`move_${s}`, `stunned_${s}`, `recover_${s}`]
+const hittableIds = (s: Size) => [`move_${s}`, `stunned_${s}`, `recover_${s}`, `recoiled_${s}`]
 const toAll = (target: (s: Size) => string) => Object.fromEntries(SIZES.flatMap((s) => hittableIds(s).map((p) => [p, target(s)])))
 
 const reactions: Record<string, Reaction> = {
@@ -97,10 +100,7 @@ export const enReeba: ActorSpec = {
     EnReeba_Move: 'move_small',
     EnReeba_SetupMoveBig: 'move_big',
     EnReeba_MoveBig: 'move_big',
-    EnReeba_Recoiled: post(
-      'entered only when a raised shield bounces the spin (AT_BOUNCED); a step cannot branch on a block, and it ends the same way under a beat (14 frames): a small Leever sinks, a big one moves again',
-      666,
-    ),
+    EnReeba_Recoiled: 'recoiled_*',
     EnReeba_SetupSink: 'sunk',
     EnReeba_Sink: 'sunk',
     EnReeba_SetupDamaged: 'damaged_*',

@@ -100,6 +100,7 @@ state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 
 state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 2670
 state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 2810
 state swing_hammer_jump "Hammer jump attack on its way" in hits at 3000 2950
+state swing_reflect_rock "Octorok rock, sent back on its way" in hits at 3140 3020
 state guard_with_deku_shield "Shield up: deku shield" in link_state at 1080 710
 state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1220 710
 state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1080 780
@@ -975,6 +976,14 @@ verb miss_hammer_jump__submerged "Hammer jump attack has no effect (Octorok wait
   take swing_hammer_jump
   need phase_submerged
 
+verb hit_reflect_rock "Octorok rock, sent back hits" by world priority 79 in hits at 3000 3090
+  take swing_reflect_rock
+  give 2 dmg_body
+
+verb miss_reflect_rock__submerged "Octorok rock, sent back has no effect (Octorok waits under the water)" by world priority 80 in hits at 3140 3090
+  take swing_reflect_rock
+  need phase_submerged
+
 verb body_empty_in_appear "Octorok runs out (Octorok surfaces)" by world priority 92 in enemy_health at 2500 220
   unless hp_body
   take alive_body
@@ -1159,30 +1168,41 @@ verb hide_step_1 "Octorok is under" by world priority 69 in enemy at 2040 570
   give phase_submerged
   give beat_end
 
-verb rock_blocked_deku_shield "Octorok rock: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+verb rock_reflected_deku_shield "Octorok rock: sent back by the deku shield" by world priority 61 in attacks at 3460 80
+  take incoming_rock
+  need guard_with_deku_shield
+  give swing_reflect_rock
+
+verb rock_reflected_hylian_shield_adult "Octorok rock: sent back by the hylian shield" by world priority 61 in attacks at 3320 150
+  take incoming_rock
+  need guard_with_hylian_shield
+  need age_adult
+  give swing_reflect_rock
+
+verb rock_blocked_deku_shield "Octorok rock: blocked by the deku shield" by world priority 60 in attacks at 3460 150
   take incoming_rock
   need guard_with_deku_shield
 
-verb rock_blocked_hylian_shield "Octorok rock: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+verb rock_blocked_hylian_shield "Octorok rock: blocked by the hylian shield" by world priority 60 in attacks at 3320 220
   take incoming_rock
   need guard_with_hylian_shield
 
-verb rock_blocked_mirror_shield "Octorok rock: blocked by the mirror shield" by world priority 60 in attacks at 3460 150
+verb rock_blocked_mirror_shield "Octorok rock: blocked by the mirror shield" by world priority 60 in attacks at 3460 220
   take incoming_rock
   need guard_with_mirror_shield
 
-verb rock_dodged "Octorok rock: dodged" by world priority 60 in attacks at 3320 220
+verb rock_dodged "Octorok rock: dodged" by world priority 60 in attacks at 3320 290
   take incoming_rock
   need link_dodge
   unless link_guard
 
-verb rock_nayru "Octorok rock: Nayru's Love holds" by world priority 60 in attacks at 3460 220
+verb rock_nayru "Octorok rock: Nayru's Love holds" by world priority 60 in attacks at 3460 290
   take incoming_rock
   need status_nayru
   unless link_guard
   unless link_dodge
 
-verb rock_lands "Octorok rock hits Link" by world priority 60 in attacks at 3320 290
+verb rock_lands "Octorok rock hits Link" by world priority 60 in attacks at 3320 360
   take incoming_rock
   unless link_guard
   unless link_dodge
@@ -1190,7 +1210,7 @@ verb rock_lands "Octorok rock hits Link" by world priority 60 in attacks at 3320
   unless has_double_defense
   give 2 link_dmg
 
-verb rock_lands_dd "Octorok rock hits Link" by world priority 60 in attacks at 3460 290
+verb rock_lands_dd "Octorok rock hits Link" by world priority 60 in attacks at 3460 360
   take incoming_rock
   unless link_guard
   unless link_dodge

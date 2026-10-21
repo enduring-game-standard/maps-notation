@@ -39,7 +39,7 @@ const steps: Step[] = [
   { from: 'wait_rising', to: 'look_around', label: 'Link is far off: the scrub looks around', range: 'far', cite: at(270) },
   { from: 'stand', to: 'throw', label: 'Scrub takes aim', range: 'far', cite: at(304) },
   { from: 'stand', to: 'burrow', label: 'Link is close: the scrub ducks', range: 'near', cite: at(302) },
-  { from: 'throw', to: 'stand', label: 'The nut flies (it is En_Nutsball, a separate actor)', cite: at(316) },
+  { from: 'throw', to: 'stand', label: 'Scrub spits a nut at Link', attack: 'nut', cite: at(316) },
   { from: 'look_around', to: 'burrow', label: 'Scrub gives up and ducks', cite: at(288) },
   { from: 'burrow', to: 'wait_hidden', label: 'Scrub is under', cite: at(335) },
   { from: 'begin_run', to: 'run_3', label: 'Scrub starts to run', cite: at(350) },
@@ -58,17 +58,17 @@ const MELEE = [
   'deku_stick', 'hammer_swing', 'slash_kokiri', 'slash_master', 'slash_giant', 'magic_fire', 'spin_kokiri', 'spin_giant', 'spin_master',
   'jump_kokiri', 'jump_kokiri_self', 'jump_giant', 'jump_giant_self', 'jump_master', 'jump_master_self', 'hammer_jump',
 ]
-const RANGED = ['slingshot', 'explosive', 'boomerang', 'arrow_normal', 'hookshot', 'arrow_fire', 'arrow_ice', 'arrow_light']
-const noAttack = 'the scrub has no attack in this spec (its nuts are En_Nutsball, a separate actor whose collider is not in this inventory entry), so Link never loses health'
 const deadVerbs: Record<string, string> = {
-  link_hurt: noAttack,
-  link_hurt_overkill: noAttack,
-  link_heals: `${noAttack}, and healing only follows the fairy reviving him`,
-  fairy_revives_link: noAttack,
-  link_fell: noAttack,
   ...Object.fromEntries(COUNTS.map((c) => [`body_empty_in_stunned_${c}`, 'stunned has no timer (it counts loops of gDekuNutsDamageAnim, whose length is not in the decomp source), so it is entered only by Link\'s own Deku Nut and left on that same beat; no damaging hit finds it'])),
   ...Object.fromEntries(MELEE.flatMap((k) => ['wait_rising', 'throw', 'look_around'].map((p) => [`hit_${k}__${p}`, `${p} is entered only while Link is far and is left on the next enemy step whatever Link does, so the move that brings him near for a melee swing is spent before he can swing`]))),
-  ...Object.fromEntries([...MELEE, ...RANGED].map((k) => [`miss_${k}__begin_run`, 'begin_run is entered only by Link\'s own hit and left on that same beat, so no later hit finds it'])),
+  ...Object.fromEntries(MELEE.map((k) => [`miss_${k}__begin_run`, 'begin_run is entered by Link\'s own hit and left on that same beat, or by its reflected nut, which it is hit by only in stand, entered only while Link is far; so no melee hit finds it'])),
+  ...Object.fromEntries(['arrow_fire', 'arrow_ice', 'arrow_light'].map((k) => [`miss_${k}__begin_run`, 'the magic arrows are only in the adult_arrows kit, whose Mirror Shield does not send the nut back (z_en_nutsball.c:127-128), so there begin_run is entered only by Link\'s own hit and left on that same beat'])),
+  link_hurt_overkill: 'the nut costs 8, or 4 with Double Defense, and every kit\'s health and heal stays a multiple of that',
+  nut_blocked_deku_shield: 'a raised Deku Shield always sends the nut back (z_en_nutsball.c:127), and the reflection outranks the plain block',
+  hit_reflect_nut: 'the reflected nut resolves on the beat it was spat, and spitting always leaves the scrub in stand, so it only ever hits there',
+  ...Object.fromEntries(
+    ['miss_reflect_nut__wait_hidden', 'hit_reflect_nut__wait_rising', 'hit_reflect_nut__throw', 'hit_reflect_nut__look_around', 'hit_reflect_nut__burrow', 'miss_reflect_nut__begin_run'].map((v) => [v, 'as hit_reflect_nut']),
+  ),
 }
 
 export const enDekunuts: ActorSpec = {
@@ -76,7 +76,7 @@ export const enDekunuts: ActorSpec = {
   name: 'Mad Deku Scrub',
   role: 'enemy',
   summary:
-    'A scrub planted in a flower that pops up and spits nuts. While planted, any hit only drives it out to run; once running, any damaging hit kills it and a Deku Nut stuns it. Its nuts are a separate actor (En_Nutsball) and are not attacks of this spec.',
+    'A scrub planted in a flower that pops up and spits nuts. While planted, any hit only drives it out to run; once running, any damaging hit kills it and a Deku Nut stuns it. It spits nuts (En_Nutsball) for half a heart; a Deku Shield, or an adult\'s Hylian Shield, sends a nut back at it.',
   cite: at(123),
   pools: [{ id: 'body', label: 'Mad Deku Scrub', hp: { value: 1, cite: at(75) }, then: 'defeated' }],
   damage: {
@@ -92,7 +92,24 @@ export const enDekunuts: ActorSpec = {
   start: 'wait_hidden',
   range: 'far',
   steps,
-  attacks: [],
+  attacks: [
+    {
+      id: 'nut',
+      label: 'Spat Deku Nut',
+      damage: 8,
+      effect: { kind: 'none' },
+      blockable: true,
+      dodgeable: true,
+      source: 'src/overlays/actors/ovl_En_Nutsball/z_en_nutsball.c:59',
+      via: { overlay: 'ovl_En_Nutsball', spawn: at(321) },
+      reflect: {
+        shields: [{ gear: 'deku_shield' }, { gear: 'hylian_shield', ages: ['adult'] }],
+        as: 'DEKU_STICK',
+        damage: 8,
+        cite: 'src/overlays/actors/ovl_En_Nutsball/z_en_nutsball.c:134',
+      },
+    },
+  ],
   actionFuncs: {
     EnDekunuts_Wait: 'wait_*',
     EnDekunuts_Stand: 'stand',

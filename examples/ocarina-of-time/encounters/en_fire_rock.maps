@@ -67,10 +67,11 @@ state phase_fall_homing "A rock falls, steering over Link" in enemy at 2180 80
 state phase_fall_pieces "Two broken pieces bounce out" in enemy at 2040 150
 state phase_gone "The rock has crumbled away" in enemy at 2180 150
 state phase_on_floor "A burning rock rests on the floor" in enemy at 2040 220
-state phase_ceiling_armed "A ceiling spot waits for Link" in enemy at 2180 220
-state phase_fall_ceiling "A rock falls from the ceiling spot" in enemy at 2040 290
-state phase_fall_pieces_ceiling "Pieces of the ceiling rock bounce out" in enemy at 2180 290
-state phase_ceiling_spent "The ceiling spot waits for Link to step away" in enemy at 2040 360
+state phase_on_floor_blocked "The burning rock struck Link's shield" in enemy at 2180 220
+state phase_ceiling_armed "A ceiling spot waits for Link" in enemy at 2040 290
+state phase_fall_ceiling "A rock falls from the ceiling spot" in enemy at 2180 290
+state phase_fall_pieces_ceiling "Pieces of the ceiling rock bounce out" in enemy at 2040 360
+state phase_ceiling_spent "The ceiling spot waits for Link to step away" in enemy at 2180 360
 state status_burn "Link: burn (beats left)" in link_state at 1220 290
 state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
 state lens_on "Lens of Truth on" in link_state at 1220 360
@@ -107,6 +108,7 @@ state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 
 state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1220 780
 state incoming_rock "Falling rock incoming" in attacks at 3000 80
 state incoming_floor_burn "Burning floor rock incoming" in attacks at 3000 360
+state incoming_floor_push "Burning floor rock knocks Link back (Actor_SetPlayerKnockbackSmall, 4 damage) incoming" in attacks at 3000 710
 state tick_burn "Beat ends: burn checked" in beat at 580 360
 state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
@@ -929,11 +931,11 @@ verb link_lens_off "Link puts the Lens away" by link in link_moves at 2500 1970
   take lens_on
   give link_turn
 
-verb enemy_ready "Falling volcanic rock gets ready" by world priority 70 in enemy at 2180 360
+verb enemy_ready "Falling volcanic rock gets ready" by world priority 70 in enemy at 2040 430
   take enemy_turn
   give enemy_act
 
-verb fall_rock_step_1 "The rock lands on Link and breaks" by world priority 69 in enemy at 2040 430
+verb fall_rock_step_1 "The rock lands on Link and breaks" by world priority 69 in enemy at 2180 430
   take enemy_act
   take phase_fall_rock
   give phase_fall_pieces
@@ -941,21 +943,21 @@ verb fall_rock_step_1 "The rock lands on Link and breaks" by world priority 69 i
   give beat_end
   need range_near
 
-verb fall_rock_step_2 "The rock lands away from Link and breaks" by world priority 69 in enemy at 2180 430
+verb fall_rock_step_2 "The rock lands away from Link and breaks" by world priority 69 in enemy at 2040 500
   take enemy_act
   take phase_fall_rock
   give phase_fall_pieces
   give beat_end
   need range_far
 
-verb fall_homing_step_1 "The steering rock lands on Link and breaks" by world priority 69 in enemy at 2040 500
+verb fall_homing_step_1 "The steering rock lands on Link and breaks" by world priority 69 in enemy at 2180 500
   take enemy_act
   take phase_fall_homing
   give phase_fall_pieces
   give incoming_rock
   give beat_end
 
-verb fall_pieces_step_1 "A piece bounces into Link" by world priority 69 in enemy at 2180 500
+verb fall_pieces_step_1 "A piece bounces into Link" by world priority 69 in enemy at 2040 570
   take enemy_act
   take phase_fall_pieces
   give phase_gone
@@ -963,42 +965,49 @@ verb fall_pieces_step_1 "A piece bounces into Link" by world priority 69 in enem
   give beat_end
   need range_near
 
-verb fall_pieces_step_2 "The pieces land and crumble" by world priority 69 in enemy at 2040 570
+verb fall_pieces_step_2 "The pieces land and crumble" by world priority 69 in enemy at 2180 570
   take enemy_act
   take phase_fall_pieces
   give phase_gone
   give beat_end
 
-verb gone_holds "The rock has crumbled away: nothing changes" by world priority 68 in enemy at 2180 570
+verb gone_holds "The rock has crumbled away: nothing changes" by world priority 68 in enemy at 2040 640
   take enemy_act
   need phase_gone
   give beat_end
 
-verb on_floor_step_1 "Link brushes the burning rock" by world priority 69 in enemy at 2040 640
+verb on_floor_step_1 "Link brushes the burning rock" by world priority 69 in enemy at 2180 640
   take enemy_act
   need phase_on_floor
   give incoming_floor_burn
   give beat_end
   need range_near
 
-verb on_floor_holds "A burning rock rests on the floor: nothing changes" by world priority 68 in enemy at 2180 640
+verb on_floor_holds "A burning rock rests on the floor: nothing changes" by world priority 68 in enemy at 2040 710
   take enemy_act
   need phase_on_floor
   give beat_end
 
-verb ceiling_armed_step_1 "Link steps under the ceiling spot and a rock drops" by world priority 69 in enemy at 2040 710
+verb on_floor_blocked_step_1 "The blocked rock knocks Link back" by world priority 69 in enemy at 2180 710
+  take enemy_act
+  take phase_on_floor_blocked
+  give phase_on_floor
+  give incoming_floor_push
+  give beat_end
+
+verb ceiling_armed_step_1 "Link steps under the ceiling spot and a rock drops" by world priority 69 in enemy at 2040 780
   take enemy_act
   take phase_ceiling_armed
   give phase_fall_ceiling
   give beat_end
   need range_near
 
-verb ceiling_armed_holds "A ceiling spot waits for Link: nothing changes" by world priority 68 in enemy at 2180 710
+verb ceiling_armed_holds "A ceiling spot waits for Link: nothing changes" by world priority 68 in enemy at 2180 780
   take enemy_act
   need phase_ceiling_armed
   give beat_end
 
-verb fall_ceiling_step_1 "The ceiling rock lands on Link and breaks" by world priority 69 in enemy at 2040 780
+verb fall_ceiling_step_1 "The ceiling rock lands on Link and breaks" by world priority 69 in enemy at 2040 850
   take enemy_act
   take phase_fall_ceiling
   give phase_fall_pieces_ceiling
@@ -1006,14 +1015,14 @@ verb fall_ceiling_step_1 "The ceiling rock lands on Link and breaks" by world pr
   give beat_end
   need range_near
 
-verb fall_ceiling_step_2 "The ceiling rock lands away from Link" by world priority 69 in enemy at 2180 780
+verb fall_ceiling_step_2 "The ceiling rock lands away from Link" by world priority 69 in enemy at 2180 850
   take enemy_act
   take phase_fall_ceiling
   give phase_fall_pieces_ceiling
   give beat_end
   need range_far
 
-verb fall_pieces_ceiling_step_1 "A piece bounces into Link" by world priority 69 in enemy at 2040 850
+verb fall_pieces_ceiling_step_1 "A piece bounces into Link" by world priority 69 in enemy at 2040 920
   take enemy_act
   take phase_fall_pieces_ceiling
   give phase_ceiling_spent
@@ -1021,20 +1030,20 @@ verb fall_pieces_ceiling_step_1 "A piece bounces into Link" by world priority 69
   give beat_end
   need range_near
 
-verb fall_pieces_ceiling_step_2 "The pieces land and crumble" by world priority 69 in enemy at 2180 850
+verb fall_pieces_ceiling_step_2 "The pieces land and crumble" by world priority 69 in enemy at 2180 920
   take enemy_act
   take phase_fall_pieces_ceiling
   give phase_ceiling_spent
   give beat_end
 
-verb ceiling_spent_step_1 "Link steps away and the ceiling spot rearms" by world priority 69 in enemy at 2040 920
+verb ceiling_spent_step_1 "Link steps away and the ceiling spot rearms" by world priority 69 in enemy at 2040 990
   take enemy_act
   take phase_ceiling_spent
   give phase_ceiling_armed
   give beat_end
   need range_far
 
-verb ceiling_spent_holds "The ceiling spot waits for Link to step away: nothing changes" by world priority 68 in enemy at 2180 920
+verb ceiling_spent_holds "The ceiling spot waits for Link to step away: nothing changes" by world priority 68 in enemy at 2180 990
   take enemy_act
   need phase_ceiling_spent
   give beat_end
@@ -1078,18 +1087,24 @@ verb rock_lands_dd "Falling rock hits Link" by world priority 60 in attacks at 3
   need has_double_defense
   give 4 link_dmg
 
-verb floor_burn_blocked_deku_shield "Burning floor rock: blocked by the deku shield, which burns" by world priority 60 in attacks at 3140 360
+verb floor_burn_blocked_deku_shield__on_floor "Burning floor rock: blocked by the deku shield, which burns" by world priority 60 in attacks at 3140 360
   take incoming_floor_burn
   need guard_with_deku_shield
   take has_deku_shield
+  take phase_on_floor
+  give phase_on_floor_blocked
 
-verb floor_burn_blocked_hylian_shield "Burning floor rock: blocked by the hylian shield" by world priority 60 in attacks at 3000 430
+verb floor_burn_blocked_hylian_shield__on_floor "Burning floor rock: blocked by the hylian shield" by world priority 60 in attacks at 3000 430
   take incoming_floor_burn
   need guard_with_hylian_shield
+  take phase_on_floor
+  give phase_on_floor_blocked
 
-verb floor_burn_blocked_mirror_shield "Burning floor rock: blocked by the mirror shield" by world priority 60 in attacks at 3140 430
+verb floor_burn_blocked_mirror_shield__on_floor "Burning floor rock: blocked by the mirror shield" by world priority 60 in attacks at 3140 430
   take incoming_floor_burn
   need guard_with_mirror_shield
+  take phase_on_floor
+  give phase_on_floor_blocked
 
 verb floor_burn_dodged "Burning floor rock: dodged" by world priority 60 in attacks at 3000 500
   take incoming_floor_burn
@@ -1139,6 +1154,47 @@ verb floor_burn_lands_dd_again "Burning floor rock hits Link again" by world pri
   need has_double_defense
   give 4 link_dmg
   need status_burn
+
+verb floor_push_nayru_near "Burning floor rock knocks Link back (Actor_SetPlayerKnockbackSmall, 4 damage): Nayru's Love holds, Link is knocked back" by world priority 60 in attacks at 3140 710
+  take incoming_floor_push
+  need status_nayru
+  take range_near
+  give range_far
+
+verb floor_push_nayru_far "Burning floor rock knocks Link back (Actor_SetPlayerKnockbackSmall, 4 damage): Nayru's Love holds" by world priority 60 in attacks at 3000 780
+  take incoming_floor_push
+  need status_nayru
+  need range_far
+
+verb floor_push_lands_near "Burning floor rock knocks Link back (Actor_SetPlayerKnockbackSmall, 4 damage) hits Link, knocking him back" by world priority 60 in attacks at 3140 780
+  take incoming_floor_push
+  unless status_nayru
+  unless has_double_defense
+  give 4 link_dmg
+  take range_near
+  give range_far
+
+verb floor_push_lands_far "Burning floor rock knocks Link back (Actor_SetPlayerKnockbackSmall, 4 damage) hits Link" by world priority 60 in attacks at 3000 850
+  take incoming_floor_push
+  unless status_nayru
+  unless has_double_defense
+  give 4 link_dmg
+  need range_far
+
+verb floor_push_lands_dd_near "Burning floor rock knocks Link back (Actor_SetPlayerKnockbackSmall, 4 damage) hits Link, knocking him back" by world priority 60 in attacks at 3140 850
+  take incoming_floor_push
+  unless status_nayru
+  need has_double_defense
+  give 2 link_dmg
+  take range_near
+  give range_far
+
+verb floor_push_lands_dd_far "Burning floor rock knocks Link back (Actor_SetPlayerKnockbackSmall, 4 damage) hits Link" by world priority 60 in attacks at 3000 920
+  take incoming_floor_push
+  unless status_nayru
+  need has_double_defense
+  give 2 link_dmg
+  need range_far
 
 verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
   need beat_end

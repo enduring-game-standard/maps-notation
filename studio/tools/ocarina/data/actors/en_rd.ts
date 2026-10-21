@@ -148,7 +148,13 @@ export const enRd: ActorSpec = {
     EnRd_Dead: post('death animation and fade after the finishing blow; the encounter has already ended', 727),
     actionFunc: post('not an action function: the extractor read the parameter name of EnRd_SetupAction', 163),
   },
-  atSources: {},
+  atSources: {
+    [at(388)]: 'scream',
+    [at(641)]: 'scream_long',
+    [at(563)]: 'grab',
+    [at(599)]: 'grab',
+    [at(417)]: post('sets Link\'s freezeTimer to 0, ending a scream\'s freeze the moment the grab starts; it inflicts nothing', 417),
+  },
   loadouts: standardLoadouts(['child', 'adult']),
   expected: { deadVerbs },
 }

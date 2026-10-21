@@ -1,5 +1,5 @@
 {
- "positions": 52801,
+ "positions": 122749,
  "complete": true,
  "outcomes": [
   "Link falls",
@@ -8,26 +8,63 @@
  ],
  "stalls": 0,
  "livelocks": 0,
- "deadVerbs": [],
+ "deadVerbs": [
+  "nabooru_overkill",
+  "miss_explosive__flinch",
+  "miss_hammer_swing__flinch",
+  "miss_slash_master__flinch",
+  "miss_slash_giant__flinch",
+  "miss_spin_giant__flinch",
+  "miss_spin_master__flinch",
+  "miss_jump_giant__flinch",
+  "miss_jump_giant_self__flinch",
+  "miss_jump_master__flinch",
+  "miss_jump_master_self__flinch",
+  "miss_hammer_jump__flinch",
+  "body_empty_in_walk_armored",
+  "body_empty_in_vertical_armored",
+  "body_empty_in_axe_stuck_armored",
+  "body_empty_in_horizontal_armored",
+  "body_empty_in_recover_armored",
+  "nabooru_empty_in_walk_nabooru",
+  "nabooru_empty_in_vertical_nabooru",
+  "nabooru_empty_in_axe_stuck_nabooru",
+  "nabooru_empty_in_horizontal_nabooru",
+  "nabooru_empty_in_recover_nabooru"
+ ],
  "kitSplit": {},
  "slices": [
   {
    "kit": "adult_arrows",
-   "variant": "",
-   "positions": 1976,
+   "variant": "common",
+   "positions": 1986,
    "complete": true,
    "outcomes": {
     "Link withdraws": 455,
-    "Link wins": 10,
+    "Link wins": 20,
     "Link falls": 300
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2383
+   "ms": 2571
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "nabooru",
+   "positions": 2621,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 600,
+    "Link wins": 20,
+    "Link falls": 400
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3430
   },
   {
    "kit": "adult_blade",
-   "variant": "",
+   "variant": "common",
    "positions": 398,
    "complete": true,
    "outcomes": {
@@ -37,11 +74,25 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 519
+   "ms": 571
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "nabooru",
+   "positions": 527,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 120,
+    "Link wins": 6,
+    "Link falls": 80
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 748
   },
   {
    "kit": "adult_bottles",
-   "variant": "",
+   "variant": "common",
    "positions": 2119,
    "complete": true,
    "outcomes": {
@@ -51,11 +102,25 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2562
+   "ms": 2536
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "nabooru",
+   "positions": 2825,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 720,
+    "Link wins": 24,
+    "Link falls": 160
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3527
   },
   {
    "kit": "adult_dins",
-   "variant": "",
+   "variant": "common",
    "positions": 2766,
    "complete": true,
    "outcomes": {
@@ -65,11 +130,25 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2633
+   "ms": 2858
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "nabooru",
+   "positions": 3669,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 840,
+    "Link wins": 28,
+    "Link falls": 560
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3825
   },
   {
    "kit": "adult_giant",
-   "variant": "",
+   "variant": "common",
    "positions": 859,
    "complete": true,
    "outcomes": {
@@ -79,25 +158,53 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1183
+   "ms": 1318
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "nabooru",
+   "positions": 1069,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 270,
+    "Link wins": 18,
+    "Link falls": 60
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1699
   },
   {
    "kit": "adult_lens",
-   "variant": "",
-   "positions": 8781,
+   "variant": "common",
+   "positions": 8751,
    "complete": true,
    "outcomes": {
     "Link withdraws": 2002,
     "Link wins": 50,
-    "Link falls": 1404
+    "Link falls": 1374
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 8145
+   "ms": 8725
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "nabooru",
+   "positions": 11655,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2640,
+    "Link wins": 100,
+    "Link falls": 1874
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 12353
   },
   {
    "kit": "adult_nayru",
-   "variant": "",
+   "variant": "common",
    "positions": 24841,
    "complete": true,
    "outcomes": {
@@ -107,11 +214,25 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 17402
+   "ms": 22760
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "nabooru",
+   "positions": 32929,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8640,
+    "Link wins": 288,
+    "Link falls": 1040
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 30495
   },
   {
    "kit": "adult_spin",
-   "variant": "",
+   "variant": "common",
    "positions": 11061,
    "complete": true,
    "outcomes": {
@@ -121,7 +242,21 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 10326
+   "ms": 11785
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "nabooru",
+   "positions": 14673,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3360,
+    "Link wins": 112,
+    "Link falls": 2240
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 15971
   }
  ]
 }

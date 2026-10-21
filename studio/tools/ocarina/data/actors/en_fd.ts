@@ -99,7 +99,7 @@ export const enFd: ActorSpec = {
       '0x0': {
         damage: false,
         note: 'every entry of preset 15 is 0 with reaction 0, and the fire form never calls Actor_ApplyDamage: an AC hit (or a hammer quake) only spawns the core, so the phase overrides decide every hit',
-        cite: at(312),
+        cite: at(313),
       },
     },
   },

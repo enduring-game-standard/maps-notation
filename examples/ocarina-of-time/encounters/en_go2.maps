@@ -937,10 +937,12 @@ verb roll_big_step_1 "The Goron rolls into Link" by world priority 69 in enemy a
   give beat_end
   need range_near
 
-verb roll_big_holds "The big Goron City Goron rolls: nothing changes" by world priority 68 in enemy at 2040 360
+verb roll_big_step_2 "The Goron rolls along its path toward Link" by world priority 69 in enemy at 2040 360
   take enemy_act
   need phase_roll_big
   give beat_end
+  take range_far
+  give range_near
 
 verb roll_link_step_1 "Goron Link rolls into Link" by world priority 69 in enemy at 2180 360
   take enemy_act
@@ -949,10 +951,12 @@ verb roll_link_step_1 "Goron Link rolls into Link" by world priority 69 in enemy
   give beat_end
   need range_near
 
-verb roll_link_holds "Goron Link rolls, turning back when Link stands in his way: nothing changes" by world priority 68 in enemy at 2040 430
+verb roll_link_step_2 "Goron Link rolls along his path toward Link" by world priority 69 in enemy at 2040 430
   take enemy_act
   need phase_roll_link
   give beat_end
+  take range_far
+  give range_near
 
 verb roll_small_step_1 "The Goron rolls into Link" by world priority 69 in enemy at 2180 430
   take enemy_act
@@ -961,23 +965,30 @@ verb roll_small_step_1 "The Goron rolls into Link" by world priority 69 in enemy
   give beat_end
   need range_near
 
-verb roll_small_step_2 "The Goron reaches the end of its path and stops" by world priority 69 in enemy at 2040 500
+verb roll_small_step_2 "The Goron rolls along its path toward Link" by world priority 69 in enemy at 2040 500
+  take enemy_act
+  need phase_roll_small
+  give beat_end
+  take range_far
+  give range_near
+
+verb roll_small_step_3 "The Goron reaches the end of its path and stops" by world priority 69 in enemy at 2180 500
   take enemy_act
   take phase_roll_small
   give phase_stopped_small
   give beat_end
 
-verb stopped_big_holds "The big Goron has stopped, woken, and sits: nothing changes" by world priority 68 in enemy at 2180 500
+verb stopped_big_holds "The big Goron has stopped, woken, and sits: nothing changes" by world priority 68 in enemy at 2040 570
   take enemy_act
   need phase_stopped_big
   give beat_end
 
-verb stopped_link_holds "Goron Link has stopped and talks: nothing changes" by world priority 68 in enemy at 2040 570
+verb stopped_link_holds "Goron Link has stopped and talks: nothing changes" by world priority 68 in enemy at 2180 570
   take enemy_act
   need phase_stopped_link
   give beat_end
 
-verb stopped_small_holds "The small Goron has stopped and sits curled up: nothing changes" by world priority 68 in enemy at 2180 570
+verb stopped_small_holds "The small Goron has stopped and sits curled up: nothing changes" by world priority 68 in enemy at 2040 640
   take enemy_act
   need phase_stopped_small
   give beat_end

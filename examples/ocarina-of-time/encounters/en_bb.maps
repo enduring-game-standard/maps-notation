@@ -127,8 +127,9 @@ state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 9740
 state guard_with_deku_shield "Shield up: deku shield" in link_state at 1220 710
 state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
 state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1220 780
-state incoming_bite "Bubble bite incoming" in attacks at 3320 80
-state incoming_bite_fire "Fire Bubble bite incoming" in attacks at 3320 360
+state incoming_bite "Blue Bubble bite incoming" in attacks at 3320 80
+state incoming_bite_fire "Fire Bubble bite incoming" in attacks at 3460 430
+state incoming_bite_green "Green Bubble bite incoming" in attacks at 3320 920
 state tick_burn "Beat ends: burn checked" in beat at 580 360
 state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
@@ -2529,7 +2530,7 @@ verb green_on_ticks "Green Bubble circles, flame lit: a beat passes" by world pr
 verb green_on_step_1 "Green Bubble swoops into Link" by world priority 69 in enemy at 2040 2320
   take enemy_act
   need phase_green_on
-  give incoming_bite
+  give incoming_bite_green
   give beat_end
   need range_near
 
@@ -2555,7 +2556,7 @@ verb green_off_ticks "Green Bubble circles, flame out: a beat passes" by world p
 verb green_off_step_1 "Unlit Green Bubble swoops into Link" by world priority 69 in enemy at 2040 2460
   take enemy_act
   need phase_green_off
-  give incoming_bite
+  give incoming_bite_green
   give beat_end
   need range_near
 
@@ -2591,30 +2592,54 @@ verb stunned_green_holds "Green Bubble is stunned, flame out: nothing changes" b
   need phase_stunned_green
   give beat_end
 
-verb bite_blocked_deku_shield "Bubble bite: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+verb bite_blocked_deku_shield__blue_fly "Blue Bubble bite: blocked by the deku shield" by world priority 60 in attacks at 3460 80
   take incoming_bite
   need guard_with_deku_shield
+  take phase_blue_fly
+  give phase_down_blue
+  give 10 timer_down_blue
 
-verb bite_blocked_hylian_shield "Bubble bite: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+verb bite_blocked_deku_shield__down_blue "Blue Bubble bite: blocked by the deku shield" by world priority 60 in attacks at 3320 150
+  take incoming_bite
+  need guard_with_deku_shield
+  need phase_down_blue
+
+verb bite_blocked_hylian_shield__blue_fly "Blue Bubble bite: blocked by the hylian shield" by world priority 60 in attacks at 3460 150
   take incoming_bite
   need guard_with_hylian_shield
+  take phase_blue_fly
+  give phase_down_blue
+  give 10 timer_down_blue
 
-verb bite_blocked_mirror_shield "Bubble bite: blocked by the mirror shield" by world priority 60 in attacks at 3460 150
+verb bite_blocked_hylian_shield__down_blue "Blue Bubble bite: blocked by the hylian shield" by world priority 60 in attacks at 3320 220
+  take incoming_bite
+  need guard_with_hylian_shield
+  need phase_down_blue
+
+verb bite_blocked_mirror_shield__blue_fly "Blue Bubble bite: blocked by the mirror shield" by world priority 60 in attacks at 3460 220
   take incoming_bite
   need guard_with_mirror_shield
+  take phase_blue_fly
+  give phase_down_blue
+  give 10 timer_down_blue
 
-verb bite_dodged "Bubble bite: dodged" by world priority 60 in attacks at 3320 220
+verb bite_blocked_mirror_shield__down_blue "Blue Bubble bite: blocked by the mirror shield" by world priority 60 in attacks at 3320 290
+  take incoming_bite
+  need guard_with_mirror_shield
+  need phase_down_blue
+
+verb bite_dodged "Blue Bubble bite: dodged" by world priority 60 in attacks at 3460 290
   take incoming_bite
   need link_dodge
   unless link_guard
 
-verb bite_nayru "Bubble bite: Nayru's Love holds" by world priority 60 in attacks at 3460 220
+verb bite_nayru "Blue Bubble bite: Nayru's Love holds" by world priority 60 in attacks at 3320 360
   take incoming_bite
   need status_nayru
   unless link_guard
   unless link_dodge
 
-verb bite_lands "Bubble bite hits Link" by world priority 60 in attacks at 3320 290
+verb bite_lands "Blue Bubble bite hits Link" by world priority 60 in attacks at 3460 360
   take incoming_bite
   unless link_guard
   unless link_dodge
@@ -2622,7 +2647,7 @@ verb bite_lands "Bubble bite hits Link" by world priority 60 in attacks at 3320 
   unless has_double_defense
   give 8 link_dmg
 
-verb bite_lands_dd "Bubble bite hits Link" by world priority 60 in attacks at 3460 290
+verb bite_lands_dd "Blue Bubble bite hits Link" by world priority 60 in attacks at 3320 430
   take incoming_bite
   unless link_guard
   unless link_dodge
@@ -2630,31 +2655,56 @@ verb bite_lands_dd "Bubble bite hits Link" by world priority 60 in attacks at 34
   need has_double_defense
   give 4 link_dmg
 
-verb bite_fire_blocked_deku_shield "Fire Bubble bite: blocked by the deku shield, which burns" by world priority 60 in attacks at 3460 360
+verb bite_fire_blocked_deku_shield__red_attack "Fire Bubble bite: blocked by the deku shield, which burns" by world priority 60 in attacks at 3320 500
   take incoming_bite_fire
   need guard_with_deku_shield
   take has_deku_shield
+  take phase_red_attack
+  give phase_down_red
+  give 10 timer_down_red
 
-verb bite_fire_blocked_hylian_shield "Fire Bubble bite: blocked by the hylian shield" by world priority 60 in attacks at 3320 430
+verb bite_fire_blocked_deku_shield__down_red "Fire Bubble bite: blocked by the deku shield, which burns" by world priority 60 in attacks at 3460 500
+  take incoming_bite_fire
+  need guard_with_deku_shield
+  take has_deku_shield
+  need phase_down_red
+
+verb bite_fire_blocked_hylian_shield__red_attack "Fire Bubble bite: blocked by the hylian shield" by world priority 60 in attacks at 3320 570
   take incoming_bite_fire
   need guard_with_hylian_shield
+  take phase_red_attack
+  give phase_down_red
+  give 10 timer_down_red
 
-verb bite_fire_blocked_mirror_shield "Fire Bubble bite: blocked by the mirror shield" by world priority 60 in attacks at 3460 430
+verb bite_fire_blocked_hylian_shield__down_red "Fire Bubble bite: blocked by the hylian shield" by world priority 60 in attacks at 3460 570
+  take incoming_bite_fire
+  need guard_with_hylian_shield
+  need phase_down_red
+
+verb bite_fire_blocked_mirror_shield__red_attack "Fire Bubble bite: blocked by the mirror shield" by world priority 60 in attacks at 3320 640
   take incoming_bite_fire
   need guard_with_mirror_shield
+  take phase_red_attack
+  give phase_down_red
+  give 10 timer_down_red
 
-verb bite_fire_dodged "Fire Bubble bite: dodged" by world priority 60 in attacks at 3320 500
+verb bite_fire_blocked_mirror_shield__down_red "Fire Bubble bite: blocked by the mirror shield" by world priority 60 in attacks at 3460 640
+  take incoming_bite_fire
+  need guard_with_mirror_shield
+  need phase_down_red
+
+verb bite_fire_dodged "Fire Bubble bite: dodged" by world priority 60 in attacks at 3320 710
   take incoming_bite_fire
   need link_dodge
   unless link_guard
 
-verb bite_fire_nayru "Fire Bubble bite: Nayru's Love holds" by world priority 60 in attacks at 3460 500
+verb bite_fire_nayru "Fire Bubble bite: Nayru's Love holds" by world priority 60 in attacks at 3460 710
   take incoming_bite_fire
   need status_nayru
   unless link_guard
   unless link_dodge
 
-verb bite_fire_lands "Fire Bubble bite hits Link" by world priority 60 in attacks at 3320 570
+verb bite_fire_lands "Fire Bubble bite hits Link" by world priority 60 in attacks at 3320 780
   take incoming_bite_fire
   unless link_guard
   unless link_dodge
@@ -2664,7 +2714,7 @@ verb bite_fire_lands "Fire Bubble bite hits Link" by world priority 60 in attack
   give 5 status_burn
   unless status_burn
 
-verb bite_fire_lands_again "Fire Bubble bite hits Link again" by world priority 60 in attacks at 3460 570
+verb bite_fire_lands_again "Fire Bubble bite hits Link again" by world priority 60 in attacks at 3460 780
   take incoming_bite_fire
   unless link_guard
   unless link_dodge
@@ -2673,7 +2723,7 @@ verb bite_fire_lands_again "Fire Bubble bite hits Link again" by world priority 
   give 8 link_dmg
   need status_burn
 
-verb bite_fire_lands_dd "Fire Bubble bite hits Link" by world priority 60 in attacks at 3320 640
+verb bite_fire_lands_dd "Fire Bubble bite hits Link" by world priority 60 in attacks at 3320 850
   take incoming_bite_fire
   unless link_guard
   unless link_dodge
@@ -2683,7 +2733,7 @@ verb bite_fire_lands_dd "Fire Bubble bite hits Link" by world priority 60 in att
   give 5 status_burn
   unless status_burn
 
-verb bite_fire_lands_dd_again "Fire Bubble bite hits Link again" by world priority 60 in attacks at 3460 640
+verb bite_fire_lands_dd_again "Fire Bubble bite hits Link again" by world priority 60 in attacks at 3460 850
   take incoming_bite_fire
   unless link_guard
   unless link_dodge
@@ -2691,6 +2741,69 @@ verb bite_fire_lands_dd_again "Fire Bubble bite hits Link again" by world priori
   need has_double_defense
   give 4 link_dmg
   need status_burn
+
+verb bite_green_blocked_deku_shield__green_on "Green Bubble bite: blocked by the deku shield" by world priority 60 in attacks at 3460 920
+  take incoming_bite_green
+  need guard_with_deku_shield
+  take phase_green_on
+  give phase_green_off
+  give 4 timer_green_off
+
+verb bite_green_blocked_deku_shield__green_off "Green Bubble bite: blocked by the deku shield" by world priority 60 in attacks at 3320 990
+  take incoming_bite_green
+  need guard_with_deku_shield
+  need phase_green_off
+
+verb bite_green_blocked_hylian_shield__green_on "Green Bubble bite: blocked by the hylian shield" by world priority 60 in attacks at 3460 990
+  take incoming_bite_green
+  need guard_with_hylian_shield
+  take phase_green_on
+  give phase_green_off
+  give 4 timer_green_off
+
+verb bite_green_blocked_hylian_shield__green_off "Green Bubble bite: blocked by the hylian shield" by world priority 60 in attacks at 3320 1060
+  take incoming_bite_green
+  need guard_with_hylian_shield
+  need phase_green_off
+
+verb bite_green_blocked_mirror_shield__green_on "Green Bubble bite: blocked by the mirror shield" by world priority 60 in attacks at 3460 1060
+  take incoming_bite_green
+  need guard_with_mirror_shield
+  take phase_green_on
+  give phase_green_off
+  give 4 timer_green_off
+
+verb bite_green_blocked_mirror_shield__green_off "Green Bubble bite: blocked by the mirror shield" by world priority 60 in attacks at 3320 1130
+  take incoming_bite_green
+  need guard_with_mirror_shield
+  need phase_green_off
+
+verb bite_green_dodged "Green Bubble bite: dodged" by world priority 60 in attacks at 3460 1130
+  take incoming_bite_green
+  need link_dodge
+  unless link_guard
+
+verb bite_green_nayru "Green Bubble bite: Nayru's Love holds" by world priority 60 in attacks at 3320 1200
+  take incoming_bite_green
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb bite_green_lands "Green Bubble bite hits Link" by world priority 60 in attacks at 3460 1200
+  take incoming_bite_green
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 8 link_dmg
+
+verb bite_green_lands_dd "Green Bubble bite hits Link" by world priority 60 in attacks at 3320 1270
+  take incoming_bite_green
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 4 link_dmg
 
 verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
   need beat_end

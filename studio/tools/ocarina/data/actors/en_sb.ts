@@ -1,46 +1,29 @@
 import { standardLoadouts } from '../loadouts'
 import type { DmgType } from '../../inventory'
-import type { ActorSpec, Cite } from '../../spec'
+import type { ActorSpec, Cite, Reaction } from '../../spec'
 
 const F = 'src/overlays/actors/ovl_En_Sb/z_en_sb.c'
 const at = (line: number): Cite => `${F}:${line}`
 
 /**
- * `sDamageTable` (lines 72-105), assigned straight to `colChkInfo.damageTable` at line 132, so the extractor does not
- * see it. Each entry is [damage, reaction, table line]. `EnSb_UpdateDamage` reads the reaction: 15 and 14 damage it
- * only while vulnerable; 13 and 1 damage it while vulnerable and send it to cooldown; 2 (fire) always damages it;
- * 0 does nothing.
+ * `EnSb_UpdateDamage` reads `sDamageTable`'s reactions. 15 and 14 damage it only while vulnerable and facing Link;
+ * 13 and 1 do the same and send it to cooldown; 2 (fire) always damages it; 0 falls to the default and does nothing.
+ * The vulnerable window is carried by the guards on the shut phases.
  */
-const TABLE: Partial<Record<DmgType, [number, number, number]>> = {
-  EXPLOSIVE: [2, 15, 76],
-  ARROW_NORMAL: [2, 15, 78],
-  HAMMER_SWING: [2, 15, 79],
-  HOOKSHOT: [2, 1, 80],
-  SLASH_KOKIRI: [1, 13, 81],
-  SLASH_MASTER: [2, 13, 82],
-  SLASH_GIANT: [4, 13, 83],
-  ARROW_FIRE: [4, 2, 84],
-  ARROW_ICE: [2, 15, 85],
-  ARROW_LIGHT: [2, 15, 86],
-  ARROW_UNK1: [4, 14, 87],
-  ARROW_UNK2: [2, 15, 88],
-  ARROW_UNK3: [2, 15, 89],
-  MAGIC_FIRE: [4, 2, 90],
-  SPIN_KOKIRI: [1, 13, 95],
-  SPIN_GIANT: [4, 13, 96],
-  SPIN_MASTER: [2, 13, 97],
-  JUMP_KOKIRI: [2, 13, 98],
-  JUMP_GIANT: [8, 13, 99],
-  JUMP_MASTER: [4, 13, 100],
+const reactions: Record<string, Reaction> = {
+  '0x0': { damage: false, note: 'falls to the default case: no damage, only metal sparks', cite: at(438) },
+  '0xF': { damage: true, note: 'explosives, arrows, hammer: damage while vulnerable and facing Link', cite: at(408) },
+  '0xE': { damage: true, note: 'wind arrow: falls through to the explosive case', cite: at(405) },
+  '0x2': { damage: true, note: 'fire arrow and Din\'s Fire: damage in any state', cite: at(419) },
+  '0xD': { damage: true, to: 'cooldown', note: 'swords: damage while vulnerable and facing Link, then it snaps shut (EnSb_SetupCooldown)', cite: at(426) },
+  '0x1': { damage: true, to: 'cooldown', note: 'hookshot: handled with the swords', cite: at(425) },
 }
-const entries = Object.fromEntries(
-  Object.entries(TABLE).map(([d, [damage, reaction, line]]) => [
-    d,
-    { damage, cite: at(line), ...(reaction === 13 || reaction === 1 ? { to: 'cooldown' } : {}) },
-  ]),
-)
 /** Outside its vulnerable frames, or facing away, a non-fire hit only throws metal sparks (line 455). */
-const SHELL = (Object.keys(TABLE) as DmgType[]).filter((d) => TABLE[d]![1] !== 2)
+const SHELL: DmgType[] = [
+  'EXPLOSIVE', 'ARROW_NORMAL', 'HAMMER_SWING', 'HOOKSHOT', 'SLASH_KOKIRI', 'SLASH_MASTER', 'SLASH_GIANT', 'ARROW_ICE',
+  'ARROW_LIGHT', 'ARROW_UNK1', 'ARROW_UNK2', 'ARROW_UNK3', 'SPIN_KOKIRI', 'SPIN_GIANT', 'SPIN_MASTER', 'JUMP_KOKIRI',
+  'JUMP_GIANT', 'JUMP_MASTER',
+]
 
 export const enSb: ActorSpec = {
   overlay: 'ovl_En_Sb',
@@ -49,7 +32,7 @@ export const enSb: ActorSpec = {
   summary: 'A clam that opens when Link is in range, then turns and hops at him. Its shell turns every blow except fire; it can be hurt only from the front while it is opening or open. A sword or hookshot hit makes it snap shut and back off. Fire hurts it in any state.',
   cite: at(41),
   pools: [{ id: 'shell', label: 'Shell Blade', hp: { value: 2, cite: at(133) }, then: 'defeated' }],
-  damage: { kind: 'custom', entries },
+  damage: { kind: 'decomp', table: 'sDamageTable', reactions },
   phases: [
     { id: 'closed', label: 'Shell Blade waits, shut', guards: SHELL, cite: at(362) },
     { id: 'open', label: 'Shell Blade opens', cite: at(357) },

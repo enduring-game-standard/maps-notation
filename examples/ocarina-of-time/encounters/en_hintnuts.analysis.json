@@ -1,17 +1,16 @@
 {
- "positions": 2643,
+ "positions": 11627,
  "complete": true,
  "outcomes": [
+  "Link falls",
   "Link withdraws"
  ],
  "stalls": 0,
  "livelocks": 0,
  "deadVerbs": [
   "link_heals",
-  "link_hurt",
   "link_hurt_overkill",
   "fairy_revives_link",
-  "link_fell",
   "hit_deku_stick__up",
   "hit_deku_stick__looking",
   "hit_deku_stick__throw",
@@ -39,81 +38,91 @@
   "hit_jump_master__up",
   "hit_jump_master__looking",
   "hit_jump_master__throw",
-  "hit_jump_master__up_after_throw"
+  "hit_jump_master__up_after_throw",
+  "miss_reflect_nut",
+  "hit_reflect_nut__up",
+  "hit_reflect_nut__looking",
+  "hit_reflect_nut__throw",
+  "hit_reflect_nut__burrow",
+  "nut_blocked_deku_shield"
  ],
  "kitSplit": {},
  "slices": [
   {
    "kit": "child_blade",
    "variant": "",
-   "positions": 21,
+   "positions": 26,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 6
+    "Link withdraws": 8
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 45
+   "ms": 31
   },
   {
    "kit": "child_bottles",
    "variant": "",
-   "positions": 41,
+   "positions": 76,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 12
+    "Link withdraws": 24
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 54
+   "ms": 50
   },
   {
    "kit": "child_dins",
    "variant": "",
-   "positions": 141,
+   "positions": 708,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 42
+    "Link withdraws": 224,
+    "Link falls": 7
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 196
+   "ms": 375
   },
   {
    "kit": "child_lens",
    "variant": "",
-   "positions": 441,
+   "positions": 2226,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 132
+    "Link withdraws": 704,
+    "Link falls": 25
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 451
+   "ms": 1089
   },
   {
    "kit": "child_nayru",
    "variant": "",
-   "positions": 1438,
+   "positions": 5762,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 431
+    "Link withdraws": 1724,
+    "Link falls": 13
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1061
+   "ms": 2229
   },
   {
    "kit": "child_spin",
    "variant": "",
-   "positions": 561,
+   "positions": 2829,
    "complete": true,
    "outcomes": {
-    "Link withdraws": 168
+    "Link withdraws": 896,
+    "Link falls": 28
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 629
+   "ms": 1539
   }
  ]
 }

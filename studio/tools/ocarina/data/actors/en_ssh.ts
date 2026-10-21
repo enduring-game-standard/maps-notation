@@ -138,12 +138,13 @@ export const enSsh: ActorSpec = {
   cite: at(51),
   pools: [],
   damage: {
-    kind: 'custom',
-    entries: Object.fromEntries([
-      ...BODY.map((d) => [d, { damage: 0, cite: at(220) }]),
-      ...QUAKE.map((d) => [d, { damage: 0, cite: at(548) }]),
-      ...FRONT.map((d) => [d, { damage: 0, cite: at(228) }]),
-    ]),
+    kind: 'decomp',
+    table: 'DamageTable_Get(2)',
+    reactions: Object.fromEntries(['0x0', '0x1'].map((r) => [r, {
+      damage: false,
+      note: 'the actor never reads colChkInfo.damage or damageReaction and never lowers its health; what a hit does is decided by which cylinder it strikes, carried in each phase\'s overrides',
+      cite: at(230),
+    }])),
   },
   phases,
   start: 'hang',
@@ -165,6 +166,7 @@ export const enSsh: ActorSpec = {
     actionFunc: post('not an action function: the parameter name in EnSsh_SetupAction', 131),
   },
   atSources: {
+    [at(489)]: 'spin',
     [at(72)]: post('this cylinder\'s base is AT_NONE (line 64) and it is only ever registered with CollisionCheck_SetAC (lines 565, 573, 576), so its ATELEM_ON never touches Link', 64),
     [at(107)]: post('the JntSph AT collider is registered only when colChkInfo.health is 0; health starts at 1 (line 81) and nothing in the actor lowers it', 608),
   },
