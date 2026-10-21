@@ -5,6 +5,10 @@ export interface Compiled {
   inputs: Map<string, { state: string; kind: 'take' | 'need' | 'unless'; count: number }[]>
   outputs: Map<string, { state: string; count: number }[]>
   outcomes: State[]
+  /** Each verb is filed under one state it takes or needs, so only verbs under a marked state can be possible. */
+  byKeyState: Map<string, number[]>
+  /** Verbs with nothing to take or need: they are checked at every marking. */
+  unkeyed: number[]
 }
 
 export const compile = (net: Net): Compiled => {
@@ -14,7 +18,14 @@ export const compile = (net: Net): Compiled => {
     if (a.kind === 'give') outputs.get(a.verb)?.push({ state: a.state, count: a.count })
     else inputs.get(a.verb)?.push({ state: a.state, kind: a.kind, count: a.count })
   }
-  return { net, inputs, outputs, outcomes: net.states.filter((p) => p.ends !== undefined) }
+  const byKeyState: Compiled['byKeyState'] = new Map()
+  const unkeyed: number[] = []
+  net.verbs.forEach((v, i) => {
+    const key = inputs.get(v.id)!.find((a) => a.kind !== 'unless')
+    if (!key) unkeyed.push(i)
+    else byKeyState.set(key.state, [...(byKeyState.get(key.state) ?? []), i])
+  })
+  return { net, inputs, outputs, outcomes: net.states.filter((p) => p.ends !== undefined), byKeyState, unkeyed }
 }
 
 export const isEnabled = (c: Compiled, m: Marking, verb: string): boolean =>
@@ -54,7 +65,12 @@ export type Turn =
 export const whoseTurn = (c: Compiled, m: Marking): Turn => {
   const outcome = outcomeOf(c, m)
   if (outcome !== undefined) return { kind: 'over', outcome }
-  const enabled = c.net.verbs.filter((v) => isEnabled(c, m, v.id))
+  const candidates = [...c.unkeyed]
+  for (const id in m) if (m[id] > 0) candidates.push(...(c.byKeyState.get(id) ?? []))
+  const enabled = candidates
+    .sort((a, b) => a - b)
+    .map((i) => c.net.verbs[i])
+    .filter((v) => isEnabled(c, m, v.id))
   const world = enabled.filter((v) => v.by === WORLD)
   if (world.length) {
     const top = Math.max(...world.map((v) => v.priority))
