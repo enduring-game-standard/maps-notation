@@ -95,7 +95,13 @@ const verifyCompleteness = (inv: Inventory) => {
       if (!sources.has(c)) fail('C6', `${s.overlay}: ledger names ${c}, which is not an AT element or runtime atDmgInfo change`)
       if (typeof v === 'string' && !ids.has(v)) fail('C6', `${s.overlay}: ${c} maps to unknown attack ${v}`)
     }
-    for (const a of s.attacks) if (s.atSources[a.source as Cite] !== a.id && !sources.has(a.source)) fail('C6', `${s.overlay}: attack ${a.id} source ${a.source} is not a ledgered AT source`)
+    for (const a of s.attacks) {
+      if (a.via) {
+        const carrier = inv.actors.find((x) => x.overlay === a.via!.overlay)
+        const carried = new Set([...(carrier?.elements.filter((e) => e.atOn).map((e) => `${e.file}:${e.line}`) ?? []), ...(carrier?.runtimeAt.map((r) => `${r.file}:${r.line}`) ?? [])])
+        if (!carried.has(a.source)) fail('C6', `${s.overlay}: attack ${a.id} is carried by ${a.via.overlay}, but ${a.source} is not one of its AT sources`)
+      } else if (s.atSources[a.source as Cite] !== a.id && !sources.has(a.source)) fail('C6', `${s.overlay}: attack ${a.id} source ${a.source} is not a ledgered AT source`)
+    }
   }
 
   const read = new Set<string>([
@@ -111,7 +117,7 @@ const verifyCompleteness = (inv: Inventory) => {
 }
 
 /** V3: the generated net against a fresh extraction, never against the spec's own reading. */
-const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net) => {
+const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net, inv: Inventory) => {
   const verbs = new Map(net.verbs.map((v) => [v.id, v]))
   const gives = (verb: string, state: string) => net.arcs.find((a) => a.verb === verb && a.kind === 'give' && a.state === state)?.count ?? 0
   const unit = Number(/1 mark = (\d+)\//.exec(net.states.find((s) => s.id === 'link_hp')!.label)![1])
@@ -146,8 +152,9 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net) => {
     }
   }
   for (const a of spec.attacks) {
-    const el = ia.elements.find((e) => `${e.file}:${e.line}` === a.source)
-    const rt = ia.runtimeAt.find((r) => `${r.file}:${r.line}` === a.source)
+    const carrier = a.via ? inv.actors.find((x) => x.overlay === a.via!.overlay) ?? ia : ia
+    const el = carrier.elements.find((e) => `${e.file}:${e.line}` === a.source)
+    const rt = carrier.runtimeAt.find((r) => `${r.file}:${r.line}` === a.source)
     if (el && el.atDamage !== a.damage) fail('V3', `${spec.overlay}: attack ${a.id} damage ${a.damage}, element at ${a.source} deals ${el.atDamage}`)
     if (rt && /atDmgInfo\.damage\s*=\s*(\d+|0x[0-9a-f]+)/i.test(rt.text)) {
       const n = Number(/atDmgInfo\.damage\s*=\s*(\d+|0x[0-9a-f]+)/i.exec(rt.text)![1])
@@ -163,6 +170,19 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net) => {
   }
 }
 
+/** Whether the spec gives the actor any way to die: health, or a hit or step that ends in `defeated`. */
+const declaresDeath = (spec: ActorSpec) => {
+  const dies = (to: string | Record<string, string> | undefined) => to === 'defeated' || (typeof to === 'object' && Object.values(to).includes('defeated'))
+  const d = spec.damage
+  return (
+    spec.pools.length > 0 ||
+    (d.kind === 'decomp' && Object.values(d.reactions).some((r) => dies(r.to))) ||
+    (d.kind === 'custom' && Object.values(d.entries).some((e) => dies(e?.to))) ||
+    spec.phases.some((p) => Object.values(p.overrides ?? {}).some((o) => dies(o?.to))) ||
+    spec.steps.some((s) => s.to === 'defeated')
+  )
+}
+
 const verifyEncounter = async (spec: ActorSpec, inv: Inventory, analyzeLimit: number) => {
   const ia = inv.actors.find((a) => a.overlay === spec.overlay)!
   const { net } = encounter(spec, link, inv)
@@ -175,7 +195,7 @@ const verifyEncounter = async (spec: ActorSpec, inv: Inventory, analyzeLimit: nu
   for (const p of problems.filter((x) => x.severity === 'error')) fail('V1', `${spec.overlay}: ${p.message}`)
   for (const p of problems.filter((x) => x.severity === 'warning'))
     if (!Object.keys(spec.expected?.warnings ?? {}).some((k) => p.message.includes(k))) fail('V1', `${spec.overlay}: unexpected warning: ${p.message}`)
-  verifyNumbers(spec, ia, parsed)
+  verifyNumbers(spec, ia, parsed, inv)
 
   const slices = await analyzeFile(fileURLToPath(file), analyzeLimit)
   const fired = new Set(slices.flatMap((r) => r.fired))
@@ -214,7 +234,7 @@ const verifyEncounter = async (spec: ActorSpec, inv: Inventory, analyzeLimit: nu
   const expectedDead = spec.expected?.deadVerbs ?? {}
   for (const v of deadVerbs) if (!(v in expectedDead)) fail('V2', `${spec.overlay}: verb ${v} can never be said`)
   for (const v of Object.keys(expectedDead)) if (!deadVerbs.includes(v)) fail('V2', `${spec.overlay}: ledgered dead verb ${v} is reachable after all`)
-  const killable = spec.pools.length > 0 || (spec.damage.kind === 'decomp' && Object.values(spec.damage.reactions).some((r) => r.to === 'defeated' || Object.values(typeof r.to === 'object' ? r.to : {}).includes('defeated')))
+  const killable = declaresDeath(spec)
   if (killable !== outcomes.has('Link wins')) fail('V2', `${spec.overlay}: Link wins reachable=${outcomes.has('Link wins')} but killable=${killable}`)
   if (spec.attacks.length > 0 !== outcomes.has('Link falls')) fail('V2', `${spec.overlay}: Link falls reachable=${outcomes.has('Link falls')} with ${spec.attacks.length} attacks`)
   note('V2', `${spec.overlay}: ${summary.positions} positions over ${slices.length} slices; ${kitSplit.length} verbs dead only because their gear is in different kits`)

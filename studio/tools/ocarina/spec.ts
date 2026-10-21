@@ -174,6 +174,16 @@ export interface Attack {
   dodgeable: boolean
   /** The collider element (from the inventory) or runtime `atDmgInfo` assignment this attack is. */
   source: Cite
+  /**
+   * The attack is a projectile actor this actor spawns: `source` is that actor's collider element or runtime change,
+   * and `spawn` is the line where this actor spawns it.
+   */
+  via?: { overlay: string; spawn: Cite }
+  /**
+   * A raised shield sends it back, and it strikes this actor as Link's hit of type `as` dealing `damage`
+   * (the reflected collider's own damage, for actors with no table). Each shield may be limited to some ages.
+   */
+  reflect?: { shields: { gear: Gear; ages?: Age[] }[]; as: DmgType; damage: number; cite: Cite }
 }
 
 /** How this actor's code reads a reaction value from its damage table. */

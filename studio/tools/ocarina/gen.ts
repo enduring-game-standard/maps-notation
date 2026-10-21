@@ -401,6 +401,12 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     swingOf.set(id, key)
     if (!swings.has(key)) swings.set(key, attack)
   }
+  const reflected = new Set<string>()
+  for (const a of enemyAttacks.filter((x) => x.reflect)) {
+    const r = a.reflect!
+    swings.set(`reflect_${a.id}`, { dmg: r.as, label: `${a.label}, sent back`, ages, needs: [], reach: 'ranged', ownDamage: { value: r.damage, cite: r.cite }, cite: r.cite })
+    reflected.add(`reflect_${a.id}`)
+  }
   for (const { id, attack } of attacks) {
     const sword = attack.needs.some((g) => SWORDS.includes(g))
     for (const [k, ageArc] of ageArcs(attack).entries())
@@ -419,7 +425,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   /** The phases each pool can run out in: wherever a damaging hit leaves the enemy. */
   const emptyAt = new Map(spec.pools.map((pool) => [pool.id, new Set<string>()]))
   for (const [key, rep] of swings) {
-    const name = DMG_NAMES[rep.dmg] ?? rep.label
+    const name = reflected.has(key) ? rep.label : (DMG_NAMES[rep.dmg] ?? rep.label)
     b.state(`swing_${key}`, `${name} on its way`, 'hits')
     const swing: [ArcKind, string] = ['take', `swing_${key}`]
     const effects = spec.phases.map((p) => ({ p, e: effectOf(spec, p, hitRule(spec, inv, p, rep)) }))
@@ -522,6 +528,12 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   function attackVerbs(a: Attack) {
     b.state(`incoming_${a.id}`, `${a.label} incoming`, 'attacks')
     const inc: [ArcKind, string] = ['take', `incoming_${a.id}`]
+    if (a.reflect)
+      for (const r of a.reflect.shields.filter((x) => has(x.gear)))
+        for (const age of r.ages ? r.ages.filter((x) => ages.includes(x)) : [undefined])
+          b.verb(`${a.id}_reflected_${r.gear}${age ? `_${age}` : ''}`, `${a.label}: sent back by the ${r.gear.replace(/_/g, ' ')}`, WORLD, 'attacks', P.attack + 1, [
+            inc, ['need', `guard_with_${r.gear}`], ...(age ? ([['need', `age_${age}`]] as [ArcKind, string][]) : []), ['give', `swing_reflect_${a.id}`],
+          ])
     if (a.blockable)
       for (const s of shields) {
         const burns = a.effect.kind === 'burn' && s.burnsOnFire

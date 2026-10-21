@@ -2,10 +2,10 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { compile, settle, type Compiled } from '../../src/core/engine'
 import type { Marking } from '../../src/core/model'
-import { parse } from '../../src/core/text'
+import { parse, print } from '../../src/core/text'
 import { encounterFile, loadInventory, modeled, OUT } from './build'
 import { link } from './data/link'
-import { doubleDefense, linkAttacks, swingKey } from './gen'
+import { doubleDefense, encounter, linkAttacks, swingKey } from './gen'
 import { DMG_TYPES } from './inventory'
 import type { ActorSpec } from './spec'
 
@@ -30,6 +30,10 @@ for (const spec of modeled()) {
   describe(`${spec.name} (${spec.overlay})`, () => {
     const { net, c, unit } = load(spec)
     const has = (id: string) => net.states.some((s) => s.id === id)
+
+    it('the encounter file is what the generator makes from the spec', () => {
+      expect(readFileSync(new URL(`encounters/${encounterFile(spec.overlay)}`, OUT), 'utf8')).toBe(print(encounter(spec, link, inventory).net))
+    })
     const verbIds = new Set(net.verbs.map((v) => v.id))
     const all = linkAttacks(link).map((x) => x.attack)
     const keys = new Map(all.map((a) => [swingKey(spec, all, a), a]))
@@ -80,6 +84,16 @@ for (const spec of modeled()) {
             const m = quiet(c, { ...base, in_fight: 1, range_near: 1, link_hp: 10, link_guard: 1, [`guard_with_${s.gear}`]: 1, [`has_${s.gear}`]: 1, [`incoming_${a.id}`]: 1 })
             expect(m.link_hp).toBe(10)
           })
+      for (const r of a.reflect?.shields.filter((x) => has(`guard_with_${x.gear}`)) ?? [])
+        it(`${a.label} is sent back by a raised ${r.gear.replace(/_/g, ' ')}`, () => {
+          const base: Marking = Object.fromEntries(net.states.map((st) => [st.id, 0]))
+          const age = r.ages?.[0] ?? spec.loadouts[0].age
+          const m0: Marking = { ...base, in_fight: 1, range_far: 1, link_hp: 10, link_guard: 1, [`age_${age}`]: 1, [`guard_with_${r.gear}`]: 1, [`has_${r.gear}`]: 1, [`incoming_${a.id}`]: 1, [`phase_${spec.start}`]: 1 }
+          for (const q of spec.pools) Object.assign(m0, { [`hp_${q.id}`]: q.hp.value, [`alive_${q.id}`]: 1 })
+          const m = quiet(c, m0)
+          expect(m.link_hp).toBe(10)
+          expect(m[`swing_reflect_${a.id}`]).toBe(0)
+        })
     }
   })
 }
