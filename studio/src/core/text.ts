@@ -172,6 +172,8 @@ export const print = (net: Net): string => {
     a.push(`at ${Math.round(p.x)} ${Math.round(p.y)}`)
     lines.push(a.join(' '))
   }
+  const arcsByVerb = new Map<string, Net['arcs']>()
+  for (const arc of net.arcs) arcsByVerb.set(arc.verb, [...(arcsByVerb.get(arc.verb) ?? []), arc])
   for (const v of net.verbs) {
     lines.push('')
     const a = [`verb ${v.id} ${q(v.label)} by ${v.by}`]
@@ -180,7 +182,7 @@ export const print = (net: Net): string => {
     if (v.group) a.push(`in ${v.group}`)
     a.push(`at ${Math.round(v.x)} ${Math.round(v.y)}`)
     lines.push(a.join(' '))
-    for (const arc of net.arcs.filter((x) => x.verb === v.id))
+    for (const arc of arcsByVerb.get(v.id) ?? [])
       lines.push(
         `  ${arc.kind}${arc.count !== 1 ? ' ' + arc.count : ''} ${arc.state}` +
           (arc.via?.length ? ` via ${arc.via.map((p) => `${Math.round(p.x)} ${Math.round(p.y)}`).join(' ')}` : ''),

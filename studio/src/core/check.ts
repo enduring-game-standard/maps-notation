@@ -29,12 +29,14 @@ export const check = (net: Net): Problem[] => {
   const stateById = new Map(net.states.map((p) => [p.id, p]))
   const verbIds = new Set(net.verbs.map((v) => v.id))
   const groups = new Set(net.groups.map((g) => g.id))
+  const speakerOf = new Map(net.verbs.map((v) => [v.id, v.by]))
+  const hasInput = new Set(net.arcs.filter((a) => a.kind !== 'give').map((a) => a.verb))
   for (const v of net.verbs) {
     if (v.by !== WORLD && !seats.has(v.by)) err(`${v.id} is spoken by "${v.by}", which is not a seat`, v.id)
     if (v.by === WORLD && v.weight < 1) err(`${v.id} has weight ${v.weight}; a world verb's weight is at least 1`, v.id)
     if (v.by !== WORLD && (v.priority || v.weight !== 1)) warn(`${v.id}: priority and weight only order the world's responses; a seat simply chooses`, v.id)
     if (v.group && !groups.has(v.group)) err(`${v.id} is in unknown group ${v.group}`, v.id)
-    if (!net.arcs.some((a) => a.verb === v.id && a.kind !== 'give'))
+    if (!hasInput.has(v.id))
       warn(`${v.id} has no inputs, so it is always possible${v.by === WORLD ? ' and the world never falls silent' : ''}`, v.id)
   }
   for (const p of net.states) {
@@ -51,7 +53,7 @@ export const check = (net: Net): Problem[] => {
     const key = `${a.kind}|${a.state}|${a.verb}`
     if (seen.has(key)) err(`${a.verb} has two "${a.kind} ${a.state}" arcs; use a count instead`, a.verb)
     seen.add(key)
-    const speaker = net.verbs.find((v) => v.id === a.verb)?.by
+    const speaker = speakerOf.get(a.verb)
     if (state && speaker && speaker !== WORLD && a.kind !== 'give' && state.seenBy !== 'all' && !state.seenBy.includes(speaker))
       warn(`${a.verb} ${a.kind}s ${a.state}, which ${speaker} cannot see; whether ${a.verb} is possible tells ${speaker} about it`, a.verb)
   }
