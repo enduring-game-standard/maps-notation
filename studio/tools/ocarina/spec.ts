@@ -274,6 +274,8 @@ export interface ActorSpec {
    */
   loadouts: Loadout[]
   /** Checker warnings and dead verbs this design expects, with why. */
+  /** Where this fight changes the player code's own status rules (a scene that burns faster), with the cited values. */
+  linkRules?: { statusFrames?: Partial<LinkSpec['statusFrames']>; burnDamage?: Rate; freezeDamage?: Rate }
   expected?: { warnings?: Record<string, string>; deadVerbs?: Record<string, string> }
 }
 

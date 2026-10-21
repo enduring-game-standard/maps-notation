@@ -251,7 +251,9 @@ const effectBeats = (link: LinkSpec, e: Effect) =>
   : 0
 
 /** Build one encounter: Link against one actor, from the spec, the Link spec, and the decomp inventory. */
-export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory): Built => {
+export const encounter = (spec: ActorSpec, base: LinkSpec, inventory: Inventory): Built => {
+  const r = spec.linkRules
+  const link: LinkSpec = r ? { ...base, ...r, statusFrames: { ...base.statusFrames, ...r.statusFrames } } : base
   const inv = inventory.actors.find((a) => a.overlay === spec.overlay)
   const b = new NetBuilder(`Ocarina of Time combat: Link vs ${spec.name}`)
   const ages = [...new Set(spec.loadouts.map((lo) => lo.age))]
