@@ -264,6 +264,7 @@ export const encounter = (spec: ActorSpec, base: LinkSpec, inventory: Inventory)
     if (id !== 'defeated' && !phase.has(id)) throw new Error(`${spec.overlay}: ${where} names unknown phase ${id}`)
   }
   for (const a of spec.attacks) if (a.onBlock && a.onBlock.to !== 'defeated') needPhase(a.onBlock.to, `attack ${a.id} on block`)
+  for (const a of spec.attacks) for (const [from, to] of Object.entries(a.onLand?.to ?? {})) needPhase(from, `attack ${a.id} on land`), needPhase(to, `attack ${a.id} on land`)
   for (const s of spec.steps) {
     if (s.afterTimer && !phase.get(s.from)?.frames) throw new Error(`${spec.overlay}: step ${s.label} waits for a timer, but phase ${s.from} has no frames`)
     needPhase(s.from, `step ${s.label}`)
@@ -661,6 +662,13 @@ export const encounter = (spec: ActorSpec, base: LinkSpec, inventory: Inventory)
     if (st) effectArcs.push(['give', `status_${st}`, effectBeats(link, a.effect)])
     if (a.effect.kind === 'steal') effectArcs.push(['give', `steal_${a.id}`])
     if (a.effect.kind === 'grab' && a.effect.release === 'carried_off') effectArcs.push(['give', `carried_${a.id}`])
+    if (a.onLand) {
+      const tok = `landed_${a.id}`
+      effectArcs.push(['give', tok])
+      b.state(tok, `${a.label}: landed`, 'attacks')
+      for (const [from, to] of Object.entries(a.onLand.to)) b.verb(`${a.id}_landing_moves__${from}`, `${a.label} landing changes the fight`, WORLD, 'attacks', P.steal, [['take', tok], ...move(from, to)])
+      b.verb(`${a.id}_landing_settles`, `${a.label} landed`, WORLD, 'attacks', P.steal - 1, [['take', tok], ...Object.keys(a.onLand.to).map((f): [ArcKind, string] => ['unless', `phase_${f}`])])
+    }
     const dd = has('double_defense')
     const variants: [string, number, [ArcKind, string][]][] = dd
       ? [['lands', a.damage, [['unless', 'has_double_defense']]], ['lands_dd', doubleDefense(a.damage), [['need', 'has_double_defense']]]]
@@ -674,7 +682,7 @@ export const encounter = (spec: ActorSpec, base: LinkSpec, inventory: Inventory)
         if (landsAt.has('far')) b.verb(`${a.id}_${suffix}_far`, `${a.label} hits Link`, WORLD, 'attacks', pa, [...arcs, ['need', 'range_far']])
       } else b.verb(`${a.id}_${suffix}`, `${a.label} hits Link`, WORLD, 'attacks', pa, arcs)
       if (st)
-        b.verb(`${a.id}_${suffix}_again`, `${a.label} hits Link again`, WORLD, 'attacks', pa, [...open, ...ddArcs, ['give', 'link_dmg', H(dmg)], ['need', `status_${st}`]])
+        b.verb(`${a.id}_${suffix}_again`, `${a.label} hits Link again`, WORLD, 'attacks', pa, [...open, ...ddArcs, ['give', 'link_dmg', H(dmg)], ['need', `status_${st}`], ...(a.onLand ? ([['give', `landed_${a.id}`]] as [ArcKind, string][]) : [])])
     }
     if (a.effect.kind === 'steal') {
       b.state(`steal_${a.id}`, `${a.label}: taking gear`, 'attacks')

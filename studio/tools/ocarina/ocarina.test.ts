@@ -130,6 +130,21 @@ for (const spec of modeled()) {
       }
     }
 
+    for (const a of spec.attacks.filter((x) => x.onLand))
+      for (const [from, to] of Object.entries(a.onLand!.to))
+        it(`${a.label} landing in ${from} moves it to ${to}`, () => {
+          const base: Marking = Object.fromEntries(net.states.map((s) => [s.id, 0]))
+          for (const q of spec.pools) {
+            for (const sg of poolSegments(q)) base[sg.id] = q.hp.fromLinkHealth ? 0 : sg.marks
+            base[`alive_${q.id}`] = 1
+            for (const t of q.thresholds ?? []) base[`above_${q.id}_${t.at}`] = 1
+          }
+          const m = quiet(c, { ...base, in_fight: 1, link_hp: 1000, range_near: 1, [`phase_${from}`]: 1, [`incoming_${a.id}`]: 1 })
+          expect(m[`phase_${to}`]).toBe(1)
+          if (from !== to) expect(m[`phase_${from}`]).toBe(0)
+          expect(m[`landed_${a.id}`]).toBe(0)
+        })
+
     for (const st of spec.steps.filter((x) => x.restore)) {
       const pool = spec.pools.find((q) => q.id === st.restore!.pool)!
       for (const left of [0, 1, pool.hp.value])

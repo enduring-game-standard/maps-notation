@@ -194,6 +194,8 @@ export interface Attack {
   reflect?: { shields: { gear: Gear; ages?: Age[] }[]; as: DmgType; damage: number; cite: Cite }
   /** A shield block sends the actor to this phase (from whichever phase the attacking step left it in), or `defeated`. */
   onBlock?: { to: string; cite: Cite }
+  /** Landing on Link moves the actor from each listed phase to another, such as a charge lost when Link is burned. */
+  onLand?: { to: Record<string, string>; cite: Cite }
 }
 
 /** How this actor's code reads a reaction value from its damage table. */
