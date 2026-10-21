@@ -89,6 +89,10 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       actor.health.push({ value: num(m[1]), via: 'field', file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/colChkInfo\.health\s*([*+-])=\s*(-?(?:0x)?[0-9A-Fa-f]+)\s*;/g))
       actor.health.push({ value: num(m[2]), via: `${m[1]}=`, file: rel, line: lineOf(src, m.index!) })
+    for (const m of src.matchAll(/colChkInfo\.health\s*=\s*(\w+)\.health\s*>>\s*(\d+)\s*;/g)) {
+      const init = actor.health.find((h) => h.via === m[1])
+      if (init) actor.health.push({ value: init.value >> num(m[2]), via: `${m[1]}>>`, file: rel, line: lineOf(src, m.index!) })
+    }
     for (const m of src.matchAll(/colChkInfo\.health\s*=\s*[\w.]*healthCapacity\s*>>\s*(\d+)\s*;/g))
       actor.health.push({ value: num(m[1]), via: 'healthCapacity>>', file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/\{\s*(ELEM_MATERIAL_\w+),\s*\{\s*([^,]+),\s*(HIT_SPECIAL_EFFECT_\w+|[\w]+),\s*([^}]+)\},\s*\{\s*([^,]+),\s*[^,]+,\s*[^}]+\},\s*([^,]+),\s*([^,]+),/g))
@@ -99,7 +103,7 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       })
     for (const m of src.matchAll(/[^\n]*atDmgInfo\.(?:damage|effect|hitSpecialEffect|dmgFlags)\s*[*+\-|&]?=[^\n]*/g))
       actor.runtimeAt.push({ text: m[0].trim(), file: rel, line: lineOf(src, m.index!) })
-    for (const m of src.matchAll(/[^\n]*\b(?:damagePlayer\(|Actor_SetPlayerKnockback(?:Large|Small)?\(|Player_InflictDamage\w*\(|Health_ChangeBy\(\s*play\s*,\s*-|player->actor\.freezeTimer\s*=(?!=))[^\n]*/g))
+    for (const m of src.matchAll(/[^\n]*\b(?:damagePlayer\(|Actor_SetPlayerKnockback(?:Large|Small)?\(|Player_InflictDamage\w*\(|Health_ChangeBy\(\s*play\s*,\s*-|Play_Trigger(?:Respawn|VoidOut)\(|player->actor\.freezeTimer\s*=(?!=))[^\n]*/g))
       actor.directHurt.push({ text: m[0].trim(), file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/\bactionFunc\s*=\s*(\w+)\s*;/gi)) funcs.add(m[1])
     for (const m of src.matchAll(/\w+_SetupAction\(\s*this\s*,\s*(\w+)\s*\)/g)) funcs.add(m[1])

@@ -145,27 +145,27 @@ state tick_grab "Beat ends: grab checked" in beat at 580 360
 state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state lens_count "The Lens: beats toward the next cost" in beat at 580 570
 
-verb wait_timer_timer_clears "Wallmaster: shadow follows Link is over" by world priority 99 in enemy at 2040 220
+verb wait_timer_timer_clears "Wallmaster: shadow follows Link is over" by world priority 100 in enemy at 2040 220
   take timer_wait_timer
   unless phase_wait_timer
 
-verb stun_timer_timer_clears "Wallmaster is stunned is over" by world priority 99 in enemy at 2180 570
+verb stun_timer_timer_clears "Wallmaster is stunned is over" by world priority 100 in enemy at 2180 570
   take timer_stun_timer
   unless phase_stun_timer
 
-verb wait_prox_timer_clears "Wallmaster (wakes near home): shadow follows Link is over" by world priority 99 in enemy at 2040 710
+verb wait_prox_timer_clears "Wallmaster (wakes near home): shadow follows Link is over" by world priority 100 in enemy at 2040 710
   take timer_wait_prox
   unless phase_wait_prox
 
-verb stun_prox_timer_clears "Wallmaster (wakes near home) is stunned is over" by world priority 99 in enemy at 2180 1060
+verb stun_prox_timer_clears "Wallmaster (wakes near home) is stunned is over" by world priority 100 in enemy at 2180 1060
   take timer_stun_prox
   unless phase_stun_prox
 
-verb wait_flag_timer_clears "Wallmaster (switch-flag, one drop): shadow follows Link is over" by world priority 99 in enemy at 2040 1200
+verb wait_flag_timer_clears "Wallmaster (switch-flag, one drop): shadow follows Link is over" by world priority 100 in enemy at 2040 1200
   take timer_wait_flag
   unless phase_wait_flag
 
-verb stun_flag_timer_clears "Wallmaster (switch-flag, one drop) is stunned is over" by world priority 99 in enemy at 2180 1550
+verb stun_flag_timer_clears "Wallmaster (switch-flag, one drop) is stunned is over" by world priority 100 in enemy at 2180 1550
   take timer_stun_flag
   unless phase_stun_flag
 
@@ -386,50 +386,50 @@ verb variant_flag "Wallmaster released by a switch flag" by world priority 30 in
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 2 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Wallmaster loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Wallmaster loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Wallmaster has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Wallmaster has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -3595,37 +3595,37 @@ verb hit_hammer_jump__stun_flag "Hammer jump attack hits (Wallmaster (switch-fla
   give phase_hurt_flag
   give 4 dmg_body
 
-verb body_empty_in_hurt_timer "Wallmaster runs out (Wallmaster reels)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_hurt_timer "Wallmaster runs out (Wallmaster reels)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_hurt_timer
   give link_wins
 
-verb body_empty_in_stun_timer "Wallmaster runs out (Wallmaster is stunned)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_stun_timer "Wallmaster runs out (Wallmaster is stunned)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_stun_timer
   give link_wins
 
-verb body_empty_in_hurt_prox "Wallmaster runs out (Wallmaster (wakes near home) reels)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_hurt_prox "Wallmaster runs out (Wallmaster (wakes near home) reels)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_hurt_prox
   give link_wins
 
-verb body_empty_in_stun_prox "Wallmaster runs out (Wallmaster (wakes near home) is stunned)" by world priority 92 in enemy_health at 2360 360
+verb body_empty_in_stun_prox "Wallmaster runs out (Wallmaster (wakes near home) is stunned)" by world priority 90 in enemy_health at 2360 360
   unless hp_body
   take alive_body
   take phase_stun_prox
   give link_wins
 
-verb body_empty_in_hurt_flag "Wallmaster runs out (Wallmaster (switch-flag, one drop) reels)" by world priority 92 in enemy_health at 2500 360
+verb body_empty_in_hurt_flag "Wallmaster runs out (Wallmaster (switch-flag, one drop) reels)" by world priority 90 in enemy_health at 2500 360
   unless hp_body
   take alive_body
   take phase_hurt_flag
   give link_wins
 
-verb body_empty_in_stun_flag "Wallmaster runs out (Wallmaster (switch-flag, one drop) is stunned)" by world priority 92 in enemy_health at 2360 430
+verb body_empty_in_stun_flag "Wallmaster runs out (Wallmaster (switch-flag, one drop) is stunned)" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_stun_flag
@@ -4174,7 +4174,7 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 580 710
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 780
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 780
   take lens_count
   unless lens_on
 

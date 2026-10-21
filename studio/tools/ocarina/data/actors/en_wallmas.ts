@@ -64,7 +64,7 @@ const attacks: Attack[] = [
     effect: { kind: 'grab', frames: { value: 0x1e, cite: at(275) }, damagePerBeat: 0, release: 'carried_off' },
     blockable: false,
     dodgeable: true,
-    source: at(345),
+    source: at(494),
   },
 ]
 
@@ -119,6 +119,7 @@ export const enWallmas: ActorSpec = {
     EnWallmas_Die: post('shrink and item drop after the finishing blow; the encounter has already ended', 430),
   },
   atSources: {
+    [at(494)]: 'grab',
   },
   loadouts: standardLoadouts(['child', 'adult'], 1),
   expected: {

@@ -152,6 +152,33 @@
    ]
   },
   {
+   "overlay": "ovl_Bg_Haka_Ship",
+   "category": "ACTORCAT_BG",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Play_TriggerVoidOut(play);",
+     "file": "src/overlays/actors/ovl_Bg_Haka_Ship/z_bg_haka_ship.c",
+     "line": 197
+    }
+   ],
+   "actionFuncs": [
+    "BgHakaShip_ChildUpdatePosition",
+    "BgHakaShip_CrashFall",
+    "BgHakaShip_CrashShake",
+    "BgHakaShip_CutsceneStationary",
+    "BgHakaShip_Move",
+    "BgHakaShip_SetupCrash",
+    "BgHakaShip_WaitForSong"
+   ]
+  },
+  {
    "overlay": "ovl_Bg_Haka_Trap",
    "category": "ACTORCAT_BG",
    "inScopeBecause": [
@@ -707,6 +734,32 @@
    "actionFuncs": [
     "func_8089B7C4",
     "func_8089B870"
+   ]
+  },
+  {
+   "overlay": "ovl_Bg_Relay_Objects",
+   "category": "ACTORCAT_BG",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Play_TriggerRespawn(play);",
+     "file": "src/overlays/actors/ovl_Bg_Relay_Objects/z_bg_relay_objects.c",
+     "line": 187
+    }
+   ],
+   "actionFuncs": [
+    "BgRelayObjects_DoNothing",
+    "func_808A90F4",
+    "func_808A91AC",
+    "func_808A9234",
+    "func_808A932C",
+    "func_808A939C"
    ]
   },
   {
@@ -7496,6 +7549,25 @@
    ]
   },
   {
+   "overlay": "ovl_En_Eg",
+   "category": "ACTORCAT_ITEMACTION",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Play_TriggerRespawn(play);",
+     "file": "src/overlays/actors/ovl_En_Eg/z_en_eg.c",
+     "line": 64
+    }
+   ],
+   "actionFuncs": []
+  },
+  {
    "overlay": "ovl_En_Eiyer",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
@@ -8599,6 +8671,12 @@
      "via": "sColChkInfoInit",
      "file": "src/overlays/actors/ovl_En_Floormas/z_en_floormas.c",
      "line": 93
+    },
+    {
+     "value": 2,
+     "via": "sColChkInfoInit>>",
+     "file": "src/overlays/actors/ovl_En_Floormas/z_en_floormas.c",
+     "line": 313
     }
    ],
    "elements": [
@@ -16332,6 +16410,7 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -16492,7 +16571,13 @@
     }
    ],
    "runtimeAt": [],
-   "directHurt": [],
+   "directHurt": [
+    {
+     "text": "Play_TriggerRespawn(play);",
+     "file": "src/overlays/actors/ovl_En_Wallmas/z_en_wallmas.c",
+     "line": 494
+    }
+   ],
    "actionFuncs": [
     "EnWallmas_Cooldown",
     "EnWallmas_Die",
@@ -17224,13 +17309,20 @@
    "overlay": "ovl_Obj_Roomtimer",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
-    "ACTORCAT_ENEMY"
+    "ACTORCAT_ENEMY",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [],
    "elements": [],
    "runtimeAt": [],
-   "directHurt": [],
+   "directHurt": [
+    {
+     "text": "Play_TriggerVoidOut(play);",
+     "file": "src/overlays/actors/ovl_Obj_Roomtimer/z_obj_roomtimer.c",
+     "line": 79
+    }
+   ],
    "actionFuncs": [
     "func_80B9D054",
     "func_80B9D0B0"

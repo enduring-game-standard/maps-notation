@@ -91,6 +91,7 @@ state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
 state lens_on "Lens of Truth on" in link_state at 1220 360
 state link_guard "Link holds up his shield" in link_state at 1080 430
 state link_dodge "Link dodges" in link_state at 1220 430
+state restore_body "Poe: health being reset to 4" in enemy_health at 2360 220
 state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
 state swing_deku_stick "Deku Stick on its way" in hits at 3000 150
 state swing_slingshot "Slingshot seed on its way" in hits at 3140 290
@@ -126,31 +127,31 @@ state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
 state lens_count "The Lens: beats toward the next cost" in beat at 440 710
 
-verb wait_timer_clears "No Poe: waiting to rise near Link is over" by world priority 99 in enemy at 2040 150
+verb wait_timer_clears "No Poe: waiting to rise near Link is over" by world priority 100 in enemy at 2040 150
   take timer_wait
   unless phase_wait
 
-verb wait_c_timer_clears "No Poe: waiting to rise near Link (Big Poe already taken) is over" by world priority 99 in enemy at 2180 220
+verb wait_c_timer_clears "No Poe: waiting to rise near Link (Big Poe already taken) is over" by world priority 100 in enemy at 2180 220
   take timer_wait_c
   unless phase_wait_c
 
-verb circle_timer_clears "Poe circles Link, dropping flames is over" by world priority 99 in enemy at 2180 430
+verb circle_timer_clears "Poe circles Link, dropping flames is over" by world priority 100 in enemy at 2180 430
   take timer_circle
   unless phase_circle
 
-verb circle_c_timer_clears "Poe circles Link, dropping flames is over" by world priority 99 in enemy at 2040 570
+verb circle_c_timer_clears "Poe circles Link, dropping flames is over" by world priority 100 in enemy at 2040 570
   take timer_circle_c
   unless phase_circle_c
 
-verb flee_timer_clears "Big Poe flees is over" by world priority 99 in enemy at 2180 640
+verb flee_timer_clears "Big Poe flees is over" by world priority 100 in enemy at 2180 640
   take timer_flee
   unless phase_flee
 
-verb vanish_timer_clears "Poe vanishes, laughing is over" by world priority 99 in enemy at 2180 850
+verb vanish_timer_clears "Poe vanishes, laughing is over" by world priority 100 in enemy at 2180 850
   take timer_vanish
   unless phase_vanish
 
-verb vanish_c_timer_clears "Poe vanishes, laughing is over" by world priority 99 in enemy at 2040 990
+verb vanish_c_timer_clears "Poe vanishes, laughing is over" by world priority 100 in enemy at 2040 990
   take timer_vanish_c
   unless phase_vanish_c
 
@@ -365,50 +366,64 @@ verb variant_taken_spot "Spawn point whose Big Poe was already bottled" by world
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Poe loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Poe loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Poe has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_resets_hp_body "Poe: old health cleared" by world priority 99 in enemy_health at 2500 220
+  need restore_body
+  take hp_body
+
+verb body_stands_again "Poe stands again" by world priority 99 in enemy_health at 2360 290
+  need restore_body
+  unless alive_body
+  give alive_body
+
+verb body_reset_to_4 "Poe has 4 health" by world priority 98 in enemy_health at 2500 290
+  take restore_body
+  unless hp_body
+  give 4 hp_body
+
+verb body_overkill "Poe has no health left to lose" by world priority 96 in enemy_health at 2360 360
   take dmg_body
   unless hp_body
 
@@ -1288,19 +1303,19 @@ verb hit_hammer_jump__flee "Hammer jump attack hits (Big Poe flees)" by world pr
   give phase_hurt_big
   give 4 dmg_body
 
-verb body_empty_in_hurt_small "Poe runs out (Poe recoils)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_hurt_small "Poe runs out (Poe recoils)" by world priority 90 in enemy_health at 2500 360
   unless hp_body
   take alive_body
   take phase_hurt_small
   give link_wins
 
-verb body_empty_in_hurt_small_c "Poe runs out (Poe recoils)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_hurt_small_c "Poe runs out (Poe recoils)" by world priority 90 in enemy_health at 2360 430
   unless hp_body
   take alive_body
   take phase_hurt_small_c
   give link_wins
 
-verb body_empty_in_hurt_big "Poe runs out (Big Poe recoils)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_hurt_big "Poe runs out (Big Poe recoils)" by world priority 90 in enemy_health at 2500 430
   unless hp_body
   take alive_body
   take phase_hurt_big
@@ -1610,6 +1625,7 @@ verb vanish_step_1 "Poe is gone" by world priority 69 in enemy at 2180 2040
   give phase_wait
   give 10 timer_wait
   unless timer_vanish
+  give restore_body
   give beat_end
 
 verb vanish_c_ticks "Poe vanishes, laughing: a beat passes" by world priority 71 in enemy at 2040 2110
@@ -1624,6 +1640,7 @@ verb vanish_c_step_1 "Poe is gone" by world priority 69 in enemy at 2180 2110
   give phase_wait_c
   give 10 timer_wait_c
   unless timer_vanish_c
+  give restore_body
   give beat_end
 
 verb flame_blocked_deku_shield "Poe lantern flame: blocked by the deku shield, which burns" by world priority 60 in attacks at 3460 80
@@ -1722,7 +1739,7 @@ verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 580 
   give tick_burn
   give 5 link_dmg
 
-verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 440 570
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 440 570
   take burn_count
   unless status_burn
 
@@ -1769,6 +1786,6 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 440 850
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 850
   take lens_count
   unless lens_on

@@ -40,8 +40,8 @@ const steps: Step[] = [
   { from: 'hurt_small', to: 'circle', label: 'Poe resumes circling', cite: at(557) },
   { from: 'hurt_small_c', to: 'circle_c', label: 'Poe resumes circling', cite: at(557) },
   { from: 'hurt_big', to: 'flee', label: 'Big Poe flees again', cite: at(555) },
-  { from: 'vanish', to: 'wait', label: 'Poe is gone', afterTimer: true, cite: at(616) },
-  { from: 'vanish_c', to: 'wait_c', label: 'Poe is gone', afterTimer: true, cite: at(616) },
+  { from: 'vanish', to: 'wait', label: 'Poe is gone', afterTimer: true, restore: { pool: 'body', to: 4, cite: at(219) }, cite: at(616) },
+  { from: 'vanish_c', to: 'wait_c', label: 'Poe is gone', afterTimer: true, restore: { pool: 'body', to: 4, cite: at(219) }, cite: at(616) },
 ]
 
 const attacks: Attack[] = [
@@ -90,4 +90,28 @@ export const enPoField: ActorSpec = {
   },
   atSources: { [at(97)]: 'flame' },
   loadouts: standardLoadouts(['child', 'adult']),
+  expected: {
+    deadVerbs: {
+      body_stands_again: 'the vanish restore stands the pool back up only if it had emptied, but an empty pool ends the fight first',
+      wait_timer_clears: 'the Poe rises only when the wait runs out, and nothing can hit it while it waits, so no timer is left behind',
+      wait_c_timer_clears: 'as wait_timer_clears',
+      vanish_timer_clears: 'as wait_timer_clears: the vanish is left only when its timer runs out',
+      vanish_c_timer_clears: 'as vanish_timer_clears',
+      hit_deku_stick__flee: 'the Big Poe enters flee at far and moves back to far on the same beat Link closes in, so a melee or self-centered swing never finds it near',
+      hit_hammer_swing__flee: 'as hit_deku_stick__flee',
+      hit_slash_kokiri__flee: 'as hit_deku_stick__flee',
+      hit_slash_master__flee: 'as hit_deku_stick__flee',
+      hit_slash_giant__flee: 'as hit_deku_stick__flee',
+      hit_spin_kokiri__flee: 'as hit_deku_stick__flee',
+      hit_spin_giant__flee: 'as hit_deku_stick__flee',
+      hit_spin_master__flee: 'as hit_deku_stick__flee',
+      hit_jump_kokiri__flee: 'as hit_deku_stick__flee',
+      hit_jump_kokiri_self__flee: 'as hit_deku_stick__flee',
+      hit_jump_giant__flee: 'as hit_deku_stick__flee',
+      hit_jump_giant_self__flee: 'as hit_deku_stick__flee',
+      hit_jump_master__flee: 'as hit_deku_stick__flee',
+      hit_jump_master_self__flee: 'as hit_deku_stick__flee',
+      hit_hammer_jump__flee: 'as hit_deku_stick__flee',
+    },
+  },
 }

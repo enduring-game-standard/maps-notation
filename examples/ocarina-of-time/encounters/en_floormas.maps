@@ -155,55 +155,55 @@ state tick_grab "Beat ends: grab checked" in beat at 900 360
 state tick_nayru "Beat ends: nayru checked" in beat at 760 430
 state lens_count "The Lens: beats toward the next cost" in beat at 900 570
 
-verb charge_big_timer_clears "Floormaster slides at Link is over" by world priority 99 in enemy at 580 220
+verb charge_big_timer_clears "Floormaster slides at Link is over" by world priority 100 in enemy at 580 220
   take timer_charge_big
   unless phase_charge_big
 
-verb land_big_timer_clears "Floormaster bounces off Link and lands is over" by world priority 99 in enemy at 440 360
+verb land_big_timer_clears "Floormaster bounces off Link and lands is over" by world priority 100 in enemy at 440 360
   take timer_land_big
   unless phase_land_big
 
-verb land_big_long_timer_clears "Floormaster ends its slide is over" by world priority 99 in enemy at 580 430
+verb land_big_long_timer_clears "Floormaster ends its slide is over" by world priority 100 in enemy at 580 430
   take timer_land_big_long
   unless phase_land_big_long
 
-verb frozen_big_timer_clears "Floormaster is stunned is over" by world priority 99 in enemy at 580 570
+verb frozen_big_timer_clears "Floormaster is stunned is over" by world priority 100 in enemy at 580 570
   take timer_frozen_big
   unless phase_frozen_big
 
-verb idle_s3_timer_clears "The first small hand scurries is over" by world priority 99 in enemy at 580 710
+verb idle_s3_timer_clears "The first small hand scurries is over" by world priority 100 in enemy at 580 710
   take timer_idle_s3
   unless phase_idle_s3
 
-verb land_s3_timer_clears "The first small hand lands is over" by world priority 99 in enemy at 440 920
+verb land_s3_timer_clears "The first small hand lands is over" by world priority 100 in enemy at 440 920
   take timer_land_s3
   unless phase_land_s3
 
-verb frozen_s3_timer_clears "The first small hand is stunned is over" by world priority 99 in enemy at 440 1060
+verb frozen_s3_timer_clears "The first small hand is stunned is over" by world priority 100 in enemy at 440 1060
   take timer_frozen_s3
   unless phase_frozen_s3
 
-verb idle_s2_timer_clears "The second small hand scurries is over" by world priority 99 in enemy at 580 1130
+verb idle_s2_timer_clears "The second small hand scurries is over" by world priority 100 in enemy at 580 1130
   take timer_idle_s2
   unless phase_idle_s2
 
-verb land_s2_timer_clears "The second small hand lands is over" by world priority 99 in enemy at 440 1340
+verb land_s2_timer_clears "The second small hand lands is over" by world priority 100 in enemy at 440 1340
   take timer_land_s2
   unless phase_land_s2
 
-verb frozen_s2_timer_clears "The second small hand is stunned is over" by world priority 99 in enemy at 440 1480
+verb frozen_s2_timer_clears "The second small hand is stunned is over" by world priority 100 in enemy at 440 1480
   take timer_frozen_s2
   unless phase_frozen_s2
 
-verb idle_s1_timer_clears "The last small hand scurries is over" by world priority 99 in enemy at 580 1550
+verb idle_s1_timer_clears "The last small hand scurries is over" by world priority 100 in enemy at 580 1550
   take timer_idle_s1
   unless phase_idle_s1
 
-verb land_s1_timer_clears "The last small hand lands is over" by world priority 99 in enemy at 440 1760
+verb land_s1_timer_clears "The last small hand lands is over" by world priority 100 in enemy at 440 1760
   take timer_land_s1
   unless phase_land_s1
 
-verb frozen_s1_timer_clears "The last small hand is stunned is over" by world priority 99 in enemy at 440 1900
+verb frozen_s1_timer_clears "The last small hand is stunned is over" by world priority 100 in enemy at 440 1900
   take timer_frozen_s1
   unless phase_frozen_s1
 
@@ -417,74 +417,74 @@ verb variant_invisible "Floormaster, visible only through the Lens" by world pri
   give link_turn
   give enemy_unseen
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1400 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1400 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1540 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1540 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1400 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1400 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1540 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1540 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1400 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1400 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1540 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1540 640
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1400 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1400 710
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1860 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1860 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb big_hurt "Floormaster loses health" by world priority 96 in enemy_health at 2360 500
+verb big_hurt "Floormaster loses health" by world priority 97 in enemy_health at 2360 500
   take dmg_big
   take hp_big
 
-verb big_overkill "Floormaster has no health left to lose" by world priority 95 in enemy_health at 2500 500
+verb big_overkill "Floormaster has no health left to lose" by world priority 96 in enemy_health at 2500 500
   take dmg_big
   unless hp_big
 
-verb small_s3_hurt "The first small hand loses health" by world priority 96 in enemy_health at 2360 570
+verb small_s3_hurt "The first small hand loses health" by world priority 97 in enemy_health at 2360 570
   take dmg_small_s3
   take hp_small_s3
 
-verb small_s3_overkill "The first small hand has no health left to lose" by world priority 95 in enemy_health at 2500 570
+verb small_s3_overkill "The first small hand has no health left to lose" by world priority 96 in enemy_health at 2500 570
   take dmg_small_s3
   unless hp_small_s3
 
-verb small_s2_hurt "The second small hand loses health" by world priority 96 in enemy_health at 2360 640
+verb small_s2_hurt "The second small hand loses health" by world priority 97 in enemy_health at 2360 640
   take dmg_small_s2
   take hp_small_s2
 
-verb small_s2_overkill "The second small hand has no health left to lose" by world priority 95 in enemy_health at 2500 640
+verb small_s2_overkill "The second small hand has no health left to lose" by world priority 96 in enemy_health at 2500 640
   take dmg_small_s2
   unless hp_small_s2
 
-verb small_s1_hurt "The last small hand loses health" by world priority 96 in enemy_health at 2360 710
+verb small_s1_hurt "The last small hand loses health" by world priority 97 in enemy_health at 2360 710
   take dmg_small_s1
   take hp_small_s1
 
-verb small_s1_overkill "The last small hand has no health left to lose" by world priority 95 in enemy_health at 2500 710
+verb small_s1_overkill "The last small hand has no health left to lose" by world priority 96 in enemy_health at 2500 710
   take dmg_small_s1
   unless hp_small_s1
 
@@ -3929,49 +3929,49 @@ verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by worl
   need enemy_unseen
   unless lens_on
 
-verb big_empty_in_hurt_big "Floormaster runs out (Floormaster reels)" by world priority 92 in enemy_health at 2360 780
+verb big_empty_in_hurt_big "Floormaster runs out (Floormaster reels)" by world priority 90 in enemy_health at 2360 780
   unless hp_big
   take alive_big
   take phase_hurt_big
   give phase_split
 
-verb big_empty_in_frozen_big "Floormaster runs out (Floormaster is stunned)" by world priority 92 in enemy_health at 2500 780
+verb big_empty_in_frozen_big "Floormaster runs out (Floormaster is stunned)" by world priority 90 in enemy_health at 2500 780
   unless hp_big
   take alive_big
   take phase_frozen_big
   give phase_split
 
-verb small_s3_empty_in_hurt_s3 "The first small hand runs out (The first small hand reels)" by world priority 92 in enemy_health at 2360 850
+verb small_s3_empty_in_hurt_s3 "The first small hand runs out (The first small hand reels)" by world priority 90 in enemy_health at 2360 850
   unless hp_small_s3
   take alive_small_s3
   take phase_hurt_s3
   give phase_stalk_s2
 
-verb small_s3_empty_in_frozen_s3 "The first small hand runs out (The first small hand is stunned)" by world priority 92 in enemy_health at 2500 850
+verb small_s3_empty_in_frozen_s3 "The first small hand runs out (The first small hand is stunned)" by world priority 90 in enemy_health at 2500 850
   unless hp_small_s3
   take alive_small_s3
   take phase_frozen_s3
   give phase_stalk_s2
 
-verb small_s2_empty_in_hurt_s2 "The second small hand runs out (The second small hand reels)" by world priority 92 in enemy_health at 2360 920
+verb small_s2_empty_in_hurt_s2 "The second small hand runs out (The second small hand reels)" by world priority 90 in enemy_health at 2360 920
   unless hp_small_s2
   take alive_small_s2
   take phase_hurt_s2
   give phase_stalk_s1
 
-verb small_s2_empty_in_frozen_s2 "The second small hand runs out (The second small hand is stunned)" by world priority 92 in enemy_health at 2500 920
+verb small_s2_empty_in_frozen_s2 "The second small hand runs out (The second small hand is stunned)" by world priority 90 in enemy_health at 2500 920
   unless hp_small_s2
   take alive_small_s2
   take phase_frozen_s2
   give phase_stalk_s1
 
-verb small_s1_empty_in_hurt_s1 "The last small hand runs out (The last small hand reels)" by world priority 92 in enemy_health at 2360 990
+verb small_s1_empty_in_hurt_s1 "The last small hand runs out (The last small hand reels)" by world priority 90 in enemy_health at 2360 990
   unless hp_small_s1
   take alive_small_s1
   take phase_hurt_s1
   give link_wins
 
-verb small_s1_empty_in_frozen_s1 "The last small hand runs out (The last small hand is stunned)" by world priority 92 in enemy_health at 2500 990
+verb small_s1_empty_in_frozen_s1 "The last small hand runs out (The last small hand is stunned)" by world priority 90 in enemy_health at 2500 990
   unless hp_small_s1
   take alive_small_s1
   take phase_frozen_s1
@@ -4639,7 +4639,7 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 900 710
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 760 780
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 760 780
   take lens_count
   unless lens_on
 

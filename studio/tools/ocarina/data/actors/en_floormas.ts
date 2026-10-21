@@ -71,7 +71,7 @@ const attacks: Attack[] = [
     // Hardened at the grab, actionTarget starts at 0x28 (z_en_floormas.c:200), so the first 8 lands at once and then every 20 frames.
     damage: 8,
     // Escape is mashing: actionVar2 must pass 100 (z_player.c:14249) at +5 per A/B press, 21 presses, one every other frame at best.
-    effect: { kind: 'grab', frames: { value: 42, cite: 'src/overlays/actors/ovl_player_actor/z_player.c:1867' }, damagePerBeat: 8, release: 'escape' },
+    effect: { kind: 'grab', frames: { value: 42, cite: 'src/overlays/actors/ovl_player_actor/z_player.c:1867' }, damagePerBeat: { value: { units: 8, frames: 20 }, cite: at(833) }, release: 'escape' },
     blockable: false,
     dodgeable: true,
     source: at(833),
