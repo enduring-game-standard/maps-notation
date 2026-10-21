@@ -180,13 +180,18 @@ interface Effect_ {
   damage: number
   pool?: string
   to?: string
+  backlash?: string
 }
-/** What a hit rule changes: damage to a pool and a phase change. Rules that change nothing are all the same. */
-export const effectOf = (spec: ActorSpec, p: Phase, r: HitRule): Effect_ => {
+/** The damage types carried by Link's melee weapon quads, which take the backlash of what they strike (z_player.c:9132-9147); the hammer is exempt. */
+const MELEE_WEAPON: DmgType[] = ['DEKU_STICK', 'SLASH_KOKIRI', 'SLASH_MASTER', 'SLASH_GIANT', 'SPIN_KOKIRI', 'SPIN_GIANT', 'SPIN_MASTER', 'JUMP_KOKIRI', 'JUMP_GIANT', 'JUMP_MASTER']
+/** What a hit rule changes: damage to a pool, a phase change, and a backlash on Link. Rules that change nothing are all the same. */
+export const effectOf = (spec: ActorSpec, p: Phase, r: HitRule, dmg?: DmgType): Effect_ => {
   const pool = spec.pools.find((x) => x.id === (p.pool ?? spec.pools[0]?.id))?.id
   const damage = r.connects && !r.guarded && pool ? r.damage : 0
   const to = r.connects && !r.guarded ? r.to : undefined
-  return damage ? { sig: `${pool}:${damage}`, damage, pool, to } : { sig: NOTHING, damage: 0, to }
+  const backlash = spec.backlash && r.connects && !p.backlashOff && dmg && MELEE_WEAPON.includes(dmg) ? spec.backlash.attack : undefined
+  const base = damage ? { sig: `${pool}:${damage}`, damage, pool, to } : { sig: NOTHING, damage: 0, to }
+  return backlash ? { ...base, sig: `${base.sig}+${backlash}`, backlash } : base
 }
 
 /**
@@ -428,11 +433,14 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     const name = reflected.has(key) ? rep.label : (DMG_NAMES[rep.dmg] ?? rep.label)
     b.state(`swing_${key}`, `${name} on its way`, 'hits')
     const swing: [ArcKind, string] = ['take', `swing_${key}`]
-    const effects = spec.phases.map((p) => ({ p, e: effectOf(spec, p, hitRule(spec, inv, p, rep)) }))
+    const effects = spec.phases.map((p) => ({ p, e: effectOf(spec, p, hitRule(spec, inv, p, rep), rep.dmg) }))
     const counts = new Map<string, number>()
     for (const { e } of effects) if (!e.to) counts.set(e.sig, (counts.get(e.sig) ?? 0) + 1)
     const fallback = [...counts].sort((a, b) => b[1] - a[1] || (a[0] === NOTHING ? -1 : b[0] === NOTHING ? 1 : 0))[0]?.[0] ?? NOTHING
-    const dmgArcs = (e: Effect_): [ArcKind, string, number?][] => (e.pool ? [['give', `dmg_${e.pool}`, e.damage]] : [])
+    const dmgArcs = (e: Effect_): [ArcKind, string, number?][] => [
+      ...(e.pool ? ([['give', `dmg_${e.pool}`, e.damage]] as [ArcKind, string, number][]) : []),
+      ...(e.backlash ? ([['give', `incoming_${e.backlash}`]] as [ArcKind, string][]) : []),
+    ]
     const fallbackEffect = effects.find(({ e }) => e.sig === fallback)?.e ?? { sig: NOTHING, damage: 0 }
     if (counts.get(fallback))
       b.verb(fallback === NOTHING ? `miss_${key}` : `hit_${key}`, `${name} ${fallback === NOTHING ? 'has no effect' : 'hits'}`, WORLD, 'hits', P.hit - 1, [swing, ...dmgArcs(fallbackEffect)])
@@ -497,7 +505,8 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     const out = spec.steps.filter((s) => s.from === p.id)
     out.forEach((s, i) => stepVerbs(s, i))
     const gated = (st: Step) => (st.gear ?? []).some((g) => has(g.gear) || g.has)
-    const unconditional = out.some((st) => !st.range && !gated(st) && (!st.afterTimer || (p.frames && beatsOf(p.frames) === 1)))
+    const always = (st: Step) => !gated(st) && (!st.afterTimer || (p.frames && beatsOf(p.frames) === 1))
+    const unconditional = out.some((st) => always(st) && !st.range) || (['near', 'far'] as const).every((r) => out.some((st) => always(st) && st.range === r))
     if (!unconditional) b.verb(`${p.id}_holds`, `${p.label}: nothing changes`, WORLD, 'enemy', P.hold, [['take', 'enemy_act'], ['need', `phase_${p.id}`], ['give', 'beat_end']])
   }
   function stepVerbs(s: Step, i: number) {

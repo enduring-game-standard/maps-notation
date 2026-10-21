@@ -100,6 +100,8 @@ const verifyCompleteness = (inv: Inventory) => {
         const carrier = inv.actors.find((x) => x.overlay === a.via!.overlay)
         const carried = new Set([...(carrier?.elements.filter((e) => e.atOn).map((e) => `${e.file}:${e.line}`) ?? []), ...(carrier?.runtimeAt.map((r) => `${r.file}:${r.line}`) ?? []), ...(carrier?.directHurt.map((r) => `${r.file}:${r.line}`) ?? [])])
         if (!carried.has(a.source)) fail('C6', `${s.overlay}: attack ${a.id} is carried by ${a.via.overlay}, but ${a.source} is not one of its AT sources`)
+      } else if (s.backlash?.attack === a.id) {
+        if (!ia.elements.some((e) => `${e.file}:${e.line}` === a.source && e.acOn)) fail('C6', `${s.overlay}: backlash ${a.id} source ${a.source} is not one of its hurtbox elements`)
       } else if (s.atSources[a.source as Cite] !== a.id && !sources.has(a.source)) fail('C6', `${s.overlay}: attack ${a.id} source ${a.source} is not a ledgered AT source`)
     }
   }
@@ -152,6 +154,10 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net, inv: Inventory) => 
     }
   }
   for (const a of spec.attacks) {
+    if (spec.backlash?.attack === a.id) {
+      if (a.damage !== 8 || a.effect.kind !== 'shock') fail('V3', `${spec.overlay}: backlash ${a.id} must be an 8-damage shock (z_player.c:9146)`)
+      continue
+    }
     const carrier = a.via ? inv.actors.find((x) => x.overlay === a.via!.overlay) ?? ia : ia
     const el = carrier.elements.find((e) => `${e.file}:${e.line}` === a.source)
     const rt = carrier.runtimeAt.find((r) => `${r.file}:${r.line}` === a.source)
@@ -245,7 +251,10 @@ const verifyEncounter = async (spec: ActorSpec, inv: Inventory, analyzeLimit: nu
   if (summary.livelocks) fail('V2', `${spec.overlay}: ${summary.livelocks} positions where the world never falls silent`)
   const expectedDead = spec.expected?.deadVerbs ?? {}
   for (const v of deadVerbs) if (!(v in expectedDead)) fail('V2', `${spec.overlay}: verb ${v} can never be said`)
-  for (const v of Object.keys(expectedDead)) if (!deadVerbs.includes(v)) fail('V2', `${spec.overlay}: ledgered dead verb ${v} is reachable after all`)
+  const verbIds = new Set(parsed.verbs.map((v) => v.id))
+  for (const v of Object.keys(expectedDead))
+    if (!verbIds.has(v)) fail('V2', `${spec.overlay}: ledgered dead verb ${v} is not in the encounter; remove it from expected.deadVerbs`)
+    else if (!deadVerbs.includes(v)) fail('V2', `${spec.overlay}: ledgered dead verb ${v} is reachable after all`)
   const killable = declaresDeath(spec)
   if (killable !== outcomes.has('Link wins')) fail('V2', `${spec.overlay}: Link wins reachable=${outcomes.has('Link wins')} but killable=${killable}`)
   if (spec.attacks.length > 0 !== outcomes.has('Link falls')) fail('V2', `${spec.overlay}: Link falls reachable=${outcomes.has('Link falls')} with ${spec.attacks.length} attacks`)

@@ -132,6 +132,8 @@ export interface Phase {
   guards?: DmgType[]
   /** Which health pool hits in this phase drain. Defaults to the first pool. */
   pool?: string
+  /** The actor's electric backlash is off here, with the line that turns it off. */
+  backlashOff?: Cite
   /** The damage table in force here, when the actor swaps tables by variant or state. Defaults to `damage.table`. */
   table?: string
   /** Hits in this phase that do something other than the damage table says. */
@@ -245,6 +247,11 @@ export interface ActorSpec {
   states?: Record<string, { phase: string; cite: Cite } | Excluded>
   /** C6: every collider element with ATELEM_ON and every runtime atDmgInfo change, by cite, mapped to an attack or excluded. */
   atSources: Record<Cite, string | Excluded>
+  /**
+   * The actor's hurtbox carries HIT_BACKLASH_ELECTRIC: each of Link's melee-weapon hits that connects shocks him with
+   * this attack, 8 damage (src/overlays/actors/ovl_player_actor/z_player.c:9146). `cite` is the element's backlash line.
+   */
+  backlash?: { attack: string; cite: Cite }
   /**
    * The kits Link can start the encounter with, one per setup choice. Keep each small: analysis
    * explores every kit, so the encounter's size is the sum of the kits. Together they cover every

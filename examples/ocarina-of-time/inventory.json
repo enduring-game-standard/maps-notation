@@ -2734,9 +2734,146 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "sDamageTable",
+     "file": "src/overlays/actors/ovl_Boss_Va/z_boss_va.c",
+     "line": 365,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0xE"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x6"
+      },
+      {
+       "damage": 0,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 8,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [],
    "elements": [
     {
@@ -3118,9 +3255,146 @@
    "overlay": "ovl_En_Anubice",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
-    "ACTORCAT_ENEMY"
+    "ACTORCAT_ENEMY",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "sDamageTable",
+     "file": "src/overlays/actors/ovl_En_Anubice/z_en_anubice.c",
+     "line": 83,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 1,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 6,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "ANUBICE_DMG_REACT_FIRE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 3,
+       "reaction": "ANUBICE_DMG_REACT_FIRE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 6,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 12,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 4,
+       "reaction": "ANUBICE_DMG_REACT_0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      },
+      {
+       "damage": 0,
+       "reaction": "ANUBICE_DMG_REACT_NONE"
+      }
+     ]
+    }
+   ],
    "health": [],
    "elements": [
     {
@@ -4892,6 +5166,177 @@
     "EnCrow_FlyIdle",
     "EnCrow_Respawn",
     "EnCrow_TurnAway"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Cs",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "DamageTable"
+   ],
+   "damageTables": [
+    {
+     "name": "sDamageTable",
+     "file": "src/overlays/actors/ovl_En_Cs/z_en_cs.c",
+     "line": 67,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit2",
+     "file": "src/overlays/actors/ovl_En_Cs/z_en_cs.c",
+     "line": 65
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Cs/z_en_cs.c",
+     "line": 56,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 0,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [],
+   "actionFuncs": [
+    "EnCs_Talk",
+    "EnCs_Wait",
+    "EnCs_Walk"
    ]
   },
   {
@@ -13185,9 +13630,146 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "sDamageTable",
+     "file": "src/overlays/actors/ovl_En_Sb/z_en_sb.c",
+     "line": 72,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 1,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 4,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x2"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 4,
+       "reaction": "0xE"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x2"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 4,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 8,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 4,
+       "reaction": "0xD"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 2,
@@ -14681,9 +15263,146 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "sDamageTable",
+     "file": "src/overlays/actors/ovl_En_Tite/z_en_tite.c",
+     "line": 134,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0xE"
+      },
+      {
+       "damage": 3,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "0xE"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 8,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 2,

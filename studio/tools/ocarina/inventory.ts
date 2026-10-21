@@ -65,7 +65,7 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
     const rel = join('src/overlays/actors', overlay, f)
     const src = readFileSync(join(dir, f), 'utf8')
     for (const m of src.matchAll(/ActorProfile\s+\w+_Profile\s*=\s*\{[^}]*?(ACTORCAT_[A-Z]+)/g)) actor.category ||= m[1]
-    for (const m of src.matchAll(/DamageTable\s+(\w+)\s*=\s*\{([\s\S]*?)\};/g)) {
+    for (const m of src.matchAll(/DamageTable\s+(\w+)(?:\[\])?\s*=\s*\{([\s\S]*?)\};/g)) {
       const entries = [...m[2].matchAll(/DMG_ENTRY\(\s*([^,]+),\s*([^)]+?)\s*\)/g)].map((e) => ({ damage: num(e[1]), reaction: e[2].trim() }))
       if (entries.length !== 32) throw new Error(`${rel}: damage table ${m[1]} has ${entries.length} entries`)
       actor.damageTables.push({ name: m[1], file: rel, line: lineOf(src, m.index!), entries })
