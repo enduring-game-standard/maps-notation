@@ -30,6 +30,18 @@ MAPS is the mechanical graph, level 3 in `GAME_ABSTRACTION_LEVELS.md`. It is not
 - **One encounter is one actor.** Link faces one instance of one actor per encounter. Rooms with several enemies are compositions of encounters, and MAPS has no composition yet (SPEC.md, open problems). Actors that spawn parts or projectiles, such as Dead Hand's hands or Volvagia's rocks, model them as attacks or phases of the parent, and the spawned actor also gets its own encounter if it is in the inventory.
 - **Out of scope entirely:** item drops, ammunition counts, rupees, environmental heat and drowning timers, Z-targeting as a camera aid (the attacks it enables are in), frame data, rendering, sound, and Master Quest room layouts (same actors, same rules).
 
+## Declared rules of the abstraction
+
+These rules hold for every encounter. The generator applies them, so no author chooses them per actor.
+
+- **A beat is 20 frames.** A duration of n frames becomes round(n / 20) beats, at least 1. A random duration uses the mean of its range.
+- **A rate becomes a whole amount every so many beats.** A rate of u units per f frames becomes 20u/f per beat, reduced to lowest terms p every q beats, and a counter fires it on every q-th beat. Burning, freezing, and the Lens drain follow this rule.
+- **Double Defense halves damage, rounding up.** `Health_ChangeBy` shifts the negative amount right by one (`src/code/z_parameter.c:2252`), which rounds the loss toward the larger magnitude.
+- **Heals stop at the bar.** A potion or fairy fills Link's health only up to his hearts, and magic refills only up to the meter.
+- **Near is engagement distance.** Near means the actor's own distance check for engaging Link has passed, which is also where Link's melee reaches. Everything else is far.
+- **Link fights with a kit.** A kit is an age, a heart count, a gear list, and a starting magic amount. Each encounter declares its kits, and the world opens the fight by choosing one. The standard kits are in `studio/tools/ocarina/data/loadouts.ts`. Each one carries one magic item, so that magic timers do not multiply. A worn mask is gear Link keeps for the whole fight, so it is its own kit.
+- **An encounter is analyzed one branch at a time.** `verify.ts` cuts each generated file into one net per kit and variant, by deleting the other opening verbs, and analyzes each net exhaustively. Together the branches cover every position of the whole file. A verb that never fires in any branch is dead. It is reported, not failed, only when every state it reads is reached in some kit but none of them in the same kit. Every other dead verb fails V2 unless the spec ledgers it with its reason.
+
 ## The artifacts
 
 - `studio/tools/ocarina/inventory.ts` extracts the inventory from the decomp.
@@ -57,7 +69,7 @@ Every line below holds, and `studio/tools/ocarina/verify.ts` checks each mechani
 Every line below holds on the real generated files.
 
 - **V1. Well-formed.** Every generated `.maps` file parses, prints back to the identical text, and the checker reports zero errors. Warnings are allowed only when the ledger names the warning and the reason, such as a hidden-information leak that matches the game.
-- **V2. Sound under exhaustive play.** Each encounter, analyzed with its declared test loadout for each age that can fight it, finishes below the analysis limit with zero stalls, zero places where the world never falls silent, and zero verbs that can never be said (or each such verb ledgered with the reason it is unreachable under that loadout). "Link wins" is reachable exactly when the decomp gives the actor a way to die. "Link falls" is reachable whenever the actor can hurt Link.
+- **V2. Sound under exhaustive play.** Each encounter, analyzed in every kit and variant it declares, finishes below the analysis limit with zero stalls, zero places where the world never falls silent, and zero verbs that can never be said (or each such verb ledgered with the reason it is unreachable under that loadout). "Link wins" is reachable exactly when the decomp gives the actor a way to die. "Link falls" is reachable whenever the actor can hurt Link.
 - **V3. Faithful numbers, checked independently.** `verify.ts` re-extracts the inventory from the pinned decomp and compares it with every spec: hit points, all 32 damage-table entries, every attack's damage and effect, and every magic cost. The specs are written by people and agents reading code; the extractor is a separate parser. They must agree on every value. A disagreement fails the run.
 - **V4. Faithful dynamics.** For each modeled actor and each attack type that damages it in a vulnerable phase, a generated test replays a transcript against the encounter net and checks that exactly ceil(hit points / damage) hits defeat it, and one fewer does not. For each attack on Link, a test checks the health lost, with and without Double Defense, against the decomp's `Health_ChangeBy` rule.
 - **V5. The ledger closes.** `ledger.json` lists every item in C1 through C7, and the count of items with no disposition is zero. Every "modeled" pointer names a state or verb that exists in the generated file.
