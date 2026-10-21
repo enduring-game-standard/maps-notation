@@ -22,16 +22,19 @@ export interface SliceResult {
  * One branch of the encounter's opening choices, cut from the generated file itself: every other
  * kit and variant verb is removed, so the exploration is exactly that branch of the whole file's.
  */
+/** The kit and variant choices: the setup group's verbs, so an enemy phase named `fight` is never mistaken for one. */
+const opening = (net: Net) => net.verbs.filter((v) => v.group === 'setup')
+
 export const slice = (net: Net, kit: string, variant: string): Net => {
   const drop = new Set(
-    net.verbs.filter((v) => (v.id.startsWith('fight_') && v.id !== `fight_${kit}`) || (v.id.startsWith('variant_') && variant && v.id !== `variant_${variant}`)).map((v) => v.id),
+    opening(net).filter((v) => (v.id.startsWith('fight_') && v.id !== `fight_${kit}`) || (v.id.startsWith('variant_') && variant && v.id !== `variant_${variant}`)).map((v) => v.id),
   )
   return { ...net, verbs: net.verbs.filter((v) => !drop.has(v.id)), arcs: net.arcs.filter((a) => !drop.has(a.verb)) }
 }
 
 export const branches = (net: Net) => {
-  const kits = net.verbs.filter((v) => v.id.startsWith('fight_')).map((v) => v.id.slice('fight_'.length))
-  const variants = net.verbs.filter((v) => v.id.startsWith('variant_')).map((v) => v.id.slice('variant_'.length))
+  const kits = opening(net).filter((v) => v.id.startsWith('fight_')).map((v) => v.id.slice('fight_'.length))
+  const variants = opening(net).filter((v) => v.id.startsWith('variant_')).map((v) => v.id.slice('variant_'.length))
   return kits.flatMap((kit) => (variants.length ? variants : ['']).map((variant) => ({ kit, variant })))
 }
 

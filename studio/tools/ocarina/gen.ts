@@ -580,6 +580,8 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   for (const a of enemyAttacks) attackVerbs(a)
   function attackVerbs(a: Attack) {
     b.state(`incoming_${a.id}`, `${a.label} incoming`, 'attacks')
+    // A knockback splits on Link's range when it lands; skip a range no delivering step can leave him at.
+    const landsAt = new Set(spec.backlash?.attack === a.id ? ['near', 'far'] : spec.steps.filter((st) => st.attack === a.id).flatMap((st) => (st.move ?? st.range) ? [st.move ?? st.range!] : ['near', 'far']))
     const inc: [ArcKind, string] = ['take', `incoming_${a.id}`]
     if (a.reflect)
       for (const r of a.reflect.shields.filter((x) => has(x.gear)))
@@ -606,8 +608,8 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       ]
       // Nayru's Love stops the damage, not the knockback (link.ts nayrus_love).
       if (a.effect.kind === 'knockback') {
-        b.verb(`${a.id}_nayru_near`, `${a.label}: Nayru's Love holds, Link is knocked back`, WORLD, 'attacks', P.attack, [...held, ['take', 'range_near'], ['give', 'range_far']])
-        b.verb(`${a.id}_nayru_far`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', P.attack, [...held, ['need', 'range_far']])
+        if (landsAt.has('near')) b.verb(`${a.id}_nayru_near`, `${a.label}: Nayru's Love holds, Link is knocked back`, WORLD, 'attacks', P.attack, [...held, ['take', 'range_near'], ['give', 'range_far']])
+        if (landsAt.has('far')) b.verb(`${a.id}_nayru_far`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', P.attack, [...held, ['need', 'range_far']])
       } else b.verb(`${a.id}_nayru`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', P.attack, held)
     }
     const open: [ArcKind, string][] = [
@@ -630,8 +632,8 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       const arcs: [ArcKind, string, number?][] = [...open, ...ddArcs, ['give', 'link_dmg', H(dmg)], ...effectArcs]
       if (st) arcs.push(['unless', `status_${st}`])
       if (knock) {
-        b.verb(`${a.id}_${suffix}_near`, `${a.label} hits Link, knocking him back`, WORLD, 'attacks', P.attack, [...arcs, ['take', 'range_near'], ['give', 'range_far']])
-        b.verb(`${a.id}_${suffix}_far`, `${a.label} hits Link`, WORLD, 'attacks', P.attack, [...arcs, ['need', 'range_far']])
+        if (landsAt.has('near')) b.verb(`${a.id}_${suffix}_near`, `${a.label} hits Link, knocking him back`, WORLD, 'attacks', P.attack, [...arcs, ['take', 'range_near'], ['give', 'range_far']])
+        if (landsAt.has('far')) b.verb(`${a.id}_${suffix}_far`, `${a.label} hits Link`, WORLD, 'attacks', P.attack, [...arcs, ['need', 'range_far']])
       } else b.verb(`${a.id}_${suffix}`, `${a.label} hits Link`, WORLD, 'attacks', P.attack, arcs)
       if (st)
         b.verb(`${a.id}_${suffix}_again`, `${a.label} hits Link again`, WORLD, 'attacks', P.attack, [...open, ...ddArcs, ['give', 'link_dmg', H(dmg)], ['need', `status_${st}`]])
