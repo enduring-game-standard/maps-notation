@@ -150,53 +150,53 @@ state incoming_grab "Redead grab and bite incoming" in attacks at 3320 500
 state tick_paralyze "Beat ends: paralyze checked" in beat at 900 360
 state tick_grab "Beat ends: grab checked" in beat at 760 430
 state tick_nayru "Beat ends: nayru checked" in beat at 900 430
-state lens_count "The Lens: beats toward the next cost" in beat at 760 710
+state lens_count "The Lens: beats toward the next cost" in beat at 900 710
 
-verb walk_cd_plain_timer_clears "Redead shuffles toward Link after screaming is over" by world priority 99 in enemy at 580 290
+verb walk_cd_plain_timer_clears "Redead shuffles toward Link after screaming is over" by world priority 100 in enemy at 580 290
   take timer_walk_cd_plain
   unless phase_walk_cd_plain
 
-verb grab_plain_timer_clears "Redead clings to Link is over" by world priority 99 in enemy at 440 430
+verb grab_plain_timer_clears "Redead clings to Link is over" by world priority 100 in enemy at 440 430
   take timer_grab_plain
   unless phase_grab_plain
 
-verb released_plain_timer_clears "Redead lets go of Link is over" by world priority 99 in enemy at 580 500
+verb released_plain_timer_clears "Redead lets go of Link is over" by world priority 100 in enemy at 580 500
   take timer_released_plain
   unless phase_released_plain
 
-verb stunned_plain_timer_clears "Redead is stunned is over" by world priority 99 in enemy at 440 710
+verb stunned_plain_timer_clears "Redead is stunned is over" by world priority 100 in enemy at 440 710
   take timer_stunned_plain
   unless phase_stunned_plain
 
-verb walk_cd_crying_timer_clears "Crying Redead shuffles toward Link after screaming is over" by world priority 99 in enemy at 580 920
+verb walk_cd_crying_timer_clears "Crying Redead shuffles toward Link after screaming is over" by world priority 100 in enemy at 580 920
   take timer_walk_cd_crying
   unless phase_walk_cd_crying
 
-verb grab_crying_timer_clears "Crying Redead clings to Link is over" by world priority 99 in enemy at 440 1060
+verb grab_crying_timer_clears "Crying Redead clings to Link is over" by world priority 100 in enemy at 440 1060
   take timer_grab_crying
   unless phase_grab_crying
 
-verb released_crying_timer_clears "Crying Redead lets go of Link is over" by world priority 99 in enemy at 580 1130
+verb released_crying_timer_clears "Crying Redead lets go of Link is over" by world priority 100 in enemy at 580 1130
   take timer_released_crying
   unless phase_released_crying
 
-verb stunned_crying_timer_clears "Crying Redead is stunned is over" by world priority 99 in enemy at 580 1340
+verb stunned_crying_timer_clears "Crying Redead is stunned is over" by world priority 100 in enemy at 580 1340
   take timer_stunned_crying
   unless phase_stunned_crying
 
-verb walk_cd_silent_timer_clears "Silent Redead shuffles toward Link after screaming is over" by world priority 99 in enemy at 580 1550
+verb walk_cd_silent_timer_clears "Silent Redead shuffles toward Link after screaming is over" by world priority 100 in enemy at 580 1550
   take timer_walk_cd_silent
   unless phase_walk_cd_silent
 
-verb grab_silent_timer_clears "Silent Redead clings to Link is over" by world priority 99 in enemy at 440 1690
+verb grab_silent_timer_clears "Silent Redead clings to Link is over" by world priority 100 in enemy at 440 1690
   take timer_grab_silent
   unless phase_grab_silent
 
-verb released_silent_timer_clears "Silent Redead lets go of Link is over" by world priority 99 in enemy at 580 1760
+verb released_silent_timer_clears "Silent Redead lets go of Link is over" by world priority 100 in enemy at 580 1760
   take timer_released_silent
   unless phase_released_silent
 
-verb stunned_silent_timer_clears "Silent Redead is stunned is over" by world priority 99 in enemy at 440 1970
+verb stunned_silent_timer_clears "Silent Redead is stunned is over" by world priority 100 in enemy at 440 1970
   take timer_stunned_silent
   unless phase_stunned_silent
 
@@ -428,50 +428,50 @@ verb variant_silent "Redead whose scream does not freeze Link (rdFlags 0x80)" by
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1540 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1540 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1400 570
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1400 570
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1540 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1540 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1400 640
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1400 640
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1540 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1540 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1400 710
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1400 710
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1540 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1540 710
   need in_fight
   unless link_hp
   take has_fairy
   give 8 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1860 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1860 150
   need in_fight
   unless link_hp
   unless has_fairy
   give link_falls
 
-verb body_hurt "Redead loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Redead loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Redead has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Redead has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -3494,19 +3494,19 @@ verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by worl
   need enemy_unseen
   unless lens_on
 
-verb body_empty_in_damaged_plain "Redead runs out (Redead reels from a hit)" by world priority 92 in enemy_health at 2500 220
+verb body_empty_in_damaged_plain "Redead runs out (Redead reels from a hit)" by world priority 90 in enemy_health at 2500 220
   unless hp_body
   take alive_body
   take phase_damaged_plain
   give link_wins
 
-verb body_empty_in_damaged_crying "Redead runs out (Crying Redead reels from a hit)" by world priority 92 in enemy_health at 2360 290
+verb body_empty_in_damaged_crying "Redead runs out (Crying Redead reels from a hit)" by world priority 90 in enemy_health at 2360 290
   unless hp_body
   take alive_body
   take phase_damaged_crying
   give link_wins
 
-verb body_empty_in_damaged_silent "Redead runs out (Silent Redead reels from a hit)" by world priority 92 in enemy_health at 2500 290
+verb body_empty_in_damaged_silent "Redead runs out (Silent Redead reels from a hit)" by world priority 90 in enemy_health at 2500 290
   unless hp_body
   take alive_body
   take phase_damaged_silent
@@ -4225,25 +4225,33 @@ verb paralyze_idle "Link: no paralyze" by world priority 48 in beat at 900 500
 verb grab_ticks "Link: grab wears on" by world priority 47 in beat at 760 570
   take tick_paralyze
   take status_grab
+  unless has_double_defense
   give tick_grab
   give 2 link_dmg
 
-verb grab_idle "Link: no grab" by world priority 47 in beat at 900 570
+verb grab_dd_ticks "Link: grab (Double Defense) wears on" by world priority 47 in beat at 900 570
+  take tick_paralyze
+  take status_grab
+  need has_double_defense
+  give tick_grab
+  give link_dmg
+
+verb grab_idle "Link: no grab" by world priority 47 in beat at 760 640
   take tick_paralyze
   unless status_grab
   give tick_grab
 
-verb nayru_ticks "Link: nayru wears on" by world priority 46 in beat at 760 640
+verb nayru_ticks "Link: nayru wears on" by world priority 46 in beat at 900 640
   take tick_grab
   take status_nayru
   give tick_nayru
 
-verb nayru_idle "Link: no nayru" by world priority 46 in beat at 900 640
+verb nayru_idle "Link: no nayru" by world priority 46 in beat at 760 710
   take tick_grab
   unless status_nayru
   give tick_nayru
 
-verb lens_ticks "The Lens wears on" by world priority 45 in beat at 900 710
+verb lens_ticks "The Lens wears on" by world priority 45 in beat at 760 780
   take tick_nayru
   need lens_on
   need magic
@@ -4251,7 +4259,7 @@ verb lens_ticks "The Lens wears on" by world priority 45 in beat at 900 710
   give lens_count
   give link_turn
 
-verb lens_costs "The Lens takes its toll" by world priority 45 in beat at 760 780
+verb lens_costs "The Lens takes its toll" by world priority 45 in beat at 900 780
   take tick_nayru
   need lens_on
   need magic
@@ -4260,27 +4268,27 @@ verb lens_costs "The Lens takes its toll" by world priority 45 in beat at 760 78
   take magic
   give magic_spent
 
-verb lens_fades "The Lens runs out of magic" by world priority 45 in beat at 900 780
+verb lens_fades "The Lens runs out of magic" by world priority 45 in beat at 760 850
   take tick_nayru
   take lens_on
   unless magic
   give link_turn
 
-verb lens_idle "The Lens is off" by world priority 45 in beat at 760 850
+verb lens_idle "The Lens is off" by world priority 45 in beat at 900 850
   take tick_nayru
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 900 850
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 760 920
   take lens_count
   unless lens_on
 
-verb link_helpless_paralyze "Link cannot act: paralyze" by world priority 40 in beat at 760 920
+verb link_helpless_paralyze "Link cannot act: paralyze" by world priority 40 in beat at 900 920
   take link_turn
   need status_paralyze
   give enemy_turn
 
-verb link_helpless_grab "Link cannot act: grab" by world priority 40 in beat at 900 920
+verb link_helpless_grab "Link cannot act: grab" by world priority 40 in beat at 760 990
   take link_turn
   need status_grab
   give enemy_turn

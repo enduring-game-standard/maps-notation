@@ -342,13 +342,13 @@ verb link_hurt_overkill "Link has no health left to lose" by world priority 94 i
   take link_dmg
   unless link_hp
 
-verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
   need in_fight
   unless link_hp
   take has_fairy
   give 32 link_heal
 
-verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
   need in_fight
   unless link_hp
   unless has_fairy
@@ -1197,7 +1197,7 @@ verb hit_hammer_jump__recover_cut "Hammer jump attack hits (The nucleus swims fr
   give timer_stunned_sword
   give 4 dmg_nucleus
 
-verb nucleus_empty_in_stunned_sword "Morpha nucleus runs out (The nucleus reels from a sword hit)" by world priority 92 in enemy_health at 2500 220
+verb nucleus_empty_in_stunned_sword "Morpha nucleus runs out (The nucleus reels from a sword hit)" by world priority 90 in enemy_health at 2500 220
   unless hp_nucleus
   take alive_nucleus
   take phase_stunned_sword

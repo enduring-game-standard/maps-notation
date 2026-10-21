@@ -5,9 +5,9 @@ import type { Marking } from '../../src/core/model'
 import { parse, print } from '../../src/core/text'
 import { encounterFile, loadInventory, modeled, OUT } from './build'
 import { link } from './data/link'
-import { doubleDefense, encounter, linkAttacks, poolSegments, poolStart, swingKey } from './gen'
+import { doubleDefense, drainRate, encounter, linkAttacks, poolSegments, poolStart, swingKey } from './gen'
 import { DMG_TYPES } from './inventory'
-import type { ActorSpec } from './spec'
+import type { ActorSpec, Effect } from './spec'
 
 const inventory = loadInventory()
 
@@ -114,6 +114,21 @@ for (const spec of modeled()) {
             else expect(m[`phase_${to}`], `${above} damage reaches ${t.at}`).toBe(1)
           })
         }
+
+    for (const a of spec.attacks.filter((x) => x.effect.kind === 'grab')) {
+      const d = (a.effect as Extract<Effect, { kind: 'grab' }>).damagePerBeat
+      for (const dd of [false, true]) {
+        if (dd && !has('has_double_defense')) continue
+        const id = dd && drainRate(d, true).join() !== drainRate(d).join() ? 'grab_dd' : 'grab'
+        const pay = net.verbs.find((v) => v.id === `${id}_costs`) ?? net.verbs.find((v) => v.id === `${id}_ticks`)
+        if (!drainRate(d)[0]) continue
+        it(`${a.label} drains ${drainRate(d, dd)[0]} every ${drainRate(d, dd)[1]} beats${dd ? ' with Double Defense' : ''}`, () => {
+          expect(pay, `${id} pays a drain`).toBeDefined()
+          const paid = net.arcs.find((x) => x.verb === pay!.id && x.kind === 'give' && x.state === 'link_dmg')?.count ?? 0
+          expect(paid * unit).toBe(drainRate(d, dd)[0])
+        })
+      }
+    }
 
     for (const st of spec.steps.filter((x) => x.restore)) {
       const pool = spec.pools.find((q) => q.id === st.restore!.pool)!

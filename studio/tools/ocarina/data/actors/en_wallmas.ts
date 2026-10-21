@@ -4,6 +4,17 @@ import type { ActorSpec, Attack, Cite, Excluded, Phase, Reaction, Step } from '.
 const F = 'src/overlays/actors/ovl_En_Wallmas/z_en_wallmas.c'
 const at = (line: number): Cite => `${F}:${line}`
 
+/*
+ * Reported gaps (the types cannot express these):
+ * - The drop timer restarts at 0x82 every frame Link is off the ground (a dodge), in PLAYER_STATE1_20 or _27, or, for the
+ *   proximity kind, more than 320 units from home (z_en_wallmas.c:323-326). No step can reset a phase's timer, and a
+ *   self-step keeps it running, so wait_* always counts down from entry.
+ * - up_* is hittable only for the first 20 animation frames at 3x speed (:232, :385), while the hand is still on the floor
+ *   and the ground AC check passes (:588-590); once it rises it is not. The beat model makes it hittable for the whole beat.
+ * - The grab hold counts timer from -0x1E (:275) by 2 (:484) to 0x1E (:492), 30 frames, but only after the hover
+ *   animation finishes (:455); the animation length is in the asset, not the source, so 30 frames is a lower bound.
+ */
+
 /** Spawn params (`WMT_*`) decide where the hand goes after it climbs back to the ceiling. */
 type Kind = 'timer' | 'prox' | 'flag'
 const KINDS: Kind[] = ['timer', 'prox', 'flag']
@@ -22,7 +33,7 @@ const phases: Phase[] = [
     { id: `stand_${k}`, label: `${NAME[k]} stands up`, cite: at(355) },
     { id: `walk_${k}`, label: `${NAME[k]} walks`, cite: at(363) },
     { id: `rise_${k}`, label: `${NAME[k]} crouches to jump`, cite: at(376) },
-    { id: `up_${k}`, label: `${NAME[k]} rises to the ceiling`, hittable: 'none', cite: at(382) },
+    { id: `up_${k}`, label: `${NAME[k]} rises to the ceiling`, cite: at(382) },
     { id: `hurt_${k}`, label: `${NAME[k]} reels`, hittable: 'none', cite: at(409) },
     { id: `cooldown_${k}`, label: `${NAME[k]} recovers`, cite: at(424) },
     { id: `stun_${k}`, label: `${NAME[k]} is stunned`, frames: { value: 0x50, cite: at(307) }, cite: at(512) },
@@ -42,7 +53,7 @@ const steps: Step[] = [
   { from: 'dormant', to: 'wait_prox', label: 'Link comes near; Wallmaster starts following him', range: 'near', cite: at(501) },
   ...KINDS.flatMap((k): Step[] => [
     { from: `wait_${k}`, to: `drop_${k}`, label: `${NAME[k]} drops`, afterTimer: true, cite: at(335) },
-    { from: `drop_${k}`, to: `land_${k}`, label: `${NAME[k]} grabs at Link as it lands`, attack: 'grab', move: 'near', cite: at(345) },
+    { from: `drop_${k}`, to: `land_${k}`, label: `${NAME[k]} grabs at Link as it lands`, attack: 'grab', move: 'near', cite: at(581) },
     { from: `land_${k}`, to: `stand_${k}`, label: `${NAME[k]} stands`, cite: at(351) },
     { from: `stand_${k}`, to: `walk_${k}`, label: `${NAME[k]} walks off`, cite: at(357) },
     { from: `walk_${k}`, to: `rise_${k}`, label: `${NAME[k]} stops`, cite: at(365) },
@@ -58,17 +69,18 @@ const attacks: Attack[] = [
   {
     id: 'grab',
     label: 'Wallmaster grab',
+    // The grab triggers at z_en_wallmas.c:345 when the hand reaches Link; a dodged drop lands at :581 (the step's cite).
     // The carry-off itself deals nothing; Play_TriggerRespawn (z_en_wallmas.c:494) reloads the entrance with
     // respawnFlag -1, Player_Init sets unk_A86 = -2 (z_player.c:10743), and func_808382DC then inflicts 16 (z_player.c:4824).
     damage: 16,
-    effect: { kind: 'grab', frames: { value: 0x1e, cite: at(275) }, damagePerBeat: 0, release: 'carried_off' },
+    effect: { kind: 'grab', frames: { value: 0x1e, cite: at(492) }, damagePerBeat: 0, release: 'carried_off' },
     blockable: false,
     dodgeable: true,
     source: at(494),
   },
 ]
 
-const HITTABLE = ['land', 'stand', 'walk', 'rise', 'cooldown', 'stun']
+const HITTABLE = ['land', 'stand', 'walk', 'rise', 'up', 'cooldown', 'stun']
 const toMap = (target: 'hurt' | 'stun') =>
   Object.fromEntries(
     KINDS.flatMap((k) => HITTABLE.filter((h) => !(target === 'stun' && h === 'stun')).map((h) => [`${h}_${k}`, `${target}_${k}`])),
@@ -124,7 +136,7 @@ export const enWallmas: ActorSpec = {
   loadouts: standardLoadouts(['child', 'adult'], 1),
   expected: {
     deadVerbs: {
-      wait_timer_timer_clears: 'the hand leaves its wait only when the timer runs out, and it cannot be hit there, so no timer is ever left behind',
+      wait_timer_timer_clears: 'in the model the hand leaves its wait only when the timer runs out (the code can also restart it, :323-326, a reported gap), and it cannot be hit there, so no timer is ever left behind',
       wait_prox_timer_clears: 'as wait_timer_timer_clears',
       wait_flag_timer_clears: 'as wait_timer_timer_clears',
       link_hurt_overkill: 'the grab is the only damage and it ends the fight, so it never lands on an empty health bar',

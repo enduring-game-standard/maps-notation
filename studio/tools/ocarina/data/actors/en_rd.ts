@@ -101,6 +101,7 @@ const deadVerbs: Record<string, string> = Object.fromEntries([
     ...ledger([`grab_${l}_timer_clears`], 'the grab phase cannot be hit and is left only when its timer runs out'),
     ...ledger([`walk_cd_${l}_step_2`], 'after a scream the Redead grabs on its next beat if Link is near and turns home if he is far, so its 60-frame scream timer never runs out'),
   ]),
+  ...ledger(['link_hurt_overkill'], 'Link starts and heals in whole hearts (even marks), every cost is 2 marks without Double Defense and 1 mark with it, so no cost is ever larger than the health left'),
   ...ledger(NEAR_ONLY.map((k) => `hit_${k}__crouch_crying`), 'the crouch is entered only from home while Link is far and lasts one beat, so a near-only attack never finds it'),
   ...ledger(NEAR_ONLY.map((k) => `hit_${k}__idle_silent`), 'a silent Redead stands idle only at the start or after walking home, both while Link is far, and wakes the beat he comes near'),
   ...(['plain', 'crying'] as const).flatMap((l) =>

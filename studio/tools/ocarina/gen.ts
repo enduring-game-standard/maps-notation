@@ -33,8 +33,11 @@ export const beatRate = (r: Rate): [number, number] => {
   const g = gcd(num, den)
   return [num / g, den / g]
 }
-/** A grab's drain as p every q beats. */
-export const grabRate = (d: number | Rate): [number, number] => (typeof d === 'number' ? [d, 1] : beatRate(d))
+/** A drain as p every q beats. Double Defense halves each tick's amount, so a 1-unit tick stays 1 (z_parameter.c:2252). */
+export const drainRate = (d: number | Rate, dd = false): [number, number] => {
+  const tick = (n: number) => (dd ? doubleDefense(n) : n)
+  return typeof d === 'number' ? [tick(d), 1] : beatRate({ ...d, value: { ...d.value, units: tick(d.value.units) } })
+}
 export const dmgBit = (d: DmgType) => 2 ** DMG_TYPES.indexOf(d)
 const low = (d: DmgType) => d.toLowerCase()
 const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : a)
@@ -292,7 +295,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     maxHealth,
     ...spec.loadouts.map((lo) => lo.hearts * link.healthPerHeart.value),
     ...enemyAttacks.flatMap((a) => [a.damage, doubleDefense(a.damage)]),
-    ...enemyAttacks.flatMap((a) => (a.effect.kind === 'grab' ? [grabRate(a.effect.damagePerBeat)[0], doubleDefense(grabRate(a.effect.damagePerBeat)[0])] : [])),
+    ...enemyAttacks.flatMap((a) => (a.effect.kind === 'grab' ? [drainRate(a.effect.damagePerBeat)[0], drainRate(a.effect.damagePerBeat, true)[0]] : [])),
     ...(enemyAttacks.some((a) => a.effect.kind === 'burn') ? [beatRate(link.burnDamage)[0]] : []),
     ...(enemyAttacks.some((a) => a.effect.kind === 'freeze') ? [beatRate(link.freezeDamage)[0]] : []),
     ...(has('fairy') ? [heal(link.fairyRevive.value)] : []),
@@ -690,10 +693,10 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   for (const s of shields) b.verb(`link_lowers_${s.gear}`, `Link lowers the ${s.gear.replace(/_/g, ' ')}`, WORLD, 'beat', P.stance, [['need', 'beat_end'], ['take', `guard_with_${s.gear}`]])
   b.verb('link_lands', 'Link lands from his dodge', WORLD, 'beat', P.stance, [['need', 'beat_end'], ['take', 'link_dodge']])
 
-  const grabRates = new Map(enemyAttacks.flatMap((a) => (a.effect.kind === 'grab' ? [[grabRate(a.effect.damagePerBeat).join('/'), grabRate(a.effect.damagePerBeat)] as const] : [])))
-  if (grabRates.size > 1) throw new Error(`${spec.overlay}: grabs with different damage per beat`)
-  const perBeat = (s: Status): [number, number] =>
-    s === 'burn' ? beatRate(link.burnDamage) : s === 'freeze' ? beatRate(link.freezeDamage) : s === 'grab' ? ([...grabRates.values()][0] ?? [0, 1]) : [0, 1]
+  const grabDrains = new Map(enemyAttacks.flatMap((a) => (a.effect.kind === 'grab' ? [[drainRate(a.effect.damagePerBeat).join('/'), a.effect.damagePerBeat] as const] : [])))
+  if (grabDrains.size > 1) throw new Error(`${spec.overlay}: grabs with different damage per beat`)
+  const perBeat = (s: Status, dd: boolean): [number, number] =>
+    s === 'burn' ? drainRate(link.burnDamage, dd) : s === 'freeze' ? drainRate(link.freezeDamage, dd) : s === 'grab' ? drainRate([...grabDrains.values()][0] ?? 0, dd) : [0, 1]
   const chain = [...statuses, ...(has('lens_of_truth') && hasMagic ? (['lens'] as const) : [])]
   const link_ = (i: number) => (i === 0 ? 'beat_end' : i === chain.length ? 'link_turn' : `tick_${chain[i - 1]}`)
   chain.forEach((s, i) => {
@@ -726,9 +729,16 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       if (q > 1) b.verb('lens_count_clears', 'The Lens count resets', WORLD, 'beat', P.timerCleanup, [['take', 'lens_count'], ['unless', 'lens_on']])
       return
     }
-    const rate = perBeat(s)
-    periodic(s, `Link: ${s}`, pr, from, to, [['take', `status_${s}`]], rate, (n) => [['give', 'link_dmg', H(n)]])
-    if (rate[1] > 1) b.verb(`${s}_count_clears`, `Link: ${s} count resets`, WORLD, 'beat', P.timerCleanup, [['take', `${s}_count`], ['unless', `status_${s}`]])
+    const rate = perBeat(s, false)
+    const halved = perBeat(s, true)
+    const split = has('double_defense') && rate.join('/') !== halved.join('/')
+    const drains: [string, string, [number, number], [ArcKind, string][]][] = split
+      ? [[s, `Link: ${s}`, rate, [['unless', 'has_double_defense']]], [`${s}_dd`, `Link: ${s} (Double Defense)`, halved, [['need', 'has_double_defense']]]]
+      : [[s, `Link: ${s}`, rate, []]]
+    for (const [id, label, r, gate] of drains) {
+      periodic(id, label, pr, from, to, [['take', `status_${s}`], ...gate], r, (n) => [['give', 'link_dmg', H(n)]])
+      if (r[1] > 1) b.verb(`${id}_count_clears`, `${label} count resets`, WORLD, 'beat', P.timerCleanup, [['take', `${id}_count`], ['unless', `status_${s}`]])
+    }
     b.verb(`${s}_idle`, `Link: no ${s}`, WORLD, 'beat', pr, [['take', from], ['unless', `status_${s}`], ['give', to]])
   })
 

@@ -188,7 +188,10 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net, inv: Inventory) => 
     }
     const dh = carrier.directHurt.find((r) => `${r.file}:${r.line}` === a.source)
     const direct = dh && directDamage(dh.text)
-    if (direct !== undefined && direct !== a.damage) fail('V3', `${spec.overlay}: attack ${a.id} damage ${a.damage}, the call at ${a.source} deals ${direct}`)
+    // A grab whose drain cites the same call deals that call's amount once per tick, not on contact.
+    const drain = a.effect.kind === 'grab' && typeof a.effect.damagePerBeat === 'object' && a.effect.damagePerBeat.cite === a.source ? a.effect.damagePerBeat : undefined
+    if (drain && direct !== undefined && direct !== drain.value.units) fail('V3', `${spec.overlay}: attack ${a.id} drains ${drain.value.units} per tick, the call at ${a.source} deals ${direct}`)
+    if (!drain && direct !== undefined && direct !== a.damage) fail('V3', `${spec.overlay}: attack ${a.id} damage ${a.damage}, the call at ${a.source} deals ${direct}`)
     if (!el && !rt && !dh) fail('V3', `${spec.overlay}: attack ${a.id} source ${a.source} is neither an element, a runtime change, nor a direct hurt call`)
     const want = a.damage / unit
     const landed = net.verbs.filter((v) => v.id === `${a.id}_lands` || v.id.startsWith(`${a.id}_lands_n`) || v.id.startsWith(`${a.id}_lands_f`))
