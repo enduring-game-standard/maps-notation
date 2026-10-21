@@ -35,7 +35,9 @@ export const objIcePoly: ActorSpec = {
     ObjIcePoly_Idle: 'idle',
     ObjIcePoly_Melt: 'melt',
   },
-  atSources: { [at(55)]: 'chill' },
+  atSources: {
+    [at(55)]: 'chill',
+  },
   loadouts: standardLoadouts(['adult']),
   expected: {
     deadVerbs: {

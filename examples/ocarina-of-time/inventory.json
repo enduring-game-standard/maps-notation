@@ -584,54 +584,6 @@
    ]
   },
   {
-   "overlay": "ovl_Bg_Ice_Shelter",
-   "category": "ACTORCAT_BG",
-   "inScopeBecause": [
-    "hurts Link directly"
-   ],
-   "damageTables": [],
-   "health": [],
-   "elements": [
-    {
-     "file": "src/overlays/actors/ovl_Bg_Ice_Shelter/z_bg_ice_shelter.c",
-     "line": 68,
-     "atFlags": 0,
-     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
-     "atDamage": 0,
-     "acFlags": 4291821567,
-     "atOn": false,
-     "acOn": true
-    },
-    {
-     "file": "src/overlays/actors/ovl_Bg_Ice_Shelter/z_bg_ice_shelter.c",
-     "line": 88,
-     "atFlags": 0,
-     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
-     "atDamage": 0,
-     "acFlags": 1338114038,
-     "atOn": false,
-     "acOn": true
-    }
-   ],
-   "runtimeAt": [],
-   "directHurt": [
-    {
-     "text": "this->dyna.actor.parent->freezeTimer = 10000;",
-     "file": "src/overlays/actors/ovl_Bg_Ice_Shelter/z_bg_ice_shelter.c",
-     "line": 355
-    },
-    {
-     "text": "this->dyna.actor.parent->freezeTimer = 50;",
-     "file": "src/overlays/actors/ovl_Bg_Ice_Shelter/z_bg_ice_shelter.c",
-     "line": 366
-    }
-   ],
-   "actionFuncs": [
-    "BgIceShelter_Idle",
-    "BgIceShelter_Melt"
-   ]
-  },
-  {
    "overlay": "ovl_Bg_Ice_Turara",
    "category": "ACTORCAT_PROP",
    "inScopeBecause": [
@@ -3628,7 +3580,6 @@
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
     "AT_TYPE_ENEMY collider",
-    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -4087,18 +4038,7 @@
      "line": 374
     }
    ],
-   "directHurt": [
-    {
-     "text": "this->actor.freezeTimer = this->collider.elements[0].base.acHitElem->atDmgInfo.damage;",
-     "file": "src/overlays/actors/ovl_En_Bb/z_en_bb.c",
-     "line": 1179
-    },
-    {
-     "text": "this->actor.freezeTimer = this->collider.elements[0].base.acHitElem->atDmgInfo.damage;",
-     "file": "src/overlays/actors/ovl_En_Bb/z_en_bb.c",
-     "line": 1189
-    }
-   ],
+   "directHurt": [],
    "actionFuncs": [
     "EnBb_Blue",
     "EnBb_Damage",
@@ -8679,11 +8619,6 @@
      "text": "play->damagePlayer(play, -8);",
      "file": "src/overlays/actors/ovl_En_Floormas/z_en_floormas.c",
      "line": 833
-    },
-    {
-     "text": "this->actor.freezeTimer == 0) {",
-     "file": "src/overlays/actors/ovl_En_Floormas/z_en_floormas.c",
-     "line": 1070
     }
    ],
    "actionFuncs": [
@@ -8708,48 +8643,6 @@
     "EnFloormas_Stand",
     "EnFloormas_TakeDamage",
     "EnFloormas_Turn"
-   ]
-  },
-  {
-   "overlay": "ovl_En_Fr",
-   "category": "ACTORCAT_NPC",
-   "inScopeBecause": [
-    "hurts Link directly"
-   ],
-   "damageTables": [],
-   "health": [],
-   "elements": [],
-   "runtimeAt": [],
-   "directHurt": [
-    {
-     "text": "this->unusedButterflyActor->freezeTimer = 10;",
-     "file": "src/overlays/actors/ovl_En_Fr/z_en_fr.c",
-     "line": 1001
-    }
-   ],
-   "actionFuncs": [
-    "EnFr_Activate",
-    "EnFr_ActivateCheckFrogSong",
-    "EnFr_ChildSong",
-    "EnFr_ChildSongFirstTime",
-    "EnFr_ChooseJumpFromLogSpot",
-    "EnFr_ContinueFrogSong",
-    "EnFr_Deactivate",
-    "EnFr_GiveReward",
-    "EnFr_Idle",
-    "EnFr_JumpingBackIntoWater",
-    "EnFr_JumpingOutOfWater",
-    "EnFr_JumpingUp",
-    "EnFr_ListeningToOcarinaNotes",
-    "EnFr_OrientOnLogSpot",
-    "EnFr_PrintTextBox",
-    "EnFr_SetIdle",
-    "EnFr_SetReward",
-    "EnFr_SetupFrogSong",
-    "EnFr_SetupJumpingOutOfWater",
-    "EnFr_TalkBeforeFrogSong",
-    "EnFr_TalkBeforeReward",
-    "func_80A1BE98"
    ]
   },
   {
@@ -9190,11 +9083,6 @@
      "text": "player->actor.freezeTimer = 1200;",
      "file": "src/overlays/actors/ovl_En_Ge1/z_en_ge1.c",
      "line": 607
-    },
-    {
-     "text": "horse->freezeTimer = 1200;",
-     "file": "src/overlays/actors/ovl_En_Ge1/z_en_ge1.c",
-     "line": 610
     }
    ],
    "actionFuncs": [
@@ -9986,38 +9874,6 @@
    ]
   },
   {
-   "overlay": "ovl_En_Heishi1",
-   "category": "ACTORCAT_NPC",
-   "inScopeBecause": [
-    "hurts Link directly"
-   ],
-   "damageTables": [],
-   "health": [],
-   "elements": [],
-   "runtimeAt": [],
-   "directHurt": [
-    {
-     "text": "if (player->actor.freezeTimer == 0) {",
-     "file": "src/overlays/actors/ovl_En_Heishi1/z_en_heishi1.c",
-     "line": 431
-    }
-   ],
-   "actionFuncs": [
-    "EnHeishi1_Kick",
-    "EnHeishi1_MoveToLink",
-    "EnHeishi1_SetupKick",
-    "EnHeishi1_SetupMoveToLink",
-    "EnHeishi1_SetupTurnTowardLink",
-    "EnHeishi1_SetupWait",
-    "EnHeishi1_SetupWaitNight",
-    "EnHeishi1_SetupWalk",
-    "EnHeishi1_TurnTowardLink",
-    "EnHeishi1_Wait",
-    "EnHeishi1_WaitNight",
-    "EnHeishi1_Walk"
-   ]
-  },
-  {
    "overlay": "ovl_En_Hintnuts",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
@@ -10563,29 +10419,14 @@
    "runtimeAt": [],
    "directHurt": [
     {
-     "text": "player->rideActor->freezeTimer = 10;",
-     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
-     "line": 505
-    },
-    {
      "text": "player->actor.freezeTimer = 10;",
      "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
      "line": 507
     },
     {
-     "text": "player->rideActor->freezeTimer = 10;",
-     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
-     "line": 841
-    },
-    {
      "text": "player->actor.freezeTimer = 10;",
      "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
      "line": 843
-    },
-    {
-     "text": "player->rideActor->freezeTimer = 10;",
-     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
-     "line": 927
     },
     {
      "text": "player->actor.freezeTimer = 10;",
@@ -12807,7 +12648,6 @@
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
     "AT_TYPE_ENEMY collider",
-    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -12968,13 +12808,7 @@
     }
    ],
    "runtimeAt": [],
-   "directHurt": [
-    {
-     "text": "this->actor.freezeTimer = 0;",
-     "file": "src/overlays/actors/ovl_En_Po_Sisters/z_en_po_sisters.c",
-     "line": 1169
-    }
-   ],
+   "directHurt": [],
    "actionFuncs": [
     "func_80ADA4A8",
     "func_80ADA530",
@@ -15971,7 +15805,6 @@
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
     "AT_TYPE_ENEMY collider",
-    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -16144,23 +15977,7 @@
     }
    ],
    "runtimeAt": [],
-   "directHurt": [
-    {
-     "text": "this->actor.freezeTimer = 80;",
-     "file": "src/overlays/actors/ovl_En_Tp/z_en_tp.c",
-     "line": 582
-    },
-    {
-     "text": "parent->actor.freezeTimer = 80;",
-     "file": "src/overlays/actors/ovl_En_Tp/z_en_tp.c",
-     "line": 596
-    },
-    {
-     "text": "child->actor.freezeTimer = 80;",
-     "file": "src/overlays/actors/ovl_En_Tp/z_en_tp.c",
-     "line": 612
-    }
-   ],
+   "directHurt": [],
    "actionFuncs": [
     "EnTp_BodyElem",
     "EnTp_BodyElemRemnant",
@@ -16515,7 +16332,6 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -16676,13 +16492,7 @@
     }
    ],
    "runtimeAt": [],
-   "directHurt": [
-    {
-     "text": "(this->actor.freezeTimer == 0)) {",
-     "file": "src/overlays/actors/ovl_En_Wallmas/z_en_wallmas.c",
-     "line": 589
-    }
-   ],
+   "directHurt": [],
    "actionFuncs": [
     "EnWallmas_Cooldown",
     "EnWallmas_Die",
@@ -17377,8 +17187,7 @@
    "overlay": "ovl_Obj_Ice_Poly",
    "category": "ACTORCAT_PROP",
    "inScopeBecause": [
-    "AT_TYPE_ENEMY collider",
-    "hurts Link directly"
+    "AT_TYPE_ENEMY collider"
    ],
    "damageTables": [],
    "health": [],
@@ -17405,18 +17214,7 @@
     }
    ],
    "runtimeAt": [],
-   "directHurt": [
-    {
-     "text": "this->actor.parent->freezeTimer = 40;",
-     "file": "src/overlays/actors/ovl_Obj_Ice_Poly/z_obj_ice_poly.c",
-     "line": 137
-    },
-    {
-     "text": "this->actor.parent->freezeTimer = 40;",
-     "file": "src/overlays/actors/ovl_Obj_Ice_Poly/z_obj_ice_poly.c",
-     "line": 177
-    }
-   ],
+   "directHurt": [],
    "actionFuncs": [
     "ObjIcePoly_Idle",
     "ObjIcePoly_Melt"

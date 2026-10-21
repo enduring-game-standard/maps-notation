@@ -139,7 +139,6 @@ export const enFloormas: ActorSpec = {
   atSources: {
     [at(84)]: 'charge',
     [at(833)]: 'grab',
-    [at(1070)]: off('reads the Floormaster\'s own freezeTimer to decide whether it can be hit; it does not touch Link', 1070),
   },
   loadouts: standardLoadouts(['child', 'adult']),
   expected: {

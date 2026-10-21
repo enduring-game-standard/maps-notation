@@ -119,7 +119,6 @@ export const enWallmas: ActorSpec = {
     EnWallmas_Die: post('shrink and item drop after the finishing blow; the encounter has already ended', 430),
   },
   atSources: {
-    [at(589)]: post('reads the Wallmaster\'s own freezeTimer to decide whether it can be hit; it does not touch Link', 589),
   },
   loadouts: standardLoadouts(['child', 'adult'], 1),
   expected: {

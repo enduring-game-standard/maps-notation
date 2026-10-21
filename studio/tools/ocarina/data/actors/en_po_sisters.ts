@@ -137,7 +137,9 @@ export const enPoSisters: ActorSpec = {
     func_80ADBEE8: intro(225),
     func_80ADBF58: intro(1124),
   },
-  atSources: { [at(108)]: 'spin' },
+  atSources: {
+    [at(108)]: 'spin',
+  },
   loadouts: standardLoadouts(['adult']),
   expected: {
     deadVerbs: {

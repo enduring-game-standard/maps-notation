@@ -99,7 +99,7 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       })
     for (const m of src.matchAll(/[^\n]*atDmgInfo\.(?:damage|effect|hitSpecialEffect|dmgFlags)\s*[*+\-|&]?=[^\n]*/g))
       actor.runtimeAt.push({ text: m[0].trim(), file: rel, line: lineOf(src, m.index!) })
-    for (const m of src.matchAll(/[^\n]*\b(?:damagePlayer\(|Actor_SetPlayerKnockback(?:Large|Small)?\(|Player_InflictDamage\w*\(|Health_ChangeBy\(\s*play\s*,\s*-|freezeTimer\s*=)[^\n]*/g))
+    for (const m of src.matchAll(/[^\n]*\b(?:damagePlayer\(|Actor_SetPlayerKnockback(?:Large|Small)?\(|Player_InflictDamage\w*\(|Health_ChangeBy\(\s*play\s*,\s*-|player->actor\.freezeTimer\s*=(?!=))[^\n]*/g))
       actor.directHurt.push({ text: m[0].trim(), file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/\bactionFunc\s*=\s*(\w+)\s*;/gi)) funcs.add(m[1])
     for (const m of src.matchAll(/\w+_SetupAction\(\s*this\s*,\s*(\w+)\s*\)/g)) funcs.add(m[1])

@@ -86,9 +86,6 @@ export const enTp: ActorSpec = {
   },
   atSources: {
     [at(75)]: 'shock',
-    [at(582)]: { excluded: 'the Tailpasaran freezing its own parts after a Deku Nut (this, parent, and child segments); it never touches Link', cite: at(582) },
-    [at(596)]: { excluded: 'the Tailpasaran freezing its own parts after a Deku Nut (this, parent, and child segments); it never touches Link', cite: at(596) },
-    [at(612)]: { excluded: 'the Tailpasaran freezing its own parts after a Deku Nut (this, parent, and child segments); it never touches Link', cite: at(612) },
   },
   loadouts: standardLoadouts(['child', 'adult']),
   expected: {

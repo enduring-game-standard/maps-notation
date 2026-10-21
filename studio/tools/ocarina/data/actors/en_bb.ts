@@ -59,16 +59,19 @@ const steps: Step[] = [
 
   { from: 'stunned_white', to: 'white_fly', label: 'White Bubble shakes off the stun', afterTimer: true, cite: at(1146) },
 
-  { from: 'green_on', to: 'green_on', label: 'Green Bubble swoops into Link', range: 'near', attack: 'bite', cite: at(1277) },
+  { from: 'green_on', to: 'green_on', label: 'Green Bubble swoops into Link', range: 'near', attack: 'bite_green', cite: at(1277) },
   { from: 'green_on', to: 'green_off', label: 'Green Bubble\'s flame goes out', afterTimer: true, cite: at(1063) },
-  { from: 'green_off', to: 'green_off', label: 'Unlit Green Bubble swoops into Link', range: 'near', attack: 'bite', cite: at(1277) },
+  { from: 'green_off', to: 'green_off', label: 'Unlit Green Bubble swoops into Link', range: 'near', attack: 'bite_green', cite: at(1277) },
   { from: 'green_off', to: 'green_on', label: 'Green Bubble relights', afterTimer: true, cite: at(1073) },
   { from: 'stunned_green', to: 'green_on', label: 'Green Bubble shakes off the stun and relights', afterTimer: true, cite: at(1144) },
 ]
 
 const attacks: Attack[] = [
-  { id: 'bite', label: 'Bubble bite', damage: 8, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(356) },
-  { id: 'bite_fire', label: 'Fire Bubble bite', damage: 8, effect: { kind: 'burn' }, blockable: true, dodgeable: true, source: at(374) },
+  // A blocked bite sets AT_BOUNCED. Outside BB_DOWN a blue or fire Bubble drops (EnBb_SetupDown); a downed one ignores it.
+  { id: 'bite', label: 'Blue Bubble bite', damage: 8, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(356), onBlock: { to: 'down_blue', cite: at(1167) } },
+  { id: 'bite_fire', label: 'Fire Bubble bite', damage: 8, effect: { kind: 'burn' }, blockable: true, dodgeable: true, source: at(374), onBlock: { to: 'down_red', cite: at(1167) } },
+  // vFlameTimer = 1 makes the next EnBb_Green frame's `--vFlameTimer == 0` (line 1062) put the flame out for 60-90 frames.
+  { id: 'bite_green', label: 'Green Bubble bite', damage: 8, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(356), onBlock: { to: 'green_off', cite: at(1170) } },
 ]
 
 const all = (ids: string[], to: string) => Object.fromEntries(ids.map((id) => [id, to]))
@@ -161,8 +164,6 @@ export const enBb: ActorSpec = {
     [at(355)]: 'bite',
     [at(356)]: 'bite',
     [at(374)]: 'bite_fire',
-    [at(1179)]: { excluded: "sets the Bubble's own freezeTimer (a hitstop of the attacker's damage in frames) when Din's Fire hits a White Bubble; it does not touch Link", cite: at(1179) },
-    [at(1189)]: { excluded: "sets the Bubble's own freezeTimer (hitstop) for reaction 6 hits; it does not touch Link", cite: at(1189) },
   },
   loadouts: standardLoadouts(['child', 'adult']),
   expected: {
