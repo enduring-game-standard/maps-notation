@@ -78,7 +78,7 @@ for (const p of phases) {
 }
 
 const reactions: Record<string, Reaction> = {
-  EN_FIREFLY_DMG_REACT_NONE: { damage: true, note: 'any damage kills it: health is 1 and every damaging hit reaches EnFirefly_SetupDie', cite: at(670) },
+  EN_FIREFLY_DMG_REACT_NONE: { damage: true, note: 'any damage kills it: health is 1 and every damaging hit reaches EnFirefly_SetupDie', cite: at(669) },
   EN_FIREFLY_DMG_REACT_STUN: { damage: true, to: stunTo, note: 'Deku Nut stuns unless already stunned', cite: at(660) },
   EN_FIREFLY_DMG_REACT_DINS_FIRE: { damage: true, to: dinsTo, note: "Din's Fire kills an ice Keese and lights a normal one; a lit one is unchanged", cite: at(642) },
   EN_FIREFLY_DMG_REACT_ICE: { damage: true, to: 'defeated', note: 'ice kills it, frozen unless it is an ice Keese', cite: at(654) },
@@ -133,8 +133,30 @@ export const enFirefly: ActorSpec = {
     [at(196)]: 'bite_ice',
     [at(199)]: 'bite',
   },
-  loadouts: standardLoadouts(['child', 'adult'], 2, { child_blade: ['skull_mask'] }),
+  loadouts: [
+    ...standardLoadouts(['child', 'adult']),
+    { id: 'child_skull_mask', age: 'child', hearts: 2, gear: ['kokiri_sword', 'deku_shield', 'skull_mask'] },
+  ],
   expected: {
-    deadVerbs: {},
+    deadVerbs: {
+      stunned_fire_timer_clears: 'a lit Keese only leaves its stun when the stun runs out; nothing it can be hit with moves it to another phase',
+      stunned_fire_p_timer_clears: 'as stunned_fire_timer_clears, for the Keese that can perch',
+      stunned_ice_timer_clears: 'a stunned ice Keese only leaves by recovering or dying, and dying ends the encounter',
+      stay_fire_timer_clears: 'stay_fire is entered only by Din\'s Fire during the one-beat bounce, and it ends on that same beat',
+      stay_fire_p_timer_clears: 'as stay_fire_timer_clears',
+      hit_deku_nut__stay_fire: 'the bounce lasts one beat (18 frames), so a phase Link enters it into with his own move is gone before his next move',
+      hit_deku_nut__stay_fire_p: 'as hit_deku_nut__stay_fire',
+      hit_deku_nut__from_perch_fire: 'Din\'s Fire lights a Keese dropping from its perch only while Link is near, and the Keese then strikes on that same beat',
+      hit_magic_fire__perched: 'a perched Keese drops the beat Link comes near, and Din\'s Fire reaches only near',
+      body_empty_in_stay_fire: 'no hit can land in stay_fire (see hit_deku_nut__stay_fire)',
+      body_empty_in_stay_fire_p: 'as body_empty_in_stay_fire',
+      body_empty_in_from_perch_fire: 'no hit can land in from_perch_fire (see hit_deku_nut__from_perch_fire)',
+      from_perch_fire_step_2: 'from_perch_fire always strikes on the beat it starts, since Link is near, so its timer never runs out',
+      from_perch_fire_holds: 'as from_perch_fire_step_2',
+      bite_fire_lands_again: 'a fire Keese loses its flame when it bites, so it cannot burn Link while he still burns',
+      bite_fire_lands_dd_again: 'as bite_fire_lands_again',
+      bite_ice_lands_again: 'after a bite an ice Keese bounces, flies home, and circles before it can bite again, longer than the freeze lasts',
+      bite_ice_lands_dd_again: 'as bite_ice_lands_again',
+    },
   },
 }

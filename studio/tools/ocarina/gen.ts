@@ -9,6 +9,7 @@ import {
   type Gear,
   type LinkAttack,
   type LinkSpec,
+  type Loadout,
   type Phase,
   type Rate,
   type Step,
@@ -227,6 +228,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     if (id !== 'defeated' && !phase.has(id)) throw new Error(`${spec.overlay}: ${where} names unknown phase ${id}`)
   }
   for (const s of spec.steps) {
+    if (s.afterTimer && !phase.get(s.from)?.frames) throw new Error(`${spec.overlay}: step ${s.label} waits for a timer, but phase ${s.from} has no frames`)
     needPhase(s.from, `step ${s.label}`)
     needPhase(s.to, `step ${s.label}`)
     if (s.attack && !attackById.has(s.attack)) throw new Error(`${spec.overlay}: step ${s.label} names unknown attack ${s.attack}`)
@@ -274,6 +276,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     ...(has('green_potion') ? [Math.min(link.potions.green.value, meter)] : []),
     ...(has('blue_potion') ? [Math.min(link.potions.blue.magic.value, meter)] : []),
     link.magicMeter.single.value,
+    ...spec.loadouts.flatMap((lo) => (lo.magic !== undefined ? [lo.magic] : [])),
   ]
   const magicUnit = hasMagic ? gcdAll([meter, ...magicCosts, ...(has('lens_of_truth') ? [beatRate(link.lensDrain)[0]] : [])]) : 1
   const M = (n: number) => {
@@ -329,6 +332,11 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     b.state(`dmg_${pool.id}`, `${pool.label}: damage`, 'enemy_health')
   }
 
+  const magicArcs = (lo: Loadout): [ArcKind, string, number][] => {
+    const full = lo.gear.includes('double_magic') ? link.magicMeter.double.value : link.magicMeter.single.value
+    const start = Math.min(lo.magic ?? full, full)
+    return [['give', 'magic', M(start)], ['give', 'magic_spent', M(meter - start)]]
+  }
   const startArcs = (): [ArcKind, string, number?][] =>
     spec.variants?.length ? [['give', 'choose_variant']] : [...enter(spec.start), ['give', `range_${spec.range}`], ['give', 'link_turn']]
   for (const lo of spec.loadouts) {
@@ -340,7 +348,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       ['give', 'link_missing', H(maxHealth - hp)],
       ['give', 'in_fight'],
       ...lo.gear.map((g): [ArcKind, string] => ['give', `has_${g}`]),
-      ...(hasMagic && lo.gear.includes('magic') ? ([['give', 'magic', M(lo.gear.includes('double_magic') ? link.magicMeter.double.value : link.magicMeter.single.value)], ['give', 'magic_spent', M(meter - (lo.gear.includes('double_magic') ? link.magicMeter.double.value : link.magicMeter.single.value))]] as [ArcKind, string, number][]) : []),
+      ...(hasMagic && lo.gear.includes('magic') ? magicArcs(lo) : []),
       ...startArcs(),
     ])
   }
@@ -376,14 +384,11 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   for (const pool of spec.pools) {
     b.verb(`${pool.id}_hurt`, `${pool.label} loses health`, WORLD, 'enemy_health', P.drain, [['take', `dmg_${pool.id}`], ['take', `hp_${pool.id}`]])
     b.verb(`${pool.id}_overkill`, `${pool.label} has no health left to lose`, WORLD, 'enemy_health', P.overkill, [['take', `dmg_${pool.id}`], ['unless', `hp_${pool.id}`]])
-    for (const p of spec.phases)
-      b.verb(`${pool.id}_empty_in_${p.id}`, `${pool.label} runs out (${p.label})`, WORLD, 'enemy_health', P.poolEmpty, [
-        ['unless', `hp_${pool.id}`], ['take', `alive_${pool.id}`], ...move(p.id, pool.then),
-      ])
   }
 
   const spend = (n: number): [ArcKind, string, number?][] => (n && hasMagic ? [['take', 'magic', M(n)], ['give', 'magic_spent', M(n)]] : [])
-  const ageArcs = (a: LinkAttack): [ArcKind, string][][] => a.ages.filter((age) => ages.includes(age)).map((age) => [['need', `age_${age}`]])
+  const ageArcs = (a: LinkAttack): [ArcKind, string][][] =>
+    a.ages.filter((age) => spec.loadouts.some((lo) => lo.age === age && a.needs.every((g) => lo.gear.includes(g)))).map((age) => [['need', `age_${age}`]])
   const ready = (): [ArcKind, string, number?][] => [
     ['take', 'link_turn'],
     ...[...statuses].filter((s) => HELPLESS.includes(s)).map((s): [ArcKind, string] => ['unless', `status_${s}`]),
@@ -410,6 +415,8 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       ])
   }
   const lensOk = has('lens_of_truth')
+  /** The phases each pool can run out in: wherever a damaging hit leaves the enemy. */
+  const emptyAt = new Map(spec.pools.map((pool) => [pool.id, new Set<string>()]))
   for (const [key, rep] of swings) {
     const name = DMG_NAMES[rep.dmg] ?? rep.label
     b.state(`swing_${key}`, `${name} on its way`, 'hits')
@@ -420,7 +427,9 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     const fallback = [...counts].sort((a, b) => b[1] - a[1] || (a[0] === NOTHING ? -1 : b[0] === NOTHING ? 1 : 0))[0]?.[0] ?? NOTHING
     const dmgArcs = (e: Effect_): [ArcKind, string, number?][] => (e.pool ? [['give', `dmg_${e.pool}`, e.damage]] : [])
     const fallbackEffect = effects.find(({ e }) => e.sig === fallback)?.e ?? { sig: NOTHING, damage: 0 }
-    b.verb(fallback === NOTHING ? `miss_${key}` : `hit_${key}`, `${name} ${fallback === NOTHING ? 'has no effect' : 'hits'}`, WORLD, 'hits', P.hit - 1, [swing, ...dmgArcs(fallbackEffect)])
+    if (counts.get(fallback))
+      b.verb(fallback === NOTHING ? `miss_${key}` : `hit_${key}`, `${name} ${fallback === NOTHING ? 'has no effect' : 'hits'}`, WORLD, 'hits', P.hit - 1, [swing, ...dmgArcs(fallbackEffect)])
+    for (const { p, e } of effects) if (e.pool && e.to !== 'defeated') emptyAt.get(e.pool)!.add(e.to ?? p.id)
     for (const { p, e } of effects) {
       if (e.sig === fallback && !e.to) continue
       const nothing = e.sig === NOTHING && !e.to
@@ -434,6 +443,12 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     for (const p of spec.phases.filter((x) => x.invisible))
       b.verb(`unseen_${key}__${p.id}`, `${name} misses: unseen (${p.label})`, WORLD, 'hits', P.hit + 1, [swing, ['need', `phase_${p.id}`], ...(lensOk ? ([['unless', 'lens_on']] as [ArcKind, string][]) : [])])
   }
+
+  for (const pool of spec.pools)
+    for (const p of spec.phases.filter((x) => emptyAt.get(pool.id)!.has(x.id)))
+      b.verb(`${pool.id}_empty_in_${p.id}`, `${pool.label} runs out (${p.label})`, WORLD, 'enemy_health', P.poolEmpty, [
+        ['unless', `hp_${pool.id}`], ['take', `alive_${pool.id}`], ...move(p.id, pool.then),
+      ])
 
   const shields = link.shields.filter((s) => has(s.gear))
   for (const s of shields) b.state(`guard_with_${s.gear}`, `Shield up: ${s.gear.replace(/_/g, ' ')}`, 'link_state')
@@ -474,7 +489,8 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       b.verb(`${p.id}_ticks`, `${p.label}: a beat passes`, WORLD, 'enemy', P.tick, [['take', 'enemy_turn'], ['need', `phase_${p.id}`], ['take', `timer_${p.id}`], ['give', 'enemy_act']])
     const out = spec.steps.filter((s) => s.from === p.id)
     out.forEach((s, i) => stepVerbs(s, i))
-    const unconditional = out.some((s) => !s.range && !s.afterTimer)
+    const gated = (st: Step) => (st.gear ?? []).some((g) => has(g.gear) || g.has)
+    const unconditional = out.some((st) => !st.range && !gated(st) && (!st.afterTimer || (p.frames && beatsOf(p.frames) === 1)))
     if (!unconditional) b.verb(`${p.id}_holds`, `${p.label}: nothing changes`, WORLD, 'enemy', P.hold, [['take', 'enemy_act'], ['need', `phase_${p.id}`], ['give', 'beat_end']])
   }
   function stepVerbs(s: Step, i: number) {

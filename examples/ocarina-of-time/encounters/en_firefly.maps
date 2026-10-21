@@ -36,35 +36,35 @@ state in_fight "The fight is on" in setup at 120 220
 state link_wins "Keese defeated" ends "Link wins" in outcomes at 1720 80
 state link_falls "Link falls" ends "Link falls" in outcomes at 1860 80
 state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1720 150
-state has_kokiri_sword "Has kokiri sword" in gear at 2040 80
-state has_deku_shield "Has deku shield" in gear at 2180 80
-state has_deku_sticks "Has deku sticks" in gear at 2040 150
-state has_deku_nuts "Has deku nuts" in gear at 2180 150
+state has_deku_nuts "Has deku nuts" in gear at 2040 80
+state has_kokiri_sword "Has kokiri sword" in gear at 2180 80
+state has_deku_shield "Has deku shield" in gear at 2040 150
+state has_deku_sticks "Has deku sticks" in gear at 2180 150
 state has_slingshot "Has slingshot" in gear at 2040 220
 state has_boomerang "Has boomerang" in gear at 2180 220
 state has_bombs "Has bombs" in gear at 2040 290
-state has_skull_mask "Has skull mask" in gear at 2180 290
-state has_magic "Has magic" in gear at 2040 360
-state has_green_potion "Has green potion" in gear at 2180 360
-state has_dins_fire "Has dins fire" in gear at 2040 430
-state has_hylian_shield "Has hylian shield" in gear at 2180 430
-state has_nayrus_love "Has nayrus love" in gear at 2040 500
-state has_lens_of_truth "Has lens of truth" in gear at 2180 500
-state has_fairy "Has fairy" in gear at 2040 570
-state has_red_potion "Has red potion" in gear at 2180 570
-state has_master_sword "Has master sword" in gear at 2040 640
-state has_hookshot "Has hookshot" in gear at 2180 640
-state has_megaton_hammer "Has megaton hammer" in gear at 2040 710
-state has_bow "Has bow" in gear at 2180 710
-state has_bombchus "Has bombchus" in gear at 2040 780
-state has_mirror_shield "Has mirror shield" in gear at 2180 780
-state has_biggoron_sword "Has biggoron sword" in gear at 2040 850
-state has_giants_knife "Has giants knife" in gear at 2180 850
-state has_double_defense "Has double defense" in gear at 2040 920
-state has_fire_arrows "Has fire arrows" in gear at 2180 920
-state has_ice_arrows "Has ice arrows" in gear at 2040 990
-state has_light_arrows "Has light arrows" in gear at 2180 990
-state has_blue_potion "Has blue potion" in gear at 2040 1060
+state has_magic "Has magic" in gear at 2180 290
+state has_green_potion "Has green potion" in gear at 2040 360
+state has_dins_fire "Has dins fire" in gear at 2180 360
+state has_hylian_shield "Has hylian shield" in gear at 2040 430
+state has_nayrus_love "Has nayrus love" in gear at 2180 430
+state has_lens_of_truth "Has lens of truth" in gear at 2040 500
+state has_fairy "Has fairy" in gear at 2180 500
+state has_red_potion "Has red potion" in gear at 2040 570
+state has_master_sword "Has master sword" in gear at 2180 570
+state has_hookshot "Has hookshot" in gear at 2040 640
+state has_megaton_hammer "Has megaton hammer" in gear at 2180 640
+state has_bow "Has bow" in gear at 2040 710
+state has_bombchus "Has bombchus" in gear at 2180 710
+state has_mirror_shield "Has mirror shield" in gear at 2040 780
+state has_biggoron_sword "Has biggoron sword" in gear at 2180 780
+state has_giants_knife "Has giants knife" in gear at 2040 850
+state has_double_defense "Has double defense" in gear at 2180 850
+state has_fire_arrows "Has fire arrows" in gear at 2040 920
+state has_ice_arrows "Has ice arrows" in gear at 2180 920
+state has_light_arrows "Has light arrows" in gear at 2040 990
+state has_blue_potion "Has blue potion" in gear at 2180 990
+state has_skull_mask "Has skull mask" in gear at 2040 1060
 state phase_idle_fire "fire Keese circles" in enemy at 580 80
 state timer_idle_fire "fire Keese circles: beats left" in enemy at 440 150
 state phase_attack_fire "fire Keese dives at Link" in enemy at 440 220
@@ -141,20 +141,20 @@ state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3140 1690
 state swing_slash_master "Master Sword slash on its way" in hits at 3000 1830
 state swing_slash_giant "Two-handed sword slash on its way" in hits at 3140 1900
 state swing_arrow_fire "Fire arrow on its way" in hits at 3000 2040
-state swing_arrow_ice "Ice arrow on its way" in hits at 3140 3090
-state swing_arrow_light "Light arrow on its way" in hits at 3000 4210
-state swing_magic_fire "Din's Fire on its way" in hits at 3140 4280
-state swing_shield "Shield on its way" in hits at 3000 5050
-state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 5120
-state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 5260
-state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 5400
-state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3140 5540
-state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 5680
-state swing_jump_giant "Two-handed jump attack on its way" in hits at 3000 5820
-state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 5890
-state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 6030
-state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 6170
-state swing_hammer_jump "Hammer jump attack on its way" in hits at 3000 6310
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 3090
+state swing_arrow_light "Light arrow on its way" in hits at 3000 4140
+state swing_magic_fire "Din's Fire on its way" in hits at 3140 4210
+state swing_shield "Shield on its way" in hits at 3000 4980
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 5050
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 5190
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 5330
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3140 5470
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 5610
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3000 5750
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 5820
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 5960
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 6100
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3000 6240
 state guard_with_deku_shield "Shield up: deku shield" in link_state at 1400 780
 state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1540 780
 state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1400 850
@@ -280,14 +280,13 @@ verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in 
   give age_child
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_kokiri_sword
   give has_deku_shield
   give has_deku_sticks
-  give has_deku_nuts
   give has_slingshot
   give has_boomerang
   give has_bombs
-  give has_skull_mask
   give choose_variant
 
 verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 120 290
@@ -295,11 +294,13 @@ verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in se
   give age_child
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_kokiri_sword
   give has_deku_shield
   give has_magic
   give has_green_potion
-  give 48 magic
+  give 4 magic
+  give 44 magic_spent
   give choose_variant
 
 verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 260 290
@@ -307,11 +308,13 @@ verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in se
   give age_child
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_kokiri_sword
   give has_deku_shield
   give has_magic
   give has_dins_fire
-  give 48 magic
+  give 12 magic
+  give 36 magic_spent
   give choose_variant
 
 verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 120 360
@@ -319,11 +322,13 @@ verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in 
   give age_child
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_kokiri_sword
   give has_hylian_shield
   give has_magic
   give has_nayrus_love
-  give 48 magic
+  give 24 magic
+  give 24 magic_spent
   give choose_variant
 
 verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 260 360
@@ -331,11 +336,13 @@ verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in se
   give age_child
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_kokiri_sword
   give has_deku_shield
   give has_magic
   give has_lens_of_truth
-  give 48 magic
+  give 4 magic
+  give 44 magic_spent
   give choose_variant
 
 verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 120 430
@@ -343,6 +350,7 @@ verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link
   give age_child
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_kokiri_sword
   give has_deku_shield
   give has_fairy
@@ -354,6 +362,7 @@ verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in 
   give age_adult
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_master_sword
   give has_hylian_shield
   give has_hookshot
@@ -368,11 +377,13 @@ verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in se
   give age_adult
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_master_sword
   give has_mirror_shield
   give has_magic
   give has_green_potion
-  give 48 magic
+  give 4 magic
+  give 44 magic_spent
   give choose_variant
 
 verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 260 500
@@ -380,11 +391,13 @@ verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in 
   give age_adult
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_biggoron_sword
   give has_giants_knife
   give has_magic
   give has_double_defense
-  give 48 magic
+  give 4 magic
+  give 44 magic_spent
   give choose_variant
 
 verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 120 570
@@ -392,6 +405,7 @@ verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link i
   give age_adult
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_master_sword
   give has_mirror_shield
   give has_bow
@@ -399,7 +413,8 @@ verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link i
   give has_ice_arrows
   give has_light_arrows
   give has_magic
-  give 48 magic
+  give 8 magic
+  give 40 magic_spent
   give choose_variant
 
 verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 260 570
@@ -407,11 +422,13 @@ verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in se
   give age_adult
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_master_sword
   give has_hylian_shield
   give has_magic
   give has_dins_fire
-  give 48 magic
+  give 12 magic
+  give 36 magic_spent
   give choose_variant
 
 verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 120 640
@@ -419,11 +436,13 @@ verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in 
   give age_adult
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_master_sword
   give has_hylian_shield
   give has_magic
   give has_nayrus_love
-  give 48 magic
+  give 24 magic
+  give 24 magic_spent
   give choose_variant
 
 verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 260 640
@@ -431,11 +450,13 @@ verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in se
   give age_adult
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_master_sword
   give has_hylian_shield
   give has_magic
   give has_lens_of_truth
-  give 48 magic
+  give 4 magic
+  give 44 magic_spent
   give choose_variant
 
 verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 120 710
@@ -443,6 +464,7 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give age_adult
   give 32 link_hp
   give in_fight
+  give 2 has_deku_nuts
   give has_master_sword
   give has_hylian_shield
   give has_fairy
@@ -450,14 +472,24 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give has_double_defense
   give choose_variant
 
-verb variant_fire "Fire Keese" by world priority 30 in setup at 260 710
+verb fight_child_skull_mask "Fight as child Link: child skull mask (2 hearts)" by link in setup at 260 710
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_skull_mask
+  give choose_variant
+
+verb variant_fire "Fire Keese" by world priority 30 in setup at 120 780
   take choose_variant
   give phase_idle_fire
   give 6 timer_idle_fire
   give range_far
   give link_turn
 
-verb variant_fire_unseen "Fire Keese, visible only through the Lens" by world priority 30 in setup at 120 780
+verb variant_fire_unseen "Fire Keese, visible only through the Lens" by world priority 30 in setup at 260 780
   take choose_variant
   give phase_idle_fire
   give 6 timer_idle_fire
@@ -465,14 +497,14 @@ verb variant_fire_unseen "Fire Keese, visible only through the Lens" by world pr
   give link_turn
   give enemy_unseen
 
-verb variant_fire_p "Fire Keese that can perch" by world priority 30 in setup at 260 780
+verb variant_fire_p "Fire Keese that can perch" by world priority 30 in setup at 120 850
   take choose_variant
   give phase_idle_fire_p
   give 6 timer_idle_fire_p
   give range_far
   give link_turn
 
-verb variant_fire_p_unseen "Fire Keese that can perch, visible only through the Lens" by world priority 30 in setup at 120 850
+verb variant_fire_p_unseen "Fire Keese that can perch, visible only through the Lens" by world priority 30 in setup at 260 850
   take choose_variant
   give phase_idle_fire_p
   give 6 timer_idle_fire_p
@@ -480,14 +512,14 @@ verb variant_fire_p_unseen "Fire Keese that can perch, visible only through the 
   give link_turn
   give enemy_unseen
 
-verb variant_normal "Keese" by world priority 30 in setup at 260 850
+verb variant_normal "Keese" by world priority 30 in setup at 120 920
   take choose_variant
   give phase_idle_normal
   give 6 timer_idle_normal
   give range_far
   give link_turn
 
-verb variant_normal_unseen "Keese, visible only through the Lens" by world priority 30 in setup at 120 920
+verb variant_normal_unseen "Keese, visible only through the Lens" by world priority 30 in setup at 260 920
   take choose_variant
   give phase_idle_normal
   give 6 timer_idle_normal
@@ -495,27 +527,27 @@ verb variant_normal_unseen "Keese, visible only through the Lens" by world prior
   give link_turn
   give enemy_unseen
 
-verb variant_normal_p "Perched Keese" by world priority 30 in setup at 260 920
+verb variant_normal_p "Perched Keese" by world priority 30 in setup at 120 990
   take choose_variant
   give phase_perched
   give range_far
   give link_turn
 
-verb variant_normal_p_unseen "Perched Keese, visible only through the Lens" by world priority 30 in setup at 120 990
+verb variant_normal_p_unseen "Perched Keese, visible only through the Lens" by world priority 30 in setup at 260 990
   take choose_variant
   give phase_perched
   give range_far
   give link_turn
   give enemy_unseen
 
-verb variant_ice "Ice Keese" by world priority 30 in setup at 260 990
+verb variant_ice "Ice Keese" by world priority 30 in setup at 120 1060
   take choose_variant
   give phase_idle_ice
   give 6 timer_idle_ice
   give range_far
   give link_turn
 
-verb variant_ice_unseen "Ice Keese, visible only through the Lens" by world priority 30 in setup at 120 1060
+verb variant_ice_unseen "Ice Keese, visible only through the Lens" by world priority 30 in setup at 260 1060
   take choose_variant
   give phase_idle_ice
   give 6 timer_idle_ice
@@ -570,174 +602,6 @@ verb body_overkill "Keese has no health left to lose" by world priority 95 in en
   take dmg_body
   unless hp_body
 
-verb body_empty_in_idle_fire "Keese runs out (fire Keese circles)" by world priority 92 in enemy_health at 2500 220
-  unless hp_body
-  take alive_body
-  take phase_idle_fire
-  give link_wins
-
-verb body_empty_in_attack_fire "Keese runs out (fire Keese dives at Link)" by world priority 92 in enemy_health at 2360 290
-  unless hp_body
-  take alive_body
-  take phase_attack_fire
-  give link_wins
-
-verb body_empty_in_home_fire "Keese runs out (fire Keese flies home)" by world priority 92 in enemy_health at 2500 290
-  unless hp_body
-  take alive_body
-  take phase_home_fire
-  give link_wins
-
-verb body_empty_in_stunned_fire "Keese runs out (fire Keese is stunned)" by world priority 92 in enemy_health at 2360 360
-  unless hp_body
-  take alive_body
-  take phase_stunned_fire
-  give link_wins
-
-verb body_empty_in_idle_fire_p "Keese runs out (fire Keese (can perch) circles)" by world priority 92 in enemy_health at 2500 360
-  unless hp_body
-  take alive_body
-  take phase_idle_fire_p
-  give link_wins
-
-verb body_empty_in_attack_fire_p "Keese runs out (fire Keese (can perch) dives at Link)" by world priority 92 in enemy_health at 2360 430
-  unless hp_body
-  take alive_body
-  take phase_attack_fire_p
-  give link_wins
-
-verb body_empty_in_home_fire_p "Keese runs out (fire Keese (can perch) flies home)" by world priority 92 in enemy_health at 2500 430
-  unless hp_body
-  take alive_body
-  take phase_home_fire_p
-  give link_wins
-
-verb body_empty_in_stunned_fire_p "Keese runs out (fire Keese (can perch) is stunned)" by world priority 92 in enemy_health at 2360 500
-  unless hp_body
-  take alive_body
-  take phase_stunned_fire_p
-  give link_wins
-
-verb body_empty_in_idle_normal "Keese runs out (Keese circles)" by world priority 92 in enemy_health at 2500 500
-  unless hp_body
-  take alive_body
-  take phase_idle_normal
-  give link_wins
-
-verb body_empty_in_attack_normal "Keese runs out (Keese dives at Link)" by world priority 92 in enemy_health at 2360 570
-  unless hp_body
-  take alive_body
-  take phase_attack_normal
-  give link_wins
-
-verb body_empty_in_home_normal "Keese runs out (Keese flies home)" by world priority 92 in enemy_health at 2500 570
-  unless hp_body
-  take alive_body
-  take phase_home_normal
-  give link_wins
-
-verb body_empty_in_stunned_normal "Keese runs out (Keese is stunned)" by world priority 92 in enemy_health at 2360 640
-  unless hp_body
-  take alive_body
-  take phase_stunned_normal
-  give link_wins
-
-verb body_empty_in_idle_normal_p "Keese runs out (Keese (perches) circles)" by world priority 92 in enemy_health at 2500 640
-  unless hp_body
-  take alive_body
-  take phase_idle_normal_p
-  give link_wins
-
-verb body_empty_in_attack_normal_p "Keese runs out (Keese (perches) dives at Link)" by world priority 92 in enemy_health at 2360 710
-  unless hp_body
-  take alive_body
-  take phase_attack_normal_p
-  give link_wins
-
-verb body_empty_in_home_normal_p "Keese runs out (Keese (perches) flies home)" by world priority 92 in enemy_health at 2500 710
-  unless hp_body
-  take alive_body
-  take phase_home_normal_p
-  give link_wins
-
-verb body_empty_in_stunned_normal_p "Keese runs out (Keese (perches) is stunned)" by world priority 92 in enemy_health at 2360 780
-  unless hp_body
-  take alive_body
-  take phase_stunned_normal_p
-  give link_wins
-
-verb body_empty_in_idle_ice "Keese runs out (ice Keese circles)" by world priority 92 in enemy_health at 2500 780
-  unless hp_body
-  take alive_body
-  take phase_idle_ice
-  give link_wins
-
-verb body_empty_in_attack_ice "Keese runs out (ice Keese dives at Link)" by world priority 92 in enemy_health at 2360 850
-  unless hp_body
-  take alive_body
-  take phase_attack_ice
-  give link_wins
-
-verb body_empty_in_home_ice "Keese runs out (ice Keese flies home)" by world priority 92 in enemy_health at 2500 850
-  unless hp_body
-  take alive_body
-  take phase_home_ice
-  give link_wins
-
-verb body_empty_in_stunned_ice "Keese runs out (ice Keese is stunned)" by world priority 92 in enemy_health at 2360 920
-  unless hp_body
-  take alive_body
-  take phase_stunned_ice
-  give link_wins
-
-verb body_empty_in_stay_fire "Keese runs out (fire Keese bounces off)" by world priority 92 in enemy_health at 2500 920
-  unless hp_body
-  take alive_body
-  take phase_stay_fire
-  give link_wins
-
-verb body_empty_in_stay_fire_p "Keese runs out (fire Keese (can perch) bounces off)" by world priority 92 in enemy_health at 2360 990
-  unless hp_body
-  take alive_body
-  take phase_stay_fire_p
-  give link_wins
-
-verb body_empty_in_stay_normal "Keese runs out (Keese bounces off)" by world priority 92 in enemy_health at 2500 990
-  unless hp_body
-  take alive_body
-  take phase_stay_normal
-  give link_wins
-
-verb body_empty_in_stay_normal_p "Keese runs out (Keese (perches) bounces off)" by world priority 92 in enemy_health at 2360 1060
-  unless hp_body
-  take alive_body
-  take phase_stay_normal_p
-  give link_wins
-
-verb body_empty_in_stay_ice "Keese runs out (ice Keese bounces off)" by world priority 92 in enemy_health at 2500 1060
-  unless hp_body
-  take alive_body
-  take phase_stay_ice
-  give link_wins
-
-verb body_empty_in_perched "Keese runs out (Keese hangs on its perch)" by world priority 92 in enemy_health at 2360 1130
-  unless hp_body
-  take alive_body
-  take phase_perched
-  give link_wins
-
-verb body_empty_in_from_perch_normal "Keese runs out (Keese drops from its perch at Link)" by world priority 92 in enemy_health at 2500 1130
-  unless hp_body
-  take alive_body
-  take phase_from_perch_normal
-  give link_wins
-
-verb body_empty_in_from_perch_fire "Keese runs out (Lit Keese drops from its perch at Link)" by world priority 92 in enemy_health at 2360 1200
-  unless hp_body
-  take alive_body
-  take phase_from_perch_fire
-  give link_wins
-
 verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
   take link_turn
   unless status_freeze
@@ -787,15 +651,7 @@ verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns 
   give swing_explosive
   give enemy_turn
 
-verb link_explosive_2_1 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 290
-  take link_turn
-  unless status_freeze
-  need age_child
-  need has_bombchus
-  give swing_explosive
-  give enemy_turn
-
-verb link_explosive_2_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2820 290
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 290
   take link_turn
   unless status_freeze
   need age_adult
@@ -803,7 +659,7 @@ verb link_explosive_2_2 "Bombchu explosion (spawns an En_Bom with timer 0, so th
   give swing_explosive
   give enemy_turn
 
-verb link_boomerang "Boomerang" by link in link_moves at 2680 360
+verb link_boomerang "Boomerang" by link in link_moves at 2820 290
   take link_turn
   unless status_freeze
   need age_child
@@ -811,7 +667,7 @@ verb link_boomerang "Boomerang" by link in link_moves at 2680 360
   give swing_boomerang
   give enemy_turn
 
-verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2820 360
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2680 360
   take link_turn
   unless status_freeze
   need age_adult
@@ -819,7 +675,7 @@ verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)"
   give swing_arrow_normal
   give enemy_turn
 
-verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2680 430
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2820 360
   take link_turn
   unless status_freeze
   need age_adult
@@ -828,7 +684,7 @@ verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2680 430
   give swing_hammer_swing
   give enemy_turn
 
-verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2820 430
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2680 430
   take link_turn
   unless status_freeze
   need age_adult
@@ -836,7 +692,7 @@ verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in 
   give swing_hookshot
   give enemy_turn
 
-verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 500
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 430
   take link_turn
   unless status_freeze
   need age_child
@@ -845,7 +701,7 @@ verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo 
   give swing_slash_kokiri
   give enemy_turn
 
-verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 500
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 500
   take link_turn
   unless status_freeze
   need age_adult
@@ -854,7 +710,7 @@ verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo 
   give swing_slash_master
   give enemy_turn
 
-verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 570
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 500
   take link_turn
   unless status_freeze
   need age_adult
@@ -863,7 +719,7 @@ verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, comb
   give swing_slash_giant
   give enemy_turn
 
-verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 570
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 570
   take link_turn
   unless status_freeze
   need age_adult
@@ -872,7 +728,7 @@ verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, com
   give swing_slash_giant
   give enemy_turn
 
-verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2680 640
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 570
   take link_turn
   unless status_freeze
   need age_adult
@@ -884,7 +740,7 @@ verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic requ
   give swing_arrow_fire
   give enemy_turn
 
-verb link_arrow_ice "Ice Arrow" by link in link_moves at 2820 640
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 640
   take link_turn
   unless status_freeze
   need age_adult
@@ -896,7 +752,7 @@ verb link_arrow_ice "Ice Arrow" by link in link_moves at 2820 640
   give swing_arrow_ice
   give enemy_turn
 
-verb link_arrow_light "Light Arrow" by link in link_moves at 2680 710
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 640
   take link_turn
   unless status_freeze
   need age_adult
@@ -908,7 +764,7 @@ verb link_arrow_light "Light Arrow" by link in link_moves at 2680 710
   give swing_arrow_light
   give enemy_turn
 
-verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2820 710
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 710
   take link_turn
   unless status_freeze
   need age_child
@@ -919,7 +775,7 @@ verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten
   give swing_magic_fire
   give enemy_turn
 
-verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 780
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2820 710
   take link_turn
   unless status_freeze
   need age_adult
@@ -930,7 +786,7 @@ verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten
   give swing_magic_fire
   give enemy_turn
 
-verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 780
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 780
   take link_turn
   unless status_freeze
   need age_child
@@ -939,7 +795,7 @@ verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SH
   give swing_shield
   give enemy_turn
 
-verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 850
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 780
   take link_turn
   unless status_freeze
   need age_child
@@ -948,7 +804,7 @@ verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DM
   give swing_shield
   give enemy_turn
 
-verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 850
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 850
   take link_turn
   unless status_freeze
   need age_adult
@@ -957,7 +813,7 @@ verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DM
   give swing_shield
   give enemy_turn
 
-verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 920
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 850
   take link_turn
   unless status_freeze
   need age_adult
@@ -966,7 +822,7 @@ verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_
   give swing_shield
   give enemy_turn
 
-verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 920
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 920
   take link_turn
   unless status_freeze
   need age_child
@@ -975,7 +831,7 @@ verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thun
   give swing_spin_kokiri
   give enemy_turn
 
-verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 990
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 920
   take link_turn
   unless status_freeze
   need age_child
@@ -986,7 +842,7 @@ verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (pa
   give swing_spin_kokiri
   give enemy_turn
 
-verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 990
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 990
   take link_turn
   unless status_freeze
   need age_adult
@@ -995,7 +851,7 @@ verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thun
   give swing_spin_giant
   give enemy_turn
 
-verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 1060
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 990
   take link_turn
   unless status_freeze
   need age_adult
@@ -1006,7 +862,7 @@ verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (pa
   give swing_spin_giant
   give enemy_turn
 
-verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 1060
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1060
   take link_turn
   unless status_freeze
   need age_adult
@@ -1015,7 +871,7 @@ verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thu
   give swing_spin_giant
   give enemy_turn
 
-verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 1130
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1060
   take link_turn
   unless status_freeze
   need age_adult
@@ -1026,7 +882,7 @@ verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (p
   give swing_spin_giant
   give enemy_turn
 
-verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 1130
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1130
   take link_turn
   unless status_freeze
   need age_adult
@@ -1035,7 +891,7 @@ verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thun
   give swing_spin_master
   give enemy_turn
 
-verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 1200
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1130
   take link_turn
   unless status_freeze
   need age_adult
@@ -1046,7 +902,7 @@ verb link_spin_master_2 "Master Sword charged spin released below 85% charge (pa
   give swing_spin_master
   give enemy_turn
 
-verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2820 1200
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2680 1200
   take link_turn
   unless status_freeze
   need age_child
@@ -1055,7 +911,7 @@ verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link
   give swing_jump_kokiri
   give enemy_turn
 
-verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 1270
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1200
   take link_turn
   unless status_freeze
   need age_child
@@ -1066,7 +922,7 @@ verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or ab
   give swing_jump_kokiri_self
   give enemy_turn
 
-verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2820 1270
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2680 1270
   take link_turn
   unless status_freeze
   need age_adult
@@ -1075,7 +931,7 @@ verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link
   give swing_jump_giant
   give enemy_turn
 
-verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 1340
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1270
   take link_turn
   unless status_freeze
   need age_adult
@@ -1086,7 +942,7 @@ verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or ab
   give swing_jump_giant_self
   give enemy_turn
 
-verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2820 1340
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2680 1340
   take link_turn
   unless status_freeze
   need age_adult
@@ -1095,7 +951,7 @@ verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in lin
   give swing_jump_giant
   give enemy_turn
 
-verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 1410
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1340
   take link_turn
   unless status_freeze
   need age_adult
@@ -1106,7 +962,7 @@ verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or a
   give swing_jump_giant_self
   give enemy_turn
 
-verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2820 1410
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2680 1410
   take link_turn
   unless status_freeze
   need age_adult
@@ -1115,7 +971,7 @@ verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link
   give swing_jump_master
   give enemy_turn
 
-verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 1480
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1410
   take link_turn
   unless status_freeze
   need age_adult
@@ -1126,7 +982,7 @@ verb link_jump_master_2 "Master Sword great spin: charged spin released at or ab
   give swing_jump_master_self
   give enemy_turn
 
-verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2820 1480
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2680 1480
   take link_turn
   unless status_freeze
   need age_child
@@ -1135,7 +991,7 @@ verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table
   give swing_jump_master
   give enemy_turn
 
-verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2680 1550
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 1480
   take link_turn
   unless status_freeze
   need age_adult
@@ -1380,599 +1236,761 @@ verb unseen_slash_giant "Two-handed sword slash misses: the enemy is unseen" by 
   need enemy_unseen
   unless lens_on
 
-verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3140 2040
-  take swing_arrow_fire
-
-verb hit_arrow_fire__idle_fire "Fire arrow hits (fire Keese circles)" by world priority 80 in hits at 3000 2110
+verb hit_arrow_fire__idle_fire "Fire arrow hits (fire Keese circles)" by world priority 80 in hits at 3140 2040
   take swing_arrow_fire
   take phase_idle_fire
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__attack_fire "Fire arrow hits (fire Keese dives at Link)" by world priority 80 in hits at 3140 2110
+verb hit_arrow_fire__attack_fire "Fire arrow hits (fire Keese dives at Link)" by world priority 80 in hits at 3000 2110
   take swing_arrow_fire
   take phase_attack_fire
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__home_fire "Fire arrow hits (fire Keese flies home)" by world priority 80 in hits at 3000 2180
+verb hit_arrow_fire__home_fire "Fire arrow hits (fire Keese flies home)" by world priority 80 in hits at 3140 2110
   take swing_arrow_fire
   take phase_home_fire
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stunned_fire "Fire arrow hits (fire Keese is stunned)" by world priority 80 in hits at 3140 2180
+verb hit_arrow_fire__stunned_fire "Fire arrow hits (fire Keese is stunned)" by world priority 80 in hits at 3000 2180
   take swing_arrow_fire
   take phase_stunned_fire
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__idle_fire_p "Fire arrow hits (fire Keese (can perch) circles)" by world priority 80 in hits at 3000 2250
+verb hit_arrow_fire__idle_fire_p "Fire arrow hits (fire Keese (can perch) circles)" by world priority 80 in hits at 3140 2180
   take swing_arrow_fire
   take phase_idle_fire_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__attack_fire_p "Fire arrow hits (fire Keese (can perch) dives at Link)" by world priority 80 in hits at 3140 2250
+verb hit_arrow_fire__attack_fire_p "Fire arrow hits (fire Keese (can perch) dives at Link)" by world priority 80 in hits at 3000 2250
   take swing_arrow_fire
   take phase_attack_fire_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__home_fire_p "Fire arrow hits (fire Keese (can perch) flies home)" by world priority 80 in hits at 3000 2320
+verb hit_arrow_fire__home_fire_p "Fire arrow hits (fire Keese (can perch) flies home)" by world priority 80 in hits at 3140 2250
   take swing_arrow_fire
   take phase_home_fire_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stunned_fire_p "Fire arrow hits (fire Keese (can perch) is stunned)" by world priority 80 in hits at 3140 2320
+verb hit_arrow_fire__stunned_fire_p "Fire arrow hits (fire Keese (can perch) is stunned)" by world priority 80 in hits at 3000 2320
   take swing_arrow_fire
   take phase_stunned_fire_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__idle_normal "Fire arrow hits (Keese circles)" by world priority 80 in hits at 3000 2390
+verb hit_arrow_fire__idle_normal "Fire arrow hits (Keese circles)" by world priority 80 in hits at 3140 2320
   take swing_arrow_fire
   take phase_idle_normal
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__attack_normal "Fire arrow hits (Keese dives at Link)" by world priority 80 in hits at 3140 2390
+verb hit_arrow_fire__attack_normal "Fire arrow hits (Keese dives at Link)" by world priority 80 in hits at 3000 2390
   take swing_arrow_fire
   take phase_attack_normal
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__home_normal "Fire arrow hits (Keese flies home)" by world priority 80 in hits at 3000 2460
+verb hit_arrow_fire__home_normal "Fire arrow hits (Keese flies home)" by world priority 80 in hits at 3140 2390
   take swing_arrow_fire
   take phase_home_normal
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stunned_normal "Fire arrow hits (Keese is stunned)" by world priority 80 in hits at 3140 2460
+verb hit_arrow_fire__stunned_normal "Fire arrow hits (Keese is stunned)" by world priority 80 in hits at 3000 2460
   take swing_arrow_fire
   take phase_stunned_normal
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__idle_normal_p "Fire arrow hits (Keese (perches) circles)" by world priority 80 in hits at 3000 2530
+verb hit_arrow_fire__idle_normal_p "Fire arrow hits (Keese (perches) circles)" by world priority 80 in hits at 3140 2460
   take swing_arrow_fire
   take phase_idle_normal_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__attack_normal_p "Fire arrow hits (Keese (perches) dives at Link)" by world priority 80 in hits at 3140 2530
+verb hit_arrow_fire__attack_normal_p "Fire arrow hits (Keese (perches) dives at Link)" by world priority 80 in hits at 3000 2530
   take swing_arrow_fire
   take phase_attack_normal_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__home_normal_p "Fire arrow hits (Keese (perches) flies home)" by world priority 80 in hits at 3000 2600
+verb hit_arrow_fire__home_normal_p "Fire arrow hits (Keese (perches) flies home)" by world priority 80 in hits at 3140 2530
   take swing_arrow_fire
   take phase_home_normal_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stunned_normal_p "Fire arrow hits (Keese (perches) is stunned)" by world priority 80 in hits at 3140 2600
+verb hit_arrow_fire__stunned_normal_p "Fire arrow hits (Keese (perches) is stunned)" by world priority 80 in hits at 3000 2600
   take swing_arrow_fire
   take phase_stunned_normal_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__idle_ice "Fire arrow hits (ice Keese circles)" by world priority 80 in hits at 3000 2670
+verb hit_arrow_fire__idle_ice "Fire arrow hits (ice Keese circles)" by world priority 80 in hits at 3140 2600
   take swing_arrow_fire
   take phase_idle_ice
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__attack_ice "Fire arrow hits (ice Keese dives at Link)" by world priority 80 in hits at 3140 2670
+verb hit_arrow_fire__attack_ice "Fire arrow hits (ice Keese dives at Link)" by world priority 80 in hits at 3000 2670
   take swing_arrow_fire
   take phase_attack_ice
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__home_ice "Fire arrow hits (ice Keese flies home)" by world priority 80 in hits at 3000 2740
+verb hit_arrow_fire__home_ice "Fire arrow hits (ice Keese flies home)" by world priority 80 in hits at 3140 2670
   take swing_arrow_fire
   take phase_home_ice
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stunned_ice "Fire arrow hits (ice Keese is stunned)" by world priority 80 in hits at 3140 2740
+verb hit_arrow_fire__stunned_ice "Fire arrow hits (ice Keese is stunned)" by world priority 80 in hits at 3000 2740
   take swing_arrow_fire
   take phase_stunned_ice
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stay_fire "Fire arrow hits (fire Keese bounces off)" by world priority 80 in hits at 3000 2810
+verb hit_arrow_fire__stay_fire "Fire arrow hits (fire Keese bounces off)" by world priority 80 in hits at 3140 2740
   take swing_arrow_fire
   take phase_stay_fire
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stay_fire_p "Fire arrow hits (fire Keese (can perch) bounces off)" by world priority 80 in hits at 3140 2810
+verb hit_arrow_fire__stay_fire_p "Fire arrow hits (fire Keese (can perch) bounces off)" by world priority 80 in hits at 3000 2810
   take swing_arrow_fire
   take phase_stay_fire_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stay_normal "Fire arrow hits (Keese bounces off)" by world priority 80 in hits at 3000 2880
+verb hit_arrow_fire__stay_normal "Fire arrow hits (Keese bounces off)" by world priority 80 in hits at 3140 2810
   take swing_arrow_fire
   take phase_stay_normal
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stay_normal_p "Fire arrow hits (Keese (perches) bounces off)" by world priority 80 in hits at 3140 2880
+verb hit_arrow_fire__stay_normal_p "Fire arrow hits (Keese (perches) bounces off)" by world priority 80 in hits at 3000 2880
   take swing_arrow_fire
   take phase_stay_normal_p
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__stay_ice "Fire arrow hits (ice Keese bounces off)" by world priority 80 in hits at 3000 2950
+verb hit_arrow_fire__stay_ice "Fire arrow hits (ice Keese bounces off)" by world priority 80 in hits at 3140 2880
   take swing_arrow_fire
   take phase_stay_ice
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__perched "Fire arrow hits (Keese hangs on its perch)" by world priority 80 in hits at 3140 2950
+verb hit_arrow_fire__perched "Fire arrow hits (Keese hangs on its perch)" by world priority 80 in hits at 3000 2950
   take swing_arrow_fire
   take phase_perched
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__from_perch_normal "Fire arrow hits (Keese drops from its perch at Link)" by world priority 80 in hits at 3000 3020
+verb hit_arrow_fire__from_perch_normal "Fire arrow hits (Keese drops from its perch at Link)" by world priority 80 in hits at 3140 2950
   take swing_arrow_fire
   take phase_from_perch_normal
   give link_wins
   give 2 dmg_body
 
-verb hit_arrow_fire__from_perch_fire "Fire arrow hits (Lit Keese drops from its perch at Link)" by world priority 80 in hits at 3140 3020
+verb hit_arrow_fire__from_perch_fire "Fire arrow hits (Lit Keese drops from its perch at Link)" by world priority 80 in hits at 3000 3020
   take swing_arrow_fire
   take phase_from_perch_fire
   give link_wins
   give 2 dmg_body
 
-verb unseen_arrow_fire "Fire arrow misses: the enemy is unseen" by world priority 81 in hits at 3000 3090
+verb unseen_arrow_fire "Fire arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 3020
   take swing_arrow_fire
   need enemy_unseen
   unless lens_on
 
-verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3000 3160
-  take swing_arrow_ice
-
-verb hit_arrow_ice__idle_fire "Ice arrow hits (fire Keese circles)" by world priority 80 in hits at 3140 3160
+verb hit_arrow_ice__idle_fire "Ice arrow hits (fire Keese circles)" by world priority 80 in hits at 3140 3090
   take swing_arrow_ice
   take phase_idle_fire
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__attack_fire "Ice arrow hits (fire Keese dives at Link)" by world priority 80 in hits at 3000 3230
+verb hit_arrow_ice__attack_fire "Ice arrow hits (fire Keese dives at Link)" by world priority 80 in hits at 3000 3160
   take swing_arrow_ice
   take phase_attack_fire
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__home_fire "Ice arrow hits (fire Keese flies home)" by world priority 80 in hits at 3140 3230
+verb hit_arrow_ice__home_fire "Ice arrow hits (fire Keese flies home)" by world priority 80 in hits at 3140 3160
   take swing_arrow_ice
   take phase_home_fire
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stunned_fire "Ice arrow hits (fire Keese is stunned)" by world priority 80 in hits at 3000 3300
+verb hit_arrow_ice__stunned_fire "Ice arrow hits (fire Keese is stunned)" by world priority 80 in hits at 3000 3230
   take swing_arrow_ice
   take phase_stunned_fire
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__idle_fire_p "Ice arrow hits (fire Keese (can perch) circles)" by world priority 80 in hits at 3140 3300
+verb hit_arrow_ice__idle_fire_p "Ice arrow hits (fire Keese (can perch) circles)" by world priority 80 in hits at 3140 3230
   take swing_arrow_ice
   take phase_idle_fire_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__attack_fire_p "Ice arrow hits (fire Keese (can perch) dives at Link)" by world priority 80 in hits at 3000 3370
+verb hit_arrow_ice__attack_fire_p "Ice arrow hits (fire Keese (can perch) dives at Link)" by world priority 80 in hits at 3000 3300
   take swing_arrow_ice
   take phase_attack_fire_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__home_fire_p "Ice arrow hits (fire Keese (can perch) flies home)" by world priority 80 in hits at 3140 3370
+verb hit_arrow_ice__home_fire_p "Ice arrow hits (fire Keese (can perch) flies home)" by world priority 80 in hits at 3140 3300
   take swing_arrow_ice
   take phase_home_fire_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stunned_fire_p "Ice arrow hits (fire Keese (can perch) is stunned)" by world priority 80 in hits at 3000 3440
+verb hit_arrow_ice__stunned_fire_p "Ice arrow hits (fire Keese (can perch) is stunned)" by world priority 80 in hits at 3000 3370
   take swing_arrow_ice
   take phase_stunned_fire_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__idle_normal "Ice arrow hits (Keese circles)" by world priority 80 in hits at 3140 3440
+verb hit_arrow_ice__idle_normal "Ice arrow hits (Keese circles)" by world priority 80 in hits at 3140 3370
   take swing_arrow_ice
   take phase_idle_normal
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__attack_normal "Ice arrow hits (Keese dives at Link)" by world priority 80 in hits at 3000 3510
+verb hit_arrow_ice__attack_normal "Ice arrow hits (Keese dives at Link)" by world priority 80 in hits at 3000 3440
   take swing_arrow_ice
   take phase_attack_normal
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__home_normal "Ice arrow hits (Keese flies home)" by world priority 80 in hits at 3140 3510
+verb hit_arrow_ice__home_normal "Ice arrow hits (Keese flies home)" by world priority 80 in hits at 3140 3440
   take swing_arrow_ice
   take phase_home_normal
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stunned_normal "Ice arrow hits (Keese is stunned)" by world priority 80 in hits at 3000 3580
+verb hit_arrow_ice__stunned_normal "Ice arrow hits (Keese is stunned)" by world priority 80 in hits at 3000 3510
   take swing_arrow_ice
   take phase_stunned_normal
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__idle_normal_p "Ice arrow hits (Keese (perches) circles)" by world priority 80 in hits at 3140 3580
+verb hit_arrow_ice__idle_normal_p "Ice arrow hits (Keese (perches) circles)" by world priority 80 in hits at 3140 3510
   take swing_arrow_ice
   take phase_idle_normal_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__attack_normal_p "Ice arrow hits (Keese (perches) dives at Link)" by world priority 80 in hits at 3000 3650
+verb hit_arrow_ice__attack_normal_p "Ice arrow hits (Keese (perches) dives at Link)" by world priority 80 in hits at 3000 3580
   take swing_arrow_ice
   take phase_attack_normal_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__home_normal_p "Ice arrow hits (Keese (perches) flies home)" by world priority 80 in hits at 3140 3650
+verb hit_arrow_ice__home_normal_p "Ice arrow hits (Keese (perches) flies home)" by world priority 80 in hits at 3140 3580
   take swing_arrow_ice
   take phase_home_normal_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stunned_normal_p "Ice arrow hits (Keese (perches) is stunned)" by world priority 80 in hits at 3000 3720
+verb hit_arrow_ice__stunned_normal_p "Ice arrow hits (Keese (perches) is stunned)" by world priority 80 in hits at 3000 3650
   take swing_arrow_ice
   take phase_stunned_normal_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__idle_ice "Ice arrow hits (ice Keese circles)" by world priority 80 in hits at 3140 3720
+verb hit_arrow_ice__idle_ice "Ice arrow hits (ice Keese circles)" by world priority 80 in hits at 3140 3650
   take swing_arrow_ice
   take phase_idle_ice
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__attack_ice "Ice arrow hits (ice Keese dives at Link)" by world priority 80 in hits at 3000 3790
+verb hit_arrow_ice__attack_ice "Ice arrow hits (ice Keese dives at Link)" by world priority 80 in hits at 3000 3720
   take swing_arrow_ice
   take phase_attack_ice
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__home_ice "Ice arrow hits (ice Keese flies home)" by world priority 80 in hits at 3140 3790
+verb hit_arrow_ice__home_ice "Ice arrow hits (ice Keese flies home)" by world priority 80 in hits at 3140 3720
   take swing_arrow_ice
   take phase_home_ice
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stunned_ice "Ice arrow hits (ice Keese is stunned)" by world priority 80 in hits at 3000 3860
+verb hit_arrow_ice__stunned_ice "Ice arrow hits (ice Keese is stunned)" by world priority 80 in hits at 3000 3790
   take swing_arrow_ice
   take phase_stunned_ice
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stay_fire "Ice arrow hits (fire Keese bounces off)" by world priority 80 in hits at 3140 3860
+verb hit_arrow_ice__stay_fire "Ice arrow hits (fire Keese bounces off)" by world priority 80 in hits at 3140 3790
   take swing_arrow_ice
   take phase_stay_fire
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stay_fire_p "Ice arrow hits (fire Keese (can perch) bounces off)" by world priority 80 in hits at 3000 3930
+verb hit_arrow_ice__stay_fire_p "Ice arrow hits (fire Keese (can perch) bounces off)" by world priority 80 in hits at 3000 3860
   take swing_arrow_ice
   take phase_stay_fire_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stay_normal "Ice arrow hits (Keese bounces off)" by world priority 80 in hits at 3140 3930
+verb hit_arrow_ice__stay_normal "Ice arrow hits (Keese bounces off)" by world priority 80 in hits at 3140 3860
   take swing_arrow_ice
   take phase_stay_normal
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stay_normal_p "Ice arrow hits (Keese (perches) bounces off)" by world priority 80 in hits at 3000 4000
+verb hit_arrow_ice__stay_normal_p "Ice arrow hits (Keese (perches) bounces off)" by world priority 80 in hits at 3000 3930
   take swing_arrow_ice
   take phase_stay_normal_p
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__stay_ice "Ice arrow hits (ice Keese bounces off)" by world priority 80 in hits at 3140 4000
+verb hit_arrow_ice__stay_ice "Ice arrow hits (ice Keese bounces off)" by world priority 80 in hits at 3140 3930
   take swing_arrow_ice
   take phase_stay_ice
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__perched "Ice arrow hits (Keese hangs on its perch)" by world priority 80 in hits at 3000 4070
+verb hit_arrow_ice__perched "Ice arrow hits (Keese hangs on its perch)" by world priority 80 in hits at 3000 4000
   take swing_arrow_ice
   take phase_perched
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__from_perch_normal "Ice arrow hits (Keese drops from its perch at Link)" by world priority 80 in hits at 3140 4070
+verb hit_arrow_ice__from_perch_normal "Ice arrow hits (Keese drops from its perch at Link)" by world priority 80 in hits at 3140 4000
   take swing_arrow_ice
   take phase_from_perch_normal
   give link_wins
   give 4 dmg_body
 
-verb hit_arrow_ice__from_perch_fire "Ice arrow hits (Lit Keese drops from its perch at Link)" by world priority 80 in hits at 3000 4140
+verb hit_arrow_ice__from_perch_fire "Ice arrow hits (Lit Keese drops from its perch at Link)" by world priority 80 in hits at 3000 4070
   take swing_arrow_ice
   take phase_from_perch_fire
   give link_wins
   give 4 dmg_body
 
-verb unseen_arrow_ice "Ice arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 4140
+verb unseen_arrow_ice "Ice arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 4070
   take swing_arrow_ice
   need enemy_unseen
   unless lens_on
 
-verb hit_arrow_light "Light arrow hits" by world priority 79 in hits at 3140 4210
+verb hit_arrow_light "Light arrow hits" by world priority 79 in hits at 3140 4140
   take swing_arrow_light
   give 2 dmg_body
 
-verb unseen_arrow_light "Light arrow misses: the enemy is unseen" by world priority 81 in hits at 3000 4280
+verb unseen_arrow_light "Light arrow misses: the enemy is unseen" by world priority 81 in hits at 3000 4210
   take swing_arrow_light
   need enemy_unseen
   unless lens_on
 
-verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 4350
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 4280
   take swing_magic_fire
 
-verb hit_magic_fire__idle_normal "Din's Fire hits (Keese circles)" by world priority 80 in hits at 3140 4350
+verb hit_magic_fire__idle_normal "Din's Fire hits (Keese circles)" by world priority 80 in hits at 3140 4280
   take swing_magic_fire
   take phase_idle_normal
   give phase_idle_fire
   give 6 timer_idle_fire
 
-verb hit_magic_fire__attack_normal "Din's Fire hits (Keese dives at Link)" by world priority 80 in hits at 3000 4420
+verb hit_magic_fire__attack_normal "Din's Fire hits (Keese dives at Link)" by world priority 80 in hits at 3000 4350
   take swing_magic_fire
   take phase_attack_normal
   give phase_attack_fire
   give 6 timer_attack_fire
 
-verb hit_magic_fire__home_normal "Din's Fire hits (Keese flies home)" by world priority 80 in hits at 3140 4420
+verb hit_magic_fire__home_normal "Din's Fire hits (Keese flies home)" by world priority 80 in hits at 3140 4350
   take swing_magic_fire
   take phase_home_normal
   give phase_home_fire
   give 8 timer_home_fire
 
-verb hit_magic_fire__stunned_normal "Din's Fire hits (Keese is stunned)" by world priority 80 in hits at 3000 4490
+verb hit_magic_fire__stunned_normal "Din's Fire hits (Keese is stunned)" by world priority 80 in hits at 3000 4420
   take swing_magic_fire
   take phase_stunned_normal
   give phase_stunned_fire
   give 4 timer_stunned_fire
 
-verb hit_magic_fire__idle_normal_p "Din's Fire hits (Keese (perches) circles)" by world priority 80 in hits at 3140 4490
+verb hit_magic_fire__idle_normal_p "Din's Fire hits (Keese (perches) circles)" by world priority 80 in hits at 3140 4420
   take swing_magic_fire
   take phase_idle_normal_p
   give phase_idle_fire_p
   give 6 timer_idle_fire_p
 
-verb hit_magic_fire__attack_normal_p "Din's Fire hits (Keese (perches) dives at Link)" by world priority 80 in hits at 3000 4560
+verb hit_magic_fire__attack_normal_p "Din's Fire hits (Keese (perches) dives at Link)" by world priority 80 in hits at 3000 4490
   take swing_magic_fire
   take phase_attack_normal_p
   give phase_attack_fire_p
   give 6 timer_attack_fire_p
 
-verb hit_magic_fire__home_normal_p "Din's Fire hits (Keese (perches) flies home)" by world priority 80 in hits at 3140 4560
+verb hit_magic_fire__home_normal_p "Din's Fire hits (Keese (perches) flies home)" by world priority 80 in hits at 3140 4490
   take swing_magic_fire
   take phase_home_normal_p
   give phase_home_fire_p
   give 8 timer_home_fire_p
 
-verb hit_magic_fire__stunned_normal_p "Din's Fire hits (Keese (perches) is stunned)" by world priority 80 in hits at 3000 4630
+verb hit_magic_fire__stunned_normal_p "Din's Fire hits (Keese (perches) is stunned)" by world priority 80 in hits at 3000 4560
   take swing_magic_fire
   take phase_stunned_normal_p
   give phase_stunned_fire_p
   give 4 timer_stunned_fire_p
 
-verb hit_magic_fire__idle_ice "Din's Fire hits (ice Keese circles)" by world priority 80 in hits at 3140 4630
+verb hit_magic_fire__idle_ice "Din's Fire hits (ice Keese circles)" by world priority 80 in hits at 3140 4560
   take swing_magic_fire
   take phase_idle_ice
   give link_wins
 
-verb hit_magic_fire__attack_ice "Din's Fire hits (ice Keese dives at Link)" by world priority 80 in hits at 3000 4700
+verb hit_magic_fire__attack_ice "Din's Fire hits (ice Keese dives at Link)" by world priority 80 in hits at 3000 4630
   take swing_magic_fire
   take phase_attack_ice
   give link_wins
 
-verb hit_magic_fire__home_ice "Din's Fire hits (ice Keese flies home)" by world priority 80 in hits at 3140 4700
+verb hit_magic_fire__home_ice "Din's Fire hits (ice Keese flies home)" by world priority 80 in hits at 3140 4630
   take swing_magic_fire
   take phase_home_ice
   give link_wins
 
-verb hit_magic_fire__stunned_ice "Din's Fire hits (ice Keese is stunned)" by world priority 80 in hits at 3000 4770
+verb hit_magic_fire__stunned_ice "Din's Fire hits (ice Keese is stunned)" by world priority 80 in hits at 3000 4700
   take swing_magic_fire
   take phase_stunned_ice
   give link_wins
 
-verb hit_magic_fire__stay_normal "Din's Fire hits (Keese bounces off)" by world priority 80 in hits at 3140 4770
+verb hit_magic_fire__stay_normal "Din's Fire hits (Keese bounces off)" by world priority 80 in hits at 3140 4700
   take swing_magic_fire
   take phase_stay_normal
   give phase_stay_fire
   give timer_stay_fire
 
-verb hit_magic_fire__stay_normal_p "Din's Fire hits (Keese (perches) bounces off)" by world priority 80 in hits at 3000 4840
+verb hit_magic_fire__stay_normal_p "Din's Fire hits (Keese (perches) bounces off)" by world priority 80 in hits at 3000 4770
   take swing_magic_fire
   take phase_stay_normal_p
   give phase_stay_fire_p
   give timer_stay_fire_p
 
-verb hit_magic_fire__stay_ice "Din's Fire hits (ice Keese bounces off)" by world priority 80 in hits at 3140 4840
+verb hit_magic_fire__stay_ice "Din's Fire hits (ice Keese bounces off)" by world priority 80 in hits at 3140 4770
   take swing_magic_fire
   take phase_stay_ice
   give link_wins
 
-verb hit_magic_fire__perched "Din's Fire hits (Keese hangs on its perch)" by world priority 80 in hits at 3000 4910
+verb hit_magic_fire__perched "Din's Fire hits (Keese hangs on its perch)" by world priority 80 in hits at 3000 4840
   take swing_magic_fire
   take phase_perched
   give phase_idle_fire_p
   give 6 timer_idle_fire_p
 
-verb hit_magic_fire__from_perch_normal "Din's Fire hits (Keese drops from its perch at Link)" by world priority 80 in hits at 3140 4910
+verb hit_magic_fire__from_perch_normal "Din's Fire hits (Keese drops from its perch at Link)" by world priority 80 in hits at 3140 4840
   take swing_magic_fire
   take phase_from_perch_normal
   give phase_from_perch_fire
   give 3 timer_from_perch_fire
 
-verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 4980
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 4910
   take swing_magic_fire
   need range_far
 
-verb unseen_magic_fire "Din's Fire misses: the enemy is unseen" by world priority 81 in hits at 3140 4980
+verb unseen_magic_fire "Din's Fire misses: the enemy is unseen" by world priority 81 in hits at 3140 4910
   take swing_magic_fire
   need enemy_unseen
   unless lens_on
 
-verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 5050
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 4980
   take swing_shield
 
-verb unseen_shield "Shield misses: the enemy is unseen" by world priority 81 in hits at 3000 5120
+verb unseen_shield "Shield misses: the enemy is unseen" by world priority 81 in hits at 3000 5050
   take swing_shield
   need enemy_unseen
   unless lens_on
 
-verb hit_spin_kokiri "Kokiri spin attack hits" by world priority 79 in hits at 3000 5190
+verb hit_spin_kokiri "Kokiri spin attack hits" by world priority 79 in hits at 3000 5120
   take swing_spin_kokiri
   give dmg_body
 
-verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 5190
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 5120
   take swing_spin_kokiri
   need range_far
 
-verb unseen_spin_kokiri "Kokiri spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5260
+verb unseen_spin_kokiri "Kokiri spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5190
   take swing_spin_kokiri
   need enemy_unseen
   unless lens_on
 
-verb hit_spin_giant "Two-handed spin attack hits" by world priority 79 in hits at 3000 5330
+verb hit_spin_giant "Two-handed spin attack hits" by world priority 79 in hits at 3000 5260
   take swing_spin_giant
   give 4 dmg_body
 
-verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3140 5330
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3140 5260
   take swing_spin_giant
   need range_far
 
-verb unseen_spin_giant "Two-handed spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5400
+verb unseen_spin_giant "Two-handed spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5330
   take swing_spin_giant
   need enemy_unseen
   unless lens_on
 
-verb hit_spin_master "Master Sword spin attack hits" by world priority 79 in hits at 3000 5470
+verb hit_spin_master "Master Sword spin attack hits" by world priority 79 in hits at 3000 5400
   take swing_spin_master
   give 2 dmg_body
 
-verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 5470
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 5400
   take swing_spin_master
   need range_far
 
-verb unseen_spin_master "Master Sword spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5540
+verb unseen_spin_master "Master Sword spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5470
   take swing_spin_master
   need enemy_unseen
   unless lens_on
 
-verb hit_jump_kokiri "Kokiri jump attack hits" by world priority 79 in hits at 3000 5610
+verb hit_jump_kokiri "Kokiri jump attack hits" by world priority 79 in hits at 3000 5540
   take swing_jump_kokiri
   give 2 dmg_body
 
-verb unseen_jump_kokiri "Kokiri jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 5610
+verb unseen_jump_kokiri "Kokiri jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 5540
   take swing_jump_kokiri
   need enemy_unseen
   unless lens_on
 
-verb hit_jump_kokiri_self "Kokiri jump attack hits" by world priority 79 in hits at 3140 5680
+verb hit_jump_kokiri_self "Kokiri jump attack hits" by world priority 79 in hits at 3140 5610
   take swing_jump_kokiri_self
   give 2 dmg_body
 
-verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 5750
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 5680
   take swing_jump_kokiri_self
   need range_far
 
-verb unseen_jump_kokiri_self "Kokiri jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 5750
+verb unseen_jump_kokiri_self "Kokiri jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 5680
   take swing_jump_kokiri_self
   need enemy_unseen
   unless lens_on
 
-verb hit_jump_giant "Two-handed jump attack hits" by world priority 79 in hits at 3140 5820
+verb hit_jump_giant "Two-handed jump attack hits" by world priority 79 in hits at 3140 5750
   take swing_jump_giant
   give 8 dmg_body
 
-verb unseen_jump_giant "Two-handed jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5890
+verb unseen_jump_giant "Two-handed jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5820
   take swing_jump_giant
   need enemy_unseen
   unless lens_on
 
-verb hit_jump_giant_self "Two-handed jump attack hits" by world priority 79 in hits at 3000 5960
+verb hit_jump_giant_self "Two-handed jump attack hits" by world priority 79 in hits at 3000 5890
   take swing_jump_giant_self
   give 8 dmg_body
 
-verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 5960
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 5890
   take swing_jump_giant_self
   need range_far
 
-verb unseen_jump_giant_self "Two-handed jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 6030
+verb unseen_jump_giant_self "Two-handed jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 5960
   take swing_jump_giant_self
   need enemy_unseen
   unless lens_on
 
-verb hit_jump_master "Master Sword jump attack hits" by world priority 79 in hits at 3000 6100
+verb hit_jump_master "Master Sword jump attack hits" by world priority 79 in hits at 3000 6030
   take swing_jump_master
   give 4 dmg_body
 
-verb unseen_jump_master "Master Sword jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 6100
+verb unseen_jump_master "Master Sword jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 6030
   take swing_jump_master
   need enemy_unseen
   unless lens_on
 
-verb hit_jump_master_self "Master Sword jump attack hits" by world priority 79 in hits at 3140 6170
+verb hit_jump_master_self "Master Sword jump attack hits" by world priority 79 in hits at 3140 6100
   take swing_jump_master_self
   give 4 dmg_body
 
-verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 6240
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 6170
   take swing_jump_master_self
   need range_far
 
-verb unseen_jump_master_self "Master Sword jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 6240
+verb unseen_jump_master_self "Master Sword jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 6170
   take swing_jump_master_self
   need enemy_unseen
   unless lens_on
 
-verb hit_hammer_jump "Hammer jump attack hits" by world priority 79 in hits at 3140 6310
+verb hit_hammer_jump "Hammer jump attack hits" by world priority 79 in hits at 3140 6240
   take swing_hammer_jump
   give 4 dmg_body
 
-verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 6380
+verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 6310
   take swing_hammer_jump
   need enemy_unseen
   unless lens_on
 
-verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2820 1550
+verb body_empty_in_idle_fire "Keese runs out (fire Keese circles)" by world priority 92 in enemy_health at 2500 220
+  unless hp_body
+  take alive_body
+  take phase_idle_fire
+  give link_wins
+
+verb body_empty_in_attack_fire "Keese runs out (fire Keese dives at Link)" by world priority 92 in enemy_health at 2360 290
+  unless hp_body
+  take alive_body
+  take phase_attack_fire
+  give link_wins
+
+verb body_empty_in_home_fire "Keese runs out (fire Keese flies home)" by world priority 92 in enemy_health at 2500 290
+  unless hp_body
+  take alive_body
+  take phase_home_fire
+  give link_wins
+
+verb body_empty_in_stunned_fire "Keese runs out (fire Keese is stunned)" by world priority 92 in enemy_health at 2360 360
+  unless hp_body
+  take alive_body
+  take phase_stunned_fire
+  give link_wins
+
+verb body_empty_in_idle_fire_p "Keese runs out (fire Keese (can perch) circles)" by world priority 92 in enemy_health at 2500 360
+  unless hp_body
+  take alive_body
+  take phase_idle_fire_p
+  give link_wins
+
+verb body_empty_in_attack_fire_p "Keese runs out (fire Keese (can perch) dives at Link)" by world priority 92 in enemy_health at 2360 430
+  unless hp_body
+  take alive_body
+  take phase_attack_fire_p
+  give link_wins
+
+verb body_empty_in_home_fire_p "Keese runs out (fire Keese (can perch) flies home)" by world priority 92 in enemy_health at 2500 430
+  unless hp_body
+  take alive_body
+  take phase_home_fire_p
+  give link_wins
+
+verb body_empty_in_stunned_fire_p "Keese runs out (fire Keese (can perch) is stunned)" by world priority 92 in enemy_health at 2360 500
+  unless hp_body
+  take alive_body
+  take phase_stunned_fire_p
+  give link_wins
+
+verb body_empty_in_idle_normal "Keese runs out (Keese circles)" by world priority 92 in enemy_health at 2500 500
+  unless hp_body
+  take alive_body
+  take phase_idle_normal
+  give link_wins
+
+verb body_empty_in_attack_normal "Keese runs out (Keese dives at Link)" by world priority 92 in enemy_health at 2360 570
+  unless hp_body
+  take alive_body
+  take phase_attack_normal
+  give link_wins
+
+verb body_empty_in_home_normal "Keese runs out (Keese flies home)" by world priority 92 in enemy_health at 2500 570
+  unless hp_body
+  take alive_body
+  take phase_home_normal
+  give link_wins
+
+verb body_empty_in_stunned_normal "Keese runs out (Keese is stunned)" by world priority 92 in enemy_health at 2360 640
+  unless hp_body
+  take alive_body
+  take phase_stunned_normal
+  give link_wins
+
+verb body_empty_in_idle_normal_p "Keese runs out (Keese (perches) circles)" by world priority 92 in enemy_health at 2500 640
+  unless hp_body
+  take alive_body
+  take phase_idle_normal_p
+  give link_wins
+
+verb body_empty_in_attack_normal_p "Keese runs out (Keese (perches) dives at Link)" by world priority 92 in enemy_health at 2360 710
+  unless hp_body
+  take alive_body
+  take phase_attack_normal_p
+  give link_wins
+
+verb body_empty_in_home_normal_p "Keese runs out (Keese (perches) flies home)" by world priority 92 in enemy_health at 2500 710
+  unless hp_body
+  take alive_body
+  take phase_home_normal_p
+  give link_wins
+
+verb body_empty_in_stunned_normal_p "Keese runs out (Keese (perches) is stunned)" by world priority 92 in enemy_health at 2360 780
+  unless hp_body
+  take alive_body
+  take phase_stunned_normal_p
+  give link_wins
+
+verb body_empty_in_idle_ice "Keese runs out (ice Keese circles)" by world priority 92 in enemy_health at 2500 780
+  unless hp_body
+  take alive_body
+  take phase_idle_ice
+  give link_wins
+
+verb body_empty_in_attack_ice "Keese runs out (ice Keese dives at Link)" by world priority 92 in enemy_health at 2360 850
+  unless hp_body
+  take alive_body
+  take phase_attack_ice
+  give link_wins
+
+verb body_empty_in_home_ice "Keese runs out (ice Keese flies home)" by world priority 92 in enemy_health at 2500 850
+  unless hp_body
+  take alive_body
+  take phase_home_ice
+  give link_wins
+
+verb body_empty_in_stunned_ice "Keese runs out (ice Keese is stunned)" by world priority 92 in enemy_health at 2360 920
+  unless hp_body
+  take alive_body
+  take phase_stunned_ice
+  give link_wins
+
+verb body_empty_in_stay_fire "Keese runs out (fire Keese bounces off)" by world priority 92 in enemy_health at 2500 920
+  unless hp_body
+  take alive_body
+  take phase_stay_fire
+  give link_wins
+
+verb body_empty_in_stay_fire_p "Keese runs out (fire Keese (can perch) bounces off)" by world priority 92 in enemy_health at 2360 990
+  unless hp_body
+  take alive_body
+  take phase_stay_fire_p
+  give link_wins
+
+verb body_empty_in_stay_normal "Keese runs out (Keese bounces off)" by world priority 92 in enemy_health at 2500 990
+  unless hp_body
+  take alive_body
+  take phase_stay_normal
+  give link_wins
+
+verb body_empty_in_stay_normal_p "Keese runs out (Keese (perches) bounces off)" by world priority 92 in enemy_health at 2360 1060
+  unless hp_body
+  take alive_body
+  take phase_stay_normal_p
+  give link_wins
+
+verb body_empty_in_stay_ice "Keese runs out (ice Keese bounces off)" by world priority 92 in enemy_health at 2500 1060
+  unless hp_body
+  take alive_body
+  take phase_stay_ice
+  give link_wins
+
+verb body_empty_in_perched "Keese runs out (Keese hangs on its perch)" by world priority 92 in enemy_health at 2360 1130
+  unless hp_body
+  take alive_body
+  take phase_perched
+  give link_wins
+
+verb body_empty_in_from_perch_normal "Keese runs out (Keese drops from its perch at Link)" by world priority 92 in enemy_health at 2500 1130
+  unless hp_body
+  take alive_body
+  take phase_from_perch_normal
+  give link_wins
+
+verb body_empty_in_from_perch_fire "Keese runs out (Lit Keese drops from its perch at Link)" by world priority 92 in enemy_health at 2360 1200
+  unless hp_body
+  take alive_body
+  take phase_from_perch_fire
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 1550
   take link_turn
   unless status_freeze
   need age_child
@@ -1981,7 +1999,7 @@ verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves
   give guard_with_deku_shield
   give enemy_turn
 
-verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2680 1620
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 1550
   take link_turn
   unless status_freeze
   need age_child
@@ -1990,7 +2008,7 @@ verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in 
   give guard_with_hylian_shield
   give enemy_turn
 
-verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2820 1620
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1620
   take link_turn
   unless status_freeze
   need age_adult
@@ -1999,7 +2017,7 @@ verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in 
   give guard_with_hylian_shield
   give enemy_turn
 
-verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2680 1690
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1620
   take link_turn
   unless status_freeze
   need age_adult
@@ -2008,47 +2026,47 @@ verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_m
   give guard_with_mirror_shield
   give enemy_turn
 
-verb link_dodges "Link backflips or sidehops" by link in link_moves at 2820 1690
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1690
   take link_turn
   unless status_freeze
   give link_dodge
   give enemy_turn
 
-verb link_closes_in "Link closes in" by link in link_moves at 2680 1760
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1690
   take link_turn
   unless status_freeze
   take range_far
   give range_near
   give enemy_turn
 
-verb link_backs_off "Link backs off" by link in link_moves at 2820 1760
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1760
   take link_turn
   unless status_freeze
   take range_near
   give range_far
   give enemy_turn
 
-verb link_leaves "Link leaves the fight" by link in link_moves at 2680 1830
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1760
   take link_turn
   unless status_freeze
   need range_far
   give link_withdraws
 
-verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2820 1830
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 1830
   take link_turn
   unless status_freeze
   take has_red_potion
   give 32 link_heal
   give enemy_turn
 
-verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2680 1900
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 1830
   take link_turn
   unless status_freeze
   take has_green_potion
   give 48 magic_refill
   give enemy_turn
 
-verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2820 1900
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2680 1900
   take link_turn
   unless status_freeze
   take has_blue_potion
@@ -2056,7 +2074,7 @@ verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves a
   give 48 magic_refill
   give enemy_turn
 
-verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2680 1970
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2820 1900
   take link_turn
   unless status_freeze
   need has_nayrus_love
@@ -2066,7 +2084,7 @@ verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2
   give 60 status_nayru
   give enemy_turn
 
-verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2820 1970
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2680 1970
   take link_turn
   unless lens_on
   need has_lens_of_truth
@@ -2074,7 +2092,7 @@ verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves a
   give lens_on
   give link_turn
 
-verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 2040
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
   take link_turn
   take lens_on
   give link_turn
@@ -2539,18 +2557,13 @@ verb stay_fire_step_1 "fire Keese turns for home" by world priority 69 in enemy 
   unless timer_stay_fire
   give beat_end
 
-verb stay_fire_holds "fire Keese bounces off: nothing changes" by world priority 68 in enemy at 440 5400
-  take enemy_act
-  need phase_stay_fire
-  give beat_end
-
-verb stay_fire_p_ticks "fire Keese (can perch) bounces off: a beat passes" by world priority 71 in enemy at 580 5400
+verb stay_fire_p_ticks "fire Keese (can perch) bounces off: a beat passes" by world priority 71 in enemy at 440 5400
   take enemy_turn
   need phase_stay_fire_p
   take timer_stay_fire_p
   give enemy_act
 
-verb stay_fire_p_step_1 "fire Keese (can perch) turns for home" by world priority 69 in enemy at 440 5470
+verb stay_fire_p_step_1 "fire Keese (can perch) turns for home" by world priority 69 in enemy at 580 5400
   take enemy_act
   take phase_stay_fire_p
   give phase_home_fire_p
@@ -2558,18 +2571,13 @@ verb stay_fire_p_step_1 "fire Keese (can perch) turns for home" by world priorit
   unless timer_stay_fire_p
   give beat_end
 
-verb stay_fire_p_holds "fire Keese (can perch) bounces off: nothing changes" by world priority 68 in enemy at 580 5470
-  take enemy_act
-  need phase_stay_fire_p
-  give beat_end
-
-verb stay_normal_ticks "Keese bounces off: a beat passes" by world priority 71 in enemy at 440 5540
+verb stay_normal_ticks "Keese bounces off: a beat passes" by world priority 71 in enemy at 440 5470
   take enemy_turn
   need phase_stay_normal
   take timer_stay_normal
   give enemy_act
 
-verb stay_normal_step_1 "Keese turns for home" by world priority 69 in enemy at 580 5540
+verb stay_normal_step_1 "Keese turns for home" by world priority 69 in enemy at 580 5470
   take enemy_act
   take phase_stay_normal
   give phase_home_normal
@@ -2577,18 +2585,13 @@ verb stay_normal_step_1 "Keese turns for home" by world priority 69 in enemy at 
   unless timer_stay_normal
   give beat_end
 
-verb stay_normal_holds "Keese bounces off: nothing changes" by world priority 68 in enemy at 440 5610
-  take enemy_act
-  need phase_stay_normal
-  give beat_end
-
-verb stay_normal_p_ticks "Keese (perches) bounces off: a beat passes" by world priority 71 in enemy at 580 5610
+verb stay_normal_p_ticks "Keese (perches) bounces off: a beat passes" by world priority 71 in enemy at 440 5540
   take enemy_turn
   need phase_stay_normal_p
   take timer_stay_normal_p
   give enemy_act
 
-verb stay_normal_p_step_1 "Keese (perches) turns for home" by world priority 69 in enemy at 440 5680
+verb stay_normal_p_step_1 "Keese (perches) turns for home" by world priority 69 in enemy at 580 5540
   take enemy_act
   take phase_stay_normal_p
   give phase_home_normal_p
@@ -2596,18 +2599,13 @@ verb stay_normal_p_step_1 "Keese (perches) turns for home" by world priority 69 
   unless timer_stay_normal_p
   give beat_end
 
-verb stay_normal_p_holds "Keese (perches) bounces off: nothing changes" by world priority 68 in enemy at 580 5680
-  take enemy_act
-  need phase_stay_normal_p
-  give beat_end
-
-verb stay_ice_ticks "ice Keese bounces off: a beat passes" by world priority 71 in enemy at 440 5750
+verb stay_ice_ticks "ice Keese bounces off: a beat passes" by world priority 71 in enemy at 440 5610
   take enemy_turn
   need phase_stay_ice
   take timer_stay_ice
   give enemy_act
 
-verb stay_ice_step_1 "ice Keese turns for home" by world priority 69 in enemy at 580 5750
+verb stay_ice_step_1 "ice Keese turns for home" by world priority 69 in enemy at 580 5610
   take enemy_act
   take phase_stay_ice
   give phase_home_ice
@@ -2615,12 +2613,7 @@ verb stay_ice_step_1 "ice Keese turns for home" by world priority 69 in enemy at
   unless timer_stay_ice
   give beat_end
 
-verb stay_ice_holds "ice Keese bounces off: nothing changes" by world priority 68 in enemy at 440 5820
-  take enemy_act
-  need phase_stay_ice
-  give beat_end
-
-verb perched_step_1 "Keese drops at Link" by world priority 69 in enemy at 580 5820
+verb perched_step_1 "Keese drops at Link" by world priority 69 in enemy at 440 5680
   take enemy_act
   take phase_perched
   give phase_from_perch_normal
@@ -2628,25 +2621,25 @@ verb perched_step_1 "Keese drops at Link" by world priority 69 in enemy at 580 5
   give beat_end
   need range_near
 
-verb perched_holds "Keese hangs on its perch: nothing changes" by world priority 68 in enemy at 440 5890
+verb perched_holds "Keese hangs on its perch: nothing changes" by world priority 68 in enemy at 580 5680
   take enemy_act
   need phase_perched
   give beat_end
 
-verb from_perch_normal_ticks "Keese drops from its perch at Link: a beat passes" by world priority 71 in enemy at 580 5890
+verb from_perch_normal_ticks "Keese drops from its perch at Link: a beat passes" by world priority 71 in enemy at 440 5750
   take enemy_turn
   need phase_from_perch_normal
   take timer_from_perch_normal
   give enemy_act
 
-verb from_perch_normal_step_1 "Keese strikes from its perch" by world priority 69 in enemy at 440 5960
+verb from_perch_normal_step_1 "Keese strikes from its perch" by world priority 69 in enemy at 580 5750
   take enemy_act
   need phase_from_perch_normal
   give incoming_bite
   give beat_end
   need range_near
 
-verb from_perch_normal_step_2 "Keese flies off" by world priority 69 in enemy at 580 5960
+verb from_perch_normal_step_2 "Keese flies off" by world priority 69 in enemy at 440 5820
   take enemy_act
   take phase_from_perch_normal
   give phase_idle_normal_p
@@ -2654,18 +2647,18 @@ verb from_perch_normal_step_2 "Keese flies off" by world priority 69 in enemy at
   unless timer_from_perch_normal
   give beat_end
 
-verb from_perch_normal_holds "Keese drops from its perch at Link: nothing changes" by world priority 68 in enemy at 440 6030
+verb from_perch_normal_holds "Keese drops from its perch at Link: nothing changes" by world priority 68 in enemy at 580 5820
   take enemy_act
   need phase_from_perch_normal
   give beat_end
 
-verb from_perch_fire_ticks "Lit Keese drops from its perch at Link: a beat passes" by world priority 71 in enemy at 580 6030
+verb from_perch_fire_ticks "Lit Keese drops from its perch at Link: a beat passes" by world priority 71 in enemy at 440 5890
   take enemy_turn
   need phase_from_perch_fire
   take timer_from_perch_fire
   give enemy_act
 
-verb from_perch_fire_step_1 "Lit Keese strikes from its perch" by world priority 69 in enemy at 440 6100
+verb from_perch_fire_step_1 "Lit Keese strikes from its perch" by world priority 69 in enemy at 580 5890
   take enemy_act
   take phase_from_perch_fire
   give phase_from_perch_normal
@@ -2674,7 +2667,7 @@ verb from_perch_fire_step_1 "Lit Keese strikes from its perch" by world priority
   give beat_end
   need range_near
 
-verb from_perch_fire_step_2 "Lit Keese flies off" by world priority 69 in enemy at 580 6100
+verb from_perch_fire_step_2 "Lit Keese flies off" by world priority 69 in enemy at 440 5960
   take enemy_act
   take phase_from_perch_fire
   give phase_idle_fire_p
@@ -2682,7 +2675,7 @@ verb from_perch_fire_step_2 "Lit Keese flies off" by world priority 69 in enemy 
   unless timer_from_perch_fire
   give beat_end
 
-verb from_perch_fire_holds "Lit Keese drops from its perch at Link: nothing changes" by world priority 68 in enemy at 440 6170
+verb from_perch_fire_holds "Lit Keese drops from its perch at Link: nothing changes" by world priority 68 in enemy at 580 5960
   take enemy_act
   need phase_from_perch_fire
   give beat_end

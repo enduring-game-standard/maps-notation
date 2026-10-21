@@ -1,14 +1,15 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { analyze } from '../../src/core/analyze'
+import { fileURLToPath } from 'node:url'
 import { check } from '../../src/core/check'
 import type { Net } from '../../src/core/model'
 import { parse, print } from '../../src/core/text'
 import { dispositions, encounterFile, modeled, OUT } from './build'
 import { link } from './data/link'
 import { doubleDefense, encounter, linkAttacks, swingKey } from './gen'
+import { analyzeFile } from './slice'
 import { DMG_TYPES, extract, type Actor, type DmgType, type Inventory } from './inventory'
-import { isExcluded, type ActorSpec, type Cite } from './spec'
+import { isExcluded, type ActorSpec, type Cite, type Gear } from './spec'
 
 type Verdict = 'VERIFIED' | 'NOT VERIFIED' | 'INCONCLUSIVE'
 const results = new Map<string, { verdict: Verdict; failures: string[]; notes: string[] }>()
@@ -23,11 +24,17 @@ const fail = (id: string, msg: string) => {
 }
 const note = (id: string, msg: string) => line(id).notes.push(msg)
 
-const CONTRACT_ECONOMY = [
-  'hearts', 'double_defense', 'magic_meter', 'magic_costs', 'fairy', 'potions', 'swords', 'shields', 'tunics',
-  'deku_sticks', 'deku_nuts', 'slingshot', 'bow', 'magic_arrows', 'bombs', 'bombchus', 'boomerang', 'hookshot',
-  'megaton_hammer', 'dins_fire', 'nayrus_love', 'lens_of_truth', 'ammo',
+/** CONTRACT item 4, as gear: each must be read by an attack, a shield, a Link spec field, or an economy entry. */
+const CONTRACT_GEAR: Gear[] = [
+  'kokiri_sword', 'master_sword', 'giants_knife', 'biggoron_sword', 'deku_shield', 'hylian_shield', 'mirror_shield',
+  'kokiri_tunic', 'goron_tunic', 'zora_tunic', 'deku_sticks', 'deku_nuts', 'slingshot', 'bow', 'fire_arrows', 'ice_arrows',
+  'light_arrows', 'bombs', 'bombchus', 'boomerang', 'hookshot', 'megaton_hammer', 'dins_fire', 'nayrus_love', 'lens_of_truth',
+  'double_defense', 'magic', 'fairy', 'red_potion', 'green_potion', 'blue_potion', 'ocarina',
 ]
+const FIELD_GEAR: Partial<Record<Gear, keyof typeof link>> = {
+  double_defense: 'doubleDefense', magic: 'magicMeter', fairy: 'fairyRevive', red_potion: 'potions', green_potion: 'potions',
+  blue_potion: 'potions', nayrus_love: 'nayruMagic', lens_of_truth: 'lensDrain', ocarina: 'songs',
+}
 const HIT_SPECIAL_EFFECTS = ['NONE', 'FIRE', 'ICE', 'ELECTRIC', 'KNOCKBACK', '7', '8', '9']
 
 /** Every cite must name a real decomp line that carries content, not a bare brace. */
@@ -97,7 +104,16 @@ const verifyCompleteness = (inv: Inventory) => {
     for (const a of s.attacks) if (s.atSources[a.source as Cite] !== a.id && !sources.has(a.source)) fail('C6', `${s.overlay}: attack ${a.id} source ${a.source} is not a ledgered AT source`)
   }
 
-  for (const k of CONTRACT_ECONOMY) if (!(k in link.economy)) fail('C7', `economy item ${k} has no disposition`)
+  const read = new Set<string>([
+    ...Object.values(link.attacks).flatMap((a) => (isExcluded(a) ? [] : a.flatMap((x) => x.needs))),
+    ...link.shields.map((x) => x.gear),
+  ])
+  for (const g of CONTRACT_GEAR) {
+    const field = FIELD_GEAR[g]
+    const ok = read.has(g) || (field && link[field] !== undefined) || Object.keys(link.economy).some((k) => k.includes(g.replace(/_(sword|shield)$/, '')))
+    if (!ok) fail('C7', `${g} has no disposition in the Link spec`)
+  }
+  if (!('ammo' in link.economy)) fail('C7', 'ammunition has no disposition')
 }
 
 /** V3: the generated net against a fresh extraction, never against the spec's own reading. */
@@ -153,7 +169,7 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net) => {
   }
 }
 
-const verifyEncounter = (spec: ActorSpec, inv: Inventory, analyzeLimit: number) => {
+const verifyEncounter = async (spec: ActorSpec, inv: Inventory, analyzeLimit: number) => {
   const ia = inv.actors.find((a) => a.overlay === spec.overlay)!
   const { net } = encounter(spec, link, inv)
   const file = new URL(`encounters/${encounterFile(spec.overlay)}`, OUT)
@@ -167,39 +183,54 @@ const verifyEncounter = (spec: ActorSpec, inv: Inventory, analyzeLimit: number) 
     if (!Object.keys(spec.expected?.warnings ?? {}).some((k) => p.message.includes(k))) fail('V1', `${spec.overlay}: unexpected warning: ${p.message}`)
   verifyNumbers(spec, ia, parsed)
 
-  const t0 = Date.now()
-  const a = analyze(parsed, analyzeLimit)
+  const slices = await analyzeFile(fileURLToPath(file), analyzeLimit)
+  const fired = new Set(slices.flatMap((r) => r.fired))
+  const outcomes = new Set(slices.flatMap((r) => Object.keys(r.outcomes)))
+  const allDead = parsed.verbs.map((v) => v.id).filter((v) => !fired.has(v))
+  const givers = new Map<string, string[]>()
+  for (const a of parsed.arcs) if (a.kind === 'give') givers.set(a.verb, [...(givers.get(a.verb) ?? []), a.state])
+  const startMarked = parsed.states.filter((st) => st.marks > 0).map((st) => st.id)
+  /** A state counts as reached in a slice if it starts marked or a verb that fired there gives it, which catches marks the world spends at once. */
+  const markedBy = slices.map((r) => new Set([...startMarked, ...r.fired.flatMap((v) => givers.get(v) ?? [])]))
+  const inputsOf = (v: string) => [...new Set(parsed.arcs.filter((a) => a.verb === v && (a.kind === 'take' || a.kind === 'need')).map((a) => a.state))]
+  /** Dead only because its inputs never meet in one kit: each input is marked in some slice, all of them in none. */
+  const kitSplit = allDead.filter((v) => {
+    const ins = inputsOf(v)
+    return ins.every((st) => markedBy.some((m) => m.has(st))) && !markedBy.some((m) => ins.every((st) => m.has(st)))
+  })
+  const deadVerbs = allDead.filter((v) => !kitSplit.includes(v))
   const summary = {
-    positions: a.nodes.size,
-    complete: a.complete,
-    outcomes: Object.fromEntries(a.outcomes),
-    stalls: a.stalls.length,
-    livelocks: a.livelocks.length,
-    deadVerbs: a.deadVerbs,
-    ms: Date.now() - t0,
+    positions: slices.reduce((n, r) => n + r.positions, 0),
+    complete: slices.every((r) => r.complete),
+    outcomes: [...outcomes].sort(),
+    stalls: slices.reduce((n, r) => n + r.stalls, 0),
+    livelocks: slices.reduce((n, r) => n + r.livelocks, 0),
+    deadVerbs,
+    kitSplit: Object.fromEntries(kitSplit.map((v) => [v, inputsOf(v)])),
+    slices: slices.map(({ fired: _f, ...r }) => r).sort((a, b) => `${a.kit}/${a.variant}`.localeCompare(`${b.kit}/${b.variant}`)),
   }
   writeFileSync(new URL(`encounters/${encounterFile(spec.overlay).replace(/\.maps$/, '.analysis.json')}`, OUT), JSON.stringify(summary, null, 1) + '\n')
-  if (!a.complete) {
+  if (!summary.complete) {
     line('V2').verdict = line('V2').verdict === 'VERIFIED' ? 'INCONCLUSIVE' : line('V2').verdict
-    line('V2').failures.push(`${spec.overlay}: exploration hit the ${analyzeLimit} limit`)
+    line('V2').failures.push(`${spec.overlay}: exploration hit the ${analyzeLimit} limit in ${slices.filter((r) => !r.complete).map((r) => `${r.kit}/${r.variant}`).join(', ')}`)
     return
   }
-  if (a.stalls.length) fail('V2', `${spec.overlay}: ${a.stalls.length} stalled positions`)
-  if (a.livelocks.length) fail('V2', `${spec.overlay}: ${a.livelocks.length} positions where the world never falls silent`)
+  if (summary.stalls) fail('V2', `${spec.overlay}: ${summary.stalls} stalled positions`)
+  if (summary.livelocks) fail('V2', `${spec.overlay}: ${summary.livelocks} positions where the world never falls silent`)
   const expectedDead = spec.expected?.deadVerbs ?? {}
-  for (const v of a.deadVerbs) if (!(v in expectedDead)) fail('V2', `${spec.overlay}: verb ${v} can never be said`)
-  for (const v of Object.keys(expectedDead)) if (!a.deadVerbs.includes(v)) fail('V2', `${spec.overlay}: ledgered dead verb ${v} is reachable after all`)
+  for (const v of deadVerbs) if (!(v in expectedDead)) fail('V2', `${spec.overlay}: verb ${v} can never be said`)
+  for (const v of Object.keys(expectedDead)) if (!deadVerbs.includes(v)) fail('V2', `${spec.overlay}: ledgered dead verb ${v} is reachable after all`)
   const killable = spec.pools.length > 0 || (spec.damage.kind === 'decomp' && Object.values(spec.damage.reactions).some((r) => r.to === 'defeated' || Object.values(typeof r.to === 'object' ? r.to : {}).includes('defeated')))
-  if (killable !== a.outcomes.has('Link wins')) fail('V2', `${spec.overlay}: Link wins reachable=${a.outcomes.has('Link wins')} but killable=${killable}`)
-  if (spec.attacks.length > 0 !== a.outcomes.has('Link falls')) fail('V2', `${spec.overlay}: Link falls reachable=${a.outcomes.has('Link falls')} with ${spec.attacks.length} attacks`)
-  note('V2', `${spec.overlay}: ${a.nodes.size} positions in ${summary.ms} ms`)
+  if (killable !== outcomes.has('Link wins')) fail('V2', `${spec.overlay}: Link wins reachable=${outcomes.has('Link wins')} but killable=${killable}`)
+  if (spec.attacks.length > 0 !== outcomes.has('Link falls')) fail('V2', `${spec.overlay}: Link falls reachable=${outcomes.has('Link falls')} with ${spec.attacks.length} attacks`)
+  note('V2', `${spec.overlay}: ${summary.positions} positions over ${slices.length} slices; ${kitSplit.length} verbs dead only because their gear is in different kits`)
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const root = process.argv[2]
   if (!root) throw new Error('usage: tsx verify.ts <oot-decomp> [--only ovl_X] [--limit N]')
   const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : undefined
-  const limit = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : 3_000_000
+  const limit = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : 1_000_000
   const fresh = extract(root)
   const committed: Inventory = JSON.parse(readFileSync(new URL('inventory.json', OUT), 'utf8'))
   if (JSON.stringify(fresh) !== JSON.stringify(committed)) fail('V3', 'inventory.json differs from a fresh extraction of the decomp')
@@ -207,7 +238,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   for (const d of dispositions) walkCites(root, d, d.overlay)
   if (process.env.OCARINA_ONLY) note('C1', 'OCARINA_ONLY is set: C1 counts only the loaded actor and cannot pass')
   verifyCompleteness(fresh)
-  for (const spec of modeled().filter((s) => !only || s.overlay === only)) verifyEncounter(spec, fresh, limit)
+  for (const spec of modeled().filter((s) => !only || s.overlay === only)) await verifyEncounter(spec, fresh, limit)
   for (const id of ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'cites', 'V1', 'V2', 'V3']) line(id)
   let ok = true
   for (const [id, r] of results) {

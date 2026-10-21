@@ -116,6 +116,8 @@ export interface Loadout {
   age: Age
   hearts: number
   gear: Gear[]
+  /** Magic units Link arrives with, when less than a full meter. Small amounts keep the analysis small. */
+  magic?: number
 }
 
 export type Role = 'enemy' | 'boss' | 'hazard' | 'projectile' | 'part'
