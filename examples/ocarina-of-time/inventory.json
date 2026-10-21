@@ -4224,7 +4224,14 @@
      ]
     }
    ],
-   "health": [],
+   "health": [
+    {
+     "value": 4,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_Bigokuta/z_en_bigokuta.c",
+     "line": 131
+    }
+   ],
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Bigokuta/z_en_bigokuta.c",
@@ -11699,7 +11706,14 @@
      ]
     }
    ],
-   "health": [],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_Mm/z_en_mm.c",
+     "line": 89
+    }
+   ],
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Mm/z_en_mm.c",

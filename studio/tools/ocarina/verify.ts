@@ -197,7 +197,8 @@ const declaresDeath = (spec: ActorSpec) => {
     (d.kind === 'decomp' && Object.values(d.reactions).some((r) => dies(r.to))) ||
     (d.kind === 'custom' && Object.values(d.entries).some((e) => dies(e?.to))) ||
     spec.phases.some((p) => Object.values(p.overrides ?? {}).some((o) => dies(o?.to))) ||
-    spec.steps.some((s) => s.to === 'defeated')
+    spec.steps.some((s) => s.to === 'defeated') ||
+    spec.attacks.some((a) => a.onBlock?.to === 'defeated')
   )
 }
 

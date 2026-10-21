@@ -75,7 +75,7 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       if (!preset) throw new Error(`${rel}: DamageTable_Get(${m[1]}) names no preset`)
       if (!actor.damageTables.some((t) => t.name === preset.name)) actor.damageTables.push(preset)
     }
-    for (const m of src.matchAll(/CollisionCheckInfoInit2?\s+(\w+)\s*=\s*\{\s*([^,}]+)/g))
+    for (const m of src.matchAll(/CollisionCheckInfoInit2?\s+(\w+)(?:\[\])?\s*=\s*\{\s*([^,}]+)/g))
       actor.health.push({ value: num(m[2]), via: m[1], file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/colChkInfo\.health\s*=\s*(-?(?:0x)?[0-9A-Fa-f]+)\s*;/g))
       actor.health.push({ value: num(m[1]), via: 'assignment', file: rel, line: lineOf(src, m.index!) })

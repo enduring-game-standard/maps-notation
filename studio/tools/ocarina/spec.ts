@@ -186,6 +186,8 @@ export interface Attack {
    * (the reflected collider's own damage, for actors with no table). Each shield may be limited to some ages.
    */
   reflect?: { shields: { gear: Gear; ages?: Age[] }[]; as: DmgType; damage: number; cite: Cite }
+  /** A shield block sends the actor to this phase (from whichever phase the attacking step left it in), or `defeated`. */
+  onBlock?: { to: string; cite: Cite }
 }
 
 /** How this actor's code reads a reaction value from its damage table. */

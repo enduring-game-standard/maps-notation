@@ -233,6 +233,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   const needPhase = (id: string, where: string) => {
     if (id !== 'defeated' && !phase.has(id)) throw new Error(`${spec.overlay}: ${where} names unknown phase ${id}`)
   }
+  for (const a of spec.attacks) if (a.onBlock && a.onBlock.to !== 'defeated') needPhase(a.onBlock.to, `attack ${a.id} on block`)
   for (const s of spec.steps) {
     if (s.afterTimer && !phase.get(s.from)?.frames) throw new Error(`${spec.overlay}: step ${s.label} waits for a timer, but phase ${s.from} has no frames`)
     needPhase(s.from, `step ${s.label}`)
@@ -546,9 +547,12 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     if (a.blockable)
       for (const s of shields) {
         const burns = a.effect.kind === 'burn' && s.burnsOnFire
-        b.verb(`${a.id}_blocked_${s.gear}`, `${a.label}: blocked by the ${s.gear.replace(/_/g, ' ')}${burns ? ', which burns' : ''}`, WORLD, 'attacks', P.attack, [
-          inc, ['need', `guard_with_${s.gear}`], ...(burns ? ([['take', `has_${s.gear}`]] as [ArcKind, string][]) : []),
-        ])
+        const blockArcs: [ArcKind, string, number?][] = [inc, ['need', `guard_with_${s.gear}`], ...(burns ? ([['take', `has_${s.gear}`]] as [ArcKind, string][]) : [])]
+        const label = `${a.label}: blocked by the ${s.gear.replace(/_/g, ' ')}${burns ? ', which burns' : ''}`
+        if (!a.onBlock) b.verb(`${a.id}_blocked_${s.gear}`, label, WORLD, 'attacks', P.attack, blockArcs)
+        else
+          for (const from of new Set(spec.steps.filter((st) => st.attack === a.id).map((st) => st.to)))
+            b.verb(`${a.id}_blocked_${s.gear}__${from}`, label, WORLD, 'attacks', P.attack, [...blockArcs, ...move(from, a.onBlock.to)])
       }
     if (a.dodgeable) b.verb(`${a.id}_dodged`, `${a.label}: dodged`, WORLD, 'attacks', P.attack, [inc, ['need', 'link_dodge'], ...(a.blockable ? ([['unless', 'link_guard']] as [ArcKind, string][]) : [])])
     if (statuses.has('nayru'))
