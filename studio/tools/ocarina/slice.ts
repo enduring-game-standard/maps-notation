@@ -44,7 +44,7 @@ const runOne = (file: string, kit: string, variant: string, limit: number): Prom
   })
 
 /** Analyze every branch of an encounter file in parallel processes. */
-export const analyzeFile = async (file: string, limit: number, parallel = Math.max(1, cpus().length - 2)) => {
+export const analyzeFile = async (file: string, limit: number, parallel = Number(process.env.OCARINA_PARALLEL) || Math.max(1, cpus().length - 2)) => {
   const todo = branches(parse(readFileSync(file, 'utf8')))
   const results: SliceResult[] = []
   let next = 0

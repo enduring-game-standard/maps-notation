@@ -28,7 +28,7 @@ Each beat, Link chooses one action: an attack (per damage type), raising a shiel
 5. **Health.** `pools[].hp.cite` must be exactly the `file:line` of a health value in the inventory, and the value must match. Several pools model parts or phases with their own health.
 6. **Attacks on Link.** Map every collider element with `atOn: true`, and every runtime `atDmgInfo` change in the inventory, in `atSources`, keyed by the inventory's `file:line`. Map each to an attack id, or exclude it with a reason, for example a collider used only against other actors. An attack's `source` is one of those cites. Its `damage` must equal the element's damage, or the runtime value it sets. `effect` follows the element's hit special effect: FIRE is `burn`, ICE is `freeze`, ELECTRIC is `shock`, KNOCKBACK is `knockback`, and NONE or 7/8/9 is `none`. It can also be an actor-specific effect the code applies (grab, paralyze, steal), each cited. Set `blockable` false only when the code shows the shield does not stop it, for example `DMG_UNBLOCKABLE` in the element's flags or a grab. Set `dodgeable` false when nothing about a backflip avoids it in the code, for example a room-wide effect.
 7. **Variants.** Spawn params that change behavior become `variants`, each with its own start phase. The world picks one at even odds. An invisible-unless-Lens params bit is an `unseen` variant.
-8. **Loadouts.** Use `standardLoadouts(ages, hearts, extra)` from `../loadouts`. Pass the ages that meet the actor in the game, cited from the scene or the actor's own age checks. Use `extra` to add gear the actor reacts to, such as a mask. Pick hearts so Link can both win and fall: 2 by default, more if the actor's single hit takes more than 2 hearts.
+8. **Loadouts.** Use `standardLoadouts(ages, hearts)` from `../loadouts`. Pass the ages that meet the actor in the game. Gear the actor reacts to that the standard kits lack, such as a mask, goes in its own extra kit appended to the list. A worn mask is gear Link has for the whole fight, so a kit with the mask is a fight in which Link wears it. See Keese's `child_skull_mask`. Pick hearts so Link can both win and fall: 2 by default, more if the actor's single hit takes more than 2 hearts.
 9. **Room.** Add `room: ['light_beam']` only if the actor's code reacts to `DMG_MIR_RAY` and it appears in a room with a light beam.
 
 ## The cite rule
@@ -41,8 +41,15 @@ From `studio/`, run each of these and read the output:
 
 ```sh
 OCARINA_ONLY=ovl_Your_Actor npx tsx tools/ocarina/build.ts
-OCARINA_ONLY=ovl_Your_Actor npx tsx tools/ocarina/verify.ts /home/wscottsh/repos/oot-decomp --only ovl_Your_Actor
+OCARINA_ONLY=ovl_Your_Actor OCARINA_PARALLEL=4 npx tsx tools/ocarina/verify.ts /home/wscottsh/repos/oot-decomp --only ovl_Your_Actor
+npx vitest run tools/ocarina
 ```
+
+`OCARINA_PARALLEL=4` keeps your analysis to four processes, because other authors are running theirs on the same machine. Verify writes `examples/ocarina-of-time/encounters/<actor>.analysis.json`. Read it: it lists every slice (kit and variant), its size, and every dead verb. The vitest run checks hits-to-kill and the health each attack costs, on the generated file.
+
+**Dead verbs.** Verify proves some dead verbs mechanically and reports them as `kitSplit`. Their inputs are each reached in some kit, but never together in one kit. Every other dead verb fails V2 until you either fix the model or ledger it in `expected.deadVerbs`. A legitimate reason states a fact of the model, such as "this phase lasts one beat and is only entered by Link's own move, so no later hit finds it" or "the phase is left the beat Link comes near, and this attack needs near". Before you ledger one, check that it is not a missing step, a wrong range, or a wrong phase.
+
+**Size.** If a slice hits the limit, the encounter is too big to verify. Look at which kit and variant blew up in the analysis file. Common causes are a long timer on a phase the enemy sits in for many beats, a large health pool, and several timers that run at once. Do not shorten a timer the code states. Report it, and say which slice and what dominates.
 
 Only your actor's lines matter, and `C1` fails until every actor is disposed. Your actor is done when the verifier shows no failure that names it under C3 through C6, cites, V1, V2, or V3. Every `deadVerbs` or `warnings` entry in `expected` needs a reason a reviewer would accept: the verb really cannot happen under any kit, and here is why. Do not add expected dead verbs to make the check pass. A verb that can never be said usually means a missing step or a wrong phase.
 
