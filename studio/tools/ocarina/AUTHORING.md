@@ -42,7 +42,7 @@ From `studio/`, run each of these and read the output:
 ```sh
 OCARINA_ONLY=ovl_Your_Actor npx tsx tools/ocarina/build.ts
 OCARINA_ONLY=ovl_Your_Actor OCARINA_PARALLEL=4 npx tsx tools/ocarina/verify.ts /home/wscottsh/repos/oot-decomp --only ovl_Your_Actor
-npx vitest run tools/ocarina
+OCARINA_ONLY=ovl_Your_Actor npx vitest run tools/ocarina
 ```
 
 `OCARINA_PARALLEL=4` keeps your analysis to four processes, because other authors are running theirs on the same machine. Verify writes `examples/ocarina-of-time/encounters/<actor>.analysis.json`. Read it: it lists every slice (kit and variant), its size, and every dead verb. The vitest run checks hits-to-kill and the health each attack costs, on the generated file.
