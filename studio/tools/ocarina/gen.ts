@@ -41,13 +41,15 @@ const gcdAll = (xs: number[]) => xs.filter((x) => x > 0).reduce(gcd, 0) || 1
 
 /** Priorities of the world's answers, highest first. One order for every encounter. */
 const P = {
-  timerCleanup: 99,
-  heal: 98,
-  refill: 97,
-  drain: 96,
-  overkill: 95,
-  linkDrain: 94,
-  linkOverkill: 93,
+  timerCleanup: 100,
+  heal: 99,
+  refill: 98,
+  drain: 97,
+  overkill: 96,
+  linkDrain: 95,
+  linkOverkill: 94,
+  /** Electric backlash lands on the hit that connects, so it resolves before a killing blow ends the fight. */
+  backlash: 93,
   poolEmpty: 92,
   revive: 90,
   fall: 89,
@@ -600,6 +602,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
 
   for (const a of enemyAttacks) attackVerbs(a)
   function attackVerbs(a: Attack) {
+    const pa = spec.backlash?.attack === a.id ? P.backlash : P.attack
     b.state(`incoming_${a.id}`, `${a.label} incoming`, 'attacks')
     // A knockback splits on Link's range when it lands; skip a range no delivering step can leave him at.
     const landsAt = new Set(spec.backlash?.attack === a.id ? ['near', 'far'] : spec.steps.filter((st) => st.attack === a.id).flatMap((st) => (st.move ?? st.range) ? [st.move ?? st.range!] : ['near', 'far']))
@@ -615,12 +618,12 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
         const burns = a.effect.kind === 'burn' && s.burnsOnFire
         const blockArcs: [ArcKind, string, number?][] = [inc, ['need', `guard_with_${s.gear}`], ...(burns ? ([['take', `has_${s.gear}`]] as [ArcKind, string][]) : [])]
         const label = `${a.label}: blocked by the ${s.gear.replace(/_/g, ' ')}${burns ? ', which burns' : ''}`
-        if (!a.onBlock) b.verb(`${a.id}_blocked_${s.gear}`, label, WORLD, 'attacks', P.attack, blockArcs)
+        if (!a.onBlock) b.verb(`${a.id}_blocked_${s.gear}`, label, WORLD, 'attacks', pa, blockArcs)
         else
           for (const from of new Set(spec.steps.filter((st) => st.attack === a.id).map((st) => st.to)))
-            b.verb(`${a.id}_blocked_${s.gear}__${from}`, label, WORLD, 'attacks', P.attack, [...blockArcs, ...move(from, a.onBlock.to)])
+            b.verb(`${a.id}_blocked_${s.gear}__${from}`, label, WORLD, 'attacks', pa, [...blockArcs, ...move(from, a.onBlock.to)])
       }
-    if (a.dodgeable) b.verb(`${a.id}_dodged`, `${a.label}: dodged`, WORLD, 'attacks', P.attack, [inc, ['need', 'link_dodge'], ...(a.blockable ? ([['unless', 'link_guard']] as [ArcKind, string][]) : [])])
+    if (a.dodgeable) b.verb(`${a.id}_dodged`, `${a.label}: dodged`, WORLD, 'attacks', pa, [inc, ['need', 'link_dodge'], ...(a.blockable ? ([['unless', 'link_guard']] as [ArcKind, string][]) : [])])
     if (statuses.has('nayru')) {
       const held: [ArcKind, string][] = [
         inc, ['need', 'status_nayru'],
@@ -629,9 +632,9 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       ]
       // Nayru's Love stops the damage, not the knockback (link.ts nayrus_love).
       if (a.effect.kind === 'knockback') {
-        if (landsAt.has('near')) b.verb(`${a.id}_nayru_near`, `${a.label}: Nayru's Love holds, Link is knocked back`, WORLD, 'attacks', P.attack, [...held, ['take', 'range_near'], ['give', 'range_far']])
-        if (landsAt.has('far')) b.verb(`${a.id}_nayru_far`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', P.attack, [...held, ['need', 'range_far']])
-      } else b.verb(`${a.id}_nayru`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', P.attack, held)
+        if (landsAt.has('near')) b.verb(`${a.id}_nayru_near`, `${a.label}: Nayru's Love holds, Link is knocked back`, WORLD, 'attacks', pa, [...held, ['take', 'range_near'], ['give', 'range_far']])
+        if (landsAt.has('far')) b.verb(`${a.id}_nayru_far`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', pa, [...held, ['need', 'range_far']])
+      } else b.verb(`${a.id}_nayru`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', pa, held)
     }
     const open: [ArcKind, string][] = [
       inc,
@@ -653,11 +656,11 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       const arcs: [ArcKind, string, number?][] = [...open, ...ddArcs, ['give', 'link_dmg', H(dmg)], ...effectArcs]
       if (st) arcs.push(['unless', `status_${st}`])
       if (knock) {
-        if (landsAt.has('near')) b.verb(`${a.id}_${suffix}_near`, `${a.label} hits Link, knocking him back`, WORLD, 'attacks', P.attack, [...arcs, ['take', 'range_near'], ['give', 'range_far']])
-        if (landsAt.has('far')) b.verb(`${a.id}_${suffix}_far`, `${a.label} hits Link`, WORLD, 'attacks', P.attack, [...arcs, ['need', 'range_far']])
-      } else b.verb(`${a.id}_${suffix}`, `${a.label} hits Link`, WORLD, 'attacks', P.attack, arcs)
+        if (landsAt.has('near')) b.verb(`${a.id}_${suffix}_near`, `${a.label} hits Link, knocking him back`, WORLD, 'attacks', pa, [...arcs, ['take', 'range_near'], ['give', 'range_far']])
+        if (landsAt.has('far')) b.verb(`${a.id}_${suffix}_far`, `${a.label} hits Link`, WORLD, 'attacks', pa, [...arcs, ['need', 'range_far']])
+      } else b.verb(`${a.id}_${suffix}`, `${a.label} hits Link`, WORLD, 'attacks', pa, arcs)
       if (st)
-        b.verb(`${a.id}_${suffix}_again`, `${a.label} hits Link again`, WORLD, 'attacks', P.attack, [...open, ...ddArcs, ['give', 'link_dmg', H(dmg)], ['need', `status_${st}`]])
+        b.verb(`${a.id}_${suffix}_again`, `${a.label} hits Link again`, WORLD, 'attacks', pa, [...open, ...ddArcs, ['give', 'link_dmg', H(dmg)], ['need', `status_${st}`]])
     }
     if (a.effect.kind === 'steal') {
       b.state(`steal_${a.id}`, `${a.label}: taking gear`, 'attacks')

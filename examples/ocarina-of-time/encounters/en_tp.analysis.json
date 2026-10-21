@@ -17,10 +17,7 @@
   "link_hurt_overkill",
   "shock_lands_again",
   "shock_lands_dd_again",
-  "backlash_nayru",
-  "backlash_lands",
   "backlash_lands_again",
-  "backlash_lands_dd",
   "backlash_lands_dd_again",
   "link_helpless_shock"
  ],
@@ -38,7 +35,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 5490
+   "ms": 1771
   },
   {
    "kit": "adult_blade",
@@ -52,7 +49,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 2184
+   "ms": 343
   },
   {
    "kit": "adult_bottles",
@@ -66,7 +63,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 4989
+   "ms": 3355
   },
   {
    "kit": "adult_dins",
@@ -80,7 +77,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 6791
+   "ms": 2194
   },
   {
    "kit": "adult_giant",
@@ -94,7 +91,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 6082
+   "ms": 2000
   },
   {
    "kit": "adult_lens",
@@ -108,7 +105,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 14917
+   "ms": 7318
   },
   {
    "kit": "adult_nayru",
@@ -122,7 +119,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 33708
+   "ms": 17365
   },
   {
    "kit": "adult_spin",
@@ -136,7 +133,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 25816
+   "ms": 9644
   },
   {
    "kit": "child_blade",
@@ -150,7 +147,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 1106
+   "ms": 323
   },
   {
    "kit": "child_bottles",
@@ -164,7 +161,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 4077
+   "ms": 839
   },
   {
    "kit": "child_dins",
@@ -178,7 +175,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 5393
+   "ms": 1800
   },
   {
    "kit": "child_lens",
@@ -192,7 +189,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 17051
+   "ms": 7055
   },
   {
    "kit": "child_nayru",
@@ -206,7 +203,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 24662
+   "ms": 15987
   },
   {
    "kit": "child_spin",
@@ -220,7 +217,7 @@
    },
    "stalls": 0,
    "livelocks": 0,
-   "ms": 17630
+   "ms": 9359
   }
  ]
 }

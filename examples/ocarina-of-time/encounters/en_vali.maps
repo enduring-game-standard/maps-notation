@@ -118,15 +118,15 @@ state tick_shock "Beat ends: shock checked" in beat at 580 360
 state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state lens_count "The Lens: beats toward the next cost" in beat at 580 570
 
-verb electrify_timer_clears "Bari crackles after stinging Link is over" by world priority 99 in enemy at 2180 220
+verb electrify_timer_clears "Bari crackles after stinging Link is over" by world priority 100 in enemy at 2180 220
   take timer_electrify
   unless phase_electrify
 
-verb electrify_slashed_timer_clears "Bari crackles after a sword hit, shocking Link is over" by world priority 99 in enemy at 2040 360
+verb electrify_slashed_timer_clears "Bari crackles after a sword hit, shocking Link is over" by world priority 100 in enemy at 2040 360
   take timer_electrify_slashed
   unless phase_electrify_slashed
 
-verb stunned_timer_clears "Bari is stunned (its body no longer shocks) is over" by world priority 99 in enemy at 2040 570
+verb stunned_timer_clears "Bari is stunned (its body no longer shocks) is over" by world priority 100 in enemy at 2040 570
   take timer_stunned
   unless phase_stunned
 
@@ -355,30 +355,30 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
@@ -394,11 +394,11 @@ verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
   unless has_fairy
   give link_falls
 
-verb body_hurt "Bari loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Bari loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Bari has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Bari has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -1706,7 +1706,7 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 580 710
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 780
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 780
   take lens_count
   unless lens_on
 

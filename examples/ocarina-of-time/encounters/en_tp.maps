@@ -123,35 +123,35 @@ state tick_shock "Beat ends: shock checked" in beat at 580 360
 state tick_nayru "Beat ends: nayru checked" in beat at 440 430
 state lens_count "The Lens: beats toward the next cost" in beat at 580 570
 
-verb wait_rising_timer_clears "Tailpasaran rises out of the floor is over" by world priority 99 in enemy at 2180 150
+verb wait_rising_timer_clears "Tailpasaran rises out of the floor is over" by world priority 100 in enemy at 2180 150
   take timer_wait_rising
   unless phase_wait_rising
 
-verb hover_timer_clears "Tailpasaran hovers above Link is over" by world priority 99 in enemy at 2040 290
+verb hover_timer_clears "Tailpasaran hovers above Link is over" by world priority 100 in enemy at 2040 290
   take timer_hover
   unless phase_hover
 
-verb attack_timer_clears "Tailpasaran swoops at Link is over" by world priority 99 in enemy at 2180 360
+verb attack_timer_clears "Tailpasaran swoops at Link is over" by world priority 100 in enemy at 2180 360
   take timer_attack
   unless phase_attack
 
-verb sink_rise_timer_clears "Tailpasaran rises back under its home is over" by world priority 99 in enemy at 2180 500
+verb sink_rise_timer_clears "Tailpasaran rises back under its home is over" by world priority 100 in enemy at 2180 500
   take timer_sink_rise
   unless phase_sink_rise
 
-verb stunned_wait_rising_timer_clears "Tailpasaran is frozen while rising is over" by world priority 99 in enemy at 2040 640
+verb stunned_wait_rising_timer_clears "Tailpasaran is frozen while rising is over" by world priority 100 in enemy at 2040 640
   take timer_stunned_wait_rising
   unless phase_stunned_wait_rising
 
-verb stunned_hover_timer_clears "Tailpasaran is frozen while hovering is over" by world priority 99 in enemy at 2180 710
+verb stunned_hover_timer_clears "Tailpasaran is frozen while hovering is over" by world priority 100 in enemy at 2180 710
   take timer_stunned_hover
   unless phase_stunned_hover
 
-verb stunned_attack_timer_clears "Tailpasaran is frozen while attacking is over" by world priority 99 in enemy at 2040 850
+verb stunned_attack_timer_clears "Tailpasaran is frozen while attacking is over" by world priority 100 in enemy at 2040 850
   take timer_stunned_attack
   unless phase_stunned_attack
 
-verb stunned_sink_plunge_timer_clears "Tailpasaran is frozen while diving is over" by world priority 99 in enemy at 2180 920
+verb stunned_sink_plunge_timer_clears "Tailpasaran is frozen while diving is over" by world priority 100 in enemy at 2180 920
   take timer_stunned_sink_plunge
   unless phase_stunned_sink_plunge
 
@@ -380,30 +380,30 @@ verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link
   give range_far
   give link_turn
 
-verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
   take link_heal
   take link_missing
   give link_hp
 
-verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
   take link_heal
   unless link_missing
 
-verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
   take magic_refill
   take magic_spent
   give magic
 
-verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
   take magic_refill
   unless magic_spent
 
-verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
   take link_dmg
   take link_hp
   give link_missing
 
-verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
   take link_dmg
   unless link_hp
 
@@ -419,11 +419,11 @@ verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
   unless has_fairy
   give link_falls
 
-verb body_hurt "Tailpasaran body segment loses health" by world priority 96 in enemy_health at 2500 150
+verb body_hurt "Tailpasaran body segment loses health" by world priority 97 in enemy_health at 2500 150
   take dmg_body
   take hp_body
 
-verb body_overkill "Tailpasaran body segment has no health left to lose" by world priority 95 in enemy_health at 2360 220
+verb body_overkill "Tailpasaran body segment has no health left to lose" by world priority 96 in enemy_health at 2360 220
   take dmg_body
   unless hp_body
 
@@ -1710,11 +1710,11 @@ verb shock_lands_dd_again "Tailpasaran shock hits Link again" by world priority 
   give link_dmg
   need status_shock
 
-verb backlash_nayru "Tailpasaran electric backlash: Nayru's Love holds" by world priority 60 in attacks at 3460 430
+verb backlash_nayru "Tailpasaran electric backlash: Nayru's Love holds" by world priority 93 in attacks at 3460 430
   take incoming_backlash
   need status_nayru
 
-verb backlash_lands "Tailpasaran electric backlash hits Link" by world priority 60 in attacks at 3320 500
+verb backlash_lands "Tailpasaran electric backlash hits Link" by world priority 93 in attacks at 3320 500
   take incoming_backlash
   unless status_nayru
   unless has_double_defense
@@ -1722,14 +1722,14 @@ verb backlash_lands "Tailpasaran electric backlash hits Link" by world priority 
   give status_shock
   unless status_shock
 
-verb backlash_lands_again "Tailpasaran electric backlash hits Link again" by world priority 60 in attacks at 3460 500
+verb backlash_lands_again "Tailpasaran electric backlash hits Link again" by world priority 93 in attacks at 3460 500
   take incoming_backlash
   unless status_nayru
   unless has_double_defense
   give 2 link_dmg
   need status_shock
 
-verb backlash_lands_dd "Tailpasaran electric backlash hits Link" by world priority 60 in attacks at 3320 570
+verb backlash_lands_dd "Tailpasaran electric backlash hits Link" by world priority 93 in attacks at 3320 570
   take incoming_backlash
   unless status_nayru
   need has_double_defense
@@ -1737,7 +1737,7 @@ verb backlash_lands_dd "Tailpasaran electric backlash hits Link" by world priori
   give status_shock
   unless status_shock
 
-verb backlash_lands_dd_again "Tailpasaran electric backlash hits Link again" by world priority 60 in attacks at 3460 570
+verb backlash_lands_dd_again "Tailpasaran electric backlash hits Link again" by world priority 93 in attacks at 3460 570
   take incoming_backlash
   unless status_nayru
   need has_double_defense
@@ -1812,7 +1812,7 @@ verb lens_idle "The Lens is off" by world priority 46 in beat at 580 710
   unless lens_on
   give link_turn
 
-verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 780
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 780
   take lens_count
   unless lens_on
 
