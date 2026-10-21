@@ -203,9 +203,16 @@ export interface Reaction {
 export interface Pool {
   id: string
   label: string
-  hp: Cited<number>
+  /**
+   * `cite` is an extracted health value. `ops` are later extracted `health *=`, `+=` or `-=` lines, applied in order,
+   * and `value` is the result. `fromLinkHealth` is health set from Link's own health capacity shifted right, so it
+   * depends on the kit's hearts; `value` is then ignored.
+   */
+  hp: Cited<number> & { ops?: Cite[]; fromLinkHealth?: { shift: number } }
   /** Where the enemy goes when the pool empties: another phase, or defeat. */
   then: string | 'defeated'
+  /** When health first drops to `at` or below, the enemy goes to `to` (a phase, a map from phase to phase, or defeat). */
+  thresholds?: { at: number; to: string | Record<string, string>; cite: Cite }[]
 }
 
 export interface ActorSpec {

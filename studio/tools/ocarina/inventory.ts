@@ -79,6 +79,12 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       actor.health.push({ value: num(m[2]), via: m[1], file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/colChkInfo\.health\s*=\s*(-?(?:0x)?[0-9A-Fa-f]+)\s*;/g))
       actor.health.push({ value: num(m[1]), via: 'assignment', file: rel, line: lineOf(src, m.index!) })
+    for (const m of src.matchAll(/this->health\s*=\s*((?:0x)?[0-9A-Fa-f]+)\s*;/g))
+      actor.health.push({ value: num(m[1]), via: 'field', file: rel, line: lineOf(src, m.index!) })
+    for (const m of src.matchAll(/colChkInfo\.health\s*([*+-])=\s*(-?(?:0x)?[0-9A-Fa-f]+)\s*;/g))
+      actor.health.push({ value: num(m[2]), via: `${m[1]}=`, file: rel, line: lineOf(src, m.index!) })
+    for (const m of src.matchAll(/colChkInfo\.health\s*=\s*[\w.]*healthCapacity\s*>>\s*(\d+)\s*;/g))
+      actor.health.push({ value: num(m[1]), via: 'healthCapacity>>', file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/\{\s*(ELEM_MATERIAL_\w+),\s*\{\s*([^,]+),\s*(HIT_SPECIAL_EFFECT_\w+|[\w]+),\s*([^}]+)\},\s*\{\s*([^,]+),\s*[^,]+,\s*[^}]+\},\s*([^,]+),\s*([^,]+),/g))
       actor.elements.push({
         file: rel, line: lineOf(src, m.index! + m[0].indexOf(m[2])),

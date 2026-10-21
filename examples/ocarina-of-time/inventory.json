@@ -805,7 +805,20 @@
     "AT_TYPE_ENEMY collider"
    ],
    "damageTables": [],
-   "health": [],
+   "health": [
+    {
+     "value": 12,
+     "via": "field",
+     "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo.c",
+     "line": 231
+    },
+    {
+     "value": 1,
+     "via": "field",
+     "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo.c",
+     "line": 595
+    }
+   ],
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Dodongo/z_boss_dodongo_data.inc.c",
@@ -1035,6 +1048,18 @@
      "via": "assignment",
      "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd.c",
      "line": 1308
+    },
+    {
+     "value": 2,
+     "via": "-=",
+     "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd.c",
+     "line": 1303
+    },
+    {
+     "value": 2,
+     "via": "-=",
+     "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd.c",
+     "line": 1305
     }
    ],
    "elements": [
@@ -1263,6 +1288,12 @@
      "via": "assignment",
      "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2.c",
      "line": 904
+    },
+    {
+     "value": 2,
+     "via": "-=",
+     "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2.c",
+     "line": 857
     }
    ],
    "elements": [
@@ -1477,6 +1508,12 @@
      "via": "assignment",
      "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
      "line": 2298
+    },
+    {
+     "value": 2,
+     "via": "-=",
+     "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
+     "line": 2256
     }
    ],
    "elements": [
@@ -1701,6 +1738,12 @@
      "via": "assignment",
      "file": "src/overlays/actors/ovl_Boss_Ganondrof/z_boss_ganondrof.c",
      "line": 310
+    },
+    {
+     "value": 2,
+     "via": "-=",
+     "file": "src/overlays/actors/ovl_Boss_Ganondrof/z_boss_ganondrof.c",
+     "line": 1302
     }
    ],
    "elements": [
@@ -8754,6 +8797,12 @@
      "via": "assignment",
      "file": "src/overlays/actors/ovl_En_Fw/z_en_fw.c",
      "line": 167
+    },
+    {
+     "value": 8,
+     "via": "-=",
+     "file": "src/overlays/actors/ovl_En_Fw/z_en_fw.c",
+     "line": 169
     }
    ],
    "elements": [
@@ -10299,6 +10348,12 @@
      "via": "assignment",
      "file": "src/overlays/actors/ovl_En_Ik/z_en_ik.c",
      "line": 240
+    },
+    {
+     "value": 20,
+     "via": "+=",
+     "file": "src/overlays/actors/ovl_En_Ik/z_en_ik.c",
+     "line": 246
     }
    ],
    "elements": [
@@ -14910,6 +14965,12 @@
      "via": "D_80B0F074",
      "file": "src/overlays/actors/ovl_En_Sw/z_en_sw.c",
      "line": 80
+    },
+    {
+     "value": 2,
+     "via": "*=",
+     "file": "src/overlays/actors/ovl_En_Sw/z_en_sw.c",
+     "line": 319
     }
    ],
    "elements": [
@@ -15604,7 +15665,14 @@
      ]
     }
    ],
-   "health": [],
+   "health": [
+    {
+     "value": 3,
+     "via": "healthCapacity>>",
+     "file": "src/overlays/actors/ovl_En_Torch2/z_en_torch2.c",
+     "line": 135
+    }
+   ],
    "elements": [],
    "runtimeAt": [
     {

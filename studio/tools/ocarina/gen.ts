@@ -10,6 +10,7 @@ import {
   type LinkAttack,
   type LinkSpec,
   type Loadout,
+  type Pool,
   type Phase,
   type Rate,
   type Step,
@@ -174,6 +175,24 @@ export const hitRule = (spec: ActorSpec, inv: Actor | undefined, phase: Phase, a
   }
 }
 
+/**
+ * A pool's health as stacked segments, top first: the health above the highest threshold, then each band down to the
+ * next. Damage drains the top segment first, so "the top segments are empty" is "health is at or below that threshold".
+ */
+export const poolSegments = (pool: Pool) => {
+  const ats = [...new Set((pool.thresholds ?? []).map((t) => t.at))].sort((a, b) => b - a)
+  if (pool.hp.fromLinkHealth && ats.length) throw new Error(`pool ${pool.id}: thresholds on health set from Link's are not supported`)
+  const bounds = [pool.hp.value, ...ats, 0]
+  return bounds.slice(0, -1).map((hi, k) => ({
+    id: k ? `hp_${pool.id}_${ats[k - 1]}` : `hp_${pool.id}`,
+    label: k ? `${pool.label}: health up to ${ats[k - 1]}` : `${pool.label}: health`,
+    below: k ? ats[k - 1] : undefined,
+    marks: hi - bounds[k + 1],
+  }))
+}
+/** A pool's starting health; for health set from Link's capacity, `linkHealth` is the kit's health in units. */
+export const poolStart = (pool: Pool, linkHealth: number) => (pool.hp.fromLinkHealth ? linkHealth >> pool.hp.fromLinkHealth.shift : pool.hp.value)
+
 export const NOTHING = 'nothing'
 interface Effect_ {
   sig: string
@@ -248,7 +267,10 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   if (spec.damage.kind === 'custom') for (const [d, e] of Object.entries(spec.damage.entries)) if (e?.to) needPhase(e.to, `custom ${d}`)
   for (const p of spec.phases) for (const [d, o] of Object.entries(p.overrides ?? {})) if (o?.to) needPhase(o.to, `override ${p.id} ${d}`)
   for (const v of spec.variants ?? []) needPhase(v.start, `variant ${v.id}`)
-  for (const p of spec.pools) needPhase(p.then, `pool ${p.id}`)
+  for (const p of spec.pools) {
+    needPhase(p.then, `pool ${p.id}`)
+    for (const t of p.thresholds ?? []) for (const to of typeof t.to === 'string' ? [t.to] : Object.values(t.to)) needPhase(to, `pool ${p.id} threshold ${t.at}`)
+  }
 
   const gearAll = new Set(spec.loadouts.flatMap((lo) => lo.gear))
   const has = (g: Gear) => gearAll.has(g)
@@ -334,7 +356,9 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
     }
   }
   for (const pool of spec.pools) {
-    b.state(`hp_${pool.id}`, `${pool.label}: health`, 'enemy_health', { marks: pool.hp.value })
+    const segs = poolSegments(pool)
+    for (const sg of segs) b.state(sg.id, sg.label, 'enemy_health', { marks: pool.hp.fromLinkHealth ? 0 : sg.marks })
+    for (const t of pool.thresholds ?? []) b.state(`above_${pool.id}_${t.at}`, `${pool.label}: above ${t.at}`, 'enemy_health', { marks: 1 })
     b.state(`alive_${pool.id}`, `${pool.label}: standing`, 'enemy_health', { marks: 1 })
     b.state(`dmg_${pool.id}`, `${pool.label}: damage`, 'enemy_health')
   }
@@ -356,6 +380,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       ['give', 'in_fight'],
       ...lo.gear.map((g): [ArcKind, string] => ['give', `has_${g}`]),
       ...(hasMagic && lo.gear.includes('magic') ? magicArcs(lo) : []),
+      ...spec.pools.flatMap((pool): [ArcKind, string, number][] => (pool.hp.fromLinkHealth ? [['give', `hp_${pool.id}`, poolStart(pool, hp)]] : [])),
       ...startArcs(),
     ])
   }
@@ -389,8 +414,13 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   b.verb('link_fell', 'Link falls', WORLD, 'outcomes', P.fall, [['need', 'in_fight'], ['unless', 'link_hp'], ...(has('fairy') ? ([['unless', 'has_fairy']] as [ArcKind, string][]) : []), ['give', 'link_falls']])
 
   for (const pool of spec.pools) {
-    b.verb(`${pool.id}_hurt`, `${pool.label} loses health`, WORLD, 'enemy_health', P.drain, [['take', `dmg_${pool.id}`], ['take', `hp_${pool.id}`]])
-    b.verb(`${pool.id}_overkill`, `${pool.label} has no health left to lose`, WORLD, 'enemy_health', P.overkill, [['take', `dmg_${pool.id}`], ['unless', `hp_${pool.id}`]])
+    const segs = poolSegments(pool)
+    segs.forEach((sg, k) =>
+      b.verb(`${pool.id}_hurt${k ? `_${sg.below}` : ''}`, `${pool.label} loses health${k ? ` (${sg.below} or less)` : ''}`, WORLD, 'enemy_health', P.drain, [
+        ['take', `dmg_${pool.id}`], ['take', sg.id], ...segs.slice(0, k).map((u): [ArcKind, string] => ['unless', u.id]),
+      ]),
+    )
+    b.verb(`${pool.id}_overkill`, `${pool.label} has no health left to lose`, WORLD, 'enemy_health', P.overkill, [['take', `dmg_${pool.id}`], ...segs.map((u): [ArcKind, string] => ['unless', u.id])])
   }
 
   const spend = (n: number): [ArcKind, string, number?][] => (n && hasMagic ? [['take', 'magic', M(n)], ['give', 'magic_spent', M(n)]] : [])
@@ -463,8 +493,21 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   for (const pool of spec.pools)
     for (const p of spec.phases.filter((x) => emptyAt.get(pool.id)!.has(x.id)))
       b.verb(`${pool.id}_empty_in_${p.id}`, `${pool.label} runs out (${p.label})`, WORLD, 'enemy_health', P.poolEmpty, [
-        ['unless', `hp_${pool.id}`], ['take', `alive_${pool.id}`], ...move(p.id, pool.then),
+        ...poolSegments(pool).map((u): [ArcKind, string] => ['unless', u.id]), ['take', `alive_${pool.id}`], ...move(p.id, pool.then),
       ])
+  for (const pool of spec.pools) {
+    const segs = poolSegments(pool)
+    for (const t of pool.thresholds ?? []) {
+      const above = segs.slice(0, segs.findIndex((sg) => sg.below === t.at))
+      for (const p of spec.phases.filter((x) => emptyAt.get(pool.id)!.has(x.id))) {
+        const to = typeof t.to === 'string' ? t.to : t.to[p.id]
+        if (!to) continue
+        b.verb(`${pool.id}_falls_to_${t.at}_in_${p.id}`, `${pool.label} drops to ${t.at} (${p.label})`, WORLD, 'enemy_health', P.poolEmpty - 1, [
+          ['take', `above_${pool.id}_${t.at}`], ['need', `alive_${pool.id}`], ...above.map((u): [ArcKind, string] => ['unless', u.id]), ...move(p.id, to),
+        ])
+      }
+    }
+  }
 
   const shields = link.shields.filter((s) => has(s.gear))
   for (const s of shields) b.state(`guard_with_${s.gear}`, `Shield up: ${s.gear.replace(/_/g, ' ')}`, 'link_state')
@@ -555,12 +598,18 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
             b.verb(`${a.id}_blocked_${s.gear}__${from}`, label, WORLD, 'attacks', P.attack, [...blockArcs, ...move(from, a.onBlock.to)])
       }
     if (a.dodgeable) b.verb(`${a.id}_dodged`, `${a.label}: dodged`, WORLD, 'attacks', P.attack, [inc, ['need', 'link_dodge'], ...(a.blockable ? ([['unless', 'link_guard']] as [ArcKind, string][]) : [])])
-    if (statuses.has('nayru'))
-      b.verb(`${a.id}_nayru`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', P.attack, [
+    if (statuses.has('nayru')) {
+      const held: [ArcKind, string][] = [
         inc, ['need', 'status_nayru'],
         ...(a.blockable ? ([['unless', 'link_guard']] as [ArcKind, string][]) : []),
         ...(a.dodgeable ? ([['unless', 'link_dodge']] as [ArcKind, string][]) : []),
-      ])
+      ]
+      // Nayru's Love stops the damage, not the knockback (link.ts nayrus_love).
+      if (a.effect.kind === 'knockback') {
+        b.verb(`${a.id}_nayru_near`, `${a.label}: Nayru's Love holds, Link is knocked back`, WORLD, 'attacks', P.attack, [...held, ['take', 'range_near'], ['give', 'range_far']])
+        b.verb(`${a.id}_nayru_far`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', P.attack, [...held, ['need', 'range_far']])
+      } else b.verb(`${a.id}_nayru`, `${a.label}: Nayru's Love holds`, WORLD, 'attacks', P.attack, held)
+    }
     const open: [ArcKind, string][] = [
       inc,
       ...(a.blockable ? ([['unless', 'link_guard']] as [ArcKind, string][]) : []),

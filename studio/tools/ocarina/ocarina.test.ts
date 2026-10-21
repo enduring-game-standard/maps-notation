@@ -5,7 +5,7 @@ import type { Marking } from '../../src/core/model'
 import { parse, print } from '../../src/core/text'
 import { encounterFile, loadInventory, modeled, OUT } from './build'
 import { link } from './data/link'
-import { doubleDefense, encounter, linkAttacks, swingKey } from './gen'
+import { doubleDefense, encounter, linkAttacks, poolSegments, poolStart, swingKey } from './gen'
 import { DMG_TYPES } from './inventory'
 import type { ActorSpec } from './spec'
 
@@ -30,6 +30,8 @@ for (const spec of modeled()) {
   describe(`${spec.name} (${spec.overlay})`, () => {
     const { net, c, unit } = load(spec)
     const has = (id: string) => net.states.some((s) => s.id === id)
+    /** Starting health, in the first kit for health set from Link's capacity. */
+    const start = (q: ActorSpec['pools'][number]) => poolStart(q, spec.loadouts[0].hearts * link.healthPerHeart.value)
 
     it('the encounter file is what the generator makes from the spec', () => {
       expect(readFileSync(new URL(`encounters/${encounterFile(spec.overlay)}`, OUT), 'utf8')).toBe(print(encounter(spec, link, inventory).net))
@@ -47,18 +49,22 @@ for (const spec of modeled()) {
           const d = net.arcs.find((a) => a.verb === vid && a.kind === 'give' && a.state === `dmg_${pool.id}`)?.count ?? 0
           if (!d) continue
           const fromDecomp = p.overrides?.[attack.dmg] || p.hittable ? undefined : decompDamage(spec, p, attack.dmg)
-          it(`${key} in ${p.id}: ${Math.ceil(pool.hp.value / d)} hits empty ${pool.id} (${pool.hp.value} hp, ${d} each)`, () => {
+          // A threshold that moves the enemy out of this phase ends the run of hits early, so only unbroken pools are replayed.
+          if (pool.thresholds?.length) continue
+          it(`${key} in ${p.id}: ${Math.ceil(start(pool) / d)} hits empty ${pool.id} (${start(pool)} hp, ${d} each)`, () => {
             if (fromDecomp !== undefined) expect(d).toBe(fromDecomp)
             const base: Marking = Object.fromEntries(net.states.map((s) => [s.id, 0]))
             for (const q of spec.pools) {
-              base[`hp_${q.id}`] = q.hp.value
+              for (const sg of poolSegments(q)) base[sg.id] = q.hp.fromLinkHealth ? 0 : sg.marks
+              if (q.hp.fromLinkHealth) base[`hp_${q.id}`] = start(q)
+              for (const t of q.thresholds ?? []) base[`above_${q.id}_${t.at}`] = 1
               base[`alive_${q.id}`] = 1
             }
             base.in_fight = 1
             base.link_hp = 1
             base.range_near = 1
             let m: Marking = { ...base, [`phase_${p.id}`]: 1 }
-            const need = Math.ceil(pool.hp.value / d)
+            const need = Math.ceil(start(pool) / d)
             for (let i = 1; i <= need; i++) {
               for (const ph of spec.phases) m[`phase_${ph.id}`] = ph.id === p.id ? 1 : 0
               m = quiet(c, { ...m, [`swing_${key}`]: 1 })
@@ -89,7 +95,7 @@ for (const spec of modeled()) {
           const base: Marking = Object.fromEntries(net.states.map((st) => [st.id, 0]))
           const age = r.ages?.[0] ?? spec.loadouts[0].age
           const m0: Marking = { ...base, in_fight: 1, range_far: 1, link_hp: 10, link_guard: 1, [`age_${age}`]: 1, [`guard_with_${r.gear}`]: 1, [`has_${r.gear}`]: 1, [`incoming_${a.id}`]: 1, [`phase_${spec.start}`]: 1 }
-          for (const q of spec.pools) Object.assign(m0, { [`hp_${q.id}`]: q.hp.value, [`alive_${q.id}`]: 1 })
+          for (const q of spec.pools) Object.assign(m0, { [`hp_${q.id}`]: start(q), [`alive_${q.id}`]: 1 })
           const m = quiet(c, m0)
           expect(m.link_hp).toBe(10)
           expect(m[`swing_reflect_${a.id}`]).toBe(0)

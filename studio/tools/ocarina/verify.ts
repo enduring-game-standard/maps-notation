@@ -6,7 +6,7 @@ import type { Net } from '../../src/core/model'
 import { parse, print } from '../../src/core/text'
 import { dispositions, encounterFile, modeled, OUT } from './build'
 import { link } from './data/link'
-import { doubleDefense, encounter, linkAttacks, swingKey } from './gen'
+import { doubleDefense, encounter, linkAttacks, poolSegments, poolStart, swingKey } from './gen'
 import { atlas, ATLAS } from './atlas'
 import { buildLedger, checkLedger, CONTRACT_GEAR, FIELD_GEAR, HIT_SPECIAL_EFFECTS } from './ledger'
 import { analyzeFile } from './slice'
@@ -124,10 +124,26 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net, inv: Inventory) => 
   const gives = (verb: string, state: string) => net.arcs.find((a) => a.verb === verb && a.kind === 'give' && a.state === state)?.count ?? 0
   const unit = Number(/1 mark = (\d+)\//.exec(net.states.find((s) => s.id === 'link_hp')!.label)![1])
   for (const pool of spec.pools) {
-    const h = ia.health.find((x) => `${x.file}:${x.line}` === pool.hp.cite)
+    const at = (c: string) => ia.health.find((x) => `${x.file}:${x.line}` === c)
+    const h = at(pool.hp.cite)
     if (!h) fail('V3', `${spec.overlay}: pool ${pool.id} cites ${pool.hp.cite}, which is not an extracted health value`)
-    else if (h.value !== pool.hp.value) fail('V3', `${spec.overlay}: pool ${pool.id} hp ${pool.hp.value} but decomp says ${h.value}`)
-    if (net.states.find((s) => s.id === `hp_${pool.id}`)?.marks !== pool.hp.value) fail('V3', `${spec.overlay}: generated hp_${pool.id} does not start at ${pool.hp.value}`)
+    else if (pool.hp.fromLinkHealth) {
+      if (h.via !== 'healthCapacity>>' || h.value !== pool.hp.fromLinkHealth.shift) fail('V3', `${spec.overlay}: pool ${pool.id} health is not Link's capacity >> ${pool.hp.fromLinkHealth.shift} at ${pool.hp.cite}`)
+      for (const lo of spec.loadouts) {
+        const want = poolStart(pool, lo.hearts * link.healthPerHeart.value)
+        if (gives(`fight_${lo.id}`, `hp_${pool.id}`) !== want) fail('V3', `${spec.overlay}: kit ${lo.id} does not give ${pool.id} ${want} health`)
+      }
+    } else {
+      let v = h.value
+      for (const c of pool.hp.ops ?? []) {
+        const op = at(c)
+        if (!op || !/^[*+-]=$/.test(op.via)) fail('V3', `${spec.overlay}: pool ${pool.id} op ${c} is not an extracted health change`)
+        else v = op.via === '*=' ? v * op.value : op.via === '+=' ? v + op.value : v - op.value
+      }
+      if (v !== pool.hp.value) fail('V3', `${spec.overlay}: pool ${pool.id} hp ${pool.hp.value} but decomp says ${v}`)
+      const start = poolSegments(pool).reduce((n, sg) => n + (net.states.find((st) => st.id === sg.id)?.marks ?? -1e9), 0)
+      if (start !== pool.hp.value) fail('V3', `${spec.overlay}: generated health of ${pool.id} does not start at ${pool.hp.value}`)
+    }
   }
   if (spec.damage.kind === 'decomp') {
     const { reactions } = spec.damage
