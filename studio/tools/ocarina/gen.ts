@@ -567,6 +567,10 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       if (has(g.gear)) gearArcs.push([g.has ? 'need' : 'unless', `has_${g.gear}`])
     }
     base.push(...gearArcs)
+    if (s.age) {
+      if (!ages.includes(s.age)) return
+      if (ages.length > 1) base.push(['need', `age_${s.age}`])
+    }
     const id = `${s.from}_step_${i + 1}`
     const ranges: ('near' | 'far' | undefined)[] = s.range ? [s.range] : s.move ? ['near', 'far'] : [undefined]
     for (const r of ranges) {
@@ -642,9 +646,9 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
       b.state(`steal_${a.id}`, `${a.label}: taking gear`, 'attacks')
       const order = a.effect.gear.filter(has)
       order.forEach((g, i) =>
-        b.verb(`${a.id}_takes_${g}`, `${a.label} takes the ${g.replace(/_/g, ' ')}`, WORLD, 'attacks', P.steal + order.length - i, [['take', `steal_${a.id}`], ['take', `has_${g}`]]),
+        b.verb(`${a.id}_takes_${g}`, `${a.label} takes the ${g.replace(/_/g, ' ')}`, WORLD, 'attacks', P.steal + order.length - i, [['need', `steal_${a.id}`], ['take', `has_${g}`]]),
       )
-      b.verb(`${a.id}_takes_nothing`, `${a.label} finds nothing to take`, WORLD, 'attacks', P.steal, [['take', `steal_${a.id}`], ...order.map((g): [ArcKind, string] => ['unless', `has_${g}`])])
+      b.verb(`${a.id}_lets_go`, `${a.label} lets go`, WORLD, 'attacks', P.steal, [['take', `steal_${a.id}`]])
     }
     if (a.effect.kind === 'grab' && a.effect.release === 'carried_off') {
       b.state(`carried_${a.id}`, `${a.label}: Link held`, 'attacks')

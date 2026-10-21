@@ -79,6 +79,10 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       actor.health.push({ value: num(m[2]), via: m[1], file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/colChkInfo\.health\s*=\s*(-?(?:0x)?[0-9A-Fa-f]+)\s*;/g))
       actor.health.push({ value: num(m[1]), via: 'assignment', file: rel, line: lineOf(src, m.index!) })
+    for (const m of src.matchAll(/colChkInfo\.health\s*=\s*LINK_IS_ADULT\s*\?\s*((?:0x)?[0-9A-Fa-f]+)\s*:\s*((?:0x)?[0-9A-Fa-f]+)\s*;/g)) {
+      actor.health.push({ value: num(m[1]), via: 'adult', file: rel, line: lineOf(src, m.index!) })
+      actor.health.push({ value: num(m[2]), via: 'child', file: rel, line: lineOf(src, m.index!) })
+    }
     for (const m of src.matchAll(/\bs\w*HP\s*([*+-]?)=\s*((?:0x)?[0-9A-Fa-f]+)\s*;/g))
       actor.health.push({ value: num(m[2]), via: m[1] ? `${m[1]}=` : 'static', file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/this->health\s*=\s*((?:0x)?[0-9A-Fa-f]+)\s*;/g))
@@ -100,6 +104,7 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
     for (const m of src.matchAll(/\bactionFunc\s*=\s*(\w+)\s*;/gi)) funcs.add(m[1])
     for (const m of src.matchAll(/\w+_SetupAction\(\s*this\s*,\s*(\w+)\s*\)/g)) funcs.add(m[1])
     if (/AT_ON\s*\|\s*AT_TYPE_ENEMY|AT_TYPE_ENEMY\s*\|\s*AT_ON/.test(src)) actor.inScopeBecause.push('AT_TYPE_ENEMY collider')
+    if (/AT_ON\s*\|\s*AT_TYPE_ALL|AT_TYPE_ALL\s*\|\s*AT_ON/.test(src)) actor.inScopeBecause.push('AT_TYPE_ALL collider')
     if (actor.directHurt.some((h) => h.file === rel)) actor.inScopeBecause.push('hurts Link directly')
   }
   actor.actionFuncs = [...funcs].filter((f) => f !== 'NULL').sort()

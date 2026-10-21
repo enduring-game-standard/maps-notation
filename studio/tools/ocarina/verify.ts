@@ -128,7 +128,8 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net, inv: Inventory) => 
   const unit = Number(/1 mark = (\d+)\//.exec(net.states.find((s) => s.id === 'link_hp')!.label)![1])
   for (const pool of spec.pools) {
     const at = (c: string) => ia.health.find((x) => `${x.file}:${x.line}` === c)
-    const h = at(pool.hp.cite)
+    // A line can set two values (LINK_IS_ADULT ? a : b); prefer the one the pool claims.
+    const h = ia.health.find((x) => `${x.file}:${x.line}` === pool.hp.cite && x.value === pool.hp.value) ?? at(pool.hp.cite)
     if (!h) fail('V3', `${spec.overlay}: pool ${pool.id} cites ${pool.hp.cite}, which is not an extracted health value`)
     else if (pool.hp.fromLinkHealth) {
       if (h.via !== 'healthCapacity>>' || h.value !== pool.hp.fromLinkHealth.shift) fail('V3', `${spec.overlay}: pool ${pool.id} health is not Link's capacity >> ${pool.hp.fromLinkHealth.shift} at ${pool.hp.cite}`)

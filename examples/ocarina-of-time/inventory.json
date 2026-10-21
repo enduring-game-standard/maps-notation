@@ -2669,6 +2669,7 @@
    "inScopeBecause": [
     "ACTORCAT_BOSS",
     "AT_TYPE_ENEMY collider",
+    "AT_TYPE_ALL collider",
     "hurts Link directly"
    ],
    "damageTables": [],
@@ -4517,6 +4518,91 @@
     "EnBili_SlingshotKnockback",
     "EnBili_SpawnedByBari",
     "EnBili_Stunned"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Bom",
+   "category": "ACTORCAT_EXPLOSIVE",
+   "inScopeBecause": [
+    "AT_TYPE_ALL collider"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Bom/z_en_bom.c",
+     "line": 59,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 260136,
+     "atOn": false,
+     "acOn": true
+    },
+    {
+     "file": "src/overlays/actors/ovl_En_Bom/z_en_bom.c",
+     "line": 72,
+     "atFlags": 8,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 8,
+     "acFlags": 0,
+     "atOn": true,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [
+    {
+     "text": "this->explosionColliderElements[0].base.atDmgInfo.damage += (thisx->shape.rot.z & 0xFF00) >> 8;",
+     "file": "src/overlays/actors/ovl_En_Bom/z_en_bom.c",
+     "line": 119
+    }
+   ],
+   "directHurt": [],
+   "actionFuncs": [
+    "EnBom_Explode",
+    "EnBom_Move",
+    "EnBom_WaitForRelease",
+    "actionFunc"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Bombf",
+   "category": "ACTORCAT_PROP",
+   "inScopeBecause": [
+    "AT_TYPE_ALL collider"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Bombf/z_en_bombf.c",
+     "line": 62,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 260136,
+     "atOn": false,
+     "acOn": true
+    },
+    {
+     "file": "src/overlays/actors/ovl_En_Bombf/z_en_bombf.c",
+     "line": 75,
+     "atFlags": 8,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 8,
+     "acFlags": 0,
+     "atOn": true,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [],
+   "actionFuncs": [
+    "EnBombf_Explode",
+    "EnBombf_GrowBomb",
+    "EnBombf_Move",
+    "EnBombf_WaitForRelease",
+    "actionFunc"
    ]
   },
   {
@@ -6464,7 +6550,20 @@
      ]
     }
    ],
-   "health": [],
+   "health": [
+    {
+     "value": 14,
+     "via": "adult",
+     "file": "src/overlays/actors/ovl_En_Dh/z_en_dh.c",
+     "line": 178
+    },
+    {
+     "value": 20,
+     "via": "child",
+     "file": "src/overlays/actors/ovl_En_Dh/z_en_dh.c",
+     "line": 178
+    }
+   ],
    "elements": [
     {
      "file": "src/overlays/actors/ovl_En_Dh/z_en_dh.c",

@@ -78,6 +78,7 @@ export type Effect =
   | { kind: 'grab'; frames: Frames; damagePerBeat: number; release: 'escape' | 'carried_off' }
   | { kind: 'paralyze'; frames: Frames }
   | { kind: 'curse'; frames: Frames }
+  /** Takes every listed gear Link has, in order, on one contact. */
   | { kind: 'steal'; gear: Gear[] }
 export type EffectKind = Effect['kind']
 
@@ -155,6 +156,8 @@ export interface Step {
   range?: 'near' | 'far'
   /** The enemy closes to near, or backs off to far, as part of this step. */
   move?: 'near' | 'far'
+  /** Only for Link of this age, when the code branches on `LINK_IS_ADULT`. */
+  age?: Age
   /** The attack this step delivers. */
   attack?: string
   /** Only possible once the phase's timer has run out. */
