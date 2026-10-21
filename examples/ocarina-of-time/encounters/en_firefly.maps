@@ -16,7 +16,7 @@ group attacks "attacks"
 
 state choose_age "Link sets out" marks 1 in setup at 120 80
 state age_child "Link is a child" in setup at 260 80
-state age_adult "Link is a adult" in setup at 120 150
+state age_adult "Link is an adult" in setup at 120 150
 state choose_variant "Which Keese" in setup at 260 150
 state enemy_unseen "Keese is invisible without the Lens" in enemy at 440 80
 state link_turn "Link's move" in beat at 760 80

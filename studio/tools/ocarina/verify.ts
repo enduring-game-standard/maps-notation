@@ -75,12 +75,17 @@ const verifyCompleteness = (inv: Inventory) => {
     const ia = inv.actors.find((a) => a.overlay === s.overlay)!
     if (ia.damageTables.length && s.damage.kind !== 'decomp') fail('C4', `${s.overlay} has a DamageTable but its spec uses ${s.damage.kind}`)
     if (s.damage.kind === 'decomp') {
-      const table = s.damage.table
-      const t = ia.damageTables.find((x) => x.name === table)
-      if (!t) fail('C4', `${s.overlay}: table ${table} not in inventory`)
-      else for (const e of t.entries) if (!(e.reaction in s.damage.reactions)) fail('C4', `${s.overlay}: reaction ${e.reaction} not interpreted`)
+      const carried = new Set([s.damage.table, ...s.phases.flatMap((p) => (p.table ? [p.table] : []))])
+      const unused = s.damage.unusedTables ?? {}
+      for (const table of carried) {
+        const t = ia.damageTables.find((x) => x.name === table)
+        if (!t) fail('C4', `${s.overlay}: table ${table} not in inventory`)
+        else for (const e of t.entries) if (!(e.reaction in s.damage.reactions)) fail('C4', `${s.overlay}: reaction ${e.reaction} (table ${table}) not interpreted`)
+      }
+      for (const t of ia.damageTables)
+        if (!carried.has(t.name) && !(t.name in unused)) fail('C4', `${s.overlay}: table ${t.name} is neither in force in some phase nor ledgered as unused`)
+      for (const t of Object.keys(unused)) if (carried.has(t)) fail('C4', `${s.overlay}: table ${t} is ledgered unused but a phase uses it`)
     }
-    if (ia.damageTables.length > 1) note('C4', `${s.overlay} has ${ia.damageTables.length} tables; spec carries ${s.damage.kind === 'decomp' ? s.damage.table : 'none'}`)
 
     const funcs = new Set(ia.actionFuncs)
     for (const f of funcs) if (!(f in s.actionFuncs)) fail('C5', `${s.overlay}: action function ${f} not ledgered`)
@@ -128,16 +133,16 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net) => {
     if (net.states.find((s) => s.id === `hp_${pool.id}`)?.marks !== pool.hp.value) fail('V3', `${spec.overlay}: generated hp_${pool.id} does not start at ${pool.hp.value}`)
   }
   if (spec.damage.kind === 'decomp') {
-    const { table, reactions } = spec.damage
-    const t = ia.damageTables.find((x) => x.name === table)!
+    const { reactions } = spec.damage
+    const tableOf = (p: (typeof spec.phases)[number]) => ia.damageTables.find((x) => x.name === (p.table ?? (spec.damage as { table: string }).table))!
     const keys = new Map<string, DmgType>()
     const all = linkAttacks(link).map((x) => x.attack)
     for (const a of all) keys.set(swingKey(spec, all, a), a.dmg)
     for (const [key, dmg] of keys) {
       if (!net.states.some((st) => st.id === `swing_${key}`)) continue
-      const entry = t.entries[DMG_TYPES.indexOf(dmg)]
       for (const p of spec.phases) {
         if (p.overrides?.[dmg] || p.guards?.includes(dmg) || p.hittable) continue
+        const entry = tableOf(p).entries[DMG_TYPES.indexOf(dmg)]
         const vid = [`hit_${key}__${p.id}`, `miss_${key}__${p.id}`, `hit_${key}`, `miss_${key}`].find((x) => verbs.has(x))
         if (!vid) {
           fail('V3', `${spec.overlay}: no verb resolves ${key} in ${p.id}`)

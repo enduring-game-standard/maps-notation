@@ -161,7 +161,8 @@ export const hitRule = (spec: ActorSpec, inv: Actor | undefined, phase: Phase, a
       return { connects: true, guarded: false, damage: e?.damage ?? 0, to: e?.to }
     }
     case 'decomp': {
-      const { table, reactions } = spec.damage
+      const table = phase.table ?? spec.damage.table
+      const { reactions } = spec.damage
       const t = inv?.damageTables.find((x) => x.name === table)
       if (!t) throw new Error(`${spec.overlay}: no damage table ${table} in the inventory`)
       const entry = t.entries[DMG_TYPES.indexOf(d)]
@@ -285,7 +286,7 @@ export const encounter = (spec: ActorSpec, link: LinkSpec, inventory: Inventory)
   }
 
   b.state('choose_age', 'Link sets out', 'setup', { marks: 1 })
-  for (const age of ages) b.state(`age_${age}`, `Link is a ${age}`, 'setup')
+  for (const age of ages) b.state(`age_${age}`, `Link is ${age === 'adult' ? 'an adult' : 'a child'}`, 'setup')
   if (spec.variants?.length) b.state('choose_variant', `Which ${spec.name}`, 'setup')
   const mayBeUnseen = !!spec.variants?.some((v) => v.unseen)
   if (mayBeUnseen) b.state('enemy_unseen', `${spec.name} is invisible without the Lens`, 'enemy')

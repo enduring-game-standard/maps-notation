@@ -17,9 +17,9 @@ const load = (spec: ActorSpec) => {
 }
 
 /** The damage the decomp gives this damage type against this actor, read straight from the inventory. */
-const decompDamage = (spec: ActorSpec, dmg: (typeof DMG_TYPES)[number]) => {
+const decompDamage = (spec: ActorSpec, phase: ActorSpec['phases'][number], dmg: (typeof DMG_TYPES)[number]) => {
   if (spec.damage.kind !== 'decomp') return undefined
-  const table = spec.damage.table
+  const table = phase.table ?? spec.damage.table
   const entry = inventory.actors.find((a) => a.overlay === spec.overlay)!.damageTables.find((t) => t.name === table)!.entries[DMG_TYPES.indexOf(dmg)]
   return spec.damage.reactions[entry.reaction].damage ? entry.damage : 0
 }
@@ -42,7 +42,7 @@ for (const spec of modeled()) {
           if (!vid) continue
           const d = net.arcs.find((a) => a.verb === vid && a.kind === 'give' && a.state === `dmg_${pool.id}`)?.count ?? 0
           if (!d) continue
-          const fromDecomp = p.overrides?.[attack.dmg] || p.hittable ? undefined : decompDamage(spec, attack.dmg)
+          const fromDecomp = p.overrides?.[attack.dmg] || p.hittable ? undefined : decompDamage(spec, p, attack.dmg)
           it(`${key} in ${p.id}: ${Math.ceil(pool.hp.value / d)} hits empty ${pool.id} (${pool.hp.value} hp, ${d} each)`, () => {
             if (fromDecomp !== undefined) expect(d).toBe(fromDecomp)
             const base: Marking = Object.fromEntries(net.states.map((s) => [s.id, 0]))

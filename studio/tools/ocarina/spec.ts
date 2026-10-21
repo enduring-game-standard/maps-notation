@@ -132,6 +132,8 @@ export interface Phase {
   guards?: DmgType[]
   /** Which health pool hits in this phase drain. Defaults to the first pool. */
   pool?: string
+  /** The damage table in force here, when the actor swaps tables by variant or state. Defaults to `damage.table`. */
+  table?: string
   /** Hits in this phase that do something other than the damage table says. */
   overrides?: Partial<Record<DmgType, { damage: number; to?: string; cite: Cite }>>
   /** The enemy is out of Link's sight here: Link's attacks need the Lens of Truth to connect. */
@@ -207,7 +209,13 @@ export interface ActorSpec {
    * `none`: Link cannot hurt it.
    */
   damage:
-    | { kind: 'decomp'; table: string; reactions: Record<string, Reaction> }
+    | {
+        kind: 'decomp'
+        table: string
+        reactions: Record<string, Reaction>
+        /** Tables the actor declares but never puts in force in play, each with the evidence. */
+        unusedTables?: Record<string, Excluded>
+      }
     | { kind: 'own' }
     | { kind: 'custom'; entries: Partial<Record<DmgType, { damage: number; to?: string; cite: Cite }>> }
     | { kind: 'none' }
