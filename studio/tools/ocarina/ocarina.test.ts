@@ -49,15 +49,14 @@ for (const spec of modeled()) {
           const d = net.arcs.find((a) => a.verb === vid && a.kind === 'give' && a.state === `dmg_${pool.id}`)?.count ?? 0
           if (!d) continue
           const fromDecomp = p.overrides?.[attack.dmg] || p.hittable ? undefined : decompDamage(spec, p, attack.dmg)
-          // A threshold that moves the enemy out of this phase ends the run of hits early, so only unbroken pools are replayed.
-          if (pool.thresholds?.length) continue
           it(`${key} in ${p.id}: ${Math.ceil(start(pool) / d)} hits empty ${pool.id} (${start(pool)} hp, ${d} each)`, () => {
             if (fromDecomp !== undefined) expect(d).toBe(fromDecomp)
             const base: Marking = Object.fromEntries(net.states.map((s) => [s.id, 0]))
             for (const q of spec.pools) {
               for (const sg of poolSegments(q)) base[sg.id] = q.hp.fromLinkHealth ? 0 : sg.marks
               if (q.hp.fromLinkHealth) base[`hp_${q.id}`] = start(q)
-              for (const t of q.thresholds ?? []) base[`above_${q.id}_${t.at}`] = 1
+              // Thresholds start crossed, so the replay counts the drain alone; the threshold tests below count the crossing.
+              for (const t of q.thresholds ?? []) base[`above_${q.id}_${t.at}`] = 0
               base[`alive_${q.id}`] = 1
             }
             base.in_fight = 1
@@ -71,6 +70,26 @@ for (const spec of modeled()) {
               const down = m[`alive_${pool.id}`] === 0 || m.link_wins === 1
               expect(down).toBe(i === need)
             }
+          })
+        }
+
+    for (const pool of spec.pools.filter((q) => !q.hp.fromLinkHealth))
+      for (const t of pool.thresholds ?? [])
+        for (const p of spec.phases.filter((ph) => (ph.pool ?? spec.pools[0].id) === pool.id && (typeof t.to === 'string' || t.to[ph.id]))) {
+          const to = typeof t.to === 'string' ? t.to : t.to[p.id]
+          const vid = `${pool.id}_falls_to_${t.at}_in_${p.id}`
+          if (!verbIds.has(vid) || to === p.id) continue
+          it(`${pool.id} in ${p.id}: dropping from ${pool.hp.value} to ${t.at} moves it to ${to}`, () => {
+            const base: Marking = Object.fromEntries(net.states.map((s) => [s.id, 0]))
+            for (const sg of poolSegments(pool)) base[sg.id] = sg.marks
+            for (const u of pool.thresholds!) base[`above_${pool.id}_${u.at}`] = u.at < t.at ? 1 : 0
+            Object.assign(base, { in_fight: 1, link_hp: 1, range_near: 1, [`alive_${pool.id}`]: 1, [`phase_${p.id}`]: 1, [`above_${pool.id}_${t.at}`]: 1 })
+            const above = pool.hp.value - t.at
+            const one = quiet(c, { ...base, [`dmg_${pool.id}`]: above - 1 })
+            expect(one[`phase_${p.id}`], `${above - 1} damage stays above ${t.at}`).toBe(1)
+            const m = quiet(c, { ...base, [`dmg_${pool.id}`]: above })
+            if (to === 'defeated') expect(m.link_wins === 1 || m[`alive_${pool.id}`] === 0).toBe(true)
+            else expect(m[`phase_${to}`], `${above} damage reaches ${t.at}`).toBe(1)
           })
         }
 
