@@ -21,7 +21,14 @@ export const loadInitial = (): Net => {
   return parse(ticTacToe)
 }
 
-export const autosave = (net: Net) => localStorage.setItem(KEY, print(net))
+export const autosave = (net: Net) => {
+  try {
+    localStorage.setItem(KEY, print(net))
+  } catch {
+    // Past the storage quota (a whole atlas) the net lives only in the page; the file on disk is the copy.
+    localStorage.removeItem(KEY)
+  }
+}
 
 export const newNet = (): Net => ({ ...emptyNet(), seats: [{ id: 'p1', name: 'Player 1', color: '#e4572e' }] })
 

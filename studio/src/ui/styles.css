@@ -1049,6 +1049,11 @@ button.line:hover {
   padding: 0 8px;
   height: 18px;
 }
+.gutter .run {
+  height: auto;
+  line-height: 18px;
+  white-space: pre;
+}
 .gutter .is-error {
   background: #fdecea;
   color: var(--danger);

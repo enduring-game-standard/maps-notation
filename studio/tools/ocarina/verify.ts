@@ -87,7 +87,7 @@ const verifyCompleteness = (inv: Inventory) => {
 
     const sources = new Set<string>([
       ...ia.elements.filter((e) => e.atOn).map((e) => `${e.file}:${e.line}`),
-      ...ia.runtimeAt.map((r) => `${r.file}:${r.line}`),
+      ...ia.runtimeAt.map((r) => `${r.file}:${r.line}`), ...ia.directHurt.map((r) => `${r.file}:${r.line}`),
     ])
     const ids = new Set(s.attacks.map((a) => a.id))
     for (const c of sources) if (!(c in s.atSources)) fail('C6', `${s.overlay}: AT source ${c} not ledgered`)
@@ -98,7 +98,7 @@ const verifyCompleteness = (inv: Inventory) => {
     for (const a of s.attacks) {
       if (a.via) {
         const carrier = inv.actors.find((x) => x.overlay === a.via!.overlay)
-        const carried = new Set([...(carrier?.elements.filter((e) => e.atOn).map((e) => `${e.file}:${e.line}`) ?? []), ...(carrier?.runtimeAt.map((r) => `${r.file}:${r.line}`) ?? [])])
+        const carried = new Set([...(carrier?.elements.filter((e) => e.atOn).map((e) => `${e.file}:${e.line}`) ?? []), ...(carrier?.runtimeAt.map((r) => `${r.file}:${r.line}`) ?? []), ...(carrier?.directHurt.map((r) => `${r.file}:${r.line}`) ?? [])])
         if (!carried.has(a.source)) fail('C6', `${s.overlay}: attack ${a.id} is carried by ${a.via.overlay}, but ${a.source} is not one of its AT sources`)
       } else if (s.atSources[a.source as Cite] !== a.id && !sources.has(a.source)) fail('C6', `${s.overlay}: attack ${a.id} source ${a.source} is not a ledgered AT source`)
     }
@@ -160,7 +160,10 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net, inv: Inventory) => 
       const n = Number(/atDmgInfo\.damage\s*=\s*(\d+|0x[0-9a-f]+)/i.exec(rt.text)![1])
       if (n !== a.damage) fail('V3', `${spec.overlay}: attack ${a.id} damage ${a.damage}, runtime change at ${a.source} sets ${n}`)
     }
-    if (!el && !rt) fail('V3', `${spec.overlay}: attack ${a.id} source ${a.source} is neither an element nor a runtime change`)
+    const dh = carrier.directHurt.find((r) => `${r.file}:${r.line}` === a.source)
+    const direct = dh && directDamage(dh.text)
+    if (direct !== undefined && direct !== a.damage) fail('V3', `${spec.overlay}: attack ${a.id} damage ${a.damage}, the call at ${a.source} deals ${direct}`)
+    if (!el && !rt && !dh) fail('V3', `${spec.overlay}: attack ${a.id} source ${a.source} is neither an element, a runtime change, nor a direct hurt call`)
     const want = a.damage / unit
     const landed = net.verbs.filter((v) => v.id === `${a.id}_lands` || v.id.startsWith(`${a.id}_lands_n`) || v.id.startsWith(`${a.id}_lands_f`))
     if (!landed.length) fail('V3', `${spec.overlay}: no verb lands attack ${a.id}`)
@@ -168,6 +171,15 @@ const verifyNumbers = (spec: ActorSpec, ia: Actor, net: Net, inv: Inventory) => 
     for (const v of net.verbs.filter((x) => x.id.startsWith(`${a.id}_lands_dd`)))
       if (gives(v.id, 'link_dmg') * unit !== doubleDefense(a.damage)) fail('V3', `${spec.overlay}: ${v.id} with Double Defense costs ${gives(v.id, 'link_dmg') * unit}, expected ${doubleDefense(a.damage)}`)
   }
+}
+
+/** The damage a direct hurt call states as a literal on its own line, or undefined when it is computed or spans lines. */
+const directDamage = (text: string) => {
+  const lit = (x: string | undefined) => (x && /^-?(0x[0-9a-f]+|\d+)$/i.test(x.trim()) ? Math.abs(Number(x.trim().replace(/^-/, ''))) : undefined)
+  const knock = /Actor_SetPlayerKnockback(?:Large|Small)?\((.*)\)/.exec(text)
+  if (knock) return lit(knock[1].split(',').pop())
+  const hurt = /(?:damagePlayer|Player_InflictDamage\w*|Health_ChangeBy)\(\s*play\s*,\s*([^)]*)\)/.exec(text)
+  return hurt ? lit(hurt[1]) : undefined
 }
 
 /** Whether the spec gives the actor any way to die: health, or a hit or step that ends in `defeated`. */

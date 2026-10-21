@@ -465,7 +465,9 @@ export function Canvas(props: Props) {
               </text>
             </g>
           ))}
-          <g className={focus ? 'arcs has-focus' : 'arcs'}>{arcLayer}</g>
+          <g key={routes.size ? 'routed' : 'unrouted'} className={focus ? 'arcs has-focus' : 'arcs'}>
+            {arcLayer}
+          </g>
           {net.states.map((p) => {
             const ref: NodeRef = { kind: 'state', id: p.id }
             const n = marking ? (marking[p.id] ?? 0) : p.marks

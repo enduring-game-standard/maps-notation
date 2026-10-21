@@ -56,6 +56,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgBdanObjects_ChangeWaterBoxLevel",
     "BgBdanObjects_DoNothing",
@@ -144,6 +145,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgHakaSgami_SetupSpin",
     "BgHakaSgami_Spin"
@@ -197,6 +199,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgHakaTrap_FanBlade_FullGust",
     "BgHakaTrap_FanBlade_Idle",
@@ -240,6 +243,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgHakaTubo_DropCollectible",
     "BgHakaTubo_Idle"
@@ -273,6 +277,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgHidanCurtain_TurnOff",
     "BgHidanCurtain_TurnOn",
@@ -311,6 +316,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgHidanFirewall_Countdown",
     "BgHidanFirewall_Erupt",
@@ -338,6 +344,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgHidanFwbig_Lower",
     "BgHidanFwbig_Move",
@@ -369,6 +376,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "func_8088B268",
     "func_8088B5F4",
@@ -451,6 +459,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -531,6 +540,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -564,12 +574,61 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgHidanSima_MovingPlatform_Idle",
     "BgHidanSima_MovingPlatform_Move",
     "BgHidanSima_SinkingPlatform_Idle",
     "BgHidanSima_SinkingPlatform_Sink",
     "BgHidanSima_SinkingPlatform_WarningShake"
+   ]
+  },
+  {
+   "overlay": "ovl_Bg_Ice_Shelter",
+   "category": "ACTORCAT_BG",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_Bg_Ice_Shelter/z_bg_ice_shelter.c",
+     "line": 68,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 4291821567,
+     "atOn": false,
+     "acOn": true
+    },
+    {
+     "file": "src/overlays/actors/ovl_Bg_Ice_Shelter/z_bg_ice_shelter.c",
+     "line": 88,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 1338114038,
+     "atOn": false,
+     "acOn": true
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "this->dyna.actor.parent->freezeTimer = 10000;",
+     "file": "src/overlays/actors/ovl_Bg_Ice_Shelter/z_bg_ice_shelter.c",
+     "line": 355
+    },
+    {
+     "text": "this->dyna.actor.parent->freezeTimer = 50;",
+     "file": "src/overlays/actors/ovl_Bg_Ice_Shelter/z_bg_ice_shelter.c",
+     "line": 366
+    }
+   ],
+   "actionFuncs": [
+    "BgIceShelter_Idle",
+    "BgIceShelter_Melt"
    ]
   },
   {
@@ -593,6 +652,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgIceTurara_Fall",
     "BgIceTurara_Regrow",
@@ -605,7 +665,8 @@
    "overlay": "ovl_Bg_Jya_Goroiwa",
    "category": "ACTORCAT_PROP",
    "inScopeBecause": [
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [
@@ -629,6 +690,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, thisx, 2.0f, thisx->yawTowardsPlayer, 0.0f, 0);",
+     "file": "src/overlays/actors/ovl_Bg_Jya_Goroiwa/z_bg_jya_goroiwa.c",
+     "line": 164
+    }
+   ],
    "actionFuncs": [
     "BgJyaGoroiwa_Move",
     "BgJyaGoroiwa_Wait"
@@ -655,10 +723,38 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgJyaHaheniron_ChairCrumble",
     "BgJyaHaheniron_PillarCrumble",
     "BgJyaHaheniron_RubbleCollide"
+   ]
+  },
+  {
+   "overlay": "ovl_Bg_Jya_Zurerukabe",
+   "category": "ACTORCAT_BG",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->dyna.actor, 1.5f, this->dyna.actor.shape.rot.y, 0.0f, 0);",
+     "file": "src/overlays/actors/ovl_Bg_Jya_Zurerukabe/z_bg_jya_zurerukabe.c",
+     "line": 112
+    },
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->dyna.actor, 1.5f, this->dyna.actor.shape.rot.y, 0.0f, 0);",
+     "file": "src/overlays/actors/ovl_Bg_Jya_Zurerukabe/z_bg_jya_zurerukabe.c",
+     "line": 118
+    }
+   ],
+   "actionFuncs": [
+    "func_8089B7C4",
+    "func_8089B870"
    ]
   },
   {
@@ -692,6 +788,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BgYdanMaruta_DoNothing",
     "func_808BEFF4",
@@ -902,6 +999,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BossDodongo_BlowFire",
     "BossDodongo_Damaged",
@@ -921,6 +1019,7 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
+    "hurts Link directly",
     "AT_TYPE_ENEMY collider"
    ],
    "damageTables": [],
@@ -1131,6 +1230,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, NULL, 5.0f, effect->kbAngle, 0.0f, 0x30);",
+     "file": "src/overlays/actors/ovl_Boss_Fd/z_boss_fd.c",
+     "line": 1497
+    }
+   ],
    "actionFuncs": [
     "BossFd_Fly",
     "BossFd_Wait"
@@ -1141,6 +1247,7 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
+    "hurts Link directly",
     "AT_TYPE_ENEMY collider"
    ],
    "damageTables": [],
@@ -1251,6 +1358,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 3.0f, this->actor.yawTowardsPlayer, 2.0f, 0x20);",
+     "file": "src/overlays/actors/ovl_Boss_Fd2/z_boss_fd2.c",
+     "line": 319
+    }
+   ],
    "actionFuncs": [
     "BossFd2_BreatheFire",
     "BossFd2_Burrow",
@@ -1268,7 +1382,8 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [
@@ -1302,6 +1417,23 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 3.0f, this->actor.world.rot.y, 0.0f, 0x30);",
+     "file": "src/overlays/actors/ovl_Boss_Ganon/z_boss_ganon.c",
+     "line": 4013
+    },
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 3.0f, this->actor.world.rot.y, 0.0f, 0x50);",
+     "file": "src/overlays/actors/ovl_Boss_Ganon/z_boss_ganon.c",
+     "line": 4485
+    },
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &sGanondorf->actor, 7.0f,",
+     "file": "src/overlays/actors/ovl_Boss_Ganon/z_boss_ganon.c",
+     "line": 4806
+    }
+   ],
    "actionFuncs": [
     "BossGanon_Block",
     "BossGanon_ChargeBigMagic",
@@ -1323,7 +1455,8 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [
@@ -1529,6 +1662,18 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 15.0f, this->actor.yawTowardsPlayer + phi_v0_2, 2.0f,",
+     "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
+     "line": 2193
+    },
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 10.0f, Math_Atan2S(temp_f12, temp_f2), 0.0f, 0x10);",
+     "file": "src/overlays/actors/ovl_Boss_Ganon2/z_boss_ganon2.c",
+     "line": 2220
+    }
+   ],
    "actionFuncs": [
     "func_808FD5F4",
     "func_808FFDB0",
@@ -1581,6 +1726,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BossGanondrof_Block",
     "BossGanondrof_Charge",
@@ -1742,6 +1888,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BossGoma_CeilingIdle",
     "BossGoma_CeilingMoveToCenter",
@@ -1768,6 +1915,7 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
+    "hurts Link directly",
     "AT_TYPE_ENEMY collider"
    ],
    "damageTables": [],
@@ -1988,6 +2136,18 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -1);",
+     "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo.c",
+     "line": 815
+    },
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 20.0f, this->actor.shape.rot.y + 0x8000,",
+     "file": "src/overlays/actors/ovl_Boss_Mo/z_boss_mo.c",
+     "line": 861
+    }
+   ],
    "actionFuncs": [
     "BossMo_Tentacle"
    ]
@@ -1997,6 +2157,7 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -2393,6 +2554,13 @@
      "line": 2533
     }
    ],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_Boss_Sst/z_boss_sst.c",
+     "line": 1914
+    }
+   ],
    "actionFuncs": [
     "BossSst_HandBreakIce",
     "BossSst_HandClap",
@@ -2457,7 +2625,8 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [
@@ -2517,6 +2686,18 @@
      "text": "this->collider.elem.atDmgInfo.hitSpecialEffect = HIT_SPECIAL_EFFECT_FIRE;",
      "file": "src/overlays/actors/ovl_Boss_Tw/z_boss_tw.c",
      "line": 496
+    }
+   ],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 3.0f, this->actor.shape.rot.y, 0.0f, 0x20);",
+     "file": "src/overlays/actors/ovl_Boss_Tw/z_boss_tw.c",
+     "line": 836
+    },
+    {
+     "text": "play->damagePlayer(play, -1);",
+     "file": "src/overlays/actors/ovl_Boss_Tw/z_boss_tw.c",
+     "line": 4821
     }
    ],
    "actionFuncs": [
@@ -2600,6 +2781,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "BossVa_BariDeath",
     "BossVa_BariIntro",
@@ -2636,6 +2818,7 @@
    "health": [],
    "elements": [],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -2659,13 +2842,15 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
    "overlay": "ovl_Door_Killer",
    "category": "ACTORCAT_BG",
    "inScopeBecause": [
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [],
@@ -2692,6 +2877,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 6.0f, this->actor.yawTowardsPlayer, 6.0f, 0x10);",
+     "file": "src/overlays/actors/ovl_Door_Killer/z_door_killer.c",
+     "line": 369
+    }
+   ],
    "actionFuncs": [
     "DoorKiller_Die",
     "DoorKiller_FallAsRubble",
@@ -2907,6 +3099,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnAm_Cooldown",
     "EnAm_Lunge",
@@ -2942,6 +3135,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnAnubice_Die",
     "EnAnubice_FindFlameCircles",
@@ -2981,6 +3175,7 @@
      "line": 130
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "func_809B26EC",
     "func_809B27D8",
@@ -3014,6 +3209,7 @@
      "line": 150
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "EnArrow_Fly",
     "EnArrow_Shoot",
@@ -3026,12 +3222,20 @@
    "overlay": "ovl_En_Attack_Niw",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
-    "ACTORCAT_ENEMY"
+    "ACTORCAT_ENEMY",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [],
    "elements": [],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 2.0f, this->actor.world.rot.y, 0.0f, 0x10);",
+     "file": "src/overlays/actors/ovl_En_Attack_Niw/z_en_attack_niw.c",
+     "line": 384
+    }
+   ],
    "actionFuncs": [
     "func_809B5670",
     "func_809B59B0",
@@ -3077,6 +3281,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnBa_Die",
     "EnBa_FallAsBlob",
@@ -3092,6 +3297,7 @@
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
     "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -3550,6 +3756,18 @@
      "line": 374
     }
    ],
+   "directHurt": [
+    {
+     "text": "this->actor.freezeTimer = this->collider.elements[0].base.acHitElem->atDmgInfo.damage;",
+     "file": "src/overlays/actors/ovl_En_Bb/z_en_bb.c",
+     "line": 1179
+    },
+    {
+     "text": "this->actor.freezeTimer = this->collider.elements[0].base.acHitElem->atDmgInfo.damage;",
+     "file": "src/overlays/actors/ovl_En_Bb/z_en_bb.c",
+     "line": 1189
+    }
+   ],
    "actionFuncs": [
     "EnBb_Blue",
     "EnBb_Damage",
@@ -3567,12 +3785,20 @@
    "overlay": "ovl_En_Bdfire",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
-    "ACTORCAT_ENEMY"
+    "ACTORCAT_ENEMY",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [],
    "elements": [],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 20.0f, this->actor.world.rot.y, 0.0f, 8);",
+     "file": "src/overlays/actors/ovl_En_Bdfire/z_en_bdfire.c",
+     "line": 188
+    }
+   ],
    "actionFuncs": [
     "actionFunc",
     "func_809BC2A4",
@@ -3758,6 +3984,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "func_809BD84C",
     "func_809BD8DC",
@@ -3940,6 +4167,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnBili_ApproachPlayer",
     "EnBili_AscendAway",
@@ -3983,6 +4211,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnBrob_Idle",
     "EnBrob_MoveDown",
@@ -3997,9 +4226,147 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(9)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 323,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 8,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 1,
@@ -4045,6 +4412,13 @@
      "text": "elem->atDmgInfo.damage = 4;",
      "file": "src/overlays/actors/ovl_En_Bubble/z_en_bubble.c",
      "line": 116
+    }
+   ],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, damage);",
+     "file": "src/overlays/actors/ovl_En_Bubble/z_en_bubble.c",
+     "line": 131
     }
    ],
    "actionFuncs": [
@@ -4240,6 +4614,7 @@
      "line": 814
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "actionFunc",
     "func_809CE884",
@@ -4258,7 +4633,8 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [],
@@ -4285,6 +4661,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -4);",
+     "file": "src/overlays/actors/ovl_En_Bx/z_en_bx.c",
+     "line": 168
+    }
+   ],
    "actionFuncs": []
   },
   {
@@ -4326,6 +4709,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -4500,6 +4884,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnCrow_Damaged",
     "EnCrow_Die",
@@ -4673,6 +5058,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnDaiku_EscapeRotate",
     "EnDaiku_EscapeRun",
@@ -4846,6 +5232,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnDaikuKakariko_Run",
     "EnDaikuKakariko_StopRunning",
@@ -5226,6 +5613,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnDekubaba_Attack",
     "EnDekubaba_Attacked",
@@ -5408,6 +5796,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnDekunuts_BeDamaged",
     "EnDekunuts_BeStunned",
@@ -5657,6 +6046,7 @@
      "line": 516
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "EnDh_Attack",
     "EnDh_Burrow",
@@ -5879,6 +6269,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnDha_Die",
     "EnDha_TakeDamage",
@@ -5891,9 +6282,146 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(4)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 148,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 8,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 1,
@@ -5915,6 +6443,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnDodojr_CrawlTowardsTarget",
     "EnDodojr_DeathSequence",
@@ -6225,6 +6754,7 @@
      "line": 653
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "EnDodongo_BreatheFire",
     "EnDodongo_Death",
@@ -6235,6 +6765,187 @@
     "EnDodongo_SweepTail",
     "EnDodongo_Walk",
     "actionFunc"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Du",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "DamageTable"
+   ],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(22)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 778,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_Du/z_en_du.c",
+     "line": 73
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Du/z_en_du.c",
+     "line": 64,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 0,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [],
+   "actionFuncs": [
+    "actionFunc",
+    "func_809FE3B4",
+    "func_809FE3C0",
+    "func_809FE4A4",
+    "func_809FE638",
+    "func_809FE6CC",
+    "func_809FE740",
+    "func_809FE798",
+    "func_809FE890",
+    "func_809FEB08",
+    "func_809FEC14",
+    "func_809FEC70",
+    "func_809FECE4"
    ]
   },
   {
@@ -6403,6 +7114,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnEiyer_Ambush",
     "EnEiyer_AppearFromGround",
@@ -6429,6 +7141,7 @@
    "health": [],
    "elements": [],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnEncount2_SpawnRocks",
     "EnEncount2_Wait"
@@ -6439,9 +7152,146 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(15)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 533,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 24,
@@ -6579,6 +7429,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnFd_JumpToGround",
     "EnFd_Land",
@@ -6755,6 +7606,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnFdFire_DanceTowardsPlayer",
     "EnFdFire_Disappear",
@@ -6767,7 +7619,8 @@
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [],
@@ -6784,6 +7637,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockback(play, &this->actor, 3.0f, this->actor.world.rot.y, 0.0f,",
+     "file": "src/overlays/actors/ovl_En_Fhg_Fire/z_en_fhg_fire.c",
+     "line": 553
+    }
+   ],
    "actionFuncs": []
   },
   {
@@ -6791,7 +7651,8 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [],
@@ -6818,6 +7679,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackSmall(play, thisx, 2.0f, -player->actor.world.rot.y, 3.0f, 4);",
+     "file": "src/overlays/actors/ovl_En_Fire_Rock/z_en_fire_rock.c",
+     "line": 384
+    }
+   ],
    "actionFuncs": [
     "EnFireRock_Fall",
     "EnFireRock_SpawnMoreBrokenPieces",
@@ -7018,6 +7886,7 @@
      "line": 199
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "EnFirefly_Attack",
     "EnFirefly_AttackFromPerched",
@@ -7037,6 +7906,7 @@
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
     "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -7197,6 +8067,18 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_Floormas/z_en_floormas.c",
+     "line": 833
+    },
+    {
+     "text": "this->actor.freezeTimer == 0) {",
+     "file": "src/overlays/actors/ovl_En_Floormas/z_en_floormas.c",
+     "line": 1070
+    }
+   ],
    "actionFuncs": [
     "EnFloormas_BigDecideAction",
     "EnFloormas_BigStopWalk",
@@ -7222,13 +8104,192 @@
    ]
   },
   {
+   "overlay": "ovl_En_Fr",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "this->unusedButterflyActor->freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Fr/z_en_fr.c",
+     "line": 1001
+    }
+   ],
+   "actionFuncs": [
+    "EnFr_Activate",
+    "EnFr_ActivateCheckFrogSong",
+    "EnFr_ChildSong",
+    "EnFr_ChildSongFirstTime",
+    "EnFr_ChooseJumpFromLogSpot",
+    "EnFr_ContinueFrogSong",
+    "EnFr_Deactivate",
+    "EnFr_GiveReward",
+    "EnFr_Idle",
+    "EnFr_JumpingBackIntoWater",
+    "EnFr_JumpingOutOfWater",
+    "EnFr_JumpingUp",
+    "EnFr_ListeningToOcarinaNotes",
+    "EnFr_OrientOnLogSpot",
+    "EnFr_PrintTextBox",
+    "EnFr_SetIdle",
+    "EnFr_SetReward",
+    "EnFr_SetupFrogSong",
+    "EnFr_SetupJumpingOutOfWater",
+    "EnFr_TalkBeforeFrogSong",
+    "EnFr_TalkBeforeReward",
+    "func_80A1BE98"
+   ]
+  },
+  {
    "overlay": "ovl_En_Fw",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(16)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 568,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 8,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 8,
@@ -7256,6 +8317,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnFw_Bounce",
     "EnFw_JumpToParentInitPos",
@@ -7449,6 +8511,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnFz_AimForFreeze",
     "EnFz_AimForMove",
@@ -7472,6 +8535,7 @@
    "health": [],
    "elements": [],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -7484,7 +8548,70 @@
    "health": [],
    "elements": [],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
+  },
+  {
+   "overlay": "ovl_En_Ge1",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Ge1/z_en_ge1.c",
+     "line": 82,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 1794,
+     "atOn": false,
+     "acOn": true
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "player->actor.freezeTimer = 1200;",
+     "file": "src/overlays/actors/ovl_En_Ge1/z_en_ge1.c",
+     "line": 607
+    },
+    {
+     "text": "horse->freezeTimer = 1200;",
+     "file": "src/overlays/actors/ovl_En_Ge1/z_en_ge1.c",
+     "line": 610
+    }
+   ],
+   "actionFuncs": [
+    "EnGe1_BeginGame_Archery",
+    "EnGe1_BeginGiveItem_Archery",
+    "EnGe1_CheckForCard_GTGGuard",
+    "EnGe1_CheckGate_GateOp",
+    "EnGe1_GetReaction_GateGuard",
+    "EnGe1_GetReaction_ValleyFloor",
+    "EnGe1_KickPlayer",
+    "EnGe1_OpenGate_GateOp",
+    "EnGe1_Open_GTGGuard",
+    "EnGe1_RefuseEntryTooPoor_GTGGuard",
+    "EnGe1_SetNormalText",
+    "EnGe1_SetupOpen_GTGGuard",
+    "EnGe1_SetupWait_Archery",
+    "EnGe1_TalkAfterGame_Archery",
+    "EnGe1_TalkNoPrize_Archery",
+    "EnGe1_TalkOfferPlay_Archery",
+    "EnGe1_TalkTooPoor_Archery",
+    "EnGe1_TalkWinPrize_Archery",
+    "EnGe1_WaitDoNothing",
+    "EnGe1_WaitTillItemGiven_Archery",
+    "EnGe1_WaitTillOpened_GTGGuard",
+    "EnGe1_WaitUntilGateOpened_GateOp",
+    "EnGe1_Wait_Archery",
+    "EnGe1_WatchForAndSensePlayer",
+    "EnGe1_WatchForPlayerFrontOnly",
+    "actionFunc"
+   ]
   },
   {
    "overlay": "ovl_En_GeldB",
@@ -7682,6 +8809,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnGeldB_Advance",
     "EnGeldB_Block",
@@ -7701,6 +8829,260 @@
     "EnGeldB_Stunned",
     "EnGeldB_Wait",
     "actionFunc"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Go",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "hurts Link directly",
+    "DamageTable"
+   ],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(22)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 778,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_Go/z_en_go.c",
+     "line": 87
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Go/z_en_go.c",
+     "line": 78,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 0,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -4);",
+     "file": "src/overlays/actors/ovl_En_Go/z_en_go.c",
+     "line": 734
+    }
+   ],
+   "actionFuncs": [
+    "EnGo_BiggoronActionFunc",
+    "EnGo_CurledUp",
+    "EnGo_Eyedrops",
+    "EnGo_FireGenericActionFunc",
+    "EnGo_GetItem",
+    "EnGo_GoronLinkRolling",
+    "EnGo_StopRolling",
+    "EnGo_WakeUp",
+    "actionFunc",
+    "func_80A3FEB4",
+    "func_80A4008C",
+    "func_80A40494",
+    "func_80A405CC",
+    "func_80A408D8",
+    "func_80A40A54",
+    "func_80A40B1C",
+    "func_80A40C78",
+    "func_80A40DCC"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Go2",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_Go2/z_en_go2.c",
+     "line": 108
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Go2/z_en_go2.c",
+     "line": 99,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 8,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -4);",
+     "file": "src/overlays/actors/ovl_En_Go2/z_en_go2.c",
+     "line": 925
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Go2/z_en_go2.c",
+     "line": 1907
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Go2/z_en_go2.c",
+     "line": 1917
+    }
+   ],
+   "actionFuncs": [
+    "EnGo2_BiggoronEyedrops",
+    "EnGo2_ContinueRolling",
+    "EnGo2_CurledUp",
+    "EnGo2_GoronDmtBombFlowerAnimation",
+    "EnGo2_GoronFireGenericAction",
+    "EnGo2_GoronLinkStopRolling",
+    "EnGo2_GoronRollingBigContinueRolling",
+    "EnGo2_GroundRolling",
+    "EnGo2_ReverseRolling",
+    "EnGo2_SetGetItem",
+    "EnGo2_SetupGetItem",
+    "EnGo2_SlowRolling",
+    "func_80A46B40"
    ]
   },
   {
@@ -7742,6 +9124,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnGoma_BossLimb",
     "EnGoma_ChasePlayer",
@@ -7764,7 +9147,8 @@
    "overlay": "ovl_En_Goroiwa",
    "category": "ACTORCAT_PROP",
    "inScopeBecause": [
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [
@@ -7788,6 +9172,23 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 2.0f, this->actor.yawTowardsPlayer, 0.0f, 0);",
+     "file": "src/overlays/actors/ovl_En_Goroiwa/z_en_goroiwa.c",
+     "line": 632
+    },
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 2.0f, this->actor.yawTowardsPlayer, 0.0f, 4);",
+     "file": "src/overlays/actors/ovl_En_Goroiwa/z_en_goroiwa.c",
+     "line": 718
+    },
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 2.0f, this->actor.yawTowardsPlayer, 0.0f, 4);",
+     "file": "src/overlays/actors/ovl_En_Goroiwa/z_en_goroiwa.c",
+     "line": 743
+    }
+   ],
    "actionFuncs": [
     "EnGoroiwa_MoveAndFallToGround",
     "EnGoroiwa_MoveDown",
@@ -7960,6 +9361,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "func_80A4E910",
     "func_80A4EA08",
@@ -7968,6 +9370,38 @@
     "func_80A4F13C",
     "func_80A4F700",
     "func_80A4F734"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Heishi1",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "if (player->actor.freezeTimer == 0) {",
+     "file": "src/overlays/actors/ovl_En_Heishi1/z_en_heishi1.c",
+     "line": 431
+    }
+   ],
+   "actionFuncs": [
+    "EnHeishi1_Kick",
+    "EnHeishi1_MoveToLink",
+    "EnHeishi1_SetupKick",
+    "EnHeishi1_SetupMoveToLink",
+    "EnHeishi1_SetupTurnTowardLink",
+    "EnHeishi1_SetupWait",
+    "EnHeishi1_SetupWaitNight",
+    "EnHeishi1_SetupWalk",
+    "EnHeishi1_TurnTowardLink",
+    "EnHeishi1_Wait",
+    "EnHeishi1_WaitNight",
+    "EnHeishi1_Walk"
    ]
   },
   {
@@ -7998,6 +9432,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnHintnuts_BeginFreeze",
     "EnHintnuts_BeginRun",
@@ -8060,6 +9495,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnHonotrap_EyeAttack",
     "EnHonotrap_EyeClose",
@@ -8073,11 +9509,199 @@
    ]
   },
   {
+   "overlay": "ovl_En_Horse",
+   "category": "ACTORCAT_BG",
+   "inScopeBecause": [
+    "DamageTable"
+   ],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(11)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 393,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 9,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
+   "health": [
+    {
+     "value": 10,
+     "via": "D_80A65F38",
+     "file": "src/overlays/actors/ovl_En_Horse/z_en_horse.c",
+     "line": 177
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Horse/z_en_horse.c",
+     "line": 121,
+     "atFlags": 1024,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 4,
+     "acFlags": 4291821567,
+     "atOn": true,
+     "acOn": false
+    },
+    {
+     "file": "src/overlays/actors/ovl_En_Horse/z_en_horse.c",
+     "line": 141,
+     "atFlags": 4291821567,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 4291821567,
+     "atOn": false,
+     "acOn": false
+    },
+    {
+     "file": "src/overlays/actors/ovl_En_Horse/z_en_horse.c",
+     "line": 154,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 129060,
+     "atOn": false,
+     "acOn": true
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [],
+   "actionFuncs": []
+  },
+  {
    "overlay": "ovl_En_Ik",
    "category": "ACTORCAT_BOSS",
    "inScopeBecause": [
     "ACTORCAT_BOSS",
     "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -8268,6 +9892,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -64);",
+     "file": "src/overlays/actors/ovl_En_Ik/z_en_ik.c",
+     "line": 850
+    }
+   ],
    "actionFuncs": [
     "EnIk_Die",
     "EnIk_DoubleHorizontalAttack",
@@ -8281,6 +9912,83 @@
     "EnIk_VerticalAttack",
     "EnIk_WalkOrRun",
     "actionFunc"
+   ]
+  },
+  {
+   "overlay": "ovl_En_In",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
+     "line": 80
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
+     "line": 71,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 0,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "player->rideActor->freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
+     "line": 505
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
+     "line": 507
+    },
+    {
+     "text": "player->rideActor->freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
+     "line": 841
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
+     "line": 843
+    },
+    {
+     "text": "player->rideActor->freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
+     "line": 927
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_In/z_en_in.c",
+     "line": 929
+    }
+   ],
+   "actionFuncs": [
+    "EnIn_ClosingGate",
+    "EnIn_EndRentalPeriod",
+    "EnIn_FinishClosingGate",
+    "EnIn_GuardingGate",
+    "EnIn_Idle",
+    "EnIn_OfferingRematch",
+    "EnIn_PlayerEscapesRanch",
+    "EnIn_PlayerLostRace",
+    "EnIn_PlayerWonFirstRace",
+    "EnIn_PlayerWonSecondRace",
+    "EnIn_Racing",
+    "EnIn_RentalPeriod",
+    "EnIn_StartRentalPeriod",
+    "EnIn_WaitForObject"
    ]
   },
   {
@@ -8304,6 +10012,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -8311,9 +10020,146 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(1)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 43,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0xE"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 1,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "0xF"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x2"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x2"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 1,
@@ -8345,6 +10191,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnKarebaba_Awaken",
     "EnKarebaba_Dead",
@@ -8359,11 +10206,529 @@
    ]
   },
   {
+   "overlay": "ovl_En_Ma1",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "DamageTable"
+   ],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(22)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 778,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_Ma1/z_en_ma1.c",
+     "line": 75
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Ma1/z_en_ma1.c",
+     "line": 66,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 0,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [],
+   "actionFuncs": [
+    "EnMa1_DoNothing",
+    "EnMa1_FinishGivingWeirdEgg",
+    "EnMa1_GiveWeirdEgg",
+    "EnMa1_Idle",
+    "EnMa1_IdleTeachSong",
+    "EnMa1_StartTeachSong",
+    "EnMa1_TeachSong",
+    "EnMa1_WaitForPlayback"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Ma2",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "DamageTable"
+   ],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(22)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 778,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_Ma2/z_en_ma2.c",
+     "line": 76
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Ma2/z_en_ma2.c",
+     "line": 67,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 0,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [],
+   "actionFuncs": [
+    "EnMa2_ForceTalkAfterSong",
+    "EnMa2_WaitForEponasSong",
+    "EnMa2_WaitForOcarina",
+    "EnMa2_WaitToEndTalk"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Ma3",
+   "category": "ACTORCAT_NPC",
+   "inScopeBecause": [
+    "DamageTable"
+   ],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(22)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 778,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
+   "health": [
+    {
+     "value": 0,
+     "via": "sColChkInfoInit",
+     "file": "src/overlays/actors/ovl_En_Ma3/z_en_ma3.c",
+     "line": 72
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Ma3/z_en_ma3.c",
+     "line": 63,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 0,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [],
+   "actionFuncs": [
+    "func_80AA3200"
+   ]
+  },
+  {
    "overlay": "ovl_En_Mb",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
     "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -8707,6 +11072,23 @@
      "line": 320
     }
    ],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_Mb/z_en_mb.c",
+     "line": 865
+    },
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_Mb/z_en_mb.c",
+     "line": 945
+    },
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_Mb/z_en_mb.c",
+     "line": 1027
+    }
+   ],
    "actionFuncs": [
     "EnMb_ClubAttack",
     "EnMb_ClubDamaged",
@@ -8886,11 +11268,70 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "func_80AAE224",
     "func_80AAE294",
     "func_80AAE50C",
     "func_80AAE598"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Niw",
+   "category": "ACTORCAT_PROP",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Niw/z_en_niw.c",
+     "line": 110,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 4291821567,
+     "atOn": false,
+     "acOn": true
+    },
+    {
+     "file": "src/overlays/actors/ovl_En_Niw/z_en_niw.c",
+     "line": 130,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 0,
+     "atOn": false,
+     "acOn": false
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 2.0f, thisx->world.rot.y, 0.0f, 0x10);",
+     "file": "src/overlays/actors/ovl_En_Niw/z_en_niw.c",
+     "line": 1097
+    }
+   ],
+   "actionFuncs": [
+    "EnNiw_ResetAction",
+    "func_80AB6324",
+    "func_80AB63A8",
+    "func_80AB6450",
+    "func_80AB6570",
+    "func_80AB6A38",
+    "func_80AB6BF8",
+    "func_80AB6D08",
+    "func_80AB6EB4",
+    "func_80AB6F04",
+    "func_80AB70A0",
+    "func_80AB70F8",
+    "func_80AB714C",
+    "func_80AB7204",
+    "func_80AB7290",
+    "func_80AB7328",
+    "func_80AB7420"
    ]
   },
   {
@@ -8920,6 +11361,7 @@
      "line": 134
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "EnNutsball_Projectile",
     "EnNutsball_WaitForObject"
@@ -9091,6 +11533,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnNy_Die",
     "EnNy_Move",
@@ -9290,6 +11733,7 @@
      "line": 508
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "EnOkuta_Appear",
     "EnOkuta_Die",
@@ -9301,6 +11745,25 @@
     "EnOkuta_WaitToDie",
     "EnOkuta_WaitToShoot"
    ]
+  },
+  {
+   "overlay": "ovl_En_Part",
+   "category": "ACTORCAT_ITEMACTION",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_Part/z_en_part.c",
+     "line": 210
+    }
+   ],
+   "actionFuncs": []
   },
   {
    "overlay": "ovl_En_Peehat",
@@ -9500,6 +11963,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnPeehat_Adult_StateDie",
     "EnPeehat_Flying_StateFly",
@@ -9695,6 +12159,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnPoField_Appear",
     "EnPoField_CirclePlayer",
@@ -9716,6 +12181,7 @@
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
     "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -9876,6 +12342,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "this->actor.freezeTimer = 0;",
+     "file": "src/overlays/actors/ovl_En_Po_Sisters/z_en_po_sisters.c",
+     "line": 1169
+    }
+   ],
    "actionFuncs": [
     "func_80ADA4A8",
     "func_80ADA530",
@@ -10080,6 +12553,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnPoh_Appear",
     "EnPoh_Attack",
@@ -10107,6 +12581,7 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -10267,6 +12742,33 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "player->actor.freezeTimer = 40;",
+     "file": "src/overlays/actors/ovl_En_Rd/z_en_rd.c",
+     "line": 388
+    },
+    {
+     "text": "player->actor.freezeTimer = 0;",
+     "file": "src/overlays/actors/ovl_En_Rd/z_en_rd.c",
+     "line": 417
+    },
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_Rd/z_en_rd.c",
+     "line": 563
+    },
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_Rd/z_en_rd.c",
+     "line": 599
+    },
+    {
+     "text": "player->actor.freezeTimer = 60;",
+     "file": "src/overlays/actors/ovl_En_Rd/z_en_rd.c",
+     "line": 641
+    }
+   ],
    "actionFuncs": [
     "EnRd_AttemptPlayerFreeze",
     "EnRd_Crouch",
@@ -10465,13 +12967,32 @@
      "line": 156
     }
    ],
-   "actionFuncs": []
+   "directHurt": [],
+   "actionFuncs": [
+    "EnReeba_Damaged",
+    "EnReeba_Die",
+    "EnReeba_Move",
+    "EnReeba_MoveBig",
+    "EnReeba_Recoiled",
+    "EnReeba_SetupDamaged",
+    "EnReeba_SetupDie",
+    "EnReeba_SetupMoveBig",
+    "EnReeba_SetupSink",
+    "EnReeba_SetupStunned",
+    "EnReeba_SetupSurface",
+    "EnReeba_Sink",
+    "EnReeba_StunDie",
+    "EnReeba_StunRecover",
+    "EnReeba_Stunned",
+    "EnReeba_Surface"
+   ]
   },
   {
    "overlay": "ovl_En_Rr",
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -10642,6 +13163,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "Actor_SetPlayerKnockbackLarge(play, &this->actor, 4.0f, this->actor.shape.rot.y, 12.0f, 8);",
+     "file": "src/overlays/actors/ovl_En_Rr/z_en_rr.c",
+     "line": 349
+    }
+   ],
    "actionFuncs": [
     "EnRr_Approach",
     "EnRr_Damage",
@@ -10681,6 +13209,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnSb_Bounce",
     "EnSb_Cooldown",
@@ -10701,6 +13230,7 @@
    "health": [],
    "elements": [],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -10731,6 +13261,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnShopnuts_Burrow",
     "EnShopnuts_Idle",
@@ -10738,6 +13269,57 @@
     "EnShopnuts_Peek",
     "EnShopnuts_SpawnSalesman",
     "EnShopnuts_ThrowNut"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Si",
+   "category": "ACTORCAT_ITEMACTION",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [
+    {
+     "value": 0,
+     "via": "D_80AFBADC",
+     "file": "src/overlays/actors/ovl_En_Si/z_en_si.c",
+     "line": 49
+    }
+   ],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Si/z_en_si.c",
+     "line": 40,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 144,
+     "atOn": false,
+     "acOn": true
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Si/z_en_si.c",
+     "line": 104
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Si/z_en_si.c",
+     "line": 126
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Si/z_en_si.c",
+     "line": 137
+    }
+   ],
+   "actionFuncs": [
+    "func_80AFB768",
+    "func_80AFB89C",
+    "func_80AFB950"
    ]
   },
   {
@@ -10922,6 +13504,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnSkb_Attack",
     "EnSkb_Death",
@@ -11100,6 +13683,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnSkj_CleanupOcarinaGame",
     "EnSkj_FailedMiniGame",
@@ -11166,15 +13750,154 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
    "overlay": "ovl_En_Ssh",
    "category": "ACTORCAT_NPC",
    "inScopeBecause": [
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(2)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 78,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 3,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 8,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 1,
@@ -11216,6 +13939,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_Ssh/z_en_ssh.c",
+     "line": 489
+    }
+   ],
    "actionFuncs": [
     "EnSsh_Drop",
     "EnSsh_Idle",
@@ -11232,9 +13962,147 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(2)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 78,
+     "entries": [
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x1"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 3,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 8,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 2,
@@ -11276,6 +14144,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -8);",
+     "file": "src/overlays/actors/ovl_En_St/z_en_st.c",
+     "line": 427
+    }
+   ],
    "actionFuncs": [
     "EnSt_BounceAround",
     "EnSt_Die",
@@ -11293,9 +14168,146 @@
    "overlay": "ovl_En_Sw",
    "category": "ACTORCAT_NPC",
    "inScopeBecause": [
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "DamageTable"
    ],
-   "damageTables": [],
+   "damageTables": [
+    {
+     "name": "DamageTable_Get(14)",
+     "file": "src/code/z_collision_btltbls.c",
+     "line": 498,
+     "entries": [
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 1,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 2,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 4,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 8,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      },
+      {
+       "damage": 0,
+       "reaction": "0x0"
+      }
+     ]
+    }
+   ],
    "health": [
     {
      "value": 1,
@@ -11316,7 +14328,14 @@
      "acOn": true
     }
    ],
-   "runtimeAt": [],
+   "runtimeAt": [
+    {
+     "text": "this->collider.elements[0].base.atDmgInfo.damage *= 2;",
+     "file": "src/overlays/actors/ovl_En_Sw/z_en_sw.c",
+     "line": 317
+    }
+   ],
+   "directHurt": [],
    "actionFuncs": [
     "func_80B0D364",
     "func_80B0D3AC",
@@ -11328,6 +14347,94 @@
     "func_80B0E728",
     "func_80B0E90C",
     "func_80B0E9BC"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Syateki_Itm",
+   "category": "ACTORCAT_PROP",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Syateki_Itm/z_en_syateki_itm.c",
+     "line": 146
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Syateki_Itm/z_en_syateki_itm.c",
+     "line": 161
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Syateki_Itm/z_en_syateki_itm.c",
+     "line": 182
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Syateki_Itm/z_en_syateki_itm.c",
+     "line": 288
+    },
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Syateki_Itm/z_en_syateki_itm.c",
+     "line": 320
+    }
+   ],
+   "actionFuncs": [
+    "EnSyatekiItm_CheckTargets",
+    "EnSyatekiItm_CleanupGame",
+    "EnSyatekiItm_EndGame",
+    "EnSyatekiItm_Idle",
+    "EnSyatekiItm_SpawnTargets",
+    "EnSyatekiItm_StartRound"
+   ]
+  },
+  {
+   "overlay": "ovl_En_Syateki_Niw",
+   "category": "ACTORCAT_PROP",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Syateki_Niw/z_en_syateki_niw.c",
+     "line": 70,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 4291821567,
+     "atOn": false,
+     "acOn": true
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "player->actor.freezeTimer = 10;",
+     "file": "src/overlays/actors/ovl_En_Syateki_Niw/z_en_syateki_niw.c",
+     "line": 384
+    },
+    {
+     "text": "player->actor.freezeTimer = 20;",
+     "file": "src/overlays/actors/ovl_En_Syateki_Niw/z_en_syateki_niw.c",
+     "line": 483
+    }
+   ],
+   "actionFuncs": [
+    "EnSyatekiNiw_Archery",
+    "EnSyatekiNiw_Default",
+    "EnSyatekiNiw_ExitArchery",
+    "EnSyatekiNiw_Remove",
+    "EnSyatekiNiw_SetupArchery",
+    "EnSyatekiNiw_SetupDefault"
    ]
   },
   {
@@ -11538,6 +14645,7 @@
      "line": 1104
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "EnTest_Fall",
     "EnTest_Idle",
@@ -11603,6 +14711,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnTite_Attack",
     "EnTite_DeathCry",
@@ -11771,6 +14880,7 @@
      "line": 130
     }
    ],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -11937,6 +15047,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnToryo_Idle"
    ]
@@ -11947,6 +15058,7 @@
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
     "AT_TYPE_ENEMY collider",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -12119,6 +15231,23 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "this->actor.freezeTimer = 80;",
+     "file": "src/overlays/actors/ovl_En_Tp/z_en_tp.c",
+     "line": 582
+    },
+    {
+     "text": "parent->actor.freezeTimer = 80;",
+     "file": "src/overlays/actors/ovl_En_Tp/z_en_tp.c",
+     "line": 596
+    },
+    {
+     "text": "child->actor.freezeTimer = 80;",
+     "file": "src/overlays/actors/ovl_En_Tp/z_en_tp.c",
+     "line": 612
+    }
+   ],
    "actionFuncs": [
     "EnTp_BodyElem",
     "EnTp_BodyElemRemnant",
@@ -12129,6 +15258,36 @@
     "EnTp_Head_WaitPlayerAndRise",
     "actionFunc"
    ]
+  },
+  {
+   "overlay": "ovl_En_Trap",
+   "category": "ACTORCAT_BG",
+   "inScopeBecause": [
+    "hurts Link directly"
+   ],
+   "damageTables": [],
+   "health": [],
+   "elements": [
+    {
+     "file": "src/overlays/actors/ovl_En_Trap/z_en_trap.c",
+     "line": 68,
+     "atFlags": 0,
+     "atEffect": "HIT_SPECIAL_EFFECT_NONE",
+     "atDamage": 0,
+     "acFlags": 4096,
+     "atOn": false,
+     "acOn": true
+    }
+   ],
+   "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "play->damagePlayer(play, -4);",
+     "file": "src/overlays/actors/ovl_En_Trap/z_en_trap.c",
+     "line": 192
+    }
+   ],
+   "actionFuncs": []
   },
   {
    "overlay": "ovl_En_Tubo_Trap",
@@ -12151,6 +15310,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnTuboTrap_Fly",
     "EnTuboTrap_Levitate",
@@ -12333,6 +15493,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnVali_Appear",
     "EnVali_Burnt",
@@ -12369,6 +15530,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": []
   },
   {
@@ -12426,6 +15588,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnVm_Attack",
     "EnVm_Die",
@@ -12439,6 +15602,7 @@
    "category": "ACTORCAT_ENEMY",
    "inScopeBecause": [
     "ACTORCAT_ENEMY",
+    "hurts Link directly",
     "DamageTable"
    ],
    "damageTables": [
@@ -12599,6 +15763,13 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "(this->actor.freezeTimer == 0)) {",
+     "file": "src/overlays/actors/ovl_En_Wallmas/z_en_wallmas.c",
+     "line": 589
+    }
+   ],
    "actionFuncs": [
     "EnWallmas_Cooldown",
     "EnWallmas_Die",
@@ -12781,6 +15952,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnWeiyer_Attack",
     "EnWeiyer_Dead",
@@ -13022,6 +16194,7 @@
      "line": 281
     }
    ],
+   "directHurt": [],
    "actionFuncs": [
     "EnWf_Attack",
     "EnWf_AttackBouncedOff",
@@ -13062,7 +16235,13 @@
     }
    ],
    "runtimeAt": [],
-   "actionFuncs": []
+   "directHurt": [],
+   "actionFuncs": [
+    "EnYukabyun_Break",
+    "func_80B43A94",
+    "func_80B43AD4",
+    "func_80B43B6C"
+   ]
   },
   {
    "overlay": "ovl_En_Zf",
@@ -13258,6 +16437,7 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "EnZf_Attack",
     "EnZf_AttackBounced",
@@ -13284,7 +16464,8 @@
    "overlay": "ovl_Obj_Ice_Poly",
    "category": "ACTORCAT_PROP",
    "inScopeBecause": [
-    "AT_TYPE_ENEMY collider"
+    "AT_TYPE_ENEMY collider",
+    "hurts Link directly"
    ],
    "damageTables": [],
    "health": [],
@@ -13311,6 +16492,18 @@
     }
    ],
    "runtimeAt": [],
+   "directHurt": [
+    {
+     "text": "this->actor.parent->freezeTimer = 40;",
+     "file": "src/overlays/actors/ovl_Obj_Ice_Poly/z_obj_ice_poly.c",
+     "line": 137
+    },
+    {
+     "text": "this->actor.parent->freezeTimer = 40;",
+     "file": "src/overlays/actors/ovl_Obj_Ice_Poly/z_obj_ice_poly.c",
+     "line": 177
+    }
+   ],
    "actionFuncs": [
     "ObjIcePoly_Idle",
     "ObjIcePoly_Melt"
@@ -13326,6 +16519,7 @@
    "health": [],
    "elements": [],
    "runtimeAt": [],
+   "directHurt": [],
    "actionFuncs": [
     "func_80B9D054",
     "func_80B9D0B0"

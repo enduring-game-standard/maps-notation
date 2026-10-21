@@ -39,11 +39,17 @@ export function TextPane({ net, onCommit }: { net: Net; onCommit: (net: Net) => 
     <div className="text-pane">
       <div className="editor">
         <div className="gutter" ref={gutter} aria-hidden>
-          {Array.from({ length: lines }, (_, i) => (
-            <div key={i} className={error?.line === i + 1 ? 'is-error' : undefined}>
-              {i + 1}
-            </div>
-          ))}
+          {gutterRuns(lines, error?.line).map((r) =>
+            r.error ? (
+              <div key={r.from} className="is-error">
+                {r.from}
+              </div>
+            ) : (
+              <div key={r.from} className="run">
+                {Array.from({ length: r.to - r.from + 1 }, (_, i) => r.from + i).join('\n')}
+              </div>
+            ),
+          )}
         </div>
         <textarea
           ref={area}
@@ -71,4 +77,15 @@ export function TextPane({ net, onCommit }: { net: Net; onCommit: (net: Net) => 
       )}
     </div>
   )
+}
+
+/** Line numbers as at most three blocks of text around the error line, so a long file costs three nodes, not one per line. */
+const gutterRuns = (lines: number, errorLine?: number) => {
+  const e = errorLine && errorLine <= lines ? errorLine : undefined
+  const runs: { from: number; to: number; error?: boolean }[] = []
+  if (!e) return [{ from: 1, to: lines }]
+  if (e > 1) runs.push({ from: 1, to: e - 1 })
+  runs.push({ from: e, to: e, error: true })
+  if (e < lines) runs.push({ from: e + 1, to: lines })
+  return runs
 }

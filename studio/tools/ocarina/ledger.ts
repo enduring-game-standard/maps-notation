@@ -97,7 +97,7 @@ export const buildLedger = (inv: Inventory) => {
     const states = Object.entries(s.states ?? {}).map(([k, v]): Entry =>
       isExcluded(v) ? fromExcluded(`${s.overlay}.${k}`, v) : modeledOrMissing(`${s.overlay}.${k}`, phaseIds(v.phase).slice(0, 3).map((id) => ({ file: f, id }))),
     )
-    const sources = [...new Set([...ia.elements.filter((e) => e.atOn).map((e) => `${e.file}:${e.line}`), ...ia.runtimeAt.map((r) => `${r.file}:${r.line}`)])]
+    const sources = [...new Set([...ia.elements.filter((e) => e.atOn).map((e) => `${e.file}:${e.line}`), ...ia.runtimeAt.map((r) => `${r.file}:${r.line}`), ...ia.directHurt.map((r) => `${r.file}:${r.line}`)])]
     const at = sources.map((c): Entry => {
       const item = `${s.overlay}@${c}`
       const v = s.atSources[c as Cite]

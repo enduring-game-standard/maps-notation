@@ -22,6 +22,8 @@ export interface Actor {
   health: (Cite & { value: number; via: string })[]
   elements: Element[]
   runtimeAt: (Cite & { text: string })[]
+  /** Calls that hurt or disable Link without a collider: direct damage, damaging knockback, a freeze timer. */
+  directHurt: (Cite & { text: string })[]
   actionFuncs: string[]
 }
 export interface Inventory { decompSha: string; dmgTypes: readonly string[]; actors: Actor[] }
@@ -34,10 +36,26 @@ const literal = (s: string, defines: Map<string, string>, depth = 0): number => 
   throw new Error(`not a number literal: ${s}`)
 }
 
+const PRESETS = 'src/code/z_collision_btltbls.c'
+let presetCache: DamageTable[] | undefined
+/** The shared tables `DamageTable_Get(n)` returns, named `DamageTable_Get(n)`, each at its own line. */
+const presets = (root: string): DamageTable[] => {
+  if (presetCache) return presetCache
+  const src = readFileSync(join(root, PRESETS), 'utf8')
+  const body = /sDamageTablePresets\[\]\s*=\s*\{([\s\S]*?)\n\};/.exec(src)!
+  const start = body.index + body[0].indexOf(body[1])
+  presetCache = [...body[1].matchAll(/\{\s*\{([\s\S]*?)\}\s*\}/g)].map((m, i) => {
+    const entries = [...m[1].matchAll(/DMG_ENTRY\(\s*([^,]+),\s*([^)]+?)\s*\)/g)].map((e) => ({ damage: literal(e[1], new Map()), reaction: e[2].trim() }))
+    if (entries.length !== 32) throw new Error(`${PRESETS}: preset ${i} has ${entries.length} entries`)
+    return { name: `DamageTable_Get(${i})`, file: PRESETS, line: lineOf(src, start + m.index!) + 1, entries }
+  })
+  return presetCache
+}
+
 const parseActor = (root: string, overlay: string): Actor | undefined => {
   const dir = join(root, 'src/overlays/actors', overlay)
   const files = readdirSync(dir).filter((f) => f.endsWith('.c')).sort()
-  const actor: Actor = { overlay, category: '', inScopeBecause: [], damageTables: [], health: [], elements: [], runtimeAt: [], actionFuncs: [] }
+  const actor: Actor = { overlay, category: '', inScopeBecause: [], damageTables: [], health: [], elements: [], runtimeAt: [], directHurt: [], actionFuncs: [] }
   const funcs = new Set<string>()
   const defines = new Map<string, string>()
   for (const f of readdirSync(dir).filter((f) => /\.[ch]$/.test(f)))
@@ -52,6 +70,11 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       if (entries.length !== 32) throw new Error(`${rel}: damage table ${m[1]} has ${entries.length} entries`)
       actor.damageTables.push({ name: m[1], file: rel, line: lineOf(src, m.index!), entries })
     }
+    for (const m of src.matchAll(/DamageTable_Get\(\s*((?:0x)?[0-9A-Fa-f]+)\s*\)/g)) {
+      const preset = presets(root)[num(m[1])]
+      if (!preset) throw new Error(`${rel}: DamageTable_Get(${m[1]}) names no preset`)
+      if (!actor.damageTables.some((t) => t.name === preset.name)) actor.damageTables.push(preset)
+    }
     for (const m of src.matchAll(/CollisionCheckInfoInit2?\s+(\w+)\s*=\s*\{\s*([^,}]+)/g))
       actor.health.push({ value: num(m[2]), via: m[1], file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/colChkInfo\.health\s*=\s*(-?(?:0x)?[0-9A-Fa-f]+)\s*;/g))
@@ -62,11 +85,14 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
         atFlags: num(m[2]), atEffect: m[3], atDamage: num(m[4]), acFlags: num(m[5]),
         atOn: /ATELEM_ON/.test(m[6]), acOn: /ACELEM_ON/.test(m[7]),
       })
-    for (const m of src.matchAll(/[^\n]*atDmgInfo\.(?:damage|effect|hitSpecialEffect|dmgFlags)\s*=[^\n]*/g))
+    for (const m of src.matchAll(/[^\n]*atDmgInfo\.(?:damage|effect|hitSpecialEffect|dmgFlags)\s*[*+\-|&]?=[^\n]*/g))
       actor.runtimeAt.push({ text: m[0].trim(), file: rel, line: lineOf(src, m.index!) })
-    for (const m of src.matchAll(/actionFunc\s*=\s*(\w+)\s*;/g)) funcs.add(m[1])
+    for (const m of src.matchAll(/[^\n]*\b(?:damagePlayer\(|Actor_SetPlayerKnockback(?:Large|Small)?\(|Player_InflictDamage\w*\(|Health_ChangeBy\(\s*play\s*,\s*-|freezeTimer\s*=)[^\n]*/g))
+      actor.directHurt.push({ text: m[0].trim(), file: rel, line: lineOf(src, m.index!) })
+    for (const m of src.matchAll(/\bactionFunc\s*=\s*(\w+)\s*;/gi)) funcs.add(m[1])
     for (const m of src.matchAll(/\w+_SetupAction\(\s*this\s*,\s*(\w+)\s*\)/g)) funcs.add(m[1])
     if (/AT_ON\s*\|\s*AT_TYPE_ENEMY|AT_TYPE_ENEMY\s*\|\s*AT_ON/.test(src)) actor.inScopeBecause.push('AT_TYPE_ENEMY collider')
+    if (actor.directHurt.some((h) => h.file === rel)) actor.inScopeBecause.push('hurts Link directly')
   }
   actor.actionFuncs = [...funcs].filter((f) => f !== 'NULL').sort()
   if (actor.category === 'ACTORCAT_ENEMY' || actor.category === 'ACTORCAT_BOSS') actor.inScopeBecause.unshift(actor.category)

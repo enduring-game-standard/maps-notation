@@ -157,6 +157,7 @@ export function App() {
         }
         canvas={
           <Canvas
+            key={fitKey}
             net={net}
             mode={mode}
             selection={selection}
@@ -297,6 +298,7 @@ export function App() {
       </aside>
       <main className="stage">
         <Canvas
+          key={fitKey}
           net={net}
           mode={mode}
           selection={selection}
