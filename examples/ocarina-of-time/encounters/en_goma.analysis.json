@@ -1,0 +1,205 @@
+{
+ "positions": 63852,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "egg_fall_boss_timer_clears",
+  "hurt_timer_clears",
+  "link_hurt_overkill",
+  "miss_deku_stick",
+  "hit_deku_stick__egg_resting",
+  "miss_slingshot",
+  "miss_explosive",
+  "miss_boomerang",
+  "miss_slash_kokiri",
+  "hit_slash_kokiri__egg_resting",
+  "miss_magic_fire",
+  "hit_magic_fire__egg_resting",
+  "hit_shield__egg_resting",
+  "miss_spin_kokiri",
+  "hit_spin_kokiri__egg_resting",
+  "miss_jump_kokiri",
+  "hit_jump_kokiri__egg_resting",
+  "miss_jump_kokiri_self",
+  "hit_jump_kokiri_self__egg_resting",
+  "miss_jump_master",
+  "hit_jump_master__egg_resting"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "boss_egg",
+   "positions": 268,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 81,
+    "Link wins": 15,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 211
+  },
+  {
+   "kit": "child_blade",
+   "variant": "room_egg",
+   "positions": 255,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 78,
+    "Link wins": 10,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 207
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "boss_egg",
+   "positions": 970,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 297,
+    "Link wins": 28,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 464
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "room_egg",
+   "positions": 949,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 292,
+    "Link wins": 20,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 489
+  },
+  {
+   "kit": "child_dins",
+   "variant": "boss_egg",
+   "positions": 1715,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 523,
+    "Link wins": 53,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 992
+  },
+  {
+   "kit": "child_dins",
+   "variant": "room_egg",
+   "positions": 1695,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 518,
+    "Link wins": 42,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1021
+  },
+  {
+   "kit": "child_lens",
+   "variant": "boss_egg",
+   "positions": 5345,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1627,
+    "Link wins": 161,
+    "Link falls": 44
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3301
+  },
+  {
+   "kit": "child_lens",
+   "variant": "room_egg",
+   "positions": 5340,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1628,
+    "Link wins": 147,
+    "Link falls": 44
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3123
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "boss_egg",
+   "positions": 16714,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5169,
+    "Link wins": 318,
+    "Link falls": 26
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7832
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "room_egg",
+   "positions": 17184,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5286,
+    "Link wins": 431,
+    "Link falls": 26
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8139
+  },
+  {
+   "kit": "child_spin",
+   "variant": "boss_egg",
+   "positions": 6640,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2038,
+    "Link wins": 140,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4226
+  },
+  {
+   "kit": "child_spin",
+   "variant": "room_egg",
+   "positions": 6777,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2072,
+    "Link wins": 168,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4308
+  }
+ ]
+}

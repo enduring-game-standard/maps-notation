@@ -1,0 +1,429 @@
+{
+ "positions": 1097818,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "vanish_timer_clears",
+  "hover_unseen_timer_clears",
+  "appear_timer_clears",
+  "link_hurt_overkill"
+ ],
+ "kitSplit": {
+  "hit_slash_giant__flee": [
+   "swing_slash_giant",
+   "phase_flee"
+  ],
+  "hit_spin_giant__flee": [
+   "swing_spin_giant",
+   "phase_flee"
+  ],
+  "hit_jump_giant__flee": [
+   "swing_jump_giant",
+   "phase_flee"
+  ],
+  "hit_jump_giant_self__flee": [
+   "swing_jump_giant_self",
+   "phase_flee"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "composer",
+   "positions": 6903,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2101,
+    "Link falls": 480,
+    "Link wins": 40
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 18523
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "poe",
+   "positions": 6916,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2105,
+    "Link falls": 480,
+    "Link wins": 40
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 15067
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "composer",
+   "positions": 1383,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 421,
+    "Link falls": 96,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7560
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "poe",
+   "positions": 1384,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 421,
+    "Link falls": 96,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 6319
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "composer",
+   "positions": 10371,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3329,
+    "Link falls": 192,
+    "Link wins": 32
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 15734
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "poe",
+   "positions": 10375,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3330,
+    "Link falls": 192,
+    "Link wins": 32
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 14927
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "composer",
+   "positions": 9579,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2913,
+    "Link falls": 672,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 14685
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "poe",
+   "positions": 9598,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2919,
+    "Link falls": 672,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16295
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "composer",
+   "positions": 3963,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1249,
+    "Link falls": 144,
+    "Link wins": 24
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10767
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "poe",
+   "positions": 3970,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1251,
+    "Link falls": 144,
+    "Link wins": 24
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 9451
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "composer",
+   "positions": 30149,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 9154,
+    "Link falls": 2148,
+    "Link wins": 100
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 40632
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "poe",
+   "positions": 30211,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 9174,
+    "Link falls": 2148,
+    "Link wins": 100
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 42188
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "composer",
+   "positions": 92831,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 29953,
+    "Link falls": 1248,
+    "Link wins": 288
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 116630
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "poe",
+   "positions": 93044,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 30024,
+    "Link falls": 1248,
+    "Link wins": 288
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 117457
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "composer",
+   "positions": 38307,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 11649,
+    "Link falls": 2688,
+    "Link wins": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 71051
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "poe",
+   "positions": 38389,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 11676,
+    "Link falls": 2688,
+    "Link wins": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 72869
+  },
+  {
+   "kit": "child_blade",
+   "variant": "composer",
+   "positions": 2767,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 845,
+    "Link falls": 192,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10749
+  },
+  {
+   "kit": "child_blade",
+   "variant": "poe",
+   "positions": 2768,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 845,
+    "Link falls": 192,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 11511
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "composer",
+   "positions": 10563,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3329,
+    "Link falls": 384,
+    "Link wins": 16
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 19102
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "poe",
+   "positions": 10567,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3330,
+    "Link falls": 384,
+    "Link wins": 16
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 12578
+  },
+  {
+   "kit": "child_dins",
+   "variant": "composer",
+   "positions": 19155,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5825,
+    "Link falls": 1344,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 37910
+  },
+  {
+   "kit": "child_dins",
+   "variant": "poe",
+   "positions": 19174,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5831,
+    "Link falls": 1344,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 47440
+  },
+  {
+   "kit": "child_lens",
+   "variant": "composer",
+   "positions": 60281,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 18306,
+    "Link falls": 4296,
+    "Link wins": 100
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 127315
+  },
+  {
+   "kit": "child_lens",
+   "variant": "poe",
+   "positions": 60343,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 18326,
+    "Link falls": 4296,
+    "Link wins": 100
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 92856
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "composer",
+   "positions": 185655,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 59905,
+    "Link falls": 2496,
+    "Link wins": 288
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 315076
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "poe",
+   "positions": 185868,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 59976,
+    "Link falls": 2496,
+    "Link wins": 288
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 259313
+  },
+  {
+   "kit": "child_spin",
+   "variant": "composer",
+   "positions": 76611,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 23297,
+    "Link falls": 5376,
+    "Link wins": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 187931
+  },
+  {
+   "kit": "child_spin",
+   "variant": "poe",
+   "positions": 76693,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 23324,
+    "Link falls": 5376,
+    "Link wins": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 215260
+  }
+ ]
+}

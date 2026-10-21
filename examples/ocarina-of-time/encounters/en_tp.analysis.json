@@ -1,0 +1,226 @@
+{
+ "positions": 106092,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "sink_rise_timer_clears",
+  "stunned_wait_rising_timer_clears",
+  "stunned_hover_timer_clears",
+  "stunned_attack_timer_clears",
+  "stunned_sink_plunge_timer_clears",
+  "link_hurt_overkill",
+  "shock_lands_again",
+  "shock_lands_dd_again",
+  "backlash_nayru",
+  "backlash_lands",
+  "backlash_lands_again",
+  "backlash_lands_dd",
+  "backlash_lands_dd_again",
+  "link_helpless_shock"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 1886,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 440,
+    "Link wins": 320,
+    "Link falls": 5
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5490
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 442,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 88,
+    "Link wins": 128,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2184
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 3011,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 704,
+    "Link wins": 512,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4989
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 2640,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 616,
+    "Link wins": 448,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 6791
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 2260,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 528,
+    "Link wins": 384,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 6082
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 8487,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1936,
+    "Link wins": 1600,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 14917
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 26578,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6268,
+    "Link wins": 4464,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 33708
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 10557,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2464,
+    "Link wins": 1792,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 25816
+  },
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 462,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 88,
+    "Link wins": 148,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1106
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 1507,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 352,
+    "Link wins": 256,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4077
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 2640,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 616,
+    "Link wins": 448,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5393
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 8487,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1936,
+    "Link wins": 1600,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 17051
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 26578,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6268,
+    "Link wins": 4464,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 24662
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 10557,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2464,
+    "Link wins": 1792,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 17630
+  }
+ ]
+}

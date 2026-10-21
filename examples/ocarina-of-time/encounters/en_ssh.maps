@@ -1,0 +1,3109 @@
+maps 2
+title "Ocarina of Time combat: Link vs Cursed Skulltula person"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state age_adult "Link is an adult" in setup at 120 150
+state choose_variant "Which Cursed Skulltula person" in setup at 260 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Cursed Skulltula person answers" in beat at 580 80
+state enemy_act "Cursed Skulltula person acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 4/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 120 220
+state link_wins "Cursed Skulltula person defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state has_master_sword "Has master sword" in gear at 1860 570
+state has_hookshot "Has hookshot" in gear at 1720 640
+state has_megaton_hammer "Has megaton hammer" in gear at 1860 640
+state has_bow "Has bow" in gear at 1720 710
+state has_bombchus "Has bombchus" in gear at 1860 710
+state has_mirror_shield "Has mirror shield" in gear at 1720 780
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 780
+state has_giants_knife "Has giants knife" in gear at 1720 850
+state has_double_defense "Has double defense" in gear at 1860 850
+state has_fire_arrows "Has fire arrows" in gear at 1720 920
+state has_ice_arrows "Has ice arrows" in gear at 1860 920
+state has_light_arrows "Has light arrows" in gear at 1720 990
+state has_blue_potion "Has blue potion" in gear at 1860 990
+state phase_hang "Cursed Skulltula person hangs at its ceiling" in enemy at 2040 80
+state phase_hang_armed "Cursed Skulltula person hangs at its ceiling, primed to spin into Link" in enemy at 2180 80
+state phase_drop "Cursed Skulltula person drops toward Link" in enemy at 2040 150
+state phase_drop_armed "Cursed Skulltula person drops toward Link, primed to spin into Link" in enemy at 2180 150
+state phase_down "Cursed Skulltula person hangs at Link's height" in enemy at 2040 220
+state phase_down_armed "Cursed Skulltula person hangs at Link's height, primed to spin into Link" in enemy at 2180 220
+state phase_rise "Cursed Skulltula person climbs back to its ceiling" in enemy at 2040 290
+state phase_rise_armed "Cursed Skulltula person climbs back to its ceiling, primed to spin into Link" in enemy at 2180 290
+state phase_sway "Cursed Skulltula person sways from a hit to its front" in enemy at 2040 360
+state timer_sway "Cursed Skulltula person sways from a hit to its front: beats left" in enemy at 2180 360
+state phase_sway_armed "Cursed Skulltula person sways from a hit to its front, primed to spin into Link" in enemy at 2180 430
+state timer_sway_armed "Cursed Skulltula person sways from a hit to its front, primed to spin into Link: beats left" in enemy at 2040 500
+state phase_stunned_hang "Cursed Skulltula person is stunned (hangs at its ceiling)" in enemy at 2040 570
+state timer_stunned_hang "Cursed Skulltula person is stunned (hangs at its ceiling): beats left" in enemy at 2180 570
+state phase_stunned_drop "Cursed Skulltula person is stunned (drops toward Link)" in enemy at 2180 640
+state timer_stunned_drop "Cursed Skulltula person is stunned (drops toward Link): beats left" in enemy at 2040 710
+state phase_stunned_down "Cursed Skulltula person is stunned (hangs at Link's height)" in enemy at 2040 780
+state timer_stunned_down "Cursed Skulltula person is stunned (hangs at Link's height): beats left" in enemy at 2180 780
+state phase_stunned_rise "Cursed Skulltula person is stunned (climbs back to its ceiling)" in enemy at 2180 850
+state timer_stunned_rise "Cursed Skulltula person is stunned (climbs back to its ceiling): beats left" in enemy at 2040 920
+state phase_ground "Grounded cursed Skulltula person waits by Link" in enemy at 2040 990
+state phase_ground_armed "Grounded cursed Skulltula person waits by Link, primed to spin into Link" in enemy at 2180 990
+state phase_ground_sway "Grounded cursed Skulltula person sways from a hit to its front" in enemy at 2040 1060
+state timer_ground_sway "Grounded cursed Skulltula person sways from a hit to its front: beats left" in enemy at 2180 1060
+state phase_ground_sway_armed "Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link" in enemy at 2180 1130
+state timer_ground_sway_armed "Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link: beats left" in enemy at 2040 1200
+state phase_ground_stunned "Grounded cursed Skulltula person is stunned" in enemy at 2040 1270
+state timer_ground_stunned "Grounded cursed Skulltula person is stunned: beats left" in enemy at 2180 1270
+state status_nayru "Link: nayru (beats left)" in link_state at 1220 290
+state lens_on "Lens of Truth on" in link_state at 1080 360
+state link_guard "Link holds up his shield" in link_state at 1220 360
+state link_dodge "Link dodges" in link_state at 1080 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 2680 80
+state swing_deku_stick "Deku Stick on its way" in hits at 2680 640
+state swing_slingshot "Slingshot seed on its way" in hits at 2680 1060
+state swing_explosive "Explosion on its way" in hits at 2680 1480
+state swing_boomerang "Boomerang on its way" in hits at 2680 2040
+state swing_arrow_normal "Arrow on its way" in hits at 2680 2460
+state swing_hammer_swing "Hammer swing on its way" in hits at 2680 3020
+state swing_hookshot "Hookshot on its way" in hits at 2680 3580
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 2680 4140
+state swing_slash_master "Master Sword slash on its way" in hits at 2680 4560
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 2680 4980
+state swing_arrow_fire "Fire arrow on its way" in hits at 2680 5400
+state swing_arrow_ice "Ice arrow on its way" in hits at 2680 5960
+state swing_arrow_light "Light arrow on its way" in hits at 2680 6520
+state swing_magic_fire "Din's Fire on its way" in hits at 2680 7080
+state swing_shield "Shield on its way" in hits at 2820 7640
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 2820 7710
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 2680 8200
+state swing_spin_master "Master Sword spin attack on its way" in hits at 2820 8620
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 2680 9110
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 2680 9530
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 2820 9950
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 2820 10370
+state swing_jump_master "Master Sword jump attack on its way" in hits at 2680 10860
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 2680 11280
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 2820 11700
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1080 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1220 710
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1080 780
+state incoming_spin "Cursed Skulltula person spins into Link incoming" in attacks at 3000 80
+state tick_nayru "Beat ends: nayru checked" in beat at 580 360
+state lens_count "The Lens: beats toward the next cost" in beat at 440 500
+
+verb sway_timer_clears "Cursed Skulltula person sways from a hit to its front is over" by world priority 99 in enemy at 2040 430
+  take timer_sway
+  unless phase_sway
+
+verb sway_armed_timer_clears "Cursed Skulltula person sways from a hit to its front, primed to spin into Link is over" by world priority 99 in enemy at 2180 500
+  take timer_sway_armed
+  unless phase_sway_armed
+
+verb stunned_hang_timer_clears "Cursed Skulltula person is stunned (hangs at its ceiling) is over" by world priority 99 in enemy at 2040 640
+  take timer_stunned_hang
+  unless phase_stunned_hang
+
+verb stunned_drop_timer_clears "Cursed Skulltula person is stunned (drops toward Link) is over" by world priority 99 in enemy at 2180 710
+  take timer_stunned_drop
+  unless phase_stunned_drop
+
+verb stunned_down_timer_clears "Cursed Skulltula person is stunned (hangs at Link's height) is over" by world priority 99 in enemy at 2040 850
+  take timer_stunned_down
+  unless phase_stunned_down
+
+verb stunned_rise_timer_clears "Cursed Skulltula person is stunned (climbs back to its ceiling) is over" by world priority 99 in enemy at 2180 920
+  take timer_stunned_rise
+  unless phase_stunned_rise
+
+verb ground_sway_timer_clears "Grounded cursed Skulltula person sways from a hit to its front is over" by world priority 99 in enemy at 2040 1130
+  take timer_ground_sway
+  unless phase_ground_sway
+
+verb ground_sway_armed_timer_clears "Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link is over" by world priority 99 in enemy at 2180 1200
+  take timer_ground_sway_armed
+  unless phase_ground_sway_armed
+
+verb ground_stunned_timer_clears "Grounded cursed Skulltula person is stunned is over" by world priority 99 in enemy at 2040 1340
+  take timer_ground_stunned
+  unless phase_ground_stunned
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give choose_variant
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give choose_variant
+
+verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give choose_variant
+
+verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in setup at 120 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 260 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 120 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give choose_variant
+
+verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 260 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 120 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 260 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 120 710
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give choose_variant
+
+verb variant_hanging "Cursed Skulltula person hanging from the ceiling" by world priority 30 in setup at 260 710
+  take choose_variant
+  give phase_hang
+  give range_far
+  give link_turn
+
+verb variant_grounded "Cursed Skulltula person spawned near the floor, which never climbs away" by world priority 30 in setup at 120 780
+  take choose_variant
+  give phase_ground
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 8 link_heal
+
+verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2360 80
+  take link_turn
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_nut_2 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2500 80
+  take link_turn
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2360 150
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2500 150
+  take link_turn
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2360 220
+  take link_turn
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2500 220
+  take link_turn
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2360 290
+  take link_turn
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2500 290
+  take link_turn
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2360 360
+  take link_turn
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2500 360
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2360 430
+  take link_turn
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2500 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2360 500
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2500 500
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2360 570
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2500 570
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2360 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2500 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2360 710
+  take link_turn
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2500 710
+  take link_turn
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2360 780
+  take link_turn
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2500 780
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2360 850
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2500 850
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2360 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2500 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2360 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2500 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2360 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2500 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2360 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2500 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2360 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2500 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2360 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2500 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2360 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2500 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2360 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2500 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2360 1480
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2500 1480
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 2820 80
+  take swing_deku_nut
+
+verb hit_deku_nut__hang "Deku Nut flash hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 150
+  take swing_deku_nut
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_deku_nut__hang_armed "Deku Nut flash hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 150
+  take swing_deku_nut
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_deku_nut__drop "Deku Nut flash hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 220
+  take swing_deku_nut
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_deku_nut__drop_armed "Deku Nut flash hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 220
+  take swing_deku_nut
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_deku_nut__down "Deku Nut flash hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 290
+  take swing_deku_nut
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_deku_nut__down_armed "Deku Nut flash hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 290
+  take swing_deku_nut
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_deku_nut__rise "Deku Nut flash hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 360
+  take swing_deku_nut
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_deku_nut__rise_armed "Deku Nut flash hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 360
+  take swing_deku_nut
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_deku_nut__sway "Deku Nut flash hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 430
+  take swing_deku_nut
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_deku_nut__sway_armed "Deku Nut flash hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 430
+  take swing_deku_nut
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_deku_nut__ground "Deku Nut flash hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 500
+  take swing_deku_nut
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_deku_nut__ground_armed "Deku Nut flash hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 500
+  take swing_deku_nut
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_deku_nut__ground_sway "Deku Nut flash hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 570
+  take swing_deku_nut
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_deku_nut__ground_sway_armed "Deku Nut flash hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 570
+  take swing_deku_nut
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 2820 640
+  take swing_deku_stick
+
+verb hit_deku_stick__hang "Deku Stick hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 710
+  take swing_deku_stick
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_deku_stick__hang_armed "Deku Stick hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 710
+  take swing_deku_stick
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_deku_stick__drop "Deku Stick hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 780
+  take swing_deku_stick
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_deku_stick__drop_armed "Deku Stick hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 780
+  take swing_deku_stick
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_deku_stick__down "Deku Stick hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 850
+  take swing_deku_stick
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_deku_stick__down_armed "Deku Stick hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 850
+  take swing_deku_stick
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_deku_stick__rise "Deku Stick hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 920
+  take swing_deku_stick
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_deku_stick__rise_armed "Deku Stick hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 920
+  take swing_deku_stick
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_deku_stick__ground "Deku Stick hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 990
+  take swing_deku_stick
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_deku_stick__ground_armed "Deku Stick hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 990
+  take swing_deku_stick
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 2820 1060
+  take swing_slingshot
+
+verb hit_slingshot__hang "Slingshot seed hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 1130
+  take swing_slingshot
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slingshot__hang_armed "Slingshot seed hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 1130
+  take swing_slingshot
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slingshot__drop "Slingshot seed hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 1200
+  take swing_slingshot
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slingshot__drop_armed "Slingshot seed hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 1200
+  take swing_slingshot
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slingshot__down "Slingshot seed hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 1270
+  take swing_slingshot
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slingshot__down_armed "Slingshot seed hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 1270
+  take swing_slingshot
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slingshot__rise "Slingshot seed hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 1340
+  take swing_slingshot
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slingshot__rise_armed "Slingshot seed hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 1340
+  take swing_slingshot
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slingshot__ground "Slingshot seed hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 1410
+  take swing_slingshot
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_slingshot__ground_armed "Slingshot seed hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 1410
+  take swing_slingshot
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 2820 1480
+  take swing_explosive
+
+verb hit_explosive__hang "Explosion hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 1550
+  take swing_explosive
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_explosive__hang_armed "Explosion hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 1550
+  take swing_explosive
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_explosive__drop "Explosion hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 1620
+  take swing_explosive
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_explosive__drop_armed "Explosion hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 1620
+  take swing_explosive
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_explosive__down "Explosion hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 1690
+  take swing_explosive
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_explosive__down_armed "Explosion hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 1690
+  take swing_explosive
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_explosive__rise "Explosion hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 1760
+  take swing_explosive
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_explosive__rise_armed "Explosion hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 1760
+  take swing_explosive
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_explosive__sway "Explosion hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 1830
+  take swing_explosive
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_explosive__sway_armed "Explosion hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 1830
+  take swing_explosive
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_explosive__ground "Explosion hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 1900
+  take swing_explosive
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_explosive__ground_armed "Explosion hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 1900
+  take swing_explosive
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_explosive__ground_sway "Explosion hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 1970
+  take swing_explosive
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_explosive__ground_sway_armed "Explosion hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 1970
+  take swing_explosive
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 2820 2040
+  take swing_boomerang
+
+verb hit_boomerang__hang "Boomerang hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 2110
+  take swing_boomerang
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_boomerang__hang_armed "Boomerang hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 2110
+  take swing_boomerang
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_boomerang__drop "Boomerang hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 2180
+  take swing_boomerang
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_boomerang__drop_armed "Boomerang hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 2180
+  take swing_boomerang
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_boomerang__down "Boomerang hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 2250
+  take swing_boomerang
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_boomerang__down_armed "Boomerang hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 2250
+  take swing_boomerang
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_boomerang__rise "Boomerang hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 2320
+  take swing_boomerang
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_boomerang__rise_armed "Boomerang hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 2320
+  take swing_boomerang
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_boomerang__ground "Boomerang hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 2390
+  take swing_boomerang
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_boomerang__ground_armed "Boomerang hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 2390
+  take swing_boomerang
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 2820 2460
+  take swing_arrow_normal
+
+verb hit_arrow_normal__hang "Arrow hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 2530
+  take swing_arrow_normal
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_arrow_normal__hang_armed "Arrow hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 2530
+  take swing_arrow_normal
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_arrow_normal__drop "Arrow hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 2600
+  take swing_arrow_normal
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_arrow_normal__drop_armed "Arrow hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 2600
+  take swing_arrow_normal
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_arrow_normal__down "Arrow hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 2670
+  take swing_arrow_normal
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_normal__down_armed "Arrow hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 2670
+  take swing_arrow_normal
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_normal__rise "Arrow hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 2740
+  take swing_arrow_normal
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_arrow_normal__rise_armed "Arrow hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 2740
+  take swing_arrow_normal
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_arrow_normal__sway "Arrow hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 2810
+  take swing_arrow_normal
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_normal__sway_armed "Arrow hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 2810
+  take swing_arrow_normal
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_normal__ground "Arrow hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 2880
+  take swing_arrow_normal
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_normal__ground_armed "Arrow hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 2880
+  take swing_arrow_normal
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_normal__ground_sway "Arrow hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 2950
+  take swing_arrow_normal
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_normal__ground_sway_armed "Arrow hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 2950
+  take swing_arrow_normal
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 2820 3020
+  take swing_hammer_swing
+
+verb hit_hammer_swing__hang "Hammer swing hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 3090
+  take swing_hammer_swing
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_hammer_swing__hang_armed "Hammer swing hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 3090
+  take swing_hammer_swing
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_hammer_swing__drop "Hammer swing hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 3160
+  take swing_hammer_swing
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_hammer_swing__drop_armed "Hammer swing hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 3160
+  take swing_hammer_swing
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_hammer_swing__down "Hammer swing hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 3230
+  take swing_hammer_swing
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hammer_swing__down_armed "Hammer swing hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 3230
+  take swing_hammer_swing
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hammer_swing__rise "Hammer swing hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 3300
+  take swing_hammer_swing
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_hammer_swing__rise_armed "Hammer swing hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 3300
+  take swing_hammer_swing
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_hammer_swing__sway "Hammer swing hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 3370
+  take swing_hammer_swing
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hammer_swing__sway_armed "Hammer swing hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 3370
+  take swing_hammer_swing
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hammer_swing__ground "Hammer swing hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 3440
+  take swing_hammer_swing
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hammer_swing__ground_armed "Hammer swing hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 3440
+  take swing_hammer_swing
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hammer_swing__ground_sway "Hammer swing hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 3510
+  take swing_hammer_swing
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hammer_swing__ground_sway_armed "Hammer swing hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 3510
+  take swing_hammer_swing
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 2820 3580
+  take swing_hookshot
+
+verb hit_hookshot__hang "Hookshot hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 3650
+  take swing_hookshot
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_hookshot__hang_armed "Hookshot hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 3650
+  take swing_hookshot
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_hookshot__drop "Hookshot hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 3720
+  take swing_hookshot
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_hookshot__drop_armed "Hookshot hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 3720
+  take swing_hookshot
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_hookshot__down "Hookshot hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 3790
+  take swing_hookshot
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hookshot__down_armed "Hookshot hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 3790
+  take swing_hookshot
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hookshot__rise "Hookshot hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 3860
+  take swing_hookshot
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_hookshot__rise_armed "Hookshot hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 3860
+  take swing_hookshot
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_hookshot__sway "Hookshot hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 3930
+  take swing_hookshot
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hookshot__sway_armed "Hookshot hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 3930
+  take swing_hookshot
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hookshot__ground "Hookshot hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 4000
+  take swing_hookshot
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hookshot__ground_armed "Hookshot hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 4000
+  take swing_hookshot
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hookshot__ground_sway "Hookshot hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 4070
+  take swing_hookshot
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hookshot__ground_sway_armed "Hookshot hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 4070
+  take swing_hookshot
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 2820 4140
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__hang "Kokiri Sword slash hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 4210
+  take swing_slash_kokiri
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_kokiri__hang_armed "Kokiri Sword slash hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 4210
+  take swing_slash_kokiri
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_kokiri__drop "Kokiri Sword slash hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 4280
+  take swing_slash_kokiri
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_kokiri__drop_armed "Kokiri Sword slash hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 4280
+  take swing_slash_kokiri
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_kokiri__down "Kokiri Sword slash hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 4350
+  take swing_slash_kokiri
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_kokiri__down_armed "Kokiri Sword slash hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 4350
+  take swing_slash_kokiri
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_kokiri__rise "Kokiri Sword slash hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 4420
+  take swing_slash_kokiri
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_kokiri__rise_armed "Kokiri Sword slash hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 4420
+  take swing_slash_kokiri
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_kokiri__ground "Kokiri Sword slash hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 4490
+  take swing_slash_kokiri
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_slash_kokiri__ground_armed "Kokiri Sword slash hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 4490
+  take swing_slash_kokiri
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 2820 4560
+  take swing_slash_master
+
+verb hit_slash_master__hang "Master Sword slash hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 4630
+  take swing_slash_master
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_master__hang_armed "Master Sword slash hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 4630
+  take swing_slash_master
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_master__drop "Master Sword slash hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 4700
+  take swing_slash_master
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_master__drop_armed "Master Sword slash hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 4700
+  take swing_slash_master
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_master__down "Master Sword slash hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 4770
+  take swing_slash_master
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_master__down_armed "Master Sword slash hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 4770
+  take swing_slash_master
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_master__rise "Master Sword slash hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 4840
+  take swing_slash_master
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_master__rise_armed "Master Sword slash hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 4840
+  take swing_slash_master
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_master__ground "Master Sword slash hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 4910
+  take swing_slash_master
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_slash_master__ground_armed "Master Sword slash hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 4910
+  take swing_slash_master
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 2820 4980
+  take swing_slash_giant
+
+verb hit_slash_giant__hang "Two-handed sword slash hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 5050
+  take swing_slash_giant
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_giant__hang_armed "Two-handed sword slash hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 5050
+  take swing_slash_giant
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_giant__drop "Two-handed sword slash hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 5120
+  take swing_slash_giant
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_giant__drop_armed "Two-handed sword slash hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 5120
+  take swing_slash_giant
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_giant__down "Two-handed sword slash hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 5190
+  take swing_slash_giant
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_giant__down_armed "Two-handed sword slash hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 5190
+  take swing_slash_giant
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_giant__rise "Two-handed sword slash hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 5260
+  take swing_slash_giant
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_slash_giant__rise_armed "Two-handed sword slash hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 5260
+  take swing_slash_giant
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_slash_giant__ground "Two-handed sword slash hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 5330
+  take swing_slash_giant
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_slash_giant__ground_armed "Two-handed sword slash hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 5330
+  take swing_slash_giant
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 2820 5400
+  take swing_arrow_fire
+
+verb hit_arrow_fire__hang "Fire arrow hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 5470
+  take swing_arrow_fire
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_arrow_fire__hang_armed "Fire arrow hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 5470
+  take swing_arrow_fire
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_arrow_fire__drop "Fire arrow hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 5540
+  take swing_arrow_fire
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_arrow_fire__drop_armed "Fire arrow hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 5540
+  take swing_arrow_fire
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_arrow_fire__down "Fire arrow hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 5610
+  take swing_arrow_fire
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_fire__down_armed "Fire arrow hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 5610
+  take swing_arrow_fire
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_fire__rise "Fire arrow hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 5680
+  take swing_arrow_fire
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_arrow_fire__rise_armed "Fire arrow hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 5680
+  take swing_arrow_fire
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_arrow_fire__sway "Fire arrow hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 5750
+  take swing_arrow_fire
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_fire__sway_armed "Fire arrow hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 5750
+  take swing_arrow_fire
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_fire__ground "Fire arrow hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 5820
+  take swing_arrow_fire
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_fire__ground_armed "Fire arrow hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 5820
+  take swing_arrow_fire
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_fire__ground_sway "Fire arrow hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 5890
+  take swing_arrow_fire
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_fire__ground_sway_armed "Fire arrow hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 5890
+  take swing_arrow_fire
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 2820 5960
+  take swing_arrow_ice
+
+verb hit_arrow_ice__hang "Ice arrow hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 6030
+  take swing_arrow_ice
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_arrow_ice__hang_armed "Ice arrow hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 6030
+  take swing_arrow_ice
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_arrow_ice__drop "Ice arrow hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 6100
+  take swing_arrow_ice
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_arrow_ice__drop_armed "Ice arrow hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 6100
+  take swing_arrow_ice
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_arrow_ice__down "Ice arrow hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 6170
+  take swing_arrow_ice
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_ice__down_armed "Ice arrow hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 6170
+  take swing_arrow_ice
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_ice__rise "Ice arrow hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 6240
+  take swing_arrow_ice
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_arrow_ice__rise_armed "Ice arrow hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 6240
+  take swing_arrow_ice
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_arrow_ice__sway "Ice arrow hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 6310
+  take swing_arrow_ice
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_ice__sway_armed "Ice arrow hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 6310
+  take swing_arrow_ice
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_ice__ground "Ice arrow hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 6380
+  take swing_arrow_ice
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_ice__ground_armed "Ice arrow hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 6380
+  take swing_arrow_ice
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_ice__ground_sway "Ice arrow hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 6450
+  take swing_arrow_ice
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_ice__ground_sway_armed "Ice arrow hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 6450
+  take swing_arrow_ice
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 2820 6520
+  take swing_arrow_light
+
+verb hit_arrow_light__hang "Light arrow hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 6590
+  take swing_arrow_light
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_arrow_light__hang_armed "Light arrow hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 6590
+  take swing_arrow_light
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_arrow_light__drop "Light arrow hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 6660
+  take swing_arrow_light
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_arrow_light__drop_armed "Light arrow hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 6660
+  take swing_arrow_light
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_arrow_light__down "Light arrow hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 6730
+  take swing_arrow_light
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_light__down_armed "Light arrow hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 6730
+  take swing_arrow_light
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_light__rise "Light arrow hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 6800
+  take swing_arrow_light
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_arrow_light__rise_armed "Light arrow hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 6800
+  take swing_arrow_light
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_arrow_light__sway "Light arrow hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 6870
+  take swing_arrow_light
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_light__sway_armed "Light arrow hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 6870
+  take swing_arrow_light
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_arrow_light__ground "Light arrow hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 6940
+  take swing_arrow_light
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_light__ground_armed "Light arrow hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 6940
+  take swing_arrow_light
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_light__ground_sway "Light arrow hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 7010
+  take swing_arrow_light
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_arrow_light__ground_sway_armed "Light arrow hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 7010
+  take swing_arrow_light
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 2820 7080
+  take swing_magic_fire
+
+verb hit_magic_fire__hang "Din's Fire hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 7150
+  take swing_magic_fire
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_magic_fire__hang_armed "Din's Fire hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 7150
+  take swing_magic_fire
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_magic_fire__drop "Din's Fire hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 7220
+  take swing_magic_fire
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_magic_fire__drop_armed "Din's Fire hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 7220
+  take swing_magic_fire
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_magic_fire__down "Din's Fire hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 7290
+  take swing_magic_fire
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_magic_fire__down_armed "Din's Fire hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 7290
+  take swing_magic_fire
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_magic_fire__rise "Din's Fire hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 7360
+  take swing_magic_fire
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_magic_fire__rise_armed "Din's Fire hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 7360
+  take swing_magic_fire
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_magic_fire__sway "Din's Fire hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 7430
+  take swing_magic_fire
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_magic_fire__sway_armed "Din's Fire hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 7430
+  take swing_magic_fire
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_magic_fire__ground "Din's Fire hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 7500
+  take swing_magic_fire
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_magic_fire__ground_armed "Din's Fire hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 7500
+  take swing_magic_fire
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_magic_fire__ground_sway "Din's Fire hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2680 7570
+  take swing_magic_fire
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_magic_fire__ground_sway_armed "Din's Fire hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2820 7570
+  take swing_magic_fire
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 2680 7640
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 2680 7710
+  take swing_shield
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 2680 7780
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__hang "Kokiri spin attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2820 7780
+  take swing_spin_kokiri
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_kokiri__hang_armed "Kokiri spin attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 7850
+  take swing_spin_kokiri
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_kokiri__drop "Kokiri spin attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2820 7850
+  take swing_spin_kokiri
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_kokiri__drop_armed "Kokiri spin attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2680 7920
+  take swing_spin_kokiri
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_kokiri__down "Kokiri spin attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2820 7920
+  take swing_spin_kokiri
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_kokiri__down_armed "Kokiri spin attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2680 7990
+  take swing_spin_kokiri
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_kokiri__rise "Kokiri spin attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2820 7990
+  take swing_spin_kokiri
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_kokiri__rise_armed "Kokiri spin attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 8060
+  take swing_spin_kokiri
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_kokiri__ground "Kokiri spin attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2820 8060
+  take swing_spin_kokiri
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_spin_kokiri__ground_armed "Kokiri spin attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2680 8130
+  take swing_spin_kokiri
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 2820 8130
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 2820 8200
+  take swing_spin_giant
+
+verb hit_spin_giant__hang "Two-handed spin attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 8270
+  take swing_spin_giant
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_giant__hang_armed "Two-handed spin attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 8270
+  take swing_spin_giant
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_giant__drop "Two-handed spin attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 8340
+  take swing_spin_giant
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_giant__drop_armed "Two-handed spin attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 8340
+  take swing_spin_giant
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_giant__down "Two-handed spin attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 8410
+  take swing_spin_giant
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_giant__down_armed "Two-handed spin attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 8410
+  take swing_spin_giant
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_giant__rise "Two-handed spin attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 8480
+  take swing_spin_giant
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_giant__rise_armed "Two-handed spin attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 8480
+  take swing_spin_giant
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_giant__ground "Two-handed spin attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 8550
+  take swing_spin_giant
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_spin_giant__ground_armed "Two-handed spin attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 8550
+  take swing_spin_giant
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 2680 8620
+  take swing_spin_giant
+  need range_far
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 2680 8690
+  take swing_spin_master
+
+verb hit_spin_master__hang "Master Sword spin attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2820 8690
+  take swing_spin_master
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_master__hang_armed "Master Sword spin attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 8760
+  take swing_spin_master
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_master__drop "Master Sword spin attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2820 8760
+  take swing_spin_master
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_master__drop_armed "Master Sword spin attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2680 8830
+  take swing_spin_master
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_master__down "Master Sword spin attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2820 8830
+  take swing_spin_master
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_master__down_armed "Master Sword spin attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2680 8900
+  take swing_spin_master
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_master__rise "Master Sword spin attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2820 8900
+  take swing_spin_master
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_spin_master__rise_armed "Master Sword spin attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 8970
+  take swing_spin_master
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_spin_master__ground "Master Sword spin attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2820 8970
+  take swing_spin_master
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_spin_master__ground_armed "Master Sword spin attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2680 9040
+  take swing_spin_master
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 2820 9040
+  take swing_spin_master
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 2820 9110
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__hang "Kokiri jump attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 9180
+  take swing_jump_kokiri
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_kokiri__hang_armed "Kokiri jump attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 9180
+  take swing_jump_kokiri
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_kokiri__drop "Kokiri jump attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 9250
+  take swing_jump_kokiri
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_kokiri__drop_armed "Kokiri jump attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 9250
+  take swing_jump_kokiri
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_kokiri__down "Kokiri jump attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 9320
+  take swing_jump_kokiri
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_kokiri__down_armed "Kokiri jump attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 9320
+  take swing_jump_kokiri
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_kokiri__rise "Kokiri jump attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 9390
+  take swing_jump_kokiri
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_kokiri__rise_armed "Kokiri jump attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 9390
+  take swing_jump_kokiri
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_kokiri__ground "Kokiri jump attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 9460
+  take swing_jump_kokiri
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_jump_kokiri__ground_armed "Kokiri jump attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 9460
+  take swing_jump_kokiri
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 2820 9530
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__hang "Kokiri jump attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 9600
+  take swing_jump_kokiri_self
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_kokiri_self__hang_armed "Kokiri jump attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 9600
+  take swing_jump_kokiri_self
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_kokiri_self__drop "Kokiri jump attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 9670
+  take swing_jump_kokiri_self
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_kokiri_self__drop_armed "Kokiri jump attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 9670
+  take swing_jump_kokiri_self
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_kokiri_self__down "Kokiri jump attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 9740
+  take swing_jump_kokiri_self
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_kokiri_self__down_armed "Kokiri jump attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 9740
+  take swing_jump_kokiri_self
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_kokiri_self__rise "Kokiri jump attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 9810
+  take swing_jump_kokiri_self
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_kokiri_self__rise_armed "Kokiri jump attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 9810
+  take swing_jump_kokiri_self
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_kokiri_self__ground "Kokiri jump attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 9880
+  take swing_jump_kokiri_self
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_jump_kokiri_self__ground_armed "Kokiri jump attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 9880
+  take swing_jump_kokiri_self
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 2680 9950
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 2680 10020
+  take swing_jump_giant
+
+verb hit_jump_giant__hang "Two-handed jump attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2820 10020
+  take swing_jump_giant
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_giant__hang_armed "Two-handed jump attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 10090
+  take swing_jump_giant
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_giant__drop "Two-handed jump attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2820 10090
+  take swing_jump_giant
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_giant__drop_armed "Two-handed jump attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2680 10160
+  take swing_jump_giant
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_giant__down "Two-handed jump attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2820 10160
+  take swing_jump_giant
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_giant__down_armed "Two-handed jump attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2680 10230
+  take swing_jump_giant
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_giant__rise "Two-handed jump attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2820 10230
+  take swing_jump_giant
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_giant__rise_armed "Two-handed jump attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 10300
+  take swing_jump_giant
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_giant__ground "Two-handed jump attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2820 10300
+  take swing_jump_giant
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_jump_giant__ground_armed "Two-handed jump attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2680 10370
+  take swing_jump_giant
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 2680 10440
+  take swing_jump_giant_self
+
+verb hit_jump_giant_self__hang "Two-handed jump attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2820 10440
+  take swing_jump_giant_self
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_giant_self__hang_armed "Two-handed jump attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 10510
+  take swing_jump_giant_self
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_giant_self__drop "Two-handed jump attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2820 10510
+  take swing_jump_giant_self
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_giant_self__drop_armed "Two-handed jump attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2680 10580
+  take swing_jump_giant_self
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_giant_self__down "Two-handed jump attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2820 10580
+  take swing_jump_giant_self
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_giant_self__down_armed "Two-handed jump attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2680 10650
+  take swing_jump_giant_self
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_giant_self__rise "Two-handed jump attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2820 10650
+  take swing_jump_giant_self
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_giant_self__rise_armed "Two-handed jump attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 10720
+  take swing_jump_giant_self
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_giant_self__ground "Two-handed jump attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2820 10720
+  take swing_jump_giant_self
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_jump_giant_self__ground_armed "Two-handed jump attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2680 10790
+  take swing_jump_giant_self
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 2820 10790
+  take swing_jump_giant_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 2820 10860
+  take swing_jump_master
+
+verb hit_jump_master__hang "Master Sword jump attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 10930
+  take swing_jump_master
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_master__hang_armed "Master Sword jump attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 10930
+  take swing_jump_master
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_master__drop "Master Sword jump attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 11000
+  take swing_jump_master
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_master__drop_armed "Master Sword jump attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 11000
+  take swing_jump_master
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_master__down "Master Sword jump attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 11070
+  take swing_jump_master
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_master__down_armed "Master Sword jump attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 11070
+  take swing_jump_master
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_master__rise "Master Sword jump attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 11140
+  take swing_jump_master
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_master__rise_armed "Master Sword jump attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 11140
+  take swing_jump_master
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_master__ground "Master Sword jump attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 11210
+  take swing_jump_master
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_jump_master__ground_armed "Master Sword jump attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 11210
+  take swing_jump_master
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 2820 11280
+  take swing_jump_master_self
+
+verb hit_jump_master_self__hang "Master Sword jump attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2680 11350
+  take swing_jump_master_self
+  take phase_hang
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_master_self__hang_armed "Master Sword jump attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 11350
+  take swing_jump_master_self
+  take phase_hang_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_master_self__drop "Master Sword jump attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2680 11420
+  take swing_jump_master_self
+  take phase_drop
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_master_self__drop_armed "Master Sword jump attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2820 11420
+  take swing_jump_master_self
+  take phase_drop_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_master_self__down "Master Sword jump attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2680 11490
+  take swing_jump_master_self
+  take phase_down
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_master_self__down_armed "Master Sword jump attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2820 11490
+  take swing_jump_master_self
+  take phase_down_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_master_self__rise "Master Sword jump attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2680 11560
+  take swing_jump_master_self
+  take phase_rise
+  give phase_sway
+  give 3 timer_sway
+
+verb hit_jump_master_self__rise_armed "Master Sword jump attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2820 11560
+  take swing_jump_master_self
+  take phase_rise_armed
+  give phase_sway_armed
+  give 3 timer_sway_armed
+
+verb hit_jump_master_self__ground "Master Sword jump attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2680 11630
+  take swing_jump_master_self
+  take phase_ground
+  give phase_ground_sway
+  give 3 timer_ground_sway
+
+verb hit_jump_master_self__ground_armed "Master Sword jump attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2820 11630
+  take swing_jump_master_self
+  take phase_ground_armed
+  give phase_ground_sway_armed
+  give 3 timer_ground_sway_armed
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 2680 11700
+  take swing_jump_master_self
+  need range_far
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 2680 11770
+  take swing_hammer_jump
+
+verb hit_hammer_jump__hang "Hammer jump attack hits (Cursed Skulltula person hangs at its ceiling)" by world priority 80 in hits at 2820 11770
+  take swing_hammer_jump
+  take phase_hang
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_hammer_jump__hang_armed "Hammer jump attack hits (Cursed Skulltula person hangs at its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 11840
+  take swing_hammer_jump
+  take phase_hang_armed
+  give phase_stunned_hang
+  give 6 timer_stunned_hang
+
+verb hit_hammer_jump__drop "Hammer jump attack hits (Cursed Skulltula person drops toward Link)" by world priority 80 in hits at 2820 11840
+  take swing_hammer_jump
+  take phase_drop
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_hammer_jump__drop_armed "Hammer jump attack hits (Cursed Skulltula person drops toward Link, primed to spin into Link)" by world priority 80 in hits at 2680 11910
+  take swing_hammer_jump
+  take phase_drop_armed
+  give phase_stunned_drop
+  give 6 timer_stunned_drop
+
+verb hit_hammer_jump__down "Hammer jump attack hits (Cursed Skulltula person hangs at Link's height)" by world priority 80 in hits at 2820 11910
+  take swing_hammer_jump
+  take phase_down
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hammer_jump__down_armed "Hammer jump attack hits (Cursed Skulltula person hangs at Link's height, primed to spin into Link)" by world priority 80 in hits at 2680 11980
+  take swing_hammer_jump
+  take phase_down_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hammer_jump__rise "Hammer jump attack hits (Cursed Skulltula person climbs back to its ceiling)" by world priority 80 in hits at 2820 11980
+  take swing_hammer_jump
+  take phase_rise
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_hammer_jump__rise_armed "Hammer jump attack hits (Cursed Skulltula person climbs back to its ceiling, primed to spin into Link)" by world priority 80 in hits at 2680 12050
+  take swing_hammer_jump
+  take phase_rise_armed
+  give phase_stunned_rise
+  give 6 timer_stunned_rise
+
+verb hit_hammer_jump__sway "Hammer jump attack hits (Cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2820 12050
+  take swing_hammer_jump
+  take phase_sway
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hammer_jump__sway_armed "Hammer jump attack hits (Cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2680 12120
+  take swing_hammer_jump
+  take phase_sway_armed
+  give phase_stunned_down
+  give 6 timer_stunned_down
+
+verb hit_hammer_jump__ground "Hammer jump attack hits (Grounded cursed Skulltula person waits by Link)" by world priority 80 in hits at 2820 12120
+  take swing_hammer_jump
+  take phase_ground
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hammer_jump__ground_armed "Hammer jump attack hits (Grounded cursed Skulltula person waits by Link, primed to spin into Link)" by world priority 80 in hits at 2680 12190
+  take swing_hammer_jump
+  take phase_ground_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hammer_jump__ground_sway "Hammer jump attack hits (Grounded cursed Skulltula person sways from a hit to its front)" by world priority 80 in hits at 2820 12190
+  take swing_hammer_jump
+  take phase_ground_sway
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb hit_hammer_jump__ground_sway_armed "Hammer jump attack hits (Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link)" by world priority 80 in hits at 2680 12260
+  take swing_hammer_jump
+  take phase_ground_sway_armed
+  give phase_ground_stunned
+  give 6 timer_ground_stunned
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2360 1550
+  take link_turn
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2500 1550
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2360 1620
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2500 1620
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2360 1690
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2500 1690
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2360 1760
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2500 1760
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2360 1830
+  take link_turn
+  take has_red_potion
+  give 8 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2500 1830
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2360 1900
+  take link_turn
+  take has_blue_potion
+  give 8 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2500 1900
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2360 1970
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2500 1970
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Cursed Skulltula person gets ready" by world priority 70 in enemy at 2180 1340
+  take enemy_turn
+  give enemy_act
+
+verb hang_step_1 "It drops at Link" by world priority 69 in enemy at 2040 1410
+  take enemy_act
+  take phase_hang
+  give phase_drop
+  give beat_end
+  need range_near
+
+verb hang_holds "Cursed Skulltula person hangs at its ceiling: nothing changes" by world priority 68 in enemy at 2180 1410
+  take enemy_act
+  need phase_hang
+  give beat_end
+
+verb hang_armed_step_1 "It drops at Link" by world priority 69 in enemy at 2040 1480
+  take enemy_act
+  take phase_hang_armed
+  give phase_drop_armed
+  give beat_end
+  need range_near
+
+verb hang_armed_holds "Cursed Skulltula person hangs at its ceiling, primed to spin into Link: nothing changes" by world priority 68 in enemy at 2180 1480
+  take enemy_act
+  need phase_hang_armed
+  give beat_end
+
+verb drop_step_1 "It lands at Link's height" by world priority 69 in enemy at 2040 1550
+  take enemy_act
+  take phase_drop
+  give phase_down
+  give beat_end
+  need range_near
+
+verb drop_step_2 "Link is gone, so it climbs back" by world priority 69 in enemy at 2180 1550
+  take enemy_act
+  take phase_drop
+  give phase_rise
+  give beat_end
+  need range_far
+
+verb drop_armed_step_1 "It lands at Link's height" by world priority 69 in enemy at 2040 1620
+  take enemy_act
+  take phase_drop_armed
+  give phase_down_armed
+  give beat_end
+  need range_near
+
+verb drop_armed_step_2 "Link is gone, so it climbs back" by world priority 69 in enemy at 2180 1620
+  take enemy_act
+  take phase_drop_armed
+  give phase_rise_armed
+  give beat_end
+  need range_far
+
+verb down_step_1 "Link is gone, so it climbs back" by world priority 69 in enemy at 2040 1690
+  take enemy_act
+  take phase_down
+  give phase_rise
+  give beat_end
+  need range_far
+
+verb down_holds "Cursed Skulltula person hangs at Link's height: nothing changes" by world priority 68 in enemy at 2180 1690
+  take enemy_act
+  need phase_down
+  give beat_end
+
+verb down_armed_step_1 "Link is gone, so it climbs back" by world priority 69 in enemy at 2040 1760
+  take enemy_act
+  take phase_down_armed
+  give phase_rise_armed
+  give beat_end
+  need range_far
+
+verb down_armed_step_2 "It spins into Link" by world priority 69 in enemy at 2180 1760
+  take enemy_act
+  take phase_down_armed
+  give phase_down
+  give incoming_spin
+  give beat_end
+  need range_near
+
+verb rise_step_1 "Link is back, so it drops again" by world priority 69 in enemy at 2040 1830
+  take enemy_act
+  take phase_rise
+  give phase_drop
+  give beat_end
+  need range_near
+
+verb rise_step_2 "It reaches its ceiling" by world priority 69 in enemy at 2180 1830
+  take enemy_act
+  take phase_rise
+  give phase_hang
+  give beat_end
+  need range_far
+
+verb rise_armed_step_1 "Link is back, so it drops again" by world priority 69 in enemy at 2040 1900
+  take enemy_act
+  take phase_rise_armed
+  give phase_drop_armed
+  give beat_end
+  need range_near
+
+verb rise_armed_step_2 "It reaches its ceiling" by world priority 69 in enemy at 2180 1900
+  take enemy_act
+  take phase_rise_armed
+  give phase_hang_armed
+  give beat_end
+  need range_far
+
+verb sway_ticks "Cursed Skulltula person sways from a hit to its front: a beat passes" by world priority 71 in enemy at 2040 1970
+  take enemy_turn
+  need phase_sway
+  take timer_sway
+  give enemy_act
+
+verb sway_step_1 "It stops swaying" by world priority 69 in enemy at 2180 1970
+  take enemy_act
+  take phase_sway
+  give phase_down
+  unless timer_sway
+  give beat_end
+
+verb sway_holds "Cursed Skulltula person sways from a hit to its front: nothing changes" by world priority 68 in enemy at 2040 2040
+  take enemy_act
+  need phase_sway
+  give beat_end
+
+verb sway_armed_ticks "Cursed Skulltula person sways from a hit to its front, primed to spin into Link: a beat passes" by world priority 71 in enemy at 2180 2040
+  take enemy_turn
+  need phase_sway_armed
+  take timer_sway_armed
+  give enemy_act
+
+verb sway_armed_step_1 "It stops swaying" by world priority 69 in enemy at 2040 2110
+  take enemy_act
+  take phase_sway_armed
+  give phase_down_armed
+  unless timer_sway_armed
+  give beat_end
+
+verb sway_armed_step_2 "It spins into Link" by world priority 69 in enemy at 2180 2110
+  take enemy_act
+  take phase_sway_armed
+  give phase_sway
+  give 3 timer_sway
+  give incoming_spin
+  give beat_end
+  need range_near
+
+verb sway_armed_holds "Cursed Skulltula person sways from a hit to its front, primed to spin into Link: nothing changes" by world priority 68 in enemy at 2040 2180
+  take enemy_act
+  need phase_sway_armed
+  give beat_end
+
+verb stunned_hang_ticks "Cursed Skulltula person is stunned (hangs at its ceiling): a beat passes" by world priority 71 in enemy at 2180 2180
+  take enemy_turn
+  need phase_stunned_hang
+  take timer_stunned_hang
+  give enemy_act
+
+verb stunned_hang_step_1 "The stun wears off and it spins" by world priority 69 in enemy at 2040 2250
+  take enemy_act
+  take phase_stunned_hang
+  give phase_hang_armed
+  unless timer_stunned_hang
+  give beat_end
+
+verb stunned_hang_holds "Cursed Skulltula person is stunned (hangs at its ceiling): nothing changes" by world priority 68 in enemy at 2180 2250
+  take enemy_act
+  need phase_stunned_hang
+  give beat_end
+
+verb stunned_drop_ticks "Cursed Skulltula person is stunned (drops toward Link): a beat passes" by world priority 71 in enemy at 2040 2320
+  take enemy_turn
+  need phase_stunned_drop
+  take timer_stunned_drop
+  give enemy_act
+
+verb stunned_drop_step_1 "The stun wears off and it spins" by world priority 69 in enemy at 2180 2320
+  take enemy_act
+  take phase_stunned_drop
+  give phase_drop_armed
+  unless timer_stunned_drop
+  give beat_end
+
+verb stunned_drop_holds "Cursed Skulltula person is stunned (drops toward Link): nothing changes" by world priority 68 in enemy at 2040 2390
+  take enemy_act
+  need phase_stunned_drop
+  give beat_end
+
+verb stunned_down_ticks "Cursed Skulltula person is stunned (hangs at Link's height): a beat passes" by world priority 71 in enemy at 2180 2390
+  take enemy_turn
+  need phase_stunned_down
+  take timer_stunned_down
+  give enemy_act
+
+verb stunned_down_step_1 "The stun wears off and it spins" by world priority 69 in enemy at 2040 2460
+  take enemy_act
+  take phase_stunned_down
+  give phase_down_armed
+  unless timer_stunned_down
+  give beat_end
+
+verb stunned_down_holds "Cursed Skulltula person is stunned (hangs at Link's height): nothing changes" by world priority 68 in enemy at 2180 2460
+  take enemy_act
+  need phase_stunned_down
+  give beat_end
+
+verb stunned_rise_ticks "Cursed Skulltula person is stunned (climbs back to its ceiling): a beat passes" by world priority 71 in enemy at 2040 2530
+  take enemy_turn
+  need phase_stunned_rise
+  take timer_stunned_rise
+  give enemy_act
+
+verb stunned_rise_step_1 "The stun wears off and it spins" by world priority 69 in enemy at 2180 2530
+  take enemy_act
+  take phase_stunned_rise
+  give phase_rise_armed
+  unless timer_stunned_rise
+  give beat_end
+
+verb stunned_rise_holds "Cursed Skulltula person is stunned (climbs back to its ceiling): nothing changes" by world priority 68 in enemy at 2040 2600
+  take enemy_act
+  need phase_stunned_rise
+  give beat_end
+
+verb ground_holds "Grounded cursed Skulltula person waits by Link: nothing changes" by world priority 68 in enemy at 2180 2600
+  take enemy_act
+  need phase_ground
+  give beat_end
+
+verb ground_armed_step_1 "It spins into Link" by world priority 69 in enemy at 2040 2670
+  take enemy_act
+  take phase_ground_armed
+  give phase_ground
+  give incoming_spin
+  give beat_end
+  need range_near
+
+verb ground_armed_holds "Grounded cursed Skulltula person waits by Link, primed to spin into Link: nothing changes" by world priority 68 in enemy at 2180 2670
+  take enemy_act
+  need phase_ground_armed
+  give beat_end
+
+verb ground_sway_ticks "Grounded cursed Skulltula person sways from a hit to its front: a beat passes" by world priority 71 in enemy at 2040 2740
+  take enemy_turn
+  need phase_ground_sway
+  take timer_ground_sway
+  give enemy_act
+
+verb ground_sway_step_1 "It stops swaying" by world priority 69 in enemy at 2180 2740
+  take enemy_act
+  take phase_ground_sway
+  give phase_ground
+  unless timer_ground_sway
+  give beat_end
+
+verb ground_sway_holds "Grounded cursed Skulltula person sways from a hit to its front: nothing changes" by world priority 68 in enemy at 2040 2810
+  take enemy_act
+  need phase_ground_sway
+  give beat_end
+
+verb ground_sway_armed_ticks "Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link: a beat passes" by world priority 71 in enemy at 2180 2810
+  take enemy_turn
+  need phase_ground_sway_armed
+  take timer_ground_sway_armed
+  give enemy_act
+
+verb ground_sway_armed_step_1 "It stops swaying" by world priority 69 in enemy at 2040 2880
+  take enemy_act
+  take phase_ground_sway_armed
+  give phase_ground_armed
+  unless timer_ground_sway_armed
+  give beat_end
+
+verb ground_sway_armed_step_2 "It spins into Link" by world priority 69 in enemy at 2180 2880
+  take enemy_act
+  take phase_ground_sway_armed
+  give phase_ground_sway
+  give 3 timer_ground_sway
+  give incoming_spin
+  give beat_end
+  need range_near
+
+verb ground_sway_armed_holds "Grounded cursed Skulltula person sways from a hit to its front, primed to spin into Link: nothing changes" by world priority 68 in enemy at 2040 2950
+  take enemy_act
+  need phase_ground_sway_armed
+  give beat_end
+
+verb ground_stunned_ticks "Grounded cursed Skulltula person is stunned: a beat passes" by world priority 71 in enemy at 2180 2950
+  take enemy_turn
+  need phase_ground_stunned
+  take timer_ground_stunned
+  give enemy_act
+
+verb ground_stunned_step_1 "The stun wears off and it spins" by world priority 69 in enemy at 2040 3020
+  take enemy_act
+  take phase_ground_stunned
+  give phase_ground_armed
+  unless timer_ground_stunned
+  give beat_end
+
+verb ground_stunned_holds "Grounded cursed Skulltula person is stunned: nothing changes" by world priority 68 in enemy at 2180 3020
+  take enemy_act
+  need phase_ground_stunned
+  give beat_end
+
+verb spin_dodged "Cursed Skulltula person spins into Link: dodged" by world priority 60 in attacks at 3140 80
+  take incoming_spin
+  need link_dodge
+
+verb spin_nayru_near "Cursed Skulltula person spins into Link: Nayru's Love holds, Link is knocked back" by world priority 60 in attacks at 3000 150
+  take incoming_spin
+  need status_nayru
+  unless link_dodge
+  take range_near
+  give range_far
+
+verb spin_lands_near "Cursed Skulltula person spins into Link hits Link, knocking him back" by world priority 60 in attacks at 3140 150
+  take incoming_spin
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  take range_near
+  give range_far
+
+verb spin_lands_dd_near "Cursed Skulltula person spins into Link hits Link, knocking him back" by world priority 60 in attacks at 3000 220
+  take incoming_spin
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  take range_near
+  give range_far
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 580 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 440 360
+  need beat_end
+  take link_dodge
+
+verb nayru_ticks "Link: nayru wears on" by world priority 48 in beat at 440 430
+  take beat_end
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 48 in beat at 580 430
+  take beat_end
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 47 in beat at 580 500
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 47 in beat at 440 570
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 47 in beat at 580 570
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+  take lens_count
+  unless lens_on

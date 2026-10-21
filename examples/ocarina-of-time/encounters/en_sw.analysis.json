@@ -1,0 +1,628 @@
+{
+ "positions": 17064,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "wall_spot_timer_clears",
+  "gold_emerge_timer_clears",
+  "link_hurt_overkill",
+  "miss_deku_stick__gold_emerge",
+  "miss_hammer_swing__gold_emerge",
+  "miss_slash_kokiri__gold_emerge",
+  "miss_slash_master__gold_emerge",
+  "miss_slash_giant__gold_emerge",
+  "miss_magic_fire__gold_emerge",
+  "miss_spin_kokiri__gold_emerge",
+  "miss_spin_giant__gold_emerge",
+  "miss_spin_master__gold_emerge",
+  "miss_jump_kokiri__gold_emerge",
+  "miss_jump_kokiri_self__gold_emerge",
+  "miss_jump_giant__gold_emerge",
+  "miss_jump_giant_self__gold_emerge",
+  "miss_jump_master__gold_emerge",
+  "miss_jump_master_self__gold_emerge",
+  "miss_hammer_jump__gold_emerge"
+ ],
+ "kitSplit": {
+  "miss_hammer_jump__gold_crawl_hurt": [
+   "swing_hammer_jump",
+   "phase_gold_crawl_hurt"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "gold",
+   "positions": 46,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 10,
+    "Link falls": 5,
+    "Link wins": 15
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 60
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "gold_emerging",
+   "positions": 53,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 11,
+    "Link falls": 5,
+    "Link wins": 19
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 70
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "skullwalltula",
+   "positions": 226,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 40,
+    "Link wins": 60,
+    "Link falls": 5
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 250
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "gold",
+   "positions": 10,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2,
+    "Link falls": 1,
+    "Link wins": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "gold_emerging",
+   "positions": 14,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3,
+    "Link falls": 1,
+    "Link wins": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 19
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "skullwalltula",
+   "positions": 46,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link wins": 12,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 73
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "gold",
+   "positions": 63,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 16,
+    "Link falls": 2,
+    "Link wins": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 97
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "gold_emerging",
+   "positions": 67,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 17,
+    "Link falls": 2,
+    "Link wins": 15
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 209
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "skullwalltula",
+   "positions": 323,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 64,
+    "Link wins": 64,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 539
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "gold",
+   "positions": 50,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 14,
+    "Link falls": 7,
+    "Link wins": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 79
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "gold_emerging",
+   "positions": 56,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 15,
+    "Link falls": 7,
+    "Link wins": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 70
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "skullwalltula",
+   "positions": 288,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link wins": 56,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 271
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "gold",
+   "positions": 46,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 12,
+    "Link falls": 3,
+    "Link wins": 9
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 91
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "gold_emerging",
+   "positions": 51,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 13,
+    "Link falls": 3,
+    "Link wins": 11
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 88
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "skullwalltula",
+   "positions": 244,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 48,
+    "Link wins": 48,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 367
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "gold",
+   "positions": 158,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 44,
+    "Link falls": 22,
+    "Link wins": 25
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 188
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "gold_emerging",
+   "positions": 209,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 46,
+    "Link falls": 22,
+    "Link wins": 50
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 384
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "skullwalltula",
+   "positions": 927,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link wins": 200,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1084
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "gold",
+   "positions": 564,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 144,
+    "Link falls": 13,
+    "Link wins": 131
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 434
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "gold_emerging",
+   "positions": 571,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 145,
+    "Link falls": 13,
+    "Link wins": 134
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 396
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "skullwalltula",
+   "positions": 2886,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 572,
+    "Link wins": 576,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1963
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "gold",
+   "positions": 197,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 28,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 308
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "gold_emerging",
+   "positions": 202,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 57,
+    "Link falls": 28,
+    "Link wins": 30
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 250
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "skullwalltula",
+   "positions": 1149,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link wins": 224,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1230
+  },
+  {
+   "kit": "child_blade",
+   "variant": "gold",
+   "positions": 16,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4,
+    "Link falls": 2,
+    "Link wins": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 21
+  },
+  {
+   "kit": "child_blade",
+   "variant": "gold_emerging",
+   "positions": 20,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5,
+    "Link falls": 2,
+    "Link wins": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 26
+  },
+  {
+   "kit": "child_blade",
+   "variant": "skullwalltula",
+   "positions": 46,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link wins": 12,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 59
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "gold",
+   "positions": 45,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 12,
+    "Link falls": 4,
+    "Link wins": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 136
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "gold_emerging",
+   "positions": 57,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 16,
+    "Link falls": 4,
+    "Link wins": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 62
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "skullwalltula",
+   "positions": 163,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 32,
+    "Link wins": 32,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 292
+  },
+  {
+   "kit": "child_dins",
+   "variant": "gold",
+   "positions": 57,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 14,
+    "Link falls": 14,
+    "Link wins": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 52
+  },
+  {
+   "kit": "child_dins",
+   "variant": "gold_emerging",
+   "positions": 79,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 22,
+    "Link falls": 14,
+    "Link wins": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 101
+  },
+  {
+   "kit": "child_dins",
+   "variant": "skullwalltula",
+   "positions": 288,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link wins": 56,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 228
+  },
+  {
+   "kit": "child_lens",
+   "variant": "gold",
+   "positions": 183,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 44,
+    "Link falls": 47,
+    "Link wins": 25
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 130
+  },
+  {
+   "kit": "child_lens",
+   "variant": "gold_emerging",
+   "positions": 300,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 68,
+    "Link falls": 47,
+    "Link wins": 50
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 328
+  },
+  {
+   "kit": "child_lens",
+   "variant": "skullwalltula",
+   "positions": 927,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link wins": 200,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 665
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "gold",
+   "positions": 924,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 259,
+    "Link falls": 26,
+    "Link wins": 131
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 547
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "gold_emerging",
+   "positions": 965,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 275,
+    "Link falls": 26,
+    "Link wins": 134
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 525
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "skullwalltula",
+   "positions": 2886,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 572,
+    "Link wins": 576,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1686
+  },
+  {
+   "kit": "child_spin",
+   "variant": "gold",
+   "positions": 225,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 56,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 186
+  },
+  {
+   "kit": "child_spin",
+   "variant": "gold_emerging",
+   "positions": 288,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 85,
+    "Link falls": 56,
+    "Link wins": 30
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 220
+  },
+  {
+   "kit": "child_spin",
+   "variant": "skullwalltula",
+   "positions": 1149,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link wins": 224,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 874
+  }
+ ]
+}

@@ -1,0 +1,272 @@
+{
+ "positions": 450850,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "stun_open_timer_clears",
+  "unseen_deku_nut__ice",
+  "hit_explosive__down1_1_wait",
+  "hit_explosive__down2_ready",
+  "hit_explosive__down2_charge",
+  "hit_arrow_normal__down1_1_wait",
+  "hit_arrow_normal__down2_ready",
+  "hit_arrow_normal__down2_charge",
+  "hit_arrow_normal__ice",
+  "unseen_arrow_normal__ice",
+  "hit_hammer_swing__down1_1_wait",
+  "hit_hammer_swing__down2_ready",
+  "hit_hammer_swing__down2_charge",
+  "hit_hookshot__down1_1_wait",
+  "hit_hookshot__down2_ready",
+  "hit_hookshot__down2_charge",
+  "hit_slash_master__down1_1_wait",
+  "hit_slash_master__ice",
+  "unseen_slash_master__ice",
+  "hit_slash_giant__down1_1_wait",
+  "hit_slash_giant__down2_ready",
+  "hit_slash_giant__down2_charge",
+  "hit_arrow_fire__down1_1_wait",
+  "hit_arrow_fire__down2_ready",
+  "hit_arrow_fire__down2_charge",
+  "hit_arrow_fire__ice",
+  "unseen_arrow_fire__ice",
+  "hit_arrow_ice__down1_1_wait",
+  "hit_arrow_ice__down2_ready",
+  "hit_arrow_ice__down2_charge",
+  "hit_arrow_ice__ice",
+  "unseen_arrow_ice__ice",
+  "hit_arrow_light__down1_1_wait",
+  "hit_arrow_light__down2_ready",
+  "hit_arrow_light__down2_charge",
+  "hit_arrow_light__ice",
+  "unseen_arrow_light__ice",
+  "unseen_shield__ice",
+  "hit_spin_giant__down1_1_wait",
+  "hit_spin_giant__down2_ready",
+  "hit_spin_giant__down2_charge",
+  "hit_spin_master__down1_1_wait",
+  "hit_spin_master__ice",
+  "unseen_spin_master__ice",
+  "hit_jump_giant__down1_1_wait",
+  "hit_jump_giant__down2_ready",
+  "hit_jump_giant__down2_charge",
+  "hit_jump_giant_self__down1_1_wait",
+  "hit_jump_giant_self__down2_ready",
+  "hit_jump_giant_self__down2_charge",
+  "hit_jump_master__down1_1_wait",
+  "hit_jump_master__ice",
+  "unseen_jump_master__ice",
+  "hit_jump_master_self__down1_1_wait",
+  "hit_jump_master_self__ice",
+  "unseen_jump_master_self__ice",
+  "hit_hammer_jump__down1_1_wait",
+  "hit_hammer_jump__down2_ready",
+  "hit_hammer_jump__down2_charge",
+  "slam_lands_far",
+  "slam_lands_dd_far",
+  "shockwave_lands_near",
+  "shockwave_lands_dd_near",
+  "grab_lands_again",
+  "grab_lands_dd_again",
+  "link_helpless_grab"
+ ],
+ "kitSplit": {
+  "hit_explosive__ice": [
+   "swing_explosive",
+   "phase_ice"
+  ],
+  "unseen_explosive__ice": [
+   "swing_explosive",
+   "phase_ice"
+  ],
+  "hit_hammer_swing__ice": [
+   "swing_hammer_swing",
+   "phase_ice"
+  ],
+  "unseen_hammer_swing__ice": [
+   "swing_hammer_swing",
+   "phase_ice"
+  ],
+  "hit_hookshot__ice": [
+   "swing_hookshot",
+   "phase_ice"
+  ],
+  "unseen_hookshot__ice": [
+   "swing_hookshot",
+   "phase_ice"
+  ],
+  "hit_slash_giant__ice": [
+   "swing_slash_giant",
+   "phase_ice"
+  ],
+  "hit_slash_giant__stun_open": [
+   "swing_slash_giant",
+   "phase_stun_open"
+  ],
+  "unseen_slash_giant__ice": [
+   "swing_slash_giant",
+   "phase_ice"
+  ],
+  "unseen_magic_fire__ice": [
+   "swing_magic_fire",
+   "phase_ice"
+  ],
+  "hit_spin_giant__ice": [
+   "swing_spin_giant",
+   "phase_ice"
+  ],
+  "hit_spin_giant__stun_open": [
+   "swing_spin_giant",
+   "phase_stun_open"
+  ],
+  "unseen_spin_giant__ice": [
+   "swing_spin_giant",
+   "phase_ice"
+  ],
+  "hit_jump_giant__ice": [
+   "swing_jump_giant",
+   "phase_ice"
+  ],
+  "hit_jump_giant__stun_open": [
+   "swing_jump_giant",
+   "phase_stun_open"
+  ],
+  "unseen_jump_giant__ice": [
+   "swing_jump_giant",
+   "phase_ice"
+  ],
+  "hit_jump_giant_self__ice": [
+   "swing_jump_giant_self",
+   "phase_ice"
+  ],
+  "hit_jump_giant_self__stun_open": [
+   "swing_jump_giant_self",
+   "phase_stun_open"
+  ],
+  "unseen_jump_giant_self__ice": [
+   "swing_jump_giant_self",
+   "phase_ice"
+  ],
+  "hit_hammer_jump__ice": [
+   "swing_hammer_jump",
+   "phase_ice"
+  ],
+  "unseen_hammer_jump__ice": [
+   "swing_hammer_jump",
+   "phase_ice"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 4431,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1380,
+    "Link falls": 140
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 11033
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 887,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 276,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2696
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 4329,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1312,
+    "Link falls": 72
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8627
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 5783,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1722,
+    "Link falls": 196
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 11506
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 3259,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 984,
+    "Link falls": 66
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8552
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 351847,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 104544,
+    "Link falls": 11628,
+    "Link wins": 450
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 902302
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 57185,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 17490,
+    "Link falls": 364
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 89722
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 23129,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6888,
+    "Link falls": 784
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 55482
+  }
+ ]
+}

@@ -1,0 +1,1822 @@
+maps 2
+title "Ocarina of Time combat: Link vs Tailpasaran"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state age_adult "Link is an adult" in setup at 120 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Tailpasaran answers" in beat at 580 80
+state enemy_act "Tailpasaran acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 4/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 260 150
+state link_wins "Tailpasaran defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state has_master_sword "Has master sword" in gear at 1860 570
+state has_hookshot "Has hookshot" in gear at 1720 640
+state has_megaton_hammer "Has megaton hammer" in gear at 1860 640
+state has_bow "Has bow" in gear at 1720 710
+state has_bombchus "Has bombchus" in gear at 1860 710
+state has_mirror_shield "Has mirror shield" in gear at 1720 780
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 780
+state has_giants_knife "Has giants knife" in gear at 1720 850
+state has_double_defense "Has double defense" in gear at 1860 850
+state has_fire_arrows "Has fire arrows" in gear at 1720 920
+state has_ice_arrows "Has ice arrows" in gear at 1860 920
+state has_light_arrows "Has light arrows" in gear at 1720 990
+state has_blue_potion "Has blue potion" in gear at 1860 990
+state phase_wait_buried "Tailpasaran waits under the floor" in enemy at 2040 80
+state phase_wait_rising "Tailpasaran rises out of the floor" in enemy at 2180 80
+state timer_wait_rising "Tailpasaran rises out of the floor: beats left" in enemy at 2040 150
+state phase_hover "Tailpasaran hovers above Link" in enemy at 2040 220
+state timer_hover "Tailpasaran hovers above Link: beats left" in enemy at 2180 220
+state phase_attack "Tailpasaran swoops at Link" in enemy at 2180 290
+state timer_attack "Tailpasaran swoops at Link: beats left" in enemy at 2040 360
+state phase_sink_plunge "Tailpasaran dives into the floor" in enemy at 2040 430
+state phase_sink_rise "Tailpasaran rises back under its home" in enemy at 2180 430
+state timer_sink_rise "Tailpasaran rises back under its home: beats left" in enemy at 2040 500
+state phase_stunned_wait_rising "Tailpasaran is frozen while rising" in enemy at 2040 570
+state timer_stunned_wait_rising "Tailpasaran is frozen while rising: beats left" in enemy at 2180 570
+state phase_stunned_hover "Tailpasaran is frozen while hovering" in enemy at 2180 640
+state timer_stunned_hover "Tailpasaran is frozen while hovering: beats left" in enemy at 2040 710
+state phase_stunned_attack "Tailpasaran is frozen while attacking" in enemy at 2040 780
+state timer_stunned_attack "Tailpasaran is frozen while attacking: beats left" in enemy at 2180 780
+state phase_stunned_sink_plunge "Tailpasaran is frozen while diving" in enemy at 2180 850
+state timer_stunned_sink_plunge "Tailpasaran is frozen while diving: beats left" in enemy at 2040 920
+state hp_body "Tailpasaran body segment: health" marks 1 in enemy_health at 2360 80
+state alive_body "Tailpasaran body segment: standing" marks 1 in enemy_health at 2500 80
+state dmg_body "Tailpasaran body segment: damage" in enemy_health at 2360 150
+state status_shock "Link: shock (beats left)" in link_state at 1220 290
+state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
+state lens_on "Lens of Truth on" in link_state at 1220 360
+state link_guard "Link holds up his shield" in link_state at 1080 430
+state link_dodge "Link dodges" in link_state at 1220 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3000 290
+state swing_slingshot "Slingshot seed on its way" in hits at 3000 500
+state swing_explosive "Explosion on its way" in hits at 3000 570
+state swing_boomerang "Boomerang on its way" in hits at 3000 640
+state swing_arrow_normal "Arrow on its way" in hits at 3000 850
+state swing_hammer_swing "Hammer swing on its way" in hits at 3000 920
+state swing_hookshot "Hookshot on its way" in hits at 3000 1130
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 1200
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 1410
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 1620
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 1830
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 1900
+state swing_arrow_light "Light arrow on its way" in hits at 3000 1970
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 2040
+state swing_shield "Shield on its way" in hits at 3140 2110
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 2180
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3000 2460
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 2670
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 2950
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 3160
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3140 3370
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 3580
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 3860
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 4070
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 4280
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1220 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1220 780
+state incoming_shock "Tailpasaran shock incoming" in attacks at 3320 80
+state incoming_backlash "Tailpasaran electric backlash incoming" in attacks at 3320 430
+state tick_shock "Beat ends: shock checked" in beat at 580 360
+state tick_nayru "Beat ends: nayru checked" in beat at 440 430
+state lens_count "The Lens: beats toward the next cost" in beat at 580 570
+
+verb wait_rising_timer_clears "Tailpasaran rises out of the floor is over" by world priority 99 in enemy at 2180 150
+  take timer_wait_rising
+  unless phase_wait_rising
+
+verb hover_timer_clears "Tailpasaran hovers above Link is over" by world priority 99 in enemy at 2040 290
+  take timer_hover
+  unless phase_hover
+
+verb attack_timer_clears "Tailpasaran swoops at Link is over" by world priority 99 in enemy at 2180 360
+  take timer_attack
+  unless phase_attack
+
+verb sink_rise_timer_clears "Tailpasaran rises back under its home is over" by world priority 99 in enemy at 2180 500
+  take timer_sink_rise
+  unless phase_sink_rise
+
+verb stunned_wait_rising_timer_clears "Tailpasaran is frozen while rising is over" by world priority 99 in enemy at 2040 640
+  take timer_stunned_wait_rising
+  unless phase_stunned_wait_rising
+
+verb stunned_hover_timer_clears "Tailpasaran is frozen while hovering is over" by world priority 99 in enemy at 2180 710
+  take timer_stunned_hover
+  unless phase_stunned_hover
+
+verb stunned_attack_timer_clears "Tailpasaran is frozen while attacking is over" by world priority 99 in enemy at 2040 850
+  take timer_stunned_attack
+  unless phase_stunned_attack
+
+verb stunned_sink_plunge_timer_clears "Tailpasaran is frozen while diving is over" by world priority 99 in enemy at 2180 920
+  take timer_stunned_sink_plunge
+  unless phase_stunned_sink_plunge
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 120 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 260 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 120 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 260 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 120 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 260 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give phase_wait_buried
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 8 link_heal
+
+verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb body_hurt "Tailpasaran body segment loses health" by world priority 96 in enemy_health at 2500 150
+  take dmg_body
+  take hp_body
+
+verb body_overkill "Tailpasaran body segment has no health left to lose" by world priority 95 in enemy_health at 2360 220
+  take dmg_body
+  unless hp_body
+
+verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_nut_2 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2820 80
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2680 150
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2820 150
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2680 220
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 220
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 290
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2820 290
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2680 360
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2820 360
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2680 430
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 430
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 500
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 500
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 570
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 570
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 640
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 640
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 710
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2820 710
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 780
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 780
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 850
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 850
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 920
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 920
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 990
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 990
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1060
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1060
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1130
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1130
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2680 1200
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1200
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2680 1270
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1270
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2680 1340
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1340
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2680 1410
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1410
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2680 1480
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 1480
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb hit_deku_nut__wait_rising "Deku Nut flash hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 150
+  take swing_deku_nut
+  take phase_wait_rising
+  give phase_stunned_wait_rising
+  give 4 timer_stunned_wait_rising
+
+verb hit_deku_nut__hover "Deku Nut flash hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 150
+  take swing_deku_nut
+  take phase_hover
+  give phase_stunned_hover
+  give 4 timer_stunned_hover
+
+verb hit_deku_nut__attack "Deku Nut flash hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 220
+  take swing_deku_nut
+  take phase_attack
+  give phase_stunned_attack
+  give 4 timer_stunned_attack
+
+verb hit_deku_nut__sink_plunge "Deku Nut flash hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 220
+  take swing_deku_nut
+  take phase_sink_plunge
+  give phase_stunned_sink_plunge
+  give 4 timer_stunned_sink_plunge
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3140 290
+  take swing_deku_stick
+
+verb hit_deku_stick__wait_rising "Deku Stick hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 360
+  take swing_deku_stick
+  need phase_wait_rising
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_deku_stick__hover "Deku Stick hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 360
+  take swing_deku_stick
+  need phase_hover
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_deku_stick__attack "Deku Stick hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 430
+  take swing_deku_stick
+  need phase_attack
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_deku_stick__sink_plunge "Deku Stick hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 430
+  take swing_deku_stick
+  need phase_sink_plunge
+  give 2 dmg_body
+  give incoming_backlash
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3140 500
+  take swing_slingshot
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 570
+  take swing_explosive
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3140 640
+  take swing_boomerang
+
+verb hit_boomerang__wait_rising "Boomerang hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 710
+  take swing_boomerang
+  need phase_wait_rising
+  give dmg_body
+
+verb hit_boomerang__hover "Boomerang hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 710
+  take swing_boomerang
+  need phase_hover
+  give dmg_body
+
+verb hit_boomerang__attack "Boomerang hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 780
+  take swing_boomerang
+  need phase_attack
+  give dmg_body
+
+verb hit_boomerang__sink_plunge "Boomerang hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 780
+  take swing_boomerang
+  need phase_sink_plunge
+  give dmg_body
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3140 850
+  take swing_arrow_normal
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 920
+  take swing_hammer_swing
+
+verb hit_hammer_swing__wait_rising "Hammer swing hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 990
+  take swing_hammer_swing
+  need phase_wait_rising
+  give 2 dmg_body
+
+verb hit_hammer_swing__hover "Hammer swing hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 990
+  take swing_hammer_swing
+  need phase_hover
+  give 2 dmg_body
+
+verb hit_hammer_swing__attack "Hammer swing hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 1060
+  take swing_hammer_swing
+  need phase_attack
+  give 2 dmg_body
+
+verb hit_hammer_swing__sink_plunge "Hammer swing hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 1060
+  take swing_hammer_swing
+  need phase_sink_plunge
+  give 2 dmg_body
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 1130
+  take swing_hookshot
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3140 1200
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__wait_rising "Kokiri Sword slash hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 1270
+  take swing_slash_kokiri
+  need phase_wait_rising
+  give dmg_body
+  give incoming_backlash
+
+verb hit_slash_kokiri__hover "Kokiri Sword slash hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 1270
+  take swing_slash_kokiri
+  need phase_hover
+  give dmg_body
+  give incoming_backlash
+
+verb hit_slash_kokiri__attack "Kokiri Sword slash hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 1340
+  take swing_slash_kokiri
+  need phase_attack
+  give dmg_body
+  give incoming_backlash
+
+verb hit_slash_kokiri__sink_plunge "Kokiri Sword slash hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 1340
+  take swing_slash_kokiri
+  need phase_sink_plunge
+  give dmg_body
+  give incoming_backlash
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3140 1410
+  take swing_slash_master
+
+verb hit_slash_master__wait_rising "Master Sword slash hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 1480
+  take swing_slash_master
+  need phase_wait_rising
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_slash_master__hover "Master Sword slash hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 1480
+  take swing_slash_master
+  need phase_hover
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_slash_master__attack "Master Sword slash hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 1550
+  take swing_slash_master
+  need phase_attack
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_slash_master__sink_plunge "Master Sword slash hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 1550
+  take swing_slash_master
+  need phase_sink_plunge
+  give 2 dmg_body
+  give incoming_backlash
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3140 1620
+  take swing_slash_giant
+
+verb hit_slash_giant__wait_rising "Two-handed sword slash hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 1690
+  take swing_slash_giant
+  need phase_wait_rising
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_slash_giant__hover "Two-handed sword slash hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 1690
+  take swing_slash_giant
+  need phase_hover
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_slash_giant__attack "Two-handed sword slash hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 1760
+  take swing_slash_giant
+  need phase_attack
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_slash_giant__sink_plunge "Two-handed sword slash hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 1760
+  take swing_slash_giant
+  need phase_sink_plunge
+  give 4 dmg_body
+  give incoming_backlash
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3140 1830
+  take swing_arrow_fire
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3140 1900
+  take swing_arrow_ice
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3140 1970
+  take swing_arrow_light
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 2040
+  take swing_magic_fire
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 2110
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 2180
+  take swing_shield
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3000 2250
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__wait_rising "Kokiri spin attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3140 2250
+  take swing_spin_kokiri
+  need phase_wait_rising
+  give dmg_body
+  give incoming_backlash
+
+verb hit_spin_kokiri__hover "Kokiri spin attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3000 2320
+  take swing_spin_kokiri
+  need phase_hover
+  give dmg_body
+  give incoming_backlash
+
+verb hit_spin_kokiri__attack "Kokiri spin attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3140 2320
+  take swing_spin_kokiri
+  need phase_attack
+  give dmg_body
+  give incoming_backlash
+
+verb hit_spin_kokiri__sink_plunge "Kokiri spin attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3000 2390
+  take swing_spin_kokiri
+  need phase_sink_plunge
+  give dmg_body
+  give incoming_backlash
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 2390
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3140 2460
+  take swing_spin_giant
+
+verb hit_spin_giant__wait_rising "Two-handed spin attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 2530
+  take swing_spin_giant
+  need phase_wait_rising
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_spin_giant__hover "Two-handed spin attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 2530
+  take swing_spin_giant
+  need phase_hover
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_spin_giant__attack "Two-handed spin attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 2600
+  take swing_spin_giant
+  need phase_attack
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_spin_giant__sink_plunge "Two-handed spin attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 2600
+  take swing_spin_giant
+  need phase_sink_plunge
+  give 4 dmg_body
+  give incoming_backlash
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 2670
+  take swing_spin_giant
+  need range_far
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3000 2740
+  take swing_spin_master
+
+verb hit_spin_master__wait_rising "Master Sword spin attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3140 2740
+  take swing_spin_master
+  need phase_wait_rising
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_spin_master__hover "Master Sword spin attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3000 2810
+  take swing_spin_master
+  need phase_hover
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_spin_master__attack "Master Sword spin attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3140 2810
+  take swing_spin_master
+  need phase_attack
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_spin_master__sink_plunge "Master Sword spin attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3000 2880
+  take swing_spin_master
+  need phase_sink_plunge
+  give 2 dmg_body
+  give incoming_backlash
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 2880
+  take swing_spin_master
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 2950
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__wait_rising "Kokiri jump attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 3020
+  take swing_jump_kokiri
+  need phase_wait_rising
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_jump_kokiri__hover "Kokiri jump attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 3020
+  take swing_jump_kokiri
+  need phase_hover
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_jump_kokiri__attack "Kokiri jump attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 3090
+  take swing_jump_kokiri
+  need phase_attack
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_jump_kokiri__sink_plunge "Kokiri jump attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 3090
+  take swing_jump_kokiri
+  need phase_sink_plunge
+  give 2 dmg_body
+  give incoming_backlash
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 3160
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__wait_rising "Kokiri jump attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 3230
+  take swing_jump_kokiri_self
+  need phase_wait_rising
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_jump_kokiri_self__hover "Kokiri jump attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 3230
+  take swing_jump_kokiri_self
+  need phase_hover
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_jump_kokiri_self__attack "Kokiri jump attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 3300
+  take swing_jump_kokiri_self
+  need phase_attack
+  give 2 dmg_body
+  give incoming_backlash
+
+verb hit_jump_kokiri_self__sink_plunge "Kokiri jump attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 3300
+  take swing_jump_kokiri_self
+  need phase_sink_plunge
+  give 2 dmg_body
+  give incoming_backlash
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 3370
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 3440
+  take swing_jump_giant
+
+verb hit_jump_giant__wait_rising "Two-handed jump attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3140 3440
+  take swing_jump_giant
+  need phase_wait_rising
+  give 8 dmg_body
+  give incoming_backlash
+
+verb hit_jump_giant__hover "Two-handed jump attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3000 3510
+  take swing_jump_giant
+  need phase_hover
+  give 8 dmg_body
+  give incoming_backlash
+
+verb hit_jump_giant__attack "Two-handed jump attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3140 3510
+  take swing_jump_giant
+  need phase_attack
+  give 8 dmg_body
+  give incoming_backlash
+
+verb hit_jump_giant__sink_plunge "Two-handed jump attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3000 3580
+  take swing_jump_giant
+  need phase_sink_plunge
+  give 8 dmg_body
+  give incoming_backlash
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 3650
+  take swing_jump_giant_self
+
+verb hit_jump_giant_self__wait_rising "Two-handed jump attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3140 3650
+  take swing_jump_giant_self
+  need phase_wait_rising
+  give 8 dmg_body
+  give incoming_backlash
+
+verb hit_jump_giant_self__hover "Two-handed jump attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3000 3720
+  take swing_jump_giant_self
+  need phase_hover
+  give 8 dmg_body
+  give incoming_backlash
+
+verb hit_jump_giant_self__attack "Two-handed jump attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3140 3720
+  take swing_jump_giant_self
+  need phase_attack
+  give 8 dmg_body
+  give incoming_backlash
+
+verb hit_jump_giant_self__sink_plunge "Two-handed jump attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3000 3790
+  take swing_jump_giant_self
+  need phase_sink_plunge
+  give 8 dmg_body
+  give incoming_backlash
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 3790
+  take swing_jump_giant_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 3860
+  take swing_jump_master
+
+verb hit_jump_master__wait_rising "Master Sword jump attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 3930
+  take swing_jump_master
+  need phase_wait_rising
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_jump_master__hover "Master Sword jump attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 3930
+  take swing_jump_master
+  need phase_hover
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_jump_master__attack "Master Sword jump attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 4000
+  take swing_jump_master
+  need phase_attack
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_jump_master__sink_plunge "Master Sword jump attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 4000
+  take swing_jump_master
+  need phase_sink_plunge
+  give 4 dmg_body
+  give incoming_backlash
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 4070
+  take swing_jump_master_self
+
+verb hit_jump_master_self__wait_rising "Master Sword jump attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3000 4140
+  take swing_jump_master_self
+  need phase_wait_rising
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_jump_master_self__hover "Master Sword jump attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3140 4140
+  take swing_jump_master_self
+  need phase_hover
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_jump_master_self__attack "Master Sword jump attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3000 4210
+  take swing_jump_master_self
+  need phase_attack
+  give 4 dmg_body
+  give incoming_backlash
+
+verb hit_jump_master_self__sink_plunge "Master Sword jump attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3140 4210
+  take swing_jump_master_self
+  need phase_sink_plunge
+  give 4 dmg_body
+  give incoming_backlash
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 4280
+  take swing_jump_master_self
+  need range_far
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3000 4350
+  take swing_hammer_jump
+
+verb hit_hammer_jump__wait_rising "Hammer jump attack hits (Tailpasaran rises out of the floor)" by world priority 80 in hits at 3140 4350
+  take swing_hammer_jump
+  need phase_wait_rising
+  give 4 dmg_body
+
+verb hit_hammer_jump__hover "Hammer jump attack hits (Tailpasaran hovers above Link)" by world priority 80 in hits at 3000 4420
+  take swing_hammer_jump
+  need phase_hover
+  give 4 dmg_body
+
+verb hit_hammer_jump__attack "Hammer jump attack hits (Tailpasaran swoops at Link)" by world priority 80 in hits at 3140 4420
+  take swing_hammer_jump
+  need phase_attack
+  give 4 dmg_body
+
+verb hit_hammer_jump__sink_plunge "Hammer jump attack hits (Tailpasaran dives into the floor)" by world priority 80 in hits at 3000 4490
+  take swing_hammer_jump
+  need phase_sink_plunge
+  give 4 dmg_body
+
+verb body_empty_in_wait_rising "Tailpasaran body segment runs out (Tailpasaran rises out of the floor)" by world priority 92 in enemy_health at 2500 220
+  unless hp_body
+  take alive_body
+  take phase_wait_rising
+  give link_wins
+
+verb body_empty_in_hover "Tailpasaran body segment runs out (Tailpasaran hovers above Link)" by world priority 92 in enemy_health at 2360 290
+  unless hp_body
+  take alive_body
+  take phase_hover
+  give link_wins
+
+verb body_empty_in_attack "Tailpasaran body segment runs out (Tailpasaran swoops at Link)" by world priority 92 in enemy_health at 2500 290
+  unless hp_body
+  take alive_body
+  take phase_attack
+  give link_wins
+
+verb body_empty_in_sink_plunge "Tailpasaran body segment runs out (Tailpasaran dives into the floor)" by world priority 92 in enemy_health at 2360 360
+  unless hp_body
+  take alive_body
+  take phase_sink_plunge
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 1550
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 1550
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1620
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1620
+  take link_turn
+  unless status_shock
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1690
+  take link_turn
+  unless status_shock
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1690
+  take link_turn
+  unless status_shock
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1760
+  take link_turn
+  unless status_shock
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1760
+  take link_turn
+  unless status_shock
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 1830
+  take link_turn
+  unless status_shock
+  take has_red_potion
+  give 8 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 1830
+  take link_turn
+  unless status_shock
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2680 1900
+  take link_turn
+  unless status_shock
+  take has_blue_potion
+  give 8 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2820 1900
+  take link_turn
+  unless status_shock
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2680 1970
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Tailpasaran gets ready" by world priority 70 in enemy at 2040 990
+  take enemy_turn
+  give enemy_act
+
+verb wait_buried_step_1 "Link comes close; Tailpasaran rises" by world priority 69 in enemy at 2180 990
+  take enemy_act
+  take phase_wait_buried
+  give phase_wait_rising
+  give 3 timer_wait_rising
+  give beat_end
+  need range_near
+
+verb wait_buried_holds "Tailpasaran waits under the floor: nothing changes" by world priority 68 in enemy at 2040 1060
+  take enemy_act
+  need phase_wait_buried
+  give beat_end
+
+verb wait_rising_ticks "Tailpasaran rises out of the floor: a beat passes" by world priority 71 in enemy at 2180 1060
+  take enemy_turn
+  need phase_wait_rising
+  take timer_wait_rising
+  give enemy_act
+
+verb wait_rising_step_1 "Link moves away; Tailpasaran sinks back" by world priority 69 in enemy at 2040 1130
+  take enemy_act
+  take phase_wait_rising
+  give phase_wait_buried
+  give beat_end
+  need range_far
+
+verb wait_rising_step_2 "Tailpasaran takes to the air" by world priority 69 in enemy at 2180 1130
+  take enemy_act
+  take phase_wait_rising
+  give phase_hover
+  give 2 timer_hover
+  unless timer_wait_rising
+  give beat_end
+  need range_near
+
+verb wait_rising_holds "Tailpasaran rises out of the floor: nothing changes" by world priority 68 in enemy at 2040 1200
+  take enemy_act
+  need phase_wait_rising
+  give beat_end
+
+verb hover_ticks "Tailpasaran hovers above Link: a beat passes" by world priority 71 in enemy at 2180 1200
+  take enemy_turn
+  need phase_hover
+  take timer_hover
+  give enemy_act
+
+verb hover_step_1 "Tailpasaran turns on Link" by world priority 69 in enemy at 2040 1270
+  take enemy_act
+  take phase_hover
+  give phase_attack
+  give 10 timer_attack
+  unless timer_hover
+  give beat_end
+
+verb hover_holds "Tailpasaran hovers above Link: nothing changes" by world priority 68 in enemy at 2180 1270
+  take enemy_act
+  need phase_hover
+  give beat_end
+
+verb attack_ticks "Tailpasaran swoops at Link: a beat passes" by world priority 71 in enemy at 2040 1340
+  take enemy_turn
+  need phase_attack
+  take timer_attack
+  give enemy_act
+
+verb attack_step_1 "Tailpasaran chases Link" by world priority 69 in enemy at 2180 1340
+  take enemy_act
+  need phase_attack
+  give beat_end
+  take range_far
+  give range_near
+
+verb attack_step_2 "Tailpasaran shocks Link and dives away" by world priority 69 in enemy at 2040 1410
+  take enemy_act
+  take phase_attack
+  give phase_sink_plunge
+  give incoming_shock
+  give beat_end
+  need range_near
+
+verb attack_step_3 "Tailpasaran gives up and dives" by world priority 69 in enemy at 2180 1410
+  take enemy_act
+  take phase_attack
+  give phase_sink_plunge
+  unless timer_attack
+  give beat_end
+
+verb sink_plunge_step_1 "Tailpasaran is under the floor and returns home" by world priority 69 in enemy at 2040 1480
+  take enemy_act
+  take phase_sink_plunge
+  give phase_sink_rise
+  give 4 timer_sink_rise
+  give beat_end
+
+verb sink_rise_ticks "Tailpasaran rises back under its home: a beat passes" by world priority 71 in enemy at 2180 1480
+  take enemy_turn
+  need phase_sink_rise
+  take timer_sink_rise
+  give enemy_act
+
+verb sink_rise_step_1 "Tailpasaran is back at its home" by world priority 69 in enemy at 2040 1550
+  take enemy_act
+  take phase_sink_rise
+  give phase_wait_buried
+  unless timer_sink_rise
+  give beat_end
+
+verb sink_rise_holds "Tailpasaran rises back under its home: nothing changes" by world priority 68 in enemy at 2180 1550
+  take enemy_act
+  need phase_sink_rise
+  give beat_end
+
+verb stunned_wait_rising_ticks "Tailpasaran is frozen while rising: a beat passes" by world priority 71 in enemy at 2040 1620
+  take enemy_turn
+  need phase_stunned_wait_rising
+  take timer_stunned_wait_rising
+  give enemy_act
+
+verb stunned_wait_rising_step_1 "Tailpasaran thaws" by world priority 69 in enemy at 2180 1620
+  take enemy_act
+  take phase_stunned_wait_rising
+  give phase_wait_rising
+  give 3 timer_wait_rising
+  unless timer_stunned_wait_rising
+  give beat_end
+
+verb stunned_wait_rising_holds "Tailpasaran is frozen while rising: nothing changes" by world priority 68 in enemy at 2040 1690
+  take enemy_act
+  need phase_stunned_wait_rising
+  give beat_end
+
+verb stunned_hover_ticks "Tailpasaran is frozen while hovering: a beat passes" by world priority 71 in enemy at 2180 1690
+  take enemy_turn
+  need phase_stunned_hover
+  take timer_stunned_hover
+  give enemy_act
+
+verb stunned_hover_step_1 "Tailpasaran thaws" by world priority 69 in enemy at 2040 1760
+  take enemy_act
+  take phase_stunned_hover
+  give phase_hover
+  give 2 timer_hover
+  unless timer_stunned_hover
+  give beat_end
+
+verb stunned_hover_holds "Tailpasaran is frozen while hovering: nothing changes" by world priority 68 in enemy at 2180 1760
+  take enemy_act
+  need phase_stunned_hover
+  give beat_end
+
+verb stunned_attack_ticks "Tailpasaran is frozen while attacking: a beat passes" by world priority 71 in enemy at 2040 1830
+  take enemy_turn
+  need phase_stunned_attack
+  take timer_stunned_attack
+  give enemy_act
+
+verb stunned_attack_step_1 "Tailpasaran thaws" by world priority 69 in enemy at 2180 1830
+  take enemy_act
+  take phase_stunned_attack
+  give phase_attack
+  give 10 timer_attack
+  unless timer_stunned_attack
+  give beat_end
+
+verb stunned_attack_holds "Tailpasaran is frozen while attacking: nothing changes" by world priority 68 in enemy at 2040 1900
+  take enemy_act
+  need phase_stunned_attack
+  give beat_end
+
+verb stunned_sink_plunge_ticks "Tailpasaran is frozen while diving: a beat passes" by world priority 71 in enemy at 2180 1900
+  take enemy_turn
+  need phase_stunned_sink_plunge
+  take timer_stunned_sink_plunge
+  give enemy_act
+
+verb stunned_sink_plunge_step_1 "Tailpasaran thaws" by world priority 69 in enemy at 2040 1970
+  take enemy_act
+  take phase_stunned_sink_plunge
+  give phase_sink_plunge
+  unless timer_stunned_sink_plunge
+  give beat_end
+
+verb stunned_sink_plunge_holds "Tailpasaran is frozen while diving: nothing changes" by world priority 68 in enemy at 2180 1970
+  take enemy_act
+  need phase_stunned_sink_plunge
+  give beat_end
+
+verb shock_blocked_deku_shield "Tailpasaran shock: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+  take incoming_shock
+  need guard_with_deku_shield
+
+verb shock_blocked_hylian_shield "Tailpasaran shock: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_shock
+  need guard_with_hylian_shield
+
+verb shock_blocked_mirror_shield "Tailpasaran shock: blocked by the mirror shield" by world priority 60 in attacks at 3460 150
+  take incoming_shock
+  need guard_with_mirror_shield
+
+verb shock_dodged "Tailpasaran shock: dodged" by world priority 60 in attacks at 3320 220
+  take incoming_shock
+  need link_dodge
+  unless link_guard
+
+verb shock_nayru "Tailpasaran shock: Nayru's Love holds" by world priority 60 in attacks at 3460 220
+  take incoming_shock
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb shock_lands "Tailpasaran shock hits Link" by world priority 60 in attacks at 3320 290
+  take incoming_shock
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  give status_shock
+  unless status_shock
+
+verb shock_lands_again "Tailpasaran shock hits Link again" by world priority 60 in attacks at 3460 290
+  take incoming_shock
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  need status_shock
+
+verb shock_lands_dd "Tailpasaran shock hits Link" by world priority 60 in attacks at 3320 360
+  take incoming_shock
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  give status_shock
+  unless status_shock
+
+verb shock_lands_dd_again "Tailpasaran shock hits Link again" by world priority 60 in attacks at 3460 360
+  take incoming_shock
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  need status_shock
+
+verb backlash_nayru "Tailpasaran electric backlash: Nayru's Love holds" by world priority 60 in attacks at 3460 430
+  take incoming_backlash
+  need status_nayru
+
+verb backlash_lands "Tailpasaran electric backlash hits Link" by world priority 60 in attacks at 3320 500
+  take incoming_backlash
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  give status_shock
+  unless status_shock
+
+verb backlash_lands_again "Tailpasaran electric backlash hits Link again" by world priority 60 in attacks at 3460 500
+  take incoming_backlash
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  need status_shock
+
+verb backlash_lands_dd "Tailpasaran electric backlash hits Link" by world priority 60 in attacks at 3320 570
+  take incoming_backlash
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  give status_shock
+  unless status_shock
+
+verb backlash_lands_dd_again "Tailpasaran electric backlash hits Link again" by world priority 60 in attacks at 3460 570
+  take incoming_backlash
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  need status_shock
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 580 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 440 360
+  need beat_end
+  take link_dodge
+
+verb shock_ticks "Link: shock wears on" by world priority 48 in beat at 580 430
+  take beat_end
+  take status_shock
+  give tick_shock
+
+verb shock_idle "Link: no shock" by world priority 48 in beat at 440 500
+  take beat_end
+  unless status_shock
+  give tick_shock
+
+verb nayru_ticks "Link: nayru wears on" by world priority 47 in beat at 580 500
+  take tick_shock
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 47 in beat at 440 570
+  take tick_shock
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 46 in beat at 440 640
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 46 in beat at 580 640
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 46 in beat at 440 710
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 46 in beat at 580 710
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 780
+  take lens_count
+  unless lens_on
+
+verb link_helpless_shock "Link cannot act: shock" by world priority 40 in beat at 580 780
+  take link_turn
+  need status_shock
+  give enemy_turn

@@ -1,0 +1,3177 @@
+maps 2
+title "Ocarina of Time combat: Link vs Gerudo fighter"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state age_adult "Link is an adult" in setup at 120 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Gerudo fighter answers" in beat at 580 80
+state enemy_act "Gerudo fighter acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 4/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 260 150
+state link_wins "Gerudo fighter defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state has_master_sword "Has master sword" in gear at 1860 570
+state has_hookshot "Has hookshot" in gear at 1720 640
+state has_megaton_hammer "Has megaton hammer" in gear at 1860 640
+state has_bow "Has bow" in gear at 1720 710
+state has_bombchus "Has bombchus" in gear at 1860 710
+state has_mirror_shield "Has mirror shield" in gear at 1720 780
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 780
+state has_giants_knife "Has giants knife" in gear at 1720 850
+state has_double_defense "Has double defense" in gear at 1860 850
+state has_fire_arrows "Has fire arrows" in gear at 1720 920
+state has_ice_arrows "Has ice arrows" in gear at 1860 920
+state has_light_arrows "Has light arrows" in gear at 1720 990
+state has_blue_potion "Has blue potion" in gear at 1860 990
+state phase_ready "Gerudo stands on guard" in enemy at 2040 80
+state timer_ready "Gerudo stands on guard: beats left" in enemy at 2180 80
+state phase_advance "Gerudo advances" in enemy at 2180 150
+state phase_circle "Gerudo circles Link" in enemy at 2040 220
+state timer_circle "Gerudo circles Link: beats left" in enemy at 2180 220
+state phase_sidestep "Gerudo sidesteps" in enemy at 2180 290
+state timer_sidestep "Gerudo sidesteps: beats left" in enemy at 2040 360
+state phase_block "Gerudo blocks with her swords" in enemy at 2040 430
+state timer_block "Gerudo blocks with her swords: beats left" in enemy at 2180 430
+state phase_roll_forward "Gerudo flips toward Link" in enemy at 2180 500
+state phase_roll_back "Gerudo flips away" in enemy at 2040 570
+state phase_jump "Gerudo leaps over" in enemy at 2180 570
+state phase_slash "Gerudo slashes" in enemy at 2040 640
+state phase_spin_attack "Gerudo spins in with both swords" in enemy at 2180 640
+state phase_spin_dodge "Gerudo spins aside" in enemy at 2040 710
+state timer_spin_dodge "Gerudo spins aside: beats left" in enemy at 2180 710
+state phase_stunned "Gerudo is stunned" in enemy at 2180 780
+state timer_stunned "Gerudo is stunned: beats left" in enemy at 2040 850
+state phase_damaged "Gerudo reels from a hit" in enemy at 2040 920
+state hp_body "Gerudo fighter: health" marks 20 in enemy_health at 2360 80
+state alive_body "Gerudo fighter: standing" marks 1 in enemy_health at 2500 80
+state dmg_body "Gerudo fighter: damage" in enemy_health at 2360 150
+state status_grab "Link: grab (beats left)" in link_state at 1220 290
+state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
+state lens_on "Lens of Truth on" in link_state at 1220 360
+state link_guard "Link holds up his shield" in link_state at 1080 430
+state link_dodge "Link dodges" in link_state at 1220 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3140 430
+state swing_slingshot "Slingshot seed on its way" in hits at 3140 850
+state swing_explosive "Explosion on its way" in hits at 3140 1270
+state swing_boomerang "Boomerang on its way" in hits at 3140 1690
+state swing_arrow_normal "Arrow on its way" in hits at 3000 2110
+state swing_hammer_swing "Hammer swing on its way" in hits at 3000 2530
+state swing_hookshot "Hookshot on its way" in hits at 3000 2950
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3140 3300
+state swing_slash_master "Master Sword slash on its way" in hits at 3140 3720
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3140 4140
+state swing_arrow_fire "Fire arrow on its way" in hits at 3140 4560
+state swing_arrow_ice "Ice arrow on its way" in hits at 3140 4980
+state swing_arrow_light "Light arrow on its way" in hits at 3000 5400
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 5820
+state swing_shield "Shield on its way" in hits at 3000 6310
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3000 6380
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 6800
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3000 7290
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3140 7710
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3140 8130
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3000 8620
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3000 9040
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 9460
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3140 9880
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3000 10370
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1220 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1220 780
+state incoming_slash "Scimitar slash incoming" in attacks at 3320 80
+state incoming_spin "Spin attack: she catches Link and throws him in the cell incoming" in attacks at 3320 360
+state carried_spin "Spin attack: she catches Link and throws him in the cell: Link held" in attacks at 3320 710
+state link_carried_off "Link is carried off" ends "Link is carried off" in outcomes at 1400 220
+state tick_grab "Beat ends: grab checked" in beat at 580 360
+state tick_nayru "Beat ends: nayru checked" in beat at 440 430
+state lens_count "The Lens: beats toward the next cost" in beat at 580 570
+
+verb ready_timer_clears "Gerudo stands on guard is over" by world priority 99 in enemy at 2040 150
+  take timer_ready
+  unless phase_ready
+
+verb circle_timer_clears "Gerudo circles Link is over" by world priority 99 in enemy at 2040 290
+  take timer_circle
+  unless phase_circle
+
+verb sidestep_timer_clears "Gerudo sidesteps is over" by world priority 99 in enemy at 2180 360
+  take timer_sidestep
+  unless phase_sidestep
+
+verb block_timer_clears "Gerudo blocks with her swords is over" by world priority 99 in enemy at 2040 500
+  take timer_block
+  unless phase_block
+
+verb spin_dodge_timer_clears "Gerudo spins aside is over" by world priority 99 in enemy at 2040 780
+  take timer_spin_dodge
+  unless phase_spin_dodge
+
+verb stunned_timer_clears "Gerudo is stunned is over" by world priority 99 in enemy at 2180 850
+  take timer_stunned
+  unless phase_stunned
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 120 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 260 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 120 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 260 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 120 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 260 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give phase_ready
+  give timer_ready
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 8 link_heal
+
+verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb body_hurt "Gerudo fighter loses health" by world priority 96 in enemy_health at 2500 150
+  take dmg_body
+  take hp_body
+
+verb body_overkill "Gerudo fighter has no health left to lose" by world priority 95 in enemy_health at 2360 220
+  take dmg_body
+  unless hp_body
+
+verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_nut_2 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2820 80
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2680 150
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2820 150
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2680 220
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 220
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 290
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2820 290
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2680 360
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2820 360
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2680 430
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 430
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 500
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 500
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 570
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 570
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 640
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 640
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 710
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2820 710
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 780
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 780
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 850
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 850
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 920
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 920
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 990
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 990
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1060
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1060
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1130
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1130
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2680 1200
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1200
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2680 1270
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1270
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2680 1340
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1340
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2680 1410
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1410
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2680 1480
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 1480
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb hit_deku_nut__ready "Deku Nut flash hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 150
+  take swing_deku_nut
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_deku_nut__advance "Deku Nut flash hits (Gerudo advances)" by world priority 80 in hits at 3140 150
+  take swing_deku_nut
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_deku_nut__circle "Deku Nut flash hits (Gerudo circles Link)" by world priority 80 in hits at 3000 220
+  take swing_deku_nut
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_deku_nut__sidestep "Deku Nut flash hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 220
+  take swing_deku_nut
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_deku_nut__roll_forward "Deku Nut flash hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 290
+  take swing_deku_nut
+  take phase_roll_forward
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__roll_back "Deku Nut flash hits (Gerudo flips away)" by world priority 80 in hits at 3140 290
+  take swing_deku_nut
+  take phase_roll_back
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__slash "Deku Nut flash hits (Gerudo slashes)" by world priority 80 in hits at 3000 360
+  take swing_deku_nut
+  take phase_slash
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__spin_attack "Deku Nut flash hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 360
+  take swing_deku_nut
+  take phase_spin_attack
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__spin_dodge "Deku Nut flash hits (Gerudo spins aside)" by world priority 80 in hits at 3000 430
+  take swing_deku_nut
+  take phase_spin_dodge
+  give phase_stunned
+  give 4 timer_stunned
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3000 500
+  take swing_deku_stick
+
+verb hit_deku_stick__ready "Deku Stick hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 500
+  take swing_deku_stick
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_deku_stick__advance "Deku Stick hits (Gerudo advances)" by world priority 80 in hits at 3000 570
+  take swing_deku_stick
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_deku_stick__circle "Deku Stick hits (Gerudo circles Link)" by world priority 80 in hits at 3140 570
+  take swing_deku_stick
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_deku_stick__sidestep "Deku Stick hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 640
+  take swing_deku_stick
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_deku_stick__roll_forward "Deku Stick hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 640
+  take swing_deku_stick
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_deku_stick__roll_back "Deku Stick hits (Gerudo flips away)" by world priority 80 in hits at 3000 710
+  take swing_deku_stick
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_deku_stick__slash "Deku Stick hits (Gerudo slashes)" by world priority 80 in hits at 3140 710
+  take swing_deku_stick
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_deku_stick__spin_attack "Deku Stick hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 780
+  take swing_deku_stick
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_deku_stick__spin_dodge "Deku Stick hits (Gerudo spins aside)" by world priority 80 in hits at 3140 780
+  take swing_deku_stick
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_deku_stick__stunned "Deku Stick hits (Gerudo is stunned)" by world priority 80 in hits at 3000 850
+  take swing_deku_stick
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3000 920
+  take swing_slingshot
+
+verb hit_slingshot__ready "Slingshot seed hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 920
+  take swing_slingshot
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_slingshot__advance "Slingshot seed hits (Gerudo advances)" by world priority 80 in hits at 3000 990
+  take swing_slingshot
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_slingshot__circle "Slingshot seed hits (Gerudo circles Link)" by world priority 80 in hits at 3140 990
+  take swing_slingshot
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_slingshot__sidestep "Slingshot seed hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 1060
+  take swing_slingshot
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_slingshot__roll_forward "Slingshot seed hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 1060
+  take swing_slingshot
+  take phase_roll_forward
+  give phase_damaged
+  give dmg_body
+
+verb hit_slingshot__roll_back "Slingshot seed hits (Gerudo flips away)" by world priority 80 in hits at 3000 1130
+  take swing_slingshot
+  take phase_roll_back
+  give phase_damaged
+  give dmg_body
+
+verb hit_slingshot__slash "Slingshot seed hits (Gerudo slashes)" by world priority 80 in hits at 3140 1130
+  take swing_slingshot
+  take phase_slash
+  give phase_damaged
+  give dmg_body
+
+verb hit_slingshot__spin_attack "Slingshot seed hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 1200
+  take swing_slingshot
+  take phase_spin_attack
+  give phase_damaged
+  give dmg_body
+
+verb hit_slingshot__spin_dodge "Slingshot seed hits (Gerudo spins aside)" by world priority 80 in hits at 3140 1200
+  take swing_slingshot
+  take phase_spin_dodge
+  give phase_damaged
+  give dmg_body
+
+verb hit_slingshot__stunned "Slingshot seed hits (Gerudo is stunned)" by world priority 80 in hits at 3000 1270
+  take swing_slingshot
+  take phase_stunned
+  give phase_damaged
+  give dmg_body
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3000 1340
+  take swing_explosive
+
+verb hit_explosive__ready "Explosion hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 1340
+  take swing_explosive
+  take phase_ready
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__advance "Explosion hits (Gerudo advances)" by world priority 80 in hits at 3000 1410
+  take swing_explosive
+  take phase_advance
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__circle "Explosion hits (Gerudo circles Link)" by world priority 80 in hits at 3140 1410
+  take swing_explosive
+  take phase_circle
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__sidestep "Explosion hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 1480
+  take swing_explosive
+  take phase_sidestep
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__roll_forward "Explosion hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 1480
+  take swing_explosive
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__roll_back "Explosion hits (Gerudo flips away)" by world priority 80 in hits at 3000 1550
+  take swing_explosive
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__slash "Explosion hits (Gerudo slashes)" by world priority 80 in hits at 3140 1550
+  take swing_explosive
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__spin_attack "Explosion hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 1620
+  take swing_explosive
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__spin_dodge "Explosion hits (Gerudo spins aside)" by world priority 80 in hits at 3140 1620
+  take swing_explosive
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_explosive__stunned "Explosion hits (Gerudo is stunned)" by world priority 80 in hits at 3000 1690
+  take swing_explosive
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3000 1760
+  take swing_boomerang
+
+verb hit_boomerang__ready "Boomerang hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 1760
+  take swing_boomerang
+  take phase_ready
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_boomerang__advance "Boomerang hits (Gerudo advances)" by world priority 80 in hits at 3000 1830
+  take swing_boomerang
+  take phase_advance
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_boomerang__circle "Boomerang hits (Gerudo circles Link)" by world priority 80 in hits at 3140 1830
+  take swing_boomerang
+  take phase_circle
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_boomerang__sidestep "Boomerang hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 1900
+  take swing_boomerang
+  take phase_sidestep
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_boomerang__roll_forward "Boomerang hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 1900
+  take swing_boomerang
+  take phase_roll_forward
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_boomerang__roll_back "Boomerang hits (Gerudo flips away)" by world priority 80 in hits at 3000 1970
+  take swing_boomerang
+  take phase_roll_back
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_boomerang__slash "Boomerang hits (Gerudo slashes)" by world priority 80 in hits at 3140 1970
+  take swing_boomerang
+  take phase_slash
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_boomerang__spin_attack "Boomerang hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 2040
+  take swing_boomerang
+  take phase_spin_attack
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_boomerang__spin_dodge "Boomerang hits (Gerudo spins aside)" by world priority 80 in hits at 3140 2040
+  take swing_boomerang
+  take phase_spin_dodge
+  give phase_stunned
+  give 4 timer_stunned
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3140 2110
+  take swing_arrow_normal
+
+verb hit_arrow_normal__ready "Arrow hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 2180
+  take swing_arrow_normal
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_arrow_normal__advance "Arrow hits (Gerudo advances)" by world priority 80 in hits at 3140 2180
+  take swing_arrow_normal
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_arrow_normal__circle "Arrow hits (Gerudo circles Link)" by world priority 80 in hits at 3000 2250
+  take swing_arrow_normal
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_arrow_normal__sidestep "Arrow hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 2250
+  take swing_arrow_normal
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_arrow_normal__roll_forward "Arrow hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 2320
+  take swing_arrow_normal
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_normal__roll_back "Arrow hits (Gerudo flips away)" by world priority 80 in hits at 3140 2320
+  take swing_arrow_normal
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_normal__slash "Arrow hits (Gerudo slashes)" by world priority 80 in hits at 3000 2390
+  take swing_arrow_normal
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_normal__spin_attack "Arrow hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 2390
+  take swing_arrow_normal
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_normal__spin_dodge "Arrow hits (Gerudo spins aside)" by world priority 80 in hits at 3000 2460
+  take swing_arrow_normal
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_normal__stunned "Arrow hits (Gerudo is stunned)" by world priority 80 in hits at 3140 2460
+  take swing_arrow_normal
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 2530
+  take swing_hammer_swing
+
+verb hit_hammer_swing__ready "Hammer swing hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 2600
+  take swing_hammer_swing
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_hammer_swing__advance "Hammer swing hits (Gerudo advances)" by world priority 80 in hits at 3140 2600
+  take swing_hammer_swing
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_hammer_swing__circle "Hammer swing hits (Gerudo circles Link)" by world priority 80 in hits at 3000 2670
+  take swing_hammer_swing
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_hammer_swing__sidestep "Hammer swing hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 2670
+  take swing_hammer_swing
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_hammer_swing__roll_forward "Hammer swing hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 2740
+  take swing_hammer_swing
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_hammer_swing__roll_back "Hammer swing hits (Gerudo flips away)" by world priority 80 in hits at 3140 2740
+  take swing_hammer_swing
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_hammer_swing__slash "Hammer swing hits (Gerudo slashes)" by world priority 80 in hits at 3000 2810
+  take swing_hammer_swing
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_hammer_swing__spin_attack "Hammer swing hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 2810
+  take swing_hammer_swing
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_hammer_swing__spin_dodge "Hammer swing hits (Gerudo spins aside)" by world priority 80 in hits at 3000 2880
+  take swing_hammer_swing
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned "Hammer swing hits (Gerudo is stunned)" by world priority 80 in hits at 3140 2880
+  take swing_hammer_swing
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 2950
+  take swing_hookshot
+
+verb hit_hookshot__ready "Hookshot hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 3020
+  take swing_hookshot
+  take phase_ready
+  give phase_jump
+
+verb hit_hookshot__advance "Hookshot hits (Gerudo advances)" by world priority 80 in hits at 3140 3020
+  take swing_hookshot
+  take phase_advance
+  give phase_jump
+
+verb hit_hookshot__circle "Hookshot hits (Gerudo circles Link)" by world priority 80 in hits at 3000 3090
+  take swing_hookshot
+  take phase_circle
+  give phase_jump
+
+verb hit_hookshot__sidestep "Hookshot hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 3090
+  take swing_hookshot
+  take phase_sidestep
+  give phase_jump
+
+verb hit_hookshot__roll_forward "Hookshot hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 3160
+  take swing_hookshot
+  take phase_roll_forward
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__roll_back "Hookshot hits (Gerudo flips away)" by world priority 80 in hits at 3140 3160
+  take swing_hookshot
+  take phase_roll_back
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__slash "Hookshot hits (Gerudo slashes)" by world priority 80 in hits at 3000 3230
+  take swing_hookshot
+  take phase_slash
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__spin_attack "Hookshot hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 3230
+  take swing_hookshot
+  take phase_spin_attack
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__spin_dodge "Hookshot hits (Gerudo spins aside)" by world priority 80 in hits at 3000 3300
+  take swing_hookshot
+  take phase_spin_dodge
+  give phase_stunned
+  give 4 timer_stunned
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3000 3370
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__ready "Kokiri Sword slash hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 3370
+  take swing_slash_kokiri
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_slash_kokiri__advance "Kokiri Sword slash hits (Gerudo advances)" by world priority 80 in hits at 3000 3440
+  take swing_slash_kokiri
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_slash_kokiri__circle "Kokiri Sword slash hits (Gerudo circles Link)" by world priority 80 in hits at 3140 3440
+  take swing_slash_kokiri
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_slash_kokiri__sidestep "Kokiri Sword slash hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 3510
+  take swing_slash_kokiri
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_slash_kokiri__roll_forward "Kokiri Sword slash hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 3510
+  take swing_slash_kokiri
+  take phase_roll_forward
+  give phase_damaged
+  give dmg_body
+
+verb hit_slash_kokiri__roll_back "Kokiri Sword slash hits (Gerudo flips away)" by world priority 80 in hits at 3000 3580
+  take swing_slash_kokiri
+  take phase_roll_back
+  give phase_damaged
+  give dmg_body
+
+verb hit_slash_kokiri__slash "Kokiri Sword slash hits (Gerudo slashes)" by world priority 80 in hits at 3140 3580
+  take swing_slash_kokiri
+  take phase_slash
+  give phase_damaged
+  give dmg_body
+
+verb hit_slash_kokiri__spin_attack "Kokiri Sword slash hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 3650
+  take swing_slash_kokiri
+  take phase_spin_attack
+  give phase_damaged
+  give dmg_body
+
+verb hit_slash_kokiri__spin_dodge "Kokiri Sword slash hits (Gerudo spins aside)" by world priority 80 in hits at 3140 3650
+  take swing_slash_kokiri
+  take phase_spin_dodge
+  give phase_damaged
+  give dmg_body
+
+verb hit_slash_kokiri__stunned "Kokiri Sword slash hits (Gerudo is stunned)" by world priority 80 in hits at 3000 3720
+  take swing_slash_kokiri
+  take phase_stunned
+  give phase_damaged
+  give dmg_body
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3000 3790
+  take swing_slash_master
+
+verb hit_slash_master__ready "Master Sword slash hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 3790
+  take swing_slash_master
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_slash_master__advance "Master Sword slash hits (Gerudo advances)" by world priority 80 in hits at 3000 3860
+  take swing_slash_master
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_slash_master__circle "Master Sword slash hits (Gerudo circles Link)" by world priority 80 in hits at 3140 3860
+  take swing_slash_master
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_slash_master__sidestep "Master Sword slash hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 3930
+  take swing_slash_master
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_slash_master__roll_forward "Master Sword slash hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 3930
+  take swing_slash_master
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_slash_master__roll_back "Master Sword slash hits (Gerudo flips away)" by world priority 80 in hits at 3000 4000
+  take swing_slash_master
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_slash_master__slash "Master Sword slash hits (Gerudo slashes)" by world priority 80 in hits at 3140 4000
+  take swing_slash_master
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_slash_master__spin_attack "Master Sword slash hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 4070
+  take swing_slash_master
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_slash_master__spin_dodge "Master Sword slash hits (Gerudo spins aside)" by world priority 80 in hits at 3140 4070
+  take swing_slash_master
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_slash_master__stunned "Master Sword slash hits (Gerudo is stunned)" by world priority 80 in hits at 3000 4140
+  take swing_slash_master
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3000 4210
+  take swing_slash_giant
+
+verb hit_slash_giant__ready "Two-handed sword slash hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 4210
+  take swing_slash_giant
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_slash_giant__advance "Two-handed sword slash hits (Gerudo advances)" by world priority 80 in hits at 3000 4280
+  take swing_slash_giant
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_slash_giant__circle "Two-handed sword slash hits (Gerudo circles Link)" by world priority 80 in hits at 3140 4280
+  take swing_slash_giant
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_slash_giant__sidestep "Two-handed sword slash hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 4350
+  take swing_slash_giant
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_slash_giant__roll_forward "Two-handed sword slash hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 4350
+  take swing_slash_giant
+  take phase_roll_forward
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_slash_giant__roll_back "Two-handed sword slash hits (Gerudo flips away)" by world priority 80 in hits at 3000 4420
+  take swing_slash_giant
+  take phase_roll_back
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_slash_giant__slash "Two-handed sword slash hits (Gerudo slashes)" by world priority 80 in hits at 3140 4420
+  take swing_slash_giant
+  take phase_slash
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_slash_giant__spin_attack "Two-handed sword slash hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 4490
+  take swing_slash_giant
+  take phase_spin_attack
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_slash_giant__spin_dodge "Two-handed sword slash hits (Gerudo spins aside)" by world priority 80 in hits at 3140 4490
+  take swing_slash_giant
+  take phase_spin_dodge
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_slash_giant__stunned "Two-handed sword slash hits (Gerudo is stunned)" by world priority 80 in hits at 3000 4560
+  take swing_slash_giant
+  take phase_stunned
+  give phase_damaged
+  give 4 dmg_body
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3000 4630
+  take swing_arrow_fire
+
+verb hit_arrow_fire__ready "Fire arrow hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 4630
+  take swing_arrow_fire
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_arrow_fire__advance "Fire arrow hits (Gerudo advances)" by world priority 80 in hits at 3000 4700
+  take swing_arrow_fire
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_arrow_fire__circle "Fire arrow hits (Gerudo circles Link)" by world priority 80 in hits at 3140 4700
+  take swing_arrow_fire
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_arrow_fire__sidestep "Fire arrow hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 4770
+  take swing_arrow_fire
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_arrow_fire__roll_forward "Fire arrow hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 4770
+  take swing_arrow_fire
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_fire__roll_back "Fire arrow hits (Gerudo flips away)" by world priority 80 in hits at 3000 4840
+  take swing_arrow_fire
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_fire__slash "Fire arrow hits (Gerudo slashes)" by world priority 80 in hits at 3140 4840
+  take swing_arrow_fire
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_fire__spin_attack "Fire arrow hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 4910
+  take swing_arrow_fire
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_fire__spin_dodge "Fire arrow hits (Gerudo spins aside)" by world priority 80 in hits at 3140 4910
+  take swing_arrow_fire
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_fire__stunned "Fire arrow hits (Gerudo is stunned)" by world priority 80 in hits at 3000 4980
+  take swing_arrow_fire
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3000 5050
+  take swing_arrow_ice
+
+verb hit_arrow_ice__ready "Ice arrow hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 5050
+  take swing_arrow_ice
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_arrow_ice__advance "Ice arrow hits (Gerudo advances)" by world priority 80 in hits at 3000 5120
+  take swing_arrow_ice
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_arrow_ice__circle "Ice arrow hits (Gerudo circles Link)" by world priority 80 in hits at 3140 5120
+  take swing_arrow_ice
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_arrow_ice__sidestep "Ice arrow hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 5190
+  take swing_arrow_ice
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_arrow_ice__roll_forward "Ice arrow hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 5190
+  take swing_arrow_ice
+  take phase_roll_forward
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_ice__roll_back "Ice arrow hits (Gerudo flips away)" by world priority 80 in hits at 3000 5260
+  take swing_arrow_ice
+  take phase_roll_back
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_ice__slash "Ice arrow hits (Gerudo slashes)" by world priority 80 in hits at 3140 5260
+  take swing_arrow_ice
+  take phase_slash
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_ice__spin_attack "Ice arrow hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 5330
+  take swing_arrow_ice
+  take phase_spin_attack
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_ice__spin_dodge "Ice arrow hits (Gerudo spins aside)" by world priority 80 in hits at 3140 5330
+  take swing_arrow_ice
+  take phase_spin_dodge
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3140 5400
+  take swing_arrow_light
+
+verb hit_arrow_light__ready "Light arrow hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 5470
+  take swing_arrow_light
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_arrow_light__advance "Light arrow hits (Gerudo advances)" by world priority 80 in hits at 3140 5470
+  take swing_arrow_light
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_arrow_light__circle "Light arrow hits (Gerudo circles Link)" by world priority 80 in hits at 3000 5540
+  take swing_arrow_light
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_arrow_light__sidestep "Light arrow hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 5540
+  take swing_arrow_light
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_arrow_light__roll_forward "Light arrow hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 5610
+  take swing_arrow_light
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_light__roll_back "Light arrow hits (Gerudo flips away)" by world priority 80 in hits at 3140 5610
+  take swing_arrow_light
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_light__slash "Light arrow hits (Gerudo slashes)" by world priority 80 in hits at 3000 5680
+  take swing_arrow_light
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_light__spin_attack "Light arrow hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 5680
+  take swing_arrow_light
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_light__spin_dodge "Light arrow hits (Gerudo spins aside)" by world priority 80 in hits at 3000 5750
+  take swing_arrow_light
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_arrow_light__stunned "Light arrow hits (Gerudo is stunned)" by world priority 80 in hits at 3140 5750
+  take swing_arrow_light
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 5820
+  take swing_magic_fire
+
+verb hit_magic_fire__ready "Din's Fire hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 5890
+  take swing_magic_fire
+  take phase_ready
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__advance "Din's Fire hits (Gerudo advances)" by world priority 80 in hits at 3140 5890
+  take swing_magic_fire
+  take phase_advance
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__circle "Din's Fire hits (Gerudo circles Link)" by world priority 80 in hits at 3000 5960
+  take swing_magic_fire
+  take phase_circle
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__sidestep "Din's Fire hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 5960
+  take swing_magic_fire
+  take phase_sidestep
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__block "Din's Fire hits (Gerudo blocks with her swords)" by world priority 80 in hits at 3000 6030
+  take swing_magic_fire
+  take phase_block
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__roll_forward "Din's Fire hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 6030
+  take swing_magic_fire
+  take phase_roll_forward
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__roll_back "Din's Fire hits (Gerudo flips away)" by world priority 80 in hits at 3000 6100
+  take swing_magic_fire
+  take phase_roll_back
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__slash "Din's Fire hits (Gerudo slashes)" by world priority 80 in hits at 3140 6100
+  take swing_magic_fire
+  take phase_slash
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__spin_attack "Din's Fire hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 6170
+  take swing_magic_fire
+  take phase_spin_attack
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__spin_dodge "Din's Fire hits (Gerudo spins aside)" by world priority 80 in hits at 3140 6170
+  take swing_magic_fire
+  take phase_spin_dodge
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_magic_fire__stunned "Din's Fire hits (Gerudo is stunned)" by world priority 80 in hits at 3000 6240
+  take swing_magic_fire
+  take phase_stunned
+  give phase_damaged
+  give 4 dmg_body
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 6240
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 6310
+  take swing_shield
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3140 6380
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__ready "Kokiri spin attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 6450
+  take swing_spin_kokiri
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_spin_kokiri__advance "Kokiri spin attack hits (Gerudo advances)" by world priority 80 in hits at 3140 6450
+  take swing_spin_kokiri
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_spin_kokiri__circle "Kokiri spin attack hits (Gerudo circles Link)" by world priority 80 in hits at 3000 6520
+  take swing_spin_kokiri
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_spin_kokiri__sidestep "Kokiri spin attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 6520
+  take swing_spin_kokiri
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_spin_kokiri__roll_forward "Kokiri spin attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 6590
+  take swing_spin_kokiri
+  take phase_roll_forward
+  give phase_damaged
+  give dmg_body
+
+verb hit_spin_kokiri__roll_back "Kokiri spin attack hits (Gerudo flips away)" by world priority 80 in hits at 3140 6590
+  take swing_spin_kokiri
+  take phase_roll_back
+  give phase_damaged
+  give dmg_body
+
+verb hit_spin_kokiri__slash "Kokiri spin attack hits (Gerudo slashes)" by world priority 80 in hits at 3000 6660
+  take swing_spin_kokiri
+  take phase_slash
+  give phase_damaged
+  give dmg_body
+
+verb hit_spin_kokiri__spin_attack "Kokiri spin attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 6660
+  take swing_spin_kokiri
+  take phase_spin_attack
+  give phase_damaged
+  give dmg_body
+
+verb hit_spin_kokiri__spin_dodge "Kokiri spin attack hits (Gerudo spins aside)" by world priority 80 in hits at 3000 6730
+  take swing_spin_kokiri
+  take phase_spin_dodge
+  give phase_damaged
+  give dmg_body
+
+verb hit_spin_kokiri__stunned "Kokiri spin attack hits (Gerudo is stunned)" by world priority 80 in hits at 3140 6730
+  take swing_spin_kokiri
+  take phase_stunned
+  give phase_damaged
+  give dmg_body
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3000 6800
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3000 6870
+  take swing_spin_giant
+
+verb hit_spin_giant__ready "Two-handed spin attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 6870
+  take swing_spin_giant
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_spin_giant__advance "Two-handed spin attack hits (Gerudo advances)" by world priority 80 in hits at 3000 6940
+  take swing_spin_giant
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_spin_giant__circle "Two-handed spin attack hits (Gerudo circles Link)" by world priority 80 in hits at 3140 6940
+  take swing_spin_giant
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_spin_giant__sidestep "Two-handed spin attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 7010
+  take swing_spin_giant
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_spin_giant__roll_forward "Two-handed spin attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 7010
+  take swing_spin_giant
+  take phase_roll_forward
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_spin_giant__roll_back "Two-handed spin attack hits (Gerudo flips away)" by world priority 80 in hits at 3000 7080
+  take swing_spin_giant
+  take phase_roll_back
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_spin_giant__slash "Two-handed spin attack hits (Gerudo slashes)" by world priority 80 in hits at 3140 7080
+  take swing_spin_giant
+  take phase_slash
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_spin_giant__spin_attack "Two-handed spin attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 7150
+  take swing_spin_giant
+  take phase_spin_attack
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_spin_giant__spin_dodge "Two-handed spin attack hits (Gerudo spins aside)" by world priority 80 in hits at 3140 7150
+  take swing_spin_giant
+  take phase_spin_dodge
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_spin_giant__stunned "Two-handed spin attack hits (Gerudo is stunned)" by world priority 80 in hits at 3000 7220
+  take swing_spin_giant
+  take phase_stunned
+  give phase_damaged
+  give 4 dmg_body
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3140 7220
+  take swing_spin_giant
+  need range_far
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3140 7290
+  take swing_spin_master
+
+verb hit_spin_master__ready "Master Sword spin attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 7360
+  take swing_spin_master
+  take phase_ready
+  give phase_block
+  give timer_block
+
+verb hit_spin_master__advance "Master Sword spin attack hits (Gerudo advances)" by world priority 80 in hits at 3140 7360
+  take swing_spin_master
+  take phase_advance
+  give phase_block
+  give timer_block
+
+verb hit_spin_master__circle "Master Sword spin attack hits (Gerudo circles Link)" by world priority 80 in hits at 3000 7430
+  take swing_spin_master
+  take phase_circle
+  give phase_block
+  give timer_block
+
+verb hit_spin_master__sidestep "Master Sword spin attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 7430
+  take swing_spin_master
+  take phase_sidestep
+  give phase_block
+  give timer_block
+
+verb hit_spin_master__roll_forward "Master Sword spin attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 7500
+  take swing_spin_master
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_spin_master__roll_back "Master Sword spin attack hits (Gerudo flips away)" by world priority 80 in hits at 3140 7500
+  take swing_spin_master
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_spin_master__slash "Master Sword spin attack hits (Gerudo slashes)" by world priority 80 in hits at 3000 7570
+  take swing_spin_master
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_spin_master__spin_attack "Master Sword spin attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 7570
+  take swing_spin_master
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_spin_master__spin_dodge "Master Sword spin attack hits (Gerudo spins aside)" by world priority 80 in hits at 3000 7640
+  take swing_spin_master
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_spin_master__stunned "Master Sword spin attack hits (Gerudo is stunned)" by world priority 80 in hits at 3140 7640
+  take swing_spin_master
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3000 7710
+  take swing_spin_master
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 7780
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__ready "Kokiri jump attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 7780
+  take swing_jump_kokiri
+  take phase_ready
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_kokiri__advance "Kokiri jump attack hits (Gerudo advances)" by world priority 80 in hits at 3000 7850
+  take swing_jump_kokiri
+  take phase_advance
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_kokiri__circle "Kokiri jump attack hits (Gerudo circles Link)" by world priority 80 in hits at 3140 7850
+  take swing_jump_kokiri
+  take phase_circle
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_kokiri__sidestep "Kokiri jump attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 7920
+  take swing_jump_kokiri
+  take phase_sidestep
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_kokiri__roll_forward "Kokiri jump attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 7920
+  take swing_jump_kokiri
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri__roll_back "Kokiri jump attack hits (Gerudo flips away)" by world priority 80 in hits at 3000 7990
+  take swing_jump_kokiri
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri__slash "Kokiri jump attack hits (Gerudo slashes)" by world priority 80 in hits at 3140 7990
+  take swing_jump_kokiri
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri__spin_attack "Kokiri jump attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 8060
+  take swing_jump_kokiri
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri__spin_dodge "Kokiri jump attack hits (Gerudo spins aside)" by world priority 80 in hits at 3140 8060
+  take swing_jump_kokiri
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned "Kokiri jump attack hits (Gerudo is stunned)" by world priority 80 in hits at 3000 8130
+  take swing_jump_kokiri
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 8200
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__ready "Kokiri jump attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 8200
+  take swing_jump_kokiri_self
+  take phase_ready
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_kokiri_self__advance "Kokiri jump attack hits (Gerudo advances)" by world priority 80 in hits at 3000 8270
+  take swing_jump_kokiri_self
+  take phase_advance
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_kokiri_self__circle "Kokiri jump attack hits (Gerudo circles Link)" by world priority 80 in hits at 3140 8270
+  take swing_jump_kokiri_self
+  take phase_circle
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_kokiri_self__sidestep "Kokiri jump attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 8340
+  take swing_jump_kokiri_self
+  take phase_sidestep
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_kokiri_self__roll_forward "Kokiri jump attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 8340
+  take swing_jump_kokiri_self
+  take phase_roll_forward
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__roll_back "Kokiri jump attack hits (Gerudo flips away)" by world priority 80 in hits at 3000 8410
+  take swing_jump_kokiri_self
+  take phase_roll_back
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__slash "Kokiri jump attack hits (Gerudo slashes)" by world priority 80 in hits at 3140 8410
+  take swing_jump_kokiri_self
+  take phase_slash
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__spin_attack "Kokiri jump attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 8480
+  take swing_jump_kokiri_self
+  take phase_spin_attack
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__spin_dodge "Kokiri jump attack hits (Gerudo spins aside)" by world priority 80 in hits at 3140 8480
+  take swing_jump_kokiri_self
+  take phase_spin_dodge
+  give phase_damaged
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned "Kokiri jump attack hits (Gerudo is stunned)" by world priority 80 in hits at 3000 8550
+  take swing_jump_kokiri_self
+  take phase_stunned
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3140 8550
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3140 8620
+  take swing_jump_giant
+
+verb hit_jump_giant__ready "Two-handed jump attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 8690
+  take swing_jump_giant
+  take phase_ready
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_giant__advance "Two-handed jump attack hits (Gerudo advances)" by world priority 80 in hits at 3140 8690
+  take swing_jump_giant
+  take phase_advance
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_giant__circle "Two-handed jump attack hits (Gerudo circles Link)" by world priority 80 in hits at 3000 8760
+  take swing_jump_giant
+  take phase_circle
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_giant__sidestep "Two-handed jump attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 8760
+  take swing_jump_giant
+  take phase_sidestep
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_giant__roll_forward "Two-handed jump attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 8830
+  take swing_jump_giant
+  take phase_roll_forward
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant__roll_back "Two-handed jump attack hits (Gerudo flips away)" by world priority 80 in hits at 3140 8830
+  take swing_jump_giant
+  take phase_roll_back
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant__slash "Two-handed jump attack hits (Gerudo slashes)" by world priority 80 in hits at 3000 8900
+  take swing_jump_giant
+  take phase_slash
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant__spin_attack "Two-handed jump attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 8900
+  take swing_jump_giant
+  take phase_spin_attack
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant__spin_dodge "Two-handed jump attack hits (Gerudo spins aside)" by world priority 80 in hits at 3000 8970
+  take swing_jump_giant
+  take phase_spin_dodge
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant__stunned "Two-handed jump attack hits (Gerudo is stunned)" by world priority 80 in hits at 3140 8970
+  take swing_jump_giant
+  take phase_stunned
+  give phase_damaged
+  give 8 dmg_body
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3140 9040
+  take swing_jump_giant_self
+
+verb hit_jump_giant_self__ready "Two-handed jump attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 9110
+  take swing_jump_giant_self
+  take phase_ready
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_giant_self__advance "Two-handed jump attack hits (Gerudo advances)" by world priority 80 in hits at 3140 9110
+  take swing_jump_giant_self
+  take phase_advance
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_giant_self__circle "Two-handed jump attack hits (Gerudo circles Link)" by world priority 80 in hits at 3000 9180
+  take swing_jump_giant_self
+  take phase_circle
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_giant_self__sidestep "Two-handed jump attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 9180
+  take swing_jump_giant_self
+  take phase_sidestep
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_giant_self__roll_forward "Two-handed jump attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 9250
+  take swing_jump_giant_self
+  take phase_roll_forward
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant_self__roll_back "Two-handed jump attack hits (Gerudo flips away)" by world priority 80 in hits at 3140 9250
+  take swing_jump_giant_self
+  take phase_roll_back
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant_self__slash "Two-handed jump attack hits (Gerudo slashes)" by world priority 80 in hits at 3000 9320
+  take swing_jump_giant_self
+  take phase_slash
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant_self__spin_attack "Two-handed jump attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 9320
+  take swing_jump_giant_self
+  take phase_spin_attack
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant_self__spin_dodge "Two-handed jump attack hits (Gerudo spins aside)" by world priority 80 in hits at 3000 9390
+  take swing_jump_giant_self
+  take phase_spin_dodge
+  give phase_damaged
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stunned "Two-handed jump attack hits (Gerudo is stunned)" by world priority 80 in hits at 3140 9390
+  take swing_jump_giant_self
+  take phase_stunned
+  give phase_damaged
+  give 8 dmg_body
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3000 9460
+  take swing_jump_giant_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 9530
+  take swing_jump_master
+
+verb hit_jump_master__ready "Master Sword jump attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 9530
+  take swing_jump_master
+  take phase_ready
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_master__advance "Master Sword jump attack hits (Gerudo advances)" by world priority 80 in hits at 3000 9600
+  take swing_jump_master
+  take phase_advance
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_master__circle "Master Sword jump attack hits (Gerudo circles Link)" by world priority 80 in hits at 3140 9600
+  take swing_jump_master
+  take phase_circle
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_master__sidestep "Master Sword jump attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 9670
+  take swing_jump_master
+  take phase_sidestep
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_master__roll_forward "Master Sword jump attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 9670
+  take swing_jump_master
+  take phase_roll_forward
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master__roll_back "Master Sword jump attack hits (Gerudo flips away)" by world priority 80 in hits at 3000 9740
+  take swing_jump_master
+  take phase_roll_back
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master__slash "Master Sword jump attack hits (Gerudo slashes)" by world priority 80 in hits at 3140 9740
+  take swing_jump_master
+  take phase_slash
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master__spin_attack "Master Sword jump attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 9810
+  take swing_jump_master
+  take phase_spin_attack
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master__spin_dodge "Master Sword jump attack hits (Gerudo spins aside)" by world priority 80 in hits at 3140 9810
+  take swing_jump_master
+  take phase_spin_dodge
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master__stunned "Master Sword jump attack hits (Gerudo is stunned)" by world priority 80 in hits at 3000 9880
+  take swing_jump_master
+  take phase_stunned
+  give phase_damaged
+  give 4 dmg_body
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 9950
+  take swing_jump_master_self
+
+verb hit_jump_master_self__ready "Master Sword jump attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3140 9950
+  take swing_jump_master_self
+  take phase_ready
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_master_self__advance "Master Sword jump attack hits (Gerudo advances)" by world priority 80 in hits at 3000 10020
+  take swing_jump_master_self
+  take phase_advance
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_master_self__circle "Master Sword jump attack hits (Gerudo circles Link)" by world priority 80 in hits at 3140 10020
+  take swing_jump_master_self
+  take phase_circle
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_master_self__sidestep "Master Sword jump attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3000 10090
+  take swing_jump_master_self
+  take phase_sidestep
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_jump_master_self__roll_forward "Master Sword jump attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3140 10090
+  take swing_jump_master_self
+  take phase_roll_forward
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master_self__roll_back "Master Sword jump attack hits (Gerudo flips away)" by world priority 80 in hits at 3000 10160
+  take swing_jump_master_self
+  take phase_roll_back
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master_self__slash "Master Sword jump attack hits (Gerudo slashes)" by world priority 80 in hits at 3140 10160
+  take swing_jump_master_self
+  take phase_slash
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master_self__spin_attack "Master Sword jump attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3000 10230
+  take swing_jump_master_self
+  take phase_spin_attack
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master_self__spin_dodge "Master Sword jump attack hits (Gerudo spins aside)" by world priority 80 in hits at 3140 10230
+  take swing_jump_master_self
+  take phase_spin_dodge
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_jump_master_self__stunned "Master Sword jump attack hits (Gerudo is stunned)" by world priority 80 in hits at 3000 10300
+  take swing_jump_master_self
+  take phase_stunned
+  give phase_damaged
+  give 4 dmg_body
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3140 10300
+  take swing_jump_master_self
+  need range_far
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3140 10370
+  take swing_hammer_jump
+
+verb hit_hammer_jump__ready "Hammer jump attack hits (Gerudo stands on guard)" by world priority 80 in hits at 3000 10440
+  take swing_hammer_jump
+  take phase_ready
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_hammer_jump__advance "Hammer jump attack hits (Gerudo advances)" by world priority 80 in hits at 3140 10440
+  take swing_hammer_jump
+  take phase_advance
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_hammer_jump__circle "Hammer jump attack hits (Gerudo circles Link)" by world priority 80 in hits at 3000 10510
+  take swing_hammer_jump
+  take phase_circle
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_hammer_jump__sidestep "Hammer jump attack hits (Gerudo sidesteps)" by world priority 80 in hits at 3140 10510
+  take swing_hammer_jump
+  take phase_sidestep
+  give phase_spin_dodge
+  give timer_spin_dodge
+
+verb hit_hammer_jump__roll_forward "Hammer jump attack hits (Gerudo flips toward Link)" by world priority 80 in hits at 3000 10580
+  take swing_hammer_jump
+  take phase_roll_forward
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_hammer_jump__roll_back "Hammer jump attack hits (Gerudo flips away)" by world priority 80 in hits at 3140 10580
+  take swing_hammer_jump
+  take phase_roll_back
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_hammer_jump__slash "Hammer jump attack hits (Gerudo slashes)" by world priority 80 in hits at 3000 10650
+  take swing_hammer_jump
+  take phase_slash
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_hammer_jump__spin_attack "Hammer jump attack hits (Gerudo spins in with both swords)" by world priority 80 in hits at 3140 10650
+  take swing_hammer_jump
+  take phase_spin_attack
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_hammer_jump__spin_dodge "Hammer jump attack hits (Gerudo spins aside)" by world priority 80 in hits at 3000 10720
+  take swing_hammer_jump
+  take phase_spin_dodge
+  give phase_damaged
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned "Hammer jump attack hits (Gerudo is stunned)" by world priority 80 in hits at 3140 10720
+  take swing_hammer_jump
+  take phase_stunned
+  give phase_damaged
+  give 4 dmg_body
+
+verb body_empty_in_stunned "Gerudo fighter runs out (Gerudo is stunned)" by world priority 92 in enemy_health at 2500 220
+  unless hp_body
+  take alive_body
+  take phase_stunned
+  give link_wins
+
+verb body_empty_in_damaged "Gerudo fighter runs out (Gerudo reels from a hit)" by world priority 92 in enemy_health at 2360 290
+  unless hp_body
+  take alive_body
+  take phase_damaged
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 1550
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 1550
+  take link_turn
+  unless status_grab
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1620
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1620
+  take link_turn
+  unless status_grab
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1690
+  take link_turn
+  unless status_grab
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1690
+  take link_turn
+  unless status_grab
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1760
+  take link_turn
+  unless status_grab
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1760
+  take link_turn
+  unless status_grab
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 1830
+  take link_turn
+  unless status_grab
+  take has_red_potion
+  give 8 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 1830
+  take link_turn
+  unless status_grab
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2680 1900
+  take link_turn
+  unless status_grab
+  take has_blue_potion
+  give 8 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2820 1900
+  take link_turn
+  unless status_grab
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2680 1970
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Gerudo fighter gets ready" by world priority 70 in enemy at 2180 920
+  take enemy_turn
+  give enemy_act
+
+verb ready_ticks "Gerudo stands on guard: a beat passes" by world priority 71 in enemy at 2040 990
+  take enemy_turn
+  need phase_ready
+  take timer_ready
+  give enemy_act
+
+verb ready_step_1 "Gerudo flips in from mid range" by world priority 69 weight 15 in enemy at 2180 990
+  take enemy_act
+  take phase_ready
+  give phase_roll_forward
+  unless timer_ready
+  give beat_end
+  need range_far
+
+verb ready_step_2 "Gerudo spins in from mid range" by world priority 69 weight 15 in enemy at 2040 1060
+  take enemy_act
+  take phase_ready
+  give phase_spin_attack
+  unless timer_ready
+  give beat_end
+  need range_far
+
+verb ready_step_3 "Gerudo advances" by world priority 69 weight 49 in enemy at 2180 1060
+  take enemy_act
+  take phase_ready
+  give phase_advance
+  unless timer_ready
+  give beat_end
+  need range_far
+
+verb ready_step_4 "Gerudo starts circling" by world priority 69 weight 21 in enemy at 2040 1130
+  take enemy_act
+  take phase_ready
+  give phase_circle
+  give 2 timer_circle
+  unless timer_ready
+  give beat_end
+  need range_far
+
+verb ready_step_5 "Gerudo advances" by world priority 69 weight 70 in enemy at 2180 1130
+  take enemy_act
+  take phase_ready
+  give phase_advance
+  unless timer_ready
+  give beat_end
+  need range_near
+
+verb ready_step_6 "Gerudo starts circling" by world priority 69 weight 30 in enemy at 2040 1200
+  take enemy_act
+  take phase_ready
+  give phase_circle
+  give 2 timer_circle
+  unless timer_ready
+  give beat_end
+  need range_near
+
+verb advance_step_1 "Gerudo reaches Link and slashes" by world priority 69 weight 97 in enemy at 2180 1200
+  take enemy_act
+  take phase_advance
+  give phase_slash
+  give beat_end
+  need range_near
+
+verb advance_step_2 "Gerudo circles instead" by world priority 69 weight 3 in enemy at 2040 1270
+  take enemy_act
+  take phase_advance
+  give phase_circle
+  give 2 timer_circle
+  give beat_end
+  need range_near
+
+verb advance_step_3 "Gerudo closes in" by world priority 69 weight 2 in enemy at 2180 1270
+  take enemy_act
+  need phase_advance
+  give beat_end
+  take range_far
+  give range_near
+
+verb advance_step_4 "Gerudo flips in" by world priority 69 in enemy at 2040 1340
+  take enemy_act
+  take phase_advance
+  give phase_roll_forward
+  give beat_end
+  need range_far
+
+verb advance_step_5 "Gerudo spins in" by world priority 69 in enemy at 2180 1340
+  take enemy_act
+  take phase_advance
+  give phase_spin_attack
+  give beat_end
+  need range_far
+
+verb circle_ticks "Gerudo circles Link: a beat passes" by world priority 71 in enemy at 2040 1410
+  take enemy_turn
+  need phase_circle
+  take timer_circle
+  give enemy_act
+
+verb circle_step_1 "Gerudo stops circling" by world priority 69 in enemy at 2180 1410
+  take enemy_act
+  take phase_circle
+  give phase_ready
+  give timer_ready
+  unless timer_circle
+  give beat_end
+
+verb circle_holds "Gerudo circles Link: nothing changes" by world priority 68 in enemy at 2040 1480
+  take enemy_act
+  need phase_circle
+  give beat_end
+
+verb sidestep_ticks "Gerudo sidesteps: a beat passes" by world priority 71 in enemy at 2180 1480
+  take enemy_turn
+  need phase_sidestep
+  take timer_sidestep
+  give enemy_act
+
+verb sidestep_step_1 "Gerudo turns in to slash" by world priority 69 in enemy at 2040 1550
+  take enemy_act
+  take phase_sidestep
+  give phase_slash
+  unless timer_sidestep
+  give beat_end
+  need range_near
+
+verb sidestep_step_2 "Gerudo flips in" by world priority 69 in enemy at 2180 1550
+  take enemy_act
+  take phase_sidestep
+  give phase_roll_forward
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb sidestep_step_3 "Gerudo spins in" by world priority 69 in enemy at 2040 1620
+  take enemy_act
+  take phase_sidestep
+  give phase_spin_attack
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb sidestep_step_4 "Gerudo advances" by world priority 69 weight 2 in enemy at 2180 1620
+  take enemy_act
+  take phase_sidestep
+  give phase_advance
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb block_ticks "Gerudo blocks with her swords: a beat passes" by world priority 71 in enemy at 2040 1690
+  take enemy_turn
+  need phase_block
+  take timer_block
+  give enemy_act
+
+verb block_step_1 "Gerudo lowers her guard and slashes" by world priority 69 in enemy at 2180 1690
+  take enemy_act
+  take phase_block
+  give phase_slash
+  unless timer_block
+  give beat_end
+  need range_near
+
+verb block_step_2 "Gerudo lowers her guard and circles" by world priority 69 in enemy at 2040 1760
+  take enemy_act
+  take phase_block
+  give phase_circle
+  give 2 timer_circle
+  unless timer_block
+  give beat_end
+  need range_near
+
+verb block_step_3 "Gerudo lowers her guard and circles" by world priority 69 in enemy at 2180 1760
+  take enemy_act
+  take phase_block
+  give phase_circle
+  give 2 timer_circle
+  unless timer_block
+  give beat_end
+  need range_far
+
+verb roll_forward_step_1_near "Gerudo lands her flip and slashes" by world priority 69 in enemy at 2040 1830
+  take enemy_act
+  take phase_roll_forward
+  give phase_slash
+  give beat_end
+  need range_near
+
+verb roll_forward_step_1_far "Gerudo lands her flip and slashes" by world priority 69 in enemy at 2180 1830
+  take enemy_act
+  take phase_roll_forward
+  give phase_slash
+  give beat_end
+  take range_far
+  give range_near
+
+verb roll_forward_step_2_near "Gerudo lands her flip" by world priority 69 in enemy at 2040 1900
+  take enemy_act
+  take phase_roll_forward
+  give phase_advance
+  give beat_end
+  need range_near
+
+verb roll_forward_step_2_far "Gerudo lands her flip" by world priority 69 in enemy at 2180 1900
+  take enemy_act
+  take phase_roll_forward
+  give phase_advance
+  give beat_end
+  take range_far
+  give range_near
+
+verb roll_back_step_1_near "Gerudo lands and spins back in" by world priority 69 weight 2 in enemy at 2040 1970
+  take enemy_act
+  take phase_roll_back
+  give phase_spin_attack
+  give beat_end
+  take range_near
+  give range_far
+
+verb roll_back_step_1_far "Gerudo lands and spins back in" by world priority 69 weight 2 in enemy at 2180 1970
+  take enemy_act
+  take phase_roll_back
+  give phase_spin_attack
+  give beat_end
+  need range_far
+
+verb roll_back_step_2_near "Gerudo lands and sidesteps" by world priority 69 weight 4 in enemy at 2040 2040
+  take enemy_act
+  take phase_roll_back
+  give phase_sidestep
+  give timer_sidestep
+  give beat_end
+  take range_near
+  give range_far
+
+verb roll_back_step_2_far "Gerudo lands and sidesteps" by world priority 69 weight 4 in enemy at 2180 2040
+  take enemy_act
+  take phase_roll_back
+  give phase_sidestep
+  give timer_sidestep
+  give beat_end
+  need range_far
+
+verb roll_back_step_3_near "Gerudo lands on guard" by world priority 69 weight 4 in enemy at 2040 2110
+  take enemy_act
+  take phase_roll_back
+  give phase_ready
+  give timer_ready
+  give beat_end
+  take range_near
+  give range_far
+
+verb roll_back_step_3_far "Gerudo lands on guard" by world priority 69 weight 4 in enemy at 2180 2110
+  take enemy_act
+  take phase_roll_back
+  give phase_ready
+  give timer_ready
+  give beat_end
+  need range_far
+
+verb jump_step_1_near "Gerudo lands her leap and slashes" by world priority 69 in enemy at 2040 2180
+  take enemy_act
+  take phase_jump
+  give phase_slash
+  give beat_end
+  need range_near
+
+verb jump_step_1_far "Gerudo lands her leap and slashes" by world priority 69 in enemy at 2180 2180
+  take enemy_act
+  take phase_jump
+  give phase_slash
+  give beat_end
+  take range_far
+  give range_near
+
+verb slash_step_1 "Gerudo slashes and resets" by world priority 69 weight 30 in enemy at 2040 2250
+  take enemy_act
+  take phase_slash
+  give phase_ready
+  give timer_ready
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb slash_step_2 "Gerudo slashes and sidesteps" by world priority 69 weight 21 in enemy at 2180 2250
+  take enemy_act
+  take phase_slash
+  give phase_sidestep
+  give timer_sidestep
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb slash_step_3 "Gerudo slashes again" by world priority 69 weight 49 in enemy at 2040 2320
+  take enemy_act
+  need phase_slash
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb slash_step_4 "Gerudo slashes at air" by world priority 69 in enemy at 2180 2320
+  take enemy_act
+  take phase_slash
+  give phase_ready
+  give timer_ready
+  give beat_end
+  need range_far
+
+verb spin_attack_step_1_near "Gerudo spins into Link and resets" by world priority 69 weight 30 in enemy at 2040 2390
+  take enemy_act
+  take phase_spin_attack
+  give phase_ready
+  give timer_ready
+  give incoming_spin
+  give beat_end
+  need range_near
+
+verb spin_attack_step_1_far "Gerudo spins into Link and resets" by world priority 69 weight 30 in enemy at 2180 2390
+  take enemy_act
+  take phase_spin_attack
+  give phase_ready
+  give timer_ready
+  give incoming_spin
+  give beat_end
+  take range_far
+  give range_near
+
+verb spin_attack_step_2_near "Gerudo spins into Link and sidesteps" by world priority 69 weight 21 in enemy at 2040 2460
+  take enemy_act
+  take phase_spin_attack
+  give phase_sidestep
+  give timer_sidestep
+  give incoming_spin
+  give beat_end
+  need range_near
+
+verb spin_attack_step_2_far "Gerudo spins into Link and sidesteps" by world priority 69 weight 21 in enemy at 2180 2460
+  take enemy_act
+  take phase_spin_attack
+  give phase_sidestep
+  give timer_sidestep
+  give incoming_spin
+  give beat_end
+  take range_far
+  give range_near
+
+verb spin_attack_step_3_near "Gerudo spins into Link and circles" by world priority 69 weight 49 in enemy at 2040 2530
+  take enemy_act
+  take phase_spin_attack
+  give phase_circle
+  give 2 timer_circle
+  give incoming_spin
+  give beat_end
+  need range_near
+
+verb spin_attack_step_3_far "Gerudo spins into Link and circles" by world priority 69 weight 49 in enemy at 2180 2530
+  take enemy_act
+  take phase_spin_attack
+  give phase_circle
+  give 2 timer_circle
+  give incoming_spin
+  give beat_end
+  take range_far
+  give range_near
+
+verb spin_dodge_ticks "Gerudo spins aside: a beat passes" by world priority 71 in enemy at 2040 2600
+  take enemy_turn
+  need phase_spin_dodge
+  take timer_spin_dodge
+  give enemy_act
+
+verb spin_dodge_step_1 "Gerudo comes out of her spin slashing" by world priority 69 in enemy at 2180 2600
+  take enemy_act
+  take phase_spin_dodge
+  give phase_slash
+  unless timer_spin_dodge
+  give beat_end
+  need range_near
+
+verb spin_dodge_step_2 "Gerudo comes out of her spin and flips away" by world priority 69 in enemy at 2040 2670
+  take enemy_act
+  take phase_spin_dodge
+  give phase_roll_back
+  unless timer_spin_dodge
+  give beat_end
+  need range_far
+
+verb stunned_ticks "Gerudo is stunned: a beat passes" by world priority 71 in enemy at 2180 2670
+  take enemy_turn
+  need phase_stunned
+  take timer_stunned
+  give enemy_act
+
+verb stunned_step_1 "Gerudo shakes off the stun and slashes" by world priority 69 weight 7 in enemy at 2040 2740
+  take enemy_act
+  take phase_stunned
+  give phase_slash
+  unless timer_stunned
+  give beat_end
+  need range_near
+
+verb stunned_step_2 "Gerudo shakes off the stun and circles" by world priority 69 in enemy at 2180 2740
+  take enemy_act
+  take phase_stunned
+  give phase_circle
+  give 2 timer_circle
+  unless timer_stunned
+  give beat_end
+  need range_near
+
+verb stunned_step_3 "Gerudo shakes off the stun and circles" by world priority 69 in enemy at 2040 2810
+  take enemy_act
+  take phase_stunned
+  give phase_circle
+  give 2 timer_circle
+  unless timer_stunned
+  give beat_end
+  need range_far
+
+verb stunned_holds "Gerudo is stunned: nothing changes" by world priority 68 in enemy at 2180 2810
+  take enemy_act
+  need phase_stunned
+  give beat_end
+
+verb damaged_step_1 "Gerudo recovers and slashes" by world priority 69 weight 7 in enemy at 2040 2880
+  take enemy_act
+  take phase_damaged
+  give phase_slash
+  give beat_end
+  need range_near
+
+verb damaged_step_2 "Gerudo recovers and flips away" by world priority 69 in enemy at 2180 2880
+  take enemy_act
+  take phase_damaged
+  give phase_roll_back
+  give beat_end
+  need range_near
+
+verb damaged_step_3 "Gerudo recovers and flips away" by world priority 69 in enemy at 2040 2950
+  take enemy_act
+  take phase_damaged
+  give phase_roll_back
+  give beat_end
+  need range_far
+
+verb slash_blocked_deku_shield "Scimitar slash: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+  take incoming_slash
+  need guard_with_deku_shield
+
+verb slash_blocked_hylian_shield "Scimitar slash: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_slash
+  need guard_with_hylian_shield
+
+verb slash_blocked_mirror_shield "Scimitar slash: blocked by the mirror shield" by world priority 60 in attacks at 3460 150
+  take incoming_slash
+  need guard_with_mirror_shield
+
+verb slash_dodged "Scimitar slash: dodged" by world priority 60 in attacks at 3320 220
+  take incoming_slash
+  need link_dodge
+  unless link_guard
+
+verb slash_nayru "Scimitar slash: Nayru's Love holds" by world priority 60 in attacks at 3460 220
+  take incoming_slash
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb slash_lands "Scimitar slash hits Link" by world priority 60 in attacks at 3320 290
+  take incoming_slash
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+
+verb slash_lands_dd "Scimitar slash hits Link" by world priority 60 in attacks at 3460 290
+  take incoming_slash
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+
+verb spin_blocked_deku_shield "Spin attack: she catches Link and throws him in the cell: blocked by the deku shield" by world priority 60 in attacks at 3460 360
+  take incoming_spin
+  need guard_with_deku_shield
+
+verb spin_blocked_hylian_shield "Spin attack: she catches Link and throws him in the cell: blocked by the hylian shield" by world priority 60 in attacks at 3320 430
+  take incoming_spin
+  need guard_with_hylian_shield
+
+verb spin_blocked_mirror_shield "Spin attack: she catches Link and throws him in the cell: blocked by the mirror shield" by world priority 60 in attacks at 3460 430
+  take incoming_spin
+  need guard_with_mirror_shield
+
+verb spin_dodged "Spin attack: she catches Link and throws him in the cell: dodged" by world priority 60 in attacks at 3320 500
+  take incoming_spin
+  need link_dodge
+  unless link_guard
+
+verb spin_nayru "Spin attack: she catches Link and throws him in the cell: Nayru's Love holds" by world priority 60 in attacks at 3460 500
+  take incoming_spin
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb spin_lands "Spin attack: she catches Link and throws him in the cell hits Link" by world priority 60 in attacks at 3320 570
+  take incoming_spin
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  give 2 status_grab
+  give carried_spin
+  unless status_grab
+
+verb spin_lands_again "Spin attack: she catches Link and throws him in the cell hits Link again" by world priority 60 in attacks at 3460 570
+  take incoming_spin
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  need status_grab
+
+verb spin_lands_dd "Spin attack: she catches Link and throws him in the cell hits Link" by world priority 60 in attacks at 3320 640
+  take incoming_spin
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  give 2 status_grab
+  give carried_spin
+  unless status_grab
+
+verb spin_lands_dd_again "Spin attack: she catches Link and throws him in the cell hits Link again" by world priority 60 in attacks at 3460 640
+  take incoming_spin
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  need status_grab
+
+verb spin_carries_link_off "Spin attack: she catches Link and throws him in the cell carries Link off" by world priority 50 in attacks at 3460 710
+  need carried_spin
+  unless status_grab
+  take carried_spin
+  give link_carried_off
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 580 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 440 360
+  need beat_end
+  take link_dodge
+
+verb grab_ticks "Link: grab wears on" by world priority 48 in beat at 580 430
+  take beat_end
+  take status_grab
+  give tick_grab
+
+verb grab_idle "Link: no grab" by world priority 48 in beat at 440 500
+  take beat_end
+  unless status_grab
+  give tick_grab
+
+verb nayru_ticks "Link: nayru wears on" by world priority 47 in beat at 580 500
+  take tick_grab
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 47 in beat at 440 570
+  take tick_grab
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 46 in beat at 440 640
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 46 in beat at 580 640
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 46 in beat at 440 710
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 46 in beat at 580 710
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 780
+  take lens_count
+  unless lens_on
+
+verb link_helpless_grab "Link cannot act: grab" by world priority 40 in beat at 580 780
+  take link_turn
+  need status_grab
+  give enemy_turn

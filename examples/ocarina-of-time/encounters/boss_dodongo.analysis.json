@@ -1,0 +1,109 @@
+{
+ "positions": 58347,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "walk_recover_timer_clears",
+  "blow_timer_clears",
+  "explode_timer_clears",
+  "roll_timer_clears",
+  "fire_lands_again"
+ ],
+ "kitSplit": {
+  "hit_spin_kokiri__down": [
+   "swing_spin_kokiri",
+   "phase_down"
+  ],
+  "hit_jump_kokiri_self__down": [
+   "swing_jump_kokiri_self",
+   "phase_down"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 7499,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2385,
+    "Link falls": 88,
+    "Link wins": 36
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 9927
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 2831,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 891,
+    "Link falls": 16
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 6571
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 2821,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 876,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3443
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 8864,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2745,
+    "Link falls": 194
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 13251
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 25109,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8005,
+    "Link falls": 111
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16153
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 11223,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3481,
+    "Link falls": 224
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16021
+  }
+ ]
+}

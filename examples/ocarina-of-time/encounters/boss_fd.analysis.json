@@ -1,0 +1,1980 @@
+{
+ "positions": 38666,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "h_f_emerge_1_timer_clears",
+  "h_f_emerge_2_timer_clears",
+  "h_f_emerge_3_timer_clears",
+  "h_ac_emerge_1_timer_clears",
+  "h_ac_emerge_2_timer_clears",
+  "h_ac_emerge_3_timer_clears",
+  "f_ac_burrow_timer_clears",
+  "h_ar_emerge_1_timer_clears",
+  "h_ar_emerge_2_timer_clears",
+  "h_ar_emerge_3_timer_clears",
+  "f_ar_burrow_timer_clears",
+  "h_bc_emerge_1_timer_clears",
+  "h_bc_emerge_2_timer_clears",
+  "h_bc_emerge_3_timer_clears",
+  "f_bc_burrow_timer_clears",
+  "h_br_emerge_1_timer_clears",
+  "h_br_emerge_2_timer_clears",
+  "h_br_emerge_3_timer_clears",
+  "f_br_burrow_timer_clears",
+  "h_cc_emerge_1_timer_clears",
+  "h_cc_emerge_2_timer_clears",
+  "h_cc_emerge_3_timer_clears",
+  "h_cc_damaged_timer_clears",
+  "f_cc_rise_timer_clears",
+  "f_cc_dive_timer_clears",
+  "f_cc_burrow_timer_clears",
+  "h_cr_emerge_1_timer_clears",
+  "h_cr_emerge_2_timer_clears",
+  "h_cr_emerge_3_timer_clears",
+  "h_cr_damaged_timer_clears",
+  "f_cr_rise_timer_clears",
+  "f_cr_rocks_timer_clears",
+  "f_cr_dive_timer_clears",
+  "f_cr_burrow_timer_clears",
+  "volvagia_empty_in_h_ac_vuln_1",
+  "volvagia_empty_in_h_ac_vuln_2",
+  "volvagia_empty_in_h_ac_vuln_3",
+  "volvagia_empty_in_h_ac_damaged",
+  "volvagia_empty_in_f_ac_rise",
+  "volvagia_empty_in_f_ac_dive",
+  "volvagia_empty_in_h_ar_vuln_1",
+  "volvagia_empty_in_h_ar_vuln_2",
+  "volvagia_empty_in_h_ar_vuln_3",
+  "volvagia_empty_in_h_ar_damaged",
+  "volvagia_empty_in_f_ar_rise",
+  "volvagia_empty_in_f_ar_rocks",
+  "volvagia_empty_in_f_ar_dive",
+  "volvagia_empty_in_h_bc_vuln_1",
+  "volvagia_empty_in_h_bc_vuln_2",
+  "volvagia_empty_in_h_bc_vuln_3",
+  "volvagia_empty_in_f_bc_rise",
+  "volvagia_empty_in_f_bc_dive",
+  "volvagia_empty_in_h_br_vuln_1",
+  "volvagia_empty_in_h_br_vuln_2",
+  "volvagia_empty_in_h_br_vuln_3",
+  "volvagia_empty_in_f_br_rise",
+  "volvagia_empty_in_f_br_rocks",
+  "volvagia_empty_in_f_br_dive",
+  "volvagia_falls_to_2_in_h_ac_vuln_1",
+  "volvagia_falls_to_2_in_h_ac_vuln_2",
+  "volvagia_falls_to_2_in_h_ac_vuln_3",
+  "volvagia_falls_to_2_in_f_ac_rise",
+  "volvagia_falls_to_2_in_f_ac_dive",
+  "volvagia_falls_to_2_in_h_ar_vuln_1",
+  "volvagia_falls_to_2_in_h_ar_vuln_2",
+  "volvagia_falls_to_2_in_h_ar_vuln_3",
+  "volvagia_falls_to_2_in_f_ar_rise",
+  "volvagia_falls_to_2_in_f_ar_rocks",
+  "volvagia_falls_to_2_in_f_ar_dive",
+  "fire_breath_lands_dd_again"
+ ],
+ "kitSplit": {
+  "hit_slash_giant__h_ac_vuln_1": [
+   "swing_slash_giant",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_slash_giant__h_ac_oburrow_1": [
+   "swing_slash_giant",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_slash_giant__h_ac_vuln_2": [
+   "swing_slash_giant",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_slash_giant__h_ac_oburrow_2": [
+   "swing_slash_giant",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_slash_giant__h_ac_vuln_3": [
+   "swing_slash_giant",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_slash_giant__h_ac_oburrow_3": [
+   "swing_slash_giant",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_slash_giant__f_ac_rise": [
+   "swing_slash_giant",
+   "phase_f_ac_rise"
+  ],
+  "hit_slash_giant__f_ac_chase": [
+   "swing_slash_giant",
+   "phase_f_ac_chase"
+  ],
+  "hit_slash_giant__f_ac_dive": [
+   "swing_slash_giant",
+   "phase_f_ac_dive"
+  ],
+  "hit_slash_giant__h_ar_vuln_1": [
+   "swing_slash_giant",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_slash_giant__h_ar_oburrow_1": [
+   "swing_slash_giant",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_slash_giant__h_ar_vuln_2": [
+   "swing_slash_giant",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_slash_giant__h_ar_oburrow_2": [
+   "swing_slash_giant",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_slash_giant__h_ar_vuln_3": [
+   "swing_slash_giant",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_slash_giant__h_ar_oburrow_3": [
+   "swing_slash_giant",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_slash_giant__f_ar_rise": [
+   "swing_slash_giant",
+   "phase_f_ar_rise"
+  ],
+  "hit_slash_giant__f_ar_rocks": [
+   "swing_slash_giant",
+   "phase_f_ar_rocks"
+  ],
+  "hit_slash_giant__f_ar_dive": [
+   "swing_slash_giant",
+   "phase_f_ar_dive"
+  ],
+  "hit_slash_giant__h_bc_vuln_1": [
+   "swing_slash_giant",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_slash_giant__h_bc_oburrow_1": [
+   "swing_slash_giant",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_slash_giant__h_bc_vuln_2": [
+   "swing_slash_giant",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_slash_giant__h_bc_oburrow_2": [
+   "swing_slash_giant",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_slash_giant__h_bc_vuln_3": [
+   "swing_slash_giant",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_slash_giant__h_bc_oburrow_3": [
+   "swing_slash_giant",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_slash_giant__f_bc_rise": [
+   "swing_slash_giant",
+   "phase_f_bc_rise"
+  ],
+  "hit_slash_giant__f_bc_chase": [
+   "swing_slash_giant",
+   "phase_f_bc_chase"
+  ],
+  "hit_slash_giant__f_bc_dive": [
+   "swing_slash_giant",
+   "phase_f_bc_dive"
+  ],
+  "hit_slash_giant__h_br_vuln_1": [
+   "swing_slash_giant",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_slash_giant__h_br_oburrow_1": [
+   "swing_slash_giant",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_slash_giant__h_br_vuln_2": [
+   "swing_slash_giant",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_slash_giant__h_br_oburrow_2": [
+   "swing_slash_giant",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_slash_giant__h_br_vuln_3": [
+   "swing_slash_giant",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_slash_giant__h_br_oburrow_3": [
+   "swing_slash_giant",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_slash_giant__f_br_rise": [
+   "swing_slash_giant",
+   "phase_f_br_rise"
+  ],
+  "hit_slash_giant__f_br_rocks": [
+   "swing_slash_giant",
+   "phase_f_br_rocks"
+  ],
+  "hit_slash_giant__f_br_dive": [
+   "swing_slash_giant",
+   "phase_f_br_dive"
+  ],
+  "hit_slash_giant__h_cc_vuln_1": [
+   "swing_slash_giant",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_slash_giant__h_cc_oburrow_1": [
+   "swing_slash_giant",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_slash_giant__h_cc_vuln_2": [
+   "swing_slash_giant",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_slash_giant__h_cc_oburrow_2": [
+   "swing_slash_giant",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_slash_giant__h_cc_vuln_3": [
+   "swing_slash_giant",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_slash_giant__h_cc_oburrow_3": [
+   "swing_slash_giant",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_slash_giant__f_cc_chase": [
+   "swing_slash_giant",
+   "phase_f_cc_chase"
+  ],
+  "hit_slash_giant__h_cr_vuln_1": [
+   "swing_slash_giant",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_slash_giant__h_cr_oburrow_1": [
+   "swing_slash_giant",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_slash_giant__h_cr_vuln_2": [
+   "swing_slash_giant",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_slash_giant__h_cr_oburrow_2": [
+   "swing_slash_giant",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_slash_giant__h_cr_vuln_3": [
+   "swing_slash_giant",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_slash_giant__h_cr_oburrow_3": [
+   "swing_slash_giant",
+   "phase_h_cr_oburrow_3"
+  ],
+  "hit_arrow_fire__h_ac_vuln_1": [
+   "swing_arrow_fire",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_arrow_fire__h_ac_oburrow_1": [
+   "swing_arrow_fire",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_arrow_fire__h_ac_vuln_2": [
+   "swing_arrow_fire",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_arrow_fire__h_ac_oburrow_2": [
+   "swing_arrow_fire",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_arrow_fire__h_ac_vuln_3": [
+   "swing_arrow_fire",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_arrow_fire__h_ac_oburrow_3": [
+   "swing_arrow_fire",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_arrow_fire__f_ac_rise": [
+   "swing_arrow_fire",
+   "phase_f_ac_rise"
+  ],
+  "hit_arrow_fire__f_ac_chase": [
+   "swing_arrow_fire",
+   "phase_f_ac_chase"
+  ],
+  "hit_arrow_fire__f_ac_dive": [
+   "swing_arrow_fire",
+   "phase_f_ac_dive"
+  ],
+  "hit_arrow_fire__h_ar_vuln_1": [
+   "swing_arrow_fire",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_arrow_fire__h_ar_oburrow_1": [
+   "swing_arrow_fire",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_arrow_fire__h_ar_vuln_2": [
+   "swing_arrow_fire",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_arrow_fire__h_ar_oburrow_2": [
+   "swing_arrow_fire",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_arrow_fire__h_ar_vuln_3": [
+   "swing_arrow_fire",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_arrow_fire__h_ar_oburrow_3": [
+   "swing_arrow_fire",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_arrow_fire__f_ar_rise": [
+   "swing_arrow_fire",
+   "phase_f_ar_rise"
+  ],
+  "hit_arrow_fire__f_ar_rocks": [
+   "swing_arrow_fire",
+   "phase_f_ar_rocks"
+  ],
+  "hit_arrow_fire__f_ar_dive": [
+   "swing_arrow_fire",
+   "phase_f_ar_dive"
+  ],
+  "hit_arrow_fire__h_bc_vuln_1": [
+   "swing_arrow_fire",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_arrow_fire__h_bc_oburrow_1": [
+   "swing_arrow_fire",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_arrow_fire__h_bc_vuln_2": [
+   "swing_arrow_fire",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_arrow_fire__h_bc_oburrow_2": [
+   "swing_arrow_fire",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_arrow_fire__h_bc_vuln_3": [
+   "swing_arrow_fire",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_arrow_fire__h_bc_oburrow_3": [
+   "swing_arrow_fire",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_arrow_fire__f_bc_rise": [
+   "swing_arrow_fire",
+   "phase_f_bc_rise"
+  ],
+  "hit_arrow_fire__f_bc_chase": [
+   "swing_arrow_fire",
+   "phase_f_bc_chase"
+  ],
+  "hit_arrow_fire__f_bc_dive": [
+   "swing_arrow_fire",
+   "phase_f_bc_dive"
+  ],
+  "hit_arrow_fire__h_br_vuln_1": [
+   "swing_arrow_fire",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_arrow_fire__h_br_oburrow_1": [
+   "swing_arrow_fire",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_arrow_fire__h_br_vuln_2": [
+   "swing_arrow_fire",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_arrow_fire__h_br_oburrow_2": [
+   "swing_arrow_fire",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_arrow_fire__h_br_vuln_3": [
+   "swing_arrow_fire",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_arrow_fire__h_br_oburrow_3": [
+   "swing_arrow_fire",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_arrow_fire__f_br_rise": [
+   "swing_arrow_fire",
+   "phase_f_br_rise"
+  ],
+  "hit_arrow_fire__f_br_rocks": [
+   "swing_arrow_fire",
+   "phase_f_br_rocks"
+  ],
+  "hit_arrow_fire__f_br_dive": [
+   "swing_arrow_fire",
+   "phase_f_br_dive"
+  ],
+  "hit_arrow_fire__h_cc_vuln_1": [
+   "swing_arrow_fire",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_arrow_fire__h_cc_oburrow_1": [
+   "swing_arrow_fire",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_arrow_fire__h_cc_vuln_2": [
+   "swing_arrow_fire",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_arrow_fire__h_cc_oburrow_2": [
+   "swing_arrow_fire",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_arrow_fire__h_cc_vuln_3": [
+   "swing_arrow_fire",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_arrow_fire__h_cc_oburrow_3": [
+   "swing_arrow_fire",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_arrow_fire__f_cc_chase": [
+   "swing_arrow_fire",
+   "phase_f_cc_chase"
+  ],
+  "hit_arrow_fire__h_cr_vuln_1": [
+   "swing_arrow_fire",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_arrow_fire__h_cr_oburrow_1": [
+   "swing_arrow_fire",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_arrow_fire__h_cr_vuln_2": [
+   "swing_arrow_fire",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_arrow_fire__h_cr_oburrow_2": [
+   "swing_arrow_fire",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_arrow_fire__h_cr_vuln_3": [
+   "swing_arrow_fire",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_arrow_fire__h_cr_oburrow_3": [
+   "swing_arrow_fire",
+   "phase_h_cr_oburrow_3"
+  ],
+  "hit_arrow_ice__h_ac_vuln_1": [
+   "swing_arrow_ice",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_arrow_ice__h_ac_oburrow_1": [
+   "swing_arrow_ice",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_arrow_ice__h_ac_vuln_2": [
+   "swing_arrow_ice",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_arrow_ice__h_ac_oburrow_2": [
+   "swing_arrow_ice",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_arrow_ice__h_ac_vuln_3": [
+   "swing_arrow_ice",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_arrow_ice__h_ac_oburrow_3": [
+   "swing_arrow_ice",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_arrow_ice__f_ac_rise": [
+   "swing_arrow_ice",
+   "phase_f_ac_rise"
+  ],
+  "hit_arrow_ice__f_ac_chase": [
+   "swing_arrow_ice",
+   "phase_f_ac_chase"
+  ],
+  "hit_arrow_ice__f_ac_dive": [
+   "swing_arrow_ice",
+   "phase_f_ac_dive"
+  ],
+  "hit_arrow_ice__h_ar_vuln_1": [
+   "swing_arrow_ice",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_arrow_ice__h_ar_oburrow_1": [
+   "swing_arrow_ice",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_arrow_ice__h_ar_vuln_2": [
+   "swing_arrow_ice",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_arrow_ice__h_ar_oburrow_2": [
+   "swing_arrow_ice",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_arrow_ice__h_ar_vuln_3": [
+   "swing_arrow_ice",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_arrow_ice__h_ar_oburrow_3": [
+   "swing_arrow_ice",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_arrow_ice__f_ar_rise": [
+   "swing_arrow_ice",
+   "phase_f_ar_rise"
+  ],
+  "hit_arrow_ice__f_ar_rocks": [
+   "swing_arrow_ice",
+   "phase_f_ar_rocks"
+  ],
+  "hit_arrow_ice__f_ar_dive": [
+   "swing_arrow_ice",
+   "phase_f_ar_dive"
+  ],
+  "hit_arrow_ice__h_bc_vuln_1": [
+   "swing_arrow_ice",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_arrow_ice__h_bc_oburrow_1": [
+   "swing_arrow_ice",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_arrow_ice__h_bc_vuln_2": [
+   "swing_arrow_ice",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_arrow_ice__h_bc_oburrow_2": [
+   "swing_arrow_ice",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_arrow_ice__h_bc_vuln_3": [
+   "swing_arrow_ice",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_arrow_ice__h_bc_oburrow_3": [
+   "swing_arrow_ice",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_arrow_ice__f_bc_rise": [
+   "swing_arrow_ice",
+   "phase_f_bc_rise"
+  ],
+  "hit_arrow_ice__f_bc_chase": [
+   "swing_arrow_ice",
+   "phase_f_bc_chase"
+  ],
+  "hit_arrow_ice__f_bc_dive": [
+   "swing_arrow_ice",
+   "phase_f_bc_dive"
+  ],
+  "hit_arrow_ice__h_br_vuln_1": [
+   "swing_arrow_ice",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_arrow_ice__h_br_oburrow_1": [
+   "swing_arrow_ice",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_arrow_ice__h_br_vuln_2": [
+   "swing_arrow_ice",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_arrow_ice__h_br_oburrow_2": [
+   "swing_arrow_ice",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_arrow_ice__h_br_vuln_3": [
+   "swing_arrow_ice",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_arrow_ice__h_br_oburrow_3": [
+   "swing_arrow_ice",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_arrow_ice__f_br_rise": [
+   "swing_arrow_ice",
+   "phase_f_br_rise"
+  ],
+  "hit_arrow_ice__f_br_rocks": [
+   "swing_arrow_ice",
+   "phase_f_br_rocks"
+  ],
+  "hit_arrow_ice__f_br_dive": [
+   "swing_arrow_ice",
+   "phase_f_br_dive"
+  ],
+  "hit_arrow_ice__h_cc_vuln_1": [
+   "swing_arrow_ice",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_arrow_ice__h_cc_oburrow_1": [
+   "swing_arrow_ice",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_arrow_ice__h_cc_vuln_2": [
+   "swing_arrow_ice",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_arrow_ice__h_cc_oburrow_2": [
+   "swing_arrow_ice",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_arrow_ice__h_cc_vuln_3": [
+   "swing_arrow_ice",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_arrow_ice__h_cc_oburrow_3": [
+   "swing_arrow_ice",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_arrow_ice__f_cc_chase": [
+   "swing_arrow_ice",
+   "phase_f_cc_chase"
+  ],
+  "hit_arrow_ice__h_cr_vuln_1": [
+   "swing_arrow_ice",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_arrow_ice__h_cr_oburrow_1": [
+   "swing_arrow_ice",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_arrow_ice__h_cr_vuln_2": [
+   "swing_arrow_ice",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_arrow_ice__h_cr_oburrow_2": [
+   "swing_arrow_ice",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_arrow_ice__h_cr_vuln_3": [
+   "swing_arrow_ice",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_arrow_ice__h_cr_oburrow_3": [
+   "swing_arrow_ice",
+   "phase_h_cr_oburrow_3"
+  ],
+  "hit_arrow_light__h_ac_vuln_1": [
+   "swing_arrow_light",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_arrow_light__h_ac_oburrow_1": [
+   "swing_arrow_light",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_arrow_light__h_ac_vuln_2": [
+   "swing_arrow_light",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_arrow_light__h_ac_oburrow_2": [
+   "swing_arrow_light",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_arrow_light__h_ac_vuln_3": [
+   "swing_arrow_light",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_arrow_light__h_ac_oburrow_3": [
+   "swing_arrow_light",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_arrow_light__f_ac_rise": [
+   "swing_arrow_light",
+   "phase_f_ac_rise"
+  ],
+  "hit_arrow_light__f_ac_chase": [
+   "swing_arrow_light",
+   "phase_f_ac_chase"
+  ],
+  "hit_arrow_light__f_ac_dive": [
+   "swing_arrow_light",
+   "phase_f_ac_dive"
+  ],
+  "hit_arrow_light__h_ar_vuln_1": [
+   "swing_arrow_light",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_arrow_light__h_ar_oburrow_1": [
+   "swing_arrow_light",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_arrow_light__h_ar_vuln_2": [
+   "swing_arrow_light",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_arrow_light__h_ar_oburrow_2": [
+   "swing_arrow_light",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_arrow_light__h_ar_vuln_3": [
+   "swing_arrow_light",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_arrow_light__h_ar_oburrow_3": [
+   "swing_arrow_light",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_arrow_light__f_ar_rise": [
+   "swing_arrow_light",
+   "phase_f_ar_rise"
+  ],
+  "hit_arrow_light__f_ar_rocks": [
+   "swing_arrow_light",
+   "phase_f_ar_rocks"
+  ],
+  "hit_arrow_light__f_ar_dive": [
+   "swing_arrow_light",
+   "phase_f_ar_dive"
+  ],
+  "hit_arrow_light__h_bc_vuln_1": [
+   "swing_arrow_light",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_arrow_light__h_bc_oburrow_1": [
+   "swing_arrow_light",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_arrow_light__h_bc_vuln_2": [
+   "swing_arrow_light",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_arrow_light__h_bc_oburrow_2": [
+   "swing_arrow_light",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_arrow_light__h_bc_vuln_3": [
+   "swing_arrow_light",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_arrow_light__h_bc_oburrow_3": [
+   "swing_arrow_light",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_arrow_light__f_bc_rise": [
+   "swing_arrow_light",
+   "phase_f_bc_rise"
+  ],
+  "hit_arrow_light__f_bc_chase": [
+   "swing_arrow_light",
+   "phase_f_bc_chase"
+  ],
+  "hit_arrow_light__f_bc_dive": [
+   "swing_arrow_light",
+   "phase_f_bc_dive"
+  ],
+  "hit_arrow_light__h_br_vuln_1": [
+   "swing_arrow_light",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_arrow_light__h_br_oburrow_1": [
+   "swing_arrow_light",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_arrow_light__h_br_vuln_2": [
+   "swing_arrow_light",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_arrow_light__h_br_oburrow_2": [
+   "swing_arrow_light",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_arrow_light__h_br_vuln_3": [
+   "swing_arrow_light",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_arrow_light__h_br_oburrow_3": [
+   "swing_arrow_light",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_arrow_light__f_br_rise": [
+   "swing_arrow_light",
+   "phase_f_br_rise"
+  ],
+  "hit_arrow_light__f_br_rocks": [
+   "swing_arrow_light",
+   "phase_f_br_rocks"
+  ],
+  "hit_arrow_light__f_br_dive": [
+   "swing_arrow_light",
+   "phase_f_br_dive"
+  ],
+  "hit_arrow_light__h_cc_vuln_1": [
+   "swing_arrow_light",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_arrow_light__h_cc_oburrow_1": [
+   "swing_arrow_light",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_arrow_light__h_cc_vuln_2": [
+   "swing_arrow_light",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_arrow_light__h_cc_oburrow_2": [
+   "swing_arrow_light",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_arrow_light__h_cc_vuln_3": [
+   "swing_arrow_light",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_arrow_light__h_cc_oburrow_3": [
+   "swing_arrow_light",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_arrow_light__f_cc_chase": [
+   "swing_arrow_light",
+   "phase_f_cc_chase"
+  ],
+  "hit_arrow_light__h_cr_vuln_1": [
+   "swing_arrow_light",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_arrow_light__h_cr_oburrow_1": [
+   "swing_arrow_light",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_arrow_light__h_cr_vuln_2": [
+   "swing_arrow_light",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_arrow_light__h_cr_oburrow_2": [
+   "swing_arrow_light",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_arrow_light__h_cr_vuln_3": [
+   "swing_arrow_light",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_arrow_light__h_cr_oburrow_3": [
+   "swing_arrow_light",
+   "phase_h_cr_oburrow_3"
+  ],
+  "hit_spin_giant__h_ac_vuln_1": [
+   "swing_spin_giant",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_spin_giant__h_ac_oburrow_1": [
+   "swing_spin_giant",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_spin_giant__h_ac_vuln_2": [
+   "swing_spin_giant",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_spin_giant__h_ac_oburrow_2": [
+   "swing_spin_giant",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_spin_giant__h_ac_vuln_3": [
+   "swing_spin_giant",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_spin_giant__h_ac_oburrow_3": [
+   "swing_spin_giant",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_spin_giant__f_ac_rise": [
+   "swing_spin_giant",
+   "phase_f_ac_rise"
+  ],
+  "hit_spin_giant__f_ac_chase": [
+   "swing_spin_giant",
+   "phase_f_ac_chase"
+  ],
+  "hit_spin_giant__f_ac_dive": [
+   "swing_spin_giant",
+   "phase_f_ac_dive"
+  ],
+  "hit_spin_giant__h_ar_vuln_1": [
+   "swing_spin_giant",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_spin_giant__h_ar_oburrow_1": [
+   "swing_spin_giant",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_spin_giant__h_ar_vuln_2": [
+   "swing_spin_giant",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_spin_giant__h_ar_oburrow_2": [
+   "swing_spin_giant",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_spin_giant__h_ar_vuln_3": [
+   "swing_spin_giant",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_spin_giant__h_ar_oburrow_3": [
+   "swing_spin_giant",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_spin_giant__f_ar_rise": [
+   "swing_spin_giant",
+   "phase_f_ar_rise"
+  ],
+  "hit_spin_giant__f_ar_rocks": [
+   "swing_spin_giant",
+   "phase_f_ar_rocks"
+  ],
+  "hit_spin_giant__f_ar_dive": [
+   "swing_spin_giant",
+   "phase_f_ar_dive"
+  ],
+  "hit_spin_giant__h_bc_vuln_1": [
+   "swing_spin_giant",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_spin_giant__h_bc_oburrow_1": [
+   "swing_spin_giant",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_spin_giant__h_bc_vuln_2": [
+   "swing_spin_giant",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_spin_giant__h_bc_oburrow_2": [
+   "swing_spin_giant",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_spin_giant__h_bc_vuln_3": [
+   "swing_spin_giant",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_spin_giant__h_bc_oburrow_3": [
+   "swing_spin_giant",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_spin_giant__f_bc_rise": [
+   "swing_spin_giant",
+   "phase_f_bc_rise"
+  ],
+  "hit_spin_giant__f_bc_chase": [
+   "swing_spin_giant",
+   "phase_f_bc_chase"
+  ],
+  "hit_spin_giant__f_bc_dive": [
+   "swing_spin_giant",
+   "phase_f_bc_dive"
+  ],
+  "hit_spin_giant__h_br_vuln_1": [
+   "swing_spin_giant",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_spin_giant__h_br_oburrow_1": [
+   "swing_spin_giant",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_spin_giant__h_br_vuln_2": [
+   "swing_spin_giant",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_spin_giant__h_br_oburrow_2": [
+   "swing_spin_giant",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_spin_giant__h_br_vuln_3": [
+   "swing_spin_giant",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_spin_giant__h_br_oburrow_3": [
+   "swing_spin_giant",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_spin_giant__f_br_rise": [
+   "swing_spin_giant",
+   "phase_f_br_rise"
+  ],
+  "hit_spin_giant__f_br_rocks": [
+   "swing_spin_giant",
+   "phase_f_br_rocks"
+  ],
+  "hit_spin_giant__f_br_dive": [
+   "swing_spin_giant",
+   "phase_f_br_dive"
+  ],
+  "hit_spin_giant__h_cc_vuln_1": [
+   "swing_spin_giant",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_spin_giant__h_cc_oburrow_1": [
+   "swing_spin_giant",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_spin_giant__h_cc_vuln_2": [
+   "swing_spin_giant",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_spin_giant__h_cc_oburrow_2": [
+   "swing_spin_giant",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_spin_giant__h_cc_vuln_3": [
+   "swing_spin_giant",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_spin_giant__h_cc_oburrow_3": [
+   "swing_spin_giant",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_spin_giant__f_cc_chase": [
+   "swing_spin_giant",
+   "phase_f_cc_chase"
+  ],
+  "hit_spin_giant__h_cr_vuln_1": [
+   "swing_spin_giant",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_spin_giant__h_cr_oburrow_1": [
+   "swing_spin_giant",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_spin_giant__h_cr_vuln_2": [
+   "swing_spin_giant",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_spin_giant__h_cr_oburrow_2": [
+   "swing_spin_giant",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_spin_giant__h_cr_vuln_3": [
+   "swing_spin_giant",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_spin_giant__h_cr_oburrow_3": [
+   "swing_spin_giant",
+   "phase_h_cr_oburrow_3"
+  ],
+  "hit_spin_master__h_ac_vuln_1": [
+   "swing_spin_master",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_spin_master__h_ac_oburrow_1": [
+   "swing_spin_master",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_spin_master__h_ac_vuln_2": [
+   "swing_spin_master",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_spin_master__h_ac_oburrow_2": [
+   "swing_spin_master",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_spin_master__h_ac_vuln_3": [
+   "swing_spin_master",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_spin_master__h_ac_oburrow_3": [
+   "swing_spin_master",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_spin_master__f_ac_rise": [
+   "swing_spin_master",
+   "phase_f_ac_rise"
+  ],
+  "hit_spin_master__f_ac_chase": [
+   "swing_spin_master",
+   "phase_f_ac_chase"
+  ],
+  "hit_spin_master__f_ac_dive": [
+   "swing_spin_master",
+   "phase_f_ac_dive"
+  ],
+  "hit_spin_master__h_ar_vuln_1": [
+   "swing_spin_master",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_spin_master__h_ar_oburrow_1": [
+   "swing_spin_master",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_spin_master__h_ar_vuln_2": [
+   "swing_spin_master",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_spin_master__h_ar_oburrow_2": [
+   "swing_spin_master",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_spin_master__h_ar_vuln_3": [
+   "swing_spin_master",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_spin_master__h_ar_oburrow_3": [
+   "swing_spin_master",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_spin_master__f_ar_rise": [
+   "swing_spin_master",
+   "phase_f_ar_rise"
+  ],
+  "hit_spin_master__f_ar_rocks": [
+   "swing_spin_master",
+   "phase_f_ar_rocks"
+  ],
+  "hit_spin_master__f_ar_dive": [
+   "swing_spin_master",
+   "phase_f_ar_dive"
+  ],
+  "hit_spin_master__h_bc_vuln_1": [
+   "swing_spin_master",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_spin_master__h_bc_oburrow_1": [
+   "swing_spin_master",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_spin_master__h_bc_vuln_2": [
+   "swing_spin_master",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_spin_master__h_bc_oburrow_2": [
+   "swing_spin_master",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_spin_master__h_bc_vuln_3": [
+   "swing_spin_master",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_spin_master__h_bc_oburrow_3": [
+   "swing_spin_master",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_spin_master__f_bc_rise": [
+   "swing_spin_master",
+   "phase_f_bc_rise"
+  ],
+  "hit_spin_master__f_bc_chase": [
+   "swing_spin_master",
+   "phase_f_bc_chase"
+  ],
+  "hit_spin_master__f_bc_dive": [
+   "swing_spin_master",
+   "phase_f_bc_dive"
+  ],
+  "hit_spin_master__h_br_vuln_1": [
+   "swing_spin_master",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_spin_master__h_br_oburrow_1": [
+   "swing_spin_master",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_spin_master__h_br_vuln_2": [
+   "swing_spin_master",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_spin_master__h_br_oburrow_2": [
+   "swing_spin_master",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_spin_master__h_br_vuln_3": [
+   "swing_spin_master",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_spin_master__h_br_oburrow_3": [
+   "swing_spin_master",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_spin_master__f_br_rise": [
+   "swing_spin_master",
+   "phase_f_br_rise"
+  ],
+  "hit_spin_master__f_br_rocks": [
+   "swing_spin_master",
+   "phase_f_br_rocks"
+  ],
+  "hit_spin_master__f_br_dive": [
+   "swing_spin_master",
+   "phase_f_br_dive"
+  ],
+  "hit_spin_master__h_cc_vuln_1": [
+   "swing_spin_master",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_spin_master__h_cc_oburrow_1": [
+   "swing_spin_master",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_spin_master__h_cc_vuln_2": [
+   "swing_spin_master",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_spin_master__h_cc_oburrow_2": [
+   "swing_spin_master",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_spin_master__h_cc_vuln_3": [
+   "swing_spin_master",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_spin_master__h_cc_oburrow_3": [
+   "swing_spin_master",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_spin_master__f_cc_chase": [
+   "swing_spin_master",
+   "phase_f_cc_chase"
+  ],
+  "hit_spin_master__h_cr_vuln_1": [
+   "swing_spin_master",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_spin_master__h_cr_oburrow_1": [
+   "swing_spin_master",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_spin_master__h_cr_vuln_2": [
+   "swing_spin_master",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_spin_master__h_cr_oburrow_2": [
+   "swing_spin_master",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_spin_master__h_cr_vuln_3": [
+   "swing_spin_master",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_spin_master__h_cr_oburrow_3": [
+   "swing_spin_master",
+   "phase_h_cr_oburrow_3"
+  ],
+  "hit_jump_giant__h_ac_vuln_1": [
+   "swing_jump_giant",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_jump_giant__h_ac_oburrow_1": [
+   "swing_jump_giant",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_jump_giant__h_ac_vuln_2": [
+   "swing_jump_giant",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_jump_giant__h_ac_oburrow_2": [
+   "swing_jump_giant",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_jump_giant__h_ac_vuln_3": [
+   "swing_jump_giant",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_jump_giant__h_ac_oburrow_3": [
+   "swing_jump_giant",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_jump_giant__f_ac_rise": [
+   "swing_jump_giant",
+   "phase_f_ac_rise"
+  ],
+  "hit_jump_giant__f_ac_chase": [
+   "swing_jump_giant",
+   "phase_f_ac_chase"
+  ],
+  "hit_jump_giant__f_ac_dive": [
+   "swing_jump_giant",
+   "phase_f_ac_dive"
+  ],
+  "hit_jump_giant__h_ar_vuln_1": [
+   "swing_jump_giant",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_jump_giant__h_ar_oburrow_1": [
+   "swing_jump_giant",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_jump_giant__h_ar_vuln_2": [
+   "swing_jump_giant",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_jump_giant__h_ar_oburrow_2": [
+   "swing_jump_giant",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_jump_giant__h_ar_vuln_3": [
+   "swing_jump_giant",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_jump_giant__h_ar_oburrow_3": [
+   "swing_jump_giant",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_jump_giant__f_ar_rise": [
+   "swing_jump_giant",
+   "phase_f_ar_rise"
+  ],
+  "hit_jump_giant__f_ar_rocks": [
+   "swing_jump_giant",
+   "phase_f_ar_rocks"
+  ],
+  "hit_jump_giant__f_ar_dive": [
+   "swing_jump_giant",
+   "phase_f_ar_dive"
+  ],
+  "hit_jump_giant__h_bc_vuln_1": [
+   "swing_jump_giant",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_jump_giant__h_bc_oburrow_1": [
+   "swing_jump_giant",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_jump_giant__h_bc_vuln_2": [
+   "swing_jump_giant",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_jump_giant__h_bc_oburrow_2": [
+   "swing_jump_giant",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_jump_giant__h_bc_vuln_3": [
+   "swing_jump_giant",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_jump_giant__h_bc_oburrow_3": [
+   "swing_jump_giant",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_jump_giant__f_bc_rise": [
+   "swing_jump_giant",
+   "phase_f_bc_rise"
+  ],
+  "hit_jump_giant__f_bc_chase": [
+   "swing_jump_giant",
+   "phase_f_bc_chase"
+  ],
+  "hit_jump_giant__f_bc_dive": [
+   "swing_jump_giant",
+   "phase_f_bc_dive"
+  ],
+  "hit_jump_giant__h_br_vuln_1": [
+   "swing_jump_giant",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_jump_giant__h_br_oburrow_1": [
+   "swing_jump_giant",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_jump_giant__h_br_vuln_2": [
+   "swing_jump_giant",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_jump_giant__h_br_oburrow_2": [
+   "swing_jump_giant",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_jump_giant__h_br_vuln_3": [
+   "swing_jump_giant",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_jump_giant__h_br_oburrow_3": [
+   "swing_jump_giant",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_jump_giant__f_br_rise": [
+   "swing_jump_giant",
+   "phase_f_br_rise"
+  ],
+  "hit_jump_giant__f_br_rocks": [
+   "swing_jump_giant",
+   "phase_f_br_rocks"
+  ],
+  "hit_jump_giant__f_br_dive": [
+   "swing_jump_giant",
+   "phase_f_br_dive"
+  ],
+  "hit_jump_giant__h_cc_vuln_1": [
+   "swing_jump_giant",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_jump_giant__h_cc_oburrow_1": [
+   "swing_jump_giant",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_jump_giant__h_cc_vuln_2": [
+   "swing_jump_giant",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_jump_giant__h_cc_oburrow_2": [
+   "swing_jump_giant",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_jump_giant__h_cc_vuln_3": [
+   "swing_jump_giant",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_jump_giant__h_cc_oburrow_3": [
+   "swing_jump_giant",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_jump_giant__f_cc_chase": [
+   "swing_jump_giant",
+   "phase_f_cc_chase"
+  ],
+  "hit_jump_giant__h_cr_vuln_1": [
+   "swing_jump_giant",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_jump_giant__h_cr_oburrow_1": [
+   "swing_jump_giant",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_jump_giant__h_cr_vuln_2": [
+   "swing_jump_giant",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_jump_giant__h_cr_oburrow_2": [
+   "swing_jump_giant",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_jump_giant__h_cr_vuln_3": [
+   "swing_jump_giant",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_jump_giant__h_cr_oburrow_3": [
+   "swing_jump_giant",
+   "phase_h_cr_oburrow_3"
+  ],
+  "hit_jump_giant_self__h_ac_vuln_1": [
+   "swing_jump_giant_self",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_jump_giant_self__h_ac_oburrow_1": [
+   "swing_jump_giant_self",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_jump_giant_self__h_ac_vuln_2": [
+   "swing_jump_giant_self",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_jump_giant_self__h_ac_oburrow_2": [
+   "swing_jump_giant_self",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_jump_giant_self__h_ac_vuln_3": [
+   "swing_jump_giant_self",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_jump_giant_self__h_ac_oburrow_3": [
+   "swing_jump_giant_self",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_jump_giant_self__f_ac_rise": [
+   "swing_jump_giant_self",
+   "phase_f_ac_rise"
+  ],
+  "hit_jump_giant_self__f_ac_chase": [
+   "swing_jump_giant_self",
+   "phase_f_ac_chase"
+  ],
+  "hit_jump_giant_self__f_ac_dive": [
+   "swing_jump_giant_self",
+   "phase_f_ac_dive"
+  ],
+  "hit_jump_giant_self__h_ar_vuln_1": [
+   "swing_jump_giant_self",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_jump_giant_self__h_ar_oburrow_1": [
+   "swing_jump_giant_self",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_jump_giant_self__h_ar_vuln_2": [
+   "swing_jump_giant_self",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_jump_giant_self__h_ar_oburrow_2": [
+   "swing_jump_giant_self",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_jump_giant_self__h_ar_vuln_3": [
+   "swing_jump_giant_self",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_jump_giant_self__h_ar_oburrow_3": [
+   "swing_jump_giant_self",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_jump_giant_self__f_ar_rise": [
+   "swing_jump_giant_self",
+   "phase_f_ar_rise"
+  ],
+  "hit_jump_giant_self__f_ar_rocks": [
+   "swing_jump_giant_self",
+   "phase_f_ar_rocks"
+  ],
+  "hit_jump_giant_self__f_ar_dive": [
+   "swing_jump_giant_self",
+   "phase_f_ar_dive"
+  ],
+  "hit_jump_giant_self__h_bc_vuln_1": [
+   "swing_jump_giant_self",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_jump_giant_self__h_bc_oburrow_1": [
+   "swing_jump_giant_self",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_jump_giant_self__h_bc_vuln_2": [
+   "swing_jump_giant_self",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_jump_giant_self__h_bc_oburrow_2": [
+   "swing_jump_giant_self",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_jump_giant_self__h_bc_vuln_3": [
+   "swing_jump_giant_self",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_jump_giant_self__h_bc_oburrow_3": [
+   "swing_jump_giant_self",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_jump_giant_self__f_bc_rise": [
+   "swing_jump_giant_self",
+   "phase_f_bc_rise"
+  ],
+  "hit_jump_giant_self__f_bc_chase": [
+   "swing_jump_giant_self",
+   "phase_f_bc_chase"
+  ],
+  "hit_jump_giant_self__f_bc_dive": [
+   "swing_jump_giant_self",
+   "phase_f_bc_dive"
+  ],
+  "hit_jump_giant_self__h_br_vuln_1": [
+   "swing_jump_giant_self",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_jump_giant_self__h_br_oburrow_1": [
+   "swing_jump_giant_self",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_jump_giant_self__h_br_vuln_2": [
+   "swing_jump_giant_self",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_jump_giant_self__h_br_oburrow_2": [
+   "swing_jump_giant_self",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_jump_giant_self__h_br_vuln_3": [
+   "swing_jump_giant_self",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_jump_giant_self__h_br_oburrow_3": [
+   "swing_jump_giant_self",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_jump_giant_self__f_br_rise": [
+   "swing_jump_giant_self",
+   "phase_f_br_rise"
+  ],
+  "hit_jump_giant_self__f_br_rocks": [
+   "swing_jump_giant_self",
+   "phase_f_br_rocks"
+  ],
+  "hit_jump_giant_self__f_br_dive": [
+   "swing_jump_giant_self",
+   "phase_f_br_dive"
+  ],
+  "hit_jump_giant_self__h_cc_vuln_1": [
+   "swing_jump_giant_self",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_jump_giant_self__h_cc_oburrow_1": [
+   "swing_jump_giant_self",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_jump_giant_self__h_cc_vuln_2": [
+   "swing_jump_giant_self",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_jump_giant_self__h_cc_oburrow_2": [
+   "swing_jump_giant_self",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_jump_giant_self__h_cc_vuln_3": [
+   "swing_jump_giant_self",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_jump_giant_self__h_cc_oburrow_3": [
+   "swing_jump_giant_self",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_jump_giant_self__f_cc_chase": [
+   "swing_jump_giant_self",
+   "phase_f_cc_chase"
+  ],
+  "hit_jump_giant_self__h_cr_vuln_1": [
+   "swing_jump_giant_self",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_jump_giant_self__h_cr_oburrow_1": [
+   "swing_jump_giant_self",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_jump_giant_self__h_cr_vuln_2": [
+   "swing_jump_giant_self",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_jump_giant_self__h_cr_oburrow_2": [
+   "swing_jump_giant_self",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_jump_giant_self__h_cr_vuln_3": [
+   "swing_jump_giant_self",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_jump_giant_self__h_cr_oburrow_3": [
+   "swing_jump_giant_self",
+   "phase_h_cr_oburrow_3"
+  ],
+  "hit_jump_master_self__h_ac_vuln_1": [
+   "swing_jump_master_self",
+   "phase_h_ac_vuln_1"
+  ],
+  "hit_jump_master_self__h_ac_oburrow_1": [
+   "swing_jump_master_self",
+   "phase_h_ac_oburrow_1"
+  ],
+  "hit_jump_master_self__h_ac_vuln_2": [
+   "swing_jump_master_self",
+   "phase_h_ac_vuln_2"
+  ],
+  "hit_jump_master_self__h_ac_oburrow_2": [
+   "swing_jump_master_self",
+   "phase_h_ac_oburrow_2"
+  ],
+  "hit_jump_master_self__h_ac_vuln_3": [
+   "swing_jump_master_self",
+   "phase_h_ac_vuln_3"
+  ],
+  "hit_jump_master_self__h_ac_oburrow_3": [
+   "swing_jump_master_self",
+   "phase_h_ac_oburrow_3"
+  ],
+  "hit_jump_master_self__f_ac_rise": [
+   "swing_jump_master_self",
+   "phase_f_ac_rise"
+  ],
+  "hit_jump_master_self__f_ac_chase": [
+   "swing_jump_master_self",
+   "phase_f_ac_chase"
+  ],
+  "hit_jump_master_self__f_ac_dive": [
+   "swing_jump_master_self",
+   "phase_f_ac_dive"
+  ],
+  "hit_jump_master_self__h_ar_vuln_1": [
+   "swing_jump_master_self",
+   "phase_h_ar_vuln_1"
+  ],
+  "hit_jump_master_self__h_ar_oburrow_1": [
+   "swing_jump_master_self",
+   "phase_h_ar_oburrow_1"
+  ],
+  "hit_jump_master_self__h_ar_vuln_2": [
+   "swing_jump_master_self",
+   "phase_h_ar_vuln_2"
+  ],
+  "hit_jump_master_self__h_ar_oburrow_2": [
+   "swing_jump_master_self",
+   "phase_h_ar_oburrow_2"
+  ],
+  "hit_jump_master_self__h_ar_vuln_3": [
+   "swing_jump_master_self",
+   "phase_h_ar_vuln_3"
+  ],
+  "hit_jump_master_self__h_ar_oburrow_3": [
+   "swing_jump_master_self",
+   "phase_h_ar_oburrow_3"
+  ],
+  "hit_jump_master_self__f_ar_rise": [
+   "swing_jump_master_self",
+   "phase_f_ar_rise"
+  ],
+  "hit_jump_master_self__f_ar_rocks": [
+   "swing_jump_master_self",
+   "phase_f_ar_rocks"
+  ],
+  "hit_jump_master_self__f_ar_dive": [
+   "swing_jump_master_self",
+   "phase_f_ar_dive"
+  ],
+  "hit_jump_master_self__h_bc_vuln_1": [
+   "swing_jump_master_self",
+   "phase_h_bc_vuln_1"
+  ],
+  "hit_jump_master_self__h_bc_oburrow_1": [
+   "swing_jump_master_self",
+   "phase_h_bc_oburrow_1"
+  ],
+  "hit_jump_master_self__h_bc_vuln_2": [
+   "swing_jump_master_self",
+   "phase_h_bc_vuln_2"
+  ],
+  "hit_jump_master_self__h_bc_oburrow_2": [
+   "swing_jump_master_self",
+   "phase_h_bc_oburrow_2"
+  ],
+  "hit_jump_master_self__h_bc_vuln_3": [
+   "swing_jump_master_self",
+   "phase_h_bc_vuln_3"
+  ],
+  "hit_jump_master_self__h_bc_oburrow_3": [
+   "swing_jump_master_self",
+   "phase_h_bc_oburrow_3"
+  ],
+  "hit_jump_master_self__f_bc_rise": [
+   "swing_jump_master_self",
+   "phase_f_bc_rise"
+  ],
+  "hit_jump_master_self__f_bc_chase": [
+   "swing_jump_master_self",
+   "phase_f_bc_chase"
+  ],
+  "hit_jump_master_self__f_bc_dive": [
+   "swing_jump_master_self",
+   "phase_f_bc_dive"
+  ],
+  "hit_jump_master_self__h_br_vuln_1": [
+   "swing_jump_master_self",
+   "phase_h_br_vuln_1"
+  ],
+  "hit_jump_master_self__h_br_oburrow_1": [
+   "swing_jump_master_self",
+   "phase_h_br_oburrow_1"
+  ],
+  "hit_jump_master_self__h_br_vuln_2": [
+   "swing_jump_master_self",
+   "phase_h_br_vuln_2"
+  ],
+  "hit_jump_master_self__h_br_oburrow_2": [
+   "swing_jump_master_self",
+   "phase_h_br_oburrow_2"
+  ],
+  "hit_jump_master_self__h_br_vuln_3": [
+   "swing_jump_master_self",
+   "phase_h_br_vuln_3"
+  ],
+  "hit_jump_master_self__h_br_oburrow_3": [
+   "swing_jump_master_self",
+   "phase_h_br_oburrow_3"
+  ],
+  "hit_jump_master_self__f_br_rise": [
+   "swing_jump_master_self",
+   "phase_f_br_rise"
+  ],
+  "hit_jump_master_self__f_br_rocks": [
+   "swing_jump_master_self",
+   "phase_f_br_rocks"
+  ],
+  "hit_jump_master_self__f_br_dive": [
+   "swing_jump_master_self",
+   "phase_f_br_dive"
+  ],
+  "hit_jump_master_self__h_cc_vuln_1": [
+   "swing_jump_master_self",
+   "phase_h_cc_vuln_1"
+  ],
+  "hit_jump_master_self__h_cc_oburrow_1": [
+   "swing_jump_master_self",
+   "phase_h_cc_oburrow_1"
+  ],
+  "hit_jump_master_self__h_cc_vuln_2": [
+   "swing_jump_master_self",
+   "phase_h_cc_vuln_2"
+  ],
+  "hit_jump_master_self__h_cc_oburrow_2": [
+   "swing_jump_master_self",
+   "phase_h_cc_oburrow_2"
+  ],
+  "hit_jump_master_self__h_cc_vuln_3": [
+   "swing_jump_master_self",
+   "phase_h_cc_vuln_3"
+  ],
+  "hit_jump_master_self__h_cc_oburrow_3": [
+   "swing_jump_master_self",
+   "phase_h_cc_oburrow_3"
+  ],
+  "hit_jump_master_self__f_cc_chase": [
+   "swing_jump_master_self",
+   "phase_f_cc_chase"
+  ],
+  "hit_jump_master_self__h_cr_vuln_1": [
+   "swing_jump_master_self",
+   "phase_h_cr_vuln_1"
+  ],
+  "hit_jump_master_self__h_cr_oburrow_1": [
+   "swing_jump_master_self",
+   "phase_h_cr_oburrow_1"
+  ],
+  "hit_jump_master_self__h_cr_vuln_2": [
+   "swing_jump_master_self",
+   "phase_h_cr_vuln_2"
+  ],
+  "hit_jump_master_self__h_cr_oburrow_2": [
+   "swing_jump_master_self",
+   "phase_h_cr_oburrow_2"
+  ],
+  "hit_jump_master_self__h_cr_vuln_3": [
+   "swing_jump_master_self",
+   "phase_h_cr_vuln_3"
+  ],
+  "hit_jump_master_self__h_cr_oburrow_3": [
+   "swing_jump_master_self",
+   "phase_h_cr_oburrow_3"
+  ],
+  "body_blocked_mirror_shield": [
+   "incoming_body",
+   "guard_with_mirror_shield"
+  ],
+  "body_nayru": [
+   "incoming_body",
+   "status_nayru"
+  ],
+  "body_lands_dd": [
+   "incoming_body",
+   "has_double_defense"
+  ],
+  "rock_blocked_mirror_shield": [
+   "incoming_rock",
+   "guard_with_mirror_shield"
+  ],
+  "rock_nayru": [
+   "incoming_rock",
+   "status_nayru"
+  ],
+  "rock_lands_dd": [
+   "incoming_rock",
+   "has_double_defense"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 855,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 265,
+    "Link falls": 85
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 21574
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 22251,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6492,
+    "Link falls": 3041,
+    "Link wins": 42
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 364979
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 1908,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 651,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 42225
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 1121,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 347,
+    "Link falls": 111
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 14890
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 954,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 321,
+    "Link falls": 27
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 11021
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 3462,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1058,
+    "Link falls": 363
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 28973
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 5242,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1715,
+    "Link falls": 158
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 32147
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 2873,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 887,
+    "Link falls": 283
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 35510
+  }
+ ]
+}

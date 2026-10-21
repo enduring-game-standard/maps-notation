@@ -1,0 +1,253 @@
+{
+ "positions": 5148,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "fairy_revives_link",
+  "flame_hurt",
+  "flame_overkill",
+  "hit_spin_giant__launch_dance",
+  "hit_spin_giant__launch_still",
+  "hit_spin_master__launch_dance",
+  "hit_spin_master__launch_still",
+  "hit_jump_giant__launch_dance",
+  "hit_jump_giant__launch_still",
+  "hit_jump_giant_self__launch_dance",
+  "hit_jump_giant_self__launch_still",
+  "hit_jump_master__launch_dance",
+  "hit_jump_master__launch_still",
+  "hit_jump_master_self__launch_dance",
+  "hit_jump_master_self__launch_still",
+  "flame_lands_again",
+  "flame_lands_dd_again"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "dancing",
+   "positions": 174,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 20,
+    "Link wins": 52,
+    "Link falls": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 307
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "standing",
+   "positions": 214,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 90,
+    "Link falls": 10,
+    "Link wins": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 257
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "dancing",
+   "positions": 52,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5,
+    "Link falls": 2,
+    "Link wins": 24
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 128
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "standing",
+   "positions": 64,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 19,
+    "Link falls": 2,
+    "Link wins": 18
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 146
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "dancing",
+   "positions": 100,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 19,
+    "Link wins": 21
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 167
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "standing",
+   "positions": 116,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 47,
+    "Link wins": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 202
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "dancing",
+   "positions": 169,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 20,
+    "Link wins": 52,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 229
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "standing",
+   "positions": 280,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 117,
+    "Link falls": 14,
+    "Link wins": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 264
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "dancing",
+   "positions": 118,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 18,
+    "Link wins": 32
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 195
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "standing",
+   "positions": 142,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 60,
+    "Link wins": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 295
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "dancing",
+   "positions": 691,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 74,
+    "Link wins": 221,
+    "Link falls": 50
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 631
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "standing",
+   "positions": 832,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 342,
+    "Link falls": 50,
+    "Link wins": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 695
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "dancing",
+   "positions": 495,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 87,
+    "Link wins": 111,
+    "Link falls": 19
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 510
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "standing",
+   "positions": 850,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 350,
+    "Link falls": 32,
+    "Link wins": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 672
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "dancing",
+   "positions": 261,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 43,
+    "Link falls": 15,
+    "Link wins": 62
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 399
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "standing",
+   "positions": 590,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 230,
+    "Link falls": 41,
+    "Link wins": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 686
+  }
+ ]
+}

@@ -1,0 +1,4286 @@
+maps 2
+title "Ocarina of Time combat: Link vs Redead / Gibdo"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group enemy "enemy"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state age_adult "Link is an adult" in setup at 120 150
+state choose_variant "Which Redead / Gibdo" in setup at 260 150
+state enemy_unseen "Redead / Gibdo is invisible without the Lens" in enemy at 440 80
+state link_turn "Link's move" in beat at 760 80
+state enemy_turn "Redead / Gibdo answers" in beat at 900 80
+state enemy_act "Redead / Gibdo acts" in beat at 760 150
+state beat_end "End of the beat" in beat at 900 150
+state range_near "Near" in range at 1080 80
+state range_far "Far" in range at 1220 80
+state link_hp "Link's health (1 mark = 4/16 heart)" in link_state at 1400 80
+state link_missing "Link's lost health" in link_state at 1540 80
+state link_dmg "Damage to Link" in link_state at 1400 150
+state link_heal "Healing for Link" in link_state at 1540 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1400 220
+state magic_spent "Magic spent" in link_state at 1540 220
+state magic_refill "Magic coming back" in link_state at 1400 290
+state in_fight "The fight is on" in setup at 120 220
+state link_wins "Redead / Gibdo defeated" ends "Link wins" in outcomes at 1720 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1860 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1720 150
+state has_deku_nuts "Has deku nuts" in gear at 2040 80
+state has_kokiri_sword "Has kokiri sword" in gear at 2180 80
+state has_deku_shield "Has deku shield" in gear at 2040 150
+state has_deku_sticks "Has deku sticks" in gear at 2180 150
+state has_slingshot "Has slingshot" in gear at 2040 220
+state has_boomerang "Has boomerang" in gear at 2180 220
+state has_bombs "Has bombs" in gear at 2040 290
+state has_magic "Has magic" in gear at 2180 290
+state has_green_potion "Has green potion" in gear at 2040 360
+state has_dins_fire "Has dins fire" in gear at 2180 360
+state has_hylian_shield "Has hylian shield" in gear at 2040 430
+state has_nayrus_love "Has nayrus love" in gear at 2180 430
+state has_lens_of_truth "Has lens of truth" in gear at 2040 500
+state has_fairy "Has fairy" in gear at 2180 500
+state has_red_potion "Has red potion" in gear at 2040 570
+state has_master_sword "Has master sword" in gear at 2180 570
+state has_hookshot "Has hookshot" in gear at 2040 640
+state has_megaton_hammer "Has megaton hammer" in gear at 2180 640
+state has_bow "Has bow" in gear at 2040 710
+state has_bombchus "Has bombchus" in gear at 2180 710
+state has_mirror_shield "Has mirror shield" in gear at 2040 780
+state has_biggoron_sword "Has biggoron sword" in gear at 2180 780
+state has_giants_knife "Has giants knife" in gear at 2040 850
+state has_double_defense "Has double defense" in gear at 2180 850
+state has_fire_arrows "Has fire arrows" in gear at 2040 920
+state has_ice_arrows "Has ice arrows" in gear at 2180 920
+state has_light_arrows "Has light arrows" in gear at 2040 990
+state has_blue_potion "Has blue potion" in gear at 2180 990
+state phase_rise "Gibdo rises out of its coffin" in enemy at 580 80
+state phase_idle_plain "Redead stands still" in enemy at 440 150
+state phase_attempt_plain "Redead turns to face Link" in enemy at 580 150
+state phase_walk_plain "Redead shuffles toward Link, ready to scream" in enemy at 440 220
+state phase_walk_cd_plain "Redead shuffles toward Link after screaming" in enemy at 580 220
+state timer_walk_cd_plain "Redead shuffles toward Link after screaming: beats left" in enemy at 440 290
+state phase_grab_plain "Redead clings to Link" in enemy at 440 360
+state timer_grab_plain "Redead clings to Link: beats left" in enemy at 580 360
+state phase_released_plain "Redead lets go of Link" in enemy at 580 430
+state timer_released_plain "Redead lets go of Link: beats left" in enemy at 440 500
+state phase_home_plain "Redead walks home" in enemy at 440 570
+state phase_damaged_plain "Redead reels from a hit" in enemy at 580 570
+state phase_stunned_plain "Redead is stunned" in enemy at 440 640
+state timer_stunned_plain "Redead is stunned: beats left" in enemy at 580 640
+state phase_idle_crying "Crying Redead stands still" in enemy at 580 710
+state phase_stand_up_crying "Crying Redead stands up" in enemy at 440 780
+state phase_attempt_crying "Crying Redead turns to face Link" in enemy at 580 780
+state phase_walk_crying "Crying Redead shuffles toward Link, ready to scream" in enemy at 440 850
+state phase_walk_cd_crying "Crying Redead shuffles toward Link after screaming" in enemy at 580 850
+state timer_walk_cd_crying "Crying Redead shuffles toward Link after screaming: beats left" in enemy at 440 920
+state phase_grab_crying "Crying Redead clings to Link" in enemy at 440 990
+state timer_grab_crying "Crying Redead clings to Link: beats left" in enemy at 580 990
+state phase_released_crying "Crying Redead lets go of Link" in enemy at 580 1060
+state timer_released_crying "Crying Redead lets go of Link: beats left" in enemy at 440 1130
+state phase_home_crying "Crying Redead walks home" in enemy at 440 1200
+state phase_crouch_crying "Crying Redead crouches down" in enemy at 580 1200
+state phase_damaged_crying "Crying Redead reels from a hit" in enemy at 440 1270
+state phase_stunned_crying "Crying Redead is stunned" in enemy at 580 1270
+state timer_stunned_crying "Crying Redead is stunned: beats left" in enemy at 440 1340
+state phase_idle_silent "Silent Redead stands still" in enemy at 440 1410
+state phase_attempt_silent "Silent Redead turns to face Link" in enemy at 580 1410
+state phase_walk_silent "Silent Redead shuffles toward Link, ready to scream" in enemy at 440 1480
+state phase_walk_cd_silent "Silent Redead shuffles toward Link after screaming" in enemy at 580 1480
+state timer_walk_cd_silent "Silent Redead shuffles toward Link after screaming: beats left" in enemy at 440 1550
+state phase_grab_silent "Silent Redead clings to Link" in enemy at 440 1620
+state timer_grab_silent "Silent Redead clings to Link: beats left" in enemy at 580 1620
+state phase_released_silent "Silent Redead lets go of Link" in enemy at 580 1690
+state timer_released_silent "Silent Redead lets go of Link: beats left" in enemy at 440 1760
+state phase_home_silent "Silent Redead walks home" in enemy at 440 1830
+state phase_damaged_silent "Silent Redead reels from a hit" in enemy at 580 1830
+state phase_stunned_silent "Silent Redead is stunned" in enemy at 440 1900
+state timer_stunned_silent "Silent Redead is stunned: beats left" in enemy at 580 1900
+state hp_body "Redead: health" marks 8 in enemy_health at 2360 80
+state alive_body "Redead: standing" marks 1 in enemy_health at 2500 80
+state dmg_body "Redead: damage" in enemy_health at 2360 150
+state status_paralyze "Link: paralyze (beats left)" in link_state at 1540 290
+state status_grab "Link: grab (beats left)" in link_state at 1400 360
+state status_nayru "Link: nayru (beats left)" in link_state at 1540 360
+state lens_on "Lens of Truth on" in link_state at 1400 430
+state link_guard "Link holds up his shield" in link_state at 1540 430
+state link_dodge "Link dodges" in link_state at 1400 500
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3140 150
+state swing_slingshot "Slingshot seed on its way" in hits at 3140 1060
+state swing_explosive "Explosion on its way" in hits at 3000 1200
+state swing_boomerang "Boomerang on its way" in hits at 3140 1270
+state swing_arrow_normal "Arrow on its way" in hits at 3000 1410
+state swing_hammer_swing "Hammer swing on its way" in hits at 3140 1480
+state swing_hookshot "Hookshot on its way" in hits at 3140 2390
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3140 3300
+state swing_slash_master "Master Sword slash on its way" in hits at 3140 4210
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3140 5120
+state swing_arrow_fire "Fire arrow on its way" in hits at 3140 6030
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 6170
+state swing_arrow_light "Light arrow on its way" in hits at 3140 6240
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 6380
+state swing_shield "Shield on its way" in hits at 3140 7290
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3000 7430
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 8340
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3000 9320
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3140 10230
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3140 11140
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3000 12120
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3000 13030
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 13940
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3140 14850
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3000 15830
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1400 780
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1540 780
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1400 850
+state incoming_scream_long "Redead scream (first) incoming" in attacks at 3320 80
+state incoming_scream "Redead scream incoming" in attacks at 3320 290
+state incoming_grab "Redead grab and bite incoming" in attacks at 3320 500
+state tick_paralyze "Beat ends: paralyze checked" in beat at 900 360
+state tick_grab "Beat ends: grab checked" in beat at 760 430
+state tick_nayru "Beat ends: nayru checked" in beat at 900 430
+state lens_count "The Lens: beats toward the next cost" in beat at 760 710
+
+verb walk_cd_plain_timer_clears "Redead shuffles toward Link after screaming is over" by world priority 99 in enemy at 580 290
+  take timer_walk_cd_plain
+  unless phase_walk_cd_plain
+
+verb grab_plain_timer_clears "Redead clings to Link is over" by world priority 99 in enemy at 440 430
+  take timer_grab_plain
+  unless phase_grab_plain
+
+verb released_plain_timer_clears "Redead lets go of Link is over" by world priority 99 in enemy at 580 500
+  take timer_released_plain
+  unless phase_released_plain
+
+verb stunned_plain_timer_clears "Redead is stunned is over" by world priority 99 in enemy at 440 710
+  take timer_stunned_plain
+  unless phase_stunned_plain
+
+verb walk_cd_crying_timer_clears "Crying Redead shuffles toward Link after screaming is over" by world priority 99 in enemy at 580 920
+  take timer_walk_cd_crying
+  unless phase_walk_cd_crying
+
+verb grab_crying_timer_clears "Crying Redead clings to Link is over" by world priority 99 in enemy at 440 1060
+  take timer_grab_crying
+  unless phase_grab_crying
+
+verb released_crying_timer_clears "Crying Redead lets go of Link is over" by world priority 99 in enemy at 580 1130
+  take timer_released_crying
+  unless phase_released_crying
+
+verb stunned_crying_timer_clears "Crying Redead is stunned is over" by world priority 99 in enemy at 580 1340
+  take timer_stunned_crying
+  unless phase_stunned_crying
+
+verb walk_cd_silent_timer_clears "Silent Redead shuffles toward Link after screaming is over" by world priority 99 in enemy at 580 1550
+  take timer_walk_cd_silent
+  unless phase_walk_cd_silent
+
+verb grab_silent_timer_clears "Silent Redead clings to Link is over" by world priority 99 in enemy at 440 1690
+  take timer_grab_silent
+  unless phase_grab_silent
+
+verb released_silent_timer_clears "Silent Redead lets go of Link is over" by world priority 99 in enemy at 580 1760
+  take timer_released_silent
+  unless phase_released_silent
+
+verb stunned_silent_timer_clears "Silent Redead is stunned is over" by world priority 99 in enemy at 440 1970
+  take timer_stunned_silent
+  unless phase_stunned_silent
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give choose_variant
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give choose_variant
+
+verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give choose_variant
+
+verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in setup at 120 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 260 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 120 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give choose_variant
+
+verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 260 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 120 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 260 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 120 710
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give choose_variant
+
+verb variant_standing "Gibdo or Redead standing in the room" by world priority 30 in setup at 260 710
+  take choose_variant
+  give phase_idle_plain
+  give range_far
+  give link_turn
+
+verb variant_coffin "Gibdo rising out of a coffin" by world priority 30 in setup at 120 780
+  take choose_variant
+  give phase_rise
+  give range_far
+  give link_turn
+
+verb variant_crying "Crying Redead" by world priority 30 in setup at 260 780
+  take choose_variant
+  give phase_idle_crying
+  give range_far
+  give link_turn
+
+verb variant_invisible "Redead visible only through the Lens" by world priority 30 in setup at 120 850
+  take choose_variant
+  give phase_idle_plain
+  give range_far
+  give link_turn
+  give enemy_unseen
+
+verb variant_silent "Redead whose scream does not freeze Link (rdFlags 0x80)" by world priority 30 in setup at 260 850
+  take choose_variant
+  give phase_idle_silent
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 98 in link_state at 1540 500
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1400 570
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 97 in link_state at 1540 570
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1400 640
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 94 in link_state at 1540 640
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1400 710
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1540 710
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 8 link_heal
+
+verb link_fell "Link falls" by world priority 89 in outcomes at 1860 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb body_hurt "Redead loses health" by world priority 96 in enemy_health at 2500 150
+  take dmg_body
+  take hp_body
+
+verb body_overkill "Redead has no health left to lose" by world priority 95 in enemy_health at 2360 220
+  take dmg_body
+  unless hp_body
+
+verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_nut_2 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2820 80
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2680 150
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2820 150
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2680 220
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 220
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 290
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2820 290
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2680 360
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2820 360
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2680 430
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 430
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 500
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 500
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 570
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 570
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 640
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 640
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 710
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2820 710
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 780
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 780
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 850
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 850
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 920
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 920
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 990
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 990
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1060
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1060
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1130
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1130
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2680 1200
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1200
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2680 1270
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1270
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2680 1340
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1340
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2680 1410
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1410
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2680 1480
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 1480
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb unseen_deku_nut "Deku Nut flash misses: the enemy is unseen" by world priority 81 in hits at 3000 150
+  take swing_deku_nut
+  need enemy_unseen
+  unless lens_on
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3000 220
+  take swing_deku_stick
+
+verb hit_deku_stick__idle_plain "Deku Stick hits (Redead stands still)" by world priority 80 in hits at 3140 220
+  take swing_deku_stick
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_deku_stick__attempt_plain "Deku Stick hits (Redead turns to face Link)" by world priority 80 in hits at 3000 290
+  take swing_deku_stick
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_deku_stick__walk_plain "Deku Stick hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 290
+  take swing_deku_stick
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_deku_stick__walk_cd_plain "Deku Stick hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 360
+  take swing_deku_stick
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_deku_stick__released_plain "Deku Stick hits (Redead lets go of Link)" by world priority 80 in hits at 3140 360
+  take swing_deku_stick
+  take phase_released_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_deku_stick__home_plain "Deku Stick hits (Redead walks home)" by world priority 80 in hits at 3000 430
+  take swing_deku_stick
+  take phase_home_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_deku_stick__stunned_plain "Deku Stick hits (Redead is stunned)" by world priority 80 in hits at 3140 430
+  take swing_deku_stick
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_deku_stick__idle_crying "Deku Stick hits (Crying Redead stands still)" by world priority 80 in hits at 3000 500
+  take swing_deku_stick
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__stand_up_crying "Deku Stick hits (Crying Redead stands up)" by world priority 80 in hits at 3140 500
+  take swing_deku_stick
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__attempt_crying "Deku Stick hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 570
+  take swing_deku_stick
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__walk_crying "Deku Stick hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 570
+  take swing_deku_stick
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__walk_cd_crying "Deku Stick hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 640
+  take swing_deku_stick
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__released_crying "Deku Stick hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 640
+  take swing_deku_stick
+  take phase_released_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__home_crying "Deku Stick hits (Crying Redead walks home)" by world priority 80 in hits at 3000 710
+  take swing_deku_stick
+  take phase_home_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__crouch_crying "Deku Stick hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 710
+  take swing_deku_stick
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__stunned_crying "Deku Stick hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 780
+  take swing_deku_stick
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_deku_stick__idle_silent "Deku Stick hits (Silent Redead stands still)" by world priority 80 in hits at 3140 780
+  take swing_deku_stick
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_deku_stick__attempt_silent "Deku Stick hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 850
+  take swing_deku_stick
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_deku_stick__walk_silent "Deku Stick hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 850
+  take swing_deku_stick
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_deku_stick__walk_cd_silent "Deku Stick hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 920
+  take swing_deku_stick
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_deku_stick__released_silent "Deku Stick hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 920
+  take swing_deku_stick
+  take phase_released_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_deku_stick__home_silent "Deku Stick hits (Silent Redead walks home)" by world priority 80 in hits at 3000 990
+  take swing_deku_stick
+  take phase_home_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_deku_stick__stunned_silent "Deku Stick hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 990
+  take swing_deku_stick
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb unseen_deku_stick "Deku Stick misses: the enemy is unseen" by world priority 81 in hits at 3000 1060
+  take swing_deku_stick
+  need enemy_unseen
+  unless lens_on
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3000 1130
+  take swing_slingshot
+
+verb unseen_slingshot "Slingshot seed misses: the enemy is unseen" by world priority 81 in hits at 3140 1130
+  take swing_slingshot
+  need enemy_unseen
+  unless lens_on
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 1200
+  take swing_explosive
+
+verb unseen_explosive "Explosion misses: the enemy is unseen" by world priority 81 in hits at 3000 1270
+  take swing_explosive
+  need enemy_unseen
+  unless lens_on
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3000 1340
+  take swing_boomerang
+
+verb unseen_boomerang "Boomerang misses: the enemy is unseen" by world priority 81 in hits at 3140 1340
+  take swing_boomerang
+  need enemy_unseen
+  unless lens_on
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3140 1410
+  take swing_arrow_normal
+
+verb unseen_arrow_normal "Arrow misses: the enemy is unseen" by world priority 81 in hits at 3000 1480
+  take swing_arrow_normal
+  need enemy_unseen
+  unless lens_on
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3000 1550
+  take swing_hammer_swing
+
+verb hit_hammer_swing__idle_plain "Hammer swing hits (Redead stands still)" by world priority 80 in hits at 3140 1550
+  take swing_hammer_swing
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_hammer_swing__attempt_plain "Hammer swing hits (Redead turns to face Link)" by world priority 80 in hits at 3000 1620
+  take swing_hammer_swing
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_hammer_swing__walk_plain "Hammer swing hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 1620
+  take swing_hammer_swing
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_hammer_swing__walk_cd_plain "Hammer swing hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 1690
+  take swing_hammer_swing
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_hammer_swing__released_plain "Hammer swing hits (Redead lets go of Link)" by world priority 80 in hits at 3140 1690
+  take swing_hammer_swing
+  take phase_released_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_hammer_swing__home_plain "Hammer swing hits (Redead walks home)" by world priority 80 in hits at 3000 1760
+  take swing_hammer_swing
+  take phase_home_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned_plain "Hammer swing hits (Redead is stunned)" by world priority 80 in hits at 3140 1760
+  take swing_hammer_swing
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_hammer_swing__idle_crying "Hammer swing hits (Crying Redead stands still)" by world priority 80 in hits at 3000 1830
+  take swing_hammer_swing
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__stand_up_crying "Hammer swing hits (Crying Redead stands up)" by world priority 80 in hits at 3140 1830
+  take swing_hammer_swing
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__attempt_crying "Hammer swing hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 1900
+  take swing_hammer_swing
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__walk_crying "Hammer swing hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 1900
+  take swing_hammer_swing
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__walk_cd_crying "Hammer swing hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 1970
+  take swing_hammer_swing
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__released_crying "Hammer swing hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 1970
+  take swing_hammer_swing
+  take phase_released_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__home_crying "Hammer swing hits (Crying Redead walks home)" by world priority 80 in hits at 3000 2040
+  take swing_hammer_swing
+  take phase_home_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__crouch_crying "Hammer swing hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 2040
+  take swing_hammer_swing
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned_crying "Hammer swing hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 2110
+  take swing_hammer_swing
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_hammer_swing__idle_silent "Hammer swing hits (Silent Redead stands still)" by world priority 80 in hits at 3140 2110
+  take swing_hammer_swing
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_hammer_swing__attempt_silent "Hammer swing hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 2180
+  take swing_hammer_swing
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_hammer_swing__walk_silent "Hammer swing hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 2180
+  take swing_hammer_swing
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_hammer_swing__walk_cd_silent "Hammer swing hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 2250
+  take swing_hammer_swing
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_hammer_swing__released_silent "Hammer swing hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 2250
+  take swing_hammer_swing
+  take phase_released_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_hammer_swing__home_silent "Hammer swing hits (Silent Redead walks home)" by world priority 80 in hits at 3000 2320
+  take swing_hammer_swing
+  take phase_home_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned_silent "Hammer swing hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 2320
+  take swing_hammer_swing
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb unseen_hammer_swing "Hammer swing misses: the enemy is unseen" by world priority 81 in hits at 3000 2390
+  take swing_hammer_swing
+  need enemy_unseen
+  unless lens_on
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3000 2460
+  take swing_hookshot
+
+verb hit_hookshot__idle_plain "Hookshot hits (Redead stands still)" by world priority 80 in hits at 3140 2460
+  take swing_hookshot
+  take phase_idle_plain
+  give phase_stunned_plain
+  give 4 timer_stunned_plain
+
+verb hit_hookshot__attempt_plain "Hookshot hits (Redead turns to face Link)" by world priority 80 in hits at 3000 2530
+  take swing_hookshot
+  take phase_attempt_plain
+  give phase_stunned_plain
+  give 4 timer_stunned_plain
+
+verb hit_hookshot__walk_plain "Hookshot hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 2530
+  take swing_hookshot
+  take phase_walk_plain
+  give phase_stunned_plain
+  give 4 timer_stunned_plain
+
+verb hit_hookshot__walk_cd_plain "Hookshot hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 2600
+  take swing_hookshot
+  take phase_walk_cd_plain
+  give phase_stunned_plain
+  give 4 timer_stunned_plain
+
+verb hit_hookshot__released_plain "Hookshot hits (Redead lets go of Link)" by world priority 80 in hits at 3140 2600
+  take swing_hookshot
+  take phase_released_plain
+  give phase_stunned_plain
+  give 4 timer_stunned_plain
+
+verb hit_hookshot__home_plain "Hookshot hits (Redead walks home)" by world priority 80 in hits at 3000 2670
+  take swing_hookshot
+  take phase_home_plain
+  give phase_stunned_plain
+  give 4 timer_stunned_plain
+
+verb hit_hookshot__stunned_plain "Hookshot hits (Redead is stunned)" by world priority 80 in hits at 3140 2670
+  take swing_hookshot
+  take phase_stunned_plain
+  give phase_damaged_plain
+
+verb hit_hookshot__idle_crying "Hookshot hits (Crying Redead stands still)" by world priority 80 in hits at 3000 2740
+  take swing_hookshot
+  take phase_idle_crying
+  give phase_stunned_crying
+  give 4 timer_stunned_crying
+
+verb hit_hookshot__stand_up_crying "Hookshot hits (Crying Redead stands up)" by world priority 80 in hits at 3140 2740
+  take swing_hookshot
+  take phase_stand_up_crying
+  give phase_stunned_crying
+  give 4 timer_stunned_crying
+
+verb hit_hookshot__attempt_crying "Hookshot hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 2810
+  take swing_hookshot
+  take phase_attempt_crying
+  give phase_stunned_crying
+  give 4 timer_stunned_crying
+
+verb hit_hookshot__walk_crying "Hookshot hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 2810
+  take swing_hookshot
+  take phase_walk_crying
+  give phase_stunned_crying
+  give 4 timer_stunned_crying
+
+verb hit_hookshot__walk_cd_crying "Hookshot hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 2880
+  take swing_hookshot
+  take phase_walk_cd_crying
+  give phase_stunned_crying
+  give 4 timer_stunned_crying
+
+verb hit_hookshot__released_crying "Hookshot hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 2880
+  take swing_hookshot
+  take phase_released_crying
+  give phase_stunned_crying
+  give 4 timer_stunned_crying
+
+verb hit_hookshot__home_crying "Hookshot hits (Crying Redead walks home)" by world priority 80 in hits at 3000 2950
+  take swing_hookshot
+  take phase_home_crying
+  give phase_stunned_crying
+  give 4 timer_stunned_crying
+
+verb hit_hookshot__crouch_crying "Hookshot hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 2950
+  take swing_hookshot
+  take phase_crouch_crying
+  give phase_stunned_crying
+  give 4 timer_stunned_crying
+
+verb hit_hookshot__stunned_crying "Hookshot hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 3020
+  take swing_hookshot
+  take phase_stunned_crying
+  give phase_damaged_crying
+
+verb hit_hookshot__idle_silent "Hookshot hits (Silent Redead stands still)" by world priority 80 in hits at 3140 3020
+  take swing_hookshot
+  take phase_idle_silent
+  give phase_stunned_silent
+  give 4 timer_stunned_silent
+
+verb hit_hookshot__attempt_silent "Hookshot hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 3090
+  take swing_hookshot
+  take phase_attempt_silent
+  give phase_stunned_silent
+  give 4 timer_stunned_silent
+
+verb hit_hookshot__walk_silent "Hookshot hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 3090
+  take swing_hookshot
+  take phase_walk_silent
+  give phase_stunned_silent
+  give 4 timer_stunned_silent
+
+verb hit_hookshot__walk_cd_silent "Hookshot hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 3160
+  take swing_hookshot
+  take phase_walk_cd_silent
+  give phase_stunned_silent
+  give 4 timer_stunned_silent
+
+verb hit_hookshot__released_silent "Hookshot hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 3160
+  take swing_hookshot
+  take phase_released_silent
+  give phase_stunned_silent
+  give 4 timer_stunned_silent
+
+verb hit_hookshot__home_silent "Hookshot hits (Silent Redead walks home)" by world priority 80 in hits at 3000 3230
+  take swing_hookshot
+  take phase_home_silent
+  give phase_stunned_silent
+  give 4 timer_stunned_silent
+
+verb hit_hookshot__stunned_silent "Hookshot hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 3230
+  take swing_hookshot
+  take phase_stunned_silent
+  give phase_damaged_silent
+
+verb unseen_hookshot "Hookshot misses: the enemy is unseen" by world priority 81 in hits at 3000 3300
+  take swing_hookshot
+  need enemy_unseen
+  unless lens_on
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3000 3370
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__idle_plain "Kokiri Sword slash hits (Redead stands still)" by world priority 80 in hits at 3140 3370
+  take swing_slash_kokiri
+  take phase_idle_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_slash_kokiri__attempt_plain "Kokiri Sword slash hits (Redead turns to face Link)" by world priority 80 in hits at 3000 3440
+  take swing_slash_kokiri
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_slash_kokiri__walk_plain "Kokiri Sword slash hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 3440
+  take swing_slash_kokiri
+  take phase_walk_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_slash_kokiri__walk_cd_plain "Kokiri Sword slash hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 3510
+  take swing_slash_kokiri
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_slash_kokiri__released_plain "Kokiri Sword slash hits (Redead lets go of Link)" by world priority 80 in hits at 3140 3510
+  take swing_slash_kokiri
+  take phase_released_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_slash_kokiri__home_plain "Kokiri Sword slash hits (Redead walks home)" by world priority 80 in hits at 3000 3580
+  take swing_slash_kokiri
+  take phase_home_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_slash_kokiri__stunned_plain "Kokiri Sword slash hits (Redead is stunned)" by world priority 80 in hits at 3140 3580
+  take swing_slash_kokiri
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_slash_kokiri__idle_crying "Kokiri Sword slash hits (Crying Redead stands still)" by world priority 80 in hits at 3000 3650
+  take swing_slash_kokiri
+  take phase_idle_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__stand_up_crying "Kokiri Sword slash hits (Crying Redead stands up)" by world priority 80 in hits at 3140 3650
+  take swing_slash_kokiri
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__attempt_crying "Kokiri Sword slash hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 3720
+  take swing_slash_kokiri
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__walk_crying "Kokiri Sword slash hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 3720
+  take swing_slash_kokiri
+  take phase_walk_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__walk_cd_crying "Kokiri Sword slash hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 3790
+  take swing_slash_kokiri
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__released_crying "Kokiri Sword slash hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 3790
+  take swing_slash_kokiri
+  take phase_released_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__home_crying "Kokiri Sword slash hits (Crying Redead walks home)" by world priority 80 in hits at 3000 3860
+  take swing_slash_kokiri
+  take phase_home_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__crouch_crying "Kokiri Sword slash hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 3860
+  take swing_slash_kokiri
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__stunned_crying "Kokiri Sword slash hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 3930
+  take swing_slash_kokiri
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_slash_kokiri__idle_silent "Kokiri Sword slash hits (Silent Redead stands still)" by world priority 80 in hits at 3140 3930
+  take swing_slash_kokiri
+  take phase_idle_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_slash_kokiri__attempt_silent "Kokiri Sword slash hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 4000
+  take swing_slash_kokiri
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_slash_kokiri__walk_silent "Kokiri Sword slash hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 4000
+  take swing_slash_kokiri
+  take phase_walk_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_slash_kokiri__walk_cd_silent "Kokiri Sword slash hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 4070
+  take swing_slash_kokiri
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_slash_kokiri__released_silent "Kokiri Sword slash hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 4070
+  take swing_slash_kokiri
+  take phase_released_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_slash_kokiri__home_silent "Kokiri Sword slash hits (Silent Redead walks home)" by world priority 80 in hits at 3000 4140
+  take swing_slash_kokiri
+  take phase_home_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_slash_kokiri__stunned_silent "Kokiri Sword slash hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 4140
+  take swing_slash_kokiri
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb unseen_slash_kokiri "Kokiri Sword slash misses: the enemy is unseen" by world priority 81 in hits at 3000 4210
+  take swing_slash_kokiri
+  need enemy_unseen
+  unless lens_on
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3000 4280
+  take swing_slash_master
+
+verb hit_slash_master__idle_plain "Master Sword slash hits (Redead stands still)" by world priority 80 in hits at 3140 4280
+  take swing_slash_master
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_slash_master__attempt_plain "Master Sword slash hits (Redead turns to face Link)" by world priority 80 in hits at 3000 4350
+  take swing_slash_master
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_slash_master__walk_plain "Master Sword slash hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 4350
+  take swing_slash_master
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_slash_master__walk_cd_plain "Master Sword slash hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 4420
+  take swing_slash_master
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_slash_master__released_plain "Master Sword slash hits (Redead lets go of Link)" by world priority 80 in hits at 3140 4420
+  take swing_slash_master
+  take phase_released_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_slash_master__home_plain "Master Sword slash hits (Redead walks home)" by world priority 80 in hits at 3000 4490
+  take swing_slash_master
+  take phase_home_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_slash_master__stunned_plain "Master Sword slash hits (Redead is stunned)" by world priority 80 in hits at 3140 4490
+  take swing_slash_master
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_slash_master__idle_crying "Master Sword slash hits (Crying Redead stands still)" by world priority 80 in hits at 3000 4560
+  take swing_slash_master
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__stand_up_crying "Master Sword slash hits (Crying Redead stands up)" by world priority 80 in hits at 3140 4560
+  take swing_slash_master
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__attempt_crying "Master Sword slash hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 4630
+  take swing_slash_master
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__walk_crying "Master Sword slash hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 4630
+  take swing_slash_master
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__walk_cd_crying "Master Sword slash hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 4700
+  take swing_slash_master
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__released_crying "Master Sword slash hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 4700
+  take swing_slash_master
+  take phase_released_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__home_crying "Master Sword slash hits (Crying Redead walks home)" by world priority 80 in hits at 3000 4770
+  take swing_slash_master
+  take phase_home_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__crouch_crying "Master Sword slash hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 4770
+  take swing_slash_master
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__stunned_crying "Master Sword slash hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 4840
+  take swing_slash_master
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_slash_master__idle_silent "Master Sword slash hits (Silent Redead stands still)" by world priority 80 in hits at 3140 4840
+  take swing_slash_master
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_slash_master__attempt_silent "Master Sword slash hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 4910
+  take swing_slash_master
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_slash_master__walk_silent "Master Sword slash hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 4910
+  take swing_slash_master
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_slash_master__walk_cd_silent "Master Sword slash hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 4980
+  take swing_slash_master
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_slash_master__released_silent "Master Sword slash hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 4980
+  take swing_slash_master
+  take phase_released_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_slash_master__home_silent "Master Sword slash hits (Silent Redead walks home)" by world priority 80 in hits at 3000 5050
+  take swing_slash_master
+  take phase_home_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_slash_master__stunned_silent "Master Sword slash hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 5050
+  take swing_slash_master
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb unseen_slash_master "Master Sword slash misses: the enemy is unseen" by world priority 81 in hits at 3000 5120
+  take swing_slash_master
+  need enemy_unseen
+  unless lens_on
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3000 5190
+  take swing_slash_giant
+
+verb hit_slash_giant__idle_plain "Two-handed sword slash hits (Redead stands still)" by world priority 80 in hits at 3140 5190
+  take swing_slash_giant
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_slash_giant__attempt_plain "Two-handed sword slash hits (Redead turns to face Link)" by world priority 80 in hits at 3000 5260
+  take swing_slash_giant
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_slash_giant__walk_plain "Two-handed sword slash hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 5260
+  take swing_slash_giant
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_slash_giant__walk_cd_plain "Two-handed sword slash hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 5330
+  take swing_slash_giant
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_slash_giant__released_plain "Two-handed sword slash hits (Redead lets go of Link)" by world priority 80 in hits at 3140 5330
+  take swing_slash_giant
+  take phase_released_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_slash_giant__home_plain "Two-handed sword slash hits (Redead walks home)" by world priority 80 in hits at 3000 5400
+  take swing_slash_giant
+  take phase_home_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_slash_giant__stunned_plain "Two-handed sword slash hits (Redead is stunned)" by world priority 80 in hits at 3140 5400
+  take swing_slash_giant
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_slash_giant__idle_crying "Two-handed sword slash hits (Crying Redead stands still)" by world priority 80 in hits at 3000 5470
+  take swing_slash_giant
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__stand_up_crying "Two-handed sword slash hits (Crying Redead stands up)" by world priority 80 in hits at 3140 5470
+  take swing_slash_giant
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__attempt_crying "Two-handed sword slash hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 5540
+  take swing_slash_giant
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__walk_crying "Two-handed sword slash hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 5540
+  take swing_slash_giant
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__walk_cd_crying "Two-handed sword slash hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 5610
+  take swing_slash_giant
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__released_crying "Two-handed sword slash hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 5610
+  take swing_slash_giant
+  take phase_released_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__home_crying "Two-handed sword slash hits (Crying Redead walks home)" by world priority 80 in hits at 3000 5680
+  take swing_slash_giant
+  take phase_home_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__crouch_crying "Two-handed sword slash hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 5680
+  take swing_slash_giant
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__stunned_crying "Two-handed sword slash hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 5750
+  take swing_slash_giant
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_slash_giant__idle_silent "Two-handed sword slash hits (Silent Redead stands still)" by world priority 80 in hits at 3140 5750
+  take swing_slash_giant
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_slash_giant__attempt_silent "Two-handed sword slash hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 5820
+  take swing_slash_giant
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_slash_giant__walk_silent "Two-handed sword slash hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 5820
+  take swing_slash_giant
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_slash_giant__walk_cd_silent "Two-handed sword slash hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 5890
+  take swing_slash_giant
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_slash_giant__released_silent "Two-handed sword slash hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 5890
+  take swing_slash_giant
+  take phase_released_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_slash_giant__home_silent "Two-handed sword slash hits (Silent Redead walks home)" by world priority 80 in hits at 3000 5960
+  take swing_slash_giant
+  take phase_home_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_slash_giant__stunned_silent "Two-handed sword slash hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 5960
+  take swing_slash_giant
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb unseen_slash_giant "Two-handed sword slash misses: the enemy is unseen" by world priority 81 in hits at 3000 6030
+  take swing_slash_giant
+  need enemy_unseen
+  unless lens_on
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3000 6100
+  take swing_arrow_fire
+
+verb unseen_arrow_fire "Fire arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 6100
+  take swing_arrow_fire
+  need enemy_unseen
+  unless lens_on
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3140 6170
+  take swing_arrow_ice
+
+verb unseen_arrow_ice "Ice arrow misses: the enemy is unseen" by world priority 81 in hits at 3000 6240
+  take swing_arrow_ice
+  need enemy_unseen
+  unless lens_on
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3000 6310
+  take swing_arrow_light
+
+verb unseen_arrow_light "Light arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 6310
+  take swing_arrow_light
+  need enemy_unseen
+  unless lens_on
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 6380
+  take swing_magic_fire
+
+verb hit_magic_fire__idle_plain "Din's Fire hits (Redead stands still)" by world priority 80 in hits at 3000 6450
+  take swing_magic_fire
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_magic_fire__attempt_plain "Din's Fire hits (Redead turns to face Link)" by world priority 80 in hits at 3140 6450
+  take swing_magic_fire
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_magic_fire__walk_plain "Din's Fire hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 6520
+  take swing_magic_fire
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_magic_fire__walk_cd_plain "Din's Fire hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 6520
+  take swing_magic_fire
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_magic_fire__released_plain "Din's Fire hits (Redead lets go of Link)" by world priority 80 in hits at 3000 6590
+  take swing_magic_fire
+  take phase_released_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_magic_fire__home_plain "Din's Fire hits (Redead walks home)" by world priority 80 in hits at 3140 6590
+  take swing_magic_fire
+  take phase_home_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_magic_fire__stunned_plain "Din's Fire hits (Redead is stunned)" by world priority 80 in hits at 3000 6660
+  take swing_magic_fire
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_magic_fire__idle_crying "Din's Fire hits (Crying Redead stands still)" by world priority 80 in hits at 3140 6660
+  take swing_magic_fire
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__stand_up_crying "Din's Fire hits (Crying Redead stands up)" by world priority 80 in hits at 3000 6730
+  take swing_magic_fire
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__attempt_crying "Din's Fire hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3140 6730
+  take swing_magic_fire
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__walk_crying "Din's Fire hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 6800
+  take swing_magic_fire
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__walk_cd_crying "Din's Fire hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 6800
+  take swing_magic_fire
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__released_crying "Din's Fire hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3000 6870
+  take swing_magic_fire
+  take phase_released_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__home_crying "Din's Fire hits (Crying Redead walks home)" by world priority 80 in hits at 3140 6870
+  take swing_magic_fire
+  take phase_home_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__crouch_crying "Din's Fire hits (Crying Redead crouches down)" by world priority 80 in hits at 3000 6940
+  take swing_magic_fire
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__stunned_crying "Din's Fire hits (Crying Redead is stunned)" by world priority 80 in hits at 3140 6940
+  take swing_magic_fire
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_magic_fire__idle_silent "Din's Fire hits (Silent Redead stands still)" by world priority 80 in hits at 3000 7010
+  take swing_magic_fire
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_magic_fire__attempt_silent "Din's Fire hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3140 7010
+  take swing_magic_fire
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_magic_fire__walk_silent "Din's Fire hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 7080
+  take swing_magic_fire
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_magic_fire__walk_cd_silent "Din's Fire hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 7080
+  take swing_magic_fire
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_magic_fire__released_silent "Din's Fire hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3000 7150
+  take swing_magic_fire
+  take phase_released_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_magic_fire__home_silent "Din's Fire hits (Silent Redead walks home)" by world priority 80 in hits at 3140 7150
+  take swing_magic_fire
+  take phase_home_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_magic_fire__stunned_silent "Din's Fire hits (Silent Redead is stunned)" by world priority 80 in hits at 3000 7220
+  take swing_magic_fire
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 7220
+  take swing_magic_fire
+  need range_far
+
+verb unseen_magic_fire "Din's Fire misses: the enemy is unseen" by world priority 81 in hits at 3000 7290
+  take swing_magic_fire
+  need enemy_unseen
+  unless lens_on
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 7360
+  take swing_shield
+
+verb unseen_shield "Shield misses: the enemy is unseen" by world priority 81 in hits at 3140 7360
+  take swing_shield
+  need enemy_unseen
+  unless lens_on
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3140 7430
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__idle_plain "Kokiri spin attack hits (Redead stands still)" by world priority 80 in hits at 3000 7500
+  take swing_spin_kokiri
+  take phase_idle_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_spin_kokiri__attempt_plain "Kokiri spin attack hits (Redead turns to face Link)" by world priority 80 in hits at 3140 7500
+  take swing_spin_kokiri
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_spin_kokiri__walk_plain "Kokiri spin attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 7570
+  take swing_spin_kokiri
+  take phase_walk_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_spin_kokiri__walk_cd_plain "Kokiri spin attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 7570
+  take swing_spin_kokiri
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_spin_kokiri__released_plain "Kokiri spin attack hits (Redead lets go of Link)" by world priority 80 in hits at 3000 7640
+  take swing_spin_kokiri
+  take phase_released_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_spin_kokiri__home_plain "Kokiri spin attack hits (Redead walks home)" by world priority 80 in hits at 3140 7640
+  take swing_spin_kokiri
+  take phase_home_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_spin_kokiri__stunned_plain "Kokiri spin attack hits (Redead is stunned)" by world priority 80 in hits at 3000 7710
+  take swing_spin_kokiri
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give dmg_body
+
+verb hit_spin_kokiri__idle_crying "Kokiri spin attack hits (Crying Redead stands still)" by world priority 80 in hits at 3140 7710
+  take swing_spin_kokiri
+  take phase_idle_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__stand_up_crying "Kokiri spin attack hits (Crying Redead stands up)" by world priority 80 in hits at 3000 7780
+  take swing_spin_kokiri
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__attempt_crying "Kokiri spin attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3140 7780
+  take swing_spin_kokiri
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__walk_crying "Kokiri spin attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 7850
+  take swing_spin_kokiri
+  take phase_walk_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__walk_cd_crying "Kokiri spin attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 7850
+  take swing_spin_kokiri
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__released_crying "Kokiri spin attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3000 7920
+  take swing_spin_kokiri
+  take phase_released_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__home_crying "Kokiri spin attack hits (Crying Redead walks home)" by world priority 80 in hits at 3140 7920
+  take swing_spin_kokiri
+  take phase_home_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__crouch_crying "Kokiri spin attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3000 7990
+  take swing_spin_kokiri
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__stunned_crying "Kokiri spin attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3140 7990
+  take swing_spin_kokiri
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give dmg_body
+
+verb hit_spin_kokiri__idle_silent "Kokiri spin attack hits (Silent Redead stands still)" by world priority 80 in hits at 3000 8060
+  take swing_spin_kokiri
+  take phase_idle_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_spin_kokiri__attempt_silent "Kokiri spin attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3140 8060
+  take swing_spin_kokiri
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_spin_kokiri__walk_silent "Kokiri spin attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 8130
+  take swing_spin_kokiri
+  take phase_walk_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_spin_kokiri__walk_cd_silent "Kokiri spin attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 8130
+  take swing_spin_kokiri
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_spin_kokiri__released_silent "Kokiri spin attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3000 8200
+  take swing_spin_kokiri
+  take phase_released_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_spin_kokiri__home_silent "Kokiri spin attack hits (Silent Redead walks home)" by world priority 80 in hits at 3140 8200
+  take swing_spin_kokiri
+  take phase_home_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb hit_spin_kokiri__stunned_silent "Kokiri spin attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3000 8270
+  take swing_spin_kokiri
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give dmg_body
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 8270
+  take swing_spin_kokiri
+  need range_far
+
+verb unseen_spin_kokiri "Kokiri spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 8340
+  take swing_spin_kokiri
+  need enemy_unseen
+  unless lens_on
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3000 8410
+  take swing_spin_giant
+
+verb hit_spin_giant__idle_plain "Two-handed spin attack hits (Redead stands still)" by world priority 80 in hits at 3140 8410
+  take swing_spin_giant
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_spin_giant__attempt_plain "Two-handed spin attack hits (Redead turns to face Link)" by world priority 80 in hits at 3000 8480
+  take swing_spin_giant
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_spin_giant__walk_plain "Two-handed spin attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 8480
+  take swing_spin_giant
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_spin_giant__walk_cd_plain "Two-handed spin attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 8550
+  take swing_spin_giant
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_spin_giant__released_plain "Two-handed spin attack hits (Redead lets go of Link)" by world priority 80 in hits at 3140 8550
+  take swing_spin_giant
+  take phase_released_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_spin_giant__home_plain "Two-handed spin attack hits (Redead walks home)" by world priority 80 in hits at 3000 8620
+  take swing_spin_giant
+  take phase_home_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_spin_giant__stunned_plain "Two-handed spin attack hits (Redead is stunned)" by world priority 80 in hits at 3140 8620
+  take swing_spin_giant
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_spin_giant__idle_crying "Two-handed spin attack hits (Crying Redead stands still)" by world priority 80 in hits at 3000 8690
+  take swing_spin_giant
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__stand_up_crying "Two-handed spin attack hits (Crying Redead stands up)" by world priority 80 in hits at 3140 8690
+  take swing_spin_giant
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__attempt_crying "Two-handed spin attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 8760
+  take swing_spin_giant
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__walk_crying "Two-handed spin attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 8760
+  take swing_spin_giant
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__walk_cd_crying "Two-handed spin attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 8830
+  take swing_spin_giant
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__released_crying "Two-handed spin attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 8830
+  take swing_spin_giant
+  take phase_released_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__home_crying "Two-handed spin attack hits (Crying Redead walks home)" by world priority 80 in hits at 3000 8900
+  take swing_spin_giant
+  take phase_home_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__crouch_crying "Two-handed spin attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 8900
+  take swing_spin_giant
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__stunned_crying "Two-handed spin attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 8970
+  take swing_spin_giant
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_spin_giant__idle_silent "Two-handed spin attack hits (Silent Redead stands still)" by world priority 80 in hits at 3140 8970
+  take swing_spin_giant
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_spin_giant__attempt_silent "Two-handed spin attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 9040
+  take swing_spin_giant
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_spin_giant__walk_silent "Two-handed spin attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 9040
+  take swing_spin_giant
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_spin_giant__walk_cd_silent "Two-handed spin attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 9110
+  take swing_spin_giant
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_spin_giant__released_silent "Two-handed spin attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 9110
+  take swing_spin_giant
+  take phase_released_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_spin_giant__home_silent "Two-handed spin attack hits (Silent Redead walks home)" by world priority 80 in hits at 3000 9180
+  take swing_spin_giant
+  take phase_home_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_spin_giant__stunned_silent "Two-handed spin attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 9180
+  take swing_spin_giant
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 9250
+  take swing_spin_giant
+  need range_far
+
+verb unseen_spin_giant "Two-handed spin attack misses: the enemy is unseen" by world priority 81 in hits at 3140 9250
+  take swing_spin_giant
+  need enemy_unseen
+  unless lens_on
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3140 9320
+  take swing_spin_master
+
+verb hit_spin_master__idle_plain "Master Sword spin attack hits (Redead stands still)" by world priority 80 in hits at 3000 9390
+  take swing_spin_master
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_spin_master__attempt_plain "Master Sword spin attack hits (Redead turns to face Link)" by world priority 80 in hits at 3140 9390
+  take swing_spin_master
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_spin_master__walk_plain "Master Sword spin attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 9460
+  take swing_spin_master
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_spin_master__walk_cd_plain "Master Sword spin attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 9460
+  take swing_spin_master
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_spin_master__released_plain "Master Sword spin attack hits (Redead lets go of Link)" by world priority 80 in hits at 3000 9530
+  take swing_spin_master
+  take phase_released_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_spin_master__home_plain "Master Sword spin attack hits (Redead walks home)" by world priority 80 in hits at 3140 9530
+  take swing_spin_master
+  take phase_home_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_spin_master__stunned_plain "Master Sword spin attack hits (Redead is stunned)" by world priority 80 in hits at 3000 9600
+  take swing_spin_master
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_spin_master__idle_crying "Master Sword spin attack hits (Crying Redead stands still)" by world priority 80 in hits at 3140 9600
+  take swing_spin_master
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__stand_up_crying "Master Sword spin attack hits (Crying Redead stands up)" by world priority 80 in hits at 3000 9670
+  take swing_spin_master
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__attempt_crying "Master Sword spin attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3140 9670
+  take swing_spin_master
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__walk_crying "Master Sword spin attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 9740
+  take swing_spin_master
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__walk_cd_crying "Master Sword spin attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 9740
+  take swing_spin_master
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__released_crying "Master Sword spin attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3000 9810
+  take swing_spin_master
+  take phase_released_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__home_crying "Master Sword spin attack hits (Crying Redead walks home)" by world priority 80 in hits at 3140 9810
+  take swing_spin_master
+  take phase_home_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__crouch_crying "Master Sword spin attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3000 9880
+  take swing_spin_master
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__stunned_crying "Master Sword spin attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3140 9880
+  take swing_spin_master
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_spin_master__idle_silent "Master Sword spin attack hits (Silent Redead stands still)" by world priority 80 in hits at 3000 9950
+  take swing_spin_master
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_spin_master__attempt_silent "Master Sword spin attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3140 9950
+  take swing_spin_master
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_spin_master__walk_silent "Master Sword spin attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 10020
+  take swing_spin_master
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_spin_master__walk_cd_silent "Master Sword spin attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 10020
+  take swing_spin_master
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_spin_master__released_silent "Master Sword spin attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3000 10090
+  take swing_spin_master
+  take phase_released_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_spin_master__home_silent "Master Sword spin attack hits (Silent Redead walks home)" by world priority 80 in hits at 3140 10090
+  take swing_spin_master
+  take phase_home_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_spin_master__stunned_silent "Master Sword spin attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3000 10160
+  take swing_spin_master
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 10160
+  take swing_spin_master
+  need range_far
+
+verb unseen_spin_master "Master Sword spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 10230
+  take swing_spin_master
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 10300
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__idle_plain "Kokiri jump attack hits (Redead stands still)" by world priority 80 in hits at 3140 10300
+  take swing_jump_kokiri
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri__attempt_plain "Kokiri jump attack hits (Redead turns to face Link)" by world priority 80 in hits at 3000 10370
+  take swing_jump_kokiri
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri__walk_plain "Kokiri jump attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 10370
+  take swing_jump_kokiri
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri__walk_cd_plain "Kokiri jump attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 10440
+  take swing_jump_kokiri
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri__released_plain "Kokiri jump attack hits (Redead lets go of Link)" by world priority 80 in hits at 3140 10440
+  take swing_jump_kokiri
+  take phase_released_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri__home_plain "Kokiri jump attack hits (Redead walks home)" by world priority 80 in hits at 3000 10510
+  take swing_jump_kokiri
+  take phase_home_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_plain "Kokiri jump attack hits (Redead is stunned)" by world priority 80 in hits at 3140 10510
+  take swing_jump_kokiri
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri__idle_crying "Kokiri jump attack hits (Crying Redead stands still)" by world priority 80 in hits at 3000 10580
+  take swing_jump_kokiri
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stand_up_crying "Kokiri jump attack hits (Crying Redead stands up)" by world priority 80 in hits at 3140 10580
+  take swing_jump_kokiri
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__attempt_crying "Kokiri jump attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 10650
+  take swing_jump_kokiri
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__walk_crying "Kokiri jump attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 10650
+  take swing_jump_kokiri
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__walk_cd_crying "Kokiri jump attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 10720
+  take swing_jump_kokiri
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__released_crying "Kokiri jump attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 10720
+  take swing_jump_kokiri
+  take phase_released_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__home_crying "Kokiri jump attack hits (Crying Redead walks home)" by world priority 80 in hits at 3000 10790
+  take swing_jump_kokiri
+  take phase_home_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__crouch_crying "Kokiri jump attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 10790
+  take swing_jump_kokiri
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_crying "Kokiri jump attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 10860
+  take swing_jump_kokiri
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri__idle_silent "Kokiri jump attack hits (Silent Redead stands still)" by world priority 80 in hits at 3140 10860
+  take swing_jump_kokiri
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__attempt_silent "Kokiri jump attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 10930
+  take swing_jump_kokiri
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__walk_silent "Kokiri jump attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 10930
+  take swing_jump_kokiri
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__walk_cd_silent "Kokiri jump attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 11000
+  take swing_jump_kokiri
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__released_silent "Kokiri jump attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 11000
+  take swing_jump_kokiri
+  take phase_released_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__home_silent "Kokiri jump attack hits (Silent Redead walks home)" by world priority 80 in hits at 3000 11070
+  take swing_jump_kokiri
+  take phase_home_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_silent "Kokiri jump attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 11070
+  take swing_jump_kokiri
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb unseen_jump_kokiri "Kokiri jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 11140
+  take swing_jump_kokiri
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 11210
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__idle_plain "Kokiri jump attack hits (Redead stands still)" by world priority 80 in hits at 3140 11210
+  take swing_jump_kokiri_self
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__attempt_plain "Kokiri jump attack hits (Redead turns to face Link)" by world priority 80 in hits at 3000 11280
+  take swing_jump_kokiri_self
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__walk_plain "Kokiri jump attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 11280
+  take swing_jump_kokiri_self
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__walk_cd_plain "Kokiri jump attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 11350
+  take swing_jump_kokiri_self
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__released_plain "Kokiri jump attack hits (Redead lets go of Link)" by world priority 80 in hits at 3140 11350
+  take swing_jump_kokiri_self
+  take phase_released_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__home_plain "Kokiri jump attack hits (Redead walks home)" by world priority 80 in hits at 3000 11420
+  take swing_jump_kokiri_self
+  take phase_home_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_plain "Kokiri jump attack hits (Redead is stunned)" by world priority 80 in hits at 3140 11420
+  take swing_jump_kokiri_self
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__idle_crying "Kokiri jump attack hits (Crying Redead stands still)" by world priority 80 in hits at 3000 11490
+  take swing_jump_kokiri_self
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stand_up_crying "Kokiri jump attack hits (Crying Redead stands up)" by world priority 80 in hits at 3140 11490
+  take swing_jump_kokiri_self
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__attempt_crying "Kokiri jump attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 11560
+  take swing_jump_kokiri_self
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__walk_crying "Kokiri jump attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 11560
+  take swing_jump_kokiri_self
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__walk_cd_crying "Kokiri jump attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 11630
+  take swing_jump_kokiri_self
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__released_crying "Kokiri jump attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 11630
+  take swing_jump_kokiri_self
+  take phase_released_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__home_crying "Kokiri jump attack hits (Crying Redead walks home)" by world priority 80 in hits at 3000 11700
+  take swing_jump_kokiri_self
+  take phase_home_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__crouch_crying "Kokiri jump attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 11700
+  take swing_jump_kokiri_self
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_crying "Kokiri jump attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 11770
+  take swing_jump_kokiri_self
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__idle_silent "Kokiri jump attack hits (Silent Redead stands still)" by world priority 80 in hits at 3140 11770
+  take swing_jump_kokiri_self
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__attempt_silent "Kokiri jump attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 11840
+  take swing_jump_kokiri_self
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__walk_silent "Kokiri jump attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 11840
+  take swing_jump_kokiri_self
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__walk_cd_silent "Kokiri jump attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 11910
+  take swing_jump_kokiri_self
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__released_silent "Kokiri jump attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 11910
+  take swing_jump_kokiri_self
+  take phase_released_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__home_silent "Kokiri jump attack hits (Silent Redead walks home)" by world priority 80 in hits at 3000 11980
+  take swing_jump_kokiri_self
+  take phase_home_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_silent "Kokiri jump attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 11980
+  take swing_jump_kokiri_self
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 12050
+  take swing_jump_kokiri_self
+  need range_far
+
+verb unseen_jump_kokiri_self "Kokiri jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 12050
+  take swing_jump_kokiri_self
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3140 12120
+  take swing_jump_giant
+
+verb hit_jump_giant__idle_plain "Two-handed jump attack hits (Redead stands still)" by world priority 80 in hits at 3000 12190
+  take swing_jump_giant
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant__attempt_plain "Two-handed jump attack hits (Redead turns to face Link)" by world priority 80 in hits at 3140 12190
+  take swing_jump_giant
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant__walk_plain "Two-handed jump attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 12260
+  take swing_jump_giant
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant__walk_cd_plain "Two-handed jump attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 12260
+  take swing_jump_giant
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant__released_plain "Two-handed jump attack hits (Redead lets go of Link)" by world priority 80 in hits at 3000 12330
+  take swing_jump_giant
+  take phase_released_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant__home_plain "Two-handed jump attack hits (Redead walks home)" by world priority 80 in hits at 3140 12330
+  take swing_jump_giant
+  take phase_home_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant__stunned_plain "Two-handed jump attack hits (Redead is stunned)" by world priority 80 in hits at 3000 12400
+  take swing_jump_giant
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant__idle_crying "Two-handed jump attack hits (Crying Redead stands still)" by world priority 80 in hits at 3140 12400
+  take swing_jump_giant
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__stand_up_crying "Two-handed jump attack hits (Crying Redead stands up)" by world priority 80 in hits at 3000 12470
+  take swing_jump_giant
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__attempt_crying "Two-handed jump attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3140 12470
+  take swing_jump_giant
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__walk_crying "Two-handed jump attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 12540
+  take swing_jump_giant
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__walk_cd_crying "Two-handed jump attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 12540
+  take swing_jump_giant
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__released_crying "Two-handed jump attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3000 12610
+  take swing_jump_giant
+  take phase_released_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__home_crying "Two-handed jump attack hits (Crying Redead walks home)" by world priority 80 in hits at 3140 12610
+  take swing_jump_giant
+  take phase_home_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__crouch_crying "Two-handed jump attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3000 12680
+  take swing_jump_giant
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__stunned_crying "Two-handed jump attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3140 12680
+  take swing_jump_giant
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant__idle_silent "Two-handed jump attack hits (Silent Redead stands still)" by world priority 80 in hits at 3000 12750
+  take swing_jump_giant
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant__attempt_silent "Two-handed jump attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3140 12750
+  take swing_jump_giant
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant__walk_silent "Two-handed jump attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 12820
+  take swing_jump_giant
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant__walk_cd_silent "Two-handed jump attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 12820
+  take swing_jump_giant
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant__released_silent "Two-handed jump attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3000 12890
+  take swing_jump_giant
+  take phase_released_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant__home_silent "Two-handed jump attack hits (Silent Redead walks home)" by world priority 80 in hits at 3140 12890
+  take swing_jump_giant
+  take phase_home_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant__stunned_silent "Two-handed jump attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3000 12960
+  take swing_jump_giant
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb unseen_jump_giant "Two-handed jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 12960
+  take swing_jump_giant
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3140 13030
+  take swing_jump_giant_self
+
+verb hit_jump_giant_self__idle_plain "Two-handed jump attack hits (Redead stands still)" by world priority 80 in hits at 3000 13100
+  take swing_jump_giant_self
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant_self__attempt_plain "Two-handed jump attack hits (Redead turns to face Link)" by world priority 80 in hits at 3140 13100
+  take swing_jump_giant_self
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant_self__walk_plain "Two-handed jump attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 13170
+  take swing_jump_giant_self
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant_self__walk_cd_plain "Two-handed jump attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 13170
+  take swing_jump_giant_self
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant_self__released_plain "Two-handed jump attack hits (Redead lets go of Link)" by world priority 80 in hits at 3000 13240
+  take swing_jump_giant_self
+  take phase_released_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant_self__home_plain "Two-handed jump attack hits (Redead walks home)" by world priority 80 in hits at 3140 13240
+  take swing_jump_giant_self
+  take phase_home_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stunned_plain "Two-handed jump attack hits (Redead is stunned)" by world priority 80 in hits at 3000 13310
+  take swing_jump_giant_self
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 8 dmg_body
+
+verb hit_jump_giant_self__idle_crying "Two-handed jump attack hits (Crying Redead stands still)" by world priority 80 in hits at 3140 13310
+  take swing_jump_giant_self
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stand_up_crying "Two-handed jump attack hits (Crying Redead stands up)" by world priority 80 in hits at 3000 13380
+  take swing_jump_giant_self
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__attempt_crying "Two-handed jump attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3140 13380
+  take swing_jump_giant_self
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__walk_crying "Two-handed jump attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 13450
+  take swing_jump_giant_self
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__walk_cd_crying "Two-handed jump attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 13450
+  take swing_jump_giant_self
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__released_crying "Two-handed jump attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3000 13520
+  take swing_jump_giant_self
+  take phase_released_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__home_crying "Two-handed jump attack hits (Crying Redead walks home)" by world priority 80 in hits at 3140 13520
+  take swing_jump_giant_self
+  take phase_home_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__crouch_crying "Two-handed jump attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3000 13590
+  take swing_jump_giant_self
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stunned_crying "Two-handed jump attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3140 13590
+  take swing_jump_giant_self
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 8 dmg_body
+
+verb hit_jump_giant_self__idle_silent "Two-handed jump attack hits (Silent Redead stands still)" by world priority 80 in hits at 3000 13660
+  take swing_jump_giant_self
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant_self__attempt_silent "Two-handed jump attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3140 13660
+  take swing_jump_giant_self
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant_self__walk_silent "Two-handed jump attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 13730
+  take swing_jump_giant_self
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant_self__walk_cd_silent "Two-handed jump attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 13730
+  take swing_jump_giant_self
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant_self__released_silent "Two-handed jump attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3000 13800
+  take swing_jump_giant_self
+  take phase_released_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant_self__home_silent "Two-handed jump attack hits (Silent Redead walks home)" by world priority 80 in hits at 3140 13800
+  take swing_jump_giant_self
+  take phase_home_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stunned_silent "Two-handed jump attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3000 13870
+  take swing_jump_giant_self
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 8 dmg_body
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 13870
+  take swing_jump_giant_self
+  need range_far
+
+verb unseen_jump_giant_self "Two-handed jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 13940
+  take swing_jump_giant_self
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 14010
+  take swing_jump_master
+
+verb hit_jump_master__idle_plain "Master Sword jump attack hits (Redead stands still)" by world priority 80 in hits at 3140 14010
+  take swing_jump_master
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master__attempt_plain "Master Sword jump attack hits (Redead turns to face Link)" by world priority 80 in hits at 3000 14080
+  take swing_jump_master
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master__walk_plain "Master Sword jump attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 14080
+  take swing_jump_master
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master__walk_cd_plain "Master Sword jump attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 14150
+  take swing_jump_master
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master__released_plain "Master Sword jump attack hits (Redead lets go of Link)" by world priority 80 in hits at 3140 14150
+  take swing_jump_master
+  take phase_released_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master__home_plain "Master Sword jump attack hits (Redead walks home)" by world priority 80 in hits at 3000 14220
+  take swing_jump_master
+  take phase_home_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_plain "Master Sword jump attack hits (Redead is stunned)" by world priority 80 in hits at 3140 14220
+  take swing_jump_master
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master__idle_crying "Master Sword jump attack hits (Crying Redead stands still)" by world priority 80 in hits at 3000 14290
+  take swing_jump_master
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__stand_up_crying "Master Sword jump attack hits (Crying Redead stands up)" by world priority 80 in hits at 3140 14290
+  take swing_jump_master
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__attempt_crying "Master Sword jump attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 14360
+  take swing_jump_master
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__walk_crying "Master Sword jump attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 14360
+  take swing_jump_master
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__walk_cd_crying "Master Sword jump attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 14430
+  take swing_jump_master
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__released_crying "Master Sword jump attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 14430
+  take swing_jump_master
+  take phase_released_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__home_crying "Master Sword jump attack hits (Crying Redead walks home)" by world priority 80 in hits at 3000 14500
+  take swing_jump_master
+  take phase_home_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__crouch_crying "Master Sword jump attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 14500
+  take swing_jump_master
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_crying "Master Sword jump attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 14570
+  take swing_jump_master
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master__idle_silent "Master Sword jump attack hits (Silent Redead stands still)" by world priority 80 in hits at 3140 14570
+  take swing_jump_master
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master__attempt_silent "Master Sword jump attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 14640
+  take swing_jump_master
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master__walk_silent "Master Sword jump attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 14640
+  take swing_jump_master
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master__walk_cd_silent "Master Sword jump attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 14710
+  take swing_jump_master
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master__released_silent "Master Sword jump attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 14710
+  take swing_jump_master
+  take phase_released_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master__home_silent "Master Sword jump attack hits (Silent Redead walks home)" by world priority 80 in hits at 3000 14780
+  take swing_jump_master
+  take phase_home_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_silent "Master Sword jump attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 14780
+  take swing_jump_master
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb unseen_jump_master "Master Sword jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 14850
+  take swing_jump_master
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 14920
+  take swing_jump_master_self
+
+verb hit_jump_master_self__idle_plain "Master Sword jump attack hits (Redead stands still)" by world priority 80 in hits at 3140 14920
+  take swing_jump_master_self
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master_self__attempt_plain "Master Sword jump attack hits (Redead turns to face Link)" by world priority 80 in hits at 3000 14990
+  take swing_jump_master_self
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master_self__walk_plain "Master Sword jump attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 14990
+  take swing_jump_master_self
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master_self__walk_cd_plain "Master Sword jump attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 15060
+  take swing_jump_master_self
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master_self__released_plain "Master Sword jump attack hits (Redead lets go of Link)" by world priority 80 in hits at 3140 15060
+  take swing_jump_master_self
+  take phase_released_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master_self__home_plain "Master Sword jump attack hits (Redead walks home)" by world priority 80 in hits at 3000 15130
+  take swing_jump_master_self
+  take phase_home_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master_self__stunned_plain "Master Sword jump attack hits (Redead is stunned)" by world priority 80 in hits at 3140 15130
+  take swing_jump_master_self
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_jump_master_self__idle_crying "Master Sword jump attack hits (Crying Redead stands still)" by world priority 80 in hits at 3000 15200
+  take swing_jump_master_self
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__stand_up_crying "Master Sword jump attack hits (Crying Redead stands up)" by world priority 80 in hits at 3140 15200
+  take swing_jump_master_self
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__attempt_crying "Master Sword jump attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3000 15270
+  take swing_jump_master_self
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__walk_crying "Master Sword jump attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 15270
+  take swing_jump_master_self
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__walk_cd_crying "Master Sword jump attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 15340
+  take swing_jump_master_self
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__released_crying "Master Sword jump attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3140 15340
+  take swing_jump_master_self
+  take phase_released_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__home_crying "Master Sword jump attack hits (Crying Redead walks home)" by world priority 80 in hits at 3000 15410
+  take swing_jump_master_self
+  take phase_home_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__crouch_crying "Master Sword jump attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3140 15410
+  take swing_jump_master_self
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__stunned_crying "Master Sword jump attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3000 15480
+  take swing_jump_master_self
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_jump_master_self__idle_silent "Master Sword jump attack hits (Silent Redead stands still)" by world priority 80 in hits at 3140 15480
+  take swing_jump_master_self
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master_self__attempt_silent "Master Sword jump attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3000 15550
+  take swing_jump_master_self
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master_self__walk_silent "Master Sword jump attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3140 15550
+  take swing_jump_master_self
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master_self__walk_cd_silent "Master Sword jump attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3000 15620
+  take swing_jump_master_self
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master_self__released_silent "Master Sword jump attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3140 15620
+  take swing_jump_master_self
+  take phase_released_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master_self__home_silent "Master Sword jump attack hits (Silent Redead walks home)" by world priority 80 in hits at 3000 15690
+  take swing_jump_master_self
+  take phase_home_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_jump_master_self__stunned_silent "Master Sword jump attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3140 15690
+  take swing_jump_master_self
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 15760
+  take swing_jump_master_self
+  need range_far
+
+verb unseen_jump_master_self "Master Sword jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 15760
+  take swing_jump_master_self
+  need enemy_unseen
+  unless lens_on
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3140 15830
+  take swing_hammer_jump
+
+verb hit_hammer_jump__idle_plain "Hammer jump attack hits (Redead stands still)" by world priority 80 in hits at 3000 15900
+  take swing_hammer_jump
+  take phase_idle_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_hammer_jump__attempt_plain "Hammer jump attack hits (Redead turns to face Link)" by world priority 80 in hits at 3140 15900
+  take swing_hammer_jump
+  take phase_attempt_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_hammer_jump__walk_plain "Hammer jump attack hits (Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 15970
+  take swing_hammer_jump
+  take phase_walk_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_hammer_jump__walk_cd_plain "Hammer jump attack hits (Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 15970
+  take swing_hammer_jump
+  take phase_walk_cd_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_hammer_jump__released_plain "Hammer jump attack hits (Redead lets go of Link)" by world priority 80 in hits at 3000 16040
+  take swing_hammer_jump
+  take phase_released_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_hammer_jump__home_plain "Hammer jump attack hits (Redead walks home)" by world priority 80 in hits at 3140 16040
+  take swing_hammer_jump
+  take phase_home_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned_plain "Hammer jump attack hits (Redead is stunned)" by world priority 80 in hits at 3000 16110
+  take swing_hammer_jump
+  take phase_stunned_plain
+  give phase_damaged_plain
+  give 4 dmg_body
+
+verb hit_hammer_jump__idle_crying "Hammer jump attack hits (Crying Redead stands still)" by world priority 80 in hits at 3140 16110
+  take swing_hammer_jump
+  take phase_idle_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__stand_up_crying "Hammer jump attack hits (Crying Redead stands up)" by world priority 80 in hits at 3000 16180
+  take swing_hammer_jump
+  take phase_stand_up_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__attempt_crying "Hammer jump attack hits (Crying Redead turns to face Link)" by world priority 80 in hits at 3140 16180
+  take swing_hammer_jump
+  take phase_attempt_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__walk_crying "Hammer jump attack hits (Crying Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 16250
+  take swing_hammer_jump
+  take phase_walk_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__walk_cd_crying "Hammer jump attack hits (Crying Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 16250
+  take swing_hammer_jump
+  take phase_walk_cd_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__released_crying "Hammer jump attack hits (Crying Redead lets go of Link)" by world priority 80 in hits at 3000 16320
+  take swing_hammer_jump
+  take phase_released_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__home_crying "Hammer jump attack hits (Crying Redead walks home)" by world priority 80 in hits at 3140 16320
+  take swing_hammer_jump
+  take phase_home_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__crouch_crying "Hammer jump attack hits (Crying Redead crouches down)" by world priority 80 in hits at 3000 16390
+  take swing_hammer_jump
+  take phase_crouch_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned_crying "Hammer jump attack hits (Crying Redead is stunned)" by world priority 80 in hits at 3140 16390
+  take swing_hammer_jump
+  take phase_stunned_crying
+  give phase_damaged_crying
+  give 4 dmg_body
+
+verb hit_hammer_jump__idle_silent "Hammer jump attack hits (Silent Redead stands still)" by world priority 80 in hits at 3000 16460
+  take swing_hammer_jump
+  take phase_idle_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_hammer_jump__attempt_silent "Hammer jump attack hits (Silent Redead turns to face Link)" by world priority 80 in hits at 3140 16460
+  take swing_hammer_jump
+  take phase_attempt_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_hammer_jump__walk_silent "Hammer jump attack hits (Silent Redead shuffles toward Link, ready to scream)" by world priority 80 in hits at 3000 16530
+  take swing_hammer_jump
+  take phase_walk_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_hammer_jump__walk_cd_silent "Hammer jump attack hits (Silent Redead shuffles toward Link after screaming)" by world priority 80 in hits at 3140 16530
+  take swing_hammer_jump
+  take phase_walk_cd_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_hammer_jump__released_silent "Hammer jump attack hits (Silent Redead lets go of Link)" by world priority 80 in hits at 3000 16600
+  take swing_hammer_jump
+  take phase_released_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_hammer_jump__home_silent "Hammer jump attack hits (Silent Redead walks home)" by world priority 80 in hits at 3140 16600
+  take swing_hammer_jump
+  take phase_home_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned_silent "Hammer jump attack hits (Silent Redead is stunned)" by world priority 80 in hits at 3000 16670
+  take swing_hammer_jump
+  take phase_stunned_silent
+  give phase_damaged_silent
+  give 4 dmg_body
+
+verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 16670
+  take swing_hammer_jump
+  need enemy_unseen
+  unless lens_on
+
+verb body_empty_in_damaged_plain "Redead runs out (Redead reels from a hit)" by world priority 92 in enemy_health at 2500 220
+  unless hp_body
+  take alive_body
+  take phase_damaged_plain
+  give link_wins
+
+verb body_empty_in_damaged_crying "Redead runs out (Crying Redead reels from a hit)" by world priority 92 in enemy_health at 2360 290
+  unless hp_body
+  take alive_body
+  take phase_damaged_crying
+  give link_wins
+
+verb body_empty_in_damaged_silent "Redead runs out (Silent Redead reels from a hit)" by world priority 92 in enemy_health at 2500 290
+  unless hp_body
+  take alive_body
+  take phase_damaged_silent
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 1550
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 1550
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1620
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1620
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1690
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1690
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1760
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1760
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 1830
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  take has_red_potion
+  give 8 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 1830
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2680 1900
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  take has_blue_potion
+  give 8 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2820 1900
+  take link_turn
+  unless status_paralyze
+  unless status_grab
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2680 1970
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Redead / Gibdo gets ready" by world priority 70 in enemy at 580 1970
+  take enemy_turn
+  give enemy_act
+
+verb rise_step_1 "Gibdo is out of its coffin" by world priority 69 in enemy at 440 2040
+  take enemy_act
+  take phase_rise
+  give phase_idle_plain
+  give beat_end
+
+verb idle_plain_step_1 "Redead notices Link" by world priority 69 in enemy at 580 2040
+  take enemy_act
+  take phase_idle_plain
+  give phase_attempt_plain
+  give beat_end
+  need range_near
+
+verb idle_plain_holds "Redead stands still: nothing changes" by world priority 68 in enemy at 440 2110
+  take enemy_act
+  need phase_idle_plain
+  give beat_end
+
+verb attempt_plain_step_1 "Redead faces Link and screams" by world priority 69 in enemy at 580 2110
+  take enemy_act
+  take phase_attempt_plain
+  give phase_walk_plain
+  give incoming_scream_long
+  give beat_end
+
+verb walk_plain_step_1 "Redead screams" by world priority 69 in enemy at 440 2180
+  take enemy_act
+  take phase_walk_plain
+  give phase_walk_cd_plain
+  give 3 timer_walk_cd_plain
+  give incoming_scream
+  give beat_end
+  need range_near
+
+verb walk_plain_step_2 "Redead grabs Link" by world priority 69 in enemy at 580 2180
+  take enemy_act
+  take phase_walk_plain
+  give phase_grab_plain
+  give timer_grab_plain
+  give incoming_grab
+  give beat_end
+  need range_near
+
+verb walk_plain_step_3 "Redead loses Link and turns home" by world priority 69 in enemy at 440 2250
+  take enemy_act
+  take phase_walk_plain
+  give phase_home_plain
+  give beat_end
+  need range_far
+
+verb walk_cd_plain_ticks "Redead shuffles toward Link after screaming: a beat passes" by world priority 71 in enemy at 580 2250
+  take enemy_turn
+  need phase_walk_cd_plain
+  take timer_walk_cd_plain
+  give enemy_act
+
+verb walk_cd_plain_step_1 "Redead grabs Link" by world priority 69 in enemy at 440 2320
+  take enemy_act
+  take phase_walk_cd_plain
+  give phase_grab_plain
+  give timer_grab_plain
+  give incoming_grab
+  give beat_end
+  need range_near
+
+verb walk_cd_plain_step_2 "Redead can scream again" by world priority 69 in enemy at 580 2320
+  take enemy_act
+  take phase_walk_cd_plain
+  give phase_walk_plain
+  unless timer_walk_cd_plain
+  give beat_end
+
+verb walk_cd_plain_step_3 "Redead loses Link and turns home" by world priority 69 in enemy at 440 2390
+  take enemy_act
+  take phase_walk_cd_plain
+  give phase_home_plain
+  give beat_end
+  need range_far
+
+verb grab_plain_ticks "Redead clings to Link: a beat passes" by world priority 71 in enemy at 580 2390
+  take enemy_turn
+  need phase_grab_plain
+  take timer_grab_plain
+  give enemy_act
+
+verb grab_plain_step_1 "Link breaks free of the Redead" by world priority 69 in enemy at 440 2460
+  take enemy_act
+  take phase_grab_plain
+  give phase_released_plain
+  give timer_released_plain
+  unless timer_grab_plain
+  give beat_end
+
+verb released_plain_ticks "Redead lets go of Link: a beat passes" by world priority 71 in enemy at 580 2460
+  take enemy_turn
+  need phase_released_plain
+  take timer_released_plain
+  give enemy_act
+
+verb released_plain_step_1 "Redead reaches for Link again" by world priority 69 in enemy at 440 2530
+  take enemy_act
+  take phase_released_plain
+  give phase_walk_plain
+  unless timer_released_plain
+  give beat_end
+
+verb home_plain_step_1 "Redead turns back toward Link" by world priority 69 in enemy at 580 2530
+  take enemy_act
+  take phase_home_plain
+  give phase_walk_plain
+  give beat_end
+  need range_near
+
+verb home_plain_step_2 "Redead is home" by world priority 69 in enemy at 440 2600
+  take enemy_act
+  take phase_home_plain
+  give phase_idle_plain
+  give beat_end
+  need range_far
+
+verb damaged_plain_step_1 "Redead recovers toward Link" by world priority 69 in enemy at 580 2600
+  take enemy_act
+  take phase_damaged_plain
+  give phase_walk_plain
+  give beat_end
+  need range_near
+
+verb damaged_plain_step_2 "Redead recovers and turns home" by world priority 69 in enemy at 440 2670
+  take enemy_act
+  take phase_damaged_plain
+  give phase_home_plain
+  give beat_end
+  need range_far
+
+verb stunned_plain_ticks "Redead is stunned: a beat passes" by world priority 71 in enemy at 580 2670
+  take enemy_turn
+  need phase_stunned_plain
+  take timer_stunned_plain
+  give enemy_act
+
+verb stunned_plain_step_1 "Redead comes out of the stun" by world priority 69 in enemy at 440 2740
+  take enemy_act
+  take phase_stunned_plain
+  give phase_damaged_plain
+  unless timer_stunned_plain
+  give beat_end
+
+verb stunned_plain_holds "Redead is stunned: nothing changes" by world priority 68 in enemy at 580 2740
+  take enemy_act
+  need phase_stunned_plain
+  give beat_end
+
+verb idle_crying_step_1 "Crying Redead notices Link" by world priority 69 in enemy at 440 2810
+  take enemy_act
+  take phase_idle_crying
+  give phase_stand_up_crying
+  give beat_end
+  need range_near
+
+verb idle_crying_holds "Crying Redead stands still: nothing changes" by world priority 68 in enemy at 580 2810
+  take enemy_act
+  need phase_idle_crying
+  give beat_end
+
+verb stand_up_crying_step_1 "Crying Redead is up" by world priority 69 in enemy at 440 2880
+  take enemy_act
+  take phase_stand_up_crying
+  give phase_attempt_crying
+  give beat_end
+
+verb attempt_crying_step_1 "Crying Redead faces Link and screams" by world priority 69 in enemy at 580 2880
+  take enemy_act
+  take phase_attempt_crying
+  give phase_walk_crying
+  give incoming_scream_long
+  give beat_end
+
+verb walk_crying_step_1 "Crying Redead screams" by world priority 69 in enemy at 440 2950
+  take enemy_act
+  take phase_walk_crying
+  give phase_walk_cd_crying
+  give 3 timer_walk_cd_crying
+  give incoming_scream
+  give beat_end
+  need range_near
+
+verb walk_crying_step_2 "Crying Redead grabs Link" by world priority 69 in enemy at 580 2950
+  take enemy_act
+  take phase_walk_crying
+  give phase_grab_crying
+  give timer_grab_crying
+  give incoming_grab
+  give beat_end
+  need range_near
+
+verb walk_crying_step_3 "Crying Redead loses Link and turns home" by world priority 69 in enemy at 440 3020
+  take enemy_act
+  take phase_walk_crying
+  give phase_home_crying
+  give beat_end
+  need range_far
+
+verb walk_cd_crying_ticks "Crying Redead shuffles toward Link after screaming: a beat passes" by world priority 71 in enemy at 580 3020
+  take enemy_turn
+  need phase_walk_cd_crying
+  take timer_walk_cd_crying
+  give enemy_act
+
+verb walk_cd_crying_step_1 "Crying Redead grabs Link" by world priority 69 in enemy at 440 3090
+  take enemy_act
+  take phase_walk_cd_crying
+  give phase_grab_crying
+  give timer_grab_crying
+  give incoming_grab
+  give beat_end
+  need range_near
+
+verb walk_cd_crying_step_2 "Crying Redead can scream again" by world priority 69 in enemy at 580 3090
+  take enemy_act
+  take phase_walk_cd_crying
+  give phase_walk_crying
+  unless timer_walk_cd_crying
+  give beat_end
+
+verb walk_cd_crying_step_3 "Crying Redead loses Link and turns home" by world priority 69 in enemy at 440 3160
+  take enemy_act
+  take phase_walk_cd_crying
+  give phase_home_crying
+  give beat_end
+  need range_far
+
+verb grab_crying_ticks "Crying Redead clings to Link: a beat passes" by world priority 71 in enemy at 580 3160
+  take enemy_turn
+  need phase_grab_crying
+  take timer_grab_crying
+  give enemy_act
+
+verb grab_crying_step_1 "Link breaks free of the Crying Redead" by world priority 69 in enemy at 440 3230
+  take enemy_act
+  take phase_grab_crying
+  give phase_released_crying
+  give timer_released_crying
+  unless timer_grab_crying
+  give beat_end
+
+verb released_crying_ticks "Crying Redead lets go of Link: a beat passes" by world priority 71 in enemy at 580 3230
+  take enemy_turn
+  need phase_released_crying
+  take timer_released_crying
+  give enemy_act
+
+verb released_crying_step_1 "Crying Redead reaches for Link again" by world priority 69 in enemy at 440 3300
+  take enemy_act
+  take phase_released_crying
+  give phase_walk_crying
+  unless timer_released_crying
+  give beat_end
+
+verb home_crying_step_1 "Crying Redead turns back toward Link" by world priority 69 in enemy at 580 3300
+  take enemy_act
+  take phase_home_crying
+  give phase_walk_crying
+  give beat_end
+  need range_near
+
+verb home_crying_step_2 "Crying Redead is home" by world priority 69 in enemy at 440 3370
+  take enemy_act
+  take phase_home_crying
+  give phase_crouch_crying
+  give beat_end
+  need range_far
+
+verb crouch_crying_step_1 "Crying Redead settles" by world priority 69 in enemy at 580 3370
+  take enemy_act
+  take phase_crouch_crying
+  give phase_idle_crying
+  give beat_end
+
+verb damaged_crying_step_1 "Crying Redead recovers toward Link" by world priority 69 in enemy at 440 3440
+  take enemy_act
+  take phase_damaged_crying
+  give phase_walk_crying
+  give beat_end
+  need range_near
+
+verb damaged_crying_step_2 "Crying Redead recovers and turns home" by world priority 69 in enemy at 580 3440
+  take enemy_act
+  take phase_damaged_crying
+  give phase_home_crying
+  give beat_end
+  need range_far
+
+verb stunned_crying_ticks "Crying Redead is stunned: a beat passes" by world priority 71 in enemy at 440 3510
+  take enemy_turn
+  need phase_stunned_crying
+  take timer_stunned_crying
+  give enemy_act
+
+verb stunned_crying_step_1 "Crying Redead comes out of the stun" by world priority 69 in enemy at 580 3510
+  take enemy_act
+  take phase_stunned_crying
+  give phase_damaged_crying
+  unless timer_stunned_crying
+  give beat_end
+
+verb stunned_crying_holds "Crying Redead is stunned: nothing changes" by world priority 68 in enemy at 440 3580
+  take enemy_act
+  need phase_stunned_crying
+  give beat_end
+
+verb idle_silent_step_1 "Silent Redead notices Link" by world priority 69 in enemy at 580 3580
+  take enemy_act
+  take phase_idle_silent
+  give phase_attempt_silent
+  give beat_end
+  need range_near
+
+verb idle_silent_holds "Silent Redead stands still: nothing changes" by world priority 68 in enemy at 440 3650
+  take enemy_act
+  need phase_idle_silent
+  give beat_end
+
+verb attempt_silent_step_1 "Silent Redead faces Link and screams" by world priority 69 in enemy at 580 3650
+  take enemy_act
+  take phase_attempt_silent
+  give phase_walk_silent
+  give beat_end
+
+verb walk_silent_step_1 "Silent Redead screams" by world priority 69 in enemy at 440 3720
+  take enemy_act
+  take phase_walk_silent
+  give phase_walk_cd_silent
+  give 3 timer_walk_cd_silent
+  give beat_end
+  need range_near
+
+verb walk_silent_step_2 "Silent Redead grabs Link" by world priority 69 in enemy at 580 3720
+  take enemy_act
+  take phase_walk_silent
+  give phase_grab_silent
+  give timer_grab_silent
+  give incoming_grab
+  give beat_end
+  need range_near
+
+verb walk_silent_step_3 "Silent Redead loses Link and turns home" by world priority 69 in enemy at 440 3790
+  take enemy_act
+  take phase_walk_silent
+  give phase_home_silent
+  give beat_end
+  need range_far
+
+verb walk_cd_silent_ticks "Silent Redead shuffles toward Link after screaming: a beat passes" by world priority 71 in enemy at 580 3790
+  take enemy_turn
+  need phase_walk_cd_silent
+  take timer_walk_cd_silent
+  give enemy_act
+
+verb walk_cd_silent_step_1 "Silent Redead grabs Link" by world priority 69 in enemy at 440 3860
+  take enemy_act
+  take phase_walk_cd_silent
+  give phase_grab_silent
+  give timer_grab_silent
+  give incoming_grab
+  give beat_end
+  need range_near
+
+verb walk_cd_silent_step_2 "Silent Redead can scream again" by world priority 69 in enemy at 580 3860
+  take enemy_act
+  take phase_walk_cd_silent
+  give phase_walk_silent
+  unless timer_walk_cd_silent
+  give beat_end
+
+verb walk_cd_silent_step_3 "Silent Redead loses Link and turns home" by world priority 69 in enemy at 440 3930
+  take enemy_act
+  take phase_walk_cd_silent
+  give phase_home_silent
+  give beat_end
+  need range_far
+
+verb grab_silent_ticks "Silent Redead clings to Link: a beat passes" by world priority 71 in enemy at 580 3930
+  take enemy_turn
+  need phase_grab_silent
+  take timer_grab_silent
+  give enemy_act
+
+verb grab_silent_step_1 "Link breaks free of the Silent Redead" by world priority 69 in enemy at 440 4000
+  take enemy_act
+  take phase_grab_silent
+  give phase_released_silent
+  give timer_released_silent
+  unless timer_grab_silent
+  give beat_end
+
+verb released_silent_ticks "Silent Redead lets go of Link: a beat passes" by world priority 71 in enemy at 580 4000
+  take enemy_turn
+  need phase_released_silent
+  take timer_released_silent
+  give enemy_act
+
+verb released_silent_step_1 "Silent Redead reaches for Link again" by world priority 69 in enemy at 440 4070
+  take enemy_act
+  take phase_released_silent
+  give phase_walk_silent
+  unless timer_released_silent
+  give beat_end
+
+verb home_silent_step_1 "Silent Redead turns back toward Link" by world priority 69 in enemy at 580 4070
+  take enemy_act
+  take phase_home_silent
+  give phase_walk_silent
+  give beat_end
+  need range_near
+
+verb home_silent_step_2 "Silent Redead is home" by world priority 69 in enemy at 440 4140
+  take enemy_act
+  take phase_home_silent
+  give phase_idle_silent
+  give beat_end
+  need range_far
+
+verb damaged_silent_step_1 "Silent Redead recovers toward Link" by world priority 69 in enemy at 580 4140
+  take enemy_act
+  take phase_damaged_silent
+  give phase_walk_silent
+  give beat_end
+  need range_near
+
+verb damaged_silent_step_2 "Silent Redead recovers and turns home" by world priority 69 in enemy at 440 4210
+  take enemy_act
+  take phase_damaged_silent
+  give phase_home_silent
+  give beat_end
+  need range_far
+
+verb stunned_silent_ticks "Silent Redead is stunned: a beat passes" by world priority 71 in enemy at 580 4210
+  take enemy_turn
+  need phase_stunned_silent
+  take timer_stunned_silent
+  give enemy_act
+
+verb stunned_silent_step_1 "Silent Redead comes out of the stun" by world priority 69 in enemy at 440 4280
+  take enemy_act
+  take phase_stunned_silent
+  give phase_damaged_silent
+  unless timer_stunned_silent
+  give beat_end
+
+verb stunned_silent_holds "Silent Redead is stunned: nothing changes" by world priority 68 in enemy at 580 4280
+  take enemy_act
+  need phase_stunned_silent
+  give beat_end
+
+verb scream_long_nayru "Redead scream (first): Nayru's Love holds" by world priority 60 in attacks at 3460 80
+  take incoming_scream_long
+  need status_nayru
+
+verb scream_long_lands "Redead scream (first) hits Link" by world priority 60 in attacks at 3320 150
+  take incoming_scream_long
+  unless status_nayru
+  unless has_double_defense
+  give 3 status_paralyze
+  unless status_paralyze
+
+verb scream_long_lands_again "Redead scream (first) hits Link again" by world priority 60 in attacks at 3460 150
+  take incoming_scream_long
+  unless status_nayru
+  unless has_double_defense
+  need status_paralyze
+
+verb scream_long_lands_dd "Redead scream (first) hits Link" by world priority 60 in attacks at 3320 220
+  take incoming_scream_long
+  unless status_nayru
+  need has_double_defense
+  give 3 status_paralyze
+  unless status_paralyze
+
+verb scream_long_lands_dd_again "Redead scream (first) hits Link again" by world priority 60 in attacks at 3460 220
+  take incoming_scream_long
+  unless status_nayru
+  need has_double_defense
+  need status_paralyze
+
+verb scream_nayru "Redead scream: Nayru's Love holds" by world priority 60 in attacks at 3460 290
+  take incoming_scream
+  need status_nayru
+
+verb scream_lands "Redead scream hits Link" by world priority 60 in attacks at 3320 360
+  take incoming_scream
+  unless status_nayru
+  unless has_double_defense
+  give 2 status_paralyze
+  unless status_paralyze
+
+verb scream_lands_again "Redead scream hits Link again" by world priority 60 in attacks at 3460 360
+  take incoming_scream
+  unless status_nayru
+  unless has_double_defense
+  need status_paralyze
+
+verb scream_lands_dd "Redead scream hits Link" by world priority 60 in attacks at 3320 430
+  take incoming_scream
+  unless status_nayru
+  need has_double_defense
+  give 2 status_paralyze
+  unless status_paralyze
+
+verb scream_lands_dd_again "Redead scream hits Link again" by world priority 60 in attacks at 3460 430
+  take incoming_scream
+  unless status_nayru
+  need has_double_defense
+  need status_paralyze
+
+verb grab_dodged "Redead grab and bite: dodged" by world priority 60 in attacks at 3460 500
+  take incoming_grab
+  need link_dodge
+
+verb grab_nayru "Redead grab and bite: Nayru's Love holds" by world priority 60 in attacks at 3320 570
+  take incoming_grab
+  need status_nayru
+  unless link_dodge
+
+verb grab_lands "Redead grab and bite hits Link" by world priority 60 in attacks at 3460 570
+  take incoming_grab
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  give status_grab
+  unless status_grab
+
+verb grab_lands_again "Redead grab and bite hits Link again" by world priority 60 in attacks at 3320 640
+  take incoming_grab
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  need status_grab
+
+verb grab_lands_dd "Redead grab and bite hits Link" by world priority 60 in attacks at 3460 640
+  take incoming_grab
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  give status_grab
+  unless status_grab
+
+verb grab_lands_dd_again "Redead grab and bite hits Link again" by world priority 60 in attacks at 3320 710
+  take incoming_grab
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  need status_grab
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 760 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 900 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 760 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 900 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 760 360
+  need beat_end
+  take link_dodge
+
+verb paralyze_ticks "Link: paralyze wears on" by world priority 48 in beat at 760 500
+  take beat_end
+  take status_paralyze
+  give tick_paralyze
+
+verb paralyze_idle "Link: no paralyze" by world priority 48 in beat at 900 500
+  take beat_end
+  unless status_paralyze
+  give tick_paralyze
+
+verb grab_ticks "Link: grab wears on" by world priority 47 in beat at 760 570
+  take tick_paralyze
+  take status_grab
+  give tick_grab
+  give 2 link_dmg
+
+verb grab_idle "Link: no grab" by world priority 47 in beat at 900 570
+  take tick_paralyze
+  unless status_grab
+  give tick_grab
+
+verb nayru_ticks "Link: nayru wears on" by world priority 46 in beat at 760 640
+  take tick_grab
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 46 in beat at 900 640
+  take tick_grab
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 45 in beat at 900 710
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 45 in beat at 760 780
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 45 in beat at 900 780
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 45 in beat at 760 850
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 900 850
+  take lens_count
+  unless lens_on
+
+verb link_helpless_paralyze "Link cannot act: paralyze" by world priority 40 in beat at 760 920
+  take link_turn
+  need status_paralyze
+  give enemy_turn
+
+verb link_helpless_grab "Link cannot act: grab" by world priority 40 in beat at 900 920
+  take link_turn
+  need status_grab
+  give enemy_turn

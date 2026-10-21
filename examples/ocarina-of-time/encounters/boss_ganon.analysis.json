@@ -1,0 +1,435 @@
+{
+ "positions": 152843,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "block_hi_timer_clears",
+  "charge_hi_timer_clears",
+  "pound_hi_timer_clears",
+  "pound_end_hi_timer_clears",
+  "block_lo_timer_clears",
+  "charge_lo_timer_clears",
+  "pound_lo_timer_clears",
+  "pound_end_lo_timer_clears",
+  "block_fl_timer_clears",
+  "charge_fl_timer_clears",
+  "pound_fl_timer_clears",
+  "pound_end_fl_timer_clears",
+  "downed_fl_timer_clears",
+  "miss_reflect_big_magic",
+  "body_empty_in_downed_hi",
+  "body_empty_in_rising_hi"
+ ],
+ "kitSplit": {
+  "hit_explosive__downed_hi": [
+   "swing_explosive",
+   "phase_downed_hi"
+  ],
+  "hit_explosive__rising_hi": [
+   "swing_explosive",
+   "phase_rising_hi"
+  ],
+  "hit_explosive__downed_lo": [
+   "swing_explosive",
+   "phase_downed_lo"
+  ],
+  "hit_explosive__rising_lo": [
+   "swing_explosive",
+   "phase_rising_lo"
+  ],
+  "hit_hammer_swing__downed_hi": [
+   "swing_hammer_swing",
+   "phase_downed_hi"
+  ],
+  "hit_hammer_swing__rising_hi": [
+   "swing_hammer_swing",
+   "phase_rising_hi"
+  ],
+  "hit_hammer_swing__ball_out_lo": [
+   "swing_hammer_swing",
+   "phase_ball_out_lo"
+  ],
+  "hit_hammer_swing__downed_lo": [
+   "swing_hammer_swing",
+   "phase_downed_lo"
+  ],
+  "hit_hammer_swing__rising_lo": [
+   "swing_hammer_swing",
+   "phase_rising_lo"
+  ],
+  "hit_hammer_swing__magic_out_lo": [
+   "swing_hammer_swing",
+   "phase_magic_out_lo"
+  ],
+  "hit_hammer_swing__ball_out_fl": [
+   "swing_hammer_swing",
+   "phase_ball_out_fl"
+  ],
+  "hit_hammer_swing__downed_fl": [
+   "swing_hammer_swing",
+   "phase_downed_fl"
+  ],
+  "hit_hammer_swing__rising_fl": [
+   "swing_hammer_swing",
+   "phase_rising_fl"
+  ],
+  "hit_hammer_swing__magic_out_fl": [
+   "swing_hammer_swing",
+   "phase_magic_out_fl"
+  ],
+  "hit_hookshot__wait_lo": [
+   "swing_hookshot",
+   "phase_wait_lo"
+  ],
+  "hit_hookshot__wait_fl": [
+   "swing_hookshot",
+   "phase_wait_fl"
+  ],
+  "hit_slash_giant__downed_hi": [
+   "swing_slash_giant",
+   "phase_downed_hi"
+  ],
+  "hit_slash_giant__rising_hi": [
+   "swing_slash_giant",
+   "phase_rising_hi"
+  ],
+  "hit_slash_giant__ball_out_lo": [
+   "swing_slash_giant",
+   "phase_ball_out_lo"
+  ],
+  "hit_slash_giant__downed_lo": [
+   "swing_slash_giant",
+   "phase_downed_lo"
+  ],
+  "hit_slash_giant__rising_lo": [
+   "swing_slash_giant",
+   "phase_rising_lo"
+  ],
+  "hit_slash_giant__magic_out_lo": [
+   "swing_slash_giant",
+   "phase_magic_out_lo"
+  ],
+  "hit_slash_giant__ball_out_fl": [
+   "swing_slash_giant",
+   "phase_ball_out_fl"
+  ],
+  "hit_slash_giant__downed_fl": [
+   "swing_slash_giant",
+   "phase_downed_fl"
+  ],
+  "hit_slash_giant__rising_fl": [
+   "swing_slash_giant",
+   "phase_rising_fl"
+  ],
+  "hit_slash_giant__magic_out_fl": [
+   "swing_slash_giant",
+   "phase_magic_out_fl"
+  ],
+  "hit_magic_fire__downed_hi": [
+   "swing_magic_fire",
+   "phase_downed_hi"
+  ],
+  "hit_magic_fire__rising_hi": [
+   "swing_magic_fire",
+   "phase_rising_hi"
+  ],
+  "hit_magic_fire__downed_lo": [
+   "swing_magic_fire",
+   "phase_downed_lo"
+  ],
+  "hit_magic_fire__rising_lo": [
+   "swing_magic_fire",
+   "phase_rising_lo"
+  ],
+  "hit_spin_giant__downed_hi": [
+   "swing_spin_giant",
+   "phase_downed_hi"
+  ],
+  "hit_spin_giant__rising_hi": [
+   "swing_spin_giant",
+   "phase_rising_hi"
+  ],
+  "hit_spin_giant__ball_out_lo": [
+   "swing_spin_giant",
+   "phase_ball_out_lo"
+  ],
+  "hit_spin_giant__downed_lo": [
+   "swing_spin_giant",
+   "phase_downed_lo"
+  ],
+  "hit_spin_giant__rising_lo": [
+   "swing_spin_giant",
+   "phase_rising_lo"
+  ],
+  "hit_spin_giant__magic_out_lo": [
+   "swing_spin_giant",
+   "phase_magic_out_lo"
+  ],
+  "hit_spin_giant__ball_out_fl": [
+   "swing_spin_giant",
+   "phase_ball_out_fl"
+  ],
+  "hit_spin_giant__downed_fl": [
+   "swing_spin_giant",
+   "phase_downed_fl"
+  ],
+  "hit_spin_giant__rising_fl": [
+   "swing_spin_giant",
+   "phase_rising_fl"
+  ],
+  "hit_spin_giant__magic_out_fl": [
+   "swing_spin_giant",
+   "phase_magic_out_fl"
+  ],
+  "hit_jump_giant__downed_hi": [
+   "swing_jump_giant",
+   "phase_downed_hi"
+  ],
+  "hit_jump_giant__rising_hi": [
+   "swing_jump_giant",
+   "phase_rising_hi"
+  ],
+  "hit_jump_giant__ball_out_lo": [
+   "swing_jump_giant",
+   "phase_ball_out_lo"
+  ],
+  "hit_jump_giant__downed_lo": [
+   "swing_jump_giant",
+   "phase_downed_lo"
+  ],
+  "hit_jump_giant__rising_lo": [
+   "swing_jump_giant",
+   "phase_rising_lo"
+  ],
+  "hit_jump_giant__magic_out_lo": [
+   "swing_jump_giant",
+   "phase_magic_out_lo"
+  ],
+  "hit_jump_giant__ball_out_fl": [
+   "swing_jump_giant",
+   "phase_ball_out_fl"
+  ],
+  "hit_jump_giant__downed_fl": [
+   "swing_jump_giant",
+   "phase_downed_fl"
+  ],
+  "hit_jump_giant__rising_fl": [
+   "swing_jump_giant",
+   "phase_rising_fl"
+  ],
+  "hit_jump_giant__magic_out_fl": [
+   "swing_jump_giant",
+   "phase_magic_out_fl"
+  ],
+  "hit_jump_giant_self__downed_hi": [
+   "swing_jump_giant_self",
+   "phase_downed_hi"
+  ],
+  "hit_jump_giant_self__rising_hi": [
+   "swing_jump_giant_self",
+   "phase_rising_hi"
+  ],
+  "hit_jump_giant_self__ball_out_lo": [
+   "swing_jump_giant_self",
+   "phase_ball_out_lo"
+  ],
+  "hit_jump_giant_self__downed_lo": [
+   "swing_jump_giant_self",
+   "phase_downed_lo"
+  ],
+  "hit_jump_giant_self__rising_lo": [
+   "swing_jump_giant_self",
+   "phase_rising_lo"
+  ],
+  "hit_jump_giant_self__magic_out_lo": [
+   "swing_jump_giant_self",
+   "phase_magic_out_lo"
+  ],
+  "hit_jump_giant_self__ball_out_fl": [
+   "swing_jump_giant_self",
+   "phase_ball_out_fl"
+  ],
+  "hit_jump_giant_self__downed_fl": [
+   "swing_jump_giant_self",
+   "phase_downed_fl"
+  ],
+  "hit_jump_giant_self__rising_fl": [
+   "swing_jump_giant_self",
+   "phase_rising_fl"
+  ],
+  "hit_jump_giant_self__magic_out_fl": [
+   "swing_jump_giant_self",
+   "phase_magic_out_fl"
+  ],
+  "hit_hammer_jump__downed_hi": [
+   "swing_hammer_jump",
+   "phase_downed_hi"
+  ],
+  "hit_hammer_jump__rising_hi": [
+   "swing_hammer_jump",
+   "phase_rising_hi"
+  ],
+  "hit_hammer_jump__downed_lo": [
+   "swing_hammer_jump",
+   "phase_downed_lo"
+  ],
+  "hit_hammer_jump__rising_lo": [
+   "swing_hammer_jump",
+   "phase_rising_lo"
+  ],
+  "hit_hammer_jump__downed_fl": [
+   "swing_hammer_jump",
+   "phase_downed_fl"
+  ],
+  "hit_hammer_jump__rising_fl": [
+   "swing_hammer_jump",
+   "phase_rising_fl"
+  ],
+  "big_magic_nayru_near": [
+   "incoming_big_magic",
+   "status_nayru",
+   "range_near"
+  ],
+  "big_magic_nayru_far": [
+   "incoming_big_magic",
+   "status_nayru",
+   "range_far"
+  ],
+  "big_magic_lands_dd_near": [
+   "incoming_big_magic",
+   "has_double_defense",
+   "range_near"
+  ],
+  "big_magic_lands_dd_far": [
+   "incoming_big_magic",
+   "has_double_defense",
+   "range_far"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 3037,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1008,
+    "Link falls": 60
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 6316
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 179,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 60,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 617
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 1401,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 480,
+    "Link falls": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2971
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 1247,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 420,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2707
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 1054,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 360,
+    "Link falls": 9
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3135
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 3926,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1320,
+    "Link falls": 97
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 6714
+  },
+  {
+   "kit": "adult_light_arrows",
+   "variant": "",
+   "positions": 124583,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 42324,
+    "Link falls": 1552,
+    "Link wins": 804
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 257040
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 12431,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4272,
+    "Link falls": 52
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 18637
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 4985,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1680,
+    "Link falls": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10472
+  }
+ ]
+}

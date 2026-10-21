@@ -1,0 +1,348 @@
+{
+ "positions": 206748,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "vanish_meg_timer_clears",
+  "link_hurt_overkill"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "amy",
+   "positions": 2968,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 841,
+    "Link falls": 125,
+    "Link wins": 40
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4563
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "joelle_beth",
+   "positions": 2991,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 850,
+    "Link falls": 125,
+    "Link wins": 40
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5686
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "meg",
+   "positions": 6781,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2205,
+    "Link falls": 25,
+    "Link wins": 40
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 12749
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "amy",
+   "positions": 596,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 169,
+    "Link falls": 25,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1064
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "joelle_beth",
+   "positions": 602,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 171,
+    "Link falls": 25,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2737
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "meg",
+   "positions": 1357,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 441,
+    "Link falls": 5,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3399
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "amy",
+   "positions": 4309,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1217,
+    "Link falls": 50,
+    "Link wins": 32
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7016
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "joelle_beth",
+   "positions": 4320,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1221,
+    "Link falls": 50,
+    "Link wins": 32
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5941
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "meg",
+   "positions": 2153,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 706,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2482
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "amy",
+   "positions": 3902,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1065,
+    "Link falls": 175,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5156
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "joelle_beth",
+   "positions": 3926,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1075,
+    "Link falls": 175,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4481
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "meg",
+   "positions": 1905,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 623,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2600
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "amy",
+   "positions": 1746,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 481,
+    "Link falls": 39,
+    "Link wins": 24
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3019
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "joelle_beth",
+   "positions": 1759,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 486,
+    "Link falls": 39,
+    "Link wins": 24
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3103
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "meg",
+   "positions": 1621,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 531,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3993
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "amy",
+   "positions": 12346,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3346,
+    "Link falls": 625,
+    "Link wins": 100
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16557
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "joelle_beth",
+   "positions": 12413,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3374,
+    "Link falls": 625,
+    "Link wins": 100
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 15743
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "meg",
+   "positions": 5988,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1958,
+    "Link falls": 25
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8832
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "amy",
+   "positions": 38256,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 10813,
+    "Link falls": 325,
+    "Link wins": 288
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 35577
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "joelle_beth",
+   "positions": 38411,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 10888,
+    "Link falls": 325,
+    "Link wins": 288
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 41433
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "meg",
+   "positions": 19517,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6404,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 17258
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "amy",
+   "positions": 15599,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4257,
+    "Link falls": 700,
+    "Link wins": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 18467
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "joelle_beth",
+   "positions": 15665,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4288,
+    "Link falls": 700,
+    "Link wins": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 27332
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "meg",
+   "positions": 7617,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2492,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 11632
+  }
+ ]
+}

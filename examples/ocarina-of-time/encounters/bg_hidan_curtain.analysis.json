@@ -1,0 +1,641 @@
+{
+ "positions": 269183,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "turnoff_lower_t1_timer_clears",
+  "turnoff_lower_t2_timer_clears",
+  "turnoff_lower_t3_timer_clears",
+  "turnoff_raise_t4_timer_clears",
+  "timer_open_t1_timer_clears",
+  "timer_open_t2_timer_clears",
+  "timer_open_t3_timer_clears",
+  "timer_lit_t4_timer_clears",
+  "turnon_raise_timer_clears",
+  "turnon_lower_timer_clears"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "resting",
+   "positions": 406,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 100,
+    "Link falls": 70
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2036
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "resting_inverted",
+   "positions": 16,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 50
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "switched_t1",
+   "positions": 2765,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 744,
+    "Link falls": 229
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8764
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "switched_t2",
+   "positions": 3290,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 919,
+    "Link falls": 229
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 11011
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "switched_t3",
+   "positions": 2030,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 499,
+    "Link falls": 229
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4135
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "switched_t4",
+   "positions": 4787,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1093,
+    "Link falls": 809
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 19428
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "resting",
+   "positions": 82,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 20,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 708
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "resting_inverted",
+   "positions": 4,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 38
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "switched_t1",
+   "positions": 574,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 155,
+    "Link falls": 46
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1660
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "switched_t2",
+   "positions": 679,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 190,
+    "Link falls": 46
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2386
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "switched_t3",
+   "positions": 427,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 106,
+    "Link falls": 46
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1248
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "switched_t4",
+   "positions": 989,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 225,
+    "Link falls": 162
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4381
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "resting",
+   "positions": 992,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 288,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3884
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "resting_inverted",
+   "positions": 7,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 25
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "switched_t1",
+   "positions": 6972,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1999,
+    "Link falls": 92
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 27537
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "switched_t2",
+   "positions": 8232,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2419,
+    "Link falls": 92
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 29326
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "switched_t3",
+   "positions": 5208,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1411,
+    "Link falls": 92
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 19475
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "switched_t4",
+   "positions": 12060,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3217,
+    "Link falls": 324
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 45703
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "resting",
+   "positions": 568,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 140,
+    "Link falls": 98
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2371
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "resting_inverted",
+   "positions": 22,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 136
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "switched_t1",
+   "positions": 3524,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 947,
+    "Link falls": 299
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 15610
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "switched_t2",
+   "positions": 4259,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1192,
+    "Link falls": 299
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7812
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "switched_t3",
+   "positions": 2495,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 604,
+    "Link falls": 299
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5398
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "switched_t4",
+   "positions": 5965,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1368,
+    "Link falls": 1067
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 22984
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "resting",
+   "positions": 361,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 99,
+    "Link falls": 27
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 772
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "resting_inverted",
+   "positions": 10,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 43
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "switched_t1",
+   "positions": 2450,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 684,
+    "Link falls": 93
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 6849
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "switched_t2",
+   "positions": 2900,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 834,
+    "Link falls": 93
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 9179
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "switched_t3",
+   "positions": 1820,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 474,
+    "Link falls": 93
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8613
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "switched_t4",
+   "positions": 4298,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1088,
+    "Link falls": 318
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16633
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "resting",
+   "positions": 1807,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 440,
+    "Link falls": 332
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4284
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "resting_inverted",
+   "positions": 67,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 384
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "switched_t1",
+   "positions": 12038,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3223,
+    "Link falls": 1096
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 27047
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "switched_t2",
+   "positions": 14348,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3993,
+    "Link falls": 1096
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 25305
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "switched_t3",
+   "positions": 8804,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2145,
+    "Link falls": 1096
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 24795
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "switched_t4",
+   "positions": 20886,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4669,
+    "Link falls": 3846
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 55631
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "resting",
+   "positions": 2354,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 689,
+    "Link falls": 189
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7291
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "resting_inverted",
+   "positions": 217,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 72
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1081
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "switched_t1",
+   "positions": 25018,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 7691,
+    "Link falls": 489
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 48398
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "switched_t2",
+   "positions": 31978,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 10011,
+    "Link falls": 489
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 47419
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "switched_t3",
+   "positions": 15398,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4493,
+    "Link falls": 488
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 14223
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "switched_t4",
+   "positions": 22884,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6342,
+    "Link falls": 1491
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 43547
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "resting",
+   "positions": 2269,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 560,
+    "Link falls": 392
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4207
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "resting_inverted",
+   "positions": 85,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 413
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "switched_t1",
+   "positions": 7848,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2013,
+    "Link falls": 799
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16003
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "switched_t2",
+   "positions": 10461,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2808,
+    "Link falls": 857
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 24734
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "switched_t3",
+   "positions": 5069,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1194,
+    "Link falls": 715
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10990
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "switched_t4",
+   "positions": 9460,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2166,
+    "Link falls": 1669
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 28140
+  }
+ ]
+}

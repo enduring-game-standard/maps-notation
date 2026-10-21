@@ -1,0 +1,239 @@
+{
+ "positions": 1639,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "bolt_timer_clears",
+  "link_hurt_overkill",
+  "hit_slash_master__ball_launched",
+  "hit_slash_giant__ball_launched",
+  "hit_shield__ball_launched",
+  "hit_spin_giant__ball_launched",
+  "hit_spin_master__ball_launched",
+  "hit_jump_giant__ball_launched",
+  "hit_jump_giant_self__ball_launched",
+  "hit_jump_master__ball_launched",
+  "hit_jump_master_self__ball_launched",
+  "ball_lands_again",
+  "ball_lands_dd_again",
+  "lightning_lands_again",
+  "lightning_lands_dd_again",
+  "link_helpless_shock"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "energy_ball",
+   "positions": 46,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 11,
+    "Link wins": 9
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 129
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "lightning",
+   "positions": 52,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 15,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 239
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "energy_ball",
+   "positions": 12,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3,
+    "Link wins": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 88
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "lightning",
+   "positions": 15,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 112
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "energy_ball",
+   "positions": 21,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5,
+    "Link wins": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 118
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "lightning",
+   "positions": 33,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 11
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 213
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "energy_ball",
+   "positions": 55,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 15,
+    "Link wins": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 229
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "lightning",
+   "positions": 52,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 15,
+    "Link falls": 12
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 185
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "energy_ball",
+   "positions": 26,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 7,
+    "Link wins": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 112
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "lightning",
+   "positions": 40,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 12,
+    "Link falls": 5
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 234
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "energy_ball",
+   "positions": 158,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 46,
+    "Link wins": 15
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 441
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "lightning",
+   "positions": 135,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 39,
+    "Link falls": 27
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 453
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "energy_ball",
+   "positions": 445,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 145,
+    "Link wins": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 813
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "lightning",
+   "positions": 248,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 81,
+    "Link falls": 9
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 602
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "energy_ball",
+   "positions": 182,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 57,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 718
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "lightning",
+   "positions": 119,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 37,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 339
+  }
+ ]
+}

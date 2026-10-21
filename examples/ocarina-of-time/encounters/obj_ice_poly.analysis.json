@@ -1,0 +1,124 @@
+{
+ "positions": 1374,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "melt_timer_clears",
+  "miss_magic_fire"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 118,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 24,
+    "Link falls": 5,
+    "Link wins": 48
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 214
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 10,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 48
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 40,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 13,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 129
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 74,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 21,
+    "Link falls": 7,
+    "Link wins": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 185
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 28,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 9,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 94
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 202,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 66,
+    "Link falls": 25
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 288
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 649,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 216,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 542
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 253,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 84,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 386
+  }
+ ]
+}

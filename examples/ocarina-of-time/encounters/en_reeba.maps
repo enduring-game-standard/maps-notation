@@ -1,0 +1,2225 @@
+maps 2
+title "Ocarina of Time combat: Link vs Leever"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state age_adult "Link is an adult" in setup at 120 150
+state choose_variant "Which Leever" in setup at 260 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Leever answers" in beat at 580 80
+state enemy_act "Leever acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 4/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 120 220
+state link_wins "Leever defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state has_master_sword "Has master sword" in gear at 1860 570
+state has_hookshot "Has hookshot" in gear at 1720 640
+state has_megaton_hammer "Has megaton hammer" in gear at 1860 640
+state has_bow "Has bow" in gear at 1720 710
+state has_bombchus "Has bombchus" in gear at 1860 710
+state has_mirror_shield "Has mirror shield" in gear at 1720 780
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 780
+state has_giants_knife "Has giants knife" in gear at 1720 850
+state has_double_defense "Has double defense" in gear at 1860 850
+state has_fire_arrows "Has fire arrows" in gear at 1720 920
+state has_ice_arrows "Has ice arrows" in gear at 1860 920
+state has_light_arrows "Has light arrows" in gear at 1720 990
+state has_blue_potion "Has blue potion" in gear at 1860 990
+state phase_surface_small "Leever rises out of the sand" in enemy at 2040 80
+state timer_surface_small "Leever rises out of the sand: beats left" in enemy at 2180 80
+state phase_move_small "Leever spins across the sand at Link" in enemy at 2180 150
+state timer_move_small "Leever spins across the sand at Link: beats left" in enemy at 2040 220
+state phase_damaged_small "Leever reels from a hit" in enemy at 2040 290
+state timer_damaged_small "Leever reels from a hit: beats left" in enemy at 2180 290
+state phase_stunned_small "Leever is knocked back, stunned" in enemy at 2180 360
+state timer_stunned_small "Leever is knocked back, stunned: beats left" in enemy at 2040 430
+state phase_recover_small "Leever shakes off the stun" in enemy at 2040 500
+state timer_recover_small "Leever shakes off the stun: beats left" in enemy at 2180 500
+state phase_surface_big "Big Leever rises out of the sand" in enemy at 2180 570
+state timer_surface_big "Big Leever rises out of the sand: beats left" in enemy at 2040 640
+state phase_move_big "Big Leever spins across the sand at Link" in enemy at 2040 710
+state phase_damaged_big "Big Leever reels from a hit" in enemy at 2180 710
+state timer_damaged_big "Big Leever reels from a hit: beats left" in enemy at 2040 780
+state phase_stunned_big "Big Leever is knocked back, stunned" in enemy at 2040 850
+state timer_stunned_big "Big Leever is knocked back, stunned: beats left" in enemy at 2180 850
+state phase_recover_big "Big Leever shakes off the stun" in enemy at 2180 920
+state timer_recover_big "Big Leever shakes off the stun: beats left" in enemy at 2040 990
+state phase_sunk "The Leever has sunk away into the sand and is gone" in enemy at 2040 1060
+state hp_small "Leever: health" marks 4 in enemy_health at 2360 80
+state alive_small "Leever: standing" marks 1 in enemy_health at 2500 80
+state dmg_small "Leever: damage" in enemy_health at 2360 150
+state hp_big "Big Leever: health" marks 20 in enemy_health at 2500 150
+state alive_big "Big Leever: standing" marks 1 in enemy_health at 2360 220
+state dmg_big "Big Leever: damage" in enemy_health at 2500 220
+state status_nayru "Link: nayru (beats left)" in link_state at 1220 290
+state lens_on "Lens of Truth on" in link_state at 1080 360
+state link_guard "Link holds up his shield" in link_state at 1220 360
+state link_dodge "Link dodges" in link_state at 1080 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3000 150
+state swing_slingshot "Slingshot seed on its way" in hits at 3000 430
+state swing_explosive "Explosion on its way" in hits at 3000 710
+state swing_boomerang "Boomerang on its way" in hits at 3000 990
+state swing_arrow_normal "Arrow on its way" in hits at 3000 1270
+state swing_hammer_swing "Hammer swing on its way" in hits at 3000 1550
+state swing_hookshot "Hookshot on its way" in hits at 3000 1830
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 2110
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 2390
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 2670
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 2950
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 3230
+state swing_arrow_light "Light arrow on its way" in hits at 3000 3510
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 3790
+state swing_shield "Shield on its way" in hits at 3140 3860
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 3930
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3000 4280
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 4560
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 4910
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 5190
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3140 5470
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 5750
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 6100
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 6380
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 6660
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1080 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1220 710
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1080 780
+state incoming_spin "Leever spin incoming" in attacks at 3320 80
+state incoming_spin_big "Big Leever spin incoming" in attacks at 3320 360
+state tick_nayru "Beat ends: nayru checked" in beat at 580 360
+state lens_count "The Lens: beats toward the next cost" in beat at 440 500
+
+verb surface_small_timer_clears "Leever rises out of the sand is over" by world priority 99 in enemy at 2040 150
+  take timer_surface_small
+  unless phase_surface_small
+
+verb move_small_timer_clears "Leever spins across the sand at Link is over" by world priority 99 in enemy at 2180 220
+  take timer_move_small
+  unless phase_move_small
+
+verb damaged_small_timer_clears "Leever reels from a hit is over" by world priority 99 in enemy at 2040 360
+  take timer_damaged_small
+  unless phase_damaged_small
+
+verb stunned_small_timer_clears "Leever is knocked back, stunned is over" by world priority 99 in enemy at 2180 430
+  take timer_stunned_small
+  unless phase_stunned_small
+
+verb recover_small_timer_clears "Leever shakes off the stun is over" by world priority 99 in enemy at 2040 570
+  take timer_recover_small
+  unless phase_recover_small
+
+verb surface_big_timer_clears "Big Leever rises out of the sand is over" by world priority 99 in enemy at 2180 640
+  take timer_surface_big
+  unless phase_surface_big
+
+verb damaged_big_timer_clears "Big Leever reels from a hit is over" by world priority 99 in enemy at 2180 780
+  take timer_damaged_big
+  unless phase_damaged_big
+
+verb stunned_big_timer_clears "Big Leever is knocked back, stunned is over" by world priority 99 in enemy at 2040 920
+  take timer_stunned_big
+  unless phase_stunned_big
+
+verb recover_big_timer_clears "Big Leever shakes off the stun is over" by world priority 99 in enemy at 2180 990
+  take timer_recover_big
+  unless phase_recover_big
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give choose_variant
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give choose_variant
+
+verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give choose_variant
+
+verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in setup at 120 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 260 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 120 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give choose_variant
+
+verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 260 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 120 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 260 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 120 710
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give choose_variant
+
+verb variant_small "Leever" by world priority 30 in setup at 260 710
+  take choose_variant
+  give phase_surface_small
+  give timer_surface_small
+  give range_far
+  give link_turn
+
+verb variant_big "Big Leever" by world priority 30 in setup at 120 780
+  take choose_variant
+  give phase_surface_big
+  give timer_surface_big
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 98 in link_state at 1220 430
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1080 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 97 in link_state at 1220 500
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1080 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 94 in link_state at 1220 570
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1080 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1220 640
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 8 link_heal
+
+verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb small_hurt "Leever loses health" by world priority 96 in enemy_health at 2360 290
+  take dmg_small
+  take hp_small
+
+verb small_overkill "Leever has no health left to lose" by world priority 95 in enemy_health at 2500 290
+  take dmg_small
+  unless hp_small
+
+verb big_hurt "Big Leever loses health" by world priority 96 in enemy_health at 2360 360
+  take dmg_big
+  take hp_big
+
+verb big_overkill "Big Leever has no health left to lose" by world priority 95 in enemy_health at 2500 360
+  take dmg_big
+  unless hp_big
+
+verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_nut_2 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2820 80
+  take link_turn
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2680 150
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2820 150
+  take link_turn
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2680 220
+  take link_turn
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 220
+  take link_turn
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 290
+  take link_turn
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2820 290
+  take link_turn
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2680 360
+  take link_turn
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2820 360
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2680 430
+  take link_turn
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 500
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 500
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 570
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 570
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 710
+  take link_turn
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2820 710
+  take link_turn
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 780
+  take link_turn
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 780
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 850
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 850
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2680 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2680 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2680 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2680 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2680 1480
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 1480
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3140 150
+  take swing_deku_stick
+
+verb hit_deku_stick__move_small "Deku Stick hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 220
+  take swing_deku_stick
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_deku_stick__stunned_small "Deku Stick hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 220
+  take swing_deku_stick
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_deku_stick__recover_small "Deku Stick hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 290
+  take swing_deku_stick
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_deku_stick__move_big "Deku Stick hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 290
+  take swing_deku_stick
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_deku_stick__stunned_big "Deku Stick hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 360
+  take swing_deku_stick
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_deku_stick__recover_big "Deku Stick hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 360
+  take swing_deku_stick
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3140 430
+  take swing_slingshot
+
+verb hit_slingshot__move_small "Slingshot seed hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 500
+  take swing_slingshot
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give dmg_small
+
+verb hit_slingshot__stunned_small "Slingshot seed hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 500
+  take swing_slingshot
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give dmg_small
+
+verb hit_slingshot__recover_small "Slingshot seed hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 570
+  take swing_slingshot
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give dmg_small
+
+verb hit_slingshot__move_big "Slingshot seed hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 570
+  take swing_slingshot
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give dmg_big
+
+verb hit_slingshot__stunned_big "Slingshot seed hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 640
+  take swing_slingshot
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give dmg_big
+
+verb hit_slingshot__recover_big "Slingshot seed hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 640
+  take swing_slingshot
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give dmg_big
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 710
+  take swing_explosive
+
+verb hit_explosive__move_small "Explosion hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 780
+  take swing_explosive
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_explosive__stunned_small "Explosion hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 780
+  take swing_explosive
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_explosive__recover_small "Explosion hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 850
+  take swing_explosive
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_explosive__move_big "Explosion hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 850
+  take swing_explosive
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_explosive__stunned_big "Explosion hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 920
+  take swing_explosive
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_explosive__recover_big "Explosion hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 920
+  take swing_explosive
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3140 990
+  take swing_boomerang
+
+verb hit_boomerang__move_small "Boomerang hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 1060
+  take swing_boomerang
+  take phase_move_small
+  give phase_stunned_small
+  give timer_stunned_small
+
+verb hit_boomerang__stunned_small "Boomerang hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 1060
+  take swing_boomerang
+  need phase_stunned_small
+
+verb hit_boomerang__recover_small "Boomerang hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 1130
+  take swing_boomerang
+  take phase_recover_small
+  give phase_stunned_small
+  give timer_stunned_small
+
+verb hit_boomerang__move_big "Boomerang hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 1130
+  take swing_boomerang
+  take phase_move_big
+  give phase_stunned_big
+  give timer_stunned_big
+
+verb hit_boomerang__stunned_big "Boomerang hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 1200
+  take swing_boomerang
+  need phase_stunned_big
+
+verb hit_boomerang__recover_big "Boomerang hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 1200
+  take swing_boomerang
+  take phase_recover_big
+  give phase_stunned_big
+  give timer_stunned_big
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3140 1270
+  take swing_arrow_normal
+
+verb hit_arrow_normal__move_small "Arrow hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 1340
+  take swing_arrow_normal
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_normal__stunned_small "Arrow hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 1340
+  take swing_arrow_normal
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_normal__recover_small "Arrow hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 1410
+  take swing_arrow_normal
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_normal__move_big "Arrow hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 1410
+  take swing_arrow_normal
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_arrow_normal__stunned_big "Arrow hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 1480
+  take swing_arrow_normal
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_arrow_normal__recover_big "Arrow hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 1480
+  take swing_arrow_normal
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 1550
+  take swing_hammer_swing
+
+verb hit_hammer_swing__move_small "Hammer swing hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 1620
+  take swing_hammer_swing
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_hammer_swing__stunned_small "Hammer swing hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 1620
+  take swing_hammer_swing
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_hammer_swing__recover_small "Hammer swing hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 1690
+  take swing_hammer_swing
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_hammer_swing__move_big "Hammer swing hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 1690
+  take swing_hammer_swing
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_hammer_swing__stunned_big "Hammer swing hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 1760
+  take swing_hammer_swing
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_hammer_swing__recover_big "Hammer swing hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 1760
+  take swing_hammer_swing
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 1830
+  take swing_hookshot
+
+verb hit_hookshot__move_small "Hookshot hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 1900
+  take swing_hookshot
+  take phase_move_small
+  give phase_stunned_small
+  give timer_stunned_small
+
+verb hit_hookshot__stunned_small "Hookshot hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 1900
+  take swing_hookshot
+  need phase_stunned_small
+
+verb hit_hookshot__recover_small "Hookshot hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 1970
+  take swing_hookshot
+  take phase_recover_small
+  give phase_stunned_small
+  give timer_stunned_small
+
+verb hit_hookshot__move_big "Hookshot hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 1970
+  take swing_hookshot
+  take phase_move_big
+  give phase_stunned_big
+  give timer_stunned_big
+
+verb hit_hookshot__stunned_big "Hookshot hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 2040
+  take swing_hookshot
+  need phase_stunned_big
+
+verb hit_hookshot__recover_big "Hookshot hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 2040
+  take swing_hookshot
+  take phase_recover_big
+  give phase_stunned_big
+  give timer_stunned_big
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3140 2110
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__move_small "Kokiri Sword slash hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 2180
+  take swing_slash_kokiri
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give dmg_small
+
+verb hit_slash_kokiri__stunned_small "Kokiri Sword slash hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 2180
+  take swing_slash_kokiri
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give dmg_small
+
+verb hit_slash_kokiri__recover_small "Kokiri Sword slash hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 2250
+  take swing_slash_kokiri
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give dmg_small
+
+verb hit_slash_kokiri__move_big "Kokiri Sword slash hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 2250
+  take swing_slash_kokiri
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give dmg_big
+
+verb hit_slash_kokiri__stunned_big "Kokiri Sword slash hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 2320
+  take swing_slash_kokiri
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give dmg_big
+
+verb hit_slash_kokiri__recover_big "Kokiri Sword slash hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 2320
+  take swing_slash_kokiri
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give dmg_big
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3140 2390
+  take swing_slash_master
+
+verb hit_slash_master__move_small "Master Sword slash hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 2460
+  take swing_slash_master
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_slash_master__stunned_small "Master Sword slash hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 2460
+  take swing_slash_master
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_slash_master__recover_small "Master Sword slash hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 2530
+  take swing_slash_master
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_slash_master__move_big "Master Sword slash hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 2530
+  take swing_slash_master
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb hit_slash_master__stunned_big "Master Sword slash hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 2600
+  take swing_slash_master
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb hit_slash_master__recover_big "Master Sword slash hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 2600
+  take swing_slash_master
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3140 2670
+  take swing_slash_giant
+
+verb hit_slash_giant__move_small "Two-handed sword slash hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 2740
+  take swing_slash_giant
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 6 dmg_small
+
+verb hit_slash_giant__stunned_small "Two-handed sword slash hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 2740
+  take swing_slash_giant
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 6 dmg_small
+
+verb hit_slash_giant__recover_small "Two-handed sword slash hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 2810
+  take swing_slash_giant
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 6 dmg_small
+
+verb hit_slash_giant__move_big "Two-handed sword slash hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 2810
+  take swing_slash_giant
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 6 dmg_big
+
+verb hit_slash_giant__stunned_big "Two-handed sword slash hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 2880
+  take swing_slash_giant
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 6 dmg_big
+
+verb hit_slash_giant__recover_big "Two-handed sword slash hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 2880
+  take swing_slash_giant
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 6 dmg_big
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3140 2950
+  take swing_arrow_fire
+
+verb hit_arrow_fire__move_small "Fire arrow hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 3020
+  take swing_arrow_fire
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_fire__stunned_small "Fire arrow hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 3020
+  take swing_arrow_fire
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_fire__recover_small "Fire arrow hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 3090
+  take swing_arrow_fire
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_fire__move_big "Fire arrow hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 3090
+  take swing_arrow_fire
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_arrow_fire__stunned_big "Fire arrow hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 3160
+  take swing_arrow_fire
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_arrow_fire__recover_big "Fire arrow hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 3160
+  take swing_arrow_fire
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3140 3230
+  take swing_arrow_ice
+
+verb hit_arrow_ice__move_small "Ice arrow hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 3300
+  take swing_arrow_ice
+  take phase_move_small
+  give phase_stunned_small
+  give timer_stunned_small
+  give 4 dmg_small
+
+verb hit_arrow_ice__stunned_small "Ice arrow hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 3300
+  take swing_arrow_ice
+  need phase_stunned_small
+  give 4 dmg_small
+
+verb hit_arrow_ice__recover_small "Ice arrow hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 3370
+  take swing_arrow_ice
+  take phase_recover_small
+  give phase_stunned_small
+  give timer_stunned_small
+  give 4 dmg_small
+
+verb hit_arrow_ice__move_big "Ice arrow hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 3370
+  take swing_arrow_ice
+  take phase_move_big
+  give phase_stunned_big
+  give timer_stunned_big
+  give 4 dmg_big
+
+verb hit_arrow_ice__stunned_big "Ice arrow hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 3440
+  take swing_arrow_ice
+  need phase_stunned_big
+  give 4 dmg_big
+
+verb hit_arrow_ice__recover_big "Ice arrow hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 3440
+  take swing_arrow_ice
+  take phase_recover_big
+  give phase_stunned_big
+  give timer_stunned_big
+  give 4 dmg_big
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3140 3510
+  take swing_arrow_light
+
+verb hit_arrow_light__move_small "Light arrow hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 3580
+  take swing_arrow_light
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_light__stunned_small "Light arrow hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 3580
+  take swing_arrow_light
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_light__recover_small "Light arrow hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 3650
+  take swing_arrow_light
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_arrow_light__move_big "Light arrow hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 3650
+  take swing_arrow_light
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_arrow_light__stunned_big "Light arrow hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 3720
+  take swing_arrow_light
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_arrow_light__recover_big "Light arrow hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 3720
+  take swing_arrow_light
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 3790
+  take swing_magic_fire
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 3860
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 3930
+  take swing_shield
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3000 4000
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__move_small "Kokiri spin attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3140 4000
+  take swing_spin_kokiri
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_spin_kokiri__stunned_small "Kokiri spin attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3000 4070
+  take swing_spin_kokiri
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_spin_kokiri__recover_small "Kokiri spin attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3140 4070
+  take swing_spin_kokiri
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_spin_kokiri__move_big "Kokiri spin attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3000 4140
+  take swing_spin_kokiri
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_spin_kokiri__stunned_big "Kokiri spin attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3140 4140
+  take swing_spin_kokiri
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_spin_kokiri__recover_big "Kokiri spin attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3000 4210
+  take swing_spin_kokiri
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 4210
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3140 4280
+  take swing_spin_giant
+
+verb hit_spin_giant__move_small "Two-handed spin attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 4350
+  take swing_spin_giant
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_spin_giant__stunned_small "Two-handed spin attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 4350
+  take swing_spin_giant
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_spin_giant__recover_small "Two-handed spin attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 4420
+  take swing_spin_giant
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_spin_giant__move_big "Two-handed spin attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 4420
+  take swing_spin_giant
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb hit_spin_giant__stunned_big "Two-handed spin attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 4490
+  take swing_spin_giant
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb hit_spin_giant__recover_big "Two-handed spin attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 4490
+  take swing_spin_giant
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 4560
+  take swing_spin_giant
+  need range_far
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3000 4630
+  take swing_spin_master
+
+verb hit_spin_master__move_small "Master Sword spin attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3140 4630
+  take swing_spin_master
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_spin_master__stunned_small "Master Sword spin attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3000 4700
+  take swing_spin_master
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_spin_master__recover_small "Master Sword spin attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3140 4700
+  take swing_spin_master
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_spin_master__move_big "Master Sword spin attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3000 4770
+  take swing_spin_master
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb hit_spin_master__stunned_big "Master Sword spin attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3140 4770
+  take swing_spin_master
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb hit_spin_master__recover_big "Master Sword spin attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3000 4840
+  take swing_spin_master
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 4840
+  take swing_spin_master
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 4910
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__move_small "Kokiri jump attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 4980
+  take swing_jump_kokiri
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_jump_kokiri__stunned_small "Kokiri jump attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 4980
+  take swing_jump_kokiri
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_jump_kokiri__recover_small "Kokiri jump attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 5050
+  take swing_jump_kokiri
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_jump_kokiri__move_big "Kokiri jump attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 5050
+  take swing_jump_kokiri
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_jump_kokiri__stunned_big "Kokiri jump attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 5120
+  take swing_jump_kokiri
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_jump_kokiri__recover_big "Kokiri jump attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 5120
+  take swing_jump_kokiri
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 5190
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__move_small "Kokiri jump attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 5260
+  take swing_jump_kokiri_self
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_jump_kokiri_self__stunned_small "Kokiri jump attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 5260
+  take swing_jump_kokiri_self
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_jump_kokiri_self__recover_small "Kokiri jump attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 5330
+  take swing_jump_kokiri_self
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 2 dmg_small
+
+verb hit_jump_kokiri_self__move_big "Kokiri jump attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 5330
+  take swing_jump_kokiri_self
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_jump_kokiri_self__stunned_big "Kokiri jump attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 5400
+  take swing_jump_kokiri_self
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb hit_jump_kokiri_self__recover_big "Kokiri jump attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 5400
+  take swing_jump_kokiri_self
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 2 dmg_big
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 5470
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 5540
+  take swing_jump_giant
+
+verb hit_jump_giant__move_small "Two-handed jump attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3140 5540
+  take swing_jump_giant
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_jump_giant__stunned_small "Two-handed jump attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3000 5610
+  take swing_jump_giant
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_jump_giant__recover_small "Two-handed jump attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3140 5610
+  take swing_jump_giant
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_jump_giant__move_big "Two-handed jump attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3000 5680
+  take swing_jump_giant
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb hit_jump_giant__stunned_big "Two-handed jump attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3140 5680
+  take swing_jump_giant
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb hit_jump_giant__recover_big "Two-handed jump attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3000 5750
+  take swing_jump_giant
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 5820
+  take swing_jump_giant_self
+
+verb hit_jump_giant_self__move_small "Two-handed jump attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3140 5820
+  take swing_jump_giant_self
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_jump_giant_self__stunned_small "Two-handed jump attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3000 5890
+  take swing_jump_giant_self
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_jump_giant_self__recover_small "Two-handed jump attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3140 5890
+  take swing_jump_giant_self
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 8 dmg_small
+
+verb hit_jump_giant_self__move_big "Two-handed jump attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3000 5960
+  take swing_jump_giant_self
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb hit_jump_giant_self__stunned_big "Two-handed jump attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3140 5960
+  take swing_jump_giant_self
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb hit_jump_giant_self__recover_big "Two-handed jump attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3000 6030
+  take swing_jump_giant_self
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 8 dmg_big
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 6030
+  take swing_jump_giant_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 6100
+  take swing_jump_master
+
+verb hit_jump_master__move_small "Master Sword jump attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 6170
+  take swing_jump_master
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_jump_master__stunned_small "Master Sword jump attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 6170
+  take swing_jump_master
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_jump_master__recover_small "Master Sword jump attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 6240
+  take swing_jump_master
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_jump_master__move_big "Master Sword jump attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 6240
+  take swing_jump_master
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb hit_jump_master__stunned_big "Master Sword jump attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 6310
+  take swing_jump_master
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb hit_jump_master__recover_big "Master Sword jump attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 6310
+  take swing_jump_master
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 6380
+  take swing_jump_master_self
+
+verb hit_jump_master_self__move_small "Master Sword jump attack hits (Leever spins across the sand at Link)" by world priority 80 in hits at 3000 6450
+  take swing_jump_master_self
+  take phase_move_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_jump_master_self__stunned_small "Master Sword jump attack hits (Leever is knocked back, stunned)" by world priority 80 in hits at 3140 6450
+  take swing_jump_master_self
+  take phase_stunned_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_jump_master_self__recover_small "Master Sword jump attack hits (Leever shakes off the stun)" by world priority 80 in hits at 3000 6520
+  take swing_jump_master_self
+  take phase_recover_small
+  give phase_damaged_small
+  give timer_damaged_small
+  give 4 dmg_small
+
+verb hit_jump_master_self__move_big "Master Sword jump attack hits (Big Leever spins across the sand at Link)" by world priority 80 in hits at 3140 6520
+  take swing_jump_master_self
+  take phase_move_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb hit_jump_master_self__stunned_big "Master Sword jump attack hits (Big Leever is knocked back, stunned)" by world priority 80 in hits at 3000 6590
+  take swing_jump_master_self
+  take phase_stunned_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb hit_jump_master_self__recover_big "Master Sword jump attack hits (Big Leever shakes off the stun)" by world priority 80 in hits at 3140 6590
+  take swing_jump_master_self
+  take phase_recover_big
+  give phase_damaged_big
+  give timer_damaged_big
+  give 4 dmg_big
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 6660
+  take swing_jump_master_self
+  need range_far
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3000 6730
+  take swing_hammer_jump
+
+verb small_empty_in_damaged_small "Leever runs out (Leever reels from a hit)" by world priority 92 in enemy_health at 2360 430
+  unless hp_small
+  take alive_small
+  take phase_damaged_small
+  give link_wins
+
+verb small_empty_in_stunned_small "Leever runs out (Leever is knocked back, stunned)" by world priority 92 in enemy_health at 2500 430
+  unless hp_small
+  take alive_small
+  take phase_stunned_small
+  give link_wins
+
+verb big_empty_in_damaged_big "Big Leever runs out (Big Leever reels from a hit)" by world priority 92 in enemy_health at 2360 500
+  unless hp_big
+  take alive_big
+  take phase_damaged_big
+  give link_wins
+
+verb big_empty_in_stunned_big "Big Leever runs out (Big Leever is knocked back, stunned)" by world priority 92 in enemy_health at 2500 500
+  unless hp_big
+  take alive_big
+  take phase_stunned_big
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 1550
+  take link_turn
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 1550
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1620
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1620
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1690
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1690
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1760
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1760
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 1830
+  take link_turn
+  take has_red_potion
+  give 8 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 1830
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2680 1900
+  take link_turn
+  take has_blue_potion
+  give 8 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2820 1900
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2680 1970
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Leever gets ready" by world priority 70 in enemy at 2180 1060
+  take enemy_turn
+  give enemy_act
+
+verb surface_small_ticks "Leever rises out of the sand: a beat passes" by world priority 71 in enemy at 2040 1130
+  take enemy_turn
+  need phase_surface_small
+  take timer_surface_small
+  give enemy_act
+
+verb surface_small_step_1 "Leever surfaces and aims at Link" by world priority 69 in enemy at 2180 1130
+  take enemy_act
+  take phase_surface_small
+  give phase_move_small
+  give 7 timer_move_small
+  unless timer_surface_small
+  give beat_end
+
+verb move_small_ticks "Leever spins across the sand at Link: a beat passes" by world priority 71 in enemy at 2040 1200
+  take enemy_turn
+  need phase_move_small
+  take timer_move_small
+  give enemy_act
+
+verb move_small_step_1 "Leever charges at Link" by world priority 69 in enemy at 2180 1200
+  take enemy_act
+  need phase_move_small
+  give beat_end
+  take range_far
+  give range_near
+
+verb move_small_step_2 "Leever spins into Link and sinks" by world priority 69 in enemy at 2040 1270
+  take enemy_act
+  take phase_move_small
+  give phase_sunk
+  give incoming_spin
+  give beat_end
+  need range_near
+
+verb move_small_step_3 "Leever runs out of time and sinks" by world priority 69 in enemy at 2180 1270
+  take enemy_act
+  take phase_move_small
+  give phase_sunk
+  unless timer_move_small
+  give beat_end
+
+verb damaged_small_ticks "Leever reels from a hit: a beat passes" by world priority 71 in enemy at 2040 1340
+  take enemy_turn
+  need phase_damaged_small
+  take timer_damaged_small
+  give enemy_act
+
+verb damaged_small_step_1 "Leever sinks after the hit" by world priority 69 in enemy at 2180 1340
+  take enemy_act
+  take phase_damaged_small
+  give phase_sunk
+  unless timer_damaged_small
+  give beat_end
+
+verb stunned_small_ticks "Leever is knocked back, stunned: a beat passes" by world priority 71 in enemy at 2040 1410
+  take enemy_turn
+  need phase_stunned_small
+  take timer_stunned_small
+  give enemy_act
+
+verb stunned_small_step_1 "Leever stops sliding" by world priority 69 in enemy at 2180 1410
+  take enemy_act
+  take phase_stunned_small
+  give phase_recover_small
+  give 3 timer_recover_small
+  unless timer_stunned_small
+  give beat_end
+
+verb recover_small_ticks "Leever shakes off the stun: a beat passes" by world priority 71 in enemy at 2040 1480
+  take enemy_turn
+  need phase_recover_small
+  take timer_recover_small
+  give enemy_act
+
+verb recover_small_step_1 "Leever recovers and sinks" by world priority 69 in enemy at 2180 1480
+  take enemy_act
+  take phase_recover_small
+  give phase_sunk
+  unless timer_recover_small
+  give beat_end
+
+verb recover_small_holds "Leever shakes off the stun: nothing changes" by world priority 68 in enemy at 2040 1550
+  take enemy_act
+  need phase_recover_small
+  give beat_end
+
+verb surface_big_ticks "Big Leever rises out of the sand: a beat passes" by world priority 71 in enemy at 2180 1550
+  take enemy_turn
+  need phase_surface_big
+  take timer_surface_big
+  give enemy_act
+
+verb surface_big_step_1 "Big Leever surfaces" by world priority 69 in enemy at 2040 1620
+  take enemy_act
+  take phase_surface_big
+  give phase_move_big
+  unless timer_surface_big
+  give beat_end
+
+verb move_big_step_1 "Big Leever closes on Link" by world priority 69 in enemy at 2180 1620
+  take enemy_act
+  need phase_move_big
+  give beat_end
+  take range_far
+  give range_near
+
+verb move_big_step_2 "Big Leever spins into Link" by world priority 69 in enemy at 2040 1690
+  take enemy_act
+  need phase_move_big
+  give incoming_spin_big
+  give beat_end
+  need range_near
+
+verb damaged_big_ticks "Big Leever reels from a hit: a beat passes" by world priority 71 in enemy at 2180 1690
+  take enemy_turn
+  need phase_damaged_big
+  take timer_damaged_big
+  give enemy_act
+
+verb damaged_big_step_1 "Big Leever comes back around" by world priority 69 in enemy at 2040 1760
+  take enemy_act
+  take phase_damaged_big
+  give phase_move_big
+  unless timer_damaged_big
+  give beat_end
+
+verb stunned_big_ticks "Big Leever is knocked back, stunned: a beat passes" by world priority 71 in enemy at 2180 1760
+  take enemy_turn
+  need phase_stunned_big
+  take timer_stunned_big
+  give enemy_act
+
+verb stunned_big_step_1 "Big Leever stops sliding" by world priority 69 in enemy at 2040 1830
+  take enemy_act
+  take phase_stunned_big
+  give phase_recover_big
+  give 3 timer_recover_big
+  unless timer_stunned_big
+  give beat_end
+
+verb recover_big_ticks "Big Leever shakes off the stun: a beat passes" by world priority 71 in enemy at 2180 1830
+  take enemy_turn
+  need phase_recover_big
+  take timer_recover_big
+  give enemy_act
+
+verb recover_big_step_1 "Big Leever recovers" by world priority 69 in enemy at 2040 1900
+  take enemy_act
+  take phase_recover_big
+  give phase_move_big
+  unless timer_recover_big
+  give beat_end
+
+verb recover_big_holds "Big Leever shakes off the stun: nothing changes" by world priority 68 in enemy at 2180 1900
+  take enemy_act
+  need phase_recover_big
+  give beat_end
+
+verb sunk_holds "The Leever has sunk away into the sand and is gone: nothing changes" by world priority 68 in enemy at 2040 1970
+  take enemy_act
+  need phase_sunk
+  give beat_end
+
+verb spin_blocked_deku_shield "Leever spin: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+  take incoming_spin
+  need guard_with_deku_shield
+
+verb spin_blocked_hylian_shield "Leever spin: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_spin
+  need guard_with_hylian_shield
+
+verb spin_blocked_mirror_shield "Leever spin: blocked by the mirror shield" by world priority 60 in attacks at 3460 150
+  take incoming_spin
+  need guard_with_mirror_shield
+
+verb spin_dodged "Leever spin: dodged" by world priority 60 in attacks at 3320 220
+  take incoming_spin
+  need link_dodge
+  unless link_guard
+
+verb spin_nayru "Leever spin: Nayru's Love holds" by world priority 60 in attacks at 3460 220
+  take incoming_spin
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb spin_lands "Leever spin hits Link" by world priority 60 in attacks at 3320 290
+  take incoming_spin
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+
+verb spin_lands_dd "Leever spin hits Link" by world priority 60 in attacks at 3460 290
+  take incoming_spin
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+
+verb spin_big_blocked_deku_shield "Big Leever spin: blocked by the deku shield" by world priority 60 in attacks at 3460 360
+  take incoming_spin_big
+  need guard_with_deku_shield
+
+verb spin_big_blocked_hylian_shield "Big Leever spin: blocked by the hylian shield" by world priority 60 in attacks at 3320 430
+  take incoming_spin_big
+  need guard_with_hylian_shield
+
+verb spin_big_blocked_mirror_shield "Big Leever spin: blocked by the mirror shield" by world priority 60 in attacks at 3460 430
+  take incoming_spin_big
+  need guard_with_mirror_shield
+
+verb spin_big_dodged "Big Leever spin: dodged" by world priority 60 in attacks at 3320 500
+  take incoming_spin_big
+  need link_dodge
+  unless link_guard
+
+verb spin_big_nayru_near "Big Leever spin: Nayru's Love holds, Link is knocked back" by world priority 60 in attacks at 3460 500
+  take incoming_spin_big
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+  take range_near
+  give range_far
+
+verb spin_big_lands_near "Big Leever spin hits Link, knocking him back" by world priority 60 in attacks at 3320 570
+  take incoming_spin_big
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 4 link_dmg
+  take range_near
+  give range_far
+
+verb spin_big_lands_dd_near "Big Leever spin hits Link, knocking him back" by world priority 60 in attacks at 3460 570
+  take incoming_spin_big
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 2 link_dmg
+  take range_near
+  give range_far
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 580 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 440 360
+  need beat_end
+  take link_dodge
+
+verb nayru_ticks "Link: nayru wears on" by world priority 48 in beat at 440 430
+  take beat_end
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 48 in beat at 580 430
+  take beat_end
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 47 in beat at 580 500
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 47 in beat at 440 570
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 47 in beat at 580 570
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 580 640
+  take lens_count
+  unless lens_on

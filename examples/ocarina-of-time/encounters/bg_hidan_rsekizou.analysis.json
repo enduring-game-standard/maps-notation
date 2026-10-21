@@ -1,0 +1,122 @@
+{
+ "positions": 8567,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "turning_timer_clears",
+  "flame_lands_again",
+  "flame_lands_dd_again"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 336,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 105,
+    "Link falls": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 795
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 68,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 21,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 330
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 556,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 175,
+    "Link falls": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1016
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 470,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 147,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 873
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 223,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 69,
+    "Link falls": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 576
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 1478,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 462,
+    "Link falls": 47
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1630
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 3559,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1168,
+    "Link falls": 26
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3368
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 1877,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 588,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2293
+  }
+ ]
+}

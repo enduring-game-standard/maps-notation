@@ -1,0 +1,857 @@
+maps 2
+title "Ocarina of Time combat: Link vs King Dodongo"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "King Dodongo answers" in beat at 580 80
+state enemy_act "King Dodongo acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 1/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 120 150
+state link_wins "King Dodongo defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state phase_walk_recover "King Dodongo plods along the wall, not yet deciding" in enemy at 2040 80
+state timer_walk_recover "King Dodongo plods along the wall, not yet deciding: beats left" in enemy at 2180 80
+state phase_walk_free "King Dodongo plods along the wall, watching Link" in enemy at 2180 150
+state phase_inhale "King Dodongo inhales" in enemy at 2040 220
+state timer_inhale "King Dodongo inhales: beats left" in enemy at 2180 220
+state phase_blow "King Dodongo breathes fire" in enemy at 2180 290
+state timer_blow "King Dodongo breathes fire: beats left" in enemy at 2040 360
+state phase_explode "The bomb goes off in his belly" in enemy at 2040 430
+state timer_explode "The bomb goes off in his belly: beats left" in enemy at 2180 430
+state phase_down "King Dodongo lies stunned" in enemy at 2180 500
+state timer_down "King Dodongo lies stunned: beats left" in enemy at 2040 570
+state phase_getup "King Dodongo gets up" in enemy at 2040 640
+state phase_damaged "King Dodongo reels from the sword" in enemy at 2180 640
+state phase_roll "King Dodongo curls up and rolls around the arena" in enemy at 2040 710
+state timer_roll "King Dodongo curls up and rolls around the arena: beats left" in enemy at 2180 710
+state hp_body "King Dodongo: health" marks 12 in enemy_health at 2360 80
+state alive_body "King Dodongo: standing" marks 1 in enemy_health at 2500 80
+state dmg_body "King Dodongo: damage" in enemy_health at 2360 150
+state status_burn "Link: burn (beats left)" in link_state at 1220 290
+state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
+state lens_on "Lens of Truth on" in link_state at 1220 360
+state link_guard "Link holds up his shield" in link_state at 1080 430
+state link_dodge "Link dodges" in link_state at 1220 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3000 150
+state swing_slingshot "Slingshot seed on its way" in hits at 3140 220
+state swing_explosive "Explosion on its way" in hits at 3000 360
+state swing_boomerang "Boomerang on its way" in hits at 3140 430
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 570
+state swing_magic_fire "Din's Fire on its way" in hits at 3140 640
+state swing_shield "Shield on its way" in hits at 3000 780
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3000 850
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 990
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3140 1060
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 1200
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1220 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
+state incoming_roll "King Dodongo rolls into Link incoming" in attacks at 3320 80
+state incoming_fire "Fire breath incoming" in attacks at 3320 290
+state tick_burn "Beat ends: burn checked" in beat at 440 360
+state tick_nayru "Beat ends: nayru checked" in beat at 580 360
+state burn_count "Link: burn: beats toward the next cost" in beat at 440 430
+state lens_count "The Lens: beats toward the next cost" in beat at 580 640
+
+verb walk_recover_timer_clears "King Dodongo plods along the wall, not yet deciding is over" by world priority 99 in enemy at 2040 150
+  take timer_walk_recover
+  unless phase_walk_recover
+
+verb inhale_timer_clears "King Dodongo inhales is over" by world priority 99 in enemy at 2040 290
+  take timer_inhale
+  unless phase_inhale
+
+verb blow_timer_clears "King Dodongo breathes fire is over" by world priority 99 in enemy at 2180 360
+  take timer_blow
+  unless phase_blow
+
+verb explode_timer_clears "The bomb goes off in his belly is over" by world priority 99 in enemy at 2040 500
+  take timer_explode
+  unless phase_explode
+
+verb down_timer_clears "King Dodongo lies stunned is over" by world priority 99 in enemy at 2180 570
+  take timer_down
+  unless phase_down
+
+verb roll_timer_clears "King Dodongo curls up and rolls around the arena is over" by world priority 99 in enemy at 2040 780
+  take timer_roll
+  unless phase_roll
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 260 150
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give phase_walk_recover
+  give 3 timer_walk_recover
+  give range_far
+  give link_turn
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_walk_recover
+  give 3 timer_walk_recover
+  give range_far
+  give link_turn
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_walk_recover
+  give 3 timer_walk_recover
+  give range_far
+  give link_turn
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_walk_recover
+  give 3 timer_walk_recover
+  give range_far
+  give link_turn
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_walk_recover
+  give 3 timer_walk_recover
+  give range_far
+  give link_turn
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give phase_walk_recover
+  give 3 timer_walk_recover
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 98 in link_state at 1080 500
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 98 in link_state at 1220 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 97 in link_state at 1080 570
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 97 in link_state at 1220 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 94 in link_state at 1080 640
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 93 in link_state at 1220 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 90 in link_state at 1080 710
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 32 link_heal
+
+verb link_fell "Link falls" by world priority 89 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb body_hurt "King Dodongo loses health" by world priority 96 in enemy_health at 2500 150
+  take dmg_body
+  take hp_body
+
+verb body_overkill "King Dodongo has no health left to lose" by world priority 95 in enemy_health at 2360 220
+  take dmg_body
+  unless hp_body
+
+verb link_deku_nut "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2820 80
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2680 150
+  take link_turn
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 150
+  take link_turn
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2680 220
+  take link_turn
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 220
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_magic_fire "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 290
+  take link_turn
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 290
+  take link_turn
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 360
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 360
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2820 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 500
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2820 500
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3140 150
+  take swing_deku_stick
+
+verb hit_deku_stick__down "Deku Stick hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 220
+  take swing_deku_stick
+  take phase_down
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3000 290
+  take swing_slingshot
+
+verb hit_slingshot__inhale "Slingshot seed hits (King Dodongo inhales)" by world priority 80 in hits at 3140 290
+  take swing_slingshot
+  take phase_inhale
+  give phase_walk_recover
+  give 3 timer_walk_recover
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 360
+  take swing_explosive
+
+verb hit_explosive__inhale "Explosion hits (King Dodongo inhales)" by world priority 80 in hits at 3000 430
+  take swing_explosive
+  take phase_inhale
+  give phase_explode
+  give 2 timer_explode
+  give 2 dmg_body
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3000 500
+  take swing_boomerang
+
+verb hit_boomerang__inhale "Boomerang hits (King Dodongo inhales)" by world priority 80 in hits at 3140 500
+  take swing_boomerang
+  take phase_inhale
+  give phase_walk_recover
+  give 3 timer_walk_recover
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3140 570
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__down "Kokiri Sword slash hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 640
+  take swing_slash_kokiri
+  take phase_down
+  give phase_damaged
+  give dmg_body
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 710
+  take swing_magic_fire
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 710
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 780
+  take swing_shield
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3140 850
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__down "Kokiri spin attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 920
+  take swing_spin_kokiri
+  take phase_down
+  give phase_damaged
+  give dmg_body
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 920
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 990
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__down "Kokiri jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3000 1060
+  take swing_jump_kokiri
+  take phase_down
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 1130
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__down "Kokiri jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3140 1130
+  take swing_jump_kokiri_self
+  take phase_down
+  give phase_damaged
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 1200
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 1270
+  take swing_jump_master
+
+verb hit_jump_master__down "Master Sword jump attack hits (King Dodongo lies stunned)" by world priority 80 in hits at 3140 1270
+  take swing_jump_master
+  take phase_down
+  give phase_damaged
+  give 4 dmg_body
+
+verb body_empty_in_explode "King Dodongo runs out (The bomb goes off in his belly)" by world priority 92 in enemy_health at 2500 220
+  unless hp_body
+  take alive_body
+  take phase_explode
+  give link_wins
+
+verb body_empty_in_damaged "King Dodongo runs out (King Dodongo reels from the sword)" by world priority 92 in enemy_health at 2360 290
+  unless hp_body
+  take alive_body
+  take phase_damaged
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 570
+  take link_turn
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 570
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 640
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 640
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 710
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 710
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 780
+  take link_turn
+  take has_red_potion
+  give 32 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 780
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2680 850
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2820 850
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 920
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "King Dodongo gets ready" by world priority 70 in enemy at 2180 780
+  take enemy_turn
+  give enemy_act
+
+verb walk_recover_ticks "King Dodongo plods along the wall, not yet deciding: a beat passes" by world priority 71 in enemy at 2040 850
+  take enemy_turn
+  need phase_walk_recover
+  take timer_walk_recover
+  give enemy_act
+
+verb walk_recover_step_1 "King Dodongo looks for Link" by world priority 69 in enemy at 2180 850
+  take enemy_act
+  take phase_walk_recover
+  give phase_walk_free
+  unless timer_walk_recover
+  give beat_end
+
+verb walk_recover_holds "King Dodongo plods along the wall, not yet deciding: nothing changes" by world priority 68 in enemy at 2040 920
+  take enemy_act
+  need phase_walk_recover
+  give beat_end
+
+verb walk_free_step_1 "Link is ahead of him; he draws breath" by world priority 69 in enemy at 2180 920
+  take enemy_act
+  take phase_walk_free
+  give phase_inhale
+  give 5 timer_inhale
+  give beat_end
+  need range_near
+
+verb walk_free_step_2 "Link is off to the side; he rolls" by world priority 69 in enemy at 2040 990
+  take enemy_act
+  take phase_walk_free
+  give phase_roll
+  give timer_roll
+  give beat_end
+  need range_far
+
+verb inhale_ticks "King Dodongo inhales: a beat passes" by world priority 71 in enemy at 2180 990
+  take enemy_turn
+  need phase_inhale
+  take timer_inhale
+  give enemy_act
+
+verb inhale_step_1 "King Dodongo breathes fire over Link" by world priority 69 in enemy at 2040 1060
+  take enemy_act
+  take phase_inhale
+  give phase_blow
+  give 3 timer_blow
+  unless timer_inhale
+  give incoming_fire
+  give beat_end
+  need range_near
+
+verb inhale_step_2 "King Dodongo breathes fire, out of Link's way" by world priority 69 in enemy at 2180 1060
+  take enemy_act
+  take phase_inhale
+  give phase_blow
+  give 3 timer_blow
+  unless timer_inhale
+  give beat_end
+  need range_far
+
+verb inhale_holds "King Dodongo inhales: nothing changes" by world priority 68 in enemy at 2040 1130
+  take enemy_act
+  need phase_inhale
+  give beat_end
+
+verb blow_ticks "King Dodongo breathes fire: a beat passes" by world priority 71 in enemy at 2180 1130
+  take enemy_turn
+  need phase_blow
+  take timer_blow
+  give enemy_act
+
+verb blow_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2040 1200
+  take enemy_act
+  take phase_blow
+  give phase_roll
+  give timer_roll
+  unless timer_blow
+  give beat_end
+
+verb blow_holds "King Dodongo breathes fire: nothing changes" by world priority 68 in enemy at 2180 1200
+  take enemy_act
+  need phase_blow
+  give beat_end
+
+verb explode_ticks "The bomb goes off in his belly: a beat passes" by world priority 71 in enemy at 2040 1270
+  take enemy_turn
+  need phase_explode
+  take timer_explode
+  give enemy_act
+
+verb explode_step_1 "King Dodongo slumps" by world priority 69 in enemy at 2180 1270
+  take enemy_act
+  take phase_explode
+  give phase_down
+  give 5 timer_down
+  unless timer_explode
+  give beat_end
+
+verb explode_holds "The bomb goes off in his belly: nothing changes" by world priority 68 in enemy at 2040 1340
+  take enemy_act
+  need phase_explode
+  give beat_end
+
+verb down_ticks "King Dodongo lies stunned: a beat passes" by world priority 71 in enemy at 2180 1340
+  take enemy_turn
+  need phase_down
+  take timer_down
+  give enemy_act
+
+verb down_step_1 "King Dodongo stirs" by world priority 69 in enemy at 2040 1410
+  take enemy_act
+  take phase_down
+  give phase_getup
+  unless timer_down
+  give beat_end
+
+verb down_holds "King Dodongo lies stunned: nothing changes" by world priority 68 in enemy at 2180 1410
+  take enemy_act
+  need phase_down
+  give beat_end
+
+verb getup_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2040 1480
+  take enemy_act
+  take phase_getup
+  give phase_roll
+  give timer_roll
+  give beat_end
+
+verb damaged_step_1 "King Dodongo rolls" by world priority 69 in enemy at 2180 1480
+  take enemy_act
+  take phase_damaged
+  give phase_roll
+  give timer_roll
+  give beat_end
+
+verb roll_ticks "King Dodongo curls up and rolls around the arena: a beat passes" by world priority 71 in enemy at 2040 1550
+  take enemy_turn
+  need phase_roll
+  take timer_roll
+  give enemy_act
+
+verb roll_step_1 "King Dodongo rolls over Link" by world priority 69 in enemy at 2180 1550
+  take enemy_act
+  take phase_roll
+  give phase_walk_free
+  unless timer_roll
+  give incoming_roll
+  give beat_end
+  need range_near
+
+verb roll_step_2 "King Dodongo rolls into the wall" by world priority 69 in enemy at 2040 1620
+  take enemy_act
+  take phase_roll
+  give phase_walk_free
+  unless timer_roll
+  give beat_end
+  need range_far
+
+verb roll_blocked_deku_shield "King Dodongo rolls into Link: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+  take incoming_roll
+  need guard_with_deku_shield
+
+verb roll_blocked_hylian_shield "King Dodongo rolls into Link: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_roll
+  need guard_with_hylian_shield
+
+verb roll_dodged "King Dodongo rolls into Link: dodged" by world priority 60 in attacks at 3460 150
+  take incoming_roll
+  need link_dodge
+  unless link_guard
+
+verb roll_nayru "King Dodongo rolls into Link: Nayru's Love holds" by world priority 60 in attacks at 3320 220
+  take incoming_roll
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb roll_lands "King Dodongo rolls into Link hits Link" by world priority 60 in attacks at 3460 220
+  take incoming_roll
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  give 4 link_dmg
+
+verb fire_dodged "Fire breath: dodged" by world priority 60 in attacks at 3460 290
+  take incoming_fire
+  need link_dodge
+
+verb fire_nayru "Fire breath: Nayru's Love holds" by world priority 60 in attacks at 3320 360
+  take incoming_fire
+  need status_nayru
+  unless link_dodge
+
+verb fire_lands "Fire breath hits Link" by world priority 60 in attacks at 3460 360
+  take incoming_fire
+  unless link_dodge
+  unless status_nayru
+  give 8 link_dmg
+  give 5 status_burn
+  unless status_burn
+
+verb fire_lands_again "Fire breath hits Link again" by world priority 60 in attacks at 3320 430
+  take incoming_fire
+  unless link_dodge
+  unless status_nayru
+  give 8 link_dmg
+  need status_burn
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 580 290
+  need beat_end
+  take link_dodge
+
+verb burn_ticks "Link: burn wears on" by world priority 48 in beat at 580 430
+  take beat_end
+  take status_burn
+  unless burn_count
+  give burn_count
+  give tick_burn
+
+verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 440 500
+  take beat_end
+  take status_burn
+  take burn_count
+  give tick_burn
+  give 5 link_dmg
+
+verb burn_count_clears "Link: burn count resets" by world priority 99 in beat at 580 500
+  take burn_count
+  unless status_burn
+
+verb burn_idle "Link: no burn" by world priority 48 in beat at 440 570
+  take beat_end
+  unless status_burn
+  give tick_burn
+
+verb nayru_ticks "Link: nayru wears on" by world priority 47 in beat at 580 570
+  take tick_burn
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 47 in beat at 440 640
+  take tick_burn
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 46 in beat at 440 710
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 46 in beat at 580 710
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 46 in beat at 440 780
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 46 in beat at 580 780
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 99 in beat at 440 850
+  take lens_count
+  unless lens_on

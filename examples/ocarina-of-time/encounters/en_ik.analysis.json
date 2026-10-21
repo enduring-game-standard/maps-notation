@@ -1,0 +1,127 @@
+{
+ "positions": 52801,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 1976,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 455,
+    "Link wins": 10,
+    "Link falls": 300
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2383
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 398,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 91,
+    "Link wins": 4,
+    "Link falls": 60
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 519
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 2119,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 542,
+    "Link wins": 12,
+    "Link falls": 120
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2562
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 2766,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 637,
+    "Link wins": 14,
+    "Link falls": 420
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2633
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 859,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 219,
+    "Link wins": 9,
+    "Link falls": 48
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1183
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 8781,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2002,
+    "Link wins": 50,
+    "Link falls": 1404
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8145
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 24841,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6552,
+    "Link wins": 144,
+    "Link falls": 780
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 17402
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 11061,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2548,
+    "Link wins": 56,
+    "Link falls": 1680
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10326
+  }
+ ]
+}

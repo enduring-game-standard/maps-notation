@@ -1,0 +1,94 @@
+{
+ "positions": 3377,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "link_helpless_shock"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 27,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 87
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 101,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 32,
+    "Link falls": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 290
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 183,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 21
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 385
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 582,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 75
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 668
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 1755,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 39
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1507
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 729,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 84
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 937
+  }
+ ]
+}

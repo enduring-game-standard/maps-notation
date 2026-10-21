@@ -1,0 +1,318 @@
+{
+ "positions": 22147,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "p4_dive_1_timer_clears",
+  "p4_sink_1_timer_clears",
+  "p4_dive_2_timer_clears",
+  "p4_sink_2_timer_clears",
+  "p4_stun_3_timer_clears",
+  "p4_dive_3_timer_clears",
+  "body_touch_lands_again",
+  "bari_touch_lands_again",
+  "lightning_lands_again",
+  "link_helpless_shock"
+ ],
+ "kitSplit": {
+  "hit_magic_fire__p2_pause_5": [
+   "swing_magic_fire",
+   "phase_p2_pause_5"
+  ],
+  "hit_magic_fire__p2_stun_5": [
+   "swing_magic_fire",
+   "phase_p2_stun_5"
+  ],
+  "hit_magic_fire__p2_pause_4": [
+   "swing_magic_fire",
+   "phase_p2_pause_4"
+  ],
+  "hit_magic_fire__p2_stun_4": [
+   "swing_magic_fire",
+   "phase_p2_stun_4"
+  ],
+  "hit_magic_fire__p2_pause_3": [
+   "swing_magic_fire",
+   "phase_p2_pause_3"
+  ],
+  "hit_magic_fire__p2_stun_3": [
+   "swing_magic_fire",
+   "phase_p2_stun_3"
+  ],
+  "hit_magic_fire__p2_pause_2": [
+   "swing_magic_fire",
+   "phase_p2_pause_2"
+  ],
+  "hit_magic_fire__p2_stun_2": [
+   "swing_magic_fire",
+   "phase_p2_stun_2"
+  ],
+  "hit_magic_fire__p2_pause_1": [
+   "swing_magic_fire",
+   "phase_p2_pause_1"
+  ],
+  "hit_magic_fire__p2_stun_1": [
+   "swing_magic_fire",
+   "phase_p2_stun_1"
+  ],
+  "hit_magic_fire__p3_stun_5": [
+   "swing_magic_fire",
+   "phase_p3_stun_5"
+  ],
+  "hit_magic_fire__p3_stun_4": [
+   "swing_magic_fire",
+   "phase_p3_stun_4"
+  ],
+  "hit_magic_fire__p3_stun_3": [
+   "swing_magic_fire",
+   "phase_p3_stun_3"
+  ],
+  "hit_magic_fire__p3_stun_2": [
+   "swing_magic_fire",
+   "phase_p3_stun_2"
+  ],
+  "hit_magic_fire__p3_stun_1": [
+   "swing_magic_fire",
+   "phase_p3_stun_1"
+  ],
+  "hit_spin_kokiri__p2_pause_5": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_5"
+  ],
+  "hit_spin_kokiri__p2_stun_5": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_5"
+  ],
+  "hit_spin_kokiri__p2_pause_4": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_4"
+  ],
+  "hit_spin_kokiri__p2_stun_4": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_4"
+  ],
+  "hit_spin_kokiri__p2_pause_3": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_3"
+  ],
+  "hit_spin_kokiri__p2_stun_3": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_3"
+  ],
+  "hit_spin_kokiri__p2_pause_2": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_2"
+  ],
+  "hit_spin_kokiri__p2_stun_2": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_2"
+  ],
+  "hit_spin_kokiri__p2_pause_1": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_1"
+  ],
+  "hit_spin_kokiri__p2_stun_1": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_1"
+  ],
+  "hit_spin_kokiri__p3_stun_5": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_5"
+  ],
+  "hit_spin_kokiri__p3_stun_4": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_4"
+  ],
+  "hit_spin_kokiri__p3_stun_3": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_3"
+  ],
+  "hit_spin_kokiri__p3_stun_2": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_2"
+  ],
+  "hit_spin_kokiri__p3_stun_1": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_1"
+  ],
+  "hit_spin_kokiri__p4_stun_1": [
+   "swing_spin_kokiri",
+   "phase_p4_stun_1"
+  ],
+  "hit_spin_kokiri__p4_stun_2": [
+   "swing_spin_kokiri",
+   "phase_p4_stun_2"
+  ],
+  "hit_spin_kokiri__p4_stun_3": [
+   "swing_spin_kokiri",
+   "phase_p4_stun_3"
+  ],
+  "hit_jump_kokiri_self__p2_pause_5": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_5"
+  ],
+  "hit_jump_kokiri_self__p2_stun_5": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_5"
+  ],
+  "hit_jump_kokiri_self__p2_pause_4": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_4"
+  ],
+  "hit_jump_kokiri_self__p2_stun_4": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_4"
+  ],
+  "hit_jump_kokiri_self__p2_pause_3": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_3"
+  ],
+  "hit_jump_kokiri_self__p2_stun_3": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_3"
+  ],
+  "hit_jump_kokiri_self__p2_pause_2": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_2"
+  ],
+  "hit_jump_kokiri_self__p2_stun_2": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_2"
+  ],
+  "hit_jump_kokiri_self__p2_pause_1": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_1"
+  ],
+  "hit_jump_kokiri_self__p2_stun_1": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_1"
+  ],
+  "hit_jump_kokiri_self__p3_stun_5": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_5"
+  ],
+  "hit_jump_kokiri_self__p3_stun_4": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_4"
+  ],
+  "hit_jump_kokiri_self__p3_stun_3": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_3"
+  ],
+  "hit_jump_kokiri_self__p3_stun_2": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_2"
+  ],
+  "hit_jump_kokiri_self__p3_stun_1": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_1"
+  ],
+  "hit_jump_kokiri_self__p4_stun_1": [
+   "swing_jump_kokiri_self",
+   "phase_p4_stun_1"
+  ],
+  "hit_jump_kokiri_self__p4_stun_2": [
+   "swing_jump_kokiri_self",
+   "phase_p4_stun_2"
+  ],
+  "hit_jump_kokiri_self__p4_stun_3": [
+   "swing_jump_kokiri_self",
+   "phase_p4_stun_3"
+  ],
+  "bari_touch_blocked_hylian_shield": [
+   "incoming_bari_touch",
+   "guard_with_hylian_shield"
+  ],
+  "bari_touch_nayru": [
+   "incoming_bari_touch",
+   "status_nayru"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 18656,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5440,
+    "Link falls": 2245,
+    "Link wins": 64
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 56363
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 105,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 32,
+    "Link falls": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 359
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 197,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 769
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 623,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 94
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2023
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 1781,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 52
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3306
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 785,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2879
+  }
+ ]
+}

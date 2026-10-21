@@ -1,0 +1,119 @@
+{
+ "positions": 2643,
+ "complete": true,
+ "outcomes": [
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "link_heals",
+  "link_hurt",
+  "link_hurt_overkill",
+  "fairy_revives_link",
+  "link_fell",
+  "hit_deku_stick__up",
+  "hit_deku_stick__looking",
+  "hit_deku_stick__throw",
+  "hit_deku_stick__up_after_throw",
+  "hit_slash_kokiri__up",
+  "hit_slash_kokiri__looking",
+  "hit_slash_kokiri__throw",
+  "hit_slash_kokiri__up_after_throw",
+  "hit_magic_fire__up",
+  "hit_magic_fire__looking",
+  "hit_magic_fire__throw",
+  "hit_magic_fire__up_after_throw",
+  "hit_spin_kokiri__up",
+  "hit_spin_kokiri__looking",
+  "hit_spin_kokiri__throw",
+  "hit_spin_kokiri__up_after_throw",
+  "hit_jump_kokiri__up",
+  "hit_jump_kokiri__looking",
+  "hit_jump_kokiri__throw",
+  "hit_jump_kokiri__up_after_throw",
+  "hit_jump_kokiri_self__up",
+  "hit_jump_kokiri_self__looking",
+  "hit_jump_kokiri_self__throw",
+  "hit_jump_kokiri_self__up_after_throw",
+  "hit_jump_master__up",
+  "hit_jump_master__looking",
+  "hit_jump_master__throw",
+  "hit_jump_master__up_after_throw"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 21,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 45
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 41,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 12
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 54
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 141,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 42
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 196
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 441,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 132
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 451
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 1438,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 431
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1061
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 561,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 168
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 629
+  }
+ ]
+}

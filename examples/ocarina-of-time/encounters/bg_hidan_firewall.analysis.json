@@ -1,0 +1,120 @@
+{
+ "positions": 13356,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "countdown_timer_clears"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 581,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 145,
+    "Link falls": 80
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1410
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 117,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 29,
+    "Link falls": 16
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 556
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 1471,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 421,
+    "Link falls": 32
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 3194
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 813,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 203,
+    "Link falls": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2576
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 529,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 144,
+    "Link falls": 33
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1452
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 2577,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 638,
+    "Link falls": 376
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4092
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 4019,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1205,
+    "Link falls": 217
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7282
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 3249,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 812,
+    "Link falls": 448
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5789
+  }
+ ]
+}

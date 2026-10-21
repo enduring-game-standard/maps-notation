@@ -1,0 +1,115 @@
+{
+ "positions": 573118,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "stunned_nut_timer_clears",
+  "stunned_seed_timer_clears",
+  "stunned_struck_timer_clears",
+  "ceiling_laying_timer_clears",
+  "ceiling_idle_larvae_timer_clears",
+  "link_hurt_overkill"
+ ],
+ "kitSplit": {
+  "hit_spin_kokiri__stunned_seed": [
+   "swing_spin_kokiri",
+   "phase_stunned_seed"
+  ],
+  "hit_jump_kokiri_self__stunned_seed": [
+   "swing_jump_kokiri_self",
+   "phase_stunned_seed"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 4783,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1680,
+    "Link wins": 52,
+    "Link falls": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5322
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 17125,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6080,
+    "Link wins": 144,
+    "Link falls": 20
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 13635
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 30003,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 10640,
+    "Link wins": 252,
+    "Link falls": 70
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 23800
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 94431,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 33440,
+    "Link wins": 900,
+    "Link falls": 250
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 75128
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 306767,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 109040,
+    "Link wins": 2556,
+    "Link falls": 130
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 196021
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 120009,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 42560,
+    "Link wins": 1008,
+    "Link falls": 280
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 106215
+  }
+ ]
+}
