@@ -52,6 +52,9 @@ const verifyCompleteness = (inv: Inventory) => {
   const byOverlay = new Map(dispositions.map((d) => [d.overlay, d]))
   for (const a of inv.actors) if (!byOverlay.has(a.overlay)) fail('C1', `${a.overlay} has no disposition`)
   for (const d of dispositions) if (!inv.actors.some((a) => a.overlay === d.overlay)) fail('C1', `${d.overlay} is not in the inventory`)
+  const sum = (f: (a: Inventory['actors'][number]) => unknown[]) => inv.actors.reduce((n, a) => n + f(a).length, 0)
+  const counts = `${inv.actors.length} actors, with ${sum((a) => a.damageTables)} damage tables, ${sum((a) => a.elements)} collider elements, ${sum((a) => a.runtimeAt)} runtime collider changes, ${sum((a) => a.directHurt)} direct hurt calls, and ${sum((a) => a.actionFuncs).toLocaleString('en-US')} action functions`
+  if (!readFileSync(new URL('CONTRACT.md', OUT), 'utf8').includes(counts)) fail('C1', `CONTRACT.md does not state the inventory counts: "${counts}"`)
   note('C1', `${dispositions.length}/${inv.actors.length} actors disposed: ${modeled().length} modeled, ${dispositions.length - modeled().length} excluded`)
 
   for (const d of DMG_TYPES) if (!(d in link.attacks)) fail('C2', `DMG_${d} has no disposition`)

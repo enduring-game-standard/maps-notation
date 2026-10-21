@@ -16,7 +16,7 @@ Combat is every rule by which Link and the world hurt each other. The decomp dec
    - it has a collider with `AT_ON | AT_TYPE_ENEMY`, so it can hurt Link;
    - it hurts or holds Link without a collider: `damagePlayer`, `Player_InflictDamage`, `Health_ChangeBy` with a negative amount, a damaging `Actor_SetPlayerKnockback*`, or setting Link's `freezeTimer`.
 
-   A damage table counts whether the actor declares it or takes a shared one through `DamageTable_Get`. At the pinned commit that is 130 actors, with 62 damage tables, 341 collider elements, 48 runtime collider changes, 77 direct hurt calls, and 1,133 action functions. The extracted list is `inventory.json`.
+   A damage table counts whether the actor declares it or takes a shared one through `DamageTable_Get`. At the pinned commit that is 131 actors, with 67 damage tables, 342 collider elements, 48 runtime collider changes, 77 direct hurt calls, and 1,136 action functions. The extracted list is `inventory.json`.
 2. **Link's attacks.** Every one of the 32 `DMG_*` damage types in `include/collision_check.h`.
 3. **What happens to Link when hit.** Every `HIT_SPECIAL_EFFECT_*` value, and every way the player code responds to damage: knockback, burning, freezing, shock, grabs, theft of shield or tunic, curses, and death.
 4. **Link's combat economy.** Hearts and the health unit, Double Defense, the magic meter and every magic cost, bottled fairies and potions, every sword, shield, and tunic as it bears on damage given or taken, and every combat item: Deku Sticks, Deku Nuts, Slingshot, Bow and its three magic arrows, Bombs, Bombchus, Boomerang, Hookshot and Longshot, Megaton Hammer, Din's Fire, Nayru's Love, the Lens of Truth, and any ocarina song the decomp shows affecting an enemy.

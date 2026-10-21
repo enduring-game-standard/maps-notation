@@ -79,6 +79,8 @@ const parseActor = (root: string, overlay: string): Actor | undefined => {
       actor.health.push({ value: num(m[2]), via: m[1], file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/colChkInfo\.health\s*=\s*(-?(?:0x)?[0-9A-Fa-f]+)\s*;/g))
       actor.health.push({ value: num(m[1]), via: 'assignment', file: rel, line: lineOf(src, m.index!) })
+    for (const m of src.matchAll(/\bs\w*HP\s*([*+-]?)=\s*((?:0x)?[0-9A-Fa-f]+)\s*;/g))
+      actor.health.push({ value: num(m[2]), via: m[1] ? `${m[1]}=` : 'static', file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/this->health\s*=\s*((?:0x)?[0-9A-Fa-f]+)\s*;/g))
       actor.health.push({ value: num(m[1]), via: 'field', file: rel, line: lineOf(src, m.index!) })
     for (const m of src.matchAll(/colChkInfo\.health\s*([*+-])=\s*(-?(?:0x)?[0-9A-Fa-f]+)\s*;/g))

@@ -2917,7 +2917,20 @@
      ]
     }
    ],
-   "health": [],
+   "health": [
+    {
+     "value": 4,
+     "via": "static",
+     "file": "src/overlays/actors/ovl_Boss_Va/z_boss_va.c",
+     "line": 1372
+    },
+    {
+     "value": 3,
+     "via": "+=",
+     "file": "src/overlays/actors/ovl_Boss_Va/z_boss_va.c",
+     "line": 1414
+    }
+   ],
    "elements": [
     {
      "file": "src/overlays/actors/ovl_Boss_Va/z_boss_va.c",
