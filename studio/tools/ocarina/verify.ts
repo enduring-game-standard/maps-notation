@@ -7,6 +7,7 @@ import { parse, print } from '../../src/core/text'
 import { dispositions, encounterFile, modeled, OUT } from './build'
 import { link } from './data/link'
 import { doubleDefense, encounter, linkAttacks, swingKey } from './gen'
+import { atlas, ATLAS } from './atlas'
 import { buildLedger, checkLedger, CONTRACT_GEAR, FIELD_GEAR, HIT_SPECIAL_EFFECTS } from './ledger'
 import { analyzeFile } from './slice'
 import { DMG_TYPES, extract, type Actor, type DmgType, type Inventory } from './inventory'
@@ -232,6 +233,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (process.env.OCARINA_ONLY) note('C1', 'OCARINA_ONLY is set: C1 counts only the loaded actor and cannot pass')
   verifyCompleteness(fresh)
   for (const spec of modeled().filter((s) => !only || s.overlay === only)) await verifyEncounter(spec, fresh, limit)
+  if (!only) {
+    const want = print(atlas(modeled().map((s) => ({ name: encounterFile(s.overlay).replace(/\.maps$/, ''), net: encounter(s, link, fresh).net }))))
+    const have = existsSync(ATLAS) ? readFileSync(ATLAS, 'utf8') : ''
+    if (have !== want) fail('V1', 'ocarina-combat.maps is missing or stale; run tools/ocarina/atlas.ts')
+    else {
+      const errors = check(parse(have)).filter((d) => d.severity === 'error')
+      if (errors.length) fail('V1', `ocarina-combat.maps: ${errors.length} checker errors, first: ${errors[0].message}`)
+      note('V1', `atlas: ${modeled().length} encounters, ${have.length} bytes`)
+    }
+  }
   const ledger = buildLedger(fresh)
   writeFileSync(new URL('ledger.json', OUT), JSON.stringify(ledger, null, 1) + '\n')
   for (const p of checkLedger(ledger)) fail('V5', p)
