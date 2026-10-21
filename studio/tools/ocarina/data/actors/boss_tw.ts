@@ -6,6 +6,27 @@ const F = 'src/overlays/actors/ovl_Boss_Tw/z_boss_tw.c'
 const at = (line: number): Cite => `${F}:${line}`
 const CC = 'src/code/z_collision_check.c'
 
+/*
+ * Reported gaps (the types cannot carry these):
+ * - The ice blast's own collider has no special effect (line 174). Link freezes from the ground ice it leaves where it
+ *   lands, when he stands on the floor inside it (lines 3553-3555). The blast is aimed at Link, so blast_ice carries the
+ *   freeze; a backflip that dodges the blast but lands in the ice is not modeled.
+ * - A beam hurts Link only when no beam or ground blast has hurt him for 150 frames (lines 833-834; ground fire and ice
+ *   set 100, lines 3556, 4072). The model's beams are at least 11 beats apart (fly, turn, charge), past that gate.
+ * - Burning wipes an ice charge every frame Link burns, and a freeze wipes a fire charge (lines 3186-3198). The landing
+ *   blast clears the charge (onLand); an ice blast soaked up while Link still burns keeps its charge here.
+ * - The sisters are one combined actor. A flight to a pillar runs until arrival or 200 frames (lines 699, 733); only
+ *   the 50-100 frame flight is carried. The fusion waits for both sisters to be in FlyTo (lines 1500-1502); hit_4 fuses
+ *   when its 53-frame timer ends.
+ * - A sister's spin lasts 20 frames plus the end of its animation (lines 1462-1476); the animation length is asset data.
+ * - The stun needs Link to aim the sent-back blast within 60 units of Twinrova (line 4647); the model assumes he does.
+ * - From 10 health up Twinrova fires runs of three of one element, starting with a coin flip (lines 532, 5143-5148).
+ *   Carried as phase states at 10 hearts, the run took adult_spin past the 1M position limit (adult_arrows 320536,
+ *   2.7 times this model). Every blast is a coin flip here.
+ * - Twinrova spins from a shot during TwinrovaFly too (lines 3026-3031); her flight has no timer here, so the spin
+ *   changes nothing and is not carried.
+ */
+
 /**
  * Link never emits these types (link.ts), so they stand only for what the Mirror Shield sends on: a reflected beam,
  * and a fire or ice blast the shield soaks up. Each phase that reads one names it in `hittable`.
@@ -22,13 +43,21 @@ type El = 'fire' | 'ice'
 const ELS: El[] = ['fire', 'ice']
 const SISTER: Record<El, string> = { fire: 'Koume', ice: 'Kotake' }
 
-/** Phase one: k counts the reflected beams that have struck a sister; the fusion needs four (line 1502). */
+/**
+ * Phase one: k counts the reflected beams that have struck a sister; the fusion needs four (line 1502). The sisters are
+ * one combined actor: a fly phase (FlyTo) ends in a turn (TurnToPlayer), and a turn ends in a shot only when the last
+ * flight was to a pillar (CAN_SHOOT, lines 699-700), else in another flight (line 666).
+ */
 const K = [0, 1, 2, 3]
+const spinOnFired = (k: number) => Object.fromEntries(FIRED.map((d) => [d, { damage: 0, to: `spin_${k}`, cite: at(2906) }]))
 const phaseOne: Phase[] = [
   ...K.flatMap((k): Phase[] => [
     {
-      id: `fly_${k}`, label: `The sisters fly and turn on Link (${k} hits)`, hittable: FIRED,
-      overrides: Object.fromEntries(FIRED.map((d) => [d, { damage: 0, to: `spin_${k}`, cite: at(2906) }])),
+      id: `fly_${k}`, label: `The sisters fly to a new spot (${k} hits)`, hittable: FIRED, overrides: spinOnFired(k),
+      frames: { value: [50, 100], cite: at(693) }, cite: at(704),
+    },
+    {
+      id: `turn_${k}`, label: `A sister turns on Link (${k} hits)`, hittable: FIRED, overrides: spinOnFired(k),
       frames: { value: 60, cite: at(644) }, cite: at(650),
     },
     { id: `spin_${k}`, label: `A sister spins away from a shot (${k} hits)`, hittable: 'none', frames: { value: 20, cite: at(1459) }, cite: at(1462) },
@@ -45,25 +74,31 @@ const phaseOne: Phase[] = [
   })),
 ]
 
+/** A sister's AT cylinder is set every update outside Wait (line 2932), so Link near her is struck in every phase. */
+const body = (from: string): Step => ({ from, to: from, label: 'A sister flies into Link', range: 'near', attack: 'sister_body', cite: at(2932) })
 const phaseOneSteps: Step[] = [
   ...K.flatMap((k): Step[] => [
-    ...ELS.map((e): Step => ({ from: `fly_${k}`, to: `shoot_charge_${e}_${k}`, label: `${SISTER[e]} raises her scepter`, afterTimer: true, weight: 1, cite: at(663) })),
-    { from: `fly_${k}`, to: `fly_${k}`, label: 'A sister flies into Link', range: 'near', attack: 'sister_body', cite: at(2932) },
+    { from: `fly_${k}`, to: `turn_${k}`, label: 'A sister arrives and turns on Link', afterTimer: true, cite: at(734) },
+    ...ELS.map((e): Step => ({ from: `turn_${k}`, to: `shoot_charge_${e}_${k}`, label: `${SISTER[e]} raises her scepter`, afterTimer: true, weight: 1, cite: at(663) })),
+    { from: `turn_${k}`, to: `fly_${k}`, label: 'She was not at a pillar, so she flies on', afterTimer: true, weight: 2, cite: at(666) },
     { from: `spin_${k}`, to: `fly_${k}`, label: 'The sister flies on', afterTimer: true, cite: at(1475) },
+    body(`fly_${k}`), body(`turn_${k}`), body(`spin_${k}`),
     ...ELS.flatMap((e): Step[] => [
       { from: `shoot_charge_${e}_${k}`, to: `shoot_beam_${e}_${k}`, label: `${SISTER[e]} fires her ${e} beam`, afterTimer: true, attack: `beam_${e}`, cite: at(1103) },
-      { from: `shoot_beam_${e}_${k}`, to: `fly_${k}`, label: `${SISTER[e]}'s beam dies away`, cite: at(1356) },
+      body(`shoot_charge_${e}_${k}`),
+      { from: `shoot_beam_${e}_${k}`, to: `fly_${k}`, label: `${SISTER[e]}'s beam dies away`, range: 'far', cite: at(1356) },
+      { from: `shoot_beam_${e}_${k}`, to: `fly_${k}`, label: `${SISTER[e]}'s beam dies away as she flies into Link`, range: 'near', attack: 'sister_body', cite: at(1356) },
     ]),
   ]),
+  ...[1, 2, 3, 4].map((k) => body(`hit_${k}`)),
   ...[1, 2, 3].map((k): Step => ({ from: `hit_${k}`, to: `fly_${k}`, label: 'The sister recovers and flies off', afterTimer: true, cite: at(1426) })),
   { from: 'hit_4', to: 'tw_fly_r_c0', label: 'Four hits: Koume and Kotake fuse into Twinrova', afterTimer: true, cite: at(1504) },
 ]
 
 /**
- * Phase two. From 10 health up the code fires runs of three of one element (lines 5143-5148). That sequence is not
- * carried: with it the adult_spin slice ran out of memory. A sequence state says which element Twinrova fires next: r, a coin flip each blast (line 5141), and l, the
- * same once health is below 3, where hits other than the sword stop counting (line 3139). A done state also remembers
- * the element just fired, which is the one the Mirror Shield can soak up.
+ * Phase two. A sequence state says which element Twinrova fires next: r, a coin flip each blast (line 5141), and l,
+ * the same once health is below 3, where hits other than the sword stop counting (line 3139). A done state also
+ * remembers the element just fired, which is the one the Mirror Shield can soak up.
  */
 const FLY: Record<string, [El, string][]> = {
   r: [['fire', 'rf'], ['ice', 'ri']],
@@ -82,7 +117,7 @@ const absorb = (e: El, c: Charge): { to: Charge | 'release'; cite: Cite } => {
   const mine = e === 'fire' ? ['cf1', 'cf2'] : ['ci1', 'ci2']
   if (c === 'c0') return { to: e === 'fire' ? 'cf1' : 'ci1', cite: at(e === 'fire' ? 4346 : 4357) }
   if (c === mine[0]) return { to: mine[1] as Charge, cite: at(e === 'fire' ? 4346 : 4357) }
-  if (c === mine[1]) return { to: 'release', cite: at(4662) }
+  if (c === mine[1]) return { to: 'release', cite: at(4363) }
   return { to: 'c0', cite: at(e === 'fire' ? 4342 : 4352) }
 }
 const CHARGE_LABEL: Record<Charge, string> = { c0: 'no charge', cf1: 'shield holds 1 fire', cf2: 'shield holds 2 fire', ci1: 'shield holds 1 ice', ci2: 'shield holds 2 ice' }
@@ -99,7 +134,7 @@ const phaseTwo: Phase[] = [
         hittable: [...FIRED, ABSORB[el]],
         overrides: {
           ...Object.fromEntries(FIRED.map((d) => [d, { damage: 0, to: `tw_fly_${back}_${c}`, cite: at(3031) }])),
-          [ABSORB[el]]: { damage: 0, to: soak.to === 'release' ? `tw_stun_${back}` : `tw_done_${q}_${soak.to}`, cite: soak.cite },
+          [ABSORB[el]]: { damage: 0, to: soak.to === 'release' ? `tw_done_aim_${back}` : `tw_done_${q}_${soak.to}`, cite: soak.cite },
         },
         frames: { value: 60, cite: at(5222) }, cite: at(5225),
       }
@@ -107,10 +142,18 @@ const phaseTwo: Phase[] = [
   ),
   ...STUNS.flatMap((q): Phase[] => [
     {
+      id: `tw_done_aim_${q}`, label: `The shield holds the third blast and fires it back at Twinrova, who hovers (${q})`, hittable: 'none',
+      frames: { value: [30, 80], cite: at(4364) }, cite: at(5228),
+    },
+    {
       id: `tw_stun_${q}`, label: `Twinrova lies stunned on the floor (${q})`, frames: { value: 150, cite: at(5243) }, cite: at(5272),
       ...(q === 'l' ? { overrides: Object.fromEntries(OTHER.map((d) => [d, { damage: 0, cite: at(3139) }])) } : {}),
     },
-    { id: `tw_getup_${q}`, label: `Twinrova gets up (${q})`, hittable: 'none', frames: { value: 50, cite: at(5334) }, cite: at(5337) },
+    {
+      id: `tw_getup_${q}`, label: `Twinrova gets up (${q})`, hittable: FIRED,
+      overrides: Object.fromEntries(FIRED.map((d) => [d, { damage: 0, to: `tw_fly_${q}_c0`, cite: at(3031) }])),
+      frames: { value: 50, cite: at(5334) }, cite: at(5337),
+    },
   ]),
 ]
 
@@ -127,22 +170,30 @@ const phaseTwoSteps: Step[] = [
     CHARGES.map((c): Step => ({ from: `tw_done_${q}_${c}`, to: `tw_fly_${back}_${c}`, label: 'Twinrova flies off', afterTimer: true, cite: at(5230) })),
   ),
   ...STUNS.flatMap((q): Step[] => [
+    { from: `tw_done_aim_${q}`, to: `tw_stun_${q}`, label: "The sent-back blast reaches Twinrova and stuns her", afterTimer: true, cite: at(4662) },
     { from: `tw_stun_${q}`, to: `tw_getup_${q}`, label: 'Twinrova comes to', afterTimer: true, cite: at(5326) },
     { from: `tw_getup_${q}`, to: `tw_fly_${q}_c0`, label: 'Twinrova rises and flies off', afterTimer: true, move: 'far', cite: at(5347) },
   ]),
 ]
 
+/** Burning Link wipes an ice charge, freezing him a fire charge (lines 3186-3198): the landing blast leaves no charge. */
+const landingClears = (done: string[], lost: Charge[]) =>
+  Object.fromEntries(done.flatMap((q) => lost.map((c) => [`tw_done_${q}_${c}`, `tw_done_${q}_c0`])))
+
 const attacks: Attack[] = [
   { id: 'sister_body', label: "A sister's body", damage: 32, effect: { kind: 'none' }, blockable: true, dodgeable: true, source: at(194) },
   ...ELS.map((e): Attack => ({
     id: `beam_${e}`, label: `${SISTER[e]}'s ${e} beam`, damage: 32, effect: { kind: e === 'fire' ? 'burn' : 'freeze' },
-    blockable: false, dodgeable: true, source: at(836),
+    blockable: true, dodgeable: true, source: at(836),
     reflect: { shields: [{ gear: 'mirror_shield' }], as: REFLECTED_BEAM, damage: 0, cite: at(1126) },
   })),
   ...ELS.map((e): Attack => ({
     id: `blast_${e}`, label: `Twinrova's ${e} blast`, damage: 48, effect: { kind: e === 'fire' ? 'burn' : 'freeze' },
     blockable: true, dodgeable: true, source: e === 'fire' ? at(496) : at(174),
     reflect: { shields: [{ gear: 'mirror_shield' }], as: ABSORB[e], damage: 0, cite: at(e === 'fire' ? 4346 : 4357) },
+    onLand: e === 'fire'
+      ? { to: landingClears(['rf', 'lf'], ['ci1', 'ci2']), cite: at(3198) }
+      : { to: landingClears(['ri', 'li'], ['cf1', 'cf2']), cite: at(3193) },
   })),
 ]
 
@@ -185,7 +236,7 @@ export const bossTw: ActorSpec = {
   attacks,
   actionFuncs: {
     BossTw_FlyTo: 'fly_*',
-    BossTw_TurnToPlayer: 'fly_*',
+    BossTw_TurnToPlayer: 'turn_*',
     BossTw_Spin: 'spin_*',
     BossTw_ShootBeam: 'shoot_*',
     BossTw_FinishBeamShoot: 'shoot_beam_*',
@@ -219,7 +270,16 @@ export const bossTw: ActorSpec = {
     [at(836)]: 'beam_fire',
     [at(4821)]: 'beam_ice',
   },
-  loadouts: standardLoadouts(['adult'], 4),
+  /*
+   * The worst landed hit is the fire blast: 48 (line 174) plus a burn of (0 + 199) / 2 frames (z_player.c:4798) at 1 a
+   * frame in this arena, 5 beats or 100. 148 health is 9.25 hearts of 16, so 10 hearts is the fewest that survive it.
+   */
+  loadouts: standardLoadouts(['adult'], 10),
+  linkRules: {
+    statusFrames: { freeze: { value: 100, cite: at(343) } },
+    burnDamage: { value: { units: 1, frames: 1 }, cite: 'src/overlays/actors/ovl_player_actor/z_player.c:11559' },
+    freezeDamage: { value: { units: 1, frames: 2 }, cite: at(4820) },
+  },
   expected: {
     deadVerbs: {
       spin_0_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
@@ -238,9 +298,8 @@ export const bossTw: ActorSpec = {
       hit_2_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
       hit_3_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
       hit_4_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
-      tw_getup_r_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
       tw_stun_l_timer_clears: 'the last stun is left only by its timer or by the finishing blow, which ends the encounter',
-      tw_getup_l_timer_clears: 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends',
+      ...Object.fromEntries(STUNS.map((q) => [`tw_done_aim_${q}_timer_clears`, 'this phase is left only by a step that waits for its timer, so its timer is always spent when it ends'])),
       miss_reflect_beam_fire: 'a sent-back beam or soaked-up blast resolves on the beat it is fired, in the phase that fired it, where it always has an effect',
       hit_reflect_beam_fire__shoot_beam_ice_0: "Koume's beam is out only in shoot_beam_fire phases, so it is never sent back from shoot_beam_ice",
       hit_reflect_beam_fire__shoot_beam_ice_1: "Koume's beam is out only in shoot_beam_fire phases, so it is never sent back from shoot_beam_ice",
@@ -253,13 +312,14 @@ export const bossTw: ActorSpec = {
       hit_reflect_beam_ice__shoot_beam_fire_3: "Kotake's beam is out only in shoot_beam_ice phases, so it is never sent back from shoot_beam_fire",
       miss_reflect_blast_fire: 'a sent-back beam or soaked-up blast resolves on the beat it is fired, in the phase that fired it, where it always has an effect',
       miss_reflect_blast_ice: 'a sent-back beam or soaked-up blast resolves on the beat it is fired, in the phase that fired it, where it always has an effect',
-      beam_fire_lands_again: 'between two beams the sisters fly (3 beats) and charge (4 beats), longer than the burn (5) or freeze (3) a beam leaves',
-      beam_fire_lands_dd_again: 'between two beams the sisters fly (3 beats) and charge (4 beats), longer than the burn (5) or freeze (3) a beam leaves',
-      beam_ice_lands_again: 'between two beams the sisters fly (3 beats) and charge (4 beats), longer than the burn (5) or freeze (3) a beam leaves',
-      beam_ice_lands_dd_again: 'between two beams the sisters fly (3 beats) and charge (4 beats), longer than the burn (5) or freeze (3) a beam leaves',
+      beam_fire_lands_again: 'between two beams the sisters fly (4 beats), turn (3) and charge (4), longer than the 5-beat burn or freeze a beam leaves',
+      beam_fire_lands_dd_again: 'between two beams the sisters fly (4 beats), turn (3) and charge (4), longer than the 5-beat burn or freeze a beam leaves',
+      beam_ice_lands_again: 'between two beams the sisters fly (4 beats), turn (3) and charge (4), longer than the 5-beat burn or freeze a beam leaves',
+      beam_ice_lands_dd_again: 'between two beams the sisters fly (4 beats), turn (3) and charge (4), longer than the 5-beat burn or freeze a beam leaves',
+      beam_fire_blocked_mirror_shield: 'a raised Mirror Shield always sends the beam back (line 898 returns before the block test at 904)',
+      beam_ice_blocked_mirror_shield: 'a raised Mirror Shield always sends the beam back (line 898 returns before the block test at 904)',
       blast_fire_blocked_mirror_shield: 'a raised Mirror Shield always soaks the blast up first (the absorb verb outranks the block)',
       blast_ice_blocked_mirror_shield: 'a raised Mirror Shield always soaks the blast up first (the absorb verb outranks the block)',
-      blast_ice_lands_again: 'between two blasts Twinrova hovers (3 beats) and flies (1), longer than the 3-beat freeze',
     },
   },
 }
