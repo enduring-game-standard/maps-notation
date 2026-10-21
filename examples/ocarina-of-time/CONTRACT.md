@@ -41,6 +41,8 @@ These rules hold for every encounter. The generator applies them, so no author c
 - **Heals stop at the bar.** A potion or fairy fills Link's health only up to his hearts, and magic refills only up to the meter.
 - **Near is engagement distance.** Near means the actor's own distance check for engaging Link has passed, which is also where Link's melee reaches. Everything else is far.
 - **Link fights with a kit.** A kit is an age, a heart count, a gear list, and a starting magic amount. Each encounter declares its kits, and the world opens the fight by choosing one. The standard kits are in `studio/tools/ocarina/data/loadouts.ts`. Each one carries one magic item, so that magic timers do not multiply. A worn mask is gear Link keeps for the whole fight, so it is its own kit.
+- **One attack carries one effect.** When the code applies two effects on one contact (burn and knockback), the attack carries the one that changes the fight more, and the author reports the other.
+- **Health drains without floors.** A few hits are clamped so they leave the enemy at 1 health or more (`z_en_dekubaba.c:953`, `z_boss_dodongo.c:594`, `z_boss_mo.c:1827`). The model drains them like any other hit, so such a hit can end the fight a beat early.
 - **An encounter is analyzed one branch at a time.** `verify.ts` cuts each generated file into one net per kit and variant, by deleting the other opening verbs, and analyzes each net exhaustively. Together the branches cover every position of the whole file. A verb that never fires in any branch is dead. It is reported, not failed, only when every state it reads is reached in some kit but none of them in the same kit. Every other dead verb fails V2 unless the spec ledgers it with its reason.
 
 ## The artifacts
@@ -57,7 +59,7 @@ These rules hold for every encounter. The generator applies them, so no author c
 
 Every line below holds, and `studio/tools/ocarina/verify.ts` checks each mechanically and exits nonzero if any fails.
 
-- **C1. Every inventory actor has a disposition.** Each of the 111 actors is either *modeled* (it has a spec and an encounter file) or *excluded* with a reason and a decomp citation showing the reason. An exclusion is allowed only when the actor cannot hurt Link and cannot be hurt by Link in play, for example a damage table used only for a scripted reaction. The count of actors with no disposition is zero.
+- **C1. Every inventory actor has a disposition.** Each inventory actor is either *modeled* (it has a spec and an encounter file) or *excluded* with a reason and a decomp citation showing the reason. An exclusion is allowed only when the actor cannot hurt Link and cannot be hurt by Link in play, for example a damage table used only for a scripted reaction. The count of actors with no disposition is zero.
 - **C2. Every damage type has a disposition.** Each of the 32 `DMG_*` types is either a Link verb, with the item, age, and magic cost that gate it, or excluded because the decomp shows the player never emits it (grep evidence cited).
 - **C3. Every hit effect and damage response has a disposition.** Each `HIT_SPECIAL_EFFECT_*` value and each actor-specific effect on Link that a modeled actor uses is implemented by the Link spec. The generator refuses an attack whose effect the Link spec does not implement.
 - **C4. Every damage table is carried in full.** For each modeled actor with a damage table, all 32 entries appear in the spec with their damage and reaction, interpreted per that actor's code (a reaction value means different things in different actors).
