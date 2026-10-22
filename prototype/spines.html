@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MAPS spine prototypes (#11)</title>
+<style>
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 0; background: #f7f6f2; color: #222; }
+  header { padding: 12px 18px 4px; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .caption { max-width: 1250px; margin: 4px 0; }
+  .legend { font-size: 12px; color: #444; margin: 6px 0; }
+  .legend i { display: inline-block; width: 10px; height: 10px; margin: 0 4px 0 12px; vertical-align: -1px; }
+  .legend i.st { border: 1.5px solid #333; border-radius: 50%; background: #fff; }
+  .row { display: flex; gap: 10px; padding: 6px 10px 90px; align-items: flex-start; }
+  .panel { flex: 1; min-width: 0; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 8px 10px; }
+  .panel h2 { font-size: 15px; margin: 0; }
+  .meta { font-size: 12px; color: #666; }
+  .says { font-size: 13px; margin: 4px 0 6px; font-weight: 600; color: #333; }
+  .note { font-size: 12px; color: #8a4b00; margin: 2px 0 4px; }
+  svg { width: 100%; display: block; }
+  svg text { font-family: system-ui, sans-serif; }
+  .pill { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #222; color: #fff;
+          border-radius: 999px; padding: 6px 10px; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 10px #0005; z-index: 9; }
+  .pill button { background: #444; color: #fff; border: 0; border-radius: 999px; width: 32px; height: 32px; font-size: 16px; cursor: pointer; }
+  .pill span { min-width: 230px; text-align: center; font-weight: 600; }
+  .pill label { font-size: 12px; font-weight: 400; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Spine prototypes (#11). Throwaway.</h1>
+  <div class="caption" id="caption"></div>
+  <div class="legend">
+    <i class="st"></i>state
+    <i style="background:#2563eb"></i>verb said by the controller
+    <i style="background:#16a34a"></i>verb the world says on its own
+    <i style="background:#ea580c"></i>verb set off by contact or content
+    &nbsp;&nbsp;Arcs run state → verb → state. Hover a verb for its gate.
+  </div>
+</header>
+<div class="row" id="row"></div>
+<div class="pill">
+  <button id="prev" title="previous (←)">←</button>
+  <span id="vlabel"></span>
+  <button id="next" title="next (→)">→</button>
+  <label><input type="checkbox" id="gates"> gates</label>
+</div>
+<script>
+// ---------- data: one model per subject. verbs are [label, from, to, speaker, gate] ----------
+const SUBJECTS = [
+  {
+    id: 'goomba', title: 'Goomba, SMB1', kind: 'capability schema', root: 'dormant', home: 'walking',
+    states: [['dormant', 'dormant'], ['walking', 'walking'], ['falling', 'falling'],
+             ['squashed', 'squashed'], ['flipped', 'flipped'], ['gone', 'gone']],
+    verbs: [
+      ['wake', 'dormant', 'walking', 'content', 'screen reaches it'],
+      ['turn', 'walking', 'walking', 'content', 'hits wall or enemy'],
+      ['walk off ledge', 'walking', 'falling', 'world', 'no floor ahead'],
+      ['land', 'falling', 'walking', 'world', 'floor below'],
+      ['fall in pit', 'falling', 'gone', 'world', 'below screen'],
+      ['despawn', 'walking', 'gone', 'content', 'scrolls off left'],
+      ['stomped', 'walking', 'squashed', 'content', 'contact: Mario falling onto it'],
+      ['squash fades', 'squashed', 'gone', 'world', 'timer'],
+      ['hit', 'walking', 'flipped', 'content', 'contact: fireball, shell, star, block bumped below'],
+      ['fall off screen', 'flipped', 'gone', 'world', ''],
+    ],
+    tags: [['walking', 'gates Mario: hurt (contact)']],
+  },
+  {
+    id: 'link', title: "Link's sword chain, OoT", kind: 'capability schema', root: 'free', home: 'free',
+    states: [['free', 'free idle'], ['z', 'Z-target idle'], ['s1', 'swinging 1'], ['s2', 'swinging 2'],
+             ['charge', 'charging'], ['shield', 'shielding'], ['roll', 'rolling'], ['air', 'airborne']],
+    verbs: [
+      ['slash', 'free', 's1', 'controller', 'B'],
+      ['again', 's1', 's2', 'controller', 'B, same direction'],
+      ['finisher', 's2', 'free', 'controller', 'B, third same-direction swing'],
+      ['settle', 's1', 'free', 'world', 'no input'],
+      ['settle', 's2', 'free', 'world', 'no input'],
+      ['hold B', 's1', 'charge', 'controller', 'B held right after a swing'],
+      ['hold B', 's2', 'charge', 'controller', 'B held right after a swing'],
+      ['spin', 'charge', 'free', 'controller', 'release under 85%'],
+      ['great spin', 'charge', 'free', 'controller', 'release at 85% or more, or stick spin'],
+      ['cancel', 'charge', 'free', 'controller', 'release under 10%'],
+      ['quick spin', 'free', 'free', 'controller', 'stick spin, then B'],
+      ['roll', 'free', 'roll', 'controller', 'A + stick forward'],
+      ['roll slash', 'roll', 's1', 'controller', 'B from frame 15'],
+      ['roll ends', 'roll', 'free', 'world', ''],
+      ['shield', 'free', 'shield', 'controller', 'R held, shield equipped'],
+      ['crouch stab', 'shield', 'shield', 'controller', 'B, melee weapon'],
+      ['lower shield', 'shield', 'free', 'controller', 'release R'],
+      ['target', 'free', 'z', 'controller', 'Z'],
+      ['untarget', 'z', 'free', 'controller', 'release Z'],
+      ['vertical slash', 'z', 's1', 'controller', 'B, stick neutral'],
+      ['thrust', 'z', 's1', 'controller', 'B, stick forward'],
+      ['jump attack', 'z', 'air', 'controller', 'Z + A, melee weapon'],
+      ['finish strike', 'air', 'z', 'world', 'landing'],
+    ],
+    tags: [],
+  },
+  {
+    id: 'deku', title: 'Inside the Deku Tree, OoT', kind: 'content instance', root: 'L0', home: 'L0',
+    note: 'State = room × one-way flags (S = Slingshot held, W1 = 1F web broken, W2 = B1 floor web burnt). ' +
+          'Rooms alone are all reversible (vines lead back up from B1 and B2), so irreversibility lives only in the flags. ' +
+          'Door webs, switches and blocks open and never close; they are drawn as verbs, not flags. ' +
+          'Backtrack copies of rooms are folded into the room the return vine lands on. ' +
+          'UNVERIFIED: where each vine lands, and how the broken webs persist.',
+    states: [
+      ['L0', 'Lobby 1F', ''], ['F2_0', '2F', ''], ['SL0', 'Slingshot rm', ''],
+      ['SL1', 'Slingshot rm', 'S'], ['F2_1', '2F', 'S'], ['L1', 'Lobby 1F', 'S'], ['F3_1', '3F', 'S'], ['CP1', 'Compass rm', 'S'],
+      ['B1P', 'B1 pool', 'S W1'], ['L1W', 'Lobby 1F', 'S W1'], ['B1H', 'Scrub hint rm', 'S W1'], ['B1R', 'Roller water rm', 'S W1'],
+      ['B1T', 'Torch rm', 'S W1'], ['LV', 'Larva rm', 'S W1'], ['B1L', 'B1 high ledge', 'S W1'],
+      ['B2P', 'B2 pool', 'S W1 W2'], ['B1P2', 'B1 pool', 'S W1 W2'], ['B2S', 'Scrub trio', 'S W1 W2'],
+      ['LAIR', "Gohma's lair", 'S W1 W2'], ['WIN', 'Gohma defeated', 'S W1 W2'],
+    ],
+    verbs: [
+      ['climb', 'L0', 'F2_0', 'controller', ''],
+      ['drop', 'F2_0', 'L0', 'controller', ''],
+      ['map chest', 'L0', 'L0', 'controller', 'top of the 1F ramp, optional'],
+      ['deflect nuts', 'F2_0', 'SL0', 'controller', 'shield against the 2F Deku Scrub opens the door'],
+      ['open chest', 'SL0', 'SL1', 'content', 'chest gives the Slingshot'],
+      ['shoot ladder', 'SL1', 'F2_1', 'controller', 'Slingshot; only way out'],
+      ['re-enter', 'F2_1', 'SL1', 'controller', ''],
+      ['drop', 'F2_1', 'L1', 'controller', ''],
+      ['climb', 'L1', 'F2_1', 'controller', ''],
+      ['shoot Skulltulas', 'F2_1', 'F3_1', 'controller', 'Slingshot: 3 Skullwalltulas off the vines'],
+      ['drop', 'F3_1', 'F2_1', 'controller', ''],
+      ['enter', 'F3_1', 'CP1', 'controller', 'floor switch, timed platforms; optional'],
+      ['torch exit', 'CP1', 'F3_1', 'controller', 'lit Deku Stick on a torch'],
+      ['jump onto web', 'F3_1', 'B1P', 'controller', 'long fall near center breaks the 1F web'],
+      ['climb vine', 'B1P', 'L1W', 'controller', 'vine back to the main level'],
+      ['drop in hole', 'L1W', 'B1P', 'controller', '1F web stays broken'],
+      ['burn door web', 'B1P', 'B1H', 'controller', 'floor switch, lit Deku Stick'],
+      ['back', 'B1H', 'B1P', 'controller', ''],
+      ['shoot eye', 'B1H', 'B1R', 'controller', 'Slingshot on the eye switch'],
+      ['back', 'B1R', 'B1H', 'controller', ''],
+      ['push block', 'B1R', 'B1T', 'controller', 'block under the high door'],
+      ['back', 'B1T', 'B1R', 'controller', ''],
+      ['light torches', 'B1T', 'LV', 'controller', '2 unlit torches'],
+      ['back', 'LV', 'B1T', 'controller', ''],
+      ['burn web, crawl', 'LV', 'B1L', 'controller', 'Larva room web(s), crawlspace to the high ledge'],
+      ['push block in', 'B1L', 'B1P', 'controller', 'block into the water, bridge back'],
+      ['cross bridge', 'B1P', 'B1L', 'controller', 'block bridge'],
+      ['burn floor web', 'B1L', 'B2P', 'content', 'lit Deku Stick; the drop'],
+      ['climb vine', 'B2P', 'B1P2', 'controller', 'vine back up'],
+      ['drop in hole', 'B1P2', 'B2P', 'controller', 'B1 floor web stays burnt'],
+      ['walk on', 'B2P', 'B2S', 'controller', ''],
+      ['back', 'B2S', 'B2P', 'controller', ''],
+      ['wrong order', 'B2S', 'B2S', 'world', 'scrubs reset'],
+      ['stun 2-3-1', 'B2S', 'LAIR', 'controller', 'middle, right, left opens the boss door'],
+      ['eye, slash', 'LAIR', 'WIN', 'controller', 'Slingshot or Deku Nut on the red eye, then sword'],
+    ],
+    tags: [],
+  },
+];
+
+const SP = { controller: '#2563eb', world: '#16a34a', content: '#ea580c' };
+const SPN = { controller: 'controller', world: 'world on its own', content: 'contact or content' };
+
+// ---------- graph helpers ----------
+function adj(s) {
+  const out = {}, inn = {};
+  s.states.forEach(([id]) => { out[id] = []; inn[id] = []; });
+  s.verbs.forEach((v, i) => { out[v[1]].push(i); inn[v[2]].push(i); });
+  return { out, inn };
+}
+function bfs(s, start, reverse) {
+  const g = adj(s), d = { [start]: 0 }, par = {}, order = [start], q = [start];
+  while (q.length) {
+    const n = q.shift();
+    for (const i of (reverse ? g.inn : g.out)[n]) {
+      const m = reverse ? s.verbs[i][1] : s.verbs[i][2];
+      if (!(m in d)) { d[m] = d[n] + 1; par[m] = n; order.push(m); q.push(m); }
+    }
+  }
+  return { d, par, order };
+}
+function tarjan(s) {
+  const g = adj(s); let idx = 0, nc = 0;
+  const ix = {}, low = {}, on = {}, st = [], comp = {};
+  function go(v) {
+    ix[v] = low[v] = idx++; st.push(v); on[v] = true;
+    for (const i of g.out[v]) {
+      const w = s.verbs[i][2];
+      if (!(w in ix)) { go(w); low[v] = Math.min(low[v], low[w]); }
+      else if (on[w]) low[v] = Math.min(low[v], ix[w]);
+    }
+    if (low[v] === ix[v]) { let w; do { w = st.pop(); on[w] = false; comp[w] = nc; } while (w !== v); nc++; }
+  }
+  go(s.root);
+  s.states.forEach(([id]) => { if (!(id in ix)) go(id); });
+  return { comp, nc };
+}
+const ids = s => s.states.map(x => x[0]);
+const spread = (n, gap) => Array.from({ length: n }, (_, i) => (i - (n - 1) / 2) * gap);
+
+// ---------- variant layouts: each returns {pos, center, deco, verbPos?, says} ----------
+function layoutA(s) {
+  const { d, par, order } = bfs(s, s.root), R = Math.max(...Object.values(d)) > 6 ? 108 : 125;
+  const kids = {}; order.forEach(n => kids[n] = []);
+  order.slice(1).forEach(n => kids[par[n]].push(n));
+  const w = {}; const W = n => w[n] ??= (kids[n].length ? kids[n].reduce((a, k) => a + W(k), 0) : 1);
+  const pos = {};
+  (function span(n, a0, a1) {
+    const a = (a0 + a1) / 2, r = R * d[n];
+    pos[n] = [Math.cos(a) * r, Math.sin(a) * r];
+    let t = a0;
+    kids[n].forEach(k => { const f = W(k) / W(n) * (a1 - a0); span(k, t, t + f); t += f; });
+  })(s.root, -Math.PI / 2, 1.5 * Math.PI);
+  const depth = Math.max(...Object.values(d));
+  const lost = ids(s).filter(id => !(id in d));
+  lost.forEach((id, i) => { const a = i / lost.length * 2 * Math.PI; pos[id] = [Math.cos(a) * R * (depth + 1), Math.sin(a) * R * (depth + 1)]; });
+  const deco = [];
+  for (let k = 1; k <= depth; k++) deco.push(`<circle cx="0" cy="0" r="${R * k}" fill="none" stroke="#e3e0d6" stroke-dasharray="3 4"/>`);
+  const ring = {}; Object.values(d).forEach(k => ring[k] = (ring[k] || 0) + 1);
+  const widest = Math.max(...Object.values(ring));
+  let back = 0, same = 0;
+  s.verbs.forEach(v => { if (v[1] === v[2]) return; if (d[v[2]] < d[v[1]]) back++; else if (d[v[2]] === d[v[1]]) same++; });
+  const shape = depth > widest * 2 ? 'a long spoke (deep, thin)' : depth < widest ? 'a wide disc (shallow, broad)' : 'a balanced wheel';
+  return { pos, center: [0, 0], deco,
+    says: `${shape}: ${depth} rings deep, widest ring ${widest} states; ${back} of ${s.verbs.length} verbs point back inward` };
+}
+
+function layoutB(s) {
+  const home = s.home, fwd = bfs(s, home).d, bk = bfs(s, home, true).d, g = adj(s);
+  const all = ids(s);
+  const loop = new Set(all.filter(id => id !== home && id in fwd && id in bk));
+  const entries = all.filter(id => !(id in fwd));
+  const exits = all.filter(id => id in fwd && !(id in bk));
+  const petalOf = {}, petals = [];
+  let selfLoops = 0;
+  for (const i of g.out[home]) {
+    const t = s.verbs[i][2];
+    if (t === home) { selfLoops++; petals.push({ self: true, label: s.verbs[i][0] }); continue; }
+    if (!loop.has(t) || t in petalOf) continue;
+    const p = { self: false, members: [], depth: {} }; petals.push(p);
+    const q = [t]; petalOf[t] = p; p.depth[t] = 1;
+    while (q.length) {
+      const n = q.shift(); p.members.push(n);
+      for (const j of g.out[n]) {
+        const m = s.verbs[j][2];
+        if (loop.has(m) && !(m in petalOf)) { petalOf[m] = p; p.depth[m] = p.depth[n] + 1; q.push(m); }
+      }
+    }
+  }
+  const pos = { [home]: [0, 0] }, real = petals.filter(p => !p.self);
+  const right = real.filter((_, i) => i % 2 === 0), left = real.filter((_, i) => i % 2 === 1);
+  let extentY = 40;
+  const place = (side, dir) => side.forEach((p, i) => {
+    const n = side.length, a = (n === 1 ? 0 : (-0.75 + 1.5 * i / (n - 1))), base = dir > 0 ? a : Math.PI - a;
+    const byD = {}; p.members.forEach(m => (byD[p.depth[m]] ??= []).push(m));
+    Object.entries(byD).forEach(([dd, ms]) => {
+      const off = spread(ms.length, 80);
+      ms.forEach((m, k) => {
+        const r = 130 * dd, px = Math.cos(base) * r - Math.sin(base) * off[k], py = Math.sin(base) * r + Math.cos(base) * off[k];
+        pos[m] = [px, py]; extentY = Math.max(extentY, Math.abs(py));
+      });
+    });
+  });
+  place(right, 1); place(left, -1);
+  const deco = [];
+  const rank = (list, dist) => { const rows = {}; list.forEach(id => (rows[dist(id)] ??= []).push(id)); return Object.keys(rows).map(Number).sort((a, b) => a - b).map(k => rows[k]); };
+  const entryRows = rank(entries, id => { const r = bfs(s, id).d; return r[home] ?? 99; });
+  entryRows.forEach((row, k) => { const xs = spread(row.length, 130); row.forEach((id, i) => pos[id] = [xs[i], -(extentY + 90 * (entryRows.length - k))]); });
+  const exitRows = rank(exits, id => fwd[id]);
+  exitRows.forEach((row, k) => { const xs = spread(row.length, 130); row.forEach((id, i) => pos[id] = [xs[i], extentY + 90 * (k + 1)]); });
+  if (entries.length) deco.push({ text: 'entries ↓', x: -40, y: -(extentY + 86), anchor: 'end' });
+  real.forEach(p => {
+    const far = Math.max(...p.members.map(m => Math.hypot(...pos[m]))), [fx, fy] = p.members.reduce((a, m) => [a[0] + pos[m][0], a[1] + pos[m][1]], [0, 0]);
+    const ang = Math.atan2(fy, fx) * 180 / Math.PI, half = (far + 50) / 2, wide = Math.max(34, ...p.members.map(m => { const [x, y] = pos[m], a = ang * Math.PI / 180; return Math.abs(-Math.sin(a) * x + Math.cos(a) * y) + 30; }));
+    deco.push(`<ellipse cx="${half - 20}" cy="0" rx="${half + 20}" ry="${wide}" transform="rotate(${ang})" fill="#efe9da" opacity="0.55" stroke="#d9cfb5"/>`);
+  });
+  if (exits.length) deco.push({ text: `exits ↓ can't return home`, x: Math.min(...exitRows.map(r => -(r.length - 1) * 65)) - 40, y: extentY + 94, anchor: 'end' });
+  const letters = 'BCDEFGHIJKLMNOP';
+  const form = ['A', ...petals.flatMap((p, i) => [p.self ? letters[i].toLowerCase() : letters[i], 'A'])].join(' ');
+  return { pos, center: [0, 0], deco,
+    says: `form ${form}: ${real.length} petal${real.length === 1 ? '' : 's'} + ${selfLoops} self-loop${selfLoops === 1 ? '' : 's'}; ${entries.length} entr${entries.length === 1 ? "y" : "ies"} above, ${exits.length} exit${exits.length === 1 ? "" : "s"} below in ${exitRows.length} rank${exitRows.length === 1 ? "" : "s"}` };
+}
+
+function layoutC(s) {
+  const { comp, nc } = tarjan(s), g = adj(s), dRoot = bfs(s, s.root).d;
+  const members = Array.from({ length: nc }, () => []);
+  ids(s).forEach(id => members[comp[id]].push(id));
+  const succ = Array.from({ length: nc }, () => new Set()), pred = Array.from({ length: nc }, () => new Set());
+  s.verbs.forEach(v => { const a = comp[v[1]], b = comp[v[2]]; if (a !== b) { succ[a].add(b); pred[b].add(a); } });
+  const rank = new Array(nc).fill(0);
+  // Tarjan numbers components in reverse topological order, so walk from high to low.
+  for (let c = nc - 1; c >= 0; c--) for (const t of succ[c]) rank[t] = Math.max(rank[t], rank[c] + 1);
+  const rows = []; for (let c = 0; c < nc; c++) (rows[rank[c]] ??= []).push(c);
+  const radius = c => members[c].length === 1 ? 0 : Math.max(55, members[c].length * 105 / (2 * Math.PI));
+  const pos = {}, deco = [], cx = {}, ringOf = {};
+  let y = 0;
+  rows.forEach((row, r) => {
+    row.sort((a, b) => {
+      const bc = c => { const ps = [...pred[c]]; return ps.length ? ps.reduce((t, p) => t + cx[p], 0) / ps.length : 0; };
+      return bc(a) - bc(b);
+    });
+    const widths = row.map(c => 2 * radius(c) + 150), total = widths.reduce((a, b) => a + b, 0);
+    const h = Math.max(...row.map(radius));
+    let x = -total / 2;
+    row.forEach((c, i) => {
+      const rc = radius(c), mx = x + widths[i] / 2, my = y + h; cx[c] = mx;
+      let ring = members[c];
+      if (ring.length > 1) {
+        const start = ring.reduce((a, b) => (dRoot[a] ?? 99) <= (dRoot[b] ?? 99) ? a : b);
+        const seen = new Set(), ord = [];
+        (function dfs(n) { seen.add(n); ord.push(n); for (const j of g.out[n]) { const m = s.verbs[j][2]; if (comp[m] === c && !seen.has(m)) dfs(m); } })(start);
+        ring = ord;
+        ring.forEach((m, k) => { const a = -Math.PI / 2 + k * 2 * Math.PI / ring.length; pos[m] = [mx + Math.cos(a) * rc, my + Math.sin(a) * rc]; });
+        deco.push({ svg: `<rect x="${mx - rc - 58}" y="${my - rc - 40}" width="${2 * rc + 116}" height="${2 * rc + 86}" rx="10" fill="#f4f1e8" stroke="#d6d0bf"/>`, box: [mx - rc - 58, my - rc - 40, mx + rc + 58, my + rc + 46] });
+        ringOf[c] = { mx, my, rc, ang: Object.fromEntries(ring.map((m, k) => [m, -Math.PI / 2 + k * 2 * Math.PI / ring.length])) };
+      } else pos[ring[0]] = [mx, my];
+      x += widths[i];
+    });
+    deco.push({ text: `row ${r}`, x: -total / 2 - 30, y: y + h + 4, anchor: 'end', color: '#999' });
+    y += 2 * h + 130;
+  });
+  // Cycle idiom: a verb inside a ring sits on the ring between its two states, outside when it runs clockwise, inside when it runs back.
+  const verbPos = {}, pairSeen = {};
+  s.verbs.forEach((v, i) => {
+    const c = comp[v[1]], R0 = ringOf[c];
+    if (!R0 || comp[v[2]] !== c || v[1] === v[2]) return;
+    const a = R0.ang[v[1]], b = R0.ang[v[2]];
+    let dlt = b - a; while (dlt > Math.PI) dlt -= 2 * Math.PI; while (dlt < -Math.PI) dlt += 2 * Math.PI;
+    const k = pairSeen[v[1] + '|' + v[2]] = (pairSeen[v[1] + '|' + v[2]] ?? -1) + 1;
+    const r = R0.rc * ((dlt > 0 ? 1.28 : 0.62) + (dlt > 0 ? 1 : -1) * 0.14 * k), m = a + dlt / 2;
+    verbPos[i] = [R0.mx + Math.cos(m) * r, R0.my + Math.sin(m) * r, true];
+  });
+  const oneWay = s.verbs.filter(v => comp[v[1]] !== comp[v[2]]).length;
+  const biggest = Math.max(...members.map(m => m.length));
+  const shape = nc === 1 ? 'one loop, no point of no return' : `${rows.length - 1} points of no return`;
+  return { pos, verbPos, center: null, deco, ringCenterOf: id => { const c = comp[id]; return members[c].length > 1 ? centroid(members[c].map(m => pos[m])) : null; },
+    says: `${shape}: ${nc} component${nc === 1 ? '' : 's'} in ${rows.length} row${rows.length === 1 ? '' : 's'}; biggest loop ${biggest} states; ${oneWay} one-way verbs` };
+}
+const centroid = pts => [pts.reduce((a, p) => a + p[0], 0) / pts.length, pts.reduce((a, p) => a + p[1], 0) / pts.length];
+
+function layoutD(s) {
+  const { d, order } = bfs(s, s.root);
+  const rowsOrder = [...order, ...ids(s).filter(id => !(id in d))];
+  const lanes = ['controller', 'world', 'content'], laneX = { controller: 200, world: 390, content: 580 };
+  const pos = {}, verbPos = {}; let y = 0;
+  rowsOrder.forEach(id => {
+    const mine = s.verbs.map((v, i) => [v, i]).filter(([v]) => v[1] === id);
+    const n = Math.max(1, ...lanes.map(l => mine.filter(([v]) => v[3] === l).length));
+    const h = Math.max(s.states.find(x => x[0] === id)[2] ? 58 : 48, n * 20 + 14);
+    pos[id] = [0, y + h / 2];
+    lanes.forEach(l => { const ls = mine.filter(([v]) => v[3] === l), ys = spread(ls.length, 20); ls.forEach(([, i], k) => verbPos[i] = [laneX[l], y + h / 2 + ys[k]]); });
+    y += h;
+  });
+  const deco = lanes.map(l => `<rect x="${laneX[l] - 18}" y="-30" width="170" height="${y + 30}" fill="${SP[l]}" opacity="0.05"/>`);
+  lanes.forEach(l => deco.push({ text: SPN[l], x: laneX[l] - 10, y: -12, anchor: 'start', color: SP[l], weight: 600 }));
+  const c = {}; lanes.forEach(l => c[l] = s.verbs.filter(v => v[3] === l).length);
+  const tot = s.verbs.length, pct = l => Math.round(100 * c[l] / tot);
+  const lead = lanes.reduce((a, b) => c[a] >= c[b] ? a : b);
+  return { pos, verbPos, center: null, deco, laneReturn: true, arrowLabels: true,
+    says: `mostly ${SPN[lead]}: controller ${c.controller} (${pct('controller')}%) · world ${c.world} (${pct('world')}%) · contact/content ${c.content} (${pct('content')}%)` };
+}
+
+const VARIANTS = [
+  { key: 'A', name: 'Depth rings', fn: layoutA,
+    caption: 'How to read this spine: the root (Goomba dormant, Link free idle, Deku Lobby) sits at the center. Ring k holds the states k verbs away from the root (BFS). Each state sits in the sector of the state it was first reached from. Far from the center means many steps in; a verb that points inward is a way back.' },
+  { key: 'B', name: 'Rondo / petals', fn: layoutB,
+    caption: 'How to read this spine: home (Goomba walking, Link free idle, Deku Lobby) is at the center. Every loop out of home and back is a petal, one per first verb out of home, and reads like musical form A B A C A. States you can be in before ever reaching home sit above as entries. States that can never return home hang below as exits, one row per depth.' },
+  { key: 'C', name: 'Point of no return', fn: layoutC,
+    caption: 'How to read this spine: each box is a strongly connected component, a set of states that can all reach each other, drawn as a ring. Rows rank components by the longest one-way path into them. Down means you can\'t come back; every arc that crosses rows is one-way.' },
+  { key: 'D', name: 'Who speaks (lanes)', fn: layoutD,
+    caption: 'How to read this spine: states run down the left in BFS order from the root. Each verb sits in its row\'s lane for who says it: the controller, the world on its own, or contact or content. Compare entities by how full each lane is.' },
+];
+
+// ---------- generic verb placement, collision relaxation, drawing ----------
+const TW = (t, px) => t.length * px * 0.56;
+const verbLabel = (s, L, v) => L.arrowLabels ? `${v[0]} → ${s.states.find(x => x[0] === v[2])[1]}` : v[0];
+function placeVerbs(s, L) {
+  const P = L.pos, out = [];
+  const pairCount = {}, pairIdx = {};
+  s.verbs.forEach(v => { const k = [v[1], v[2]].sort().join('|'); pairCount[k] = (pairCount[k] || 0) + 1; });
+  const selfCount = {}, selfIdx = {};
+  s.verbs.forEach(v => { if (v[1] === v[2]) selfCount[v[1]] = (selfCount[v[1]] || 0) + 1; });
+  const center = L.center ?? centroid(Object.values(P));
+  s.verbs.forEach((v, i) => {
+    const [, f, t] = v;
+    if (L.verbPos?.[i]) { out.push({ x: L.verbPos[i][0], y: L.verbPos[i][1], fixed: !L.verbPos[i][2] }); return; }
+    const a = P[f], b = P[t];
+    if (f === t) {
+      const rc = L.ringCenterOf?.(f) ?? center;
+      let dx = a[0] - rc[0], dy = a[1] - rc[1], m = Math.hypot(dx, dy);
+      if (m < 1) { dx = 0.6; dy = -0.8; m = 1; }
+      const k = selfIdx[f] = (selfIdx[f] ?? -1) + 1, n = selfCount[f], ang = Math.atan2(dy, dx) + (k - (n - 1) / 2) * 0.7;
+      out.push({ x: a[0] + Math.cos(ang) * 46, y: a[1] + Math.sin(ang) * 46 });
+      return;
+    }
+    const key = [f, t].sort().join('|'), [p, q] = [f, t].sort(), pa = P[p], pb = P[q];
+    const k = pairIdx[key] = (pairIdx[key] ?? -1) + 1, n = pairCount[key];
+    let nx = -(pb[1] - pa[1]), ny = pb[0] - pa[0]; const m = Math.hypot(nx, ny) || 1; nx /= m; ny /= m;
+    const off = (k - (n - 1) / 2) * 22;
+    out.push({ x: (a[0] + b[0]) / 2 + nx * off, y: (a[1] + b[1]) / 2 + ny * off });
+  });
+  return out;
+}
+function relax(s, L, vp, showGates) {
+  const boxes = vp.map((p, i) => { const v = s.verbs[i]; const w = 12 + Math.max(TW(verbLabel(s, L, v), 10), showGates && v[4] ? TW(v[4], 8) : 0); return { ...p, ax: p.x, ay: p.y, w, h: showGates && v[4] ? 24 : 14 }; });
+  const sts = s.states.map(([id, label]) => [...L.pos[id], Math.max(17, TW(label, 11) / 2 + 3)]);
+  (s.tags || []).forEach(([id, text]) => { const [x, y] = L.pos[id], w = TW(text, 9) + 10; sts.push([x - 24 - w / 2, y - 20, w / 2]); });
+  const box = b => [b.x - 6, b.y - 7, b.x - 6 + b.w, b.y - 7 + b.h];
+  for (let it = 0; it < 400; it++) {
+    for (let i = 0; i < boxes.length; i++) {
+      const A = boxes[i];
+      for (let j = i + 1; j < boxes.length; j++) {
+        const B = boxes[j]; if (A.fixed && B.fixed) continue;
+        const a = box(A), b = box(B);
+        const ox = Math.min(a[2], b[2]) - Math.max(a[0], b[0]), oy = Math.min(a[3], b[3]) - Math.max(a[1], b[1]);
+        if (ox > 0 && oy > 0) {
+          const share = A.fixed ? [0, 1] : B.fixed ? [1, 0] : [0.5, 0.5];
+          if (oy < ox) { const sg = A.y <= B.y ? -1 : 1; A.y += sg * oy * share[0] + sg * 0.5; B.y -= sg * oy * share[1] + sg * 0.5; }
+          else { const sg = A.x <= B.x ? -1 : 1; A.x += sg * ox * share[0]; B.x -= sg * ox * share[1]; }
+        }
+      }
+      if (A.fixed) continue;
+      for (const [sx, sy, lw] of sts) {
+        const a = box(A), b = [sx - lw, sy - 17, sx + lw, sy + 40];
+        const ox = Math.min(a[2], b[2]) - Math.max(a[0], b[0]), oy = Math.min(a[3], b[3]) - Math.max(a[1], b[1]);
+        if (ox > 0 && oy > 0) { if (oy < ox) A.y += (A.y < sy ? -oy : oy); else A.x += (A.x < sx ? -ox : ox); }
+      }
+      A.x += (A.ax - A.x) * 0.02; A.y += (A.ay - A.y) * 0.02;
+    }
+  }
+  return boxes;
+}
+function trim(a, b, r) { const dx = b[0] - a[0], dy = b[1] - a[1], m = Math.hypot(dx, dy) || 1; return [a[0] + dx / m * r, a[1] + dy / m * r]; }
+function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+function drawPanel(s, V, showGates) {
+  const L = V.fn(s), P = L.pos;
+  const vb = relax(s, L, placeVerbs(s, L), showGates);
+  const parts = [], arcs = [], verbs = [], nodes = [], texts = [];
+  const pts = [];
+  (L.deco || []).forEach(d => typeof d === 'string' ? parts.push(d) : d.svg ? (parts.push(d.svg), pts.push([d.box[0], d.box[1]], [d.box[2], d.box[3]]))
+    : texts.push(`<text x="${d.x}" y="${d.y}" text-anchor="${d.anchor}" font-size="12" fill="${d.color || '#777'}" font-weight="${d.weight || 400}">${esc(d.text)}</text>`));
+  s.verbs.forEach((v, i) => {
+    const [, f, t, sp, gate] = v, label = verbLabel(s, L, v), q = vb[i], a = P[f], b = P[t], c = [q.x, q.y];
+    if (L.laneReturn) {
+      const s1 = trim(a, c, 15), e = trim(b, [b[0] + 40, b[1]], 15);
+      arcs.push(`<path d="M${s1[0]},${s1[1]} L${c[0] - 5},${c[1]}" stroke="#bbb" fill="none"/>`);
+      arcs.push(`<path d="M${c[0] + 5},${c[1]} C${c[0] + 60},${c[1]} ${b[0] + 120},${b[1]} ${e[0]},${e[1]}" stroke="${SP[sp]}" stroke-opacity="0.35" fill="none" marker-end="url(#ah)"/>`);
+    } else if (f === t) {
+      const s1 = trim(a, c, 15), e = trim(c, a, 6), e2 = trim(c, a, 0), s2 = trim(a, c, 15);
+      const nx = -(c[1] - a[1]), ny = c[0] - a[0], m = Math.hypot(nx, ny) || 1, o = 9;
+      arcs.push(`<path d="M${s1[0]},${s1[1]} Q${(a[0] + c[0]) / 2 + nx / m * o},${(a[1] + c[1]) / 2 + ny / m * o} ${e[0]},${e[1]}" stroke="#999" fill="none"/>`);
+      arcs.push(`<path d="M${e2[0]},${e2[1]} Q${(a[0] + c[0]) / 2 - nx / m * o},${(a[1] + c[1]) / 2 - ny / m * o} ${s2[0]},${s2[1]}" stroke="#999" fill="none" marker-end="url(#ah)"/>`);
+    } else {
+      const s1 = trim(a, c, 15), e1 = trim(c, a, 5), s2 = trim(c, b, 5), e2 = trim(b, c, 16);
+      arcs.push(`<line x1="${s1[0]}" y1="${s1[1]}" x2="${e1[0]}" y2="${e1[1]}" stroke="#aaa"/>`);
+      arcs.push(`<line x1="${s2[0]}" y1="${s2[1]}" x2="${e2[0]}" y2="${e2[1]}" stroke="#888" marker-end="url(#ah)"/>`);
+    }
+    verbs.push(`<g><title>${esc(label)}: ${esc(SPN[sp])}${gate ? '. Gate: ' + esc(gate) : ''}</title><rect x="${c[0] - 5}" y="${c[1] - 5}" width="10" height="10" fill="${SP[sp]}"/>` +
+      `<text x="${c[0] + 8}" y="${c[1] + 3.5}" font-size="10" fill="#222">${esc(label)}</text>` +
+      (showGates && gate ? `<text x="${c[0] + 8}" y="${c[1] + 14}" font-size="8" fill="#888">${esc(gate)}</text>` : '') + `</g>`);
+    pts.push([c[0] - 6, c[1] - 8], [c[0] + q.w, c[1] + (showGates && gate ? 17 : 8)]);
+  });
+  s.states.forEach(([id, label, era]) => {
+    const [x, y] = P[id];
+    const isHome = id === s.home, isRoot = id === s.root;
+    nodes.push(`<circle cx="${x}" cy="${y}" r="14" fill="#fff" stroke="#222" stroke-width="${isHome || isRoot ? 2.6 : 1.5}"/>`);
+    if (isRoot) nodes.push(`<circle cx="${x}" cy="${y}" r="5" fill="#222"/>`);
+    nodes.push(`<text x="${x}" y="${y + 27}" text-anchor="middle" font-size="11" font-weight="600">${esc(label)}</text>`);
+    if (era) nodes.push(`<text x="${x}" y="${y + 38}" text-anchor="middle" font-size="9" fill="#8a4b00">${esc(era)}</text>`);
+    const lw = TW(label, 11) / 2 + 4;
+    pts.push([x - Math.max(16, lw), y - 16], [x + Math.max(16, lw), y + (era ? 41 : 31)]);
+  });
+  (s.tags || []).forEach(([id, text]) => {
+    const [x, y] = P[id], w = TW(text, 9) + 10, tx = x - 24 - w, ty = y - 7;
+    nodes.push(`<line x1="${x - 14}" y1="${y}" x2="${x - 24}" y2="${y}" stroke="${SP.content}" stroke-dasharray="2 2"/>` +
+      `<rect x="${tx}" y="${ty}" width="${w}" height="14" rx="3" fill="#fff7ed" stroke="${SP.content}" stroke-dasharray="3 2"/>` +
+      `<text x="${tx + 5}" y="${ty + 10}" font-size="9" fill="#9a3412">${esc(text)}</text>`);
+    pts.push([tx, ty], [tx + w, ty + 14]);
+  });
+  texts.forEach(t => { const m = t.match(/x="([-\d.]+)" y="([-\d.]+)" text-anchor="(\w+)"/), x = +m[1], y = +m[2], len = TW(t.replace(/<[^>]+>/g, ''), 12);
+    const x0 = m[3] === 'end' ? x - len : m[3] === 'middle' ? x - len / 2 : x; pts.push([x0, y - 12], [x0 + len, y + 4]); });
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), pad = 14;
+  const x0 = Math.min(...xs) - pad, y0 = Math.min(...ys) - pad, w = Math.max(...xs) - x0 + pad, h = Math.max(...ys) - y0 + pad;
+  const svg = `<svg viewBox="${x0} ${y0} ${w} ${h}" data-w="${w}" data-h="${h}"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#777"/></marker></defs>` +
+    `<clipPath id="c-${s.id}"><rect x="${x0}" y="${y0}" width="${w}" height="${h}"/></clipPath><g clip-path="url(#c-${s.id})">${parts.join('')}</g>${arcs.join('')}${verbs.join('')}${nodes.join('')}${texts.join('')}</svg>`;
+  return { svg, says: L.says, w, h };
+}
+
+// ---------- page ----------
+let vi = Math.max(0, VARIANTS.findIndex(v => v.key === (new URLSearchParams(location.search).get('variant') || 'A').toUpperCase()));
+function render() {
+  const V = VARIANTS[vi], showGates = document.getElementById('gates').checked;
+  document.getElementById('vlabel').textContent = `${V.key} — ${V.name}`;
+  document.getElementById('caption').textContent = V.caption + (V.key === 'C'
+    ? ' Boss Keys check: on the Deku Tree the rows fall out as Brown\'s phases (before Slingshot, Slingshot room, with Slingshot, B1 after the web, B2, lair), but only because the state carries the one-way flags. Drawn over plain rooms (no flags), the vines would fold nearly every room into one component and the spine would say little (inferred, not drawn).' : '');
+  const row = document.getElementById('row'); row.innerHTML = '';
+  SUBJECTS.forEach(s => {
+    const r = drawPanel(s, V, showGates);
+    const div = document.createElement('div'); div.className = 'panel';
+    div.innerHTML = `<h2>${esc(s.title)}</h2><div class="meta">${s.kind} · ${s.states.length} states · ${s.verbs.length} verbs · root ● ${esc(s.states.find(x => x[0] === s.root)[1])}</div>` +
+      (s.note ? `<div class="note">${esc(s.note)}</div>` : '') + `<div class="says">The shape says: ${esc(r.says)}</div>` + r.svg;
+    div.style.flex = String(Math.sqrt(Math.max(400, r.w)));
+    row.appendChild(div);
+    const svg = div.querySelector('svg'), pw = div.clientWidth - 20;
+    svg.style.height = Math.min(pw * r.h / r.w, Math.max(r.h * 1.0, 300)) + 'px';
+  });
+  history.replaceState(null, '', `?variant=${V.key}`);
+}
+const step = d => { vi = (vi + d + VARIANTS.length) % VARIANTS.length; render(); };
+document.getElementById('prev').onclick = () => step(-1);
+document.getElementById('next').onclick = () => step(1);
+document.getElementById('gates').onchange = render;
+addEventListener('keydown', e => { if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
+addEventListener('resize', render);
+render();
+</script>
+</body>
+</html>
