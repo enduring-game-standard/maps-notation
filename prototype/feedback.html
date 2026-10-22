@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Feedback on a rules map (prototype, #22)</title>
+<style>
+  body { margin: 0; font: 14px/1.4 system-ui, sans-serif; background: #fbfaf7; color: #222; }
+  header { padding: 14px 24px 4px; }
+  header h1 { font-size: 18px; margin: 0 0 4px; }
+  header p { margin: 0; color: #555; max-width: 1100px; }
+  .game { display: grid; grid-template-columns: 1fr 330px; gap: 12px; padding: 10px 24px; border-top: 1px solid #e6e2d8; }
+  .game svg { width: 100%; height: auto; background: #fff; border: 1px solid #e6e2d8; border-radius: 6px; }
+  .side h2 { font-size: 15px; margin: 4px 0; }
+  .side p, .side li { font-size: 12.5px; margin: 3px 0; }
+  .side ul { padding-left: 16px; margin: 4px 0; }
+  .unv { color: #a33; }
+  .loops { font-size: 12.5px; }
+  .loops .pri { font-weight: 600; }
+  #pill { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #222; color: #fff;
+    border-radius: 999px; padding: 6px 10px; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 10px #0004; z-index: 9; }
+  #pill button { background: #444; color: #fff; border: 0; border-radius: 999px; width: 30px; height: 30px; font-size: 16px; cursor: pointer; }
+  #pill span { min-width: 280px; text-align: center; font-weight: 600; }
+  #pill label { font-size: 12px; font-weight: 400; }
+  .spacer { height: 70px; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="vtitle"></h1>
+  <p id="vdesc"></p>
+</header>
+<main id="main"></main>
+<div class="spacer"></div>
+<div id="pill">
+  <button id="prev" title="previous (←)">&larr;</button>
+  <span id="vlabel"></span>
+  <button id="next" title="next (→)">&rarr;</button>
+  <label><input type="checkbox" id="bura"> Bura labels</label>
+</div>
+<script>
+// ---------- Rules (data). Arcs: [kind, state, n, note]. kinds: take give need unless ----------
+const GAMES = [
+{
+  id: 'zelda', title: '1. Health dropping raises risk: Zelda 1 (NES) sword beam',
+  rules: [
+    'Link fires a sword beam only while his health is full (every heart filled).',
+    'The beam is ranged: it hits the Octorok from any distance. Stab only hits when Link is near.',
+    'The Red Octorok hurts Link by touch, which needs Link near. A hit removes a half heart.',
+    'Health counted in half hearts: 3 hearts = 6 marks. Hearts + Missing = 6 is conserved.',
+  ],
+  unverified: [
+    'Octorok touch damage = 1/2 heart and Red Octorok dies to 1 wooden-sword hit: from memory.',
+    'Omitted: Octorok rocks (ranged hit), heart drops, fairies, invincibility frames.',
+  ],
+  verified: 'Full-health beam rule: Zelda Dungeon wiki and Zelda Archive wiki (community, not Nintendo).',
+  entities: [ {id:'link', label:'Link', color:'#2e8b57'}, {id:'oct', label:'Red Octorok', color:'#c0392b'}, {id:'world', label:'World', color:'#777777'} ],
+  states: [
+    {id:'hearts', label:'Hearts', entity:'link', marks:6},
+    {id:'missing', label:'Missing', entity:'link', marks:0},
+    {id:'far', label:'Far', entity:'link', marks:1},
+    {id:'near', label:'Near', entity:'link', marks:0},
+    {id:'alive', label:'Alive', entity:'oct', marks:1},
+    {id:'beaten', label:'Defeated', entity:'oct', marks:0},
+    {id:'over', label:'Game over', entity:'world', marks:0, ends:true},
+  ],
+  verbs: [
+    {id:'approach', label:'Approach', by:'link', arcs:[['take','far'],['give','near']]},
+    {id:'backoff', label:'Back off', by:'link', arcs:[['take','near'],['give','far']]},
+    {id:'beam', label:'Sword beam', by:'link', arcs:[['unless','missing',1,'full health only'],['take','alive'],['give','beaten']]},
+    {id:'stab', label:'Stab', by:'link', arcs:[['need','near'],['take','alive'],['give','beaten']]},
+    {id:'touch', label:'Touch Link', by:'oct', arcs:[['need','alive'],['need','near'],['take','hearts',1,'1/2 heart'],['give','missing',1]]},
+    {id:'falls', label:'Link falls', by:'world', arcs:[['unless','hearts'],['unless','over'],['give','over']]},
+  ],
+  bura: [ {label:'Preparation', nodes:['hearts','missing']}, {label:'Skill', nodes:['beam']}, {label:'Risk', nodes:['touch']} ],
+  start: {state:'hearts', dir:-1},
+},
+{
+  id: 'monopoly', title: '2. A resource that snowballs: Monopoly, Boardwalk with the dark-blue set',
+  rules: [
+    'Owner holds both dark-blue lots. Houses on Boardwalk cost $200 each, at most 4 (hotel omitted).',
+    'Rent when the opponent lands: full set unbuilt $100 (doubled $50), then 1-4 houses $200 / $600 / $1400 / $1700.',
+    'Rent moves cash from the opponent to the owner. Cash buys houses. Houses raise rent.',
+    'The five "Pay rent" verbs are one family, drawn folded as one stacked verb over h = houses.',
+  ],
+  unverified: [
+    'Landing odds drawn as 1 in 40; real odds come from 2d6 and the board (not uniform).',
+    'Omitted: turn order, Park Place, even-build rule, hotels, mortgages. "Lands elsewhere" changes nothing (would livelock as real MAPS).',
+  ],
+  verified: 'Boardwalk rents 50/200/600/1400/1700/2000, $200 per house, full set doubles unbuilt rent: falstad.com table and Monopoly fandom wiki (community).',
+  entities: [ {id:'me', label:'Owner', color:'#2e6fb5'}, {id:'opp', label:'Opponent', color:'#c0392b'}, {id:'world', label:'World (dice)', color:'#777777'} ],
+  states: [
+    {id:'cash', label:'Cash $', entity:'me', marks:1500},
+    {id:'houses', label:'Houses', entity:'me', marks:0},
+    {id:'ocash', label:'Cash $', entity:'opp', marks:1500},
+    {id:'away', label:'Elsewhere', entity:'opp', marks:1},
+    {id:'onbw', label:'On Boardwalk', entity:'opp', marks:0},
+  ],
+  verbs: [
+    {id:'build', label:'Build house', by:'me', arcs:[['take','cash',200],['give','houses'],['unless','houses',4,'max']]},
+    {id:'land', label:'Lands on Boardwalk', by:'world', weight:1, arcs:[['take','away'],['give','onbw']]},
+    {id:'miss', label:'Lands elsewhere', by:'world', weight:39, arcs:[['need','away']]},
+    ...[100,200,600,1400,1700].map((r,h)=>({id:'rent'+h, label:'Pay rent', family:'rent', by:'opp', arcs:[
+      ...(h>0?[['need','houses',h]]:[]), ['unless','houses',h+1], ['take','onbw'], ['give','away'], ['take','ocash',r], ['give','cash',r] ]})),
+  ],
+  bura: [ {label:'Money', nodes:['cash']}, {label:'Preparation', nodes:['houses']}, {label:'Luck', nodes:['land','rent']} ],
+  start: {state:'cash', dir:1},
+},
+{
+  id: 'mk', title: '3. A rubber band: Mario Kart 8 Deluxe item roulette',
+  rules: [
+    'Item odds depend on how far behind the leader a racer is; racers far back draw strong items (Bullet Bill, Star) more often.',
+    'A strong item lets a trailing racer catch up. Drawn here as: using it moves the racer from Trailing to Leading.',
+    'A Spiny Shell is a rival\'s verb gated by my state: it targets whoever leads.',
+    'Position folded to one pair: Leading + Trailing = 1. Hand: Empty, Rolling, Strong, Weak (one mark among them).',
+  ],
+  unverified: [
+    'Odds weights 3:1 (strong:weak when trailing) and 0:1 (leading) are placeholders. Real MK8DX tables are by distance, not datamined here.',
+    'Strong item = guaranteed pass is a simplification. Whether 1st can draw a Spiny: unconfirmed.',
+  ],
+  verified: 'Odds by distance from the leader (MK8/MK8DX) and Spiny targets 1st: Super Mario Wiki (MK Tour page) and Wikipedia "Blue shell" (community).',
+  entities: [ {id:'me', label:'Me (racer)', color:'#2e6fb5'}, {id:'world', label:'World (item box)', color:'#777777'}, {id:'rival', label:'Rival', color:'#c0392b'} ],
+  states: [
+    {id:'trailing', label:'Trailing', entity:'me', marks:1},
+    {id:'leading', label:'Leading', entity:'me', marks:0},
+    {id:'empty', label:'Hand empty', entity:'me', marks:1},
+    {id:'rolling', label:'Rolling', entity:'me', marks:0},
+    {id:'strong', label:'Strong item', entity:'me', marks:0},
+    {id:'weak', label:'Weak item', entity:'me', marks:0},
+    {id:'spiny', label:'Holds Spiny', entity:'rival', marks:1},
+    {id:'spent', label:'Spiny used', entity:'rival', marks:0},
+  ],
+  verbs: [
+    {id:'hitbox', label:'Hit item box', by:'me', arcs:[['take','empty'],['give','rolling']]},
+    {id:'rstrong', label:'Roll strong', by:'world', weight:3, arcs:[['need','trailing',1,'w3'],['take','rolling'],['give','strong']]},
+    {id:'rweakT', label:'Roll weak (back)', by:'world', weight:1, arcs:[['need','trailing',1,'w1'],['take','rolling'],['give','weak']]},
+    {id:'rweakL', label:'Roll weak (front)', by:'world', weight:1, arcs:[['need','leading',1,'w1'],['take','rolling'],['give','weak']]},
+    {id:'usestrong', label:'Use strong', by:'me', arcs:[['take','strong'],['take','trailing'],['give','leading'],['give','empty']]},
+    {id:'useweak', label:'Use weak', by:'me', arcs:[['take','weak'],['give','empty']]},
+    {id:'fire', label:'Fire Spiny', by:'rival', arcs:[['take','spiny'],['take','leading',1,'targets 1st'],['give','trailing'],['give','spent']]},
+  ],
+  bura: [ {label:'Preparation', nodes:['leading','trailing']}, {label:'Luck', nodes:['rstrong']}, {label:'Skill', nodes:['usestrong']} ],
+  start: {state:'trailing', dir:1},
+},
+];
+
+// ---------- View graph: fold verb families into one node ----------
+function viewOf(g) {
+  const st = Object.fromEntries(g.states.map(s => [s.id, s]));
+  const nodes = g.states.map(s => ({...s, kind:'state'}));
+  const arcs = [];
+  const fams = {};
+  for (const v of g.verbs) {
+    if (!v.family) {
+      nodes.push({id:v.id, label:v.label, entity:v.by, kind:'verb', weight:v.weight});
+      for (const [k, s, n=1, note] of v.arcs) arcs.push(mkArc(k, s, v.id, n, note));
+    } else (fams[v.family] ||= []).push(v);
+  }
+  for (const [fid, members] of Object.entries(fams)) {
+    // tier state: appears in need arcs with differing n (absent = 0)
+    const needN = (v, s) => (v.arcs.find(a => a[0]==='need' && a[1]===s) || [0,0,0])[2];
+    const cand = [...new Set(members.flatMap(v => v.arcs.filter(a=>a[0]==='need'||a[0]==='unless').map(a=>a[1])))];
+    const tier = cand.find(s => new Set(members.map(v => needN(v, s))).size > 1);
+    const mag = v => v.arcs.filter(a=>a[0]==='take'||a[0]==='give').reduce((t,a)=>t+(a[2]||1),0);
+    const sorted = [...members].sort((a,b)=>needN(a,tier)-needN(b,tier));
+    const slope = Math.sign(mag(sorted.at(-1)) - mag(sorted[0]));
+    const table = sorted.map(v => [needN(v,tier), v.arcs.find(a=>a[0]==='give'&&a[2]>1)?.[2]]);
+    nodes.push({id:fid, label:members[0].label, entity:members[0].by, kind:'verb', family:members.length, table, tierState:tier});
+    arcs.push({kind:'tier', from:tier, to:fid, n:'h', note:'h = ' + st[tier].label.toLowerCase(), slope});
+    const seen = new Set();
+    for (const v of members) for (const [k, s, n=1] of v.arcs) {
+      if (s === tier) continue;
+      const key = k + s; if (seen.has(key)) continue; seen.add(key);
+      const varies = new Set(members.map(m => (m.arcs.find(a=>a[0]===k&&a[1]===s)||[])[2])).size > 1;
+      arcs.push(mkArc(k, s, fid, varies ? 'rent(h)' : n));
+    }
+  }
+  return {nodes, arcs, byId:Object.fromEntries(nodes.map(n=>[n.id,n]))};
+}
+function mkArc(kind, s, v, n, note) {
+  return kind === 'give' ? {kind, from:v, to:s, n, note} : {kind, from:s, to:v, n, note};
+}
+
+// ---------- Derivation: S-invariant pairs, signed influence graph, cycles ----------
+function derive(g, view) {
+  const states = view.nodes.filter(n => n.kind==='state');
+  const verbs = view.nodes.filter(n => n.kind==='verb');
+  const delta = (v, s) => view.arcs.reduce((d,a) =>
+    d + (a.kind==='give'&&a.from===v&&a.to===s ? (+a.n||1) : 0) - (a.kind==='take'&&a.from===s&&a.to===v ? (typeof a.n==='number'?a.n:1) : 0), 0);
+  // pairs a+b conserved: every verb's change to a is the negative of its change to b
+  const q = {}; // state -> {q, sgn}
+  const used = new Set();
+  for (const a of states) for (const b of states) {
+    if (a===b || used.has(a.id) || used.has(b.id) || a.entity!==b.entity || states.indexOf(a)>states.indexOf(b)) continue;
+    let moves = 0, ok = true;
+    for (const v of verbs) { const da = delta(v.id,a.id), db = delta(v.id,b.id); if (da!==-db) ok=false; if (da) moves++; }
+    if (ok && moves) { used.add(a.id); used.add(b.id); q[a.id]={q:a.id, sgn:1, pair:b.id}; q[b.id]={q:a.id, sgn:-1, pair:a.id}; }
+  }
+  for (const s of states) q[s.id] ||= {q:s.id, sgn:1};
+  const rep = id => q[id].q;
+  const ent = id => view.byId[id].entity;
+  const E = new Map(); // key from>to -> {from,to,sign,arcs,gate}
+  const add = (from, to, sign, arc, gate) => {
+    const k = from+'>'+to; const e = E.get(k) || {from, to, sign, arcs:[], gate:false};
+    if (e.sign !== sign) e.sign = 0; e.arcs.push(arc); e.gate ||= gate; E.set(k, e);
+  };
+  for (const a of view.arcs) {
+    if (a.kind === 'give') { add(a.from, rep(a.to), q[a.to].sgn, a, false); continue; }
+    const sg = q[a.from].sgn, Q = rep(a.from);
+    if (a.kind === 'take') { add(Q, a.to, sg, a, false); add(a.to, Q, -sg, a, false); }
+    if (a.kind === 'need') add(Q, a.to, sg, a, true);
+    if (a.kind === 'unless') add(Q, a.to, -sg, a, true);
+    if (a.kind === 'tier') add(Q, a.to, sg * a.slope, a, true);
+  }
+  const edges = [...E.values()];
+  const out = {}; for (const e of edges) (out[e.from] ||= []).push(e);
+  const nodeIds = [...new Set(edges.flatMap(e => [e.from, e.to]))];
+  const cycles = [];
+  nodeIds.forEach((s, si) => {
+    const path = [], onPath = new Set([s]);
+    (function dfs(u) {
+      for (const e of out[u] || []) {
+        const vi = nodeIds.indexOf(e.to);
+        if (e.to === s) cycles.push([...path, e]);
+        else if (vi > si && !onPath.has(e.to)) { onPath.add(e.to); path.push(e); dfs(e.to); path.pop(); onPath.delete(e.to); }
+      }
+    })(s);
+  });
+  const loops = [];
+  for (const c of cycles) {
+    const nodes = c.map(e => e.from);
+    const sign = c.reduce((p,e)=>p*e.sign, 1);
+    const gates = c.filter(e=>e.gate).length;
+    const vNodes = nodes.filter(n => view.byId[n].kind==='verb');
+    let kind;
+    if (c.length === 2 && !c[0].gate && !c[1].gate) {
+      const v = vNodes[0], s = nodes.find(n => view.byId[n].kind==='state');
+      if (ent(v) === ent(s) || ent(v) === 'world') continue; // spending own marks
+      kind = 'drain';
+    } else if (c.length === 2) kind = 'cap';
+    else kind = gates ? 'feedback' : 'circulation';
+    const ents = new Set(nodes.map(ent));
+    loops.push({edges:c, nodes, sign, kind, crossing: ents.size>1, verbs:vNodes.length});
+  }
+  const rank = l => ({feedback:0, cap:1, drain:2, circulation:3}[l.kind])*100 + (l.crossing?0:50) + l.verbs;
+  loops.sort((a,b)=>rank(a)-rank(b));
+  // rotate primary to start at the game's start quantity
+  const primary = loops[0];
+  const st = rep(g.start.state);
+  const i = primary.nodes.indexOf(st);
+  if (i > 0) { primary.edges = [...primary.edges.slice(i), ...primary.edges.slice(0,i)]; primary.nodes = primary.edges.map(e=>e.from); }
+  return {q, rep, edges, loops, primary, qLabel: id => {
+    const n = view.byId[id]; if (n.kind!=='state') return n.label;
+    return q[id].pair ? n.label + ' (vs ' + view.byId[q[id].pair].label + ')' : n.label; }};
+}
+function narrate(g, view, d, loop, startDir) {
+  let dir = startDir * (d.q[g.start.state]?.sgn || 1);
+  const parts = [];
+  loop.edges.forEach((e, i) => {
+    const n = view.byId[e.from];
+    if (n.kind === 'state') parts.push({text: d.qLabel(e.from), sym: dir>0?'up':'down'});
+    else parts.push({text: n.label, sym: dir>0?'on':'off'});
+    dir *= e.sign || 1;
+  });
+  return parts;
+}
+const SYM = {up:'↑', down:'↓', on:'enabled', off:'blocked'};
+const POL = l => l.sign > 0 ? {tag:'R', word:'reinforcing', col:'#d35400'} : l.sign < 0 ? {tag:'B', word:'balancing', col:'#2471a3'} : {tag:'?', word:'mixed', col:'#888'};
+
+// ---------- SVG helpers ----------
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs={}, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; }
+function text(parent, x, y, s, attrs={}) { const t = el('text', {x, y, 'font-size':12, 'text-anchor':'middle', ...attrs}, parent); t.textContent = s; return t; }
+const R_STATE = 22, H_VERB = 9;
+function colorOf(g, ent) { return g.entities.find(e=>e.id===ent)?.color || '#777'; }
+function defs(svg) {
+  const d = el('defs', {}, svg);
+  for (const [id, c] of [['ar','#444'],['arR','#d35400'],['arB','#2471a3'],['arP','#7d3c98']]) {
+    const m = el('marker', {id, viewBox:'0 0 10 10', refX:9, refY:5, markerWidth:7, markerHeight:7, orient:'auto-start-reverse'}, d);
+    el('path', {d:'M0,0 L10,5 L0,10 z', fill:c}, m);
+  }
+}
+function trim(p, q, r) { const dx=q.x-p.x, dy=q.y-p.y, L=Math.hypot(dx,dy)||1; return {x:q.x-dx/L*r, y:q.y-dy/L*r}; }
+function nodeR(view, id) { return view.byId[id].kind==='state' ? R_STATE : H_VERB+3; }
+function drawArc(svg, view, pos, a, opts={}) {
+  const p = pos[a.from], q = pos[a.to];
+  const s = trim(q, p, nodeR(view,a.from)), t = trim(p, q, nodeR(view,a.to) + (a.kind==='need'||a.kind==='unless'||a.kind==='tier'?4:0));
+  const stroke = opts.stroke || '#555';
+  const dash = a.kind==='tier' ? '5 3' : null;
+  let d;
+  if (opts.curve) { d = `M${s.x},${s.y} A${opts.curve.r},${opts.curve.r} 0 0 1 ${t.x},${t.y}`; }
+  else d = `M${s.x},${s.y} L${t.x},${t.y}`;
+  const path = el('path', {d, fill:'none', stroke, 'stroke-width':opts.w||1.3, ...(dash?{'stroke-dasharray':dash}:{})}, svg);
+  if (a.kind==='take'||a.kind==='give') path.setAttribute('marker-end', `url(#${opts.marker||'ar'})`);
+  if (a.kind==='need'||a.kind==='tier') el('circle', {cx:t.x, cy:t.y, r:3.5, fill:stroke}, svg);
+  if (a.kind==='unless') el('circle', {cx:t.x, cy:t.y, r:4, fill:'#fff', stroke, 'stroke-width':1.5}, svg);
+  const lab = [a.n!==1 && a.n!==undefined ? (typeof a.n==='number'&&a.n>=100?'$'+a.n:a.n) : '', a.note && a.kind!=='tier' ? a.note : ''].filter(Boolean).join(' ');
+  if (lab && !opts.nolabel) {
+    const mx = (s.x+t.x)/2, my = (s.y+t.y)/2;
+    const bg = el('rect', {fill:'#fffbe8', stroke:'#e0d8b0', rx:3}, svg);
+    const tt = text(svg, mx, my+4, lab, {'font-size':10.5, fill:'#5a4a00'});
+    const bb = tt.getBBox(); bg.setAttribute('x', bb.x-2); bg.setAttribute('y', bb.y-1); bg.setAttribute('width', bb.width+4); bg.setAttribute('height', bb.height+2);
+  }
+  return path;
+}
+function drawNode(svg, g, view, pos, id, opts={}) {
+  const n = view.byId[id], p = pos[id], c = colorOf(g, n.entity);
+  if (n.kind === 'state') {
+    el('circle', {cx:p.x, cy:p.y, r:R_STATE, fill: opts.fill||'#fff', stroke:c, 'stroke-width': n.ends?4:2}, svg);
+    text(svg, p.x, p.y+4, String(n.marks), {'font-size':12, 'font-weight':600, fill:c});
+    text(svg, p.x, p.y+R_STATE+14, n.label, {'font-size':12});
+  } else {
+    if (n.family) for (let k=n.family-1;k>0;k--) el('rect', {x:p.x-H_VERB+k*2.5, y:p.y-H_VERB-k*2.5, width:2*H_VERB, height:2*H_VERB, fill:'#fff', stroke:c, 'stroke-width':1}, svg);
+    el('rect', {x:p.x-H_VERB, y:p.y-H_VERB, width:2*H_VERB, height:2*H_VERB, fill: opts.fill||c, stroke:c}, svg);
+    text(svg, p.x, p.y-H_VERB-(n.family?16:5), n.label + (n.weight?`  w${n.weight}`:''), {'font-size':12, 'font-style':'italic'});
+    if (n.table) {
+      const t = 'h ' + n.table.map(r=>r[0]).join('  ') ;
+      text(svg, p.x, p.y+H_VERB+15, 'h: ' + n.table.map(r=>`${r[0]}→$${r[1]}`).join(' '), {'font-size':10, fill:'#5a4a00'});
+    }
+  }
+}
+function drawMap(svg, g, view, pos, opts={}) {
+  const skip = opts.skipArcs || new Set();
+  for (const a of view.arcs) if (!skip.has(a)) drawArc(svg, view, pos, a);
+  for (const n of view.nodes) drawNode(svg, g, view, pos, n.id);
+}
+function fit(svg, pad=24) {
+  const bb = svg.getBBox();
+  svg.setAttribute('viewBox', `${bb.x-pad} ${bb.y-pad} ${bb.width+2*pad} ${bb.height+2*pad}`);
+  svg.style.maxWidth = (bb.width+2*pad)*1.15 + 'px';
+}
+function laneHeaders(svg, g, lanes) {
+  for (const L of lanes) {
+    el('rect', {x:L.x0, y:L.y0-34, width:L.w-8, height:L.h+34, fill: colorOf(g, L.id)+'0d', stroke:colorOf(g,L.id)+'40', rx:8}, svg);
+    text(svg, L.x0+12, L.y0-14, g.entities.find(e=>e.id===L.id).label, {'text-anchor':'start', 'font-weight':600, fill:colorOf(g,L.id)});
+  }
+}
+function buraTags(svg, g, view, pos) {
+  for (const b of g.bura) {
+    const ids = b.nodes.filter(id => pos[id]);
+    const xs = ids.map(id=>pos[id].x), ys = ids.map(id=>pos[id].y);
+    const x0 = Math.min(...xs)-34, x1 = Math.max(...xs)+34, y0 = Math.min(...ys)-36, y1 = Math.max(...ys)+40;
+    el('rect', {x:x0, y:y0, width:x1-x0, height:y1-y0, rx:14, fill:'none', stroke:'#7d3c98', 'stroke-dasharray':'2 3', 'stroke-width':1.2}, svg);
+    text(svg, x0+4, y0-4, b.label, {'text-anchor':'start', 'font-size':11, fill:'#7d3c98', 'font-style':'italic'});
+  }
+}
+
+function spread(pos, movable, min) {
+  const mv = new Set(movable), ids = Object.keys(pos);
+  for (let it=0; it<120; it++) {
+    let moved = false;
+    for (const a of ids) for (const b of ids) {
+      if (a>=b || (!mv.has(a) && !mv.has(b))) continue;
+      let dx = pos[b].x-pos[a].x, dy = pos[b].y-pos[a].y; if (Math.hypot(dx,dy) < 0.5) { dx = 1; dy = 0.7; } const L = Math.hypot(dx,dy);
+      if (L >= min) continue;
+      const push = (min-L)/2 + 1, ux = dx/L, uy = dy/L;
+      const ka = mv.has(a) ? (mv.has(b)?1:2) : 0, kb = mv.has(b) ? (mv.has(a)?1:2) : 0;
+      pos[a].x -= ux*push*ka; pos[a].y -= uy*push*ka; pos[b].x += ux*push*kb; pos[b].y += uy*push*kb; moved = true;
+    }
+    if (!moved) break;
+  }
+}
+// ---------- Layout: entity lanes, rows by BFS from marked states ----------
+function laneLayout(g, view, opts={}) {
+  const W = opts.laneW || 300, rowH = opts.rowH || 92;
+  const layer = {};
+  const succ = {}; for (const a of view.arcs) (succ[a.from] ||= []).push(a.to);
+  let frontier = view.nodes.filter(n => n.kind==='state' && n.marks>0).map(n=>n.id);
+  frontier.forEach(id => layer[id]=0);
+  while (frontier.length) {
+    const nx = [];
+    for (const u of frontier) for (const v of succ[u]||[]) if (layer[v]===undefined) { layer[v]=layer[u]+1; nx.push(v); }
+    frontier = nx;
+  }
+  view.nodes.forEach(n => layer[n.id] ??= 0);
+  let x = 0;
+  const lanes = g.entities.filter(e => view.nodes.some(n=>n.entity===e.id)).map(e => {
+    const mine = view.nodes.filter(n=>n.entity===e.id);
+    const widest = Math.max(...Object.values(mine.reduce((m,n)=>(m[layer[n.id]]=(m[layer[n.id]]||0)+1,m),{})));
+    const w = Math.max(W, widest*160 + 40); const L = {id:e.id, x0:x, w, y0:0, h:0}; x += w; return L; });
+  const pos = {};
+  for (const L of lanes) {
+    const mine = view.nodes.filter(n=>n.entity===L.id);
+    const rows = [...new Set(mine.map(n=>layer[n.id]))].sort((a,b)=>a-b);
+    rows.forEach((r, ri) => {
+      const inRow = mine.filter(n=>layer[n.id]===r);
+      inRow.forEach((n, k) => pos[n.id] = {x: L.x0 + L.w*(k+1)/(inRow.length+1) + (ri%2?18:-18)*(inRow.length===1?1:0), y: 40 + r*rowH});
+    });
+    L.h = 40 + (rows.at(-1)+1)*rowH;
+  }
+  const H = Math.max(...lanes.map(l=>l.h)); lanes.forEach(l=>l.h=H);
+  return {pos, lanes};
+}
+
+// ---------- Variants ----------
+const VARIANTS = [
+{ key:'ring', name:'Loop as drawn cycle',
+  desc:'The derived primary loop is laid on a ring (positions computed from the cycle order), so the loop closes geometrically. Its rule arcs run along the ring; every other rule hangs outside its nearest ring node. R/B and the sign in the center are derived from the arcs.',
+  render(g, view, d, svg) {
+    const L = d.primary, R = 150;
+    // ring members: verbs + the actual state each in-arc uses
+    const ring = [];
+    L.edges.forEach((e, i) => {
+      const n = view.byId[e.from];
+      if (n.kind === 'verb') ring.push(e.from);
+      else { const a = e.arcs[0]; ring.push(a.kind==='give' ? a.to : a.from); }
+    });
+    const pos = {};
+    ring.forEach((id, i) => { const t = -Math.PI/2 + 2*Math.PI*i/ring.length; pos[id] = {x:R*Math.cos(t), y:R*Math.sin(t), t}; });
+    // others: attach to a ring neighbor, pushed out radially
+    const others = view.nodes.map(n=>n.id).filter(id=>!pos[id]);
+    const slots = {};
+    const neighbors = id => view.arcs.filter(a=>a.from===id||a.to===id).map(a=>a.from===id?a.to:a.from);
+    let pending = others.slice(), guard = 0;
+    while (pending.length && guard++ < 20) {
+      const next = [];
+      for (const id of pending) {
+        const anchor = neighbors(id).find(nb => pos[nb]);
+        if (!anchor) { next.push(id); continue; }
+        const base = pos[anchor]; const t = base.t ?? Math.atan2(base.y, base.x);
+        const k = slots[anchor] = (slots[anchor]||0) + 1;
+        const r = Math.hypot(base.x, base.y) + 105;
+        const tt = t + (k%2 ? 1 : -1) * Math.ceil(k/2) * 0.28 - 0.14 * (k>0?0:1);
+        pos[id] = {x:r*Math.cos(tt), y:r*Math.sin(tt), t:tt};
+      }
+      pending = next;
+    }
+    pending.forEach((id,i)=> pos[id] = {x:-R-220, y:-R + i*80});
+    spread(pos, others, 78);
+    const pol = POL(L);
+    // ring arcs: rule arcs whose ends are consecutive ring members
+    const ringArcs = new Set();
+    for (let i=0;i<ring.length;i++) {
+      const a = ring[i], b = ring[(i+1)%ring.length];
+      for (const arc of view.arcs) if ((arc.from===a&&arc.to===b)||(arc.from===b&&arc.to===a&&arc.kind==='take')) ringArcs.add(arc);
+    }
+    el('circle', {cx:0, cy:0, r:R, fill:pol.col+'10', stroke:pol.col+'40', 'stroke-width':18}, svg);
+    for (const a of view.arcs) if (!ringArcs.has(a)) drawArc(svg, view, pos, a, {stroke:'#999', w:1});
+    for (const a of ringArcs) {
+      const rev = !(ring.indexOf(a.from) + 1 === ring.indexOf(a.to) || (ring.indexOf(a.to)===0 && ring.indexOf(a.from)===ring.length-1));
+      const aa = rev ? {...a} : a;
+      drawArc(svg, view, pos, aa, {stroke:pol.col, w:2.6, marker: pol.tag==='R'?'arR':'arB', curve: rev?null:{r:R}});
+    }
+    for (const n of view.nodes) drawNode(svg, g, view, pos, n.id);
+    text(svg, 0, -8, pol.tag, {'font-size':44, 'font-weight':700, fill:pol.col});
+    text(svg, 0, 18, pol.word + (pol.tag==='R'?' (+)':' (−)'), {'font-size':13, fill:pol.col});
+    // edge signs at ring midpoints
+    L.edges.forEach((e,i) => {
+      const t = -Math.PI/2 + 2*Math.PI*(i+0.5)/ring.length;
+      text(svg, (R-26)*Math.cos(t), (R-26)*Math.sin(t)+5, e.sign>0?'+':e.sign<0?'−':'?', {'font-size':16, 'font-weight':700, fill:pol.col});
+    });
+    if (bura()) buraTags(svg, g, view, pos);
+  }},
+{ key:'overlay', name:'Overlay band on a plain map',
+  desc:'A plain rules map: one lane per entity, rows by reachability from the marked states, no hand placement. The derived primary loop is a translucent band laid over the rule arcs it runs through. Turn on Bura labels to see Skill/Preparation as dashed tags over the rules.',
+  render(g, view, d, svg) {
+    const {pos, lanes} = laneLayout(g, view);
+    laneHeaders(svg, g, lanes);
+    const L = d.primary, pol = POL(L);
+    // band through the actual arcs of each loop edge
+    const pts = [];
+    for (const e of L.edges) { const a = e.arcs[0]; const from = a.kind==='give'?a.from:(view.byId[e.from].kind==='verb'?a.to:a.from); const to = a.kind==='give'?a.to:(view.byId[e.from].kind==='verb'?a.from:a.to);
+      pts.push(pos[view.byId[e.from].kind==='verb'?e.from:(a.kind==='give'?a.to:a.from)]); }
+    pts.push(pts[0]);
+    el('path', {d:'M'+pts.map(p=>`${p.x},${p.y}`).join(' L'), fill:'none', stroke:pol.col, 'stroke-opacity':0.22, 'stroke-width':30, 'stroke-linejoin':'round', 'stroke-linecap':'round'}, svg);
+    drawMap(svg, g, view, pos);
+    const cx = pts.slice(0,-1).reduce((s,p)=>s+p.x,0)/(pts.length-1), cy = pts.slice(0,-1).reduce((s,p)=>s+p.y,0)/(pts.length-1);
+    el('circle', {cx, cy, r:16, fill:pol.col}, svg);
+    text(svg, cx, cy+6, pol.tag, {'font-size':17, 'font-weight':700, fill:'#fff'});
+    if (bura()) buraTags(svg, g, view, pos);
+  }},
+{ key:'strip', name:'Map plus derived loop strip',
+  desc:'The same plain map, untouched, with a causal strip computed beside it. Each step follows one rule arc and flips direction on a negative arc (unless, take). The strip is the reading a designer would otherwise do by eye.',
+  render(g, view, d, svg) {
+    const {pos, lanes} = laneLayout(g, view);
+    laneHeaders(svg, g, lanes);
+    drawMap(svg, g, view, pos);
+    const x0 = lanes.at(-1).x0 + lanes.at(-1).w + 30;
+    const loops = d.loops.filter(l=>l.kind!=='circulation' && l.verbs<=3).slice(0,2);
+    let y = 10;
+    loops.forEach((L, li) => {
+      const pol = POL(L);
+      const parts = narrate(g, view, d, L, li===0 ? g.start.dir : 1);
+      text(svg, x0, y, (li===0?'Primary loop':'Also derived') + `: ${pol.tag} ${pol.word}` + (L.kind==='drain'?' (contact drain)':L.kind==='cap'?' (cap)':''), {'text-anchor':'start', 'font-weight':700, fill:pol.col, 'font-size':li?12:13});
+      y += 22;
+      parts.forEach((p, i) => {
+        const e = L.edges[i];
+        const isState = view.byId[e.from].kind==='state';
+        el(isState?'circle':'rect', isState?{cx:x0+8, cy:y-4, r:7, fill:'none', stroke:'#555'}:{x:x0+2, y:y-10, width:12, height:12, fill:'#555'}, svg);
+        text(svg, x0+24, y, `${p.text} ${SYM[p.sym]}`, {'text-anchor':'start', 'font-size':12.5});
+        const kinds = [...new Set(e.arcs.map(a=>a.kind))].join('/');
+        text(svg, x0+34, y+16, `│ ${e.sign>0?'+':'−'} via ${kinds}`, {'text-anchor':'start', 'font-size':10.5, fill:'#888'});
+        y += 34;
+      });
+      text(svg, x0+24, y, `↺ back to ${parts[0].text} ${SYM[parts[0].sym]}`, {'text-anchor':'start', 'font-size':12.5, fill:pol.col});
+      y += 34;
+    });
+    if (bura()) buraTags(svg, g, view, pos);
+  }},
+{ key:'folded', name:'Folded influence graph (invariant view)',
+  desc:'Conserved pairs found by S-invariant (Hearts+Missing, Far+Near, Leading+Trailing) fold into one gauge each. Token circulation is hidden; only signed influence edges remain, and every derived loop gets its own R/B marker. This is what the derivation sees, including the loops a designer might not want.',
+  render(g, view, d, svg) {
+    // nodes: quantities + verbs that appear in any non-circulation loop
+    const loops = d.loops.filter(l=>l.kind!=='circulation');
+    const ids = [...new Set(loops.flatMap(l=>l.nodes))];
+    const n = ids.length, R = 60 + n*22;
+    // order: primary loop first, then the rest
+    const order = [...new Set([...d.primary.nodes, ...ids])];
+    const pos = {}; order.forEach((id,i)=>{ const t=-Math.PI/2+2*Math.PI*i/order.length; pos[id]={x:R*Math.cos(t), y:R*Math.sin(t)}; });
+    const used = new Set(loops.flatMap(l=>l.edges));
+    loops.slice().reverse().forEach((L,li) => {
+      const pol = POL(L), pts = L.nodes.map(id=>pos[id]);
+      if (pts.length>2) el('polygon', {points:pts.map(p=>`${p.x},${p.y}`).join(' '), fill:pol.col, 'fill-opacity': L===d.primary?0.16:0.05, stroke:'none'}, svg);
+    });
+    for (const e of d.edges) {
+      if (!pos[e.from]||!pos[e.to]) continue;
+      const p = pos[e.from], q = pos[e.to];
+      const rf = view.byId[e.from].kind==='state'?26:12, rt = view.byId[e.to].kind==='state'?30:16;
+      const bend = 0.18;
+      const mx = (p.x+q.x)/2 - (q.y-p.y)*bend, my = (p.y+q.y)/2 + (q.x-p.x)*bend;
+      const s = trim({x:mx,y:my}, p, rf), t = trim({x:mx,y:my}, q, rt);
+      const col = e.sign>0?'#d35400':'#2471a3';
+      el('path', {d:`M${s.x},${s.y} Q${mx},${my} ${t.x},${t.y}`, fill:'none', stroke: used.has(e)?col:'#ccc', 'stroke-width': d.primary.edges.includes(e)?2.6:1.3, 'marker-end':`url(#${e.sign>0?'arR':'arB'})`}, svg);
+      text(svg, (s.x+t.x)/2*0.5+mx*0.5, (s.y+t.y)/2*0.5+my*0.5+5, e.sign>0?'+':'−', {'font-size':15, 'font-weight':700, fill:col});
+    }
+    for (const id of order) {
+      const nd = view.byId[id], p = pos[id], c = colorOf(g, nd.entity);
+      if (nd.kind==='state') {
+        const pair = d.q[id].pair;
+        el('circle', {cx:p.x, cy:p.y, r:26, fill:'#fff', stroke:c, 'stroke-width':2}, svg);
+        if (pair) { el('path', {d:`M${p.x-26},${p.y} A26,26 0 0 0 ${p.x+26},${p.y} Z`, fill:c+'30'}, svg); }
+        text(svg, p.x, p.y+44, nd.label + (pair? ' ⇄ ' + view.byId[pair].label : ''), {'font-size':12, 'font-weight':600});
+        text(svg, p.x, p.y+5, String(nd.marks) + (pair? '|' + view.byId[pair].marks : ''), {'font-size':11, fill:c});
+      } else {
+        el('rect', {x:p.x-9, y:p.y-9, width:18, height:18, fill:c}, svg);
+        text(svg, p.x, p.y-15, nd.label, {'font-size':12, 'font-style':'italic'});
+      }
+    }
+    // loop markers
+    loops.forEach((L, li) => {
+      const pol = POL(L), pts = L.nodes.map(id=>pos[id]);
+      const cx = pts.reduce((s,p)=>s+p.x,0)/pts.length, cy = pts.reduce((s,p)=>s+p.y,0)/pts.length;
+      const off = pts.length<=2 ? {x:(pts[0].y-pts[1].y)*0.35, y:(pts[1].x-pts[0].x)*0.35} : {x:0,y:0};
+      el('circle', {cx:cx+off.x, cy:cy+off.y+ li*0, r: L===d.primary?17:11, fill:pol.col, 'fill-opacity': L===d.primary?1:0.75}, svg);
+      text(svg, cx+off.x, cy+off.y+(L===d.primary?6:4), pol.tag, {'font-size':L===d.primary?17:11, 'font-weight':700, fill:'#fff'});
+    });
+    if (bura()) {
+      for (const b of g.bura) for (const id of b.nodes) { const k = pos[id] ? id : null; if (k) text(svg, pos[k].x, pos[k].y-34, b.label, {'font-size':11, fill:'#7d3c98', 'font-style':'italic'}); }
+    }
+  }},
+{ key:'bura', name:'Bura two-layer: strategy above rules',
+  desc:'The rules map sits below, plain. Above it, a strategy layer of Bura-style resource bins (open-top boxes) is projected from the rule nodes each label covers. The loop arrows between bins are not drawn by hand: they follow the derived primary loop, in its order and with its sign. Bura labels are always on here because they are the layer.',
+  render(g, view, d, svg) {
+    const {pos, lanes} = laneLayout(g, view);
+    const yOff = 230;
+    for (const k in pos) pos[k].y += yOff;
+    lanes.forEach(l=>l.y0 += yOff);
+    laneHeaders(svg, g, lanes);
+    drawMap(svg, g, view, pos);
+    // bins
+    const binOf = {}; g.bura.forEach((b,i)=> b.nodes.forEach(id=>binOf[id]=i));
+    const binPos = g.bura.map(b => { const xs = b.nodes.filter(id=>pos[id]).map(id=>pos[id].x); return {x: xs.reduce((s,x)=>s+x,0)/xs.length, y: 60}; });
+    // loop through bins, derived from primary loop order; bins laid left to right in that order
+    const L = d.primary, pol = POL(L);
+    const seq = [];
+    L.edges.forEach(e => { const ids = [e.from, ...e.arcs.map(a=>a.from), ...e.arcs.map(a=>a.to)]; const b = ids.map(id=>binOf[id]).find(x=>x!==undefined); if (b!==undefined && seq.at(-1)!==b) seq.push(b); });
+    if (seq.length>1 && seq[0]===seq.at(-1)) seq.pop();
+    const rest = g.bura.map((b,i)=>i).filter(i=>!seq.includes(i));
+    [...seq, ...rest].forEach((b, k) => binPos[b] = {x: 90 + k*210, y: 60});
+    for (let i=0;i<seq.length && seq.length>1;i++) {
+      const a = binPos[seq[i]], b = binPos[seq[(i+1)%seq.length]];
+      const back = i===seq.length-1;
+      const mx = (a.x+b.x)/2, my = back ? a.y + 75 : a.y;
+      el('path', {d:`M${a.x+(b.x>a.x?40:-40)},${a.y} Q${mx},${my} ${b.x+(b.x>a.x?-44:44)},${b.y}`, fill:'none', stroke:pol.col, 'stroke-width':3, 'marker-end':`url(#${pol.tag==='R'?'arR':'arB'})`}, svg);
+    }
+    g.bura.forEach((b,i) => {
+      const p = binPos[i];
+      el('path', {d:`M${p.x-40},${p.y-22} L${p.x-34},${p.y+22} L${p.x+34},${p.y+22} L${p.x+40},${p.y-22}`, fill:'#f5eef8', stroke:'#7d3c98', 'stroke-width':2}, svg);
+      text(svg, p.x, p.y+6, b.label, {'font-size':13, 'font-weight':600, fill:'#7d3c98'});
+      for (const id of b.nodes) if (pos[id]) el('line', {x1:p.x, y1:p.y+22, x2:pos[id].x, y2:pos[id].y-(view.byId[id].kind==='state'?R_STATE:H_VERB+18), stroke:'#7d3c98', 'stroke-dasharray':'3 4', 'stroke-opacity':0.6}, svg);
+    });
+    const cx = seq.reduce((s,b)=>s+binPos[b].x,0)/Math.max(1,seq.length);
+    text(svg, cx, 6, `${pol.tag}  ${pol.word}`, {'font-size':14, 'font-weight':700, fill:pol.col});
+    text(svg, lanes[0].x0, 140, 'strategy layer (Bura labels)', {'text-anchor':'start', 'font-size':11, fill:'#7d3c98'});
+    text(svg, lanes[0].x0, 160, 'rules layer (MAPS)', {'text-anchor':'start', 'font-size':11, fill:'#555'});
+    el('line', {x1:lanes[0].x0, y1:148, x2:lanes.at(-1).x0+lanes.at(-1).w, y2:148, stroke:'#ccc'}, svg);
+  }},
+];
+
+// ---------- Shell ----------
+const params = new URLSearchParams(location.search);
+let vi = Math.max(0, VARIANTS.findIndex(v => v.key === params.get('variant') || String(VARIANTS.indexOf(v)) === params.get('variant')));
+document.getElementById('bura').checked = params.get('bura') === '1';
+function bura() { return document.getElementById('bura').checked; }
+const LETTER = i => String.fromCharCode(65+i);
+function render() {
+  const v = VARIANTS[vi];
+  document.getElementById('vlabel').textContent = `${LETTER(vi)} — ${v.name}`;
+  document.getElementById('vtitle').textContent = `${LETTER(vi)} — ${v.name}`;
+  document.getElementById('vdesc').textContent = v.desc;
+  const main = document.getElementById('main'); main.innerHTML = '';
+  for (const g of GAMES) {
+    const view = viewOf(g), d = derive(g, view);
+    const row = document.createElement('section'); row.className = 'game';
+    const svg = el('svg', {}); row.appendChild(svg);
+    const side = document.createElement('div'); side.className = 'side';
+    const loopsHtml = d.loops.filter(l=>l.kind!=='circulation').map((l,i)=>{ const p=POL(l); return `<li class="${l===d.primary?'pri':''}" style="color:${p.col}">${p.tag} ${l.kind}: ${l.nodes.map(id=>view.byId[id].label).join(' → ')}${l.verbs>3?' <i>(long: rides hand circulation, likely not a designer loop)</i>':''}</li>`; }).join('');
+    const circ = d.loops.filter(l=>l.kind==='circulation').length;
+    side.innerHTML = `<h2>${g.title}</h2><ul>${g.rules.map(r=>`<li>${r}</li>`).join('')}</ul>
+      <p><b>Derived loops</b> (first = primary):</p><ul class="loops">${loopsHtml}</ul><p style="color:#888">${circ} pure circulation cycle(s) hidden (token moves, no gate).</p>
+      <p><b>Checked:</b> ${g.verified}</p><p class="unv"><b>Unverified:</b></p><ul class="unv">${g.unverified.map(r=>`<li>${r}</li>`).join('')}</ul>`;
+    row.appendChild(side);
+    main.appendChild(row);
+    defs(svg);
+    const layer = el('g', {}, svg);
+    v.render(g, view, d, layer);
+    fit(svg);
+  }
+  const u = new URL(location); u.searchParams.set('variant', v.key); history.replaceState(null, '', u);
+}
+function go(k) { vi = (vi + k + VARIANTS.length) % VARIANTS.length; render(); }
+document.getElementById('prev').onclick = () => go(-1);
+document.getElementById('next').onclick = () => go(1);
+document.getElementById('bura').onchange = render;
+addEventListener('keydown', e => { if (e.key==='ArrowLeft') go(-1); if (e.key==='ArrowRight') go(1); });
+render();
+</script>
+</body>
+</html>
