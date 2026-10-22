@@ -1,3 +1,7 @@
+## Git
+
+Committing and pushing to `main` is authorized whenever work is meant to be shared, findable, or used by another session. Don't ask first. The repo is versioned, so a commit can be rolled back.
+
 ## Agent skills
 
 ### Issue tracker
