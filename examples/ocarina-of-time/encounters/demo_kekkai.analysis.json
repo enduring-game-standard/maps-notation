@@ -1,0 +1,407 @@
+{
+ "positions": 9416,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "link_hurt_overkill",
+  "link_deku_stick",
+  "link_hammer_swing",
+  "link_slash_kokiri",
+  "link_slash_giant_1",
+  "link_slash_giant_2",
+  "link_shield_1",
+  "link_shield_2_1",
+  "link_shield_2_2",
+  "link_jump_kokiri_1",
+  "link_jump_giant_1",
+  "link_jump_giant_3",
+  "link_jump_master_3",
+  "link_hammer_jump",
+  "miss_deku_stick",
+  "miss_hammer_swing",
+  "miss_slash_kokiri",
+  "miss_slash_giant",
+  "miss_magic_fire",
+  "miss_spin_kokiri",
+  "miss_spin_giant",
+  "miss_jump_kokiri",
+  "miss_jump_kokiri_self",
+  "miss_jump_giant",
+  "miss_jump_giant_self",
+  "miss_jump_master_self",
+  "miss_hammer_jump",
+  "barrier_dodged"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "tower",
+   "positions": 86,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 40,
+    "Link falls": 5
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 41
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "trial",
+   "positions": 110,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 48,
+    "Link falls": 5
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 51
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "tower",
+   "positions": 18,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "trial",
+   "positions": 18,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "tower",
+   "positions": 131,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 64,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 79
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "trial",
+   "positions": 131,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 64,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 72
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "tower",
+   "positions": 120,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 43
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "trial",
+   "positions": 120,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 50
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "tower",
+   "positions": 100,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 48,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 41
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "trial",
+   "positions": 100,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 48,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 39
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "tower",
+   "positions": 375,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 116
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "trial",
+   "positions": 375,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 125
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "tower",
+   "positions": 1166,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 279
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "trial",
+   "positions": 1166,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 263
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "tower",
+   "positions": 477,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 156
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "trial",
+   "positions": 477,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 150
+  },
+  {
+   "kit": "child_blade",
+   "variant": "tower",
+   "positions": 18,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 15
+  },
+  {
+   "kit": "child_blade",
+   "variant": "trial",
+   "positions": 18,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 16
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "tower",
+   "positions": 67,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 32,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 26
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "trial",
+   "positions": 67,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 32,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 27
+  },
+  {
+   "kit": "child_dins",
+   "variant": "tower",
+   "positions": 120,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 60
+  },
+  {
+   "kit": "child_dins",
+   "variant": "trial",
+   "positions": 120,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 66
+  },
+  {
+   "kit": "child_lens",
+   "variant": "tower",
+   "positions": 375,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 130
+  },
+  {
+   "kit": "child_lens",
+   "variant": "trial",
+   "positions": 375,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 118
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "tower",
+   "positions": 1166,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 283
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "trial",
+   "positions": 1166,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 283
+  },
+  {
+   "kit": "child_spin",
+   "variant": "tower",
+   "positions": 477,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 168
+  },
+  {
+   "kit": "child_spin",
+   "variant": "trial",
+   "positions": 477,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 170
+  }
+ ]
+}

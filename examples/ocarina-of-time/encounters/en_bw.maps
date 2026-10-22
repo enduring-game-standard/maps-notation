@@ -1,0 +1,2403 @@
+maps 2
+title "Ocarina of Time combat: Link vs Torch Slug"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state age_adult "Link is an adult" in setup at 120 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Torch Slug answers" in beat at 580 80
+state enemy_act "Torch Slug acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 1/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 260 150
+state link_wins "Torch Slug defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state has_master_sword "Has master sword" in gear at 1860 570
+state has_hookshot "Has hookshot" in gear at 1720 640
+state has_megaton_hammer "Has megaton hammer" in gear at 1860 640
+state has_bow "Has bow" in gear at 1720 710
+state has_bombchus "Has bombchus" in gear at 1860 710
+state has_mirror_shield "Has mirror shield" in gear at 1720 780
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 780
+state has_giants_knife "Has giants knife" in gear at 1720 850
+state has_double_defense "Has double defense" in gear at 1860 850
+state has_fire_arrows "Has fire arrows" in gear at 1720 920
+state has_ice_arrows "Has ice arrows" in gear at 1860 920
+state has_light_arrows "Has light arrows" in gear at 1720 990
+state has_blue_potion "Has blue potion" in gear at 1860 990
+state phase_crawl_wander "Torch Slug crawls about, aflame" in enemy at 2040 80
+state phase_crawl_cooldown "Torch Slug crawls about after a chase" in enemy at 2180 80
+state timer_crawl_cooldown "Torch Slug crawls about after a chase: beats left" in enemy at 2040 150
+state phase_aim "Torch Slug raises its eyestalks at Link" in enemy at 2040 220
+state phase_crawl_chase "Torch Slug chases Link" in enemy at 2180 220
+state timer_crawl_chase "Torch Slug chases Link: beats left" in enemy at 2040 290
+state phase_jump_lunge "Torch Slug leaps at Link" in enemy at 2040 360
+state phase_hurt "Torch Slug reels, flame out" in enemy at 2180 360
+state timer_hurt "Torch Slug reels, flame out: beats left" in enemy at 2040 430
+state phase_crawl_flee "Torch Slug crawls away from Link, flame out" in enemy at 2040 500
+state timer_crawl_flee "Torch Slug crawls away from Link, flame out: beats left" in enemy at 2180 500
+state phase_stunned_upright "Torch Slug is stunned, flame out" in enemy at 2180 570
+state timer_stunned_upright "Torch Slug is stunned, flame out: beats left" in enemy at 2040 640
+state phase_flipped "Torch Slug is flipped on its back, flame out" in enemy at 2040 710
+state timer_flipped "Torch Slug is flipped on its back, flame out: beats left" in enemy at 2180 710
+state phase_stunned_flipped "Torch Slug is stunned on its back" in enemy at 2180 780
+state timer_stunned_flipped "Torch Slug is stunned on its back: beats left" in enemy at 2040 850
+state phase_jump_righting "Torch Slug flips itself upright" in enemy at 2040 920
+state hp_body "Torch Slug: health" marks 6 in enemy_health at 2360 80
+state alive_body "Torch Slug: standing" marks 1 in enemy_health at 2500 80
+state dmg_body "Torch Slug: damage" in enemy_health at 2360 150
+state status_burn "Link: burn (beats left)" in link_state at 1220 290
+state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
+state lens_on "Lens of Truth on" in link_state at 1220 360
+state link_guard "Link holds up his shield" in link_state at 1080 430
+state link_dodge "Link dodges" in link_state at 1220 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3000 430
+state swing_slingshot "Slingshot seed on its way" in hits at 3000 500
+state swing_explosive "Explosion on its way" in hits at 3000 570
+state swing_boomerang "Boomerang on its way" in hits at 3000 920
+state swing_arrow_normal "Arrow on its way" in hits at 3000 990
+state swing_hammer_swing "Hammer swing on its way" in hits at 3000 1340
+state swing_hookshot "Hookshot on its way" in hits at 3000 1760
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 2110
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 2180
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 2530
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 2880
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 3230
+state swing_arrow_light "Light arrow on its way" in hits at 3000 3580
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 3930
+state swing_shield "Shield on its way" in hits at 3000 4280
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3000 4350
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 4700
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3000 5120
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3140 5470
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3140 5820
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3000 6240
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3000 6590
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 6940
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3140 7290
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3000 7710
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1220 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1220 780
+state incoming_flame "Torch Slug flame incoming" in attacks at 3320 80
+state tick_burn "Beat ends: burn checked" in beat at 580 360
+state tick_nayru "Beat ends: nayru checked" in beat at 440 430
+state burn_count "Link: burn: beats toward the next cost" in beat at 580 430
+state lens_count "The Lens: beats toward the next cost" in beat at 440 710
+
+verb crawl_cooldown_timer_clears "Torch Slug crawls about after a chase is over" by world priority 100 in enemy at 2180 150
+  take timer_crawl_cooldown
+  unless phase_crawl_cooldown
+
+verb crawl_chase_timer_clears "Torch Slug chases Link is over" by world priority 100 in enemy at 2180 290
+  take timer_crawl_chase
+  unless phase_crawl_chase
+
+verb hurt_timer_clears "Torch Slug reels, flame out is over" by world priority 100 in enemy at 2180 430
+  take timer_hurt
+  unless phase_hurt
+
+verb crawl_flee_timer_clears "Torch Slug crawls away from Link, flame out is over" by world priority 100 in enemy at 2040 570
+  take timer_crawl_flee
+  unless phase_crawl_flee
+
+verb stunned_upright_timer_clears "Torch Slug is stunned, flame out is over" by world priority 100 in enemy at 2180 640
+  take timer_stunned_upright
+  unless phase_stunned_upright
+
+verb flipped_timer_clears "Torch Slug is flipped on its back, flame out is over" by world priority 100 in enemy at 2040 780
+  take timer_flipped
+  unless phase_flipped
+
+verb stunned_flipped_timer_clears "Torch Slug is stunned on its back is over" by world priority 100 in enemy at 2180 850
+  take timer_stunned_flipped
+  unless phase_stunned_flipped
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_adult
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give has_megaton_hammer
+  give 4 magic
+  give 44 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 120 500
+  take choose_age
+  give age_adult
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give has_megaton_hammer
+  give 4 magic
+  give 44 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 260 500
+  take choose_age
+  give age_adult
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give has_megaton_hammer
+  give 8 magic
+  give 40 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 120 570
+  take choose_age
+  give age_adult
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give has_megaton_hammer
+  give 12 magic
+  give 36 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 260 570
+  take choose_age
+  give age_adult
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 120 640
+  take choose_age
+  give age_adult
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 260 640
+  take choose_age
+  give age_adult
+  give 32 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give phase_crawl_wander
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 32 link_heal
+
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb body_hurt "Torch Slug loses health" by world priority 97 in enemy_health at 2500 150
+  take dmg_body
+  take hp_body
+
+verb body_overkill "Torch Slug has no health left to lose" by world priority 96 in enemy_health at 2360 220
+  take dmg_body
+  unless hp_body
+
+verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_nut_2 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2820 80
+  take link_turn
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2680 150
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2820 150
+  take link_turn
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2680 220
+  take link_turn
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 220
+  take link_turn
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 290
+  take link_turn
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2820 290
+  take link_turn
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2680 360
+  take link_turn
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2820 360
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2680 430
+  take link_turn
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 500
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 500
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 570
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 570
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 710
+  take link_turn
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2820 710
+  take link_turn
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 780
+  take link_turn
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 780
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 850
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 850
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2680 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2680 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2680 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2680 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2680 1480
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 1480
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb hit_deku_nut__crawl_wander "Deku Nut flash hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 150
+  take swing_deku_nut
+  take phase_crawl_wander
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_deku_nut__crawl_cooldown "Deku Nut flash hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 150
+  take swing_deku_nut
+  take phase_crawl_cooldown
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_deku_nut__aim "Deku Nut flash hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 220
+  take swing_deku_nut
+  take phase_aim
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_deku_nut__crawl_chase "Deku Nut flash hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 220
+  take swing_deku_nut
+  take phase_crawl_chase
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_deku_nut__jump_lunge "Deku Nut flash hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 290
+  take swing_deku_nut
+  take phase_jump_lunge
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_deku_nut__hurt "Deku Nut flash hits (Torch Slug reels, flame out)" by world priority 80 in hits at 3140 290
+  take swing_deku_nut
+  take phase_hurt
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_deku_nut__crawl_flee "Deku Nut flash hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 360
+  take swing_deku_nut
+  take phase_crawl_flee
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_deku_nut__flipped "Deku Nut flash hits (Torch Slug is flipped on its back, flame out)" by world priority 80 in hits at 3140 360
+  take swing_deku_nut
+  take phase_flipped
+  give phase_stunned_flipped
+  give 4 timer_stunned_flipped
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3140 430
+  take swing_deku_stick
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3140 500
+  take swing_slingshot
+
+verb hit_explosive "Explosion hits" by world priority 79 in hits at 3140 570
+  take swing_explosive
+  give 2 dmg_body
+
+verb hit_explosive__crawl_wander "Explosion hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 640
+  take swing_explosive
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_explosive__crawl_cooldown "Explosion hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 640
+  take swing_explosive
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_explosive__aim "Explosion hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 710
+  take swing_explosive
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_explosive__crawl_chase "Explosion hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 710
+  take swing_explosive
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_explosive__jump_lunge "Explosion hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 780
+  take swing_explosive
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_explosive__crawl_flee "Explosion hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 780
+  take swing_explosive
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_explosive__stunned_upright "Explosion hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 850
+  take swing_explosive
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_explosive__jump_righting "Explosion has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 850
+  take swing_explosive
+  need phase_jump_righting
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3140 920
+  take swing_boomerang
+
+verb hit_arrow_normal "Arrow hits" by world priority 79 in hits at 3140 990
+  take swing_arrow_normal
+  give 2 dmg_body
+
+verb hit_arrow_normal__crawl_wander "Arrow hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 1060
+  take swing_arrow_normal
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_normal__crawl_cooldown "Arrow hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 1060
+  take swing_arrow_normal
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_normal__aim "Arrow hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 1130
+  take swing_arrow_normal
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_normal__crawl_chase "Arrow hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 1130
+  take swing_arrow_normal
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_normal__jump_lunge "Arrow hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 1200
+  take swing_arrow_normal
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_normal__crawl_flee "Arrow hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 1200
+  take swing_arrow_normal
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_arrow_normal__stunned_upright "Arrow hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 1270
+  take swing_arrow_normal
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_arrow_normal__jump_righting "Arrow has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 1270
+  take swing_arrow_normal
+  need phase_jump_righting
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 1340
+  take swing_hammer_swing
+
+verb hit_hammer_swing__crawl_wander "Hammer swing hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 1410
+  take swing_hammer_swing
+  take phase_crawl_wander
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_swing__crawl_cooldown "Hammer swing hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 1410
+  take swing_hammer_swing
+  take phase_crawl_cooldown
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_swing__aim "Hammer swing hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 1480
+  take swing_hammer_swing
+  take phase_aim
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_swing__crawl_chase "Hammer swing hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 1480
+  take swing_hammer_swing
+  take phase_crawl_chase
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_swing__jump_lunge "Hammer swing hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 1550
+  take swing_hammer_swing
+  take phase_jump_lunge
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_swing__hurt "Hammer swing hits (Torch Slug reels, flame out)" by world priority 80 in hits at 3140 1550
+  take swing_hammer_swing
+  take phase_hurt
+  give phase_flipped
+  give 50 timer_flipped
+  give 2 dmg_body
+
+verb hit_hammer_swing__crawl_flee "Hammer swing hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 1620
+  take swing_hammer_swing
+  take phase_crawl_flee
+  give phase_flipped
+  give 50 timer_flipped
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned_upright "Hammer swing hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3140 1620
+  take swing_hammer_swing
+  take phase_stunned_upright
+  give phase_flipped
+  give 50 timer_flipped
+  give 2 dmg_body
+
+verb hit_hammer_swing__flipped "Hammer swing hits (Torch Slug is flipped on its back, flame out)" by world priority 80 in hits at 3000 1690
+  take swing_hammer_swing
+  take phase_flipped
+  give phase_jump_righting
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned_flipped "Hammer swing hits (Torch Slug is stunned on its back)" by world priority 80 in hits at 3140 1690
+  take swing_hammer_swing
+  take phase_stunned_flipped
+  give phase_jump_righting
+  give 2 dmg_body
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 1760
+  take swing_hookshot
+
+verb hit_hookshot__crawl_wander "Hookshot hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 1830
+  take swing_hookshot
+  take phase_crawl_wander
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_hookshot__crawl_cooldown "Hookshot hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 1830
+  take swing_hookshot
+  take phase_crawl_cooldown
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_hookshot__aim "Hookshot hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 1900
+  take swing_hookshot
+  take phase_aim
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_hookshot__crawl_chase "Hookshot hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 1900
+  take swing_hookshot
+  take phase_crawl_chase
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_hookshot__jump_lunge "Hookshot hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 1970
+  take swing_hookshot
+  take phase_jump_lunge
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_hookshot__hurt "Hookshot hits (Torch Slug reels, flame out)" by world priority 80 in hits at 3140 1970
+  take swing_hookshot
+  take phase_hurt
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_hookshot__crawl_flee "Hookshot hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 2040
+  take swing_hookshot
+  take phase_crawl_flee
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+
+verb hit_hookshot__flipped "Hookshot hits (Torch Slug is flipped on its back, flame out)" by world priority 80 in hits at 3140 2040
+  take swing_hookshot
+  take phase_flipped
+  give phase_stunned_flipped
+  give 4 timer_stunned_flipped
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3140 2110
+  take swing_slash_kokiri
+
+verb hit_slash_master "Master Sword slash hits" by world priority 79 in hits at 3140 2180
+  take swing_slash_master
+  give 2 dmg_body
+
+verb hit_slash_master__crawl_wander "Master Sword slash hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 2250
+  take swing_slash_master
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_master__crawl_cooldown "Master Sword slash hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 2250
+  take swing_slash_master
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_master__aim "Master Sword slash hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 2320
+  take swing_slash_master
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_master__crawl_chase "Master Sword slash hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 2320
+  take swing_slash_master
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_master__jump_lunge "Master Sword slash hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 2390
+  take swing_slash_master
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_master__crawl_flee "Master Sword slash hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 2390
+  take swing_slash_master
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_slash_master__stunned_upright "Master Sword slash hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 2460
+  take swing_slash_master
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_slash_master__jump_righting "Master Sword slash has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 2460
+  take swing_slash_master
+  need phase_jump_righting
+
+verb hit_slash_giant "Two-handed sword slash hits" by world priority 79 in hits at 3140 2530
+  take swing_slash_giant
+  give 4 dmg_body
+
+verb hit_slash_giant__crawl_wander "Two-handed sword slash hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 2600
+  take swing_slash_giant
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_giant__crawl_cooldown "Two-handed sword slash hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 2600
+  take swing_slash_giant
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_giant__aim "Two-handed sword slash hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 2670
+  take swing_slash_giant
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_giant__crawl_chase "Two-handed sword slash hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 2670
+  take swing_slash_giant
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_giant__jump_lunge "Two-handed sword slash hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 2740
+  take swing_slash_giant
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_slash_giant__crawl_flee "Two-handed sword slash hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 2740
+  take swing_slash_giant
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_slash_giant__stunned_upright "Two-handed sword slash hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 2810
+  take swing_slash_giant
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb miss_slash_giant__jump_righting "Two-handed sword slash has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 2810
+  take swing_slash_giant
+  need phase_jump_righting
+
+verb hit_arrow_fire "Fire arrow hits" by world priority 79 in hits at 3140 2880
+  take swing_arrow_fire
+  give 2 dmg_body
+
+verb hit_arrow_fire__crawl_wander "Fire arrow hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 2950
+  take swing_arrow_fire
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_fire__crawl_cooldown "Fire arrow hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 2950
+  take swing_arrow_fire
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_fire__aim "Fire arrow hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 3020
+  take swing_arrow_fire
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_fire__crawl_chase "Fire arrow hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 3020
+  take swing_arrow_fire
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_fire__jump_lunge "Fire arrow hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 3090
+  take swing_arrow_fire
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_fire__crawl_flee "Fire arrow hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 3090
+  take swing_arrow_fire
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_arrow_fire__stunned_upright "Fire arrow hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 3160
+  take swing_arrow_fire
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_arrow_fire__jump_righting "Fire arrow has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 3160
+  take swing_arrow_fire
+  need phase_jump_righting
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3140 3230
+  take swing_arrow_ice
+
+verb hit_arrow_ice__crawl_wander "Ice arrow hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 3300
+  take swing_arrow_ice
+  take phase_crawl_wander
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+  give 4 dmg_body
+
+verb hit_arrow_ice__crawl_cooldown "Ice arrow hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 3300
+  take swing_arrow_ice
+  take phase_crawl_cooldown
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+  give 4 dmg_body
+
+verb hit_arrow_ice__aim "Ice arrow hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 3370
+  take swing_arrow_ice
+  take phase_aim
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+  give 4 dmg_body
+
+verb hit_arrow_ice__crawl_chase "Ice arrow hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 3370
+  take swing_arrow_ice
+  take phase_crawl_chase
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+  give 4 dmg_body
+
+verb hit_arrow_ice__jump_lunge "Ice arrow hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 3440
+  take swing_arrow_ice
+  take phase_jump_lunge
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+  give 4 dmg_body
+
+verb hit_arrow_ice__hurt "Ice arrow hits (Torch Slug reels, flame out)" by world priority 80 in hits at 3140 3440
+  take swing_arrow_ice
+  take phase_hurt
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+  give 4 dmg_body
+
+verb hit_arrow_ice__crawl_flee "Ice arrow hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 3510
+  take swing_arrow_ice
+  take phase_crawl_flee
+  give phase_stunned_upright
+  give 4 timer_stunned_upright
+  give 4 dmg_body
+
+verb hit_arrow_ice__flipped "Ice arrow hits (Torch Slug is flipped on its back, flame out)" by world priority 80 in hits at 3140 3510
+  take swing_arrow_ice
+  take phase_flipped
+  give phase_stunned_flipped
+  give 4 timer_stunned_flipped
+  give 4 dmg_body
+
+verb hit_arrow_light "Light arrow hits" by world priority 79 in hits at 3140 3580
+  take swing_arrow_light
+  give 2 dmg_body
+
+verb hit_arrow_light__crawl_wander "Light arrow hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 3650
+  take swing_arrow_light
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_light__crawl_cooldown "Light arrow hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 3650
+  take swing_arrow_light
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_light__aim "Light arrow hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 3720
+  take swing_arrow_light
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_light__crawl_chase "Light arrow hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 3720
+  take swing_arrow_light
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_light__jump_lunge "Light arrow hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 3790
+  take swing_arrow_light
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_arrow_light__crawl_flee "Light arrow hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 3790
+  take swing_arrow_light
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_arrow_light__stunned_upright "Light arrow hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 3860
+  take swing_arrow_light
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_arrow_light__jump_righting "Light arrow has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 3860
+  take swing_arrow_light
+  need phase_jump_righting
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 3930
+  take swing_magic_fire
+
+verb hit_magic_fire__crawl_wander "Din's Fire hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 4000
+  take swing_magic_fire
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_magic_fire__crawl_cooldown "Din's Fire hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 4000
+  take swing_magic_fire
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_magic_fire__aim "Din's Fire hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 4070
+  take swing_magic_fire
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_magic_fire__crawl_chase "Din's Fire hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 4070
+  take swing_magic_fire
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_magic_fire__jump_lunge "Din's Fire hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 4140
+  take swing_magic_fire
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_magic_fire__crawl_flee "Din's Fire hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 4140
+  take swing_magic_fire
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+
+verb hit_magic_fire__stunned_upright "Din's Fire hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 4210
+  take swing_magic_fire
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 4210
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 4280
+  take swing_shield
+
+verb hit_spin_kokiri "Kokiri spin attack hits" by world priority 79 in hits at 3140 4350
+  take swing_spin_kokiri
+  give dmg_body
+
+verb hit_spin_kokiri__crawl_wander "Kokiri spin attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 4420
+  take swing_spin_kokiri
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_kokiri__crawl_cooldown "Kokiri spin attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 4420
+  take swing_spin_kokiri
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_kokiri__aim "Kokiri spin attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 4490
+  take swing_spin_kokiri
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_kokiri__crawl_chase "Kokiri spin attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 4490
+  take swing_spin_kokiri
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_kokiri__jump_lunge "Kokiri spin attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 4560
+  take swing_spin_kokiri
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_kokiri__crawl_flee "Kokiri spin attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 4560
+  take swing_spin_kokiri
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_spin_kokiri__stunned_upright "Kokiri spin attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 4630
+  take swing_spin_kokiri
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb miss_spin_kokiri__jump_righting "Kokiri spin attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 4630
+  take swing_spin_kokiri
+  need phase_jump_righting
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3000 4700
+  take swing_spin_kokiri
+  need range_far
+
+verb hit_spin_giant "Two-handed spin attack hits" by world priority 79 in hits at 3000 4770
+  take swing_spin_giant
+  give 4 dmg_body
+
+verb hit_spin_giant__crawl_wander "Two-handed spin attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3140 4770
+  take swing_spin_giant
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_giant__crawl_cooldown "Two-handed spin attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3000 4840
+  take swing_spin_giant
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_giant__aim "Two-handed spin attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3140 4840
+  take swing_spin_giant
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_giant__crawl_chase "Two-handed spin attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3000 4910
+  take swing_spin_giant
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_giant__jump_lunge "Two-handed spin attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3140 4910
+  take swing_spin_giant
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_giant__crawl_flee "Two-handed spin attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 4980
+  take swing_spin_giant
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_spin_giant__stunned_upright "Two-handed spin attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3140 4980
+  take swing_spin_giant
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb miss_spin_giant__jump_righting "Two-handed spin attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3000 5050
+  take swing_spin_giant
+  need phase_jump_righting
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3140 5050
+  take swing_spin_giant
+  need range_far
+
+verb hit_spin_master "Master Sword spin attack hits" by world priority 79 in hits at 3140 5120
+  take swing_spin_master
+  give 2 dmg_body
+
+verb hit_spin_master__crawl_wander "Master Sword spin attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 5190
+  take swing_spin_master
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_master__crawl_cooldown "Master Sword spin attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 5190
+  take swing_spin_master
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_master__aim "Master Sword spin attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 5260
+  take swing_spin_master
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_master__crawl_chase "Master Sword spin attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 5260
+  take swing_spin_master
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_master__jump_lunge "Master Sword spin attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 5330
+  take swing_spin_master
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_spin_master__crawl_flee "Master Sword spin attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 5330
+  take swing_spin_master
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_spin_master__stunned_upright "Master Sword spin attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 5400
+  take swing_spin_master
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_spin_master__jump_righting "Master Sword spin attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 5400
+  take swing_spin_master
+  need phase_jump_righting
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3000 5470
+  take swing_spin_master
+  need range_far
+
+verb hit_jump_kokiri "Kokiri jump attack hits" by world priority 79 in hits at 3000 5540
+  take swing_jump_kokiri
+  give 2 dmg_body
+
+verb hit_jump_kokiri__crawl_wander "Kokiri jump attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3140 5540
+  take swing_jump_kokiri
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri__crawl_cooldown "Kokiri jump attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3000 5610
+  take swing_jump_kokiri
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri__aim "Kokiri jump attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3140 5610
+  take swing_jump_kokiri
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri__crawl_chase "Kokiri jump attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3000 5680
+  take swing_jump_kokiri
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri__jump_lunge "Kokiri jump attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3140 5680
+  take swing_jump_kokiri
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri__crawl_flee "Kokiri jump attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 5750
+  take swing_jump_kokiri
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned_upright "Kokiri jump attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3140 5750
+  take swing_jump_kokiri
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_jump_kokiri__jump_righting "Kokiri jump attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3000 5820
+  take swing_jump_kokiri
+  need phase_jump_righting
+
+verb hit_jump_kokiri_self "Kokiri jump attack hits" by world priority 79 in hits at 3000 5890
+  take swing_jump_kokiri_self
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__crawl_wander "Kokiri jump attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3140 5890
+  take swing_jump_kokiri_self
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri_self__crawl_cooldown "Kokiri jump attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3000 5960
+  take swing_jump_kokiri_self
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri_self__aim "Kokiri jump attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3140 5960
+  take swing_jump_kokiri_self
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri_self__crawl_chase "Kokiri jump attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3000 6030
+  take swing_jump_kokiri_self
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri_self__jump_lunge "Kokiri jump attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3140 6030
+  take swing_jump_kokiri_self
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_kokiri_self__crawl_flee "Kokiri jump attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 6100
+  take swing_jump_kokiri_self
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned_upright "Kokiri jump attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3140 6100
+  take swing_jump_kokiri_self
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self__jump_righting "Kokiri jump attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3000 6170
+  take swing_jump_kokiri_self
+  need phase_jump_righting
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3140 6170
+  take swing_jump_kokiri_self
+  need range_far
+
+verb hit_jump_giant "Two-handed jump attack hits" by world priority 79 in hits at 3140 6240
+  take swing_jump_giant
+  give 8 dmg_body
+
+verb hit_jump_giant__crawl_wander "Two-handed jump attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 6310
+  take swing_jump_giant
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant__crawl_cooldown "Two-handed jump attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 6310
+  take swing_jump_giant
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant__aim "Two-handed jump attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 6380
+  take swing_jump_giant
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant__crawl_chase "Two-handed jump attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 6380
+  take swing_jump_giant
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant__jump_lunge "Two-handed jump attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 6450
+  take swing_jump_giant
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant__crawl_flee "Two-handed jump attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 6450
+  take swing_jump_giant
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 8 dmg_body
+
+verb hit_jump_giant__stunned_upright "Two-handed jump attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 6520
+  take swing_jump_giant
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 8 dmg_body
+
+verb miss_jump_giant__jump_righting "Two-handed jump attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 6520
+  take swing_jump_giant
+  need phase_jump_righting
+
+verb hit_jump_giant_self "Two-handed jump attack hits" by world priority 79 in hits at 3140 6590
+  take swing_jump_giant_self
+  give 8 dmg_body
+
+verb hit_jump_giant_self__crawl_wander "Two-handed jump attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 6660
+  take swing_jump_giant_self
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant_self__crawl_cooldown "Two-handed jump attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 6660
+  take swing_jump_giant_self
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant_self__aim "Two-handed jump attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 6730
+  take swing_jump_giant_self
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant_self__crawl_chase "Two-handed jump attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 6730
+  take swing_jump_giant_self
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant_self__jump_lunge "Two-handed jump attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 6800
+  take swing_jump_giant_self
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_giant_self__crawl_flee "Two-handed jump attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3140 6800
+  take swing_jump_giant_self
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stunned_upright "Two-handed jump attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3000 6870
+  take swing_jump_giant_self
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 8 dmg_body
+
+verb miss_jump_giant_self__jump_righting "Two-handed jump attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3140 6870
+  take swing_jump_giant_self
+  need phase_jump_righting
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3000 6940
+  take swing_jump_giant_self
+  need range_far
+
+verb hit_jump_master "Master Sword jump attack hits" by world priority 79 in hits at 3000 7010
+  take swing_jump_master
+  give 4 dmg_body
+
+verb hit_jump_master__crawl_wander "Master Sword jump attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3140 7010
+  take swing_jump_master
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master__crawl_cooldown "Master Sword jump attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3000 7080
+  take swing_jump_master
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master__aim "Master Sword jump attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3140 7080
+  take swing_jump_master
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master__crawl_chase "Master Sword jump attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3000 7150
+  take swing_jump_master
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master__jump_lunge "Master Sword jump attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3140 7150
+  take swing_jump_master
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master__crawl_flee "Master Sword jump attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 7220
+  take swing_jump_master
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_upright "Master Sword jump attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3140 7220
+  take swing_jump_master
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb miss_jump_master__jump_righting "Master Sword jump attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3000 7290
+  take swing_jump_master
+  need phase_jump_righting
+
+verb hit_jump_master_self "Master Sword jump attack hits" by world priority 79 in hits at 3000 7360
+  take swing_jump_master_self
+  give 4 dmg_body
+
+verb hit_jump_master_self__crawl_wander "Master Sword jump attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3140 7360
+  take swing_jump_master_self
+  take phase_crawl_wander
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master_self__crawl_cooldown "Master Sword jump attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3000 7430
+  take swing_jump_master_self
+  take phase_crawl_cooldown
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master_self__aim "Master Sword jump attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3140 7430
+  take swing_jump_master_self
+  take phase_aim
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master_self__crawl_chase "Master Sword jump attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3000 7500
+  take swing_jump_master_self
+  take phase_crawl_chase
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master_self__jump_lunge "Master Sword jump attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3140 7500
+  take swing_jump_master_self
+  take phase_jump_lunge
+  give phase_hurt
+  give timer_hurt
+
+verb hit_jump_master_self__crawl_flee "Master Sword jump attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 7570
+  take swing_jump_master_self
+  take phase_crawl_flee
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master_self__stunned_upright "Master Sword jump attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3140 7570
+  take swing_jump_master_self
+  take phase_stunned_upright
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb miss_jump_master_self__jump_righting "Master Sword jump attack has no effect (Torch Slug flips itself upright)" by world priority 80 in hits at 3000 7640
+  take swing_jump_master_self
+  need phase_jump_righting
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3140 7640
+  take swing_jump_master_self
+  need range_far
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3140 7710
+  take swing_hammer_jump
+
+verb hit_hammer_jump__crawl_wander "Hammer jump attack hits (Torch Slug crawls about, aflame)" by world priority 80 in hits at 3000 7780
+  take swing_hammer_jump
+  take phase_crawl_wander
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_jump__crawl_cooldown "Hammer jump attack hits (Torch Slug crawls about after a chase)" by world priority 80 in hits at 3140 7780
+  take swing_hammer_jump
+  take phase_crawl_cooldown
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_jump__aim "Hammer jump attack hits (Torch Slug raises its eyestalks at Link)" by world priority 80 in hits at 3000 7850
+  take swing_hammer_jump
+  take phase_aim
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_jump__crawl_chase "Hammer jump attack hits (Torch Slug chases Link)" by world priority 80 in hits at 3140 7850
+  take swing_hammer_jump
+  take phase_crawl_chase
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_jump__jump_lunge "Hammer jump attack hits (Torch Slug leaps at Link)" by world priority 80 in hits at 3000 7920
+  take swing_hammer_jump
+  take phase_jump_lunge
+  give phase_flipped
+  give 50 timer_flipped
+
+verb hit_hammer_jump__hurt "Hammer jump attack hits (Torch Slug reels, flame out)" by world priority 80 in hits at 3140 7920
+  take swing_hammer_jump
+  take phase_hurt
+  give phase_flipped
+  give 50 timer_flipped
+  give 4 dmg_body
+
+verb hit_hammer_jump__crawl_flee "Hammer jump attack hits (Torch Slug crawls away from Link, flame out)" by world priority 80 in hits at 3000 7990
+  take swing_hammer_jump
+  take phase_crawl_flee
+  give phase_flipped
+  give 50 timer_flipped
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned_upright "Hammer jump attack hits (Torch Slug is stunned, flame out)" by world priority 80 in hits at 3140 7990
+  take swing_hammer_jump
+  take phase_stunned_upright
+  give phase_flipped
+  give 50 timer_flipped
+  give 4 dmg_body
+
+verb hit_hammer_jump__flipped "Hammer jump attack hits (Torch Slug is flipped on its back, flame out)" by world priority 80 in hits at 3000 8060
+  take swing_hammer_jump
+  take phase_flipped
+  give phase_jump_righting
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned_flipped "Hammer jump attack hits (Torch Slug is stunned on its back)" by world priority 80 in hits at 3140 8060
+  take swing_hammer_jump
+  take phase_stunned_flipped
+  give phase_jump_righting
+  give 4 dmg_body
+
+verb body_empty_in_hurt "Torch Slug runs out (Torch Slug reels, flame out)" by world priority 90 in enemy_health at 2500 220
+  unless hp_body
+  take alive_body
+  take phase_hurt
+  give link_wins
+
+verb body_empty_in_stunned_upright "Torch Slug runs out (Torch Slug is stunned, flame out)" by world priority 90 in enemy_health at 2360 290
+  unless hp_body
+  take alive_body
+  take phase_stunned_upright
+  give link_wins
+
+verb body_empty_in_flipped "Torch Slug runs out (Torch Slug is flipped on its back, flame out)" by world priority 90 in enemy_health at 2500 290
+  unless hp_body
+  take alive_body
+  take phase_flipped
+  give link_wins
+
+verb body_empty_in_stunned_flipped "Torch Slug runs out (Torch Slug is stunned on its back)" by world priority 90 in enemy_health at 2360 360
+  unless hp_body
+  take alive_body
+  take phase_stunned_flipped
+  give link_wins
+
+verb body_empty_in_jump_righting "Torch Slug runs out (Torch Slug flips itself upright)" by world priority 90 in enemy_health at 2500 360
+  unless hp_body
+  take alive_body
+  take phase_jump_righting
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 1550
+  take link_turn
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 1550
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1620
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1620
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1690
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1690
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1760
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1760
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 1830
+  take link_turn
+  take has_red_potion
+  give 32 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 1830
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2680 1900
+  take link_turn
+  take has_blue_potion
+  give 32 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2820 1900
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2680 1970
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Torch Slug gets ready" by world priority 70 in enemy at 2180 920
+  take enemy_turn
+  give enemy_act
+
+verb crawl_wander_step_1 "Torch Slug notices Link" by world priority 69 in enemy at 2040 990
+  take enemy_act
+  take phase_crawl_wander
+  give phase_aim
+  give beat_end
+  need range_near
+
+verb crawl_wander_holds "Torch Slug crawls about, aflame: nothing changes" by world priority 68 in enemy at 2180 990
+  take enemy_act
+  need phase_crawl_wander
+  give beat_end
+
+verb crawl_cooldown_ticks "Torch Slug crawls about after a chase: a beat passes" by world priority 71 in enemy at 2040 1060
+  take enemy_turn
+  need phase_crawl_cooldown
+  take timer_crawl_cooldown
+  give enemy_act
+
+verb crawl_cooldown_step_1 "Torch Slug is ready to notice Link again" by world priority 69 in enemy at 2180 1060
+  take enemy_act
+  take phase_crawl_cooldown
+  give phase_crawl_wander
+  unless timer_crawl_cooldown
+  give beat_end
+
+verb crawl_cooldown_holds "Torch Slug crawls about after a chase: nothing changes" by world priority 68 in enemy at 2040 1130
+  take enemy_act
+  need phase_crawl_cooldown
+  give beat_end
+
+verb aim_step_1 "Torch Slug sets off after Link" by world priority 69 in enemy at 2180 1130
+  take enemy_act
+  take phase_aim
+  give phase_crawl_chase
+  give 10 timer_crawl_chase
+  give beat_end
+
+verb crawl_chase_ticks "Torch Slug chases Link: a beat passes" by world priority 71 in enemy at 2040 1200
+  take enemy_turn
+  need phase_crawl_chase
+  take timer_crawl_chase
+  give enemy_act
+
+verb crawl_chase_step_1 "Torch Slug crawls toward Link" by world priority 69 in enemy at 2180 1200
+  take enemy_act
+  need phase_crawl_chase
+  give beat_end
+  take range_far
+  give range_near
+
+verb crawl_chase_step_2 "Torch Slug leaps at Link" by world priority 69 in enemy at 2040 1270
+  take enemy_act
+  take phase_crawl_chase
+  give phase_jump_lunge
+  give beat_end
+  need range_near
+
+verb crawl_chase_step_3 "Torch Slug gives up the chase" by world priority 69 in enemy at 2180 1270
+  take enemy_act
+  take phase_crawl_chase
+  give phase_crawl_cooldown
+  give 8 timer_crawl_cooldown
+  unless timer_crawl_chase
+  give beat_end
+
+verb jump_lunge_step_1 "Torch Slug lands on Link" by world priority 69 in enemy at 2040 1340
+  take enemy_act
+  take phase_jump_lunge
+  give phase_crawl_chase
+  give 10 timer_crawl_chase
+  give incoming_flame
+  give beat_end
+  need range_near
+
+verb jump_lunge_step_2 "Torch Slug lands short" by world priority 69 in enemy at 2180 1340
+  take enemy_act
+  take phase_jump_lunge
+  give phase_crawl_chase
+  give 10 timer_crawl_chase
+  give beat_end
+  need range_far
+
+verb hurt_ticks "Torch Slug reels, flame out: a beat passes" by world priority 71 in enemy at 2040 1410
+  take enemy_turn
+  need phase_hurt
+  take timer_hurt
+  give enemy_act
+
+verb hurt_step_1 "Torch Slug turns to flee" by world priority 69 in enemy at 2180 1410
+  take enemy_act
+  take phase_hurt
+  give phase_crawl_flee
+  give 30 timer_crawl_flee
+  unless timer_hurt
+  give beat_end
+
+verb crawl_flee_ticks "Torch Slug crawls away from Link, flame out: a beat passes" by world priority 71 in enemy at 2040 1480
+  take enemy_turn
+  need phase_crawl_flee
+  take timer_crawl_flee
+  give enemy_act
+
+verb crawl_flee_step_1 "Torch Slug crawls away from Link" by world priority 69 in enemy at 2180 1480
+  take enemy_act
+  need phase_crawl_flee
+  give beat_end
+  take range_near
+  give range_far
+
+verb crawl_flee_step_2 "Torch Slug relights and wanders" by world priority 69 in enemy at 2040 1550
+  take enemy_act
+  take phase_crawl_flee
+  give phase_crawl_wander
+  unless timer_crawl_flee
+  give beat_end
+
+verb crawl_flee_holds "Torch Slug crawls away from Link, flame out: nothing changes" by world priority 68 in enemy at 2180 1550
+  take enemy_act
+  need phase_crawl_flee
+  give beat_end
+
+verb stunned_upright_ticks "Torch Slug is stunned, flame out: a beat passes" by world priority 71 in enemy at 2040 1620
+  take enemy_turn
+  need phase_stunned_upright
+  take timer_stunned_upright
+  give enemy_act
+
+verb stunned_upright_step_1 "Torch Slug shakes off the stun and flees" by world priority 69 in enemy at 2180 1620
+  take enemy_act
+  take phase_stunned_upright
+  give phase_crawl_flee
+  give 30 timer_crawl_flee
+  unless timer_stunned_upright
+  give beat_end
+
+verb stunned_upright_holds "Torch Slug is stunned, flame out: nothing changes" by world priority 68 in enemy at 2040 1690
+  take enemy_act
+  need phase_stunned_upright
+  give beat_end
+
+verb flipped_ticks "Torch Slug is flipped on its back, flame out: a beat passes" by world priority 71 in enemy at 2180 1690
+  take enemy_turn
+  need phase_flipped
+  take timer_flipped
+  give enemy_act
+
+verb flipped_step_1 "Torch Slug kicks itself over" by world priority 69 in enemy at 2040 1760
+  take enemy_act
+  take phase_flipped
+  give phase_jump_righting
+  unless timer_flipped
+  give beat_end
+
+verb flipped_holds "Torch Slug is flipped on its back, flame out: nothing changes" by world priority 68 in enemy at 2180 1760
+  take enemy_act
+  need phase_flipped
+  give beat_end
+
+verb stunned_flipped_ticks "Torch Slug is stunned on its back: a beat passes" by world priority 71 in enemy at 2040 1830
+  take enemy_turn
+  need phase_stunned_flipped
+  take timer_stunned_flipped
+  give enemy_act
+
+verb stunned_flipped_step_1 "Torch Slug shakes off the stun and kicks itself over" by world priority 69 in enemy at 2180 1830
+  take enemy_act
+  take phase_stunned_flipped
+  give phase_jump_righting
+  unless timer_stunned_flipped
+  give beat_end
+
+verb stunned_flipped_holds "Torch Slug is stunned on its back: nothing changes" by world priority 68 in enemy at 2040 1900
+  take enemy_act
+  need phase_stunned_flipped
+  give beat_end
+
+verb jump_righting_step_1 "Torch Slug lands upright, aflame" by world priority 69 in enemy at 2180 1900
+  take enemy_act
+  take phase_jump_righting
+  give phase_crawl_wander
+  give beat_end
+
+verb flame_blocked_deku_shield "Torch Slug flame: blocked by the deku shield, which burns" by world priority 60 in attacks at 3460 80
+  take incoming_flame
+  need guard_with_deku_shield
+  take has_deku_shield
+
+verb flame_blocked_hylian_shield "Torch Slug flame: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_flame
+  need guard_with_hylian_shield
+
+verb flame_blocked_mirror_shield "Torch Slug flame: blocked by the mirror shield" by world priority 60 in attacks at 3460 150
+  take incoming_flame
+  need guard_with_mirror_shield
+
+verb flame_dodged "Torch Slug flame: dodged" by world priority 60 in attacks at 3320 220
+  take incoming_flame
+  need link_dodge
+  unless link_guard
+
+verb flame_nayru "Torch Slug flame: Nayru's Love holds" by world priority 60 in attacks at 3460 220
+  take incoming_flame
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb flame_lands "Torch Slug flame hits Link" by world priority 60 in attacks at 3320 290
+  take incoming_flame
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 8 link_dmg
+  give 5 status_burn
+  unless status_burn
+
+verb flame_lands_again "Torch Slug flame hits Link again" by world priority 60 in attacks at 3460 290
+  take incoming_flame
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 8 link_dmg
+  need status_burn
+
+verb flame_lands_dd "Torch Slug flame hits Link" by world priority 60 in attacks at 3320 360
+  take incoming_flame
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 4 link_dmg
+  give 5 status_burn
+  unless status_burn
+
+verb flame_lands_dd_again "Torch Slug flame hits Link again" by world priority 60 in attacks at 3460 360
+  take incoming_flame
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 4 link_dmg
+  need status_burn
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 580 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 440 360
+  need beat_end
+  take link_dodge
+
+verb burn_ticks "Link: burn wears on" by world priority 48 in beat at 440 500
+  take beat_end
+  take status_burn
+  unless burn_count
+  give burn_count
+  give tick_burn
+
+verb burn_costs "Link: burn takes its toll" by world priority 48 in beat at 580 500
+  take beat_end
+  take status_burn
+  take burn_count
+  give tick_burn
+  give 5 link_dmg
+
+verb burn_count_clears "Link: burn count resets" by world priority 100 in beat at 440 570
+  take burn_count
+  unless status_burn
+
+verb burn_idle "Link: no burn" by world priority 48 in beat at 580 570
+  take beat_end
+  unless status_burn
+  give tick_burn
+
+verb nayru_ticks "Link: nayru wears on" by world priority 47 in beat at 440 640
+  take tick_burn
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 47 in beat at 580 640
+  take tick_burn
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 46 in beat at 580 710
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 46 in beat at 440 780
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 46 in beat at 580 780
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 46 in beat at 440 850
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 850
+  take lens_count
+  unless lens_on

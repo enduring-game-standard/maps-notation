@@ -1,0 +1,3 @@
+seed 20261021 (LCG 1103515245/12345 mod 2^31); modeled 108; bosses 11; others 97; sample 25
+bosses: ovl_Boss_Dodongo ovl_Boss_Fd ovl_Boss_Fd2 ovl_Boss_Ganon ovl_Boss_Ganon2 ovl_Boss_Ganondrof ovl_Boss_Goma ovl_Boss_Mo ovl_Boss_Sst ovl_Boss_Tw ovl_Boss_Va
+sample: ovl_Bg_Haka_Tubo ovl_Bg_Hidan_Curtain ovl_Bg_Hidan_Firewall ovl_Bg_Hidan_Fwbig ovl_Bg_Hidan_Rock ovl_Bg_Hidan_Rsekizou ovl_En_Bili ovl_En_Bom ovl_En_Brob ovl_En_Bubble ovl_En_Dodongo ovl_En_Encount2 ovl_En_Fd ovl_En_Floormas ovl_En_GeldB ovl_En_Goma ovl_En_Goroiwa ovl_En_Peehat ovl_En_Po_Sisters ovl_En_Rr ovl_En_Shopnuts ovl_En_Vali ovl_En_Vb_Ball ovl_En_Wallmas ovl_En_Yukabyun

@@ -1,0 +1,5835 @@
+maps 2
+title "Ocarina of Time combat: Link vs Stalfos"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group enemy "enemy"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_adult "Link is an adult" in setup at 260 80
+state choose_variant "Which Stalfos" in setup at 120 150
+state enemy_unseen "Stalfos is invisible without the Lens" in enemy at 440 80
+state link_turn "Link's move" in beat at 760 80
+state enemy_turn "Stalfos answers" in beat at 900 80
+state enemy_act "Stalfos acts" in beat at 760 150
+state beat_end "End of the beat" in beat at 900 150
+state range_near "Near" in range at 1080 80
+state range_far "Far" in range at 1220 80
+state link_hp "Link's health (1 mark = 8/16 heart)" in link_state at 1400 80
+state link_missing "Link's lost health" in link_state at 1540 80
+state link_dmg "Damage to Link" in link_state at 1400 150
+state link_heal "Healing for Link" in link_state at 1540 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1400 220
+state magic_spent "Magic spent" in link_state at 1540 220
+state magic_refill "Magic coming back" in link_state at 1400 290
+state in_fight "The fight is on" in setup at 260 150
+state link_wins "Stalfos defeated" ends "Link wins" in outcomes at 1720 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1860 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1720 150
+state has_deku_nuts "Has deku nuts" in gear at 2040 80
+state has_master_sword "Has master sword" in gear at 2180 80
+state has_hylian_shield "Has hylian shield" in gear at 2040 150
+state has_hookshot "Has hookshot" in gear at 2180 150
+state has_megaton_hammer "Has megaton hammer" in gear at 2040 220
+state has_bow "Has bow" in gear at 2180 220
+state has_bombs "Has bombs" in gear at 2040 290
+state has_bombchus "Has bombchus" in gear at 2180 290
+state has_mirror_shield "Has mirror shield" in gear at 2040 360
+state has_magic "Has magic" in gear at 2180 360
+state has_green_potion "Has green potion" in gear at 2040 430
+state has_biggoron_sword "Has biggoron sword" in gear at 2180 430
+state has_giants_knife "Has giants knife" in gear at 2040 500
+state has_double_defense "Has double defense" in gear at 2180 500
+state has_fire_arrows "Has fire arrows" in gear at 2040 570
+state has_ice_arrows "Has ice arrows" in gear at 2180 570
+state has_light_arrows "Has light arrows" in gear at 2040 640
+state has_dins_fire "Has dins fire" in gear at 2180 640
+state has_nayrus_love "Has nayrus love" in gear at 2040 710
+state has_lens_of_truth "Has lens of truth" in gear at 2180 710
+state has_fairy "Has fairy" in gear at 2040 780
+state has_blue_potion "Has blue potion" in gear at 2180 780
+state phase_emerge "Stalfos rises from the floor" in enemy at 580 80
+state timer_emerge "Stalfos rises from the floor: beats left" in enemy at 440 150
+state phase_jump_back "Stalfos jumps back" in enemy at 440 220
+state phase_land "Stalfos lands" in enemy at 580 220
+state phase_idle_o "Stalfos stands guard (shield down)" in enemy at 440 290
+state timer_idle_o "Stalfos stands guard (shield down): beats left" in enemy at 580 290
+state phase_turn_o "Stalfos turns to face Link (shield down)" in enemy at 580 360
+state phase_circle_o "Stalfos circles Link (shield down)" in enemy at 440 430
+state timer_circle_o "Stalfos circles Link (shield down): beats left" in enemy at 580 430
+state phase_idle_g "Stalfos stands guard (shield up)" in enemy at 580 500
+state timer_idle_g "Stalfos stands guard (shield up): beats left" in enemy at 440 570
+state phase_turn_g "Stalfos turns to face Link (shield up)" in enemy at 440 640
+state phase_circle_g "Stalfos circles Link (shield up)" in enemy at 580 640
+state timer_circle_g "Stalfos circles Link (shield up): beats left" in enemy at 440 710
+state phase_walk "Stalfos advances behind its shield" in enemy at 440 780
+state phase_sidestep "Stalfos sidesteps behind its shield" in enemy at 580 780
+state timer_sidestep "Stalfos sidesteps behind its shield: beats left" in enemy at 440 850
+state phase_block "Stalfos stops and blocks" in enemy at 440 920
+state timer_block "Stalfos stops and blocks: beats left" in enemy at 580 920
+state phase_unblock "Stalfos lowers its shield" in enemy at 580 990
+state phase_slash_down "Stalfos slashes down" in enemy at 440 1060
+state phase_slash_up "Stalfos slashes up" in enemy at 580 1060
+state phase_slash_end "Stalfos recovers from its slash" in enemy at 440 1130
+state phase_recoil "Stalfos recoils off Link's shield" in enemy at 580 1130
+state phase_jumpslash "Stalfos leaps in with a jumpslash" in enemy at 440 1200
+state phase_jump_up "Stalfos leaps over Link" in enemy at 580 1200
+state phase_flinch "Stalfos flinches" in enemy at 440 1270
+state phase_frozen "Stalfos is frozen" in enemy at 580 1270
+state timer_frozen "Stalfos is frozen: beats left" in enemy at 440 1340
+state phase_stunned "Stalfos is stunned" in enemy at 440 1410
+state timer_stunned "Stalfos is stunned: beats left" in enemy at 580 1410
+state phase_wait_above_c "Ceiling Stalfos waits above" in enemy at 580 1480
+state phase_fall_c "Ceiling Stalfos drops from above" in enemy at 440 1550
+state phase_land_c "Ceiling Stalfos lands" in enemy at 580 1550
+state phase_idle_o_c "Ceiling Stalfos stands guard (shield down)" in enemy at 440 1620
+state timer_idle_o_c "Ceiling Stalfos stands guard (shield down): beats left" in enemy at 580 1620
+state phase_turn_o_c "Ceiling Stalfos turns to face Link (shield down)" in enemy at 580 1690
+state phase_circle_o_c "Ceiling Stalfos circles Link (shield down)" in enemy at 440 1760
+state timer_circle_o_c "Ceiling Stalfos circles Link (shield down): beats left" in enemy at 580 1760
+state phase_idle_g_c "Ceiling Stalfos stands guard (shield up)" in enemy at 580 1830
+state timer_idle_g_c "Ceiling Stalfos stands guard (shield up): beats left" in enemy at 440 1900
+state phase_turn_g_c "Ceiling Stalfos turns to face Link (shield up)" in enemy at 440 1970
+state phase_circle_g_c "Ceiling Stalfos circles Link (shield up)" in enemy at 580 1970
+state timer_circle_g_c "Ceiling Stalfos circles Link (shield up): beats left" in enemy at 440 2040
+state phase_walk_c "Ceiling Stalfos advances behind its shield" in enemy at 440 2110
+state phase_sidestep_c "Ceiling Stalfos sidesteps behind its shield" in enemy at 580 2110
+state timer_sidestep_c "Ceiling Stalfos sidesteps behind its shield: beats left" in enemy at 440 2180
+state phase_block_c "Ceiling Stalfos stops and blocks" in enemy at 440 2250
+state timer_block_c "Ceiling Stalfos stops and blocks: beats left" in enemy at 580 2250
+state phase_unblock_c "Ceiling Stalfos lowers its shield" in enemy at 580 2320
+state phase_slash_down_c "Ceiling Stalfos slashes down" in enemy at 440 2390
+state phase_slash_up_c "Ceiling Stalfos slashes up" in enemy at 580 2390
+state phase_slash_end_c "Ceiling Stalfos recovers from its slash" in enemy at 440 2460
+state phase_recoil_c "Ceiling Stalfos recoils off Link's shield" in enemy at 580 2460
+state phase_jumpslash_c "Ceiling Stalfos leaps in with a jumpslash" in enemy at 440 2530
+state phase_jump_up_c "Ceiling Stalfos leaps over Link" in enemy at 580 2530
+state phase_flinch_c "Ceiling Stalfos flinches" in enemy at 440 2600
+state phase_frozen_c "Ceiling Stalfos is frozen" in enemy at 580 2600
+state timer_frozen_c "Ceiling Stalfos is frozen: beats left" in enemy at 440 2670
+state phase_stunned_c "Ceiling Stalfos is stunned" in enemy at 440 2740
+state timer_stunned_c "Ceiling Stalfos is stunned: beats left" in enemy at 580 2740
+state hp_body "Stalfos: health" marks 10 in enemy_health at 2360 80
+state alive_body "Stalfos: standing" marks 1 in enemy_health at 2500 80
+state dmg_body "Stalfos: damage" in enemy_health at 2360 150
+state status_nayru "Link: nayru (beats left)" in link_state at 1540 290
+state lens_on "Lens of Truth on" in link_state at 1400 360
+state link_guard "Link holds up his shield" in link_state at 1540 360
+state link_dodge "Link dodges" in link_state at 1400 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_explosive "Explosion on its way" in hits at 3000 850
+state swing_arrow_normal "Arrow on its way" in hits at 3000 1760
+state swing_hammer_swing "Hammer swing on its way" in hits at 3000 2670
+state swing_hookshot "Hookshot on its way" in hits at 3000 3580
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 4350
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 5260
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 6170
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 7080
+state swing_arrow_light "Light arrow on its way" in hits at 3000 7850
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 8620
+state swing_shield "Shield on its way" in hits at 3000 8760
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 8830
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3000 9810
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3140 10720
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 11630
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 12610
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 13520
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 14430
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1400 710
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1540 710
+state incoming_slash "Stalfos sword slash incoming" in attacks at 3320 80
+state incoming_jumpslash "Stalfos jumpslash incoming" in attacks at 3460 430
+state incoming_slash_c "Stalfos sword slash incoming" in attacks at 3320 710
+state incoming_jumpslash_c "Stalfos jumpslash incoming" in attacks at 3460 1060
+state tick_nayru "Beat ends: nayru checked" in beat at 760 360
+state lens_count "The Lens: beats toward the next cost" in beat at 900 430
+
+verb emerge_timer_clears "Stalfos rises from the floor is over" by world priority 100 in enemy at 580 150
+  take timer_emerge
+  unless phase_emerge
+
+verb idle_o_timer_clears "Stalfos stands guard (shield down) is over" by world priority 100 in enemy at 440 360
+  take timer_idle_o
+  unless phase_idle_o
+
+verb circle_o_timer_clears "Stalfos circles Link (shield down) is over" by world priority 100 in enemy at 440 500
+  take timer_circle_o
+  unless phase_circle_o
+
+verb idle_g_timer_clears "Stalfos stands guard (shield up) is over" by world priority 100 in enemy at 580 570
+  take timer_idle_g
+  unless phase_idle_g
+
+verb circle_g_timer_clears "Stalfos circles Link (shield up) is over" by world priority 100 in enemy at 580 710
+  take timer_circle_g
+  unless phase_circle_g
+
+verb sidestep_timer_clears "Stalfos sidesteps behind its shield is over" by world priority 100 in enemy at 580 850
+  take timer_sidestep
+  unless phase_sidestep
+
+verb block_timer_clears "Stalfos stops and blocks is over" by world priority 100 in enemy at 440 990
+  take timer_block
+  unless phase_block
+
+verb frozen_timer_clears "Stalfos is frozen is over" by world priority 100 in enemy at 580 1340
+  take timer_frozen
+  unless phase_frozen
+
+verb stunned_timer_clears "Stalfos is stunned is over" by world priority 100 in enemy at 440 1480
+  take timer_stunned
+  unless phase_stunned
+
+verb idle_o_c_timer_clears "Ceiling Stalfos stands guard (shield down) is over" by world priority 100 in enemy at 440 1690
+  take timer_idle_o_c
+  unless phase_idle_o_c
+
+verb circle_o_c_timer_clears "Ceiling Stalfos circles Link (shield down) is over" by world priority 100 in enemy at 440 1830
+  take timer_circle_o_c
+  unless phase_circle_o_c
+
+verb idle_g_c_timer_clears "Ceiling Stalfos stands guard (shield up) is over" by world priority 100 in enemy at 580 1900
+  take timer_idle_g_c
+  unless phase_idle_g_c
+
+verb circle_g_c_timer_clears "Ceiling Stalfos circles Link (shield up) is over" by world priority 100 in enemy at 580 2040
+  take timer_circle_g_c
+  unless phase_circle_g_c
+
+verb sidestep_c_timer_clears "Ceiling Stalfos sidesteps behind its shield is over" by world priority 100 in enemy at 580 2180
+  take timer_sidestep_c
+  unless phase_sidestep_c
+
+verb block_c_timer_clears "Ceiling Stalfos stops and blocks is over" by world priority 100 in enemy at 440 2320
+  take timer_block_c
+  unless phase_block_c
+
+verb frozen_c_timer_clears "Ceiling Stalfos is frozen is over" by world priority 100 in enemy at 580 2670
+  take timer_frozen_c
+  unless phase_frozen_c
+
+verb stunned_c_timer_clears "Ceiling Stalfos is stunned is over" by world priority 100 in enemy at 440 2810
+  take timer_stunned_c
+  unless phase_stunned_c
+
+verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_adult
+  give 4 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give choose_variant
+
+verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_adult
+  give 4 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_adult
+  give 4 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_adult
+  give 4 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give choose_variant
+
+verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_adult
+  give 4 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_adult
+  give 4 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_adult
+  give 4 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 4 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give choose_variant
+
+verb variant_ground "Stalfos that rises from the floor" by world priority 30 in setup at 120 500
+  take choose_variant
+  give phase_emerge
+  give timer_emerge
+  give range_far
+  give link_turn
+
+verb variant_invisible "Invisible Stalfos, seen only through the Lens" by world priority 30 in setup at 260 500
+  take choose_variant
+  give phase_emerge
+  give timer_emerge
+  give range_far
+  give link_turn
+  give enemy_unseen
+
+verb variant_ceiling "Stalfos that drops from the ceiling" by world priority 30 in setup at 120 570
+  take choose_variant
+  give phase_wait_above_c
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1540 430
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1400 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1540 500
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1400 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1540 570
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1400 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1540 640
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 4 link_heal
+
+verb link_fell "Link falls" by world priority 91 in outcomes at 1860 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb body_hurt "Stalfos loses health" by world priority 97 in enemy_health at 2500 150
+  take dmg_body
+  take hp_body
+
+verb body_overkill "Stalfos has no health left to lose" by world priority 96 in enemy_health at 2360 220
+  take dmg_body
+  unless hp_body
+
+verb link_deku_nut "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_explosive_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 80
+  take link_turn
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 150
+  take link_turn
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2820 150
+  take link_turn
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2680 220
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2820 220
+  take link_turn
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 290
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 290
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 360
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 360
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 430
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 430
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 500
+  take link_turn
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 500
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 570
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 570
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 640
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 640
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 710
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 710
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 780
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2820 780
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 850
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2820 850
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 920
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2820 920
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 990
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 990
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb hit_deku_nut__jump_back "Deku Nut flash hits (Stalfos jumps back)" by world priority 80 in hits at 3000 150
+  take swing_deku_nut
+  take phase_jump_back
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__land "Deku Nut flash hits (Stalfos lands)" by world priority 80 in hits at 3140 150
+  take swing_deku_nut
+  take phase_land
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__idle_o "Deku Nut flash hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 220
+  take swing_deku_nut
+  take phase_idle_o
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__turn_o "Deku Nut flash hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 220
+  take swing_deku_nut
+  take phase_turn_o
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__circle_o "Deku Nut flash hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 290
+  take swing_deku_nut
+  take phase_circle_o
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__slash_down "Deku Nut flash hits (Stalfos slashes down)" by world priority 80 in hits at 3140 290
+  take swing_deku_nut
+  take phase_slash_down
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__slash_up "Deku Nut flash hits (Stalfos slashes up)" by world priority 80 in hits at 3000 360
+  take swing_deku_nut
+  take phase_slash_up
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__slash_end "Deku Nut flash hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 360
+  take swing_deku_nut
+  take phase_slash_end
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__recoil "Deku Nut flash hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 430
+  take swing_deku_nut
+  take phase_recoil
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__jumpslash "Deku Nut flash hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 430
+  take swing_deku_nut
+  take phase_jumpslash
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_deku_nut__land_c "Deku Nut flash hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 500
+  take swing_deku_nut
+  take phase_land_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_deku_nut__idle_o_c "Deku Nut flash hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 500
+  take swing_deku_nut
+  take phase_idle_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_deku_nut__turn_o_c "Deku Nut flash hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 570
+  take swing_deku_nut
+  take phase_turn_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_deku_nut__circle_o_c "Deku Nut flash hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 570
+  take swing_deku_nut
+  take phase_circle_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_deku_nut__slash_down_c "Deku Nut flash hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 640
+  take swing_deku_nut
+  take phase_slash_down_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_deku_nut__slash_up_c "Deku Nut flash hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 640
+  take swing_deku_nut
+  take phase_slash_up_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_deku_nut__slash_end_c "Deku Nut flash hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 710
+  take swing_deku_nut
+  take phase_slash_end_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_deku_nut__recoil_c "Deku Nut flash hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 710
+  take swing_deku_nut
+  take phase_recoil_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_deku_nut__jumpslash_c "Deku Nut flash hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 780
+  take swing_deku_nut
+  take phase_jumpslash_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb unseen_deku_nut "Deku Nut flash misses: the enemy is unseen" by world priority 81 in hits at 3140 780
+  take swing_deku_nut
+  need enemy_unseen
+  unless lens_on
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 850
+  take swing_explosive
+
+verb hit_explosive__jump_back "Explosion hits (Stalfos jumps back)" by world priority 80 in hits at 3000 920
+  take swing_explosive
+  take phase_jump_back
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__land "Explosion hits (Stalfos lands)" by world priority 80 in hits at 3140 920
+  take swing_explosive
+  take phase_land
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__idle_o "Explosion hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 990
+  take swing_explosive
+  take phase_idle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__turn_o "Explosion hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 990
+  take swing_explosive
+  take phase_turn_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__circle_o "Explosion hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 1060
+  take swing_explosive
+  take phase_circle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__slash_down "Explosion hits (Stalfos slashes down)" by world priority 80 in hits at 3140 1060
+  take swing_explosive
+  take phase_slash_down
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__slash_up "Explosion hits (Stalfos slashes up)" by world priority 80 in hits at 3000 1130
+  take swing_explosive
+  take phase_slash_up
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__slash_end "Explosion hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 1130
+  take swing_explosive
+  take phase_slash_end
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__recoil "Explosion hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 1200
+  take swing_explosive
+  take phase_recoil
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__jumpslash "Explosion hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 1200
+  take swing_explosive
+  take phase_jumpslash
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__frozen "Explosion hits (Stalfos is frozen)" by world priority 80 in hits at 3000 1270
+  take swing_explosive
+  take phase_frozen
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__stunned "Explosion hits (Stalfos is stunned)" by world priority 80 in hits at 3140 1270
+  take swing_explosive
+  take phase_stunned
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__land_c "Explosion hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 1340
+  take swing_explosive
+  take phase_land_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__idle_o_c "Explosion hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 1340
+  take swing_explosive
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__turn_o_c "Explosion hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 1410
+  take swing_explosive
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__circle_o_c "Explosion hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 1410
+  take swing_explosive
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__slash_down_c "Explosion hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 1480
+  take swing_explosive
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__slash_up_c "Explosion hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 1480
+  take swing_explosive
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__slash_end_c "Explosion hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 1550
+  take swing_explosive
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__recoil_c "Explosion hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 1550
+  take swing_explosive
+  take phase_recoil_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__jumpslash_c "Explosion hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 1620
+  take swing_explosive
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__frozen_c "Explosion hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 1620
+  take swing_explosive
+  take phase_frozen_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_explosive__stunned_c "Explosion hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 1690
+  take swing_explosive
+  take phase_stunned_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb unseen_explosive "Explosion misses: the enemy is unseen" by world priority 81 in hits at 3140 1690
+  take swing_explosive
+  need enemy_unseen
+  unless lens_on
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3140 1760
+  take swing_arrow_normal
+
+verb hit_arrow_normal__jump_back "Arrow hits (Stalfos jumps back)" by world priority 80 in hits at 3000 1830
+  take swing_arrow_normal
+  take phase_jump_back
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__land "Arrow hits (Stalfos lands)" by world priority 80 in hits at 3140 1830
+  take swing_arrow_normal
+  take phase_land
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__idle_o "Arrow hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 1900
+  take swing_arrow_normal
+  take phase_idle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__turn_o "Arrow hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 1900
+  take swing_arrow_normal
+  take phase_turn_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__circle_o "Arrow hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 1970
+  take swing_arrow_normal
+  take phase_circle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__slash_down "Arrow hits (Stalfos slashes down)" by world priority 80 in hits at 3140 1970
+  take swing_arrow_normal
+  take phase_slash_down
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__slash_up "Arrow hits (Stalfos slashes up)" by world priority 80 in hits at 3000 2040
+  take swing_arrow_normal
+  take phase_slash_up
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__slash_end "Arrow hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 2040
+  take swing_arrow_normal
+  take phase_slash_end
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__recoil "Arrow hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 2110
+  take swing_arrow_normal
+  take phase_recoil
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__jumpslash "Arrow hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 2110
+  take swing_arrow_normal
+  take phase_jumpslash
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__frozen "Arrow hits (Stalfos is frozen)" by world priority 80 in hits at 3000 2180
+  take swing_arrow_normal
+  take phase_frozen
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__stunned "Arrow hits (Stalfos is stunned)" by world priority 80 in hits at 3140 2180
+  take swing_arrow_normal
+  take phase_stunned
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__land_c "Arrow hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 2250
+  take swing_arrow_normal
+  take phase_land_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__idle_o_c "Arrow hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 2250
+  take swing_arrow_normal
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__turn_o_c "Arrow hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 2320
+  take swing_arrow_normal
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__circle_o_c "Arrow hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 2320
+  take swing_arrow_normal
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__slash_down_c "Arrow hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 2390
+  take swing_arrow_normal
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__slash_up_c "Arrow hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 2390
+  take swing_arrow_normal
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__slash_end_c "Arrow hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 2460
+  take swing_arrow_normal
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__recoil_c "Arrow hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 2460
+  take swing_arrow_normal
+  take phase_recoil_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__jumpslash_c "Arrow hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 2530
+  take swing_arrow_normal
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__frozen_c "Arrow hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 2530
+  take swing_arrow_normal
+  take phase_frozen_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_normal__stunned_c "Arrow hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 2600
+  take swing_arrow_normal
+  take phase_stunned_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb unseen_arrow_normal "Arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 2600
+  take swing_arrow_normal
+  need enemy_unseen
+  unless lens_on
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 2670
+  take swing_hammer_swing
+
+verb hit_hammer_swing__jump_back "Hammer swing hits (Stalfos jumps back)" by world priority 80 in hits at 3000 2740
+  take swing_hammer_swing
+  take phase_jump_back
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__land "Hammer swing hits (Stalfos lands)" by world priority 80 in hits at 3140 2740
+  take swing_hammer_swing
+  take phase_land
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__idle_o "Hammer swing hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 2810
+  take swing_hammer_swing
+  take phase_idle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__turn_o "Hammer swing hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 2810
+  take swing_hammer_swing
+  take phase_turn_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__circle_o "Hammer swing hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 2880
+  take swing_hammer_swing
+  take phase_circle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__slash_down "Hammer swing hits (Stalfos slashes down)" by world priority 80 in hits at 3140 2880
+  take swing_hammer_swing
+  take phase_slash_down
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__slash_up "Hammer swing hits (Stalfos slashes up)" by world priority 80 in hits at 3000 2950
+  take swing_hammer_swing
+  take phase_slash_up
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__slash_end "Hammer swing hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 2950
+  take swing_hammer_swing
+  take phase_slash_end
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__recoil "Hammer swing hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 3020
+  take swing_hammer_swing
+  take phase_recoil
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__jumpslash "Hammer swing hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 3020
+  take swing_hammer_swing
+  take phase_jumpslash
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__frozen "Hammer swing hits (Stalfos is frozen)" by world priority 80 in hits at 3000 3090
+  take swing_hammer_swing
+  take phase_frozen
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned "Hammer swing hits (Stalfos is stunned)" by world priority 80 in hits at 3140 3090
+  take swing_hammer_swing
+  take phase_stunned
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__land_c "Hammer swing hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 3160
+  take swing_hammer_swing
+  take phase_land_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__idle_o_c "Hammer swing hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 3160
+  take swing_hammer_swing
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__turn_o_c "Hammer swing hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 3230
+  take swing_hammer_swing
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__circle_o_c "Hammer swing hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 3230
+  take swing_hammer_swing
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__slash_down_c "Hammer swing hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 3300
+  take swing_hammer_swing
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__slash_up_c "Hammer swing hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 3300
+  take swing_hammer_swing
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__slash_end_c "Hammer swing hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 3370
+  take swing_hammer_swing
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__recoil_c "Hammer swing hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 3370
+  take swing_hammer_swing
+  take phase_recoil_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__jumpslash_c "Hammer swing hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 3440
+  take swing_hammer_swing
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__frozen_c "Hammer swing hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 3440
+  take swing_hammer_swing
+  take phase_frozen_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_hammer_swing__stunned_c "Hammer swing hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 3510
+  take swing_hammer_swing
+  take phase_stunned_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb unseen_hammer_swing "Hammer swing misses: the enemy is unseen" by world priority 81 in hits at 3140 3510
+  take swing_hammer_swing
+  need enemy_unseen
+  unless lens_on
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 3580
+  take swing_hookshot
+
+verb hit_hookshot__jump_back "Hookshot hits (Stalfos jumps back)" by world priority 80 in hits at 3000 3650
+  take swing_hookshot
+  take phase_jump_back
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__land "Hookshot hits (Stalfos lands)" by world priority 80 in hits at 3140 3650
+  take swing_hookshot
+  take phase_land
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__idle_o "Hookshot hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 3720
+  take swing_hookshot
+  take phase_idle_o
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__turn_o "Hookshot hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 3720
+  take swing_hookshot
+  take phase_turn_o
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__circle_o "Hookshot hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 3790
+  take swing_hookshot
+  take phase_circle_o
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__slash_down "Hookshot hits (Stalfos slashes down)" by world priority 80 in hits at 3140 3790
+  take swing_hookshot
+  take phase_slash_down
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__slash_up "Hookshot hits (Stalfos slashes up)" by world priority 80 in hits at 3000 3860
+  take swing_hookshot
+  take phase_slash_up
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__slash_end "Hookshot hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 3860
+  take swing_hookshot
+  take phase_slash_end
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__recoil "Hookshot hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 3930
+  take swing_hookshot
+  take phase_recoil
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__jumpslash "Hookshot hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 3930
+  take swing_hookshot
+  take phase_jumpslash
+  give phase_stunned
+  give 4 timer_stunned
+
+verb hit_hookshot__land_c "Hookshot hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 4000
+  take swing_hookshot
+  take phase_land_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_hookshot__idle_o_c "Hookshot hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 4000
+  take swing_hookshot
+  take phase_idle_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_hookshot__turn_o_c "Hookshot hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 4070
+  take swing_hookshot
+  take phase_turn_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_hookshot__circle_o_c "Hookshot hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 4070
+  take swing_hookshot
+  take phase_circle_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_hookshot__slash_down_c "Hookshot hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 4140
+  take swing_hookshot
+  take phase_slash_down_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_hookshot__slash_up_c "Hookshot hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 4140
+  take swing_hookshot
+  take phase_slash_up_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_hookshot__slash_end_c "Hookshot hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 4210
+  take swing_hookshot
+  take phase_slash_end_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_hookshot__recoil_c "Hookshot hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 4210
+  take swing_hookshot
+  take phase_recoil_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb hit_hookshot__jumpslash_c "Hookshot hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 4280
+  take swing_hookshot
+  take phase_jumpslash_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+
+verb unseen_hookshot "Hookshot misses: the enemy is unseen" by world priority 81 in hits at 3140 4280
+  take swing_hookshot
+  need enemy_unseen
+  unless lens_on
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3140 4350
+  take swing_slash_master
+
+verb hit_slash_master__jump_back "Master Sword slash hits (Stalfos jumps back)" by world priority 80 in hits at 3000 4420
+  take swing_slash_master
+  take phase_jump_back
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__land "Master Sword slash hits (Stalfos lands)" by world priority 80 in hits at 3140 4420
+  take swing_slash_master
+  take phase_land
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__idle_o "Master Sword slash hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 4490
+  take swing_slash_master
+  take phase_idle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__turn_o "Master Sword slash hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 4490
+  take swing_slash_master
+  take phase_turn_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__circle_o "Master Sword slash hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 4560
+  take swing_slash_master
+  take phase_circle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__slash_down "Master Sword slash hits (Stalfos slashes down)" by world priority 80 in hits at 3140 4560
+  take swing_slash_master
+  take phase_slash_down
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__slash_up "Master Sword slash hits (Stalfos slashes up)" by world priority 80 in hits at 3000 4630
+  take swing_slash_master
+  take phase_slash_up
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__slash_end "Master Sword slash hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 4630
+  take swing_slash_master
+  take phase_slash_end
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__recoil "Master Sword slash hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 4700
+  take swing_slash_master
+  take phase_recoil
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__jumpslash "Master Sword slash hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 4700
+  take swing_slash_master
+  take phase_jumpslash
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__frozen "Master Sword slash hits (Stalfos is frozen)" by world priority 80 in hits at 3000 4770
+  take swing_slash_master
+  take phase_frozen
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__stunned "Master Sword slash hits (Stalfos is stunned)" by world priority 80 in hits at 3140 4770
+  take swing_slash_master
+  take phase_stunned
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__land_c "Master Sword slash hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 4840
+  take swing_slash_master
+  take phase_land_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__idle_o_c "Master Sword slash hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 4840
+  take swing_slash_master
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__turn_o_c "Master Sword slash hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 4910
+  take swing_slash_master
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__circle_o_c "Master Sword slash hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 4910
+  take swing_slash_master
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__slash_down_c "Master Sword slash hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 4980
+  take swing_slash_master
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__slash_up_c "Master Sword slash hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 4980
+  take swing_slash_master
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__slash_end_c "Master Sword slash hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 5050
+  take swing_slash_master
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__recoil_c "Master Sword slash hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 5050
+  take swing_slash_master
+  take phase_recoil_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__jumpslash_c "Master Sword slash hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 5120
+  take swing_slash_master
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__frozen_c "Master Sword slash hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 5120
+  take swing_slash_master
+  take phase_frozen_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_slash_master__stunned_c "Master Sword slash hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 5190
+  take swing_slash_master
+  take phase_stunned_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb unseen_slash_master "Master Sword slash misses: the enemy is unseen" by world priority 81 in hits at 3140 5190
+  take swing_slash_master
+  need enemy_unseen
+  unless lens_on
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3140 5260
+  take swing_slash_giant
+
+verb hit_slash_giant__jump_back "Two-handed sword slash hits (Stalfos jumps back)" by world priority 80 in hits at 3000 5330
+  take swing_slash_giant
+  take phase_jump_back
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__land "Two-handed sword slash hits (Stalfos lands)" by world priority 80 in hits at 3140 5330
+  take swing_slash_giant
+  take phase_land
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__idle_o "Two-handed sword slash hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 5400
+  take swing_slash_giant
+  take phase_idle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__turn_o "Two-handed sword slash hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 5400
+  take swing_slash_giant
+  take phase_turn_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__circle_o "Two-handed sword slash hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 5470
+  take swing_slash_giant
+  take phase_circle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__slash_down "Two-handed sword slash hits (Stalfos slashes down)" by world priority 80 in hits at 3140 5470
+  take swing_slash_giant
+  take phase_slash_down
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__slash_up "Two-handed sword slash hits (Stalfos slashes up)" by world priority 80 in hits at 3000 5540
+  take swing_slash_giant
+  take phase_slash_up
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__slash_end "Two-handed sword slash hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 5540
+  take swing_slash_giant
+  take phase_slash_end
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__recoil "Two-handed sword slash hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 5610
+  take swing_slash_giant
+  take phase_recoil
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__jumpslash "Two-handed sword slash hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 5610
+  take swing_slash_giant
+  take phase_jumpslash
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__frozen "Two-handed sword slash hits (Stalfos is frozen)" by world priority 80 in hits at 3000 5680
+  take swing_slash_giant
+  take phase_frozen
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__stunned "Two-handed sword slash hits (Stalfos is stunned)" by world priority 80 in hits at 3140 5680
+  take swing_slash_giant
+  take phase_stunned
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__land_c "Two-handed sword slash hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 5750
+  take swing_slash_giant
+  take phase_land_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__idle_o_c "Two-handed sword slash hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 5750
+  take swing_slash_giant
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__turn_o_c "Two-handed sword slash hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 5820
+  take swing_slash_giant
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__circle_o_c "Two-handed sword slash hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 5820
+  take swing_slash_giant
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__slash_down_c "Two-handed sword slash hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 5890
+  take swing_slash_giant
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__slash_up_c "Two-handed sword slash hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 5890
+  take swing_slash_giant
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__slash_end_c "Two-handed sword slash hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 5960
+  take swing_slash_giant
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__recoil_c "Two-handed sword slash hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 5960
+  take swing_slash_giant
+  take phase_recoil_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__jumpslash_c "Two-handed sword slash hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 6030
+  take swing_slash_giant
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__frozen_c "Two-handed sword slash hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 6030
+  take swing_slash_giant
+  take phase_frozen_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_slash_giant__stunned_c "Two-handed sword slash hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 6100
+  take swing_slash_giant
+  take phase_stunned_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb unseen_slash_giant "Two-handed sword slash misses: the enemy is unseen" by world priority 81 in hits at 3140 6100
+  take swing_slash_giant
+  need enemy_unseen
+  unless lens_on
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3140 6170
+  take swing_arrow_fire
+
+verb hit_arrow_fire__jump_back "Fire arrow hits (Stalfos jumps back)" by world priority 80 in hits at 3000 6240
+  take swing_arrow_fire
+  take phase_jump_back
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__land "Fire arrow hits (Stalfos lands)" by world priority 80 in hits at 3140 6240
+  take swing_arrow_fire
+  take phase_land
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__idle_o "Fire arrow hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 6310
+  take swing_arrow_fire
+  take phase_idle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__turn_o "Fire arrow hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 6310
+  take swing_arrow_fire
+  take phase_turn_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__circle_o "Fire arrow hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 6380
+  take swing_arrow_fire
+  take phase_circle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__slash_down "Fire arrow hits (Stalfos slashes down)" by world priority 80 in hits at 3140 6380
+  take swing_arrow_fire
+  take phase_slash_down
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__slash_up "Fire arrow hits (Stalfos slashes up)" by world priority 80 in hits at 3000 6450
+  take swing_arrow_fire
+  take phase_slash_up
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__slash_end "Fire arrow hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 6450
+  take swing_arrow_fire
+  take phase_slash_end
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__recoil "Fire arrow hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 6520
+  take swing_arrow_fire
+  take phase_recoil
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__jumpslash "Fire arrow hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 6520
+  take swing_arrow_fire
+  take phase_jumpslash
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__frozen "Fire arrow hits (Stalfos is frozen)" by world priority 80 in hits at 3000 6590
+  take swing_arrow_fire
+  take phase_frozen
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__stunned "Fire arrow hits (Stalfos is stunned)" by world priority 80 in hits at 3140 6590
+  take swing_arrow_fire
+  take phase_stunned
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__land_c "Fire arrow hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 6660
+  take swing_arrow_fire
+  take phase_land_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__idle_o_c "Fire arrow hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 6660
+  take swing_arrow_fire
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__turn_o_c "Fire arrow hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 6730
+  take swing_arrow_fire
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__circle_o_c "Fire arrow hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 6730
+  take swing_arrow_fire
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__slash_down_c "Fire arrow hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 6800
+  take swing_arrow_fire
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__slash_up_c "Fire arrow hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 6800
+  take swing_arrow_fire
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__slash_end_c "Fire arrow hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 6870
+  take swing_arrow_fire
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__recoil_c "Fire arrow hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 6870
+  take swing_arrow_fire
+  take phase_recoil_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__jumpslash_c "Fire arrow hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 6940
+  take swing_arrow_fire
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__frozen_c "Fire arrow hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 6940
+  take swing_arrow_fire
+  take phase_frozen_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_arrow_fire__stunned_c "Fire arrow hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 7010
+  take swing_arrow_fire
+  take phase_stunned_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb unseen_arrow_fire "Fire arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 7010
+  take swing_arrow_fire
+  need enemy_unseen
+  unless lens_on
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3140 7080
+  take swing_arrow_ice
+
+verb hit_arrow_ice__jump_back "Ice arrow hits (Stalfos jumps back)" by world priority 80 in hits at 3000 7150
+  take swing_arrow_ice
+  take phase_jump_back
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__land "Ice arrow hits (Stalfos lands)" by world priority 80 in hits at 3140 7150
+  take swing_arrow_ice
+  take phase_land
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__idle_o "Ice arrow hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 7220
+  take swing_arrow_ice
+  take phase_idle_o
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__turn_o "Ice arrow hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 7220
+  take swing_arrow_ice
+  take phase_turn_o
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__circle_o "Ice arrow hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 7290
+  take swing_arrow_ice
+  take phase_circle_o
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__slash_down "Ice arrow hits (Stalfos slashes down)" by world priority 80 in hits at 3140 7290
+  take swing_arrow_ice
+  take phase_slash_down
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__slash_up "Ice arrow hits (Stalfos slashes up)" by world priority 80 in hits at 3000 7360
+  take swing_arrow_ice
+  take phase_slash_up
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__slash_end "Ice arrow hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 7360
+  take swing_arrow_ice
+  take phase_slash_end
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__recoil "Ice arrow hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 7430
+  take swing_arrow_ice
+  take phase_recoil
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__jumpslash "Ice arrow hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 7430
+  take swing_arrow_ice
+  take phase_jumpslash
+  give phase_frozen
+  give 2 timer_frozen
+  give 4 dmg_body
+
+verb hit_arrow_ice__land_c "Ice arrow hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 7500
+  take swing_arrow_ice
+  take phase_land_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb hit_arrow_ice__idle_o_c "Ice arrow hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 7500
+  take swing_arrow_ice
+  take phase_idle_o_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb hit_arrow_ice__turn_o_c "Ice arrow hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 7570
+  take swing_arrow_ice
+  take phase_turn_o_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb hit_arrow_ice__circle_o_c "Ice arrow hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 7570
+  take swing_arrow_ice
+  take phase_circle_o_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb hit_arrow_ice__slash_down_c "Ice arrow hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 7640
+  take swing_arrow_ice
+  take phase_slash_down_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb hit_arrow_ice__slash_up_c "Ice arrow hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 7640
+  take swing_arrow_ice
+  take phase_slash_up_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb hit_arrow_ice__slash_end_c "Ice arrow hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 7710
+  take swing_arrow_ice
+  take phase_slash_end_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb hit_arrow_ice__recoil_c "Ice arrow hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 7710
+  take swing_arrow_ice
+  take phase_recoil_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb hit_arrow_ice__jumpslash_c "Ice arrow hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 7780
+  take swing_arrow_ice
+  take phase_jumpslash_c
+  give phase_frozen_c
+  give 2 timer_frozen_c
+  give 4 dmg_body
+
+verb unseen_arrow_ice "Ice arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 7780
+  take swing_arrow_ice
+  need enemy_unseen
+  unless lens_on
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3140 7850
+  take swing_arrow_light
+
+verb hit_arrow_light__jump_back "Light arrow hits (Stalfos jumps back)" by world priority 80 in hits at 3000 7920
+  take swing_arrow_light
+  take phase_jump_back
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__land "Light arrow hits (Stalfos lands)" by world priority 80 in hits at 3140 7920
+  take swing_arrow_light
+  take phase_land
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__idle_o "Light arrow hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 7990
+  take swing_arrow_light
+  take phase_idle_o
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__turn_o "Light arrow hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 7990
+  take swing_arrow_light
+  take phase_turn_o
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__circle_o "Light arrow hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 8060
+  take swing_arrow_light
+  take phase_circle_o
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__slash_down "Light arrow hits (Stalfos slashes down)" by world priority 80 in hits at 3140 8060
+  take swing_arrow_light
+  take phase_slash_down
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__slash_up "Light arrow hits (Stalfos slashes up)" by world priority 80 in hits at 3000 8130
+  take swing_arrow_light
+  take phase_slash_up
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__slash_end "Light arrow hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 8130
+  take swing_arrow_light
+  take phase_slash_end
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__recoil "Light arrow hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 8200
+  take swing_arrow_light
+  take phase_recoil
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__jumpslash "Light arrow hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 8200
+  take swing_arrow_light
+  take phase_jumpslash
+  give phase_stunned
+  give 4 timer_stunned
+  give 2 dmg_body
+
+verb hit_arrow_light__land_c "Light arrow hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 8270
+  take swing_arrow_light
+  take phase_land_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb hit_arrow_light__idle_o_c "Light arrow hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 8270
+  take swing_arrow_light
+  take phase_idle_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb hit_arrow_light__turn_o_c "Light arrow hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 8340
+  take swing_arrow_light
+  take phase_turn_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb hit_arrow_light__circle_o_c "Light arrow hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 8340
+  take swing_arrow_light
+  take phase_circle_o_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb hit_arrow_light__slash_down_c "Light arrow hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 8410
+  take swing_arrow_light
+  take phase_slash_down_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb hit_arrow_light__slash_up_c "Light arrow hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 8410
+  take swing_arrow_light
+  take phase_slash_up_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb hit_arrow_light__slash_end_c "Light arrow hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 8480
+  take swing_arrow_light
+  take phase_slash_end_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb hit_arrow_light__recoil_c "Light arrow hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 8480
+  take swing_arrow_light
+  take phase_recoil_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb hit_arrow_light__jumpslash_c "Light arrow hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 8550
+  take swing_arrow_light
+  take phase_jumpslash_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  give 2 dmg_body
+
+verb unseen_arrow_light "Light arrow misses: the enemy is unseen" by world priority 81 in hits at 3140 8550
+  take swing_arrow_light
+  need enemy_unseen
+  unless lens_on
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 8620
+  take swing_magic_fire
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 8690
+  take swing_magic_fire
+  need range_far
+
+verb unseen_magic_fire "Din's Fire misses: the enemy is unseen" by world priority 81 in hits at 3140 8690
+  take swing_magic_fire
+  need enemy_unseen
+  unless lens_on
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 8760
+  take swing_shield
+
+verb unseen_shield "Shield misses: the enemy is unseen" by world priority 81 in hits at 3000 8830
+  take swing_shield
+  need enemy_unseen
+  unless lens_on
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3000 8900
+  take swing_spin_giant
+
+verb hit_spin_giant__jump_back "Two-handed spin attack hits (Stalfos jumps back)" by world priority 80 in hits at 3140 8900
+  take swing_spin_giant
+  take phase_jump_back
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__land "Two-handed spin attack hits (Stalfos lands)" by world priority 80 in hits at 3000 8970
+  take swing_spin_giant
+  take phase_land
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__idle_o "Two-handed spin attack hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 8970
+  take swing_spin_giant
+  take phase_idle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__turn_o "Two-handed spin attack hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 9040
+  take swing_spin_giant
+  take phase_turn_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__circle_o "Two-handed spin attack hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 9040
+  take swing_spin_giant
+  take phase_circle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__slash_down "Two-handed spin attack hits (Stalfos slashes down)" by world priority 80 in hits at 3000 9110
+  take swing_spin_giant
+  take phase_slash_down
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__slash_up "Two-handed spin attack hits (Stalfos slashes up)" by world priority 80 in hits at 3140 9110
+  take swing_spin_giant
+  take phase_slash_up
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__slash_end "Two-handed spin attack hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3000 9180
+  take swing_spin_giant
+  take phase_slash_end
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__recoil "Two-handed spin attack hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 9180
+  take swing_spin_giant
+  take phase_recoil
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__jumpslash "Two-handed spin attack hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 9250
+  take swing_spin_giant
+  take phase_jumpslash
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__frozen "Two-handed spin attack hits (Stalfos is frozen)" by world priority 80 in hits at 3140 9250
+  take swing_spin_giant
+  take phase_frozen
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__stunned "Two-handed spin attack hits (Stalfos is stunned)" by world priority 80 in hits at 3000 9320
+  take swing_spin_giant
+  take phase_stunned
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__land_c "Two-handed spin attack hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3140 9320
+  take swing_spin_giant
+  take phase_land_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__idle_o_c "Two-handed spin attack hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 9390
+  take swing_spin_giant
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__turn_o_c "Two-handed spin attack hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 9390
+  take swing_spin_giant
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__circle_o_c "Two-handed spin attack hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 9460
+  take swing_spin_giant
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__slash_down_c "Two-handed spin attack hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3140 9460
+  take swing_spin_giant
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__slash_up_c "Two-handed spin attack hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3000 9530
+  take swing_spin_giant
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__slash_end_c "Two-handed spin attack hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3140 9530
+  take swing_spin_giant
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__recoil_c "Two-handed spin attack hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 9600
+  take swing_spin_giant
+  take phase_recoil_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__jumpslash_c "Two-handed spin attack hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 9600
+  take swing_spin_giant
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__frozen_c "Two-handed spin attack hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3000 9670
+  take swing_spin_giant
+  take phase_frozen_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_spin_giant__stunned_c "Two-handed spin attack hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3140 9670
+  take swing_spin_giant
+  take phase_stunned_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 9740
+  take swing_spin_giant
+  need range_far
+
+verb unseen_spin_giant "Two-handed spin attack misses: the enemy is unseen" by world priority 81 in hits at 3140 9740
+  take swing_spin_giant
+  need enemy_unseen
+  unless lens_on
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3140 9810
+  take swing_spin_master
+
+verb hit_spin_master__jump_back "Master Sword spin attack hits (Stalfos jumps back)" by world priority 80 in hits at 3000 9880
+  take swing_spin_master
+  take phase_jump_back
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__land "Master Sword spin attack hits (Stalfos lands)" by world priority 80 in hits at 3140 9880
+  take swing_spin_master
+  take phase_land
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__idle_o "Master Sword spin attack hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 9950
+  take swing_spin_master
+  take phase_idle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__turn_o "Master Sword spin attack hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 9950
+  take swing_spin_master
+  take phase_turn_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__circle_o "Master Sword spin attack hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 10020
+  take swing_spin_master
+  take phase_circle_o
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__slash_down "Master Sword spin attack hits (Stalfos slashes down)" by world priority 80 in hits at 3140 10020
+  take swing_spin_master
+  take phase_slash_down
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__slash_up "Master Sword spin attack hits (Stalfos slashes up)" by world priority 80 in hits at 3000 10090
+  take swing_spin_master
+  take phase_slash_up
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__slash_end "Master Sword spin attack hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 10090
+  take swing_spin_master
+  take phase_slash_end
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__recoil "Master Sword spin attack hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 10160
+  take swing_spin_master
+  take phase_recoil
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__jumpslash "Master Sword spin attack hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 10160
+  take swing_spin_master
+  take phase_jumpslash
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__frozen "Master Sword spin attack hits (Stalfos is frozen)" by world priority 80 in hits at 3000 10230
+  take swing_spin_master
+  take phase_frozen
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__stunned "Master Sword spin attack hits (Stalfos is stunned)" by world priority 80 in hits at 3140 10230
+  take swing_spin_master
+  take phase_stunned
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__land_c "Master Sword spin attack hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 10300
+  take swing_spin_master
+  take phase_land_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__idle_o_c "Master Sword spin attack hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 10300
+  take swing_spin_master
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__turn_o_c "Master Sword spin attack hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 10370
+  take swing_spin_master
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__circle_o_c "Master Sword spin attack hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 10370
+  take swing_spin_master
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__slash_down_c "Master Sword spin attack hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 10440
+  take swing_spin_master
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__slash_up_c "Master Sword spin attack hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 10440
+  take swing_spin_master
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__slash_end_c "Master Sword spin attack hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 10510
+  take swing_spin_master
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__recoil_c "Master Sword spin attack hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 10510
+  take swing_spin_master
+  take phase_recoil_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__jumpslash_c "Master Sword spin attack hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 10580
+  take swing_spin_master
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__frozen_c "Master Sword spin attack hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 10580
+  take swing_spin_master
+  take phase_frozen_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb hit_spin_master__stunned_c "Master Sword spin attack hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 10650
+  take swing_spin_master
+  take phase_stunned_c
+  give phase_flinch_c
+  give 2 dmg_body
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 10650
+  take swing_spin_master
+  need range_far
+
+verb unseen_spin_master "Master Sword spin attack misses: the enemy is unseen" by world priority 81 in hits at 3000 10720
+  take swing_spin_master
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 10790
+  take swing_jump_giant
+
+verb hit_jump_giant__jump_back "Two-handed jump attack hits (Stalfos jumps back)" by world priority 80 in hits at 3140 10790
+  take swing_jump_giant
+  take phase_jump_back
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__land "Two-handed jump attack hits (Stalfos lands)" by world priority 80 in hits at 3000 10860
+  take swing_jump_giant
+  take phase_land
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__idle_o "Two-handed jump attack hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 10860
+  take swing_jump_giant
+  take phase_idle_o
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__turn_o "Two-handed jump attack hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 10930
+  take swing_jump_giant
+  take phase_turn_o
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__circle_o "Two-handed jump attack hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 10930
+  take swing_jump_giant
+  take phase_circle_o
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__slash_down "Two-handed jump attack hits (Stalfos slashes down)" by world priority 80 in hits at 3000 11000
+  take swing_jump_giant
+  take phase_slash_down
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__slash_up "Two-handed jump attack hits (Stalfos slashes up)" by world priority 80 in hits at 3140 11000
+  take swing_jump_giant
+  take phase_slash_up
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__slash_end "Two-handed jump attack hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3000 11070
+  take swing_jump_giant
+  take phase_slash_end
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__recoil "Two-handed jump attack hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 11070
+  take swing_jump_giant
+  take phase_recoil
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__jumpslash "Two-handed jump attack hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 11140
+  take swing_jump_giant
+  take phase_jumpslash
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__frozen "Two-handed jump attack hits (Stalfos is frozen)" by world priority 80 in hits at 3140 11140
+  take swing_jump_giant
+  take phase_frozen
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__stunned "Two-handed jump attack hits (Stalfos is stunned)" by world priority 80 in hits at 3000 11210
+  take swing_jump_giant
+  take phase_stunned
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__land_c "Two-handed jump attack hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3140 11210
+  take swing_jump_giant
+  take phase_land_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__idle_o_c "Two-handed jump attack hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 11280
+  take swing_jump_giant
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__turn_o_c "Two-handed jump attack hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 11280
+  take swing_jump_giant
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__circle_o_c "Two-handed jump attack hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 11350
+  take swing_jump_giant
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__slash_down_c "Two-handed jump attack hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3140 11350
+  take swing_jump_giant
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__slash_up_c "Two-handed jump attack hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3000 11420
+  take swing_jump_giant
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__slash_end_c "Two-handed jump attack hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3140 11420
+  take swing_jump_giant
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__recoil_c "Two-handed jump attack hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 11490
+  take swing_jump_giant
+  take phase_recoil_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__jumpslash_c "Two-handed jump attack hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 11490
+  take swing_jump_giant
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__frozen_c "Two-handed jump attack hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3000 11560
+  take swing_jump_giant
+  take phase_frozen_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant__stunned_c "Two-handed jump attack hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3140 11560
+  take swing_jump_giant
+  take phase_stunned_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb unseen_jump_giant "Two-handed jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 11630
+  take swing_jump_giant
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 11700
+  take swing_jump_giant_self
+
+verb hit_jump_giant_self__jump_back "Two-handed jump attack hits (Stalfos jumps back)" by world priority 80 in hits at 3140 11700
+  take swing_jump_giant_self
+  take phase_jump_back
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__land "Two-handed jump attack hits (Stalfos lands)" by world priority 80 in hits at 3000 11770
+  take swing_jump_giant_self
+  take phase_land
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__idle_o "Two-handed jump attack hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 11770
+  take swing_jump_giant_self
+  take phase_idle_o
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__turn_o "Two-handed jump attack hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 11840
+  take swing_jump_giant_self
+  take phase_turn_o
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__circle_o "Two-handed jump attack hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 11840
+  take swing_jump_giant_self
+  take phase_circle_o
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__slash_down "Two-handed jump attack hits (Stalfos slashes down)" by world priority 80 in hits at 3000 11910
+  take swing_jump_giant_self
+  take phase_slash_down
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__slash_up "Two-handed jump attack hits (Stalfos slashes up)" by world priority 80 in hits at 3140 11910
+  take swing_jump_giant_self
+  take phase_slash_up
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__slash_end "Two-handed jump attack hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3000 11980
+  take swing_jump_giant_self
+  take phase_slash_end
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__recoil "Two-handed jump attack hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 11980
+  take swing_jump_giant_self
+  take phase_recoil
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__jumpslash "Two-handed jump attack hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 12050
+  take swing_jump_giant_self
+  take phase_jumpslash
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__frozen "Two-handed jump attack hits (Stalfos is frozen)" by world priority 80 in hits at 3140 12050
+  take swing_jump_giant_self
+  take phase_frozen
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stunned "Two-handed jump attack hits (Stalfos is stunned)" by world priority 80 in hits at 3000 12120
+  take swing_jump_giant_self
+  take phase_stunned
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__land_c "Two-handed jump attack hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3140 12120
+  take swing_jump_giant_self
+  take phase_land_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__idle_o_c "Two-handed jump attack hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 12190
+  take swing_jump_giant_self
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__turn_o_c "Two-handed jump attack hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 12190
+  take swing_jump_giant_self
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__circle_o_c "Two-handed jump attack hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 12260
+  take swing_jump_giant_self
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__slash_down_c "Two-handed jump attack hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3140 12260
+  take swing_jump_giant_self
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__slash_up_c "Two-handed jump attack hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3000 12330
+  take swing_jump_giant_self
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__slash_end_c "Two-handed jump attack hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3140 12330
+  take swing_jump_giant_self
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__recoil_c "Two-handed jump attack hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 12400
+  take swing_jump_giant_self
+  take phase_recoil_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__jumpslash_c "Two-handed jump attack hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 12400
+  take swing_jump_giant_self
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__frozen_c "Two-handed jump attack hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3000 12470
+  take swing_jump_giant_self
+  take phase_frozen_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb hit_jump_giant_self__stunned_c "Two-handed jump attack hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3140 12470
+  take swing_jump_giant_self
+  take phase_stunned_c
+  give phase_flinch_c
+  give 8 dmg_body
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3000 12540
+  take swing_jump_giant_self
+  need range_far
+
+verb unseen_jump_giant_self "Two-handed jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 12540
+  take swing_jump_giant_self
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 12610
+  take swing_jump_master
+
+verb hit_jump_master__jump_back "Master Sword jump attack hits (Stalfos jumps back)" by world priority 80 in hits at 3000 12680
+  take swing_jump_master
+  take phase_jump_back
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__land "Master Sword jump attack hits (Stalfos lands)" by world priority 80 in hits at 3140 12680
+  take swing_jump_master
+  take phase_land
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__idle_o "Master Sword jump attack hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 12750
+  take swing_jump_master
+  take phase_idle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__turn_o "Master Sword jump attack hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 12750
+  take swing_jump_master
+  take phase_turn_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__circle_o "Master Sword jump attack hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 12820
+  take swing_jump_master
+  take phase_circle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__slash_down "Master Sword jump attack hits (Stalfos slashes down)" by world priority 80 in hits at 3140 12820
+  take swing_jump_master
+  take phase_slash_down
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__slash_up "Master Sword jump attack hits (Stalfos slashes up)" by world priority 80 in hits at 3000 12890
+  take swing_jump_master
+  take phase_slash_up
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__slash_end "Master Sword jump attack hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 12890
+  take swing_jump_master
+  take phase_slash_end
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__recoil "Master Sword jump attack hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 12960
+  take swing_jump_master
+  take phase_recoil
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__jumpslash "Master Sword jump attack hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 12960
+  take swing_jump_master
+  take phase_jumpslash
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__frozen "Master Sword jump attack hits (Stalfos is frozen)" by world priority 80 in hits at 3000 13030
+  take swing_jump_master
+  take phase_frozen
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__stunned "Master Sword jump attack hits (Stalfos is stunned)" by world priority 80 in hits at 3140 13030
+  take swing_jump_master
+  take phase_stunned
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__land_c "Master Sword jump attack hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 13100
+  take swing_jump_master
+  take phase_land_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__idle_o_c "Master Sword jump attack hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 13100
+  take swing_jump_master
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__turn_o_c "Master Sword jump attack hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 13170
+  take swing_jump_master
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__circle_o_c "Master Sword jump attack hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 13170
+  take swing_jump_master
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__slash_down_c "Master Sword jump attack hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 13240
+  take swing_jump_master
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__slash_up_c "Master Sword jump attack hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 13240
+  take swing_jump_master
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__slash_end_c "Master Sword jump attack hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 13310
+  take swing_jump_master
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__recoil_c "Master Sword jump attack hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 13310
+  take swing_jump_master
+  take phase_recoil_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__jumpslash_c "Master Sword jump attack hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 13380
+  take swing_jump_master
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__frozen_c "Master Sword jump attack hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 13380
+  take swing_jump_master
+  take phase_frozen_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master__stunned_c "Master Sword jump attack hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 13450
+  take swing_jump_master
+  take phase_stunned_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb unseen_jump_master "Master Sword jump attack misses: the enemy is unseen" by world priority 81 in hits at 3140 13450
+  take swing_jump_master
+  need enemy_unseen
+  unless lens_on
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 13520
+  take swing_jump_master_self
+
+verb hit_jump_master_self__jump_back "Master Sword jump attack hits (Stalfos jumps back)" by world priority 80 in hits at 3000 13590
+  take swing_jump_master_self
+  take phase_jump_back
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__land "Master Sword jump attack hits (Stalfos lands)" by world priority 80 in hits at 3140 13590
+  take swing_jump_master_self
+  take phase_land
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__idle_o "Master Sword jump attack hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 13660
+  take swing_jump_master_self
+  take phase_idle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__turn_o "Master Sword jump attack hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 13660
+  take swing_jump_master_self
+  take phase_turn_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__circle_o "Master Sword jump attack hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 13730
+  take swing_jump_master_self
+  take phase_circle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__slash_down "Master Sword jump attack hits (Stalfos slashes down)" by world priority 80 in hits at 3140 13730
+  take swing_jump_master_self
+  take phase_slash_down
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__slash_up "Master Sword jump attack hits (Stalfos slashes up)" by world priority 80 in hits at 3000 13800
+  take swing_jump_master_self
+  take phase_slash_up
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__slash_end "Master Sword jump attack hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3140 13800
+  take swing_jump_master_self
+  take phase_slash_end
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__recoil "Master Sword jump attack hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 13870
+  take swing_jump_master_self
+  take phase_recoil
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__jumpslash "Master Sword jump attack hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 13870
+  take swing_jump_master_self
+  take phase_jumpslash
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__frozen "Master Sword jump attack hits (Stalfos is frozen)" by world priority 80 in hits at 3000 13940
+  take swing_jump_master_self
+  take phase_frozen
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__stunned "Master Sword jump attack hits (Stalfos is stunned)" by world priority 80 in hits at 3140 13940
+  take swing_jump_master_self
+  take phase_stunned
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__land_c "Master Sword jump attack hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3000 14010
+  take swing_jump_master_self
+  take phase_land_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__idle_o_c "Master Sword jump attack hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 14010
+  take swing_jump_master_self
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__turn_o_c "Master Sword jump attack hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 14080
+  take swing_jump_master_self
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__circle_o_c "Master Sword jump attack hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 14080
+  take swing_jump_master_self
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__slash_down_c "Master Sword jump attack hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3000 14150
+  take swing_jump_master_self
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__slash_up_c "Master Sword jump attack hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3140 14150
+  take swing_jump_master_self
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__slash_end_c "Master Sword jump attack hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3000 14220
+  take swing_jump_master_self
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__recoil_c "Master Sword jump attack hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 14220
+  take swing_jump_master_self
+  take phase_recoil_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__jumpslash_c "Master Sword jump attack hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 14290
+  take swing_jump_master_self
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__frozen_c "Master Sword jump attack hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3140 14290
+  take swing_jump_master_self
+  take phase_frozen_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_jump_master_self__stunned_c "Master Sword jump attack hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3000 14360
+  take swing_jump_master_self
+  take phase_stunned_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3140 14360
+  take swing_jump_master_self
+  need range_far
+
+verb unseen_jump_master_self "Master Sword jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 14430
+  take swing_jump_master_self
+  need enemy_unseen
+  unless lens_on
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3000 14500
+  take swing_hammer_jump
+
+verb hit_hammer_jump__jump_back "Hammer jump attack hits (Stalfos jumps back)" by world priority 80 in hits at 3140 14500
+  take swing_hammer_jump
+  take phase_jump_back
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__land "Hammer jump attack hits (Stalfos lands)" by world priority 80 in hits at 3000 14570
+  take swing_hammer_jump
+  take phase_land
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__idle_o "Hammer jump attack hits (Stalfos stands guard (shield down))" by world priority 80 in hits at 3140 14570
+  take swing_hammer_jump
+  take phase_idle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__turn_o "Hammer jump attack hits (Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3000 14640
+  take swing_hammer_jump
+  take phase_turn_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__circle_o "Hammer jump attack hits (Stalfos circles Link (shield down))" by world priority 80 in hits at 3140 14640
+  take swing_hammer_jump
+  take phase_circle_o
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__slash_down "Hammer jump attack hits (Stalfos slashes down)" by world priority 80 in hits at 3000 14710
+  take swing_hammer_jump
+  take phase_slash_down
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__slash_up "Hammer jump attack hits (Stalfos slashes up)" by world priority 80 in hits at 3140 14710
+  take swing_hammer_jump
+  take phase_slash_up
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__slash_end "Hammer jump attack hits (Stalfos recovers from its slash)" by world priority 80 in hits at 3000 14780
+  take swing_hammer_jump
+  take phase_slash_end
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__recoil "Hammer jump attack hits (Stalfos recoils off Link's shield)" by world priority 80 in hits at 3140 14780
+  take swing_hammer_jump
+  take phase_recoil
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__jumpslash "Hammer jump attack hits (Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3000 14850
+  take swing_hammer_jump
+  take phase_jumpslash
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__frozen "Hammer jump attack hits (Stalfos is frozen)" by world priority 80 in hits at 3140 14850
+  take swing_hammer_jump
+  take phase_frozen
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned "Hammer jump attack hits (Stalfos is stunned)" by world priority 80 in hits at 3000 14920
+  take swing_hammer_jump
+  take phase_stunned
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__land_c "Hammer jump attack hits (Ceiling Stalfos lands)" by world priority 80 in hits at 3140 14920
+  take swing_hammer_jump
+  take phase_land_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__idle_o_c "Hammer jump attack hits (Ceiling Stalfos stands guard (shield down))" by world priority 80 in hits at 3000 14990
+  take swing_hammer_jump
+  take phase_idle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__turn_o_c "Hammer jump attack hits (Ceiling Stalfos turns to face Link (shield down))" by world priority 80 in hits at 3140 14990
+  take swing_hammer_jump
+  take phase_turn_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__circle_o_c "Hammer jump attack hits (Ceiling Stalfos circles Link (shield down))" by world priority 80 in hits at 3000 15060
+  take swing_hammer_jump
+  take phase_circle_o_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__slash_down_c "Hammer jump attack hits (Ceiling Stalfos slashes down)" by world priority 80 in hits at 3140 15060
+  take swing_hammer_jump
+  take phase_slash_down_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__slash_up_c "Hammer jump attack hits (Ceiling Stalfos slashes up)" by world priority 80 in hits at 3000 15130
+  take swing_hammer_jump
+  take phase_slash_up_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__slash_end_c "Hammer jump attack hits (Ceiling Stalfos recovers from its slash)" by world priority 80 in hits at 3140 15130
+  take swing_hammer_jump
+  take phase_slash_end_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__recoil_c "Hammer jump attack hits (Ceiling Stalfos recoils off Link's shield)" by world priority 80 in hits at 3000 15200
+  take swing_hammer_jump
+  take phase_recoil_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__jumpslash_c "Hammer jump attack hits (Ceiling Stalfos leaps in with a jumpslash)" by world priority 80 in hits at 3140 15200
+  take swing_hammer_jump
+  take phase_jumpslash_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__frozen_c "Hammer jump attack hits (Ceiling Stalfos is frozen)" by world priority 80 in hits at 3000 15270
+  take swing_hammer_jump
+  take phase_frozen_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb hit_hammer_jump__stunned_c "Hammer jump attack hits (Ceiling Stalfos is stunned)" by world priority 80 in hits at 3140 15270
+  take swing_hammer_jump
+  take phase_stunned_c
+  give phase_flinch_c
+  give 4 dmg_body
+
+verb unseen_hammer_jump "Hammer jump attack misses: the enemy is unseen" by world priority 81 in hits at 3000 15340
+  take swing_hammer_jump
+  need enemy_unseen
+  unless lens_on
+
+verb body_empty_in_flinch "Stalfos runs out (Stalfos flinches)" by world priority 90 in enemy_health at 2500 220
+  unless hp_body
+  take alive_body
+  take phase_flinch
+  give link_wins
+
+verb body_empty_in_frozen "Stalfos runs out (Stalfos is frozen)" by world priority 90 in enemy_health at 2360 290
+  unless hp_body
+  take alive_body
+  take phase_frozen
+  give link_wins
+
+verb body_empty_in_stunned "Stalfos runs out (Stalfos is stunned)" by world priority 90 in enemy_health at 2500 290
+  unless hp_body
+  take alive_body
+  take phase_stunned
+  give link_wins
+
+verb body_empty_in_flinch_c "Stalfos runs out (Ceiling Stalfos flinches)" by world priority 90 in enemy_health at 2360 360
+  unless hp_body
+  take alive_body
+  take phase_flinch_c
+  give link_wins
+
+verb body_empty_in_frozen_c "Stalfos runs out (Ceiling Stalfos is frozen)" by world priority 90 in enemy_health at 2500 360
+  unless hp_body
+  take alive_body
+  take phase_frozen_c
+  give link_wins
+
+verb body_empty_in_stunned_c "Stalfos runs out (Ceiling Stalfos is stunned)" by world priority 90 in enemy_health at 2360 430
+  unless hp_body
+  take alive_body
+  take phase_stunned_c
+  give link_wins
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1060
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1060
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1130
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1130
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1200
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1200
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2680 1270
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2820 1270
+  take link_turn
+  take has_blue_potion
+  give 4 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2680 1340
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2820 1340
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 1410
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Stalfos gets ready" by world priority 70 in enemy at 580 2810
+  take enemy_turn
+  give enemy_act
+
+verb emerge_ticks "Stalfos rises from the floor: a beat passes" by world priority 71 in enemy at 440 2880
+  take enemy_turn
+  need phase_emerge
+  take timer_emerge
+  give enemy_act
+
+verb emerge_step_1_near "Stalfos jumps back" by world priority 69 in enemy at 580 2880
+  take enemy_act
+  take phase_emerge
+  give phase_jump_back
+  unless timer_emerge
+  give beat_end
+  take range_near
+  give range_far
+
+verb emerge_step_1_far "Stalfos jumps back" by world priority 69 in enemy at 440 2950
+  take enemy_act
+  take phase_emerge
+  give phase_jump_back
+  unless timer_emerge
+  give beat_end
+  need range_far
+
+verb jump_back_step_1 "Stalfos stands guard" by world priority 69 in enemy at 580 2950
+  take enemy_act
+  take phase_jump_back
+  give phase_idle_o
+  give timer_idle_o
+  give beat_end
+  need range_near
+
+verb jump_back_step_2 "Stalfos slashes down" by world priority 69 in enemy at 440 3020
+  take enemy_act
+  take phase_jump_back
+  give phase_slash_down
+  give beat_end
+  need range_near
+
+verb jump_back_step_3 "Stalfos stands guard" by world priority 69 in enemy at 580 3020
+  take enemy_act
+  take phase_jump_back
+  give phase_idle_o
+  give timer_idle_o
+  give beat_end
+  need range_far
+
+verb jump_back_step_4 "Stalfos jumpslashes" by world priority 69 in enemy at 440 3090
+  take enemy_act
+  take phase_jump_back
+  give phase_jumpslash
+  give beat_end
+  need range_far
+
+verb land_step_1 "Stalfos stands guard" by world priority 69 in enemy at 580 3090
+  take enemy_act
+  take phase_land
+  give phase_idle_o
+  give timer_idle_o
+  give beat_end
+
+verb idle_o_ticks "Stalfos stands guard (shield down): a beat passes" by world priority 71 in enemy at 440 3160
+  take enemy_turn
+  need phase_idle_o
+  take timer_idle_o
+  give enemy_act
+
+verb idle_o_step_1 "Stalfos blocks" by world priority 69 weight 61 in enemy at 580 3160
+  take enemy_act
+  take phase_idle_o
+  give phase_block
+  give timer_block
+  unless timer_idle_o
+  give beat_end
+  need range_near
+
+verb idle_o_step_2 "Stalfos jumps back" by world priority 69 weight 64 in enemy at 440 3230
+  take enemy_act
+  take phase_idle_o
+  give phase_jump_back
+  unless timer_idle_o
+  give beat_end
+  take range_near
+  give range_far
+
+verb idle_o_step_3 "Stalfos sidesteps" by world priority 69 weight 235 in enemy at 580 3230
+  take enemy_act
+  take phase_idle_o
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_idle_o
+  give beat_end
+  need range_near
+
+verb idle_o_step_4 "Stalfos slashes down" by world priority 69 weight 47 in enemy at 440 3300
+  take enemy_act
+  take phase_idle_o
+  give phase_slash_down
+  unless timer_idle_o
+  give beat_end
+  need range_near
+
+verb idle_o_step_5 "Stalfos turns toward Link" by world priority 69 weight 150 in enemy at 580 3300
+  take enemy_act
+  take phase_idle_o
+  give phase_turn_o
+  unless timer_idle_o
+  give beat_end
+  need range_near
+
+verb idle_o_step_6 "Stalfos advances" by world priority 69 weight 443 in enemy at 440 3370
+  take enemy_act
+  take phase_idle_o
+  give phase_walk
+  unless timer_idle_o
+  give beat_end
+  need range_near
+
+verb idle_o_step_7 "Stalfos blocks" by world priority 69 weight 70 in enemy at 580 3370
+  take enemy_act
+  take phase_idle_o
+  give phase_block
+  give timer_block
+  unless timer_idle_o
+  give beat_end
+  need range_far
+
+verb idle_o_step_8 "Stalfos jumps back" by world priority 69 weight 64 in enemy at 440 3440
+  take enemy_act
+  take phase_idle_o
+  give phase_jump_back
+  unless timer_idle_o
+  give beat_end
+  need range_far
+
+verb idle_o_step_9 "Stalfos jumpslashes" by world priority 69 weight 125 in enemy at 580 3440
+  take enemy_act
+  take phase_idle_o
+  give phase_jumpslash
+  unless timer_idle_o
+  give beat_end
+  need range_far
+
+verb idle_o_step_10 "Stalfos sidesteps" by world priority 69 weight 279 in enemy at 440 3510
+  take enemy_act
+  take phase_idle_o
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_idle_o
+  give beat_end
+  need range_far
+
+verb idle_o_step_11 "Stalfos turns toward Link" by world priority 69 weight 150 in enemy at 580 3510
+  take enemy_act
+  take phase_idle_o
+  give phase_turn_o
+  unless timer_idle_o
+  give beat_end
+  need range_far
+
+verb idle_o_step_12 "Stalfos advances" by world priority 69 weight 312 in enemy at 440 3580
+  take enemy_act
+  take phase_idle_o
+  give phase_walk
+  unless timer_idle_o
+  give beat_end
+  need range_far
+
+verb turn_o_step_1 "Stalfos blocks" by world priority 69 weight 24 in enemy at 580 3580
+  take enemy_act
+  take phase_turn_o
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_near
+
+verb turn_o_step_2 "Stalfos circles Link" by world priority 69 weight 60 in enemy at 440 3650
+  take enemy_act
+  take phase_turn_o
+  give phase_circle_o
+  give 2 timer_circle_o
+  give beat_end
+  need range_near
+
+verb turn_o_step_3 "Stalfos jumps back" by world priority 69 weight 26 in enemy at 580 3650
+  take enemy_act
+  take phase_turn_o
+  give phase_jump_back
+  give beat_end
+  take range_near
+  give range_far
+
+verb turn_o_step_4 "Stalfos sidesteps" by world priority 69 weight 34 in enemy at 440 3720
+  take enemy_act
+  take phase_turn_o
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_near
+
+verb turn_o_step_5 "Stalfos slashes down" by world priority 69 weight 19 in enemy at 580 3720
+  take enemy_act
+  take phase_turn_o
+  give phase_slash_down
+  give beat_end
+  need range_near
+
+verb turn_o_step_6 "Stalfos advances" by world priority 69 weight 837 in enemy at 440 3790
+  take enemy_act
+  take phase_turn_o
+  give phase_walk
+  give beat_end
+  need range_near
+
+verb turn_o_step_7 "Stalfos blocks" by world priority 69 weight 28 in enemy at 580 3790
+  take enemy_act
+  take phase_turn_o
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_far
+
+verb turn_o_step_8 "Stalfos circles Link" by world priority 69 weight 60 in enemy at 440 3860
+  take enemy_act
+  take phase_turn_o
+  give phase_circle_o
+  give 2 timer_circle_o
+  give beat_end
+  need range_far
+
+verb turn_o_step_9 "Stalfos jumps back" by world priority 69 weight 26 in enemy at 580 3860
+  take enemy_act
+  take phase_turn_o
+  give phase_jump_back
+  give beat_end
+  need range_far
+
+verb turn_o_step_10 "Stalfos jumpslashes" by world priority 69 weight 20 in enemy at 440 3930
+  take enemy_act
+  take phase_turn_o
+  give phase_jumpslash
+  give beat_end
+  need range_far
+
+verb turn_o_step_11 "Stalfos sidesteps" by world priority 69 weight 40 in enemy at 580 3930
+  take enemy_act
+  take phase_turn_o
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_far
+
+verb turn_o_step_12 "Stalfos advances" by world priority 69 weight 827 in enemy at 440 4000
+  take enemy_act
+  take phase_turn_o
+  give phase_walk
+  give beat_end
+  need range_far
+
+verb circle_o_ticks "Stalfos circles Link (shield down): a beat passes" by world priority 71 in enemy at 580 4000
+  take enemy_turn
+  need phase_circle_o
+  take timer_circle_o
+  give enemy_act
+
+verb circle_o_step_1 "Stalfos blocks" by world priority 69 weight 173 in enemy at 440 4070
+  take enemy_act
+  take phase_circle_o
+  give phase_block
+  give timer_block
+  unless timer_circle_o
+  give beat_end
+  need range_near
+
+verb circle_o_step_2 "Stalfos jumps back" by world priority 69 weight 183 in enemy at 580 4070
+  take enemy_act
+  take phase_circle_o
+  give phase_jump_back
+  unless timer_circle_o
+  give beat_end
+  take range_near
+  give range_far
+
+verb circle_o_step_3 "Stalfos sidesteps" by world priority 69 weight 243 in enemy at 440 4140
+  take enemy_act
+  take phase_circle_o
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_circle_o
+  give beat_end
+  need range_near
+
+verb circle_o_step_4 "Stalfos slashes down" by world priority 69 weight 133 in enemy at 580 4140
+  take enemy_act
+  take phase_circle_o
+  give phase_slash_down
+  unless timer_circle_o
+  give beat_end
+  need range_near
+
+verb circle_o_step_5 "Stalfos advances" by world priority 69 weight 267 in enemy at 440 4210
+  take enemy_act
+  take phase_circle_o
+  give phase_walk
+  unless timer_circle_o
+  give beat_end
+  need range_near
+
+verb circle_o_step_6 "Stalfos blocks" by world priority 69 weight 200 in enemy at 580 4210
+  take enemy_act
+  take phase_circle_o
+  give phase_block
+  give timer_block
+  unless timer_circle_o
+  give beat_end
+  need range_far
+
+verb circle_o_step_7 "Stalfos jumps back" by world priority 69 weight 183 in enemy at 440 4280
+  take enemy_act
+  take phase_circle_o
+  give phase_jump_back
+  unless timer_circle_o
+  give beat_end
+  need range_far
+
+verb circle_o_step_8 "Stalfos jumpslashes" by world priority 69 weight 142 in enemy at 580 4280
+  take enemy_act
+  take phase_circle_o
+  give phase_jumpslash
+  unless timer_circle_o
+  give beat_end
+  need range_far
+
+verb circle_o_step_9 "Stalfos sidesteps" by world priority 69 weight 283 in enemy at 440 4350
+  take enemy_act
+  take phase_circle_o
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_circle_o
+  give beat_end
+  need range_far
+
+verb circle_o_step_10 "Stalfos advances" by world priority 69 weight 192 in enemy at 580 4350
+  take enemy_act
+  take phase_circle_o
+  give phase_walk
+  unless timer_circle_o
+  give beat_end
+  need range_far
+
+verb circle_o_holds "Stalfos circles Link (shield down): nothing changes" by world priority 68 in enemy at 440 4420
+  take enemy_act
+  need phase_circle_o
+  give beat_end
+
+verb idle_g_ticks "Stalfos stands guard (shield up): a beat passes" by world priority 71 in enemy at 580 4420
+  take enemy_turn
+  need phase_idle_g
+  take timer_idle_g
+  give enemy_act
+
+verb idle_g_step_1 "Stalfos blocks" by world priority 69 weight 61 in enemy at 440 4490
+  take enemy_act
+  take phase_idle_g
+  give phase_block
+  give timer_block
+  unless timer_idle_g
+  give beat_end
+  need range_near
+
+verb idle_g_step_2 "Stalfos jumps back" by world priority 69 weight 64 in enemy at 580 4490
+  take enemy_act
+  take phase_idle_g
+  give phase_jump_back
+  unless timer_idle_g
+  give beat_end
+  take range_near
+  give range_far
+
+verb idle_g_step_3 "Stalfos sidesteps" by world priority 69 weight 235 in enemy at 440 4560
+  take enemy_act
+  take phase_idle_g
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_idle_g
+  give beat_end
+  need range_near
+
+verb idle_g_step_4 "Stalfos slashes down" by world priority 69 weight 47 in enemy at 580 4560
+  take enemy_act
+  take phase_idle_g
+  give phase_slash_down
+  unless timer_idle_g
+  give beat_end
+  need range_near
+
+verb idle_g_step_5 "Stalfos turns toward Link behind its shield" by world priority 69 weight 150 in enemy at 440 4630
+  take enemy_act
+  take phase_idle_g
+  give phase_turn_g
+  unless timer_idle_g
+  give beat_end
+  need range_near
+
+verb idle_g_step_6 "Stalfos advances" by world priority 69 weight 443 in enemy at 580 4630
+  take enemy_act
+  take phase_idle_g
+  give phase_walk
+  unless timer_idle_g
+  give beat_end
+  need range_near
+
+verb idle_g_step_7 "Stalfos blocks" by world priority 69 weight 70 in enemy at 440 4700
+  take enemy_act
+  take phase_idle_g
+  give phase_block
+  give timer_block
+  unless timer_idle_g
+  give beat_end
+  need range_far
+
+verb idle_g_step_8 "Stalfos jumps back" by world priority 69 weight 64 in enemy at 580 4700
+  take enemy_act
+  take phase_idle_g
+  give phase_jump_back
+  unless timer_idle_g
+  give beat_end
+  need range_far
+
+verb idle_g_step_9 "Stalfos jumpslashes" by world priority 69 weight 125 in enemy at 440 4770
+  take enemy_act
+  take phase_idle_g
+  give phase_jumpslash
+  unless timer_idle_g
+  give beat_end
+  need range_far
+
+verb idle_g_step_10 "Stalfos sidesteps" by world priority 69 weight 279 in enemy at 580 4770
+  take enemy_act
+  take phase_idle_g
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_idle_g
+  give beat_end
+  need range_far
+
+verb idle_g_step_11 "Stalfos turns toward Link behind its shield" by world priority 69 weight 150 in enemy at 440 4840
+  take enemy_act
+  take phase_idle_g
+  give phase_turn_g
+  unless timer_idle_g
+  give beat_end
+  need range_far
+
+verb idle_g_step_12 "Stalfos advances" by world priority 69 weight 312 in enemy at 580 4840
+  take enemy_act
+  take phase_idle_g
+  give phase_walk
+  unless timer_idle_g
+  give beat_end
+  need range_far
+
+verb turn_g_step_1 "Stalfos blocks" by world priority 69 weight 24 in enemy at 440 4910
+  take enemy_act
+  take phase_turn_g
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_near
+
+verb turn_g_step_2 "Stalfos circles Link behind its shield" by world priority 69 weight 60 in enemy at 580 4910
+  take enemy_act
+  take phase_turn_g
+  give phase_circle_g
+  give 2 timer_circle_g
+  give beat_end
+  need range_near
+
+verb turn_g_step_3 "Stalfos jumps back" by world priority 69 weight 26 in enemy at 440 4980
+  take enemy_act
+  take phase_turn_g
+  give phase_jump_back
+  give beat_end
+  take range_near
+  give range_far
+
+verb turn_g_step_4 "Stalfos sidesteps" by world priority 69 weight 34 in enemy at 580 4980
+  take enemy_act
+  take phase_turn_g
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_near
+
+verb turn_g_step_5 "Stalfos slashes down" by world priority 69 weight 19 in enemy at 440 5050
+  take enemy_act
+  take phase_turn_g
+  give phase_slash_down
+  give beat_end
+  need range_near
+
+verb turn_g_step_6 "Stalfos advances" by world priority 69 weight 837 in enemy at 580 5050
+  take enemy_act
+  take phase_turn_g
+  give phase_walk
+  give beat_end
+  need range_near
+
+verb turn_g_step_7 "Stalfos blocks" by world priority 69 weight 28 in enemy at 440 5120
+  take enemy_act
+  take phase_turn_g
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_far
+
+verb turn_g_step_8 "Stalfos circles Link behind its shield" by world priority 69 weight 60 in enemy at 580 5120
+  take enemy_act
+  take phase_turn_g
+  give phase_circle_g
+  give 2 timer_circle_g
+  give beat_end
+  need range_far
+
+verb turn_g_step_9 "Stalfos jumps back" by world priority 69 weight 26 in enemy at 440 5190
+  take enemy_act
+  take phase_turn_g
+  give phase_jump_back
+  give beat_end
+  need range_far
+
+verb turn_g_step_10 "Stalfos jumpslashes" by world priority 69 weight 20 in enemy at 580 5190
+  take enemy_act
+  take phase_turn_g
+  give phase_jumpslash
+  give beat_end
+  need range_far
+
+verb turn_g_step_11 "Stalfos sidesteps" by world priority 69 weight 40 in enemy at 440 5260
+  take enemy_act
+  take phase_turn_g
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_far
+
+verb turn_g_step_12 "Stalfos advances" by world priority 69 weight 827 in enemy at 580 5260
+  take enemy_act
+  take phase_turn_g
+  give phase_walk
+  give beat_end
+  need range_far
+
+verb circle_g_ticks "Stalfos circles Link (shield up): a beat passes" by world priority 71 in enemy at 440 5330
+  take enemy_turn
+  need phase_circle_g
+  take timer_circle_g
+  give enemy_act
+
+verb circle_g_step_1 "Stalfos blocks" by world priority 69 weight 173 in enemy at 580 5330
+  take enemy_act
+  take phase_circle_g
+  give phase_block
+  give timer_block
+  unless timer_circle_g
+  give beat_end
+  need range_near
+
+verb circle_g_step_2 "Stalfos jumps back" by world priority 69 weight 183 in enemy at 440 5400
+  take enemy_act
+  take phase_circle_g
+  give phase_jump_back
+  unless timer_circle_g
+  give beat_end
+  take range_near
+  give range_far
+
+verb circle_g_step_3 "Stalfos sidesteps" by world priority 69 weight 243 in enemy at 580 5400
+  take enemy_act
+  take phase_circle_g
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_circle_g
+  give beat_end
+  need range_near
+
+verb circle_g_step_4 "Stalfos slashes down" by world priority 69 weight 133 in enemy at 440 5470
+  take enemy_act
+  take phase_circle_g
+  give phase_slash_down
+  unless timer_circle_g
+  give beat_end
+  need range_near
+
+verb circle_g_step_5 "Stalfos advances" by world priority 69 weight 267 in enemy at 580 5470
+  take enemy_act
+  take phase_circle_g
+  give phase_walk
+  unless timer_circle_g
+  give beat_end
+  need range_near
+
+verb circle_g_step_6 "Stalfos blocks" by world priority 69 weight 200 in enemy at 440 5540
+  take enemy_act
+  take phase_circle_g
+  give phase_block
+  give timer_block
+  unless timer_circle_g
+  give beat_end
+  need range_far
+
+verb circle_g_step_7 "Stalfos jumps back" by world priority 69 weight 183 in enemy at 580 5540
+  take enemy_act
+  take phase_circle_g
+  give phase_jump_back
+  unless timer_circle_g
+  give beat_end
+  need range_far
+
+verb circle_g_step_8 "Stalfos jumpslashes" by world priority 69 weight 142 in enemy at 440 5610
+  take enemy_act
+  take phase_circle_g
+  give phase_jumpslash
+  unless timer_circle_g
+  give beat_end
+  need range_far
+
+verb circle_g_step_9 "Stalfos sidesteps" by world priority 69 weight 283 in enemy at 580 5610
+  take enemy_act
+  take phase_circle_g
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_circle_g
+  give beat_end
+  need range_far
+
+verb circle_g_step_10 "Stalfos advances" by world priority 69 weight 192 in enemy at 440 5680
+  take enemy_act
+  take phase_circle_g
+  give phase_walk
+  unless timer_circle_g
+  give beat_end
+  need range_far
+
+verb circle_g_holds "Stalfos circles Link (shield up): nothing changes" by world priority 68 in enemy at 580 5680
+  take enemy_act
+  need phase_circle_g
+  give beat_end
+
+verb walk_step_1 "Stalfos blocks" by world priority 69 weight 124 in enemy at 440 5750
+  take enemy_act
+  take phase_walk
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_near
+
+verb walk_step_2 "Stalfos stands guard behind its shield" by world priority 69 weight 333 in enemy at 580 5750
+  take enemy_act
+  take phase_walk
+  give phase_idle_g
+  give timer_idle_g
+  give beat_end
+  need range_near
+
+verb walk_step_3 "Stalfos jumps back" by world priority 69 weight 61 in enemy at 440 5820
+  take enemy_act
+  take phase_walk
+  give phase_jump_back
+  give beat_end
+  take range_near
+  give range_far
+
+verb walk_step_4 "Stalfos sidesteps" by world priority 69 weight 81 in enemy at 580 5820
+  take enemy_act
+  take phase_walk
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_near
+
+verb walk_step_5 "Stalfos slashes down" by world priority 69 weight 311 in enemy at 440 5890
+  take enemy_act
+  take phase_walk
+  give phase_slash_down
+  give beat_end
+  need range_near
+
+verb walk_step_6 "Stalfos advances" by world priority 69 weight 89 in enemy at 580 5890
+  take enemy_act
+  need phase_walk
+  give beat_end
+  need range_near
+
+verb walk_step_7 "Stalfos blocks" by world priority 69 weight 2 in enemy at 440 5960
+  take enemy_act
+  take phase_walk
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_far
+
+verb walk_step_8 "Stalfos circles Link behind its shield" by world priority 69 weight 17 in enemy at 580 5960
+  take enemy_act
+  take phase_walk
+  give phase_circle_g
+  give 2 timer_circle_g
+  give beat_end
+  need range_far
+
+verb walk_step_9 "Stalfos stands guard behind its shield" by world priority 69 weight 500 in enemy at 440 6030
+  take enemy_act
+  take phase_walk
+  give phase_idle_g
+  give timer_idle_g
+  give beat_end
+  need range_far
+
+verb walk_step_10 "Stalfos jumps back" by world priority 69 weight 2 in enemy at 580 6030
+  take enemy_act
+  take phase_walk
+  give phase_jump_back
+  give beat_end
+  need range_far
+
+verb walk_step_11 "Stalfos jumpslashes" by world priority 69 weight 18 in enemy at 440 6100
+  take enemy_act
+  take phase_walk
+  give phase_jumpslash
+  give beat_end
+  need range_far
+
+verb walk_step_12 "Stalfos sidesteps" by world priority 69 weight 11 in enemy at 580 6100
+  take enemy_act
+  take phase_walk
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_far
+
+verb walk_step_13 "Stalfos advances" by world priority 69 weight 2 in enemy at 440 6170
+  take enemy_act
+  need phase_walk
+  give beat_end
+  need range_far
+
+verb walk_step_14 "Stalfos advances" by world priority 69 weight 450 in enemy at 580 6170
+  take enemy_act
+  need phase_walk
+  give beat_end
+  take range_far
+  give range_near
+
+verb sidestep_ticks "Stalfos sidesteps behind its shield: a beat passes" by world priority 71 in enemy at 440 6240
+  take enemy_turn
+  need phase_sidestep
+  take timer_sidestep
+  give enemy_act
+
+verb sidestep_step_1 "Stalfos blocks" by world priority 69 weight 58 in enemy at 580 6240
+  take enemy_act
+  take phase_sidestep
+  give phase_block
+  give timer_block
+  unless timer_sidestep
+  give beat_end
+  need range_near
+
+verb sidestep_step_2 "Stalfos stands guard behind its shield" by world priority 69 weight 167 in enemy at 440 6310
+  take enemy_act
+  take phase_sidestep
+  give phase_idle_g
+  give timer_idle_g
+  unless timer_sidestep
+  give beat_end
+  need range_near
+
+verb sidestep_step_3 "Stalfos jumps back" by world priority 69 weight 61 in enemy at 580 6310
+  take enemy_act
+  take phase_sidestep
+  give phase_jump_back
+  unless timer_sidestep
+  give beat_end
+  take range_near
+  give range_far
+
+verb sidestep_step_4 "Stalfos sidesteps" by world priority 69 weight 81 in enemy at 440 6380
+  take enemy_act
+  need phase_sidestep
+  unless timer_sidestep
+  give beat_end
+  need range_near
+
+verb sidestep_step_5 "Stalfos slashes down" by world priority 69 weight 44 in enemy at 580 6380
+  take enemy_act
+  take phase_sidestep
+  give phase_slash_down
+  unless timer_sidestep
+  give beat_end
+  need range_near
+
+verb sidestep_step_6 "Stalfos advances" by world priority 69 weight 589 in enemy at 440 6450
+  take enemy_act
+  take phase_sidestep
+  give phase_walk
+  unless timer_sidestep
+  give beat_end
+  need range_near
+
+verb sidestep_step_7 "Stalfos blocks" by world priority 69 weight 67 in enemy at 580 6450
+  take enemy_act
+  take phase_sidestep
+  give phase_block
+  give timer_block
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb sidestep_step_8 "Stalfos stands guard behind its shield" by world priority 69 weight 167 in enemy at 440 6520
+  take enemy_act
+  take phase_sidestep
+  give phase_idle_g
+  give timer_idle_g
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb sidestep_step_9 "Stalfos jumps back" by world priority 69 weight 61 in enemy at 580 6520
+  take enemy_act
+  take phase_sidestep
+  give phase_jump_back
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb sidestep_step_10 "Stalfos jumpslashes" by world priority 69 weight 47 in enemy at 440 6590
+  take enemy_act
+  take phase_sidestep
+  give phase_jumpslash
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb sidestep_step_11 "Stalfos sidesteps" by world priority 69 weight 94 in enemy at 580 6590
+  take enemy_act
+  need phase_sidestep
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb sidestep_step_12 "Stalfos advances" by world priority 69 weight 564 in enemy at 440 6660
+  take enemy_act
+  take phase_sidestep
+  give phase_walk
+  unless timer_sidestep
+  give beat_end
+  need range_far
+
+verb sidestep_holds "Stalfos sidesteps behind its shield: nothing changes" by world priority 68 in enemy at 580 6660
+  take enemy_act
+  need phase_sidestep
+  give beat_end
+
+verb block_ticks "Stalfos stops and blocks: a beat passes" by world priority 71 in enemy at 440 6730
+  take enemy_turn
+  need phase_block
+  take timer_block
+  give enemy_act
+
+verb block_step_1_near "Stalfos jumps back" by world priority 69 in enemy at 580 6730
+  take enemy_act
+  take phase_block
+  give phase_jump_back
+  unless timer_block
+  give beat_end
+  take range_near
+  give range_far
+
+verb block_step_1_far "Stalfos jumps back" by world priority 69 in enemy at 440 6800
+  take enemy_act
+  take phase_block
+  give phase_jump_back
+  unless timer_block
+  give beat_end
+  need range_far
+
+verb block_step_2 "Stalfos lowers its shield" by world priority 69 in enemy at 580 6800
+  take enemy_act
+  take phase_block
+  give phase_unblock
+  unless timer_block
+  give beat_end
+
+verb unblock_step_1 "Stalfos blocks" by world priority 69 weight 173 in enemy at 440 6870
+  take enemy_act
+  take phase_unblock
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_near
+
+verb unblock_step_2 "Stalfos jumps back" by world priority 69 weight 183 in enemy at 580 6870
+  take enemy_act
+  take phase_unblock
+  give phase_jump_back
+  give beat_end
+  take range_near
+  give range_far
+
+verb unblock_step_3 "Stalfos sidesteps" by world priority 69 weight 243 in enemy at 440 6940
+  take enemy_act
+  take phase_unblock
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_near
+
+verb unblock_step_4 "Stalfos slashes down" by world priority 69 weight 133 in enemy at 580 6940
+  take enemy_act
+  take phase_unblock
+  give phase_slash_down
+  give beat_end
+  need range_near
+
+verb unblock_step_5 "Stalfos advances" by world priority 69 weight 267 in enemy at 440 7010
+  take enemy_act
+  take phase_unblock
+  give phase_walk
+  give beat_end
+  need range_near
+
+verb unblock_step_6 "Stalfos blocks" by world priority 69 weight 200 in enemy at 580 7010
+  take enemy_act
+  take phase_unblock
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_far
+
+verb unblock_step_7 "Stalfos jumps back" by world priority 69 weight 183 in enemy at 440 7080
+  take enemy_act
+  take phase_unblock
+  give phase_jump_back
+  give beat_end
+  need range_far
+
+verb unblock_step_8 "Stalfos jumpslashes" by world priority 69 weight 142 in enemy at 580 7080
+  take enemy_act
+  take phase_unblock
+  give phase_jumpslash
+  give beat_end
+  need range_far
+
+verb unblock_step_9 "Stalfos sidesteps" by world priority 69 weight 283 in enemy at 440 7150
+  take enemy_act
+  take phase_unblock
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_far
+
+verb unblock_step_10 "Stalfos advances" by world priority 69 weight 192 in enemy at 580 7150
+  take enemy_act
+  take phase_unblock
+  give phase_walk
+  give beat_end
+  need range_far
+
+verb slash_down_step_1 "Stalfos recovers" by world priority 69 in enemy at 440 7220
+  take enemy_act
+  take phase_slash_down
+  give phase_slash_end
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb slash_down_step_2 "Stalfos slashes up" by world priority 69 in enemy at 580 7220
+  take enemy_act
+  take phase_slash_down
+  give phase_slash_up
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb slash_down_step_3 "Stalfos recovers" by world priority 69 in enemy at 440 7290
+  take enemy_act
+  take phase_slash_down
+  give phase_slash_end
+  give beat_end
+  need range_far
+
+verb slash_down_step_4 "Stalfos slashes up" by world priority 69 in enemy at 580 7290
+  take enemy_act
+  take phase_slash_down
+  give phase_slash_up
+  give beat_end
+  need range_far
+
+verb slash_up_step_1 "Stalfos slashes down" by world priority 69 in enemy at 440 7360
+  take enemy_act
+  take phase_slash_up
+  give phase_slash_down
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb slash_up_step_2 "Stalfos slashes down" by world priority 69 in enemy at 580 7360
+  take enemy_act
+  take phase_slash_up
+  give phase_slash_down
+  give beat_end
+  need range_far
+
+verb slash_end_step_1 "Stalfos stands guard" by world priority 69 weight 300 in enemy at 440 7430
+  take enemy_act
+  take phase_slash_end
+  give phase_idle_o
+  give timer_idle_o
+  give beat_end
+
+verb slash_end_step_2_near "Stalfos jumps back" by world priority 69 weight 333 in enemy at 580 7430
+  take enemy_act
+  take phase_slash_end
+  give phase_jump_back
+  give beat_end
+  take range_near
+  give range_far
+
+verb slash_end_step_2_far "Stalfos jumps back" by world priority 69 weight 333 in enemy at 440 7500
+  take enemy_act
+  take phase_slash_end
+  give phase_jump_back
+  give beat_end
+  need range_far
+
+verb slash_end_step_3 "Stalfos sidesteps" by world priority 69 weight 245 in enemy at 580 7500
+  take enemy_act
+  take phase_slash_end
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+
+verb slash_end_step_4 "Stalfos slashes down" by world priority 69 weight 123 in enemy at 440 7570
+  take enemy_act
+  take phase_slash_end
+  give phase_slash_down
+  give beat_end
+
+verb recoil_step_1 "Stalfos stands guard" by world priority 69 weight 6 in enemy at 580 7570
+  take enemy_act
+  take phase_recoil
+  give phase_idle_o
+  give timer_idle_o
+  give beat_end
+
+verb recoil_step_2_near "Stalfos jumps back" by world priority 69 weight 7 in enemy at 440 7640
+  take enemy_act
+  take phase_recoil
+  give phase_jump_back
+  give beat_end
+  take range_near
+  give range_far
+
+verb recoil_step_2_far "Stalfos jumps back" by world priority 69 weight 7 in enemy at 580 7640
+  take enemy_act
+  take phase_recoil
+  give phase_jump_back
+  give beat_end
+  need range_far
+
+verb recoil_step_3 "Stalfos sidesteps" by world priority 69 weight 7 in enemy at 440 7710
+  take enemy_act
+  take phase_recoil
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+
+verb jumpslash_step_1_near "Stalfos stands guard" by world priority 69 in enemy at 580 7710
+  take enemy_act
+  take phase_jumpslash
+  give phase_idle_o
+  give timer_idle_o
+  give incoming_jumpslash
+  give beat_end
+  need range_near
+
+verb jumpslash_step_1_far "Stalfos stands guard" by world priority 69 in enemy at 440 7780
+  take enemy_act
+  take phase_jumpslash
+  give phase_idle_o
+  give timer_idle_o
+  give incoming_jumpslash
+  give beat_end
+  take range_far
+  give range_near
+
+verb jump_up_step_1 "Stalfos lands" by world priority 69 in enemy at 580 7780
+  take enemy_act
+  take phase_jump_up
+  give phase_land
+  give beat_end
+
+verb flinch_step_1 "Stalfos blocks" by world priority 69 weight 87 in enemy at 440 7850
+  take enemy_act
+  take phase_flinch
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_near
+
+verb flinch_step_2 "Stalfos jumps back" by world priority 69 weight 92 in enemy at 580 7850
+  take enemy_act
+  take phase_flinch
+  give phase_jump_back
+  give beat_end
+  take range_near
+  give range_far
+
+verb flinch_step_3 "Stalfos leaps over Link" by world priority 69 weight 500 in enemy at 440 7920
+  take enemy_act
+  take phase_flinch
+  give phase_jump_up
+  give beat_end
+  need range_near
+
+verb flinch_step_4 "Stalfos sidesteps" by world priority 69 weight 122 in enemy at 580 7920
+  take enemy_act
+  take phase_flinch
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_near
+
+verb flinch_step_5 "Stalfos slashes down" by world priority 69 weight 67 in enemy at 440 7990
+  take enemy_act
+  take phase_flinch
+  give phase_slash_down
+  give beat_end
+  need range_near
+
+verb flinch_step_6 "Stalfos advances" by world priority 69 weight 133 in enemy at 580 7990
+  take enemy_act
+  take phase_flinch
+  give phase_walk
+  give beat_end
+  need range_near
+
+verb flinch_step_7 "Stalfos blocks" by world priority 69 weight 200 in enemy at 440 8060
+  take enemy_act
+  take phase_flinch
+  give phase_block
+  give timer_block
+  give beat_end
+  need range_far
+
+verb flinch_step_8 "Stalfos jumps back" by world priority 69 weight 183 in enemy at 580 8060
+  take enemy_act
+  take phase_flinch
+  give phase_jump_back
+  give beat_end
+  need range_far
+
+verb flinch_step_9 "Stalfos jumpslashes" by world priority 69 weight 142 in enemy at 440 8130
+  take enemy_act
+  take phase_flinch
+  give phase_jumpslash
+  give beat_end
+  need range_far
+
+verb flinch_step_10 "Stalfos sidesteps" by world priority 69 weight 283 in enemy at 580 8130
+  take enemy_act
+  take phase_flinch
+  give phase_sidestep
+  give 2 timer_sidestep
+  give beat_end
+  need range_far
+
+verb flinch_step_11 "Stalfos advances" by world priority 69 weight 192 in enemy at 440 8200
+  take enemy_act
+  take phase_flinch
+  give phase_walk
+  give beat_end
+  need range_far
+
+verb frozen_ticks "Stalfos is frozen: a beat passes" by world priority 71 in enemy at 580 8200
+  take enemy_turn
+  need phase_frozen
+  take timer_frozen
+  give enemy_act
+
+verb frozen_step_1 "Stalfos is stunned" by world priority 69 in enemy at 440 8270
+  take enemy_act
+  take phase_frozen
+  give phase_stunned
+  give 4 timer_stunned
+  unless timer_frozen
+  give beat_end
+
+verb frozen_holds "Stalfos is frozen: nothing changes" by world priority 68 in enemy at 580 8270
+  take enemy_act
+  need phase_frozen
+  give beat_end
+
+verb stunned_ticks "Stalfos is stunned: a beat passes" by world priority 71 in enemy at 440 8340
+  take enemy_turn
+  need phase_stunned
+  take timer_stunned
+  give enemy_act
+
+verb stunned_step_1 "Stalfos blocks" by world priority 69 weight 87 in enemy at 580 8340
+  take enemy_act
+  take phase_stunned
+  give phase_block
+  give timer_block
+  unless timer_stunned
+  give beat_end
+  need range_near
+
+verb stunned_step_2 "Stalfos jumps back" by world priority 69 weight 92 in enemy at 440 8410
+  take enemy_act
+  take phase_stunned
+  give phase_jump_back
+  unless timer_stunned
+  give beat_end
+  take range_near
+  give range_far
+
+verb stunned_step_3 "Stalfos leaps over Link" by world priority 69 weight 500 in enemy at 580 8410
+  take enemy_act
+  take phase_stunned
+  give phase_jump_up
+  unless timer_stunned
+  give beat_end
+  need range_near
+
+verb stunned_step_4 "Stalfos sidesteps" by world priority 69 weight 122 in enemy at 440 8480
+  take enemy_act
+  take phase_stunned
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_stunned
+  give beat_end
+  need range_near
+
+verb stunned_step_5 "Stalfos slashes down" by world priority 69 weight 67 in enemy at 580 8480
+  take enemy_act
+  take phase_stunned
+  give phase_slash_down
+  unless timer_stunned
+  give beat_end
+  need range_near
+
+verb stunned_step_6 "Stalfos advances" by world priority 69 weight 133 in enemy at 440 8550
+  take enemy_act
+  take phase_stunned
+  give phase_walk
+  unless timer_stunned
+  give beat_end
+  need range_near
+
+verb stunned_step_7 "Stalfos blocks" by world priority 69 weight 200 in enemy at 580 8550
+  take enemy_act
+  take phase_stunned
+  give phase_block
+  give timer_block
+  unless timer_stunned
+  give beat_end
+  need range_far
+
+verb stunned_step_8 "Stalfos jumps back" by world priority 69 weight 183 in enemy at 440 8620
+  take enemy_act
+  take phase_stunned
+  give phase_jump_back
+  unless timer_stunned
+  give beat_end
+  need range_far
+
+verb stunned_step_9 "Stalfos jumpslashes" by world priority 69 weight 142 in enemy at 580 8620
+  take enemy_act
+  take phase_stunned
+  give phase_jumpslash
+  unless timer_stunned
+  give beat_end
+  need range_far
+
+verb stunned_step_10 "Stalfos sidesteps" by world priority 69 weight 283 in enemy at 440 8690
+  take enemy_act
+  take phase_stunned
+  give phase_sidestep
+  give 2 timer_sidestep
+  unless timer_stunned
+  give beat_end
+  need range_far
+
+verb stunned_step_11 "Stalfos advances" by world priority 69 weight 192 in enemy at 580 8690
+  take enemy_act
+  take phase_stunned
+  give phase_walk
+  unless timer_stunned
+  give beat_end
+  need range_far
+
+verb stunned_holds "Stalfos is stunned: nothing changes" by world priority 68 in enemy at 440 8760
+  take enemy_act
+  need phase_stunned
+  give beat_end
+
+verb wait_above_c_step_1 "Stalfos drops" by world priority 69 in enemy at 580 8760
+  take enemy_act
+  take phase_wait_above_c
+  give phase_fall_c
+  give beat_end
+  need range_near
+
+verb wait_above_c_holds "Ceiling Stalfos waits above: nothing changes" by world priority 68 in enemy at 440 8830
+  take enemy_act
+  need phase_wait_above_c
+  give beat_end
+
+verb fall_c_step_1 "Stalfos lands" by world priority 69 in enemy at 580 8830
+  take enemy_act
+  take phase_fall_c
+  give phase_land_c
+  give beat_end
+
+verb land_c_step_1 "Stalfos stands guard" by world priority 69 in enemy at 440 8900
+  take enemy_act
+  take phase_land_c
+  give phase_idle_o_c
+  give timer_idle_o_c
+  give beat_end
+
+verb idle_o_c_ticks "Ceiling Stalfos stands guard (shield down): a beat passes" by world priority 71 in enemy at 580 8900
+  take enemy_turn
+  need phase_idle_o_c
+  take timer_idle_o_c
+  give enemy_act
+
+verb idle_o_c_step_1 "Stalfos blocks" by world priority 69 weight 76 in enemy at 440 8970
+  take enemy_act
+  take phase_idle_o_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_near
+
+verb idle_o_c_step_2 "Stalfos sidesteps" by world priority 69 weight 255 in enemy at 580 8970
+  take enemy_act
+  take phase_idle_o_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_near
+
+verb idle_o_c_step_3 "Stalfos slashes down" by world priority 69 weight 47 in enemy at 440 9040
+  take enemy_act
+  take phase_idle_o_c
+  give phase_slash_down_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_near
+
+verb idle_o_c_step_4 "Stalfos turns toward Link" by world priority 69 weight 150 in enemy at 580 9040
+  take enemy_act
+  take phase_idle_o_c
+  give phase_turn_o_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_near
+
+verb idle_o_c_step_5 "Stalfos advances" by world priority 69 weight 473 in enemy at 440 9110
+  take enemy_act
+  take phase_idle_o_c
+  give phase_walk_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_near
+
+verb idle_o_c_step_6 "Stalfos blocks" by world priority 69 weight 85 in enemy at 580 9110
+  take enemy_act
+  take phase_idle_o_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_far
+
+verb idle_o_c_step_7 "Stalfos jumpslashes" by world priority 69 weight 139 in enemy at 440 9180
+  take enemy_act
+  take phase_idle_o_c
+  give phase_jumpslash_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_far
+
+verb idle_o_c_step_8 "Stalfos sidesteps" by world priority 69 weight 299 in enemy at 580 9180
+  take enemy_act
+  take phase_idle_o_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_far
+
+verb idle_o_c_step_9 "Stalfos turns toward Link" by world priority 69 weight 150 in enemy at 440 9250
+  take enemy_act
+  take phase_idle_o_c
+  give phase_turn_o_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_far
+
+verb idle_o_c_step_10 "Stalfos advances" by world priority 69 weight 327 in enemy at 580 9250
+  take enemy_act
+  take phase_idle_o_c
+  give phase_walk_c
+  unless timer_idle_o_c
+  give beat_end
+  need range_far
+
+verb turn_o_c_step_1 "Stalfos blocks" by world priority 69 weight 30 in enemy at 440 9320
+  take enemy_act
+  take phase_turn_o_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_near
+
+verb turn_o_c_step_2 "Stalfos circles Link" by world priority 69 weight 60 in enemy at 580 9320
+  take enemy_act
+  take phase_turn_o_c
+  give phase_circle_o_c
+  give 2 timer_circle_o_c
+  give beat_end
+  need range_near
+
+verb turn_o_c_step_3 "Stalfos sidesteps" by world priority 69 weight 42 in enemy at 440 9390
+  take enemy_act
+  take phase_turn_o_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb turn_o_c_step_4 "Stalfos slashes down" by world priority 69 weight 19 in enemy at 580 9390
+  take enemy_act
+  take phase_turn_o_c
+  give phase_slash_down_c
+  give beat_end
+  need range_near
+
+verb turn_o_c_step_5 "Stalfos advances" by world priority 69 weight 849 in enemy at 440 9460
+  take enemy_act
+  take phase_turn_o_c
+  give phase_walk_c
+  give beat_end
+  need range_near
+
+verb turn_o_c_step_6 "Stalfos blocks" by world priority 69 weight 34 in enemy at 580 9460
+  take enemy_act
+  take phase_turn_o_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_far
+
+verb turn_o_c_step_7 "Stalfos circles Link" by world priority 69 weight 60 in enemy at 440 9530
+  take enemy_act
+  take phase_turn_o_c
+  give phase_circle_o_c
+  give 2 timer_circle_o_c
+  give beat_end
+  need range_far
+
+verb turn_o_c_step_8 "Stalfos jumpslashes" by world priority 69 weight 26 in enemy at 580 9530
+  take enemy_act
+  take phase_turn_o_c
+  give phase_jumpslash_c
+  give beat_end
+  need range_far
+
+verb turn_o_c_step_9 "Stalfos sidesteps" by world priority 69 weight 48 in enemy at 440 9600
+  take enemy_act
+  take phase_turn_o_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb turn_o_c_step_10 "Stalfos advances" by world priority 69 weight 833 in enemy at 580 9600
+  take enemy_act
+  take phase_turn_o_c
+  give phase_walk_c
+  give beat_end
+  need range_far
+
+verb circle_o_c_ticks "Ceiling Stalfos circles Link (shield down): a beat passes" by world priority 71 in enemy at 440 9670
+  take enemy_turn
+  need phase_circle_o_c
+  take timer_circle_o_c
+  give enemy_act
+
+verb circle_o_c_step_1 "Stalfos blocks" by world priority 69 weight 216 in enemy at 580 9670
+  take enemy_act
+  take phase_circle_o_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_circle_o_c
+  give beat_end
+  need range_near
+
+verb circle_o_c_step_2 "Stalfos sidesteps" by world priority 69 weight 300 in enemy at 440 9740
+  take enemy_act
+  take phase_circle_o_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_circle_o_c
+  give beat_end
+  need range_near
+
+verb circle_o_c_step_3 "Stalfos slashes down" by world priority 69 weight 133 in enemy at 580 9740
+  take enemy_act
+  take phase_circle_o_c
+  give phase_slash_down_c
+  unless timer_circle_o_c
+  give beat_end
+  need range_near
+
+verb circle_o_c_step_4 "Stalfos advances" by world priority 69 weight 350 in enemy at 440 9810
+  take enemy_act
+  take phase_circle_o_c
+  give phase_walk_c
+  unless timer_circle_o_c
+  give beat_end
+  need range_near
+
+verb circle_o_c_step_5 "Stalfos blocks" by world priority 69 weight 243 in enemy at 580 9810
+  take enemy_act
+  take phase_circle_o_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_circle_o_c
+  give beat_end
+  need range_far
+
+verb circle_o_c_step_6 "Stalfos jumpslashes" by world priority 69 weight 183 in enemy at 440 9880
+  take enemy_act
+  take phase_circle_o_c
+  give phase_jumpslash_c
+  unless timer_circle_o_c
+  give beat_end
+  need range_far
+
+verb circle_o_c_step_7 "Stalfos sidesteps" by world priority 69 weight 340 in enemy at 580 9880
+  take enemy_act
+  take phase_circle_o_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_circle_o_c
+  give beat_end
+  need range_far
+
+verb circle_o_c_step_8 "Stalfos advances" by world priority 69 weight 233 in enemy at 440 9950
+  take enemy_act
+  take phase_circle_o_c
+  give phase_walk_c
+  unless timer_circle_o_c
+  give beat_end
+  need range_far
+
+verb circle_o_c_holds "Ceiling Stalfos circles Link (shield down): nothing changes" by world priority 68 in enemy at 580 9950
+  take enemy_act
+  need phase_circle_o_c
+  give beat_end
+
+verb idle_g_c_ticks "Ceiling Stalfos stands guard (shield up): a beat passes" by world priority 71 in enemy at 440 10020
+  take enemy_turn
+  need phase_idle_g_c
+  take timer_idle_g_c
+  give enemy_act
+
+verb idle_g_c_step_1 "Stalfos blocks" by world priority 69 weight 76 in enemy at 580 10020
+  take enemy_act
+  take phase_idle_g_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_near
+
+verb idle_g_c_step_2 "Stalfos sidesteps" by world priority 69 weight 255 in enemy at 440 10090
+  take enemy_act
+  take phase_idle_g_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_near
+
+verb idle_g_c_step_3 "Stalfos slashes down" by world priority 69 weight 47 in enemy at 580 10090
+  take enemy_act
+  take phase_idle_g_c
+  give phase_slash_down_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_near
+
+verb idle_g_c_step_4 "Stalfos turns toward Link behind its shield" by world priority 69 weight 150 in enemy at 440 10160
+  take enemy_act
+  take phase_idle_g_c
+  give phase_turn_g_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_near
+
+verb idle_g_c_step_5 "Stalfos advances" by world priority 69 weight 473 in enemy at 580 10160
+  take enemy_act
+  take phase_idle_g_c
+  give phase_walk_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_near
+
+verb idle_g_c_step_6 "Stalfos blocks" by world priority 69 weight 85 in enemy at 440 10230
+  take enemy_act
+  take phase_idle_g_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_far
+
+verb idle_g_c_step_7 "Stalfos jumpslashes" by world priority 69 weight 139 in enemy at 580 10230
+  take enemy_act
+  take phase_idle_g_c
+  give phase_jumpslash_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_far
+
+verb idle_g_c_step_8 "Stalfos sidesteps" by world priority 69 weight 299 in enemy at 440 10300
+  take enemy_act
+  take phase_idle_g_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_far
+
+verb idle_g_c_step_9 "Stalfos turns toward Link behind its shield" by world priority 69 weight 150 in enemy at 580 10300
+  take enemy_act
+  take phase_idle_g_c
+  give phase_turn_g_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_far
+
+verb idle_g_c_step_10 "Stalfos advances" by world priority 69 weight 327 in enemy at 440 10370
+  take enemy_act
+  take phase_idle_g_c
+  give phase_walk_c
+  unless timer_idle_g_c
+  give beat_end
+  need range_far
+
+verb turn_g_c_step_1 "Stalfos blocks" by world priority 69 weight 30 in enemy at 580 10370
+  take enemy_act
+  take phase_turn_g_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_near
+
+verb turn_g_c_step_2 "Stalfos circles Link behind its shield" by world priority 69 weight 60 in enemy at 440 10440
+  take enemy_act
+  take phase_turn_g_c
+  give phase_circle_g_c
+  give 2 timer_circle_g_c
+  give beat_end
+  need range_near
+
+verb turn_g_c_step_3 "Stalfos sidesteps" by world priority 69 weight 42 in enemy at 580 10440
+  take enemy_act
+  take phase_turn_g_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb turn_g_c_step_4 "Stalfos slashes down" by world priority 69 weight 19 in enemy at 440 10510
+  take enemy_act
+  take phase_turn_g_c
+  give phase_slash_down_c
+  give beat_end
+  need range_near
+
+verb turn_g_c_step_5 "Stalfos advances" by world priority 69 weight 849 in enemy at 580 10510
+  take enemy_act
+  take phase_turn_g_c
+  give phase_walk_c
+  give beat_end
+  need range_near
+
+verb turn_g_c_step_6 "Stalfos blocks" by world priority 69 weight 34 in enemy at 440 10580
+  take enemy_act
+  take phase_turn_g_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_far
+
+verb turn_g_c_step_7 "Stalfos circles Link behind its shield" by world priority 69 weight 60 in enemy at 580 10580
+  take enemy_act
+  take phase_turn_g_c
+  give phase_circle_g_c
+  give 2 timer_circle_g_c
+  give beat_end
+  need range_far
+
+verb turn_g_c_step_8 "Stalfos jumpslashes" by world priority 69 weight 26 in enemy at 440 10650
+  take enemy_act
+  take phase_turn_g_c
+  give phase_jumpslash_c
+  give beat_end
+  need range_far
+
+verb turn_g_c_step_9 "Stalfos sidesteps" by world priority 69 weight 48 in enemy at 580 10650
+  take enemy_act
+  take phase_turn_g_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb turn_g_c_step_10 "Stalfos advances" by world priority 69 weight 833 in enemy at 440 10720
+  take enemy_act
+  take phase_turn_g_c
+  give phase_walk_c
+  give beat_end
+  need range_far
+
+verb circle_g_c_ticks "Ceiling Stalfos circles Link (shield up): a beat passes" by world priority 71 in enemy at 580 10720
+  take enemy_turn
+  need phase_circle_g_c
+  take timer_circle_g_c
+  give enemy_act
+
+verb circle_g_c_step_1 "Stalfos blocks" by world priority 69 weight 216 in enemy at 440 10790
+  take enemy_act
+  take phase_circle_g_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_circle_g_c
+  give beat_end
+  need range_near
+
+verb circle_g_c_step_2 "Stalfos sidesteps" by world priority 69 weight 300 in enemy at 580 10790
+  take enemy_act
+  take phase_circle_g_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_circle_g_c
+  give beat_end
+  need range_near
+
+verb circle_g_c_step_3 "Stalfos slashes down" by world priority 69 weight 133 in enemy at 440 10860
+  take enemy_act
+  take phase_circle_g_c
+  give phase_slash_down_c
+  unless timer_circle_g_c
+  give beat_end
+  need range_near
+
+verb circle_g_c_step_4 "Stalfos advances" by world priority 69 weight 350 in enemy at 580 10860
+  take enemy_act
+  take phase_circle_g_c
+  give phase_walk_c
+  unless timer_circle_g_c
+  give beat_end
+  need range_near
+
+verb circle_g_c_step_5 "Stalfos blocks" by world priority 69 weight 243 in enemy at 440 10930
+  take enemy_act
+  take phase_circle_g_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_circle_g_c
+  give beat_end
+  need range_far
+
+verb circle_g_c_step_6 "Stalfos jumpslashes" by world priority 69 weight 183 in enemy at 580 10930
+  take enemy_act
+  take phase_circle_g_c
+  give phase_jumpslash_c
+  unless timer_circle_g_c
+  give beat_end
+  need range_far
+
+verb circle_g_c_step_7 "Stalfos sidesteps" by world priority 69 weight 340 in enemy at 440 11000
+  take enemy_act
+  take phase_circle_g_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_circle_g_c
+  give beat_end
+  need range_far
+
+verb circle_g_c_step_8 "Stalfos advances" by world priority 69 weight 233 in enemy at 580 11000
+  take enemy_act
+  take phase_circle_g_c
+  give phase_walk_c
+  unless timer_circle_g_c
+  give beat_end
+  need range_far
+
+verb circle_g_c_holds "Ceiling Stalfos circles Link (shield up): nothing changes" by world priority 68 in enemy at 440 11070
+  take enemy_act
+  need phase_circle_g_c
+  give beat_end
+
+verb walk_c_step_1 "Stalfos blocks" by world priority 69 weight 139 in enemy at 580 11070
+  take enemy_act
+  take phase_walk_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_near
+
+verb walk_c_step_2 "Stalfos stands guard behind its shield" by world priority 69 weight 333 in enemy at 440 11140
+  take enemy_act
+  take phase_walk_c
+  give phase_idle_g_c
+  give timer_idle_g_c
+  give beat_end
+  need range_near
+
+verb walk_c_step_3 "Stalfos sidesteps" by world priority 69 weight 100 in enemy at 580 11140
+  take enemy_act
+  take phase_walk_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb walk_c_step_4 "Stalfos slashes down" by world priority 69 weight 311 in enemy at 440 11210
+  take enemy_act
+  take phase_walk_c
+  give phase_slash_down_c
+  give beat_end
+  need range_near
+
+verb walk_c_step_5 "Stalfos advances" by world priority 69 weight 117 in enemy at 580 11210
+  take enemy_act
+  need phase_walk_c
+  give beat_end
+  need range_near
+
+verb walk_c_step_6 "Stalfos blocks" by world priority 69 weight 2 in enemy at 440 11280
+  take enemy_act
+  take phase_walk_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_far
+
+verb walk_c_step_7 "Stalfos circles Link behind its shield" by world priority 69 weight 17 in enemy at 580 11280
+  take enemy_act
+  take phase_walk_c
+  give phase_circle_g_c
+  give 2 timer_circle_g_c
+  give beat_end
+  need range_far
+
+verb walk_c_step_8 "Stalfos stands guard behind its shield" by world priority 69 weight 500 in enemy at 440 11350
+  take enemy_act
+  take phase_walk_c
+  give phase_idle_g_c
+  give timer_idle_g_c
+  give beat_end
+  need range_far
+
+verb walk_c_step_9 "Stalfos jumpslashes" by world priority 69 weight 18 in enemy at 580 11350
+  take enemy_act
+  take phase_walk_c
+  give phase_jumpslash_c
+  give beat_end
+  need range_far
+
+verb walk_c_step_10 "Stalfos sidesteps" by world priority 69 weight 11 in enemy at 440 11420
+  take enemy_act
+  take phase_walk_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb walk_c_step_11 "Stalfos advances" by world priority 69 weight 2 in enemy at 580 11420
+  take enemy_act
+  need phase_walk_c
+  give beat_end
+  need range_far
+
+verb walk_c_step_12 "Stalfos advances" by world priority 69 weight 450 in enemy at 440 11490
+  take enemy_act
+  need phase_walk_c
+  give beat_end
+  take range_far
+  give range_near
+
+verb sidestep_c_ticks "Ceiling Stalfos sidesteps behind its shield: a beat passes" by world priority 71 in enemy at 580 11490
+  take enemy_turn
+  need phase_sidestep_c
+  take timer_sidestep_c
+  give enemy_act
+
+verb sidestep_c_step_1 "Stalfos blocks" by world priority 69 weight 72 in enemy at 440 11560
+  take enemy_act
+  take phase_sidestep_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb sidestep_c_step_2 "Stalfos stands guard behind its shield" by world priority 69 weight 167 in enemy at 580 11560
+  take enemy_act
+  take phase_sidestep_c
+  give phase_idle_g_c
+  give timer_idle_g_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb sidestep_c_step_3 "Stalfos sidesteps" by world priority 69 weight 100 in enemy at 440 11630
+  take enemy_act
+  need phase_sidestep_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb sidestep_c_step_4 "Stalfos slashes down" by world priority 69 weight 44 in enemy at 580 11630
+  take enemy_act
+  take phase_sidestep_c
+  give phase_slash_down_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb sidestep_c_step_5 "Stalfos advances" by world priority 69 weight 617 in enemy at 440 11700
+  take enemy_act
+  take phase_sidestep_c
+  give phase_walk_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb sidestep_c_step_6 "Stalfos blocks" by world priority 69 weight 81 in enemy at 580 11700
+  take enemy_act
+  take phase_sidestep_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb sidestep_c_step_7 "Stalfos stands guard behind its shield" by world priority 69 weight 167 in enemy at 440 11770
+  take enemy_act
+  take phase_sidestep_c
+  give phase_idle_g_c
+  give timer_idle_g_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb sidestep_c_step_8 "Stalfos jumpslashes" by world priority 69 weight 61 in enemy at 580 11770
+  take enemy_act
+  take phase_sidestep_c
+  give phase_jumpslash_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb sidestep_c_step_9 "Stalfos sidesteps" by world priority 69 weight 113 in enemy at 440 11840
+  take enemy_act
+  need phase_sidestep_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb sidestep_c_step_10 "Stalfos advances" by world priority 69 weight 578 in enemy at 580 11840
+  take enemy_act
+  take phase_sidestep_c
+  give phase_walk_c
+  unless timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb sidestep_c_holds "Ceiling Stalfos sidesteps behind its shield: nothing changes" by world priority 68 in enemy at 440 11910
+  take enemy_act
+  need phase_sidestep_c
+  give beat_end
+
+verb block_c_ticks "Ceiling Stalfos stops and blocks: a beat passes" by world priority 71 in enemy at 580 11910
+  take enemy_turn
+  need phase_block_c
+  take timer_block_c
+  give enemy_act
+
+verb block_c_step_1 "Stalfos lowers its shield" by world priority 69 in enemy at 440 11980
+  take enemy_act
+  take phase_block_c
+  give phase_unblock_c
+  unless timer_block_c
+  give beat_end
+
+verb unblock_c_step_1 "Stalfos blocks" by world priority 69 weight 216 in enemy at 580 11980
+  take enemy_act
+  take phase_unblock_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_near
+
+verb unblock_c_step_2 "Stalfos sidesteps" by world priority 69 weight 300 in enemy at 440 12050
+  take enemy_act
+  take phase_unblock_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb unblock_c_step_3 "Stalfos slashes down" by world priority 69 weight 133 in enemy at 580 12050
+  take enemy_act
+  take phase_unblock_c
+  give phase_slash_down_c
+  give beat_end
+  need range_near
+
+verb unblock_c_step_4 "Stalfos advances" by world priority 69 weight 350 in enemy at 440 12120
+  take enemy_act
+  take phase_unblock_c
+  give phase_walk_c
+  give beat_end
+  need range_near
+
+verb unblock_c_step_5 "Stalfos blocks" by world priority 69 weight 243 in enemy at 580 12120
+  take enemy_act
+  take phase_unblock_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_far
+
+verb unblock_c_step_6 "Stalfos jumpslashes" by world priority 69 weight 183 in enemy at 440 12190
+  take enemy_act
+  take phase_unblock_c
+  give phase_jumpslash_c
+  give beat_end
+  need range_far
+
+verb unblock_c_step_7 "Stalfos sidesteps" by world priority 69 weight 340 in enemy at 580 12190
+  take enemy_act
+  take phase_unblock_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb unblock_c_step_8 "Stalfos advances" by world priority 69 weight 233 in enemy at 440 12260
+  take enemy_act
+  take phase_unblock_c
+  give phase_walk_c
+  give beat_end
+  need range_far
+
+verb slash_down_c_step_1 "Stalfos recovers" by world priority 69 in enemy at 580 12260
+  take enemy_act
+  take phase_slash_down_c
+  give phase_slash_end_c
+  give incoming_slash_c
+  give beat_end
+  need range_near
+
+verb slash_down_c_step_2 "Stalfos slashes up" by world priority 69 in enemy at 440 12330
+  take enemy_act
+  take phase_slash_down_c
+  give phase_slash_up_c
+  give incoming_slash_c
+  give beat_end
+  need range_near
+
+verb slash_down_c_step_3 "Stalfos recovers" by world priority 69 in enemy at 580 12330
+  take enemy_act
+  take phase_slash_down_c
+  give phase_slash_end_c
+  give beat_end
+  need range_far
+
+verb slash_down_c_step_4 "Stalfos slashes up" by world priority 69 in enemy at 440 12400
+  take enemy_act
+  take phase_slash_down_c
+  give phase_slash_up_c
+  give beat_end
+  need range_far
+
+verb slash_up_c_step_1 "Stalfos slashes down" by world priority 69 in enemy at 580 12400
+  take enemy_act
+  take phase_slash_up_c
+  give phase_slash_down_c
+  give incoming_slash_c
+  give beat_end
+  need range_near
+
+verb slash_up_c_step_2 "Stalfos slashes down" by world priority 69 in enemy at 440 12470
+  take enemy_act
+  take phase_slash_up_c
+  give phase_slash_down_c
+  give beat_end
+  need range_far
+
+verb slash_end_c_step_1 "Stalfos stands guard" by world priority 69 weight 38 in enemy at 580 12470
+  take enemy_act
+  take phase_slash_end_c
+  give phase_idle_o_c
+  give timer_idle_o_c
+  give beat_end
+
+verb slash_end_c_step_2 "Stalfos sidesteps" by world priority 69 weight 31 in enemy at 440 12540
+  take enemy_act
+  take phase_slash_end_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+
+verb slash_end_c_step_3 "Stalfos slashes down" by world priority 69 weight 31 in enemy at 580 12540
+  take enemy_act
+  take phase_slash_end_c
+  give phase_slash_down_c
+  give beat_end
+
+verb recoil_c_step_1 "Stalfos stands guard" by world priority 69 weight 3 in enemy at 440 12610
+  take enemy_act
+  take phase_recoil_c
+  give phase_idle_o_c
+  give timer_idle_o_c
+  give beat_end
+
+verb recoil_c_step_2 "Stalfos sidesteps" by world priority 69 weight 7 in enemy at 580 12610
+  take enemy_act
+  take phase_recoil_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+
+verb jumpslash_c_step_1_near "Stalfos stands guard" by world priority 69 in enemy at 440 12680
+  take enemy_act
+  take phase_jumpslash_c
+  give phase_idle_o_c
+  give timer_idle_o_c
+  give incoming_jumpslash_c
+  give beat_end
+  need range_near
+
+verb jumpslash_c_step_1_far "Stalfos stands guard" by world priority 69 in enemy at 580 12680
+  take enemy_act
+  take phase_jumpslash_c
+  give phase_idle_o_c
+  give timer_idle_o_c
+  give incoming_jumpslash_c
+  give beat_end
+  take range_far
+  give range_near
+
+verb jump_up_c_step_1 "Stalfos lands" by world priority 69 in enemy at 440 12750
+  take enemy_act
+  take phase_jump_up_c
+  give phase_land_c
+  give beat_end
+
+verb flinch_c_step_1 "Stalfos blocks" by world priority 69 weight 108 in enemy at 580 12750
+  take enemy_act
+  take phase_flinch_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_near
+
+verb flinch_c_step_2 "Stalfos leaps over Link" by world priority 69 weight 500 in enemy at 440 12820
+  take enemy_act
+  take phase_flinch_c
+  give phase_jump_up_c
+  give beat_end
+  need range_near
+
+verb flinch_c_step_3 "Stalfos sidesteps" by world priority 69 weight 150 in enemy at 580 12820
+  take enemy_act
+  take phase_flinch_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_near
+
+verb flinch_c_step_4 "Stalfos slashes down" by world priority 69 weight 67 in enemy at 440 12890
+  take enemy_act
+  take phase_flinch_c
+  give phase_slash_down_c
+  give beat_end
+  need range_near
+
+verb flinch_c_step_5 "Stalfos advances" by world priority 69 weight 175 in enemy at 580 12890
+  take enemy_act
+  take phase_flinch_c
+  give phase_walk_c
+  give beat_end
+  need range_near
+
+verb flinch_c_step_6 "Stalfos blocks" by world priority 69 weight 243 in enemy at 440 12960
+  take enemy_act
+  take phase_flinch_c
+  give phase_block_c
+  give timer_block_c
+  give beat_end
+  need range_far
+
+verb flinch_c_step_7 "Stalfos jumpslashes" by world priority 69 weight 183 in enemy at 580 12960
+  take enemy_act
+  take phase_flinch_c
+  give phase_jumpslash_c
+  give beat_end
+  need range_far
+
+verb flinch_c_step_8 "Stalfos sidesteps" by world priority 69 weight 340 in enemy at 440 13030
+  take enemy_act
+  take phase_flinch_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  give beat_end
+  need range_far
+
+verb flinch_c_step_9 "Stalfos advances" by world priority 69 weight 233 in enemy at 580 13030
+  take enemy_act
+  take phase_flinch_c
+  give phase_walk_c
+  give beat_end
+  need range_far
+
+verb frozen_c_ticks "Ceiling Stalfos is frozen: a beat passes" by world priority 71 in enemy at 440 13100
+  take enemy_turn
+  need phase_frozen_c
+  take timer_frozen_c
+  give enemy_act
+
+verb frozen_c_step_1 "Stalfos is stunned" by world priority 69 in enemy at 580 13100
+  take enemy_act
+  take phase_frozen_c
+  give phase_stunned_c
+  give 4 timer_stunned_c
+  unless timer_frozen_c
+  give beat_end
+
+verb frozen_c_holds "Ceiling Stalfos is frozen: nothing changes" by world priority 68 in enemy at 440 13170
+  take enemy_act
+  need phase_frozen_c
+  give beat_end
+
+verb stunned_c_ticks "Ceiling Stalfos is stunned: a beat passes" by world priority 71 in enemy at 580 13170
+  take enemy_turn
+  need phase_stunned_c
+  take timer_stunned_c
+  give enemy_act
+
+verb stunned_c_step_1 "Stalfos blocks" by world priority 69 weight 108 in enemy at 440 13240
+  take enemy_act
+  take phase_stunned_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_stunned_c
+  give beat_end
+  need range_near
+
+verb stunned_c_step_2 "Stalfos leaps over Link" by world priority 69 weight 500 in enemy at 580 13240
+  take enemy_act
+  take phase_stunned_c
+  give phase_jump_up_c
+  unless timer_stunned_c
+  give beat_end
+  need range_near
+
+verb stunned_c_step_3 "Stalfos sidesteps" by world priority 69 weight 150 in enemy at 440 13310
+  take enemy_act
+  take phase_stunned_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_stunned_c
+  give beat_end
+  need range_near
+
+verb stunned_c_step_4 "Stalfos slashes down" by world priority 69 weight 67 in enemy at 580 13310
+  take enemy_act
+  take phase_stunned_c
+  give phase_slash_down_c
+  unless timer_stunned_c
+  give beat_end
+  need range_near
+
+verb stunned_c_step_5 "Stalfos advances" by world priority 69 weight 175 in enemy at 440 13380
+  take enemy_act
+  take phase_stunned_c
+  give phase_walk_c
+  unless timer_stunned_c
+  give beat_end
+  need range_near
+
+verb stunned_c_step_6 "Stalfos blocks" by world priority 69 weight 243 in enemy at 580 13380
+  take enemy_act
+  take phase_stunned_c
+  give phase_block_c
+  give timer_block_c
+  unless timer_stunned_c
+  give beat_end
+  need range_far
+
+verb stunned_c_step_7 "Stalfos jumpslashes" by world priority 69 weight 183 in enemy at 440 13450
+  take enemy_act
+  take phase_stunned_c
+  give phase_jumpslash_c
+  unless timer_stunned_c
+  give beat_end
+  need range_far
+
+verb stunned_c_step_8 "Stalfos sidesteps" by world priority 69 weight 340 in enemy at 580 13450
+  take enemy_act
+  take phase_stunned_c
+  give phase_sidestep_c
+  give 2 timer_sidestep_c
+  unless timer_stunned_c
+  give beat_end
+  need range_far
+
+verb stunned_c_step_9 "Stalfos advances" by world priority 69 weight 233 in enemy at 440 13520
+  take enemy_act
+  take phase_stunned_c
+  give phase_walk_c
+  unless timer_stunned_c
+  give beat_end
+  need range_far
+
+verb stunned_c_holds "Ceiling Stalfos is stunned: nothing changes" by world priority 68 in enemy at 580 13520
+  take enemy_act
+  need phase_stunned_c
+  give beat_end
+
+verb slash_blocked_hylian_shield__slash_end "Stalfos sword slash: blocked by the hylian shield" by world priority 60 in attacks at 3460 80
+  take incoming_slash
+  need guard_with_hylian_shield
+  take phase_slash_end
+  give phase_recoil
+
+verb slash_blocked_hylian_shield__slash_up "Stalfos sword slash: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_slash
+  need guard_with_hylian_shield
+  take phase_slash_up
+  give phase_recoil
+
+verb slash_blocked_hylian_shield__slash_down "Stalfos sword slash: blocked by the hylian shield" by world priority 60 in attacks at 3460 150
+  take incoming_slash
+  need guard_with_hylian_shield
+  take phase_slash_down
+  give phase_recoil
+
+verb slash_blocked_mirror_shield__slash_end "Stalfos sword slash: blocked by the mirror shield" by world priority 60 in attacks at 3320 220
+  take incoming_slash
+  need guard_with_mirror_shield
+  take phase_slash_end
+  give phase_recoil
+
+verb slash_blocked_mirror_shield__slash_up "Stalfos sword slash: blocked by the mirror shield" by world priority 60 in attacks at 3460 220
+  take incoming_slash
+  need guard_with_mirror_shield
+  take phase_slash_up
+  give phase_recoil
+
+verb slash_blocked_mirror_shield__slash_down "Stalfos sword slash: blocked by the mirror shield" by world priority 60 in attacks at 3320 290
+  take incoming_slash
+  need guard_with_mirror_shield
+  take phase_slash_down
+  give phase_recoil
+
+verb slash_dodged "Stalfos sword slash: dodged" by world priority 60 in attacks at 3460 290
+  take incoming_slash
+  need link_dodge
+  unless link_guard
+
+verb slash_nayru "Stalfos sword slash: Nayru's Love holds" by world priority 60 in attacks at 3320 360
+  take incoming_slash
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb slash_lands "Stalfos sword slash hits Link" by world priority 60 in attacks at 3460 360
+  take incoming_slash
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+
+verb slash_lands_dd "Stalfos sword slash hits Link" by world priority 60 in attacks at 3320 430
+  take incoming_slash
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+
+verb jumpslash_blocked_hylian_shield__idle_o "Stalfos jumpslash: blocked by the hylian shield" by world priority 60 in attacks at 3320 500
+  take incoming_jumpslash
+  need guard_with_hylian_shield
+  take phase_idle_o
+  give phase_recoil
+
+verb jumpslash_blocked_mirror_shield__idle_o "Stalfos jumpslash: blocked by the mirror shield" by world priority 60 in attacks at 3460 500
+  take incoming_jumpslash
+  need guard_with_mirror_shield
+  take phase_idle_o
+  give phase_recoil
+
+verb jumpslash_dodged "Stalfos jumpslash: dodged" by world priority 60 in attacks at 3320 570
+  take incoming_jumpslash
+  need link_dodge
+  unless link_guard
+
+verb jumpslash_nayru "Stalfos jumpslash: Nayru's Love holds" by world priority 60 in attacks at 3460 570
+  take incoming_jumpslash
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb jumpslash_lands "Stalfos jumpslash hits Link" by world priority 60 in attacks at 3320 640
+  take incoming_jumpslash
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 4 link_dmg
+
+verb jumpslash_lands_dd "Stalfos jumpslash hits Link" by world priority 60 in attacks at 3460 640
+  take incoming_jumpslash
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 2 link_dmg
+
+verb slash_c_blocked_hylian_shield__slash_end_c "Stalfos sword slash: blocked by the hylian shield" by world priority 60 in attacks at 3460 710
+  take incoming_slash_c
+  need guard_with_hylian_shield
+  take phase_slash_end_c
+  give phase_recoil_c
+
+verb slash_c_blocked_hylian_shield__slash_up_c "Stalfos sword slash: blocked by the hylian shield" by world priority 60 in attacks at 3320 780
+  take incoming_slash_c
+  need guard_with_hylian_shield
+  take phase_slash_up_c
+  give phase_recoil_c
+
+verb slash_c_blocked_hylian_shield__slash_down_c "Stalfos sword slash: blocked by the hylian shield" by world priority 60 in attacks at 3460 780
+  take incoming_slash_c
+  need guard_with_hylian_shield
+  take phase_slash_down_c
+  give phase_recoil_c
+
+verb slash_c_blocked_mirror_shield__slash_end_c "Stalfos sword slash: blocked by the mirror shield" by world priority 60 in attacks at 3320 850
+  take incoming_slash_c
+  need guard_with_mirror_shield
+  take phase_slash_end_c
+  give phase_recoil_c
+
+verb slash_c_blocked_mirror_shield__slash_up_c "Stalfos sword slash: blocked by the mirror shield" by world priority 60 in attacks at 3460 850
+  take incoming_slash_c
+  need guard_with_mirror_shield
+  take phase_slash_up_c
+  give phase_recoil_c
+
+verb slash_c_blocked_mirror_shield__slash_down_c "Stalfos sword slash: blocked by the mirror shield" by world priority 60 in attacks at 3320 920
+  take incoming_slash_c
+  need guard_with_mirror_shield
+  take phase_slash_down_c
+  give phase_recoil_c
+
+verb slash_c_dodged "Stalfos sword slash: dodged" by world priority 60 in attacks at 3460 920
+  take incoming_slash_c
+  need link_dodge
+  unless link_guard
+
+verb slash_c_nayru "Stalfos sword slash: Nayru's Love holds" by world priority 60 in attacks at 3320 990
+  take incoming_slash_c
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb slash_c_lands "Stalfos sword slash hits Link" by world priority 60 in attacks at 3460 990
+  take incoming_slash_c
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+
+verb slash_c_lands_dd "Stalfos sword slash hits Link" by world priority 60 in attacks at 3320 1060
+  take incoming_slash_c
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+
+verb jumpslash_c_blocked_hylian_shield__idle_o_c "Stalfos jumpslash: blocked by the hylian shield" by world priority 60 in attacks at 3320 1130
+  take incoming_jumpslash_c
+  need guard_with_hylian_shield
+  take phase_idle_o_c
+  give phase_recoil_c
+
+verb jumpslash_c_blocked_mirror_shield__idle_o_c "Stalfos jumpslash: blocked by the mirror shield" by world priority 60 in attacks at 3460 1130
+  take incoming_jumpslash_c
+  need guard_with_mirror_shield
+  take phase_idle_o_c
+  give phase_recoil_c
+
+verb jumpslash_c_dodged "Stalfos jumpslash: dodged" by world priority 60 in attacks at 3320 1200
+  take incoming_jumpslash_c
+  need link_dodge
+  unless link_guard
+
+verb jumpslash_c_nayru "Stalfos jumpslash: Nayru's Love holds" by world priority 60 in attacks at 3460 1200
+  take incoming_jumpslash_c
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb jumpslash_c_lands "Stalfos jumpslash hits Link" by world priority 60 in attacks at 3320 1270
+  take incoming_jumpslash_c
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 4 link_dmg
+
+verb jumpslash_c_lands_dd "Stalfos jumpslash hits Link" by world priority 60 in attacks at 3460 1270
+  take incoming_jumpslash_c
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 2 link_dmg
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 760 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 900 220
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 760 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 900 290
+  need beat_end
+  take link_dodge
+
+verb nayru_ticks "Link: nayru wears on" by world priority 48 in beat at 900 360
+  take beat_end
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 48 in beat at 760 430
+  take beat_end
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 47 in beat at 760 500
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 47 in beat at 900 500
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 47 in beat at 760 570
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 47 in beat at 900 570
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 760 640
+  take lens_count
+  unless lens_on

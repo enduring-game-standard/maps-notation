@@ -1,0 +1,1727 @@
+maps 2
+title "Ocarina of Time combat: Link vs Gohma Larva"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state choose_variant "Which Gohma Larva" in setup at 120 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Gohma Larva answers" in beat at 580 80
+state enemy_act "Gohma Larva acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 4/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 260 150
+state link_wins "Gohma Larva defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state phase_egg_rest_ceiling "Gohma egg clings to the ceiling" in enemy at 2040 80
+state phase_egg_rest_floor "Gohma egg sits on the floor" in enemy at 2180 80
+state phase_egg_fall_room "Gohma egg drops and hatches on landing" in enemy at 2040 150
+state phase_egg_fall_boss "Gohma's egg bounces and wobbles before hatching" in enemy at 2180 150
+state timer_egg_fall_boss "Gohma's egg bounces and wobbles before hatching: beats left" in enemy at 2040 220
+state phase_hatch "Larva breaks out of its shell" in enemy at 2040 290
+state timer_hatch "Larva breaks out of its shell: beats left" in enemy at 2180 290
+state phase_stand "Larva stands and watches Link" in enemy at 2180 360
+state timer_stand "Larva stands and watches Link: beats left" in enemy at 2040 430
+state phase_chase "Larva runs at Link" in enemy at 2040 500
+state phase_prepare_jump "Larva crouches to leap" in enemy at 2180 500
+state timer_prepare_jump "Larva crouches to leap: beats left" in enemy at 2040 570
+state phase_jump "Larva leaps headfirst at Link" in enemy at 2040 640
+state phase_land "Larva lands" in enemy at 2180 640
+state timer_land "Larva lands: beats left" in enemy at 2040 710
+state phase_hurt "Larva reels from a hit" in enemy at 2040 780
+state timer_hurt "Larva reels from a hit: beats left" in enemy at 2180 780
+state phase_flee "Larva runs away from Link" in enemy at 2180 850
+state timer_flee "Larva runs away from Link: beats left" in enemy at 2040 920
+state phase_stunned "Larva is stunned by a Deku Nut" in enemy at 2040 990
+state timer_stunned "Larva is stunned by a Deku Nut: beats left" in enemy at 2180 990
+state hp_body "Gohma Larva: health" marks 2 in enemy_health at 2360 80
+state alive_body "Gohma Larva: standing" marks 1 in enemy_health at 2500 80
+state dmg_body "Gohma Larva: damage" in enemy_health at 2360 150
+state status_nayru "Link: nayru (beats left)" in link_state at 1220 290
+state lens_on "Lens of Truth on" in link_state at 1080 360
+state link_guard "Link holds up his shield" in link_state at 1220 360
+state link_dodge "Link dodges" in link_state at 1080 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3140 500
+state swing_slingshot "Slingshot seed on its way" in hits at 3140 990
+state swing_explosive "Explosion on its way" in hits at 3140 1480
+state swing_boomerang "Boomerang on its way" in hits at 3140 1970
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3140 2460
+state swing_magic_fire "Din's Fire on its way" in hits at 3140 2950
+state swing_shield "Shield on its way" in hits at 3000 3510
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 3720
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3000 4280
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 4770
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 5260
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1080 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1220 710
+state incoming_contact "Larva body or headbutt incoming" in attacks at 3320 80
+state tick_nayru "Beat ends: nayru checked" in beat at 440 360
+state lens_count "The Lens: beats toward the next cost" in beat at 580 430
+
+verb egg_fall_boss_timer_clears "Gohma's egg bounces and wobbles before hatching is over" by world priority 100 in enemy at 2180 220
+  take timer_egg_fall_boss
+  unless phase_egg_fall_boss
+
+verb hatch_timer_clears "Larva breaks out of its shell is over" by world priority 100 in enemy at 2040 360
+  take timer_hatch
+  unless phase_hatch
+
+verb stand_timer_clears "Larva stands and watches Link is over" by world priority 100 in enemy at 2180 430
+  take timer_stand
+  unless phase_stand
+
+verb prepare_jump_timer_clears "Larva crouches to leap is over" by world priority 100 in enemy at 2180 570
+  take timer_prepare_jump
+  unless phase_prepare_jump
+
+verb land_timer_clears "Larva lands is over" by world priority 100 in enemy at 2180 710
+  take timer_land
+  unless phase_land
+
+verb hurt_timer_clears "Larva reels from a hit is over" by world priority 100 in enemy at 2040 850
+  take timer_hurt
+  unless phase_hurt
+
+verb flee_timer_clears "Larva runs away from Link is over" by world priority 100 in enemy at 2180 920
+  take timer_flee
+  unless phase_flee
+
+verb stunned_timer_clears "Larva is stunned by a Deku Nut is over" by world priority 100 in enemy at 2040 1060
+  take timer_stunned
+  unless phase_stunned
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give choose_variant
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give choose_variant
+
+verb variant_ceiling_egg "Egg placed on the ceiling (params 8, 9)" by world priority 30 in setup at 120 430
+  take choose_variant
+  give phase_egg_rest_ceiling
+  give range_far
+  give link_turn
+
+verb variant_floor_egg "Egg placed on the floor (params 6, 7)" by world priority 30 in setup at 260 430
+  take choose_variant
+  give phase_egg_rest_floor
+  give range_far
+  give link_turn
+
+verb variant_boss_egg "Egg laid by Queen Gohma" by world priority 30 in setup at 120 500
+  take choose_variant
+  give phase_egg_fall_boss
+  give 4 timer_egg_fall_boss
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 8 link_heal
+
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb body_hurt "Gohma Larva loses health" by world priority 97 in enemy_health at 2500 150
+  take dmg_body
+  take hp_body
+
+verb body_overkill "Gohma Larva has no health left to lose" by world priority 96 in enemy_health at 2360 220
+  take dmg_body
+  unless hp_body
+
+verb link_deku_nut "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2820 80
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2680 150
+  take link_turn
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 150
+  take link_turn
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2680 220
+  take link_turn
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 220
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_magic_fire "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 290
+  take link_turn
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 290
+  take link_turn
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 360
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 360
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2820 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 500
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2820 500
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb hit_deku_nut__egg_rest_ceiling "Deku Nut flash hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3000 150
+  take swing_deku_nut
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_deku_nut__egg_rest_floor "Deku Nut flash hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3140 150
+  take swing_deku_nut
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_deku_nut__egg_fall_room "Deku Nut flash hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3000 220
+  take swing_deku_nut
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_deku_nut__egg_fall_boss "Deku Nut flash hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3140 220
+  take swing_deku_nut
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_deku_nut__hatch "Deku Nut flash hits (Larva breaks out of its shell)" by world priority 80 in hits at 3000 290
+  take swing_deku_nut
+  take phase_hatch
+  give phase_stunned
+  give 5 timer_stunned
+
+verb hit_deku_nut__stand "Deku Nut flash hits (Larva stands and watches Link)" by world priority 80 in hits at 3140 290
+  take swing_deku_nut
+  take phase_stand
+  give phase_stunned
+  give 5 timer_stunned
+
+verb hit_deku_nut__chase "Deku Nut flash hits (Larva runs at Link)" by world priority 80 in hits at 3000 360
+  take swing_deku_nut
+  take phase_chase
+  give phase_stunned
+  give 5 timer_stunned
+
+verb hit_deku_nut__prepare_jump "Deku Nut flash hits (Larva crouches to leap)" by world priority 80 in hits at 3140 360
+  take swing_deku_nut
+  take phase_prepare_jump
+  give phase_stunned
+  give 5 timer_stunned
+
+verb hit_deku_nut__jump "Deku Nut flash hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3000 430
+  take swing_deku_nut
+  take phase_jump
+  give phase_stunned
+  give 5 timer_stunned
+
+verb hit_deku_nut__land "Deku Nut flash hits (Larva lands)" by world priority 80 in hits at 3140 430
+  take swing_deku_nut
+  take phase_land
+  give phase_stunned
+  give 5 timer_stunned
+
+verb hit_deku_nut__flee "Deku Nut flash hits (Larva runs away from Link)" by world priority 80 in hits at 3000 500
+  take swing_deku_nut
+  take phase_flee
+  give phase_stunned
+  give 5 timer_stunned
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3000 570
+  take swing_deku_stick
+
+verb hit_deku_stick__egg_rest_ceiling "Deku Stick hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3140 570
+  take swing_deku_stick
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_deku_stick__egg_rest_floor "Deku Stick hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3000 640
+  take swing_deku_stick
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_deku_stick__egg_fall_room "Deku Stick hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3140 640
+  take swing_deku_stick
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_deku_stick__egg_fall_boss "Deku Stick hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3000 710
+  take swing_deku_stick
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_deku_stick__hatch "Deku Stick hits (Larva breaks out of its shell)" by world priority 80 in hits at 3140 710
+  take swing_deku_stick
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_deku_stick__stand "Deku Stick hits (Larva stands and watches Link)" by world priority 80 in hits at 3000 780
+  take swing_deku_stick
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_deku_stick__chase "Deku Stick hits (Larva runs at Link)" by world priority 80 in hits at 3140 780
+  take swing_deku_stick
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_deku_stick__prepare_jump "Deku Stick hits (Larva crouches to leap)" by world priority 80 in hits at 3000 850
+  take swing_deku_stick
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_deku_stick__jump "Deku Stick hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3140 850
+  take swing_deku_stick
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_deku_stick__land "Deku Stick hits (Larva lands)" by world priority 80 in hits at 3000 920
+  take swing_deku_stick
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_deku_stick__flee "Deku Stick hits (Larva runs away from Link)" by world priority 80 in hits at 3140 920
+  take swing_deku_stick
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_deku_stick__stunned "Deku Stick hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3000 990
+  take swing_deku_stick
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3000 1060
+  take swing_slingshot
+
+verb hit_slingshot__egg_rest_ceiling "Slingshot seed hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3140 1060
+  take swing_slingshot
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_slingshot__egg_rest_floor "Slingshot seed hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3000 1130
+  take swing_slingshot
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_slingshot__egg_fall_room "Slingshot seed hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3140 1130
+  take swing_slingshot
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_slingshot__egg_fall_boss "Slingshot seed hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3000 1200
+  take swing_slingshot
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_slingshot__hatch "Slingshot seed hits (Larva breaks out of its shell)" by world priority 80 in hits at 3140 1200
+  take swing_slingshot
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slingshot__stand "Slingshot seed hits (Larva stands and watches Link)" by world priority 80 in hits at 3000 1270
+  take swing_slingshot
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slingshot__chase "Slingshot seed hits (Larva runs at Link)" by world priority 80 in hits at 3140 1270
+  take swing_slingshot
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slingshot__prepare_jump "Slingshot seed hits (Larva crouches to leap)" by world priority 80 in hits at 3000 1340
+  take swing_slingshot
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slingshot__jump "Slingshot seed hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3140 1340
+  take swing_slingshot
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slingshot__land "Slingshot seed hits (Larva lands)" by world priority 80 in hits at 3000 1410
+  take swing_slingshot
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slingshot__flee "Slingshot seed hits (Larva runs away from Link)" by world priority 80 in hits at 3140 1410
+  take swing_slingshot
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slingshot__stunned "Slingshot seed hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3000 1480
+  take swing_slingshot
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3000 1550
+  take swing_explosive
+
+verb hit_explosive__egg_rest_ceiling "Explosion hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3140 1550
+  take swing_explosive
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_explosive__egg_rest_floor "Explosion hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3000 1620
+  take swing_explosive
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_explosive__egg_fall_room "Explosion hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3140 1620
+  take swing_explosive
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_explosive__egg_fall_boss "Explosion hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3000 1690
+  take swing_explosive
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_explosive__hatch "Explosion hits (Larva breaks out of its shell)" by world priority 80 in hits at 3140 1690
+  take swing_explosive
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_explosive__stand "Explosion hits (Larva stands and watches Link)" by world priority 80 in hits at 3000 1760
+  take swing_explosive
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_explosive__chase "Explosion hits (Larva runs at Link)" by world priority 80 in hits at 3140 1760
+  take swing_explosive
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_explosive__prepare_jump "Explosion hits (Larva crouches to leap)" by world priority 80 in hits at 3000 1830
+  take swing_explosive
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_explosive__jump "Explosion hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3140 1830
+  take swing_explosive
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_explosive__land "Explosion hits (Larva lands)" by world priority 80 in hits at 3000 1900
+  take swing_explosive
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_explosive__flee "Explosion hits (Larva runs away from Link)" by world priority 80 in hits at 3140 1900
+  take swing_explosive
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_explosive__stunned "Explosion hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3000 1970
+  take swing_explosive
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3000 2040
+  take swing_boomerang
+
+verb hit_boomerang__egg_rest_ceiling "Boomerang hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3140 2040
+  take swing_boomerang
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_boomerang__egg_rest_floor "Boomerang hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3000 2110
+  take swing_boomerang
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_boomerang__egg_fall_room "Boomerang hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3140 2110
+  take swing_boomerang
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_boomerang__egg_fall_boss "Boomerang hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3000 2180
+  take swing_boomerang
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_boomerang__hatch "Boomerang hits (Larva breaks out of its shell)" by world priority 80 in hits at 3140 2180
+  take swing_boomerang
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_boomerang__stand "Boomerang hits (Larva stands and watches Link)" by world priority 80 in hits at 3000 2250
+  take swing_boomerang
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_boomerang__chase "Boomerang hits (Larva runs at Link)" by world priority 80 in hits at 3140 2250
+  take swing_boomerang
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_boomerang__prepare_jump "Boomerang hits (Larva crouches to leap)" by world priority 80 in hits at 3000 2320
+  take swing_boomerang
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_boomerang__jump "Boomerang hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3140 2320
+  take swing_boomerang
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_boomerang__land "Boomerang hits (Larva lands)" by world priority 80 in hits at 3000 2390
+  take swing_boomerang
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_boomerang__flee "Boomerang hits (Larva runs away from Link)" by world priority 80 in hits at 3140 2390
+  take swing_boomerang
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_boomerang__stunned "Boomerang hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3000 2460
+  take swing_boomerang
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3000 2530
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__egg_rest_ceiling "Kokiri Sword slash hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3140 2530
+  take swing_slash_kokiri
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_slash_kokiri__egg_rest_floor "Kokiri Sword slash hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3000 2600
+  take swing_slash_kokiri
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_slash_kokiri__egg_fall_room "Kokiri Sword slash hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3140 2600
+  take swing_slash_kokiri
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_slash_kokiri__egg_fall_boss "Kokiri Sword slash hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3000 2670
+  take swing_slash_kokiri
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_slash_kokiri__hatch "Kokiri Sword slash hits (Larva breaks out of its shell)" by world priority 80 in hits at 3140 2670
+  take swing_slash_kokiri
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slash_kokiri__stand "Kokiri Sword slash hits (Larva stands and watches Link)" by world priority 80 in hits at 3000 2740
+  take swing_slash_kokiri
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slash_kokiri__chase "Kokiri Sword slash hits (Larva runs at Link)" by world priority 80 in hits at 3140 2740
+  take swing_slash_kokiri
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slash_kokiri__prepare_jump "Kokiri Sword slash hits (Larva crouches to leap)" by world priority 80 in hits at 3000 2810
+  take swing_slash_kokiri
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slash_kokiri__jump "Kokiri Sword slash hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3140 2810
+  take swing_slash_kokiri
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slash_kokiri__land "Kokiri Sword slash hits (Larva lands)" by world priority 80 in hits at 3000 2880
+  take swing_slash_kokiri
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slash_kokiri__flee "Kokiri Sword slash hits (Larva runs away from Link)" by world priority 80 in hits at 3140 2880
+  take swing_slash_kokiri
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_slash_kokiri__stunned "Kokiri Sword slash hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3000 2950
+  take swing_slash_kokiri
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 3020
+  take swing_magic_fire
+
+verb hit_magic_fire__egg_rest_ceiling "Din's Fire hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3140 3020
+  take swing_magic_fire
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_magic_fire__egg_rest_floor "Din's Fire hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3000 3090
+  take swing_magic_fire
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_magic_fire__egg_fall_room "Din's Fire hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3140 3090
+  take swing_magic_fire
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_magic_fire__egg_fall_boss "Din's Fire hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3000 3160
+  take swing_magic_fire
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_magic_fire__hatch "Din's Fire hits (Larva breaks out of its shell)" by world priority 80 in hits at 3140 3160
+  take swing_magic_fire
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_magic_fire__stand "Din's Fire hits (Larva stands and watches Link)" by world priority 80 in hits at 3000 3230
+  take swing_magic_fire
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_magic_fire__chase "Din's Fire hits (Larva runs at Link)" by world priority 80 in hits at 3140 3230
+  take swing_magic_fire
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_magic_fire__prepare_jump "Din's Fire hits (Larva crouches to leap)" by world priority 80 in hits at 3000 3300
+  take swing_magic_fire
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_magic_fire__jump "Din's Fire hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3140 3300
+  take swing_magic_fire
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_magic_fire__land "Din's Fire hits (Larva lands)" by world priority 80 in hits at 3000 3370
+  take swing_magic_fire
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_magic_fire__flee "Din's Fire hits (Larva runs away from Link)" by world priority 80 in hits at 3140 3370
+  take swing_magic_fire
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_magic_fire__stunned "Din's Fire hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3000 3440
+  take swing_magic_fire
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 3440
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 3510
+  take swing_shield
+
+verb hit_shield__egg_rest_ceiling "Shield hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3000 3580
+  take swing_shield
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_shield__egg_rest_floor "Shield hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3140 3580
+  take swing_shield
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_shield__egg_fall_room "Shield hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3000 3650
+  take swing_shield
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_shield__egg_fall_boss "Shield hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3140 3650
+  take swing_shield
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_shield__jump "Shield hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3000 3720
+  take swing_shield
+  take phase_jump
+  give phase_land
+  give timer_land
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3000 3790
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__egg_rest_ceiling "Kokiri spin attack hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3140 3790
+  take swing_spin_kokiri
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_spin_kokiri__egg_rest_floor "Kokiri spin attack hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3000 3860
+  take swing_spin_kokiri
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_spin_kokiri__egg_fall_room "Kokiri spin attack hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3140 3860
+  take swing_spin_kokiri
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_spin_kokiri__egg_fall_boss "Kokiri spin attack hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3000 3930
+  take swing_spin_kokiri
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_spin_kokiri__hatch "Kokiri spin attack hits (Larva breaks out of its shell)" by world priority 80 in hits at 3140 3930
+  take swing_spin_kokiri
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_spin_kokiri__stand "Kokiri spin attack hits (Larva stands and watches Link)" by world priority 80 in hits at 3000 4000
+  take swing_spin_kokiri
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_spin_kokiri__chase "Kokiri spin attack hits (Larva runs at Link)" by world priority 80 in hits at 3140 4000
+  take swing_spin_kokiri
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_spin_kokiri__prepare_jump "Kokiri spin attack hits (Larva crouches to leap)" by world priority 80 in hits at 3000 4070
+  take swing_spin_kokiri
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_spin_kokiri__jump "Kokiri spin attack hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3140 4070
+  take swing_spin_kokiri
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_spin_kokiri__land "Kokiri spin attack hits (Larva lands)" by world priority 80 in hits at 3000 4140
+  take swing_spin_kokiri
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_spin_kokiri__flee "Kokiri spin attack hits (Larva runs away from Link)" by world priority 80 in hits at 3140 4140
+  take swing_spin_kokiri
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb hit_spin_kokiri__stunned "Kokiri spin attack hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3000 4210
+  take swing_spin_kokiri
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give dmg_body
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3140 4210
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 4280
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__egg_rest_ceiling "Kokiri jump attack hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3000 4350
+  take swing_jump_kokiri
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_jump_kokiri__egg_rest_floor "Kokiri jump attack hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3140 4350
+  take swing_jump_kokiri
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_jump_kokiri__egg_fall_room "Kokiri jump attack hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3000 4420
+  take swing_jump_kokiri
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_jump_kokiri__egg_fall_boss "Kokiri jump attack hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3140 4420
+  take swing_jump_kokiri
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_jump_kokiri__hatch "Kokiri jump attack hits (Larva breaks out of its shell)" by world priority 80 in hits at 3000 4490
+  take swing_jump_kokiri
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stand "Kokiri jump attack hits (Larva stands and watches Link)" by world priority 80 in hits at 3140 4490
+  take swing_jump_kokiri
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri__chase "Kokiri jump attack hits (Larva runs at Link)" by world priority 80 in hits at 3000 4560
+  take swing_jump_kokiri
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri__prepare_jump "Kokiri jump attack hits (Larva crouches to leap)" by world priority 80 in hits at 3140 4560
+  take swing_jump_kokiri
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri__jump "Kokiri jump attack hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3000 4630
+  take swing_jump_kokiri
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri__land "Kokiri jump attack hits (Larva lands)" by world priority 80 in hits at 3140 4630
+  take swing_jump_kokiri
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri__flee "Kokiri jump attack hits (Larva runs away from Link)" by world priority 80 in hits at 3000 4700
+  take swing_jump_kokiri
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri__stunned "Kokiri jump attack hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3140 4700
+  take swing_jump_kokiri
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 4770
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__egg_rest_ceiling "Kokiri jump attack hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3000 4840
+  take swing_jump_kokiri_self
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_jump_kokiri_self__egg_rest_floor "Kokiri jump attack hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3140 4840
+  take swing_jump_kokiri_self
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_jump_kokiri_self__egg_fall_room "Kokiri jump attack hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3000 4910
+  take swing_jump_kokiri_self
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_jump_kokiri_self__egg_fall_boss "Kokiri jump attack hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3140 4910
+  take swing_jump_kokiri_self
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_jump_kokiri_self__hatch "Kokiri jump attack hits (Larva breaks out of its shell)" by world priority 80 in hits at 3000 4980
+  take swing_jump_kokiri_self
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stand "Kokiri jump attack hits (Larva stands and watches Link)" by world priority 80 in hits at 3140 4980
+  take swing_jump_kokiri_self
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__chase "Kokiri jump attack hits (Larva runs at Link)" by world priority 80 in hits at 3000 5050
+  take swing_jump_kokiri_self
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__prepare_jump "Kokiri jump attack hits (Larva crouches to leap)" by world priority 80 in hits at 3140 5050
+  take swing_jump_kokiri_self
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__jump "Kokiri jump attack hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3000 5120
+  take swing_jump_kokiri_self
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__land "Kokiri jump attack hits (Larva lands)" by world priority 80 in hits at 3140 5120
+  take swing_jump_kokiri_self
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__flee "Kokiri jump attack hits (Larva runs away from Link)" by world priority 80 in hits at 3000 5190
+  take swing_jump_kokiri_self
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb hit_jump_kokiri_self__stunned "Kokiri jump attack hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3140 5190
+  take swing_jump_kokiri_self
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give 2 dmg_body
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3000 5260
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 5330
+  take swing_jump_master
+
+verb hit_jump_master__egg_rest_ceiling "Master Sword jump attack hits (Gohma egg clings to the ceiling)" by world priority 80 in hits at 3140 5330
+  take swing_jump_master
+  take phase_egg_rest_ceiling
+  give link_wins
+
+verb hit_jump_master__egg_rest_floor "Master Sword jump attack hits (Gohma egg sits on the floor)" by world priority 80 in hits at 3000 5400
+  take swing_jump_master
+  take phase_egg_rest_floor
+  give link_wins
+
+verb hit_jump_master__egg_fall_room "Master Sword jump attack hits (Gohma egg drops and hatches on landing)" by world priority 80 in hits at 3140 5400
+  take swing_jump_master
+  take phase_egg_fall_room
+  give link_wins
+
+verb hit_jump_master__egg_fall_boss "Master Sword jump attack hits (Gohma's egg bounces and wobbles before hatching)" by world priority 80 in hits at 3000 5470
+  take swing_jump_master
+  take phase_egg_fall_boss
+  give link_wins
+
+verb hit_jump_master__hatch "Master Sword jump attack hits (Larva breaks out of its shell)" by world priority 80 in hits at 3140 5470
+  take swing_jump_master
+  take phase_hatch
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master__stand "Master Sword jump attack hits (Larva stands and watches Link)" by world priority 80 in hits at 3000 5540
+  take swing_jump_master
+  take phase_stand
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master__chase "Master Sword jump attack hits (Larva runs at Link)" by world priority 80 in hits at 3140 5540
+  take swing_jump_master
+  take phase_chase
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master__prepare_jump "Master Sword jump attack hits (Larva crouches to leap)" by world priority 80 in hits at 3000 5610
+  take swing_jump_master
+  take phase_prepare_jump
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master__jump "Master Sword jump attack hits (Larva leaps headfirst at Link)" by world priority 80 in hits at 3140 5610
+  take swing_jump_master
+  take phase_jump
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master__land "Master Sword jump attack hits (Larva lands)" by world priority 80 in hits at 3000 5680
+  take swing_jump_master
+  take phase_land
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master__flee "Master Sword jump attack hits (Larva runs away from Link)" by world priority 80 in hits at 3140 5680
+  take swing_jump_master
+  take phase_flee
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb hit_jump_master__stunned "Master Sword jump attack hits (Larva is stunned by a Deku Nut)" by world priority 80 in hits at 3000 5750
+  take swing_jump_master
+  take phase_stunned
+  give phase_hurt
+  give timer_hurt
+  give 4 dmg_body
+
+verb body_empty_in_hurt "Gohma Larva runs out (Larva reels from a hit)" by world priority 90 in enemy_health at 2500 220
+  unless hp_body
+  take alive_body
+  take phase_hurt
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 570
+  take link_turn
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 570
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 640
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 640
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 710
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 710
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 780
+  take link_turn
+  take has_red_potion
+  give 8 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 780
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2680 850
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2820 850
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 920
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Gohma Larva gets ready" by world priority 70 in enemy at 2180 1060
+  take enemy_turn
+  give enemy_act
+
+verb egg_rest_ceiling_step_1 "Link comes close and the egg drops" by world priority 69 in enemy at 2040 1130
+  take enemy_act
+  take phase_egg_rest_ceiling
+  give phase_egg_fall_room
+  give beat_end
+  need range_near
+
+verb egg_rest_ceiling_holds "Gohma egg clings to the ceiling: nothing changes" by world priority 68 in enemy at 2180 1130
+  take enemy_act
+  need phase_egg_rest_ceiling
+  give beat_end
+
+verb egg_rest_floor_step_1 "Link bumps the egg and it stirs" by world priority 69 in enemy at 2040 1200
+  take enemy_act
+  take phase_egg_rest_floor
+  give phase_egg_fall_room
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb egg_rest_floor_holds "Gohma egg sits on the floor: nothing changes" by world priority 68 in enemy at 2180 1200
+  take enemy_act
+  need phase_egg_rest_floor
+  give beat_end
+
+verb egg_fall_room_step_1 "The egg lands on Link and hatches" by world priority 69 in enemy at 2040 1270
+  take enemy_act
+  take phase_egg_fall_room
+  give phase_hatch
+  give timer_hatch
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb egg_fall_room_step_2 "The egg lands and hatches" by world priority 69 in enemy at 2180 1270
+  take enemy_act
+  take phase_egg_fall_room
+  give phase_hatch
+  give timer_hatch
+  give beat_end
+  need range_far
+
+verb egg_fall_boss_ticks "Gohma's egg bounces and wobbles before hatching: a beat passes" by world priority 71 in enemy at 2040 1340
+  take enemy_turn
+  need phase_egg_fall_boss
+  take timer_egg_fall_boss
+  give enemy_act
+
+verb egg_fall_boss_step_1 "Link bumps the wobbling egg" by world priority 69 in enemy at 2180 1340
+  take enemy_act
+  need phase_egg_fall_boss
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb egg_fall_boss_step_2 "The egg hatches" by world priority 69 in enemy at 2040 1410
+  take enemy_act
+  take phase_egg_fall_boss
+  give phase_hatch
+  give timer_hatch
+  unless timer_egg_fall_boss
+  give beat_end
+
+verb egg_fall_boss_holds "Gohma's egg bounces and wobbles before hatching: nothing changes" by world priority 68 in enemy at 2180 1410
+  take enemy_act
+  need phase_egg_fall_boss
+  give beat_end
+
+verb hatch_ticks "Larva breaks out of its shell: a beat passes" by world priority 71 in enemy at 2040 1480
+  take enemy_turn
+  need phase_hatch
+  take timer_hatch
+  give enemy_act
+
+verb hatch_step_1 "Larva breaks out against Link" by world priority 69 in enemy at 2180 1480
+  take enemy_act
+  take phase_hatch
+  give phase_stand
+  give timer_stand
+  unless timer_hatch
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb hatch_step_2 "Larva is out" by world priority 69 in enemy at 2040 1550
+  take enemy_act
+  take phase_hatch
+  give phase_stand
+  give timer_stand
+  unless timer_hatch
+  give beat_end
+  need range_far
+
+verb stand_ticks "Larva stands and watches Link: a beat passes" by world priority 71 in enemy at 2180 1550
+  take enemy_turn
+  need phase_stand
+  take timer_stand
+  give enemy_act
+
+verb stand_step_1 "Link bumps the standing larva" by world priority 69 in enemy at 2040 1620
+  take enemy_act
+  need phase_stand
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb stand_step_2 "Larva starts running" by world priority 69 in enemy at 2180 1620
+  take enemy_act
+  take phase_stand
+  give phase_chase
+  unless timer_stand
+  give beat_end
+
+verb chase_step_1 "Larva runs into Link and crouches" by world priority 69 in enemy at 2040 1690
+  take enemy_act
+  take phase_chase
+  give phase_prepare_jump
+  give 2 timer_prepare_jump
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb chase_step_2 "Larva reaches Link and crouches" by world priority 69 in enemy at 2180 1690
+  take enemy_act
+  take phase_chase
+  give phase_prepare_jump
+  give 2 timer_prepare_jump
+  give beat_end
+  take range_far
+  give range_near
+
+verb prepare_jump_ticks "Larva crouches to leap: a beat passes" by world priority 71 in enemy at 2040 1760
+  take enemy_turn
+  need phase_prepare_jump
+  take timer_prepare_jump
+  give enemy_act
+
+verb prepare_jump_step_1 "Link bumps the crouching larva" by world priority 69 in enemy at 2180 1760
+  take enemy_act
+  need phase_prepare_jump
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb prepare_jump_step_2 "Larva leaps" by world priority 69 in enemy at 2040 1830
+  take enemy_act
+  take phase_prepare_jump
+  give phase_jump
+  unless timer_prepare_jump
+  give beat_end
+
+verb prepare_jump_holds "Larva crouches to leap: nothing changes" by world priority 68 in enemy at 2180 1830
+  take enemy_act
+  need phase_prepare_jump
+  give beat_end
+
+verb jump_step_1 "Larva headbutts Link" by world priority 69 in enemy at 2040 1900
+  take enemy_act
+  take phase_jump
+  give phase_land
+  give timer_land
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb jump_step_2 "Larva lands short" by world priority 69 in enemy at 2180 1900
+  take enemy_act
+  take phase_jump
+  give phase_land
+  give timer_land
+  give beat_end
+  need range_far
+
+verb land_ticks "Larva lands: a beat passes" by world priority 71 in enemy at 2040 1970
+  take enemy_turn
+  need phase_land
+  take timer_land
+  give enemy_act
+
+verb land_step_1 "Larva lands against Link" by world priority 69 in enemy at 2180 1970
+  take enemy_act
+  take phase_land
+  give phase_stand
+  give timer_stand
+  unless timer_land
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb land_step_2 "Larva steadies itself" by world priority 69 in enemy at 2040 2040
+  take enemy_act
+  take phase_land
+  give phase_stand
+  give timer_stand
+  unless timer_land
+  give beat_end
+  need range_far
+
+verb hurt_ticks "Larva reels from a hit: a beat passes" by world priority 71 in enemy at 2180 2040
+  take enemy_turn
+  need phase_hurt
+  take timer_hurt
+  give enemy_act
+
+verb hurt_step_1 "The reeling larva bumps Link and turns to run" by world priority 69 in enemy at 2040 2110
+  take enemy_act
+  take phase_hurt
+  give phase_flee
+  give timer_flee
+  unless timer_hurt
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb hurt_step_2 "Larva turns to run" by world priority 69 in enemy at 2180 2110
+  take enemy_act
+  take phase_hurt
+  give phase_flee
+  give timer_flee
+  unless timer_hurt
+  give beat_end
+  need range_far
+
+verb flee_ticks "Larva runs away from Link: a beat passes" by world priority 71 in enemy at 2040 2180
+  take enemy_turn
+  need phase_flee
+  take timer_flee
+  give enemy_act
+
+verb flee_step_1 "Larva bumps Link as it runs off" by world priority 69 in enemy at 2180 2180
+  take enemy_act
+  take phase_flee
+  give phase_stand
+  give timer_stand
+  unless timer_flee
+  give incoming_contact
+  give beat_end
+  take range_near
+  give range_far
+
+verb flee_step_2 "Larva stops running" by world priority 69 in enemy at 2040 2250
+  take enemy_act
+  take phase_flee
+  give phase_stand
+  give timer_stand
+  unless timer_flee
+  give beat_end
+  need range_far
+
+verb stunned_ticks "Larva is stunned by a Deku Nut: a beat passes" by world priority 71 in enemy at 2180 2250
+  take enemy_turn
+  need phase_stunned
+  take timer_stunned
+  give enemy_act
+
+verb stunned_step_1 "Link bumps the stunned larva" by world priority 69 in enemy at 2040 2320
+  take enemy_act
+  need phase_stunned
+  give incoming_contact
+  give beat_end
+  need range_near
+
+verb stunned_step_2 "Larva shakes off the stun" by world priority 69 in enemy at 2180 2320
+  take enemy_act
+  take phase_stunned
+  give phase_stand
+  give timer_stand
+  unless timer_stunned
+  give beat_end
+
+verb stunned_holds "Larva is stunned by a Deku Nut: nothing changes" by world priority 68 in enemy at 2040 2390
+  take enemy_act
+  need phase_stunned
+  give beat_end
+
+verb contact_blocked_deku_shield "Larva body or headbutt: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+  take incoming_contact
+  need guard_with_deku_shield
+
+verb contact_blocked_hylian_shield "Larva body or headbutt: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_contact
+  need guard_with_hylian_shield
+
+verb contact_dodged "Larva body or headbutt: dodged" by world priority 60 in attacks at 3460 150
+  take incoming_contact
+  need link_dodge
+  unless link_guard
+
+verb contact_nayru "Larva body or headbutt: Nayru's Love holds" by world priority 60 in attacks at 3320 220
+  take incoming_contact
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb contact_lands "Larva body or headbutt hits Link" by world priority 60 in attacks at 3460 220
+  take incoming_contact
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  give 2 link_dmg
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 580 290
+  need beat_end
+  take link_dodge
+
+verb nayru_ticks "Link: nayru wears on" by world priority 48 in beat at 580 360
+  take beat_end
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 48 in beat at 440 430
+  take beat_end
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 47 in beat at 440 500
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 47 in beat at 580 500
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 47 in beat at 440 570
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 47 in beat at 580 570
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 640
+  take lens_count
+  unless lens_on

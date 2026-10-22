@@ -1,0 +1,2032 @@
+maps 2
+title "Ocarina of Time combat: Link vs Iron Knuckle"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_adult "Link is an adult" in setup at 260 80
+state choose_variant "Which Iron Knuckle" in setup at 120 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Iron Knuckle answers" in beat at 580 80
+state enemy_act "Iron Knuckle acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 16/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 260 150
+state link_wins "Iron Knuckle defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_master_sword "Has master sword" in gear at 1860 80
+state has_hylian_shield "Has hylian shield" in gear at 1720 150
+state has_hookshot "Has hookshot" in gear at 1860 150
+state has_megaton_hammer "Has megaton hammer" in gear at 1720 220
+state has_bow "Has bow" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_bombchus "Has bombchus" in gear at 1860 290
+state has_mirror_shield "Has mirror shield" in gear at 1720 360
+state has_magic "Has magic" in gear at 1860 360
+state has_green_potion "Has green potion" in gear at 1720 430
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 430
+state has_giants_knife "Has giants knife" in gear at 1720 500
+state has_double_defense "Has double defense" in gear at 1860 500
+state has_fire_arrows "Has fire arrows" in gear at 1720 570
+state has_ice_arrows "Has ice arrows" in gear at 1860 570
+state has_light_arrows "Has light arrows" in gear at 1720 640
+state has_dins_fire "Has dins fire" in gear at 1860 640
+state has_nayrus_love "Has nayrus love" in gear at 1720 710
+state has_lens_of_truth "Has lens of truth" in gear at 1860 710
+state has_fairy "Has fairy" in gear at 1720 780
+state has_blue_potion "Has blue potion" in gear at 1860 780
+state phase_dormant "Iron Knuckle sits motionless" in enemy at 2040 80
+state phase_walk_armored "Armored Iron Knuckle stalks Link" in enemy at 2180 80
+state phase_vertical_armored "Armored Iron Knuckle raises its axe overhead" in enemy at 2040 150
+state phase_axe_stuck_armored "Armored Iron Knuckle has its axe stuck in the floor" in enemy at 2180 150
+state phase_horizontal_armored "Armored Iron Knuckle sweeps its axe sideways" in enemy at 2040 220
+state phase_recover_armored "Armored Iron Knuckle recovers from its sweep" in enemy at 2180 220
+state phase_walk_broken "Unarmored Iron Knuckle stalks Link" in enemy at 2040 290
+state phase_vertical_broken "Unarmored Iron Knuckle raises its axe overhead" in enemy at 2180 290
+state phase_axe_stuck_broken "Unarmored Iron Knuckle has its axe stuck in the floor" in enemy at 2040 360
+state phase_horizontal_broken "Unarmored Iron Knuckle sweeps its axe sideways" in enemy at 2180 360
+state phase_recover_broken "Unarmored Iron Knuckle recovers from its sweep" in enemy at 2040 430
+state phase_walk_nabooru "Nabooru's Iron Knuckle stalks Link" in enemy at 2180 430
+state phase_vertical_nabooru "Nabooru's Iron Knuckle raises its axe overhead" in enemy at 2040 500
+state phase_axe_stuck_nabooru "Nabooru's Iron Knuckle has its axe stuck in the floor" in enemy at 2180 500
+state phase_horizontal_nabooru "Nabooru's Iron Knuckle sweeps its axe sideways" in enemy at 2040 570
+state phase_recover_nabooru "Nabooru's Iron Knuckle recovers from its sweep" in enemy at 2180 570
+state phase_flinch "Unarmored Iron Knuckle reels from a hit" in enemy at 2040 640
+state hp_body "Iron Knuckle: health" marks 20 in enemy_health at 2360 80
+state hp_body_10 "Iron Knuckle: health up to 10" marks 10 in enemy_health at 2500 80
+state above_body_10 "Iron Knuckle: above 10" marks 1 in enemy_health at 2360 150
+state alive_body "Iron Knuckle: standing" marks 1 in enemy_health at 2500 150
+state dmg_body "Iron Knuckle: damage" in enemy_health at 2360 220
+state hp_nabooru "Nabooru's Iron Knuckle: health" marks 40 in enemy_health at 2500 220
+state hp_nabooru_10 "Nabooru's Iron Knuckle: health up to 10" marks 10 in enemy_health at 2360 290
+state above_nabooru_10 "Nabooru's Iron Knuckle: above 10" marks 1 in enemy_health at 2500 290
+state alive_nabooru "Nabooru's Iron Knuckle: standing" marks 1 in enemy_health at 2360 360
+state dmg_nabooru "Nabooru's Iron Knuckle: damage" in enemy_health at 2500 360
+state status_nayru "Link: nayru (beats left)" in link_state at 1220 290
+state lens_on "Lens of Truth on" in link_state at 1080 360
+state link_guard "Link holds up his shield" in link_state at 1220 360
+state link_dodge "Link dodges" in link_state at 1080 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_explosive "Explosion on its way" in hits at 3140 150
+state swing_arrow_normal "Arrow on its way" in hits at 3140 640
+state swing_hammer_swing "Hammer swing on its way" in hits at 3140 920
+state swing_hookshot "Hookshot on its way" in hits at 3140 1410
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 1550
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 2040
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 2530
+state swing_arrow_ice "Ice arrow on its way" in hits at 3000 2810
+state swing_arrow_light "Light arrow on its way" in hits at 3000 3090
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 3370
+state swing_shield "Shield on its way" in hits at 3140 3650
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 3720
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3000 4280
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3140 4770
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 5260
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 5820
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 6310
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3140 6800
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 710
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1220 710
+state incoming_axe "Iron Knuckle axe incoming" in attacks at 3320 80
+state tick_nayru "Beat ends: nayru checked" in beat at 440 360
+state lens_count "The Lens: beats toward the next cost" in beat at 580 430
+
+verb fight_adult_blade "Fight as adult Link: adult blade (5 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_adult
+  give 5 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give choose_variant
+
+verb fight_adult_spin "Fight as adult Link: adult spin (5 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_adult
+  give 5 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_giant "Fight as adult Link: adult giant (5 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_adult
+  give 5 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (5 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_adult
+  give 5 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give choose_variant
+
+verb fight_adult_dins "Fight as adult Link: adult dins (5 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_adult
+  give 5 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (5 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_adult
+  give 5 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_adult_lens "Fight as adult Link: adult lens (5 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_adult
+  give 5 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (5 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 5 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give choose_variant
+
+verb variant_common "Silver, black, or white Iron Knuckle" by world priority 30 in setup at 120 500
+  take choose_variant
+  give phase_dormant
+  give range_far
+  give link_turn
+
+verb variant_nabooru "Nabooru's Iron Knuckle" by world priority 30 in setup at 260 500
+  take choose_variant
+  give phase_walk_nabooru
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 5 link_heal
+
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb body_hurt "Iron Knuckle loses health" by world priority 97 in enemy_health at 2360 430
+  take dmg_body
+  take hp_body
+
+verb body_hurt_10 "Iron Knuckle loses health (10 or less)" by world priority 97 in enemy_health at 2500 430
+  take dmg_body
+  take hp_body_10
+  unless hp_body
+
+verb body_overkill "Iron Knuckle has no health left to lose" by world priority 96 in enemy_health at 2360 500
+  take dmg_body
+  unless hp_body
+  unless hp_body_10
+
+verb nabooru_hurt "Nabooru's Iron Knuckle loses health" by world priority 97 in enemy_health at 2500 500
+  take dmg_nabooru
+  take hp_nabooru
+
+verb nabooru_hurt_10 "Nabooru's Iron Knuckle loses health (10 or less)" by world priority 97 in enemy_health at 2360 570
+  take dmg_nabooru
+  take hp_nabooru_10
+  unless hp_nabooru
+
+verb nabooru_overkill "Nabooru's Iron Knuckle has no health left to lose" by world priority 96 in enemy_health at 2500 570
+  take dmg_nabooru
+  unless hp_nabooru
+  unless hp_nabooru_10
+
+verb link_deku_nut "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_explosive_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 80
+  take link_turn
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 150
+  take link_turn
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2820 150
+  take link_turn
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2680 220
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2820 220
+  take link_turn
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 290
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 290
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 360
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 360
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 430
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 430
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 500
+  take link_turn
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 500
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 570
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 570
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 640
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 640
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 710
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 710
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 780
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2820 780
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 850
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2820 850
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 920
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2820 920
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 990
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 990
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb hit_deku_nut__dormant "Deku Nut flash hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 150
+  take swing_deku_nut
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_explosive "Explosion hits" by world priority 79 in hits at 3000 220
+  take swing_explosive
+  give 2 dmg_body
+
+verb hit_explosive__dormant "Explosion hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3140 220
+  take swing_explosive
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_explosive__walk_broken "Explosion hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 290
+  take swing_explosive
+  take phase_walk_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__vertical_broken "Explosion hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 290
+  take swing_explosive
+  take phase_vertical_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__axe_stuck_broken "Explosion hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 360
+  take swing_explosive
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__horizontal_broken "Explosion hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 360
+  take swing_explosive
+  take phase_horizontal_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__recover_broken "Explosion hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 430
+  take swing_explosive
+  take phase_recover_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_explosive__walk_nabooru "Explosion hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 430
+  take swing_explosive
+  need phase_walk_nabooru
+  give 2 dmg_nabooru
+
+verb hit_explosive__vertical_nabooru "Explosion hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 500
+  take swing_explosive
+  need phase_vertical_nabooru
+  give 2 dmg_nabooru
+
+verb hit_explosive__axe_stuck_nabooru "Explosion hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 500
+  take swing_explosive
+  need phase_axe_stuck_nabooru
+  give 2 dmg_nabooru
+
+verb hit_explosive__horizontal_nabooru "Explosion hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 570
+  take swing_explosive
+  need phase_horizontal_nabooru
+  give 2 dmg_nabooru
+
+verb hit_explosive__recover_nabooru "Explosion hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 570
+  take swing_explosive
+  need phase_recover_nabooru
+  give 2 dmg_nabooru
+
+verb miss_explosive__flinch "Explosion has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3000 640
+  take swing_explosive
+  need phase_flinch
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3000 710
+  take swing_arrow_normal
+
+verb hit_arrow_normal__dormant "Arrow hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3140 710
+  take swing_arrow_normal
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_arrow_normal__walk_broken "Arrow hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 780
+  take swing_arrow_normal
+  take phase_walk_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__vertical_broken "Arrow hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 780
+  take swing_arrow_normal
+  take phase_vertical_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__axe_stuck_broken "Arrow hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 850
+  take swing_arrow_normal
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__horizontal_broken "Arrow hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 850
+  take swing_arrow_normal
+  take phase_horizontal_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_normal__recover_broken "Arrow hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 920
+  take swing_arrow_normal
+  take phase_recover_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing "Hammer swing hits" by world priority 79 in hits at 3000 990
+  take swing_hammer_swing
+  give 2 dmg_body
+
+verb hit_hammer_swing__dormant "Hammer swing hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3140 990
+  take swing_hammer_swing
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_hammer_swing__walk_broken "Hammer swing hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 1060
+  take swing_hammer_swing
+  take phase_walk_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__vertical_broken "Hammer swing hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 1060
+  take swing_hammer_swing
+  take phase_vertical_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__axe_stuck_broken "Hammer swing hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 1130
+  take swing_hammer_swing
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__horizontal_broken "Hammer swing hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 1130
+  take swing_hammer_swing
+  take phase_horizontal_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__recover_broken "Hammer swing hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 1200
+  take swing_hammer_swing
+  take phase_recover_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_hammer_swing__walk_nabooru "Hammer swing hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 1200
+  take swing_hammer_swing
+  need phase_walk_nabooru
+  give 2 dmg_nabooru
+
+verb hit_hammer_swing__vertical_nabooru "Hammer swing hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 1270
+  take swing_hammer_swing
+  need phase_vertical_nabooru
+  give 2 dmg_nabooru
+
+verb hit_hammer_swing__axe_stuck_nabooru "Hammer swing hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 1270
+  take swing_hammer_swing
+  need phase_axe_stuck_nabooru
+  give 2 dmg_nabooru
+
+verb hit_hammer_swing__horizontal_nabooru "Hammer swing hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 1340
+  take swing_hammer_swing
+  need phase_horizontal_nabooru
+  give 2 dmg_nabooru
+
+verb hit_hammer_swing__recover_nabooru "Hammer swing hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 1340
+  take swing_hammer_swing
+  need phase_recover_nabooru
+  give 2 dmg_nabooru
+
+verb miss_hammer_swing__flinch "Hammer swing has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3000 1410
+  take swing_hammer_swing
+  need phase_flinch
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3000 1480
+  take swing_hookshot
+
+verb hit_hookshot__dormant "Hookshot hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3140 1480
+  take swing_hookshot
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_slash_master "Master Sword slash hits" by world priority 79 in hits at 3140 1550
+  take swing_slash_master
+  give 2 dmg_body
+
+verb hit_slash_master__dormant "Master Sword slash hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 1620
+  take swing_slash_master
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_slash_master__walk_broken "Master Sword slash hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 1620
+  take swing_slash_master
+  take phase_walk_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__vertical_broken "Master Sword slash hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 1690
+  take swing_slash_master
+  take phase_vertical_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__axe_stuck_broken "Master Sword slash hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 1690
+  take swing_slash_master
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__horizontal_broken "Master Sword slash hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 1760
+  take swing_slash_master
+  take phase_horizontal_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__recover_broken "Master Sword slash hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 1760
+  take swing_slash_master
+  take phase_recover_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_slash_master__walk_nabooru "Master Sword slash hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 1830
+  take swing_slash_master
+  need phase_walk_nabooru
+  give 2 dmg_nabooru
+
+verb hit_slash_master__vertical_nabooru "Master Sword slash hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 1830
+  take swing_slash_master
+  need phase_vertical_nabooru
+  give 2 dmg_nabooru
+
+verb hit_slash_master__axe_stuck_nabooru "Master Sword slash hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 1900
+  take swing_slash_master
+  need phase_axe_stuck_nabooru
+  give 2 dmg_nabooru
+
+verb hit_slash_master__horizontal_nabooru "Master Sword slash hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 1900
+  take swing_slash_master
+  need phase_horizontal_nabooru
+  give 2 dmg_nabooru
+
+verb hit_slash_master__recover_nabooru "Master Sword slash hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 1970
+  take swing_slash_master
+  need phase_recover_nabooru
+  give 2 dmg_nabooru
+
+verb miss_slash_master__flinch "Master Sword slash has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3140 1970
+  take swing_slash_master
+  need phase_flinch
+
+verb hit_slash_giant "Two-handed sword slash hits" by world priority 79 in hits at 3140 2040
+  take swing_slash_giant
+  give 4 dmg_body
+
+verb hit_slash_giant__dormant "Two-handed sword slash hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 2110
+  take swing_slash_giant
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_slash_giant__walk_broken "Two-handed sword slash hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 2110
+  take swing_slash_giant
+  take phase_walk_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__vertical_broken "Two-handed sword slash hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 2180
+  take swing_slash_giant
+  take phase_vertical_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__axe_stuck_broken "Two-handed sword slash hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 2180
+  take swing_slash_giant
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__horizontal_broken "Two-handed sword slash hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 2250
+  take swing_slash_giant
+  take phase_horizontal_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__recover_broken "Two-handed sword slash hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 2250
+  take swing_slash_giant
+  take phase_recover_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_slash_giant__walk_nabooru "Two-handed sword slash hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 2320
+  take swing_slash_giant
+  need phase_walk_nabooru
+  give 4 dmg_nabooru
+
+verb hit_slash_giant__vertical_nabooru "Two-handed sword slash hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 2320
+  take swing_slash_giant
+  need phase_vertical_nabooru
+  give 4 dmg_nabooru
+
+verb hit_slash_giant__axe_stuck_nabooru "Two-handed sword slash hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 2390
+  take swing_slash_giant
+  need phase_axe_stuck_nabooru
+  give 4 dmg_nabooru
+
+verb hit_slash_giant__horizontal_nabooru "Two-handed sword slash hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 2390
+  take swing_slash_giant
+  need phase_horizontal_nabooru
+  give 4 dmg_nabooru
+
+verb hit_slash_giant__recover_nabooru "Two-handed sword slash hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 2460
+  take swing_slash_giant
+  need phase_recover_nabooru
+  give 4 dmg_nabooru
+
+verb miss_slash_giant__flinch "Two-handed sword slash has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3140 2460
+  take swing_slash_giant
+  need phase_flinch
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3140 2530
+  take swing_arrow_fire
+
+verb hit_arrow_fire__dormant "Fire arrow hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 2600
+  take swing_arrow_fire
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_arrow_fire__walk_broken "Fire arrow hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 2600
+  take swing_arrow_fire
+  take phase_walk_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__vertical_broken "Fire arrow hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 2670
+  take swing_arrow_fire
+  take phase_vertical_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__axe_stuck_broken "Fire arrow hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 2670
+  take swing_arrow_fire
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__horizontal_broken "Fire arrow hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 2740
+  take swing_arrow_fire
+  take phase_horizontal_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_fire__recover_broken "Fire arrow hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 2740
+  take swing_arrow_fire
+  take phase_recover_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3140 2810
+  take swing_arrow_ice
+
+verb hit_arrow_ice__dormant "Ice arrow hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 2880
+  take swing_arrow_ice
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_arrow_ice__walk_broken "Ice arrow hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 2880
+  take swing_arrow_ice
+  take phase_walk_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_ice__vertical_broken "Ice arrow hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 2950
+  take swing_arrow_ice
+  take phase_vertical_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_ice__axe_stuck_broken "Ice arrow hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 2950
+  take swing_arrow_ice
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_ice__horizontal_broken "Ice arrow hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 3020
+  take swing_arrow_ice
+  take phase_horizontal_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_ice__recover_broken "Ice arrow hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 3020
+  take swing_arrow_ice
+  take phase_recover_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3140 3090
+  take swing_arrow_light
+
+verb hit_arrow_light__dormant "Light arrow hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 3160
+  take swing_arrow_light
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_arrow_light__walk_broken "Light arrow hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 3160
+  take swing_arrow_light
+  take phase_walk_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_light__vertical_broken "Light arrow hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 3230
+  take swing_arrow_light
+  take phase_vertical_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_light__axe_stuck_broken "Light arrow hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 3230
+  take swing_arrow_light
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_light__horizontal_broken "Light arrow hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 3300
+  take swing_arrow_light
+  take phase_horizontal_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_arrow_light__recover_broken "Light arrow hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 3300
+  take swing_arrow_light
+  take phase_recover_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 3370
+  take swing_magic_fire
+
+verb hit_magic_fire__dormant "Din's Fire hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 3440
+  take swing_magic_fire
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_magic_fire__walk_broken "Din's Fire hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 3440
+  take swing_magic_fire
+  take phase_walk_broken
+  give phase_flinch
+
+verb hit_magic_fire__vertical_broken "Din's Fire hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 3510
+  take swing_magic_fire
+  take phase_vertical_broken
+  give phase_flinch
+
+verb hit_magic_fire__axe_stuck_broken "Din's Fire hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 3510
+  take swing_magic_fire
+  take phase_axe_stuck_broken
+  give phase_flinch
+
+verb hit_magic_fire__horizontal_broken "Din's Fire hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 3580
+  take swing_magic_fire
+  take phase_horizontal_broken
+  give phase_flinch
+
+verb hit_magic_fire__recover_broken "Din's Fire hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 3580
+  take swing_magic_fire
+  take phase_recover_broken
+  give phase_flinch
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 3650
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 3720
+  take swing_shield
+
+verb hit_spin_giant "Two-handed spin attack hits" by world priority 79 in hits at 3000 3790
+  take swing_spin_giant
+  give 4 dmg_body
+
+verb hit_spin_giant__dormant "Two-handed spin attack hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3140 3790
+  take swing_spin_giant
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_spin_giant__walk_broken "Two-handed spin attack hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 3860
+  take swing_spin_giant
+  take phase_walk_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__vertical_broken "Two-handed spin attack hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 3860
+  take swing_spin_giant
+  take phase_vertical_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__axe_stuck_broken "Two-handed spin attack hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 3930
+  take swing_spin_giant
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__horizontal_broken "Two-handed spin attack hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 3930
+  take swing_spin_giant
+  take phase_horizontal_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__recover_broken "Two-handed spin attack hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 4000
+  take swing_spin_giant
+  take phase_recover_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_spin_giant__walk_nabooru "Two-handed spin attack hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 4000
+  take swing_spin_giant
+  need phase_walk_nabooru
+  give 4 dmg_nabooru
+
+verb hit_spin_giant__vertical_nabooru "Two-handed spin attack hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 4070
+  take swing_spin_giant
+  need phase_vertical_nabooru
+  give 4 dmg_nabooru
+
+verb hit_spin_giant__axe_stuck_nabooru "Two-handed spin attack hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 4070
+  take swing_spin_giant
+  need phase_axe_stuck_nabooru
+  give 4 dmg_nabooru
+
+verb hit_spin_giant__horizontal_nabooru "Two-handed spin attack hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 4140
+  take swing_spin_giant
+  need phase_horizontal_nabooru
+  give 4 dmg_nabooru
+
+verb hit_spin_giant__recover_nabooru "Two-handed spin attack hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 4140
+  take swing_spin_giant
+  need phase_recover_nabooru
+  give 4 dmg_nabooru
+
+verb miss_spin_giant__flinch "Two-handed spin attack has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3000 4210
+  take swing_spin_giant
+  need phase_flinch
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3140 4210
+  take swing_spin_giant
+  need range_far
+
+verb hit_spin_master "Master Sword spin attack hits" by world priority 79 in hits at 3140 4280
+  take swing_spin_master
+  give 2 dmg_body
+
+verb hit_spin_master__dormant "Master Sword spin attack hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 4350
+  take swing_spin_master
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_spin_master__walk_broken "Master Sword spin attack hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 4350
+  take swing_spin_master
+  take phase_walk_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__vertical_broken "Master Sword spin attack hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 4420
+  take swing_spin_master
+  take phase_vertical_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__axe_stuck_broken "Master Sword spin attack hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 4420
+  take swing_spin_master
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__horizontal_broken "Master Sword spin attack hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 4490
+  take swing_spin_master
+  take phase_horizontal_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__recover_broken "Master Sword spin attack hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 4490
+  take swing_spin_master
+  take phase_recover_broken
+  give phase_flinch
+  give 2 dmg_body
+
+verb hit_spin_master__walk_nabooru "Master Sword spin attack hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 4560
+  take swing_spin_master
+  need phase_walk_nabooru
+  give 2 dmg_nabooru
+
+verb hit_spin_master__vertical_nabooru "Master Sword spin attack hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 4560
+  take swing_spin_master
+  need phase_vertical_nabooru
+  give 2 dmg_nabooru
+
+verb hit_spin_master__axe_stuck_nabooru "Master Sword spin attack hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 4630
+  take swing_spin_master
+  need phase_axe_stuck_nabooru
+  give 2 dmg_nabooru
+
+verb hit_spin_master__horizontal_nabooru "Master Sword spin attack hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 4630
+  take swing_spin_master
+  need phase_horizontal_nabooru
+  give 2 dmg_nabooru
+
+verb hit_spin_master__recover_nabooru "Master Sword spin attack hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 4700
+  take swing_spin_master
+  need phase_recover_nabooru
+  give 2 dmg_nabooru
+
+verb miss_spin_master__flinch "Master Sword spin attack has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3140 4700
+  take swing_spin_master
+  need phase_flinch
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3000 4770
+  take swing_spin_master
+  need range_far
+
+verb hit_jump_giant "Two-handed jump attack hits" by world priority 79 in hits at 3000 4840
+  take swing_jump_giant
+  give 8 dmg_body
+
+verb hit_jump_giant__dormant "Two-handed jump attack hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3140 4840
+  take swing_jump_giant
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_jump_giant__walk_broken "Two-handed jump attack hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 4910
+  take swing_jump_giant
+  take phase_walk_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__vertical_broken "Two-handed jump attack hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 4910
+  take swing_jump_giant
+  take phase_vertical_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__axe_stuck_broken "Two-handed jump attack hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 4980
+  take swing_jump_giant
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__horizontal_broken "Two-handed jump attack hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 4980
+  take swing_jump_giant
+  take phase_horizontal_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__recover_broken "Two-handed jump attack hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 5050
+  take swing_jump_giant
+  take phase_recover_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant__walk_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 5050
+  take swing_jump_giant
+  need phase_walk_nabooru
+  give 8 dmg_nabooru
+
+verb hit_jump_giant__vertical_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 5120
+  take swing_jump_giant
+  need phase_vertical_nabooru
+  give 8 dmg_nabooru
+
+verb hit_jump_giant__axe_stuck_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 5120
+  take swing_jump_giant
+  need phase_axe_stuck_nabooru
+  give 8 dmg_nabooru
+
+verb hit_jump_giant__horizontal_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 5190
+  take swing_jump_giant
+  need phase_horizontal_nabooru
+  give 8 dmg_nabooru
+
+verb hit_jump_giant__recover_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 5190
+  take swing_jump_giant
+  need phase_recover_nabooru
+  give 8 dmg_nabooru
+
+verb miss_jump_giant__flinch "Two-handed jump attack has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3000 5260
+  take swing_jump_giant
+  need phase_flinch
+
+verb hit_jump_giant_self "Two-handed jump attack hits" by world priority 79 in hits at 3000 5330
+  take swing_jump_giant_self
+  give 8 dmg_body
+
+verb hit_jump_giant_self__dormant "Two-handed jump attack hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3140 5330
+  take swing_jump_giant_self
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_jump_giant_self__walk_broken "Two-handed jump attack hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 5400
+  take swing_jump_giant_self
+  take phase_walk_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__vertical_broken "Two-handed jump attack hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 5400
+  take swing_jump_giant_self
+  take phase_vertical_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__axe_stuck_broken "Two-handed jump attack hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 5470
+  take swing_jump_giant_self
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__horizontal_broken "Two-handed jump attack hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 5470
+  take swing_jump_giant_self
+  take phase_horizontal_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__recover_broken "Two-handed jump attack hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 5540
+  take swing_jump_giant_self
+  take phase_recover_broken
+  give phase_flinch
+  give 8 dmg_body
+
+verb hit_jump_giant_self__walk_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 5540
+  take swing_jump_giant_self
+  need phase_walk_nabooru
+  give 8 dmg_nabooru
+
+verb hit_jump_giant_self__vertical_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 5610
+  take swing_jump_giant_self
+  need phase_vertical_nabooru
+  give 8 dmg_nabooru
+
+verb hit_jump_giant_self__axe_stuck_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 5610
+  take swing_jump_giant_self
+  need phase_axe_stuck_nabooru
+  give 8 dmg_nabooru
+
+verb hit_jump_giant_self__horizontal_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 5680
+  take swing_jump_giant_self
+  need phase_horizontal_nabooru
+  give 8 dmg_nabooru
+
+verb hit_jump_giant_self__recover_nabooru "Two-handed jump attack hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 5680
+  take swing_jump_giant_self
+  need phase_recover_nabooru
+  give 8 dmg_nabooru
+
+verb miss_jump_giant_self__flinch "Two-handed jump attack has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3000 5750
+  take swing_jump_giant_self
+  need phase_flinch
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3140 5750
+  take swing_jump_giant_self
+  need range_far
+
+verb hit_jump_master "Master Sword jump attack hits" by world priority 79 in hits at 3140 5820
+  take swing_jump_master
+  give 4 dmg_body
+
+verb hit_jump_master__dormant "Master Sword jump attack hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 5890
+  take swing_jump_master
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_jump_master__walk_broken "Master Sword jump attack hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 5890
+  take swing_jump_master
+  take phase_walk_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__vertical_broken "Master Sword jump attack hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 5960
+  take swing_jump_master
+  take phase_vertical_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__axe_stuck_broken "Master Sword jump attack hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 5960
+  take swing_jump_master
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__horizontal_broken "Master Sword jump attack hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 6030
+  take swing_jump_master
+  take phase_horizontal_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__recover_broken "Master Sword jump attack hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 6030
+  take swing_jump_master
+  take phase_recover_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master__walk_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 6100
+  take swing_jump_master
+  need phase_walk_nabooru
+  give 4 dmg_nabooru
+
+verb hit_jump_master__vertical_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 6100
+  take swing_jump_master
+  need phase_vertical_nabooru
+  give 4 dmg_nabooru
+
+verb hit_jump_master__axe_stuck_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 6170
+  take swing_jump_master
+  need phase_axe_stuck_nabooru
+  give 4 dmg_nabooru
+
+verb hit_jump_master__horizontal_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 6170
+  take swing_jump_master
+  need phase_horizontal_nabooru
+  give 4 dmg_nabooru
+
+verb hit_jump_master__recover_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 6240
+  take swing_jump_master
+  need phase_recover_nabooru
+  give 4 dmg_nabooru
+
+verb miss_jump_master__flinch "Master Sword jump attack has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3140 6240
+  take swing_jump_master
+  need phase_flinch
+
+verb hit_jump_master_self "Master Sword jump attack hits" by world priority 79 in hits at 3140 6310
+  take swing_jump_master_self
+  give 4 dmg_body
+
+verb hit_jump_master_self__dormant "Master Sword jump attack hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3000 6380
+  take swing_jump_master_self
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_jump_master_self__walk_broken "Master Sword jump attack hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 6380
+  take swing_jump_master_self
+  take phase_walk_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__vertical_broken "Master Sword jump attack hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 6450
+  take swing_jump_master_self
+  take phase_vertical_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__axe_stuck_broken "Master Sword jump attack hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 6450
+  take swing_jump_master_self
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__horizontal_broken "Master Sword jump attack hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 6520
+  take swing_jump_master_self
+  take phase_horizontal_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__recover_broken "Master Sword jump attack hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 6520
+  take swing_jump_master_self
+  take phase_recover_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_jump_master_self__walk_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 6590
+  take swing_jump_master_self
+  need phase_walk_nabooru
+  give 4 dmg_nabooru
+
+verb hit_jump_master_self__vertical_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 6590
+  take swing_jump_master_self
+  need phase_vertical_nabooru
+  give 4 dmg_nabooru
+
+verb hit_jump_master_self__axe_stuck_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 6660
+  take swing_jump_master_self
+  need phase_axe_stuck_nabooru
+  give 4 dmg_nabooru
+
+verb hit_jump_master_self__horizontal_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 6660
+  take swing_jump_master_self
+  need phase_horizontal_nabooru
+  give 4 dmg_nabooru
+
+verb hit_jump_master_self__recover_nabooru "Master Sword jump attack hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 6730
+  take swing_jump_master_self
+  need phase_recover_nabooru
+  give 4 dmg_nabooru
+
+verb miss_jump_master_self__flinch "Master Sword jump attack has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3140 6730
+  take swing_jump_master_self
+  need phase_flinch
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3000 6800
+  take swing_jump_master_self
+  need range_far
+
+verb hit_hammer_jump "Hammer jump attack hits" by world priority 79 in hits at 3000 6870
+  take swing_hammer_jump
+  give 4 dmg_body
+
+verb hit_hammer_jump__dormant "Hammer jump attack hits (Iron Knuckle sits motionless)" by world priority 80 in hits at 3140 6870
+  take swing_hammer_jump
+  take phase_dormant
+  give phase_walk_armored
+
+verb hit_hammer_jump__walk_broken "Hammer jump attack hits (Unarmored Iron Knuckle stalks Link)" by world priority 80 in hits at 3000 6940
+  take swing_hammer_jump
+  take phase_walk_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__vertical_broken "Hammer jump attack hits (Unarmored Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3140 6940
+  take swing_hammer_jump
+  take phase_vertical_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__axe_stuck_broken "Hammer jump attack hits (Unarmored Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3000 7010
+  take swing_hammer_jump
+  take phase_axe_stuck_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__horizontal_broken "Hammer jump attack hits (Unarmored Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3140 7010
+  take swing_hammer_jump
+  take phase_horizontal_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__recover_broken "Hammer jump attack hits (Unarmored Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3000 7080
+  take swing_hammer_jump
+  take phase_recover_broken
+  give phase_flinch
+  give 4 dmg_body
+
+verb hit_hammer_jump__walk_nabooru "Hammer jump attack hits (Nabooru's Iron Knuckle stalks Link)" by world priority 80 in hits at 3140 7080
+  take swing_hammer_jump
+  need phase_walk_nabooru
+  give 4 dmg_nabooru
+
+verb hit_hammer_jump__vertical_nabooru "Hammer jump attack hits (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 80 in hits at 3000 7150
+  take swing_hammer_jump
+  need phase_vertical_nabooru
+  give 4 dmg_nabooru
+
+verb hit_hammer_jump__axe_stuck_nabooru "Hammer jump attack hits (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 80 in hits at 3140 7150
+  take swing_hammer_jump
+  need phase_axe_stuck_nabooru
+  give 4 dmg_nabooru
+
+verb hit_hammer_jump__horizontal_nabooru "Hammer jump attack hits (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 80 in hits at 3000 7220
+  take swing_hammer_jump
+  need phase_horizontal_nabooru
+  give 4 dmg_nabooru
+
+verb hit_hammer_jump__recover_nabooru "Hammer jump attack hits (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 80 in hits at 3140 7220
+  take swing_hammer_jump
+  need phase_recover_nabooru
+  give 4 dmg_nabooru
+
+verb miss_hammer_jump__flinch "Hammer jump attack has no effect (Unarmored Iron Knuckle reels from a hit)" by world priority 80 in hits at 3000 7290
+  take swing_hammer_jump
+  need phase_flinch
+
+verb body_empty_in_walk_armored "Iron Knuckle runs out (Armored Iron Knuckle stalks Link)" by world priority 90 in enemy_health at 2360 640
+  unless hp_body
+  unless hp_body_10
+  take alive_body
+  take phase_walk_armored
+  give link_wins
+
+verb body_empty_in_vertical_armored "Iron Knuckle runs out (Armored Iron Knuckle raises its axe overhead)" by world priority 90 in enemy_health at 2500 640
+  unless hp_body
+  unless hp_body_10
+  take alive_body
+  take phase_vertical_armored
+  give link_wins
+
+verb body_empty_in_axe_stuck_armored "Iron Knuckle runs out (Armored Iron Knuckle has its axe stuck in the floor)" by world priority 90 in enemy_health at 2360 710
+  unless hp_body
+  unless hp_body_10
+  take alive_body
+  take phase_axe_stuck_armored
+  give link_wins
+
+verb body_empty_in_horizontal_armored "Iron Knuckle runs out (Armored Iron Knuckle sweeps its axe sideways)" by world priority 90 in enemy_health at 2500 710
+  unless hp_body
+  unless hp_body_10
+  take alive_body
+  take phase_horizontal_armored
+  give link_wins
+
+verb body_empty_in_recover_armored "Iron Knuckle runs out (Armored Iron Knuckle recovers from its sweep)" by world priority 90 in enemy_health at 2360 780
+  unless hp_body
+  unless hp_body_10
+  take alive_body
+  take phase_recover_armored
+  give link_wins
+
+verb body_empty_in_flinch "Iron Knuckle runs out (Unarmored Iron Knuckle reels from a hit)" by world priority 90 in enemy_health at 2500 780
+  unless hp_body
+  unless hp_body_10
+  take alive_body
+  take phase_flinch
+  give link_wins
+
+verb nabooru_empty_in_walk_nabooru "Nabooru's Iron Knuckle runs out (Nabooru's Iron Knuckle stalks Link)" by world priority 90 in enemy_health at 2360 850
+  unless hp_nabooru
+  unless hp_nabooru_10
+  take alive_nabooru
+  take phase_walk_nabooru
+  give link_wins
+
+verb nabooru_empty_in_vertical_nabooru "Nabooru's Iron Knuckle runs out (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 90 in enemy_health at 2500 850
+  unless hp_nabooru
+  unless hp_nabooru_10
+  take alive_nabooru
+  take phase_vertical_nabooru
+  give link_wins
+
+verb nabooru_empty_in_axe_stuck_nabooru "Nabooru's Iron Knuckle runs out (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 90 in enemy_health at 2360 920
+  unless hp_nabooru
+  unless hp_nabooru_10
+  take alive_nabooru
+  take phase_axe_stuck_nabooru
+  give link_wins
+
+verb nabooru_empty_in_horizontal_nabooru "Nabooru's Iron Knuckle runs out (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 90 in enemy_health at 2500 920
+  unless hp_nabooru
+  unless hp_nabooru_10
+  take alive_nabooru
+  take phase_horizontal_nabooru
+  give link_wins
+
+verb nabooru_empty_in_recover_nabooru "Nabooru's Iron Knuckle runs out (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 90 in enemy_health at 2360 990
+  unless hp_nabooru
+  unless hp_nabooru_10
+  take alive_nabooru
+  take phase_recover_nabooru
+  give link_wins
+
+verb body_falls_to_10_in_walk_armored "Iron Knuckle drops to 10 (Armored Iron Knuckle stalks Link)" by world priority 89 in enemy_health at 2500 990
+  take above_body_10
+  need alive_body
+  unless hp_body
+  take phase_walk_armored
+  give phase_flinch
+
+verb body_falls_to_10_in_vertical_armored "Iron Knuckle drops to 10 (Armored Iron Knuckle raises its axe overhead)" by world priority 89 in enemy_health at 2360 1060
+  take above_body_10
+  need alive_body
+  unless hp_body
+  take phase_vertical_armored
+  give phase_flinch
+
+verb body_falls_to_10_in_axe_stuck_armored "Iron Knuckle drops to 10 (Armored Iron Knuckle has its axe stuck in the floor)" by world priority 89 in enemy_health at 2500 1060
+  take above_body_10
+  need alive_body
+  unless hp_body
+  take phase_axe_stuck_armored
+  give phase_flinch
+
+verb body_falls_to_10_in_horizontal_armored "Iron Knuckle drops to 10 (Armored Iron Knuckle sweeps its axe sideways)" by world priority 89 in enemy_health at 2360 1130
+  take above_body_10
+  need alive_body
+  unless hp_body
+  take phase_horizontal_armored
+  give phase_flinch
+
+verb body_falls_to_10_in_recover_armored "Iron Knuckle drops to 10 (Armored Iron Knuckle recovers from its sweep)" by world priority 89 in enemy_health at 2500 1130
+  take above_body_10
+  need alive_body
+  unless hp_body
+  take phase_recover_armored
+  give phase_flinch
+
+verb nabooru_falls_to_10_in_walk_nabooru "Nabooru's Iron Knuckle drops to 10 (Nabooru's Iron Knuckle stalks Link)" by world priority 89 in enemy_health at 2360 1200
+  take above_nabooru_10
+  need alive_nabooru
+  unless hp_nabooru
+  take phase_walk_nabooru
+  give link_wins
+
+verb nabooru_falls_to_10_in_vertical_nabooru "Nabooru's Iron Knuckle drops to 10 (Nabooru's Iron Knuckle raises its axe overhead)" by world priority 89 in enemy_health at 2500 1200
+  take above_nabooru_10
+  need alive_nabooru
+  unless hp_nabooru
+  take phase_vertical_nabooru
+  give link_wins
+
+verb nabooru_falls_to_10_in_axe_stuck_nabooru "Nabooru's Iron Knuckle drops to 10 (Nabooru's Iron Knuckle has its axe stuck in the floor)" by world priority 89 in enemy_health at 2360 1270
+  take above_nabooru_10
+  need alive_nabooru
+  unless hp_nabooru
+  take phase_axe_stuck_nabooru
+  give link_wins
+
+verb nabooru_falls_to_10_in_horizontal_nabooru "Nabooru's Iron Knuckle drops to 10 (Nabooru's Iron Knuckle sweeps its axe sideways)" by world priority 89 in enemy_health at 2500 1270
+  take above_nabooru_10
+  need alive_nabooru
+  unless hp_nabooru
+  take phase_horizontal_nabooru
+  give link_wins
+
+verb nabooru_falls_to_10_in_recover_nabooru "Nabooru's Iron Knuckle drops to 10 (Nabooru's Iron Knuckle recovers from its sweep)" by world priority 89 in enemy_health at 2360 1340
+  take above_nabooru_10
+  need alive_nabooru
+  unless hp_nabooru
+  take phase_recover_nabooru
+  give link_wins
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1060
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1060
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1130
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1130
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1200
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1200
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2680 1270
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2820 1270
+  take link_turn
+  take has_blue_potion
+  give 5 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2680 1340
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2820 1340
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 1410
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Iron Knuckle gets ready" by world priority 70 in enemy at 2180 640
+  take enemy_turn
+  give enemy_act
+
+verb dormant_holds "Iron Knuckle sits motionless: nothing changes" by world priority 68 in enemy at 2040 710
+  take enemy_act
+  need phase_dormant
+  give beat_end
+
+verb walk_armored_step_1 "Iron Knuckle closes on Link" by world priority 69 in enemy at 2180 710
+  take enemy_act
+  need phase_walk_armored
+  give beat_end
+  take range_far
+  give range_near
+
+verb walk_armored_step_2 "Iron Knuckle starts an overhead chop" by world priority 69 in enemy at 2040 780
+  take enemy_act
+  take phase_walk_armored
+  give phase_vertical_armored
+  give beat_end
+  need range_near
+
+verb walk_armored_step_3 "Iron Knuckle starts a sweep" by world priority 69 in enemy at 2180 780
+  take enemy_act
+  take phase_walk_armored
+  give phase_horizontal_armored
+  give beat_end
+  need range_near
+
+verb vertical_armored_step_1 "The overhead chop lands on Link" by world priority 69 in enemy at 2040 850
+  take enemy_act
+  take phase_vertical_armored
+  give phase_axe_stuck_armored
+  give incoming_axe
+  give beat_end
+  need range_near
+
+verb vertical_armored_step_2 "The overhead chop hits the floor" by world priority 69 in enemy at 2180 850
+  take enemy_act
+  take phase_vertical_armored
+  give phase_axe_stuck_armored
+  give beat_end
+  need range_far
+
+verb axe_stuck_armored_step_1 "Iron Knuckle pulls its axe free" by world priority 69 in enemy at 2040 920
+  take enemy_act
+  take phase_axe_stuck_armored
+  give phase_walk_armored
+  give beat_end
+
+verb horizontal_armored_step_1 "The sweep catches Link" by world priority 69 in enemy at 2180 920
+  take enemy_act
+  take phase_horizontal_armored
+  give phase_recover_armored
+  give incoming_axe
+  give beat_end
+  need range_near
+
+verb horizontal_armored_step_2 "The sweep cuts the air" by world priority 69 in enemy at 2040 990
+  take enemy_act
+  take phase_horizontal_armored
+  give phase_recover_armored
+  give beat_end
+  need range_far
+
+verb recover_armored_step_1 "Iron Knuckle stands ready" by world priority 69 in enemy at 2180 990
+  take enemy_act
+  take phase_recover_armored
+  give phase_walk_armored
+  give beat_end
+
+verb walk_broken_step_1 "Iron Knuckle closes on Link" by world priority 69 in enemy at 2040 1060
+  take enemy_act
+  need phase_walk_broken
+  give beat_end
+  take range_far
+  give range_near
+
+verb walk_broken_step_2 "Iron Knuckle starts an overhead chop" by world priority 69 in enemy at 2180 1060
+  take enemy_act
+  take phase_walk_broken
+  give phase_vertical_broken
+  give beat_end
+  need range_near
+
+verb walk_broken_step_3 "Iron Knuckle starts a sweep" by world priority 69 in enemy at 2040 1130
+  take enemy_act
+  take phase_walk_broken
+  give phase_horizontal_broken
+  give beat_end
+  need range_near
+
+verb vertical_broken_step_1 "The overhead chop lands on Link" by world priority 69 in enemy at 2180 1130
+  take enemy_act
+  take phase_vertical_broken
+  give phase_axe_stuck_broken
+  give incoming_axe
+  give beat_end
+  need range_near
+
+verb vertical_broken_step_2 "The overhead chop hits the floor" by world priority 69 in enemy at 2040 1200
+  take enemy_act
+  take phase_vertical_broken
+  give phase_axe_stuck_broken
+  give beat_end
+  need range_far
+
+verb axe_stuck_broken_step_1 "Iron Knuckle pulls its axe free" by world priority 69 in enemy at 2180 1200
+  take enemy_act
+  take phase_axe_stuck_broken
+  give phase_walk_broken
+  give beat_end
+
+verb horizontal_broken_step_1 "The sweep catches Link" by world priority 69 in enemy at 2040 1270
+  take enemy_act
+  take phase_horizontal_broken
+  give phase_recover_broken
+  give incoming_axe
+  give beat_end
+  need range_near
+
+verb horizontal_broken_step_2 "The sweep cuts the air" by world priority 69 in enemy at 2180 1270
+  take enemy_act
+  take phase_horizontal_broken
+  give phase_recover_broken
+  give beat_end
+  need range_far
+
+verb recover_broken_step_1 "Iron Knuckle stands ready" by world priority 69 in enemy at 2040 1340
+  take enemy_act
+  take phase_recover_broken
+  give phase_walk_broken
+  give beat_end
+
+verb walk_nabooru_step_1 "Iron Knuckle closes on Link" by world priority 69 in enemy at 2180 1340
+  take enemy_act
+  need phase_walk_nabooru
+  give beat_end
+  take range_far
+  give range_near
+
+verb walk_nabooru_step_2 "Iron Knuckle starts an overhead chop" by world priority 69 in enemy at 2040 1410
+  take enemy_act
+  take phase_walk_nabooru
+  give phase_vertical_nabooru
+  give beat_end
+  need range_near
+
+verb walk_nabooru_step_3 "Iron Knuckle starts a sweep" by world priority 69 in enemy at 2180 1410
+  take enemy_act
+  take phase_walk_nabooru
+  give phase_horizontal_nabooru
+  give beat_end
+  need range_near
+
+verb vertical_nabooru_step_1 "The overhead chop lands on Link" by world priority 69 in enemy at 2040 1480
+  take enemy_act
+  take phase_vertical_nabooru
+  give phase_axe_stuck_nabooru
+  give incoming_axe
+  give beat_end
+  need range_near
+
+verb vertical_nabooru_step_2 "The overhead chop hits the floor" by world priority 69 in enemy at 2180 1480
+  take enemy_act
+  take phase_vertical_nabooru
+  give phase_axe_stuck_nabooru
+  give beat_end
+  need range_far
+
+verb axe_stuck_nabooru_step_1 "Iron Knuckle pulls its axe free" by world priority 69 in enemy at 2040 1550
+  take enemy_act
+  take phase_axe_stuck_nabooru
+  give phase_walk_nabooru
+  give beat_end
+
+verb horizontal_nabooru_step_1 "The sweep catches Link" by world priority 69 in enemy at 2180 1550
+  take enemy_act
+  take phase_horizontal_nabooru
+  give phase_recover_nabooru
+  give incoming_axe
+  give beat_end
+  need range_near
+
+verb horizontal_nabooru_step_2 "The sweep cuts the air" by world priority 69 in enemy at 2040 1620
+  take enemy_act
+  take phase_horizontal_nabooru
+  give phase_recover_nabooru
+  give beat_end
+  need range_far
+
+verb recover_nabooru_step_1 "Iron Knuckle stands ready" by world priority 69 in enemy at 2180 1620
+  take enemy_act
+  take phase_recover_nabooru
+  give phase_walk_nabooru
+  give beat_end
+
+verb flinch_step_1 "Iron Knuckle recovers and faces Link" by world priority 69 in enemy at 2040 1690
+  take enemy_act
+  take phase_flinch
+  give phase_walk_broken
+  give beat_end
+
+verb axe_dodged "Iron Knuckle axe: dodged" by world priority 60 in attacks at 3460 80
+  take incoming_axe
+  need link_dodge
+
+verb axe_nayru_near "Iron Knuckle axe: Nayru's Love holds, Link is knocked back" by world priority 60 in attacks at 3320 150
+  take incoming_axe
+  need status_nayru
+  unless link_dodge
+  take range_near
+  give range_far
+
+verb axe_lands_near "Iron Knuckle axe hits Link, knocking him back" by world priority 60 in attacks at 3460 150
+  take incoming_axe
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 4 link_dmg
+  take range_near
+  give range_far
+
+verb axe_lands_dd_near "Iron Knuckle axe hits Link, knocking him back" by world priority 60 in attacks at 3320 220
+  take incoming_axe
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 2 link_dmg
+  take range_near
+  give range_far
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 580 290
+  need beat_end
+  take link_dodge
+
+verb nayru_ticks "Link: nayru wears on" by world priority 48 in beat at 580 360
+  take beat_end
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 48 in beat at 440 430
+  take beat_end
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 47 in beat at 440 500
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 47 in beat at 580 500
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 47 in beat at 440 570
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 47 in beat at 580 570
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 640
+  take lens_count
+  unless lens_on

@@ -1,0 +1,110 @@
+{
+ "positions": 2223,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "link_hurt_overkill",
+  "link_deku_stick",
+  "link_slash_kokiri",
+  "link_shield_1",
+  "link_shield_2",
+  "link_jump_kokiri_1",
+  "link_jump_master_3",
+  "miss_deku_stick",
+  "miss_slash_kokiri",
+  "miss_magic_fire",
+  "miss_shield",
+  "miss_spin_kokiri",
+  "miss_jump_kokiri",
+  "miss_jump_kokiri_self",
+  "miss_jump_master",
+  "link_backs_off",
+  "spikes_dodged"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 18,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link falls": 1
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 67,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 32,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 25
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 120,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 35
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 375,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 22
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 94
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 1166,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 200
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 477,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 116
+  }
+ ]
+}

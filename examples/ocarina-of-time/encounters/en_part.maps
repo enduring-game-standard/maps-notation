@@ -1,0 +1,1037 @@
+maps 2
+title "Ocarina of Time combat: Link vs Moblin shockwave"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state age_adult "Link is an adult" in setup at 120 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Moblin shockwave answers" in beat at 580 80
+state enemy_act "Moblin shockwave acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 4/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 260 150
+state link_wins "Moblin shockwave defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state has_master_sword "Has master sword" in gear at 1860 570
+state has_hookshot "Has hookshot" in gear at 1720 640
+state has_megaton_hammer "Has megaton hammer" in gear at 1860 640
+state has_bow "Has bow" in gear at 1720 710
+state has_bombchus "Has bombchus" in gear at 1860 710
+state has_mirror_shield "Has mirror shield" in gear at 1720 780
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 780
+state has_giants_knife "Has giants knife" in gear at 1720 850
+state has_double_defense "Has double defense" in gear at 1860 850
+state has_fire_arrows "Has fire arrows" in gear at 1720 920
+state has_ice_arrows "Has ice arrows" in gear at 1860 920
+state has_light_arrows "Has light arrows" in gear at 1720 990
+state has_blue_potion "Has blue potion" in gear at 1860 990
+state phase_wave "The shockwave runs along the ground at Link" in enemy at 2040 80
+state phase_gone "The shockwave has spent itself" in enemy at 2180 80
+state status_nayru "Link: nayru (beats left)" in link_state at 1220 290
+state lens_on "Lens of Truth on" in link_state at 1080 360
+state link_guard "Link holds up his shield" in link_state at 1220 360
+state link_dodge "Link dodges" in link_state at 1080 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 2680 80
+state swing_deku_stick "Deku Stick on its way" in hits at 2680 150
+state swing_slingshot "Slingshot seed on its way" in hits at 2680 220
+state swing_explosive "Explosion on its way" in hits at 2680 290
+state swing_boomerang "Boomerang on its way" in hits at 2680 360
+state swing_arrow_normal "Arrow on its way" in hits at 2680 430
+state swing_hammer_swing "Hammer swing on its way" in hits at 2680 500
+state swing_hookshot "Hookshot on its way" in hits at 2680 570
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 2680 640
+state swing_slash_master "Master Sword slash on its way" in hits at 2680 710
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 2680 780
+state swing_arrow_fire "Fire arrow on its way" in hits at 2680 850
+state swing_arrow_ice "Ice arrow on its way" in hits at 2680 920
+state swing_arrow_light "Light arrow on its way" in hits at 2680 990
+state swing_magic_fire "Din's Fire on its way" in hits at 2680 1060
+state swing_shield "Shield on its way" in hits at 2820 1130
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 2820 1200
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 2680 1340
+state swing_spin_master "Master Sword spin attack on its way" in hits at 2820 1410
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 2680 1550
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 2680 1620
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 2820 1690
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 2820 1760
+state swing_jump_master "Master Sword jump attack on its way" in hits at 2680 1900
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 2680 1970
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 2820 2040
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1080 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1220 710
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1080 780
+state incoming_shockwave "Moblin shockwave incoming" in attacks at 3000 80
+state tick_nayru "Beat ends: nayru checked" in beat at 580 360
+state lens_count "The Lens: beats toward the next cost" in beat at 440 500
+
+verb fight_child_blade "Fight as child Link: child blade (0.5 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_child
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_child_spin "Fight as child Link: child spin (0.5 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_child_dins "Fight as child Link: child dins (0.5 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_child_nayru "Fight as child Link: child nayru (0.5 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_child_lens "Fight as child Link: child lens (0.5 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_child_bottles "Fight as child Link: child bottles (0.5 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_adult_blade "Fight as adult Link: adult blade (0.5 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_adult
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_adult_spin "Fight as adult Link: adult spin (0.5 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_adult_giant "Fight as adult Link: adult giant (0.5 hearts)" by link in setup at 120 500
+  take choose_age
+  give age_adult
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (0.5 hearts)" by link in setup at 260 500
+  take choose_age
+  give age_adult
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_adult_dins "Fight as adult Link: adult dins (0.5 hearts)" by link in setup at 120 570
+  take choose_age
+  give age_adult
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (0.5 hearts)" by link in setup at 260 570
+  take choose_age
+  give age_adult
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_adult_lens "Fight as adult Link: adult lens (0.5 hearts)" by link in setup at 120 640
+  take choose_age
+  give age_adult
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (0.5 hearts)" by link in setup at 260 640
+  take choose_age
+  give age_adult
+  give 2 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give phase_wave
+  give range_near
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 2 link_heal
+
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2360 80
+  take link_turn
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_nut_2 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2500 80
+  take link_turn
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2360 150
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2500 150
+  take link_turn
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2360 220
+  take link_turn
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2500 220
+  take link_turn
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2360 290
+  take link_turn
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2500 290
+  take link_turn
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2360 360
+  take link_turn
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2500 360
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2360 430
+  take link_turn
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2500 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2360 500
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2500 500
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2360 570
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2500 570
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2360 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2500 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2360 710
+  take link_turn
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2500 710
+  take link_turn
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2360 780
+  take link_turn
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2500 780
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2360 850
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2500 850
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2360 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2500 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2360 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2500 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2360 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2500 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2360 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2500 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2360 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2500 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2360 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2500 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2360 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2500 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2360 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2500 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2360 1480
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2500 1480
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 2820 80
+  take swing_deku_nut
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 2820 150
+  take swing_deku_stick
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 2820 220
+  take swing_slingshot
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 2820 290
+  take swing_explosive
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 2820 360
+  take swing_boomerang
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 2820 430
+  take swing_arrow_normal
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 2820 500
+  take swing_hammer_swing
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 2820 570
+  take swing_hookshot
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 2820 640
+  take swing_slash_kokiri
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 2820 710
+  take swing_slash_master
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 2820 780
+  take swing_slash_giant
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 2820 850
+  take swing_arrow_fire
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 2820 920
+  take swing_arrow_ice
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 2820 990
+  take swing_arrow_light
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 2820 1060
+  take swing_magic_fire
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 2680 1130
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 2680 1200
+  take swing_shield
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 2680 1270
+  take swing_spin_kokiri
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 2820 1270
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 2820 1340
+  take swing_spin_giant
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 2680 1410
+  take swing_spin_giant
+  need range_far
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 2680 1480
+  take swing_spin_master
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 2820 1480
+  take swing_spin_master
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 2820 1550
+  take swing_jump_kokiri
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 2820 1620
+  take swing_jump_kokiri_self
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 2680 1690
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 2680 1760
+  take swing_jump_giant
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 2680 1830
+  take swing_jump_giant_self
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 2820 1830
+  take swing_jump_giant_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 2820 1900
+  take swing_jump_master
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 2820 1970
+  take swing_jump_master_self
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 2680 2040
+  take swing_jump_master_self
+  need range_far
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 2680 2110
+  take swing_hammer_jump
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2360 1550
+  take link_turn
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2500 1550
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2360 1620
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2500 1620
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2360 1690
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2500 1690
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2360 1760
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2500 1760
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2360 1830
+  take link_turn
+  take has_red_potion
+  give 2 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2500 1830
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2360 1900
+  take link_turn
+  take has_blue_potion
+  give 2 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2500 1900
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2360 1970
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2500 1970
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Moblin shockwave gets ready" by world priority 70 in enemy at 2040 150
+  take enemy_turn
+  give enemy_act
+
+verb wave_step_1 "The shockwave reaches Link" by world priority 69 in enemy at 2180 150
+  take enemy_act
+  take phase_wave
+  give phase_gone
+  give incoming_shockwave
+  give beat_end
+  need range_near
+
+verb wave_step_2 "The shockwave runs out before it reaches Link" by world priority 69 in enemy at 2040 220
+  take enemy_act
+  take phase_wave
+  give phase_gone
+  give beat_end
+  need range_far
+
+verb gone_holds "The shockwave has spent itself: nothing changes" by world priority 68 in enemy at 2180 220
+  take enemy_act
+  need phase_gone
+  give beat_end
+
+verb shockwave_dodged "Moblin shockwave: dodged" by world priority 60 in attacks at 3140 80
+  take incoming_shockwave
+  need link_dodge
+
+verb shockwave_nayru_near "Moblin shockwave: Nayru's Love holds, Link is knocked back" by world priority 60 in attacks at 3000 150
+  take incoming_shockwave
+  need status_nayru
+  unless link_dodge
+  take range_near
+  give range_far
+
+verb shockwave_lands_near "Moblin shockwave hits Link, knocking him back" by world priority 60 in attacks at 3140 150
+  take incoming_shockwave
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+  take range_near
+  give range_far
+
+verb shockwave_lands_dd_near "Moblin shockwave hits Link, knocking him back" by world priority 60 in attacks at 3000 220
+  take incoming_shockwave
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+  take range_near
+  give range_far
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 580 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 440 360
+  need beat_end
+  take link_dodge
+
+verb nayru_ticks "Link: nayru wears on" by world priority 48 in beat at 440 430
+  take beat_end
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 48 in beat at 580 430
+  take beat_end
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 47 in beat at 580 500
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 47 in beat at 440 570
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 47 in beat at 580 570
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
+  take lens_count
+  unless lens_on

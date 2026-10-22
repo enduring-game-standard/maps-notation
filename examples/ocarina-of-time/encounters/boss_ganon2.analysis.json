@@ -1,0 +1,253 @@
+{
+ "positions": 282492,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "body_resets_hp_body",
+  "body_rearms_1",
+  "body_stands_again",
+  "body_empty_in_damaged_pre"
+ ],
+ "kitSplit": {
+  "hit_explosive__stunned_pre": [
+   "swing_explosive",
+   "phase_stunned_pre"
+  ],
+  "hit_explosive__stunned_ms": [
+   "swing_explosive",
+   "phase_stunned_ms"
+  ],
+  "hit_explosive__stunned_last": [
+   "swing_explosive",
+   "phase_stunned_last"
+  ],
+  "hit_hammer_swing__stunned_pre": [
+   "swing_hammer_swing",
+   "phase_stunned_pre"
+  ],
+  "hit_hammer_swing__stunned_ms": [
+   "swing_hammer_swing",
+   "phase_stunned_ms"
+  ],
+  "hit_hammer_swing__stunned_last": [
+   "swing_hammer_swing",
+   "phase_stunned_last"
+  ],
+  "hit_hookshot__stunned_pre": [
+   "swing_hookshot",
+   "phase_stunned_pre"
+  ],
+  "hit_hookshot__stunned_ms": [
+   "swing_hookshot",
+   "phase_stunned_ms"
+  ],
+  "hit_hookshot__stunned_last": [
+   "swing_hookshot",
+   "phase_stunned_last"
+  ],
+  "hit_slash_giant__stunned_pre": [
+   "swing_slash_giant",
+   "phase_stunned_pre"
+  ],
+  "hit_slash_giant__stunned_ms": [
+   "swing_slash_giant",
+   "phase_stunned_ms"
+  ],
+  "hit_slash_giant__stunned_last": [
+   "swing_slash_giant",
+   "phase_stunned_last"
+  ],
+  "hit_magic_fire__stunned_pre": [
+   "swing_magic_fire",
+   "phase_stunned_pre"
+  ],
+  "hit_magic_fire__stunned_ms": [
+   "swing_magic_fire",
+   "phase_stunned_ms"
+  ],
+  "hit_magic_fire__stunned_last": [
+   "swing_magic_fire",
+   "phase_stunned_last"
+  ],
+  "hit_spin_giant__stunned_pre": [
+   "swing_spin_giant",
+   "phase_stunned_pre"
+  ],
+  "hit_spin_giant__stunned_ms": [
+   "swing_spin_giant",
+   "phase_stunned_ms"
+  ],
+  "hit_spin_giant__stunned_last": [
+   "swing_spin_giant",
+   "phase_stunned_last"
+  ],
+  "hit_jump_giant__stunned_pre": [
+   "swing_jump_giant",
+   "phase_stunned_pre"
+  ],
+  "hit_jump_giant__stunned_ms": [
+   "swing_jump_giant",
+   "phase_stunned_ms"
+  ],
+  "hit_jump_giant__stunned_last": [
+   "swing_jump_giant",
+   "phase_stunned_last"
+  ],
+  "hit_jump_giant_self__stunned_pre": [
+   "swing_jump_giant_self",
+   "phase_stunned_pre"
+  ],
+  "hit_jump_giant_self__stunned_ms": [
+   "swing_jump_giant_self",
+   "phase_stunned_ms"
+  ],
+  "hit_jump_giant_self__stunned_last": [
+   "swing_jump_giant_self",
+   "phase_stunned_last"
+  ],
+  "hit_hammer_jump__stunned_pre": [
+   "swing_hammer_jump",
+   "phase_stunned_pre"
+  ],
+  "hit_hammer_jump__stunned_ms": [
+   "swing_hammer_jump",
+   "phase_stunned_ms"
+  ],
+  "hit_hammer_jump__stunned_last": [
+   "swing_hammer_jump",
+   "phase_stunned_last"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "",
+   "positions": 6548,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1503,
+    "Link wins": 20,
+    "Link falls": 300
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 6681
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "",
+   "positions": 1206,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 266,
+    "Link wins": 4,
+    "Link falls": 60
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1386
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "",
+   "positions": 7208,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1707,
+    "Link wins": 24,
+    "Link falls": 120
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 9275
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "",
+   "positions": 8410,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1852,
+    "Link wins": 28,
+    "Link falls": 420
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7111
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "",
+   "positions": 1604,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 348
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1737
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "",
+   "positions": 26492,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5816,
+    "Link wins": 100,
+    "Link falls": 1380
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 21774
+  },
+  {
+   "kit": "adult_light_arrows",
+   "variant": "",
+   "positions": 83108,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 21039,
+    "Link wins": 196,
+    "Link falls": 2940
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 94256
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "",
+   "positions": 85506,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 20720,
+    "Link wins": 288,
+    "Link falls": 780
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 58361
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "",
+   "positions": 62410,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 13732,
+    "Link wins": 208,
+    "Link falls": 3120
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 55836
+  }
+ ]
+}

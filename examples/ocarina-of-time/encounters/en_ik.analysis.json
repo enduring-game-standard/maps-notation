@@ -1,0 +1,262 @@
+{
+ "positions": 122749,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "nabooru_overkill",
+  "miss_explosive__flinch",
+  "miss_hammer_swing__flinch",
+  "miss_slash_master__flinch",
+  "miss_slash_giant__flinch",
+  "miss_spin_giant__flinch",
+  "miss_spin_master__flinch",
+  "miss_jump_giant__flinch",
+  "miss_jump_giant_self__flinch",
+  "miss_jump_master__flinch",
+  "miss_jump_master_self__flinch",
+  "miss_hammer_jump__flinch",
+  "body_empty_in_walk_armored",
+  "body_empty_in_vertical_armored",
+  "body_empty_in_axe_stuck_armored",
+  "body_empty_in_horizontal_armored",
+  "body_empty_in_recover_armored",
+  "nabooru_empty_in_walk_nabooru",
+  "nabooru_empty_in_vertical_nabooru",
+  "nabooru_empty_in_axe_stuck_nabooru",
+  "nabooru_empty_in_horizontal_nabooru",
+  "nabooru_empty_in_recover_nabooru"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "common",
+   "positions": 1986,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 455,
+    "Link wins": 20,
+    "Link falls": 300
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1618
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "nabooru",
+   "positions": 2621,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 600,
+    "Link wins": 20,
+    "Link falls": 400
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2244
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "common",
+   "positions": 398,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 91,
+    "Link wins": 4,
+    "Link falls": 60
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 362
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "nabooru",
+   "positions": 527,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 120,
+    "Link wins": 6,
+    "Link falls": 80
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 487
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "common",
+   "positions": 2119,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 542,
+    "Link wins": 12,
+    "Link falls": 120
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1666
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "nabooru",
+   "positions": 2825,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 720,
+    "Link wins": 24,
+    "Link falls": 160
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2242
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "common",
+   "positions": 2766,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 637,
+    "Link wins": 14,
+    "Link falls": 420
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1813
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "nabooru",
+   "positions": 3669,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 840,
+    "Link wins": 28,
+    "Link falls": 560
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2540
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "common",
+   "positions": 859,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 219,
+    "Link wins": 9,
+    "Link falls": 48
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 827
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "nabooru",
+   "positions": 1069,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 270,
+    "Link wins": 18,
+    "Link falls": 60
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1039
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "common",
+   "positions": 8751,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2002,
+    "Link wins": 50,
+    "Link falls": 1374
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 5626
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "nabooru",
+   "positions": 11655,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2640,
+    "Link wins": 100,
+    "Link falls": 1874
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7620
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "common",
+   "positions": 24841,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 6552,
+    "Link wins": 144,
+    "Link falls": 780
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 14003
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "nabooru",
+   "positions": 32929,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8640,
+    "Link wins": 288,
+    "Link falls": 1040
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 19503
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "common",
+   "positions": 11061,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2548,
+    "Link wins": 56,
+    "Link falls": 1680
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 7651
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "nabooru",
+   "positions": 14673,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3360,
+    "Link wins": 112,
+    "Link falls": 2240
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10452
+  }
+ ]
+}

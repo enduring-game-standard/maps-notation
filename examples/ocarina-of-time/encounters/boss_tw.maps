@@ -1,0 +1,4105 @@
+maps 2
+title "Ocarina of Time combat: Link vs Twinrova"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_adult "Link is an adult" in setup at 260 80
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Twinrova answers" in beat at 580 80
+state enemy_act "Twinrova acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 2/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 120 150
+state link_wins "Twinrova defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_master_sword "Has master sword" in gear at 1860 80
+state has_hylian_shield "Has hylian shield" in gear at 1720 150
+state has_hookshot "Has hookshot" in gear at 1860 150
+state has_megaton_hammer "Has megaton hammer" in gear at 1720 220
+state has_bow "Has bow" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_bombchus "Has bombchus" in gear at 1860 290
+state has_mirror_shield "Has mirror shield" in gear at 1720 360
+state has_magic "Has magic" in gear at 1860 360
+state has_green_potion "Has green potion" in gear at 1720 430
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 430
+state has_giants_knife "Has giants knife" in gear at 1720 500
+state has_double_defense "Has double defense" in gear at 1860 500
+state has_fire_arrows "Has fire arrows" in gear at 1720 570
+state has_ice_arrows "Has ice arrows" in gear at 1860 570
+state has_light_arrows "Has light arrows" in gear at 1720 640
+state has_dins_fire "Has dins fire" in gear at 1860 640
+state has_nayrus_love "Has nayrus love" in gear at 1720 710
+state has_lens_of_truth "Has lens of truth" in gear at 1860 710
+state has_fairy "Has fairy" in gear at 1720 780
+state has_blue_potion "Has blue potion" in gear at 1860 780
+state phase_fly_0 "The sisters fly to a new spot (0 hits)" in enemy at 2040 80
+state timer_fly_0 "The sisters fly to a new spot (0 hits): beats left" in enemy at 2180 80
+state phase_turn_0 "A sister turns on Link (0 hits)" in enemy at 2180 150
+state timer_turn_0 "A sister turns on Link (0 hits): beats left" in enemy at 2040 220
+state phase_spin_0 "A sister spins away from a shot (0 hits)" in enemy at 2040 290
+state timer_spin_0 "A sister spins away from a shot (0 hits): beats left" in enemy at 2180 290
+state phase_shoot_charge_fire_0 "Koume charges her fire beam (0 hits)" in enemy at 2180 360
+state timer_shoot_charge_fire_0 "Koume charges her fire beam (0 hits): beats left" in enemy at 2040 430
+state phase_shoot_beam_fire_0 "Koume's fire beam is out (0 hits)" in enemy at 2040 500
+state phase_shoot_charge_ice_0 "Kotake charges her ice beam (0 hits)" in enemy at 2180 500
+state timer_shoot_charge_ice_0 "Kotake charges her ice beam (0 hits): beats left" in enemy at 2040 570
+state phase_shoot_beam_ice_0 "Kotake's ice beam is out (0 hits)" in enemy at 2040 640
+state phase_fly_1 "The sisters fly to a new spot (1 hits)" in enemy at 2180 640
+state timer_fly_1 "The sisters fly to a new spot (1 hits): beats left" in enemy at 2040 710
+state phase_turn_1 "A sister turns on Link (1 hits)" in enemy at 2040 780
+state timer_turn_1 "A sister turns on Link (1 hits): beats left" in enemy at 2180 780
+state phase_spin_1 "A sister spins away from a shot (1 hits)" in enemy at 2180 850
+state timer_spin_1 "A sister spins away from a shot (1 hits): beats left" in enemy at 2040 920
+state phase_shoot_charge_fire_1 "Koume charges her fire beam (1 hits)" in enemy at 2040 990
+state timer_shoot_charge_fire_1 "Koume charges her fire beam (1 hits): beats left" in enemy at 2180 990
+state phase_shoot_beam_fire_1 "Koume's fire beam is out (1 hits)" in enemy at 2180 1060
+state phase_shoot_charge_ice_1 "Kotake charges her ice beam (1 hits)" in enemy at 2040 1130
+state timer_shoot_charge_ice_1 "Kotake charges her ice beam (1 hits): beats left" in enemy at 2180 1130
+state phase_shoot_beam_ice_1 "Kotake's ice beam is out (1 hits)" in enemy at 2180 1200
+state phase_fly_2 "The sisters fly to a new spot (2 hits)" in enemy at 2040 1270
+state timer_fly_2 "The sisters fly to a new spot (2 hits): beats left" in enemy at 2180 1270
+state phase_turn_2 "A sister turns on Link (2 hits)" in enemy at 2180 1340
+state timer_turn_2 "A sister turns on Link (2 hits): beats left" in enemy at 2040 1410
+state phase_spin_2 "A sister spins away from a shot (2 hits)" in enemy at 2040 1480
+state timer_spin_2 "A sister spins away from a shot (2 hits): beats left" in enemy at 2180 1480
+state phase_shoot_charge_fire_2 "Koume charges her fire beam (2 hits)" in enemy at 2180 1550
+state timer_shoot_charge_fire_2 "Koume charges her fire beam (2 hits): beats left" in enemy at 2040 1620
+state phase_shoot_beam_fire_2 "Koume's fire beam is out (2 hits)" in enemy at 2040 1690
+state phase_shoot_charge_ice_2 "Kotake charges her ice beam (2 hits)" in enemy at 2180 1690
+state timer_shoot_charge_ice_2 "Kotake charges her ice beam (2 hits): beats left" in enemy at 2040 1760
+state phase_shoot_beam_ice_2 "Kotake's ice beam is out (2 hits)" in enemy at 2040 1830
+state phase_fly_3 "The sisters fly to a new spot (3 hits)" in enemy at 2180 1830
+state timer_fly_3 "The sisters fly to a new spot (3 hits): beats left" in enemy at 2040 1900
+state phase_turn_3 "A sister turns on Link (3 hits)" in enemy at 2040 1970
+state timer_turn_3 "A sister turns on Link (3 hits): beats left" in enemy at 2180 1970
+state phase_spin_3 "A sister spins away from a shot (3 hits)" in enemy at 2180 2040
+state timer_spin_3 "A sister spins away from a shot (3 hits): beats left" in enemy at 2040 2110
+state phase_shoot_charge_fire_3 "Koume charges her fire beam (3 hits)" in enemy at 2040 2180
+state timer_shoot_charge_fire_3 "Koume charges her fire beam (3 hits): beats left" in enemy at 2180 2180
+state phase_shoot_beam_fire_3 "Koume's fire beam is out (3 hits)" in enemy at 2180 2250
+state phase_shoot_charge_ice_3 "Kotake charges her ice beam (3 hits)" in enemy at 2040 2320
+state timer_shoot_charge_ice_3 "Kotake charges her ice beam (3 hits): beats left" in enemy at 2180 2320
+state phase_shoot_beam_ice_3 "Kotake's ice beam is out (3 hits)" in enemy at 2180 2390
+state phase_hit_1 "A sister reels from her twin's beam (1 hits)" in enemy at 2040 2460
+state timer_hit_1 "A sister reels from her twin's beam (1 hits): beats left" in enemy at 2180 2460
+state phase_hit_2 "A sister reels from her twin's beam (2 hits)" in enemy at 2180 2530
+state timer_hit_2 "A sister reels from her twin's beam (2 hits): beats left" in enemy at 2040 2600
+state phase_hit_3 "A sister reels from her twin's beam (3 hits)" in enemy at 2040 2670
+state timer_hit_3 "A sister reels from her twin's beam (3 hits): beats left" in enemy at 2180 2670
+state phase_hit_4 "A sister reels from her twin's beam (4 hits)" in enemy at 2180 2740
+state timer_hit_4 "A sister reels from her twin's beam (4 hits): beats left" in enemy at 2040 2810
+state phase_tw_fly_r_c0 "Twinrova flies to a pillar and winds up (r, no charge)" in enemy at 2040 2880
+state phase_tw_fly_r_cf1 "Twinrova flies to a pillar and winds up (r, shield holds 1 fire)" in enemy at 2180 2880
+state phase_tw_fly_r_cf2 "Twinrova flies to a pillar and winds up (r, shield holds 2 fire)" in enemy at 2040 2950
+state phase_tw_fly_r_ci1 "Twinrova flies to a pillar and winds up (r, shield holds 1 ice)" in enemy at 2180 2950
+state phase_tw_fly_r_ci2 "Twinrova flies to a pillar and winds up (r, shield holds 2 ice)" in enemy at 2040 3020
+state phase_tw_fly_l_c0 "Twinrova flies to a pillar and winds up (l, no charge)" in enemy at 2180 3020
+state phase_tw_fly_l_cf1 "Twinrova flies to a pillar and winds up (l, shield holds 1 fire)" in enemy at 2040 3090
+state phase_tw_fly_l_cf2 "Twinrova flies to a pillar and winds up (l, shield holds 2 fire)" in enemy at 2180 3090
+state phase_tw_fly_l_ci1 "Twinrova flies to a pillar and winds up (l, shield holds 1 ice)" in enemy at 2040 3160
+state phase_tw_fly_l_ci2 "Twinrova flies to a pillar and winds up (l, shield holds 2 ice)" in enemy at 2180 3160
+state phase_tw_done_rf_c0 "Twinrova hovers after her fire blast (rf, no charge)" in enemy at 2040 3230
+state timer_tw_done_rf_c0 "Twinrova hovers after her fire blast (rf, no charge): beats left" in enemy at 2180 3230
+state phase_tw_done_rf_cf1 "Twinrova hovers after her fire blast (rf, shield holds 1 fire)" in enemy at 2180 3300
+state timer_tw_done_rf_cf1 "Twinrova hovers after her fire blast (rf, shield holds 1 fire): beats left" in enemy at 2040 3370
+state phase_tw_done_rf_cf2 "Twinrova hovers after her fire blast (rf, shield holds 2 fire)" in enemy at 2040 3440
+state timer_tw_done_rf_cf2 "Twinrova hovers after her fire blast (rf, shield holds 2 fire): beats left" in enemy at 2180 3440
+state phase_tw_done_rf_ci1 "Twinrova hovers after her fire blast (rf, shield holds 1 ice)" in enemy at 2180 3510
+state timer_tw_done_rf_ci1 "Twinrova hovers after her fire blast (rf, shield holds 1 ice): beats left" in enemy at 2040 3580
+state phase_tw_done_rf_ci2 "Twinrova hovers after her fire blast (rf, shield holds 2 ice)" in enemy at 2040 3650
+state timer_tw_done_rf_ci2 "Twinrova hovers after her fire blast (rf, shield holds 2 ice): beats left" in enemy at 2180 3650
+state phase_tw_done_ri_c0 "Twinrova hovers after her ice blast (ri, no charge)" in enemy at 2180 3720
+state timer_tw_done_ri_c0 "Twinrova hovers after her ice blast (ri, no charge): beats left" in enemy at 2040 3790
+state phase_tw_done_ri_cf1 "Twinrova hovers after her ice blast (ri, shield holds 1 fire)" in enemy at 2040 3860
+state timer_tw_done_ri_cf1 "Twinrova hovers after her ice blast (ri, shield holds 1 fire): beats left" in enemy at 2180 3860
+state phase_tw_done_ri_cf2 "Twinrova hovers after her ice blast (ri, shield holds 2 fire)" in enemy at 2180 3930
+state timer_tw_done_ri_cf2 "Twinrova hovers after her ice blast (ri, shield holds 2 fire): beats left" in enemy at 2040 4000
+state phase_tw_done_ri_ci1 "Twinrova hovers after her ice blast (ri, shield holds 1 ice)" in enemy at 2040 4070
+state timer_tw_done_ri_ci1 "Twinrova hovers after her ice blast (ri, shield holds 1 ice): beats left" in enemy at 2180 4070
+state phase_tw_done_ri_ci2 "Twinrova hovers after her ice blast (ri, shield holds 2 ice)" in enemy at 2180 4140
+state timer_tw_done_ri_ci2 "Twinrova hovers after her ice blast (ri, shield holds 2 ice): beats left" in enemy at 2040 4210
+state phase_tw_done_lf_c0 "Twinrova hovers after her fire blast (lf, no charge)" in enemy at 2040 4280
+state timer_tw_done_lf_c0 "Twinrova hovers after her fire blast (lf, no charge): beats left" in enemy at 2180 4280
+state phase_tw_done_lf_cf1 "Twinrova hovers after her fire blast (lf, shield holds 1 fire)" in enemy at 2180 4350
+state timer_tw_done_lf_cf1 "Twinrova hovers after her fire blast (lf, shield holds 1 fire): beats left" in enemy at 2040 4420
+state phase_tw_done_lf_cf2 "Twinrova hovers after her fire blast (lf, shield holds 2 fire)" in enemy at 2040 4490
+state timer_tw_done_lf_cf2 "Twinrova hovers after her fire blast (lf, shield holds 2 fire): beats left" in enemy at 2180 4490
+state phase_tw_done_lf_ci1 "Twinrova hovers after her fire blast (lf, shield holds 1 ice)" in enemy at 2180 4560
+state timer_tw_done_lf_ci1 "Twinrova hovers after her fire blast (lf, shield holds 1 ice): beats left" in enemy at 2040 4630
+state phase_tw_done_lf_ci2 "Twinrova hovers after her fire blast (lf, shield holds 2 ice)" in enemy at 2040 4700
+state timer_tw_done_lf_ci2 "Twinrova hovers after her fire blast (lf, shield holds 2 ice): beats left" in enemy at 2180 4700
+state phase_tw_done_li_c0 "Twinrova hovers after her ice blast (li, no charge)" in enemy at 2180 4770
+state timer_tw_done_li_c0 "Twinrova hovers after her ice blast (li, no charge): beats left" in enemy at 2040 4840
+state phase_tw_done_li_cf1 "Twinrova hovers after her ice blast (li, shield holds 1 fire)" in enemy at 2040 4910
+state timer_tw_done_li_cf1 "Twinrova hovers after her ice blast (li, shield holds 1 fire): beats left" in enemy at 2180 4910
+state phase_tw_done_li_cf2 "Twinrova hovers after her ice blast (li, shield holds 2 fire)" in enemy at 2180 4980
+state timer_tw_done_li_cf2 "Twinrova hovers after her ice blast (li, shield holds 2 fire): beats left" in enemy at 2040 5050
+state phase_tw_done_li_ci1 "Twinrova hovers after her ice blast (li, shield holds 1 ice)" in enemy at 2040 5120
+state timer_tw_done_li_ci1 "Twinrova hovers after her ice blast (li, shield holds 1 ice): beats left" in enemy at 2180 5120
+state phase_tw_done_li_ci2 "Twinrova hovers after her ice blast (li, shield holds 2 ice)" in enemy at 2180 5190
+state timer_tw_done_li_ci2 "Twinrova hovers after her ice blast (li, shield holds 2 ice): beats left" in enemy at 2040 5260
+state phase_tw_done_aim_r "The shield holds the third blast and fires it back at Twinrova, who hovers (r)" in enemy at 2040 5330
+state timer_tw_done_aim_r "The shield holds the third blast and fires it back at Twinrova, who hovers (r): beats left" in enemy at 2180 5330
+state phase_tw_stun_r "Twinrova lies stunned on the floor (r)" in enemy at 2180 5400
+state timer_tw_stun_r "Twinrova lies stunned on the floor (r): beats left" in enemy at 2040 5470
+state phase_tw_getup_r "Twinrova gets up (r)" in enemy at 2040 5540
+state timer_tw_getup_r "Twinrova gets up (r): beats left" in enemy at 2180 5540
+state phase_tw_done_aim_l "The shield holds the third blast and fires it back at Twinrova, who hovers (l)" in enemy at 2180 5610
+state timer_tw_done_aim_l "The shield holds the third blast and fires it back at Twinrova, who hovers (l): beats left" in enemy at 2040 5680
+state phase_tw_stun_l "Twinrova lies stunned on the floor (l)" in enemy at 2040 5750
+state timer_tw_stun_l "Twinrova lies stunned on the floor (l): beats left" in enemy at 2180 5750
+state phase_tw_getup_l "Twinrova gets up (l)" in enemy at 2180 5820
+state timer_tw_getup_l "Twinrova gets up (l): beats left" in enemy at 2040 5890
+state hp_twinrova "Twinrova: health" marks 22 in enemy_health at 2360 80
+state hp_twinrova_2 "Twinrova: health up to 2" marks 2 in enemy_health at 2500 80
+state above_twinrova_2 "Twinrova: above 2" marks 1 in enemy_health at 2360 150
+state alive_twinrova "Twinrova: standing" marks 1 in enemy_health at 2500 150
+state dmg_twinrova "Twinrova: damage" in enemy_health at 2360 220
+state status_burn "Link: burn (beats left)" in link_state at 1220 290
+state status_freeze "Link: freeze (beats left)" in link_state at 1080 360
+state status_nayru "Link: nayru (beats left)" in link_state at 1220 360
+state lens_on "Lens of Truth on" in link_state at 1080 430
+state link_guard "Link holds up his shield" in link_state at 1220 430
+state link_dodge "Link dodges" in link_state at 1080 500
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_explosive "Explosion on its way" in hits at 3000 150
+state swing_arrow_normal "Arrow on its way" in hits at 3140 220
+state swing_hammer_swing "Hammer swing on its way" in hits at 3000 1410
+state swing_hookshot "Hookshot on its way" in hits at 3000 1550
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 2670
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3000 2810
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 2950
+state swing_arrow_ice "Ice arrow on its way" in hits at 3140 4070
+state swing_arrow_light "Light arrow on its way" in hits at 3000 5260
+state swing_magic_fire "Din's Fire on its way" in hits at 3140 6380
+state swing_shield "Shield on its way" in hits at 3000 6520
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3000 6590
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 6730
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3000 6940
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3000 7080
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 7220
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3140 7360
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3000 7570
+state swing_reflect_beam_fire "Koume's fire beam, sent back on its way" in hits at 3000 7710
+state swing_reflect_beam_ice "Kotake's ice beam, sent back on its way" in hits at 3000 8060
+state swing_reflect_blast_fire "Twinrova's fire blast, sent back on its way" in hits at 3000 8410
+state swing_reflect_blast_ice "Twinrova's ice blast, sent back on its way" in hits at 3000 8830
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1220 780
+state incoming_sister_body "A sister's body incoming" in attacks at 3320 80
+state incoming_beam_fire "Koume's fire beam incoming" in attacks at 3460 290
+state incoming_beam_ice "Kotake's ice beam incoming" in attacks at 3460 640
+state incoming_blast_fire "Twinrova's fire blast incoming" in attacks at 3460 990
+state landed_blast_fire "Twinrova's fire blast: landed" in attacks at 3460 1200
+state incoming_blast_ice "Twinrova's ice blast incoming" in attacks at 3460 1550
+state landed_blast_ice "Twinrova's ice blast: landed" in attacks at 3460 1760
+state tick_burn "Beat ends: burn checked" in beat at 440 360
+state tick_freeze "Beat ends: freeze checked" in beat at 580 360
+state tick_nayru "Beat ends: nayru checked" in beat at 440 430
+state lens_count "The Lens: beats toward the next cost" in beat at 580 640
+
+verb fly_0_timer_clears "The sisters fly to a new spot (0 hits) is over" by world priority 100 in enemy at 2040 150
+  take timer_fly_0
+  unless phase_fly_0
+
+verb turn_0_timer_clears "A sister turns on Link (0 hits) is over" by world priority 100 in enemy at 2180 220
+  take timer_turn_0
+  unless phase_turn_0
+
+verb spin_0_timer_clears "A sister spins away from a shot (0 hits) is over" by world priority 100 in enemy at 2040 360
+  take timer_spin_0
+  unless phase_spin_0
+
+verb shoot_charge_fire_0_timer_clears "Koume charges her fire beam (0 hits) is over" by world priority 100 in enemy at 2180 430
+  take timer_shoot_charge_fire_0
+  unless phase_shoot_charge_fire_0
+
+verb shoot_charge_ice_0_timer_clears "Kotake charges her ice beam (0 hits) is over" by world priority 100 in enemy at 2180 570
+  take timer_shoot_charge_ice_0
+  unless phase_shoot_charge_ice_0
+
+verb fly_1_timer_clears "The sisters fly to a new spot (1 hits) is over" by world priority 100 in enemy at 2180 710
+  take timer_fly_1
+  unless phase_fly_1
+
+verb turn_1_timer_clears "A sister turns on Link (1 hits) is over" by world priority 100 in enemy at 2040 850
+  take timer_turn_1
+  unless phase_turn_1
+
+verb spin_1_timer_clears "A sister spins away from a shot (1 hits) is over" by world priority 100 in enemy at 2180 920
+  take timer_spin_1
+  unless phase_spin_1
+
+verb shoot_charge_fire_1_timer_clears "Koume charges her fire beam (1 hits) is over" by world priority 100 in enemy at 2040 1060
+  take timer_shoot_charge_fire_1
+  unless phase_shoot_charge_fire_1
+
+verb shoot_charge_ice_1_timer_clears "Kotake charges her ice beam (1 hits) is over" by world priority 100 in enemy at 2040 1200
+  take timer_shoot_charge_ice_1
+  unless phase_shoot_charge_ice_1
+
+verb fly_2_timer_clears "The sisters fly to a new spot (2 hits) is over" by world priority 100 in enemy at 2040 1340
+  take timer_fly_2
+  unless phase_fly_2
+
+verb turn_2_timer_clears "A sister turns on Link (2 hits) is over" by world priority 100 in enemy at 2180 1410
+  take timer_turn_2
+  unless phase_turn_2
+
+verb spin_2_timer_clears "A sister spins away from a shot (2 hits) is over" by world priority 100 in enemy at 2040 1550
+  take timer_spin_2
+  unless phase_spin_2
+
+verb shoot_charge_fire_2_timer_clears "Koume charges her fire beam (2 hits) is over" by world priority 100 in enemy at 2180 1620
+  take timer_shoot_charge_fire_2
+  unless phase_shoot_charge_fire_2
+
+verb shoot_charge_ice_2_timer_clears "Kotake charges her ice beam (2 hits) is over" by world priority 100 in enemy at 2180 1760
+  take timer_shoot_charge_ice_2
+  unless phase_shoot_charge_ice_2
+
+verb fly_3_timer_clears "The sisters fly to a new spot (3 hits) is over" by world priority 100 in enemy at 2180 1900
+  take timer_fly_3
+  unless phase_fly_3
+
+verb turn_3_timer_clears "A sister turns on Link (3 hits) is over" by world priority 100 in enemy at 2040 2040
+  take timer_turn_3
+  unless phase_turn_3
+
+verb spin_3_timer_clears "A sister spins away from a shot (3 hits) is over" by world priority 100 in enemy at 2180 2110
+  take timer_spin_3
+  unless phase_spin_3
+
+verb shoot_charge_fire_3_timer_clears "Koume charges her fire beam (3 hits) is over" by world priority 100 in enemy at 2040 2250
+  take timer_shoot_charge_fire_3
+  unless phase_shoot_charge_fire_3
+
+verb shoot_charge_ice_3_timer_clears "Kotake charges her ice beam (3 hits) is over" by world priority 100 in enemy at 2040 2390
+  take timer_shoot_charge_ice_3
+  unless phase_shoot_charge_ice_3
+
+verb hit_1_timer_clears "A sister reels from her twin's beam (1 hits) is over" by world priority 100 in enemy at 2040 2530
+  take timer_hit_1
+  unless phase_hit_1
+
+verb hit_2_timer_clears "A sister reels from her twin's beam (2 hits) is over" by world priority 100 in enemy at 2180 2600
+  take timer_hit_2
+  unless phase_hit_2
+
+verb hit_3_timer_clears "A sister reels from her twin's beam (3 hits) is over" by world priority 100 in enemy at 2040 2740
+  take timer_hit_3
+  unless phase_hit_3
+
+verb hit_4_timer_clears "A sister reels from her twin's beam (4 hits) is over" by world priority 100 in enemy at 2180 2810
+  take timer_hit_4
+  unless phase_hit_4
+
+verb tw_done_rf_c0_timer_clears "Twinrova hovers after her fire blast (rf, no charge) is over" by world priority 100 in enemy at 2040 3300
+  take timer_tw_done_rf_c0
+  unless phase_tw_done_rf_c0
+
+verb tw_done_rf_cf1_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 1 fire) is over" by world priority 100 in enemy at 2180 3370
+  take timer_tw_done_rf_cf1
+  unless phase_tw_done_rf_cf1
+
+verb tw_done_rf_cf2_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 2 fire) is over" by world priority 100 in enemy at 2040 3510
+  take timer_tw_done_rf_cf2
+  unless phase_tw_done_rf_cf2
+
+verb tw_done_rf_ci1_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 1 ice) is over" by world priority 100 in enemy at 2180 3580
+  take timer_tw_done_rf_ci1
+  unless phase_tw_done_rf_ci1
+
+verb tw_done_rf_ci2_timer_clears "Twinrova hovers after her fire blast (rf, shield holds 2 ice) is over" by world priority 100 in enemy at 2040 3720
+  take timer_tw_done_rf_ci2
+  unless phase_tw_done_rf_ci2
+
+verb tw_done_ri_c0_timer_clears "Twinrova hovers after her ice blast (ri, no charge) is over" by world priority 100 in enemy at 2180 3790
+  take timer_tw_done_ri_c0
+  unless phase_tw_done_ri_c0
+
+verb tw_done_ri_cf1_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 1 fire) is over" by world priority 100 in enemy at 2040 3930
+  take timer_tw_done_ri_cf1
+  unless phase_tw_done_ri_cf1
+
+verb tw_done_ri_cf2_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 2 fire) is over" by world priority 100 in enemy at 2180 4000
+  take timer_tw_done_ri_cf2
+  unless phase_tw_done_ri_cf2
+
+verb tw_done_ri_ci1_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 1 ice) is over" by world priority 100 in enemy at 2040 4140
+  take timer_tw_done_ri_ci1
+  unless phase_tw_done_ri_ci1
+
+verb tw_done_ri_ci2_timer_clears "Twinrova hovers after her ice blast (ri, shield holds 2 ice) is over" by world priority 100 in enemy at 2180 4210
+  take timer_tw_done_ri_ci2
+  unless phase_tw_done_ri_ci2
+
+verb tw_done_lf_c0_timer_clears "Twinrova hovers after her fire blast (lf, no charge) is over" by world priority 100 in enemy at 2040 4350
+  take timer_tw_done_lf_c0
+  unless phase_tw_done_lf_c0
+
+verb tw_done_lf_cf1_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 1 fire) is over" by world priority 100 in enemy at 2180 4420
+  take timer_tw_done_lf_cf1
+  unless phase_tw_done_lf_cf1
+
+verb tw_done_lf_cf2_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 2 fire) is over" by world priority 100 in enemy at 2040 4560
+  take timer_tw_done_lf_cf2
+  unless phase_tw_done_lf_cf2
+
+verb tw_done_lf_ci1_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 1 ice) is over" by world priority 100 in enemy at 2180 4630
+  take timer_tw_done_lf_ci1
+  unless phase_tw_done_lf_ci1
+
+verb tw_done_lf_ci2_timer_clears "Twinrova hovers after her fire blast (lf, shield holds 2 ice) is over" by world priority 100 in enemy at 2040 4770
+  take timer_tw_done_lf_ci2
+  unless phase_tw_done_lf_ci2
+
+verb tw_done_li_c0_timer_clears "Twinrova hovers after her ice blast (li, no charge) is over" by world priority 100 in enemy at 2180 4840
+  take timer_tw_done_li_c0
+  unless phase_tw_done_li_c0
+
+verb tw_done_li_cf1_timer_clears "Twinrova hovers after her ice blast (li, shield holds 1 fire) is over" by world priority 100 in enemy at 2040 4980
+  take timer_tw_done_li_cf1
+  unless phase_tw_done_li_cf1
+
+verb tw_done_li_cf2_timer_clears "Twinrova hovers after her ice blast (li, shield holds 2 fire) is over" by world priority 100 in enemy at 2180 5050
+  take timer_tw_done_li_cf2
+  unless phase_tw_done_li_cf2
+
+verb tw_done_li_ci1_timer_clears "Twinrova hovers after her ice blast (li, shield holds 1 ice) is over" by world priority 100 in enemy at 2040 5190
+  take timer_tw_done_li_ci1
+  unless phase_tw_done_li_ci1
+
+verb tw_done_li_ci2_timer_clears "Twinrova hovers after her ice blast (li, shield holds 2 ice) is over" by world priority 100 in enemy at 2180 5260
+  take timer_tw_done_li_ci2
+  unless phase_tw_done_li_ci2
+
+verb tw_done_aim_r_timer_clears "The shield holds the third blast and fires it back at Twinrova, who hovers (r) is over" by world priority 100 in enemy at 2040 5400
+  take timer_tw_done_aim_r
+  unless phase_tw_done_aim_r
+
+verb tw_stun_r_timer_clears "Twinrova lies stunned on the floor (r) is over" by world priority 100 in enemy at 2180 5470
+  take timer_tw_stun_r
+  unless phase_tw_stun_r
+
+verb tw_getup_r_timer_clears "Twinrova gets up (r) is over" by world priority 100 in enemy at 2040 5610
+  take timer_tw_getup_r
+  unless phase_tw_getup_r
+
+verb tw_done_aim_l_timer_clears "The shield holds the third blast and fires it back at Twinrova, who hovers (l) is over" by world priority 100 in enemy at 2180 5680
+  take timer_tw_done_aim_l
+  unless phase_tw_done_aim_l
+
+verb tw_stun_l_timer_clears "Twinrova lies stunned on the floor (l) is over" by world priority 100 in enemy at 2040 5820
+  take timer_tw_stun_l
+  unless phase_tw_stun_l
+
+verb tw_getup_l_timer_clears "Twinrova gets up (l) is over" by world priority 100 in enemy at 2180 5890
+  take timer_tw_getup_l
+  unless phase_tw_getup_l
+
+verb fight_adult_blade "Fight as adult Link: adult blade (10 hearts)" by link in setup at 260 150
+  take choose_age
+  give age_adult
+  give 80 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give phase_fly_0
+  give 4 timer_fly_0
+  give range_far
+  give link_turn
+
+verb fight_adult_spin "Fight as adult Link: adult spin (10 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_adult
+  give 80 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_fly_0
+  give 4 timer_fly_0
+  give range_far
+  give link_turn
+
+verb fight_adult_giant "Fight as adult Link: adult giant (10 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_adult
+  give 80 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give phase_fly_0
+  give 4 timer_fly_0
+  give range_far
+  give link_turn
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (10 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_adult
+  give 80 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give phase_fly_0
+  give 4 timer_fly_0
+  give range_far
+  give link_turn
+
+verb fight_adult_dins "Fight as adult Link: adult dins (10 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_adult
+  give 80 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_fly_0
+  give 4 timer_fly_0
+  give range_far
+  give link_turn
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (10 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_adult
+  give 80 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_fly_0
+  give 4 timer_fly_0
+  give range_far
+  give link_turn
+
+verb fight_adult_lens "Fight as adult Link: adult lens (10 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_adult
+  give 80 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_fly_0
+  give 4 timer_fly_0
+  give range_far
+  give link_turn
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (10 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_adult
+  give 80 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give phase_fly_0
+  give 4 timer_fly_0
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 500
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 570
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 570
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 640
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 640
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 710
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 710
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 80 link_heal
+
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb twinrova_hurt "Twinrova loses health" by world priority 97 in enemy_health at 2500 220
+  take dmg_twinrova
+  take hp_twinrova
+
+verb twinrova_hurt_2 "Twinrova loses health (2 or less)" by world priority 97 in enemy_health at 2360 290
+  take dmg_twinrova
+  take hp_twinrova_2
+  unless hp_twinrova
+
+verb twinrova_overkill "Twinrova has no health left to lose" by world priority 96 in enemy_health at 2500 290
+  take dmg_twinrova
+  unless hp_twinrova
+  unless hp_twinrova_2
+
+verb link_deku_nut "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_explosive_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 80
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 150
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2820 150
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2680 220
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2820 220
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 290
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 290
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 360
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 360
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 430
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 430
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 500
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 500
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 570
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 570
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 640
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 640
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 710
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 710
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 780
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2820 780
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 850
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2820 850
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 920
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2820 920
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 990
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 990
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 150
+  take swing_explosive
+
+verb hit_explosive__tw_stun_r "Explosion hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 220
+  take swing_explosive
+  need phase_tw_stun_r
+  give 2 dmg_twinrova
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3000 290
+  take swing_arrow_normal
+
+verb hit_arrow_normal__fly_0 "Arrow hits (The sisters fly to a new spot (0 hits))" by world priority 80 in hits at 3140 290
+  take swing_arrow_normal
+  take phase_fly_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_arrow_normal__turn_0 "Arrow hits (A sister turns on Link (0 hits))" by world priority 80 in hits at 3000 360
+  take swing_arrow_normal
+  take phase_turn_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_arrow_normal__fly_1 "Arrow hits (The sisters fly to a new spot (1 hits))" by world priority 80 in hits at 3140 360
+  take swing_arrow_normal
+  take phase_fly_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_arrow_normal__turn_1 "Arrow hits (A sister turns on Link (1 hits))" by world priority 80 in hits at 3000 430
+  take swing_arrow_normal
+  take phase_turn_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_arrow_normal__fly_2 "Arrow hits (The sisters fly to a new spot (2 hits))" by world priority 80 in hits at 3140 430
+  take swing_arrow_normal
+  take phase_fly_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_arrow_normal__turn_2 "Arrow hits (A sister turns on Link (2 hits))" by world priority 80 in hits at 3000 500
+  take swing_arrow_normal
+  take phase_turn_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_arrow_normal__fly_3 "Arrow hits (The sisters fly to a new spot (3 hits))" by world priority 80 in hits at 3140 500
+  take swing_arrow_normal
+  take phase_fly_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_arrow_normal__turn_3 "Arrow hits (A sister turns on Link (3 hits))" by world priority 80 in hits at 3000 570
+  take swing_arrow_normal
+  take phase_turn_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_arrow_normal__tw_done_rf_c0 "Arrow hits (Twinrova hovers after her fire blast (rf, no charge))" by world priority 80 in hits at 3140 570
+  take swing_arrow_normal
+  take phase_tw_done_rf_c0
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_normal__tw_done_rf_cf1 "Arrow hits (Twinrova hovers after her fire blast (rf, shield holds 1 fire))" by world priority 80 in hits at 3000 640
+  take swing_arrow_normal
+  take phase_tw_done_rf_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_arrow_normal__tw_done_rf_cf2 "Arrow hits (Twinrova hovers after her fire blast (rf, shield holds 2 fire))" by world priority 80 in hits at 3140 640
+  take swing_arrow_normal
+  take phase_tw_done_rf_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_arrow_normal__tw_done_rf_ci1 "Arrow hits (Twinrova hovers after her fire blast (rf, shield holds 1 ice))" by world priority 80 in hits at 3000 710
+  take swing_arrow_normal
+  take phase_tw_done_rf_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_arrow_normal__tw_done_rf_ci2 "Arrow hits (Twinrova hovers after her fire blast (rf, shield holds 2 ice))" by world priority 80 in hits at 3140 710
+  take swing_arrow_normal
+  take phase_tw_done_rf_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_arrow_normal__tw_done_ri_c0 "Arrow hits (Twinrova hovers after her ice blast (ri, no charge))" by world priority 80 in hits at 3000 780
+  take swing_arrow_normal
+  take phase_tw_done_ri_c0
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_normal__tw_done_ri_cf1 "Arrow hits (Twinrova hovers after her ice blast (ri, shield holds 1 fire))" by world priority 80 in hits at 3140 780
+  take swing_arrow_normal
+  take phase_tw_done_ri_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_arrow_normal__tw_done_ri_cf2 "Arrow hits (Twinrova hovers after her ice blast (ri, shield holds 2 fire))" by world priority 80 in hits at 3000 850
+  take swing_arrow_normal
+  take phase_tw_done_ri_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_arrow_normal__tw_done_ri_ci1 "Arrow hits (Twinrova hovers after her ice blast (ri, shield holds 1 ice))" by world priority 80 in hits at 3140 850
+  take swing_arrow_normal
+  take phase_tw_done_ri_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_arrow_normal__tw_done_ri_ci2 "Arrow hits (Twinrova hovers after her ice blast (ri, shield holds 2 ice))" by world priority 80 in hits at 3000 920
+  take swing_arrow_normal
+  take phase_tw_done_ri_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_arrow_normal__tw_done_lf_c0 "Arrow hits (Twinrova hovers after her fire blast (lf, no charge))" by world priority 80 in hits at 3140 920
+  take swing_arrow_normal
+  take phase_tw_done_lf_c0
+  give phase_tw_fly_l_c0
+
+verb hit_arrow_normal__tw_done_lf_cf1 "Arrow hits (Twinrova hovers after her fire blast (lf, shield holds 1 fire))" by world priority 80 in hits at 3000 990
+  take swing_arrow_normal
+  take phase_tw_done_lf_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_arrow_normal__tw_done_lf_cf2 "Arrow hits (Twinrova hovers after her fire blast (lf, shield holds 2 fire))" by world priority 80 in hits at 3140 990
+  take swing_arrow_normal
+  take phase_tw_done_lf_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_arrow_normal__tw_done_lf_ci1 "Arrow hits (Twinrova hovers after her fire blast (lf, shield holds 1 ice))" by world priority 80 in hits at 3000 1060
+  take swing_arrow_normal
+  take phase_tw_done_lf_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_arrow_normal__tw_done_lf_ci2 "Arrow hits (Twinrova hovers after her fire blast (lf, shield holds 2 ice))" by world priority 80 in hits at 3140 1060
+  take swing_arrow_normal
+  take phase_tw_done_lf_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_arrow_normal__tw_done_li_c0 "Arrow hits (Twinrova hovers after her ice blast (li, no charge))" by world priority 80 in hits at 3000 1130
+  take swing_arrow_normal
+  take phase_tw_done_li_c0
+  give phase_tw_fly_l_c0
+
+verb hit_arrow_normal__tw_done_li_cf1 "Arrow hits (Twinrova hovers after her ice blast (li, shield holds 1 fire))" by world priority 80 in hits at 3140 1130
+  take swing_arrow_normal
+  take phase_tw_done_li_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_arrow_normal__tw_done_li_cf2 "Arrow hits (Twinrova hovers after her ice blast (li, shield holds 2 fire))" by world priority 80 in hits at 3000 1200
+  take swing_arrow_normal
+  take phase_tw_done_li_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_arrow_normal__tw_done_li_ci1 "Arrow hits (Twinrova hovers after her ice blast (li, shield holds 1 ice))" by world priority 80 in hits at 3140 1200
+  take swing_arrow_normal
+  take phase_tw_done_li_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_arrow_normal__tw_done_li_ci2 "Arrow hits (Twinrova hovers after her ice blast (li, shield holds 2 ice))" by world priority 80 in hits at 3000 1270
+  take swing_arrow_normal
+  take phase_tw_done_li_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_arrow_normal__tw_stun_r "Arrow hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3140 1270
+  take swing_arrow_normal
+  need phase_tw_stun_r
+  give 2 dmg_twinrova
+
+verb hit_arrow_normal__tw_getup_r "Arrow hits (Twinrova gets up (r))" by world priority 80 in hits at 3000 1340
+  take swing_arrow_normal
+  take phase_tw_getup_r
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_normal__tw_getup_l "Arrow hits (Twinrova gets up (l))" by world priority 80 in hits at 3140 1340
+  take swing_arrow_normal
+  take phase_tw_getup_l
+  give phase_tw_fly_l_c0
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 1410
+  take swing_hammer_swing
+
+verb hit_hammer_swing__tw_stun_r "Hammer swing hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 1480
+  take swing_hammer_swing
+  need phase_tw_stun_r
+  give 2 dmg_twinrova
+
+verb hit_hammer_swing__tw_stun_l "Hammer swing hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3140 1480
+  take swing_hammer_swing
+  need phase_tw_stun_l
+  give 2 dmg_twinrova
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3140 1550
+  take swing_hookshot
+
+verb hit_hookshot__fly_0 "Hookshot hits (The sisters fly to a new spot (0 hits))" by world priority 80 in hits at 3000 1620
+  take swing_hookshot
+  take phase_fly_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_hookshot__turn_0 "Hookshot hits (A sister turns on Link (0 hits))" by world priority 80 in hits at 3140 1620
+  take swing_hookshot
+  take phase_turn_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_hookshot__fly_1 "Hookshot hits (The sisters fly to a new spot (1 hits))" by world priority 80 in hits at 3000 1690
+  take swing_hookshot
+  take phase_fly_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_hookshot__turn_1 "Hookshot hits (A sister turns on Link (1 hits))" by world priority 80 in hits at 3140 1690
+  take swing_hookshot
+  take phase_turn_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_hookshot__fly_2 "Hookshot hits (The sisters fly to a new spot (2 hits))" by world priority 80 in hits at 3000 1760
+  take swing_hookshot
+  take phase_fly_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_hookshot__turn_2 "Hookshot hits (A sister turns on Link (2 hits))" by world priority 80 in hits at 3140 1760
+  take swing_hookshot
+  take phase_turn_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_hookshot__fly_3 "Hookshot hits (The sisters fly to a new spot (3 hits))" by world priority 80 in hits at 3000 1830
+  take swing_hookshot
+  take phase_fly_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_hookshot__turn_3 "Hookshot hits (A sister turns on Link (3 hits))" by world priority 80 in hits at 3140 1830
+  take swing_hookshot
+  take phase_turn_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_hookshot__tw_done_rf_c0 "Hookshot hits (Twinrova hovers after her fire blast (rf, no charge))" by world priority 80 in hits at 3000 1900
+  take swing_hookshot
+  take phase_tw_done_rf_c0
+  give phase_tw_fly_r_c0
+
+verb hit_hookshot__tw_done_rf_cf1 "Hookshot hits (Twinrova hovers after her fire blast (rf, shield holds 1 fire))" by world priority 80 in hits at 3140 1900
+  take swing_hookshot
+  take phase_tw_done_rf_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_hookshot__tw_done_rf_cf2 "Hookshot hits (Twinrova hovers after her fire blast (rf, shield holds 2 fire))" by world priority 80 in hits at 3000 1970
+  take swing_hookshot
+  take phase_tw_done_rf_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_hookshot__tw_done_rf_ci1 "Hookshot hits (Twinrova hovers after her fire blast (rf, shield holds 1 ice))" by world priority 80 in hits at 3140 1970
+  take swing_hookshot
+  take phase_tw_done_rf_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_hookshot__tw_done_rf_ci2 "Hookshot hits (Twinrova hovers after her fire blast (rf, shield holds 2 ice))" by world priority 80 in hits at 3000 2040
+  take swing_hookshot
+  take phase_tw_done_rf_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_hookshot__tw_done_ri_c0 "Hookshot hits (Twinrova hovers after her ice blast (ri, no charge))" by world priority 80 in hits at 3140 2040
+  take swing_hookshot
+  take phase_tw_done_ri_c0
+  give phase_tw_fly_r_c0
+
+verb hit_hookshot__tw_done_ri_cf1 "Hookshot hits (Twinrova hovers after her ice blast (ri, shield holds 1 fire))" by world priority 80 in hits at 3000 2110
+  take swing_hookshot
+  take phase_tw_done_ri_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_hookshot__tw_done_ri_cf2 "Hookshot hits (Twinrova hovers after her ice blast (ri, shield holds 2 fire))" by world priority 80 in hits at 3140 2110
+  take swing_hookshot
+  take phase_tw_done_ri_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_hookshot__tw_done_ri_ci1 "Hookshot hits (Twinrova hovers after her ice blast (ri, shield holds 1 ice))" by world priority 80 in hits at 3000 2180
+  take swing_hookshot
+  take phase_tw_done_ri_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_hookshot__tw_done_ri_ci2 "Hookshot hits (Twinrova hovers after her ice blast (ri, shield holds 2 ice))" by world priority 80 in hits at 3140 2180
+  take swing_hookshot
+  take phase_tw_done_ri_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_hookshot__tw_done_lf_c0 "Hookshot hits (Twinrova hovers after her fire blast (lf, no charge))" by world priority 80 in hits at 3000 2250
+  take swing_hookshot
+  take phase_tw_done_lf_c0
+  give phase_tw_fly_l_c0
+
+verb hit_hookshot__tw_done_lf_cf1 "Hookshot hits (Twinrova hovers after her fire blast (lf, shield holds 1 fire))" by world priority 80 in hits at 3140 2250
+  take swing_hookshot
+  take phase_tw_done_lf_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_hookshot__tw_done_lf_cf2 "Hookshot hits (Twinrova hovers after her fire blast (lf, shield holds 2 fire))" by world priority 80 in hits at 3000 2320
+  take swing_hookshot
+  take phase_tw_done_lf_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_hookshot__tw_done_lf_ci1 "Hookshot hits (Twinrova hovers after her fire blast (lf, shield holds 1 ice))" by world priority 80 in hits at 3140 2320
+  take swing_hookshot
+  take phase_tw_done_lf_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_hookshot__tw_done_lf_ci2 "Hookshot hits (Twinrova hovers after her fire blast (lf, shield holds 2 ice))" by world priority 80 in hits at 3000 2390
+  take swing_hookshot
+  take phase_tw_done_lf_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_hookshot__tw_done_li_c0 "Hookshot hits (Twinrova hovers after her ice blast (li, no charge))" by world priority 80 in hits at 3140 2390
+  take swing_hookshot
+  take phase_tw_done_li_c0
+  give phase_tw_fly_l_c0
+
+verb hit_hookshot__tw_done_li_cf1 "Hookshot hits (Twinrova hovers after her ice blast (li, shield holds 1 fire))" by world priority 80 in hits at 3000 2460
+  take swing_hookshot
+  take phase_tw_done_li_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_hookshot__tw_done_li_cf2 "Hookshot hits (Twinrova hovers after her ice blast (li, shield holds 2 fire))" by world priority 80 in hits at 3140 2460
+  take swing_hookshot
+  take phase_tw_done_li_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_hookshot__tw_done_li_ci1 "Hookshot hits (Twinrova hovers after her ice blast (li, shield holds 1 ice))" by world priority 80 in hits at 3000 2530
+  take swing_hookshot
+  take phase_tw_done_li_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_hookshot__tw_done_li_ci2 "Hookshot hits (Twinrova hovers after her ice blast (li, shield holds 2 ice))" by world priority 80 in hits at 3140 2530
+  take swing_hookshot
+  take phase_tw_done_li_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_hookshot__tw_getup_r "Hookshot hits (Twinrova gets up (r))" by world priority 80 in hits at 3000 2600
+  take swing_hookshot
+  take phase_tw_getup_r
+  give phase_tw_fly_r_c0
+
+verb hit_hookshot__tw_getup_l "Hookshot hits (Twinrova gets up (l))" by world priority 80 in hits at 3140 2600
+  take swing_hookshot
+  take phase_tw_getup_l
+  give phase_tw_fly_l_c0
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3140 2670
+  take swing_slash_master
+
+verb hit_slash_master__tw_stun_r "Master Sword slash hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 2740
+  take swing_slash_master
+  need phase_tw_stun_r
+  give 2 dmg_twinrova
+
+verb hit_slash_master__tw_stun_l "Master Sword slash hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3140 2740
+  take swing_slash_master
+  need phase_tw_stun_l
+  give 2 dmg_twinrova
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3140 2810
+  take swing_slash_giant
+
+verb hit_slash_giant__tw_stun_r "Two-handed sword slash hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 2880
+  take swing_slash_giant
+  need phase_tw_stun_r
+  give 4 dmg_twinrova
+
+verb hit_slash_giant__tw_stun_l "Two-handed sword slash hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3140 2880
+  take swing_slash_giant
+  need phase_tw_stun_l
+  give 4 dmg_twinrova
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3140 2950
+  take swing_arrow_fire
+
+verb hit_arrow_fire__fly_0 "Fire arrow hits (The sisters fly to a new spot (0 hits))" by world priority 80 in hits at 3000 3020
+  take swing_arrow_fire
+  take phase_fly_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_arrow_fire__turn_0 "Fire arrow hits (A sister turns on Link (0 hits))" by world priority 80 in hits at 3140 3020
+  take swing_arrow_fire
+  take phase_turn_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_arrow_fire__fly_1 "Fire arrow hits (The sisters fly to a new spot (1 hits))" by world priority 80 in hits at 3000 3090
+  take swing_arrow_fire
+  take phase_fly_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_arrow_fire__turn_1 "Fire arrow hits (A sister turns on Link (1 hits))" by world priority 80 in hits at 3140 3090
+  take swing_arrow_fire
+  take phase_turn_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_arrow_fire__fly_2 "Fire arrow hits (The sisters fly to a new spot (2 hits))" by world priority 80 in hits at 3000 3160
+  take swing_arrow_fire
+  take phase_fly_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_arrow_fire__turn_2 "Fire arrow hits (A sister turns on Link (2 hits))" by world priority 80 in hits at 3140 3160
+  take swing_arrow_fire
+  take phase_turn_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_arrow_fire__fly_3 "Fire arrow hits (The sisters fly to a new spot (3 hits))" by world priority 80 in hits at 3000 3230
+  take swing_arrow_fire
+  take phase_fly_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_arrow_fire__turn_3 "Fire arrow hits (A sister turns on Link (3 hits))" by world priority 80 in hits at 3140 3230
+  take swing_arrow_fire
+  take phase_turn_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_arrow_fire__tw_done_rf_c0 "Fire arrow hits (Twinrova hovers after her fire blast (rf, no charge))" by world priority 80 in hits at 3000 3300
+  take swing_arrow_fire
+  take phase_tw_done_rf_c0
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_fire__tw_done_rf_cf1 "Fire arrow hits (Twinrova hovers after her fire blast (rf, shield holds 1 fire))" by world priority 80 in hits at 3140 3300
+  take swing_arrow_fire
+  take phase_tw_done_rf_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_arrow_fire__tw_done_rf_cf2 "Fire arrow hits (Twinrova hovers after her fire blast (rf, shield holds 2 fire))" by world priority 80 in hits at 3000 3370
+  take swing_arrow_fire
+  take phase_tw_done_rf_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_arrow_fire__tw_done_rf_ci1 "Fire arrow hits (Twinrova hovers after her fire blast (rf, shield holds 1 ice))" by world priority 80 in hits at 3140 3370
+  take swing_arrow_fire
+  take phase_tw_done_rf_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_arrow_fire__tw_done_rf_ci2 "Fire arrow hits (Twinrova hovers after her fire blast (rf, shield holds 2 ice))" by world priority 80 in hits at 3000 3440
+  take swing_arrow_fire
+  take phase_tw_done_rf_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_arrow_fire__tw_done_ri_c0 "Fire arrow hits (Twinrova hovers after her ice blast (ri, no charge))" by world priority 80 in hits at 3140 3440
+  take swing_arrow_fire
+  take phase_tw_done_ri_c0
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_fire__tw_done_ri_cf1 "Fire arrow hits (Twinrova hovers after her ice blast (ri, shield holds 1 fire))" by world priority 80 in hits at 3000 3510
+  take swing_arrow_fire
+  take phase_tw_done_ri_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_arrow_fire__tw_done_ri_cf2 "Fire arrow hits (Twinrova hovers after her ice blast (ri, shield holds 2 fire))" by world priority 80 in hits at 3140 3510
+  take swing_arrow_fire
+  take phase_tw_done_ri_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_arrow_fire__tw_done_ri_ci1 "Fire arrow hits (Twinrova hovers after her ice blast (ri, shield holds 1 ice))" by world priority 80 in hits at 3000 3580
+  take swing_arrow_fire
+  take phase_tw_done_ri_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_arrow_fire__tw_done_ri_ci2 "Fire arrow hits (Twinrova hovers after her ice blast (ri, shield holds 2 ice))" by world priority 80 in hits at 3140 3580
+  take swing_arrow_fire
+  take phase_tw_done_ri_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_arrow_fire__tw_done_lf_c0 "Fire arrow hits (Twinrova hovers after her fire blast (lf, no charge))" by world priority 80 in hits at 3000 3650
+  take swing_arrow_fire
+  take phase_tw_done_lf_c0
+  give phase_tw_fly_l_c0
+
+verb hit_arrow_fire__tw_done_lf_cf1 "Fire arrow hits (Twinrova hovers after her fire blast (lf, shield holds 1 fire))" by world priority 80 in hits at 3140 3650
+  take swing_arrow_fire
+  take phase_tw_done_lf_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_arrow_fire__tw_done_lf_cf2 "Fire arrow hits (Twinrova hovers after her fire blast (lf, shield holds 2 fire))" by world priority 80 in hits at 3000 3720
+  take swing_arrow_fire
+  take phase_tw_done_lf_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_arrow_fire__tw_done_lf_ci1 "Fire arrow hits (Twinrova hovers after her fire blast (lf, shield holds 1 ice))" by world priority 80 in hits at 3140 3720
+  take swing_arrow_fire
+  take phase_tw_done_lf_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_arrow_fire__tw_done_lf_ci2 "Fire arrow hits (Twinrova hovers after her fire blast (lf, shield holds 2 ice))" by world priority 80 in hits at 3000 3790
+  take swing_arrow_fire
+  take phase_tw_done_lf_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_arrow_fire__tw_done_li_c0 "Fire arrow hits (Twinrova hovers after her ice blast (li, no charge))" by world priority 80 in hits at 3140 3790
+  take swing_arrow_fire
+  take phase_tw_done_li_c0
+  give phase_tw_fly_l_c0
+
+verb hit_arrow_fire__tw_done_li_cf1 "Fire arrow hits (Twinrova hovers after her ice blast (li, shield holds 1 fire))" by world priority 80 in hits at 3000 3860
+  take swing_arrow_fire
+  take phase_tw_done_li_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_arrow_fire__tw_done_li_cf2 "Fire arrow hits (Twinrova hovers after her ice blast (li, shield holds 2 fire))" by world priority 80 in hits at 3140 3860
+  take swing_arrow_fire
+  take phase_tw_done_li_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_arrow_fire__tw_done_li_ci1 "Fire arrow hits (Twinrova hovers after her ice blast (li, shield holds 1 ice))" by world priority 80 in hits at 3000 3930
+  take swing_arrow_fire
+  take phase_tw_done_li_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_arrow_fire__tw_done_li_ci2 "Fire arrow hits (Twinrova hovers after her ice blast (li, shield holds 2 ice))" by world priority 80 in hits at 3140 3930
+  take swing_arrow_fire
+  take phase_tw_done_li_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_arrow_fire__tw_stun_r "Fire arrow hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 4000
+  take swing_arrow_fire
+  need phase_tw_stun_r
+  give 2 dmg_twinrova
+
+verb hit_arrow_fire__tw_getup_r "Fire arrow hits (Twinrova gets up (r))" by world priority 80 in hits at 3140 4000
+  take swing_arrow_fire
+  take phase_tw_getup_r
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_fire__tw_getup_l "Fire arrow hits (Twinrova gets up (l))" by world priority 80 in hits at 3000 4070
+  take swing_arrow_fire
+  take phase_tw_getup_l
+  give phase_tw_fly_l_c0
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3000 4140
+  take swing_arrow_ice
+
+verb hit_arrow_ice__fly_0 "Ice arrow hits (The sisters fly to a new spot (0 hits))" by world priority 80 in hits at 3140 4140
+  take swing_arrow_ice
+  take phase_fly_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_arrow_ice__turn_0 "Ice arrow hits (A sister turns on Link (0 hits))" by world priority 80 in hits at 3000 4210
+  take swing_arrow_ice
+  take phase_turn_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_arrow_ice__fly_1 "Ice arrow hits (The sisters fly to a new spot (1 hits))" by world priority 80 in hits at 3140 4210
+  take swing_arrow_ice
+  take phase_fly_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_arrow_ice__turn_1 "Ice arrow hits (A sister turns on Link (1 hits))" by world priority 80 in hits at 3000 4280
+  take swing_arrow_ice
+  take phase_turn_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_arrow_ice__fly_2 "Ice arrow hits (The sisters fly to a new spot (2 hits))" by world priority 80 in hits at 3140 4280
+  take swing_arrow_ice
+  take phase_fly_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_arrow_ice__turn_2 "Ice arrow hits (A sister turns on Link (2 hits))" by world priority 80 in hits at 3000 4350
+  take swing_arrow_ice
+  take phase_turn_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_arrow_ice__fly_3 "Ice arrow hits (The sisters fly to a new spot (3 hits))" by world priority 80 in hits at 3140 4350
+  take swing_arrow_ice
+  take phase_fly_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_arrow_ice__turn_3 "Ice arrow hits (A sister turns on Link (3 hits))" by world priority 80 in hits at 3000 4420
+  take swing_arrow_ice
+  take phase_turn_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_arrow_ice__tw_done_rf_c0 "Ice arrow hits (Twinrova hovers after her fire blast (rf, no charge))" by world priority 80 in hits at 3140 4420
+  take swing_arrow_ice
+  take phase_tw_done_rf_c0
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_ice__tw_done_rf_cf1 "Ice arrow hits (Twinrova hovers after her fire blast (rf, shield holds 1 fire))" by world priority 80 in hits at 3000 4490
+  take swing_arrow_ice
+  take phase_tw_done_rf_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_arrow_ice__tw_done_rf_cf2 "Ice arrow hits (Twinrova hovers after her fire blast (rf, shield holds 2 fire))" by world priority 80 in hits at 3140 4490
+  take swing_arrow_ice
+  take phase_tw_done_rf_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_arrow_ice__tw_done_rf_ci1 "Ice arrow hits (Twinrova hovers after her fire blast (rf, shield holds 1 ice))" by world priority 80 in hits at 3000 4560
+  take swing_arrow_ice
+  take phase_tw_done_rf_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_arrow_ice__tw_done_rf_ci2 "Ice arrow hits (Twinrova hovers after her fire blast (rf, shield holds 2 ice))" by world priority 80 in hits at 3140 4560
+  take swing_arrow_ice
+  take phase_tw_done_rf_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_arrow_ice__tw_done_ri_c0 "Ice arrow hits (Twinrova hovers after her ice blast (ri, no charge))" by world priority 80 in hits at 3000 4630
+  take swing_arrow_ice
+  take phase_tw_done_ri_c0
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_ice__tw_done_ri_cf1 "Ice arrow hits (Twinrova hovers after her ice blast (ri, shield holds 1 fire))" by world priority 80 in hits at 3140 4630
+  take swing_arrow_ice
+  take phase_tw_done_ri_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_arrow_ice__tw_done_ri_cf2 "Ice arrow hits (Twinrova hovers after her ice blast (ri, shield holds 2 fire))" by world priority 80 in hits at 3000 4700
+  take swing_arrow_ice
+  take phase_tw_done_ri_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_arrow_ice__tw_done_ri_ci1 "Ice arrow hits (Twinrova hovers after her ice blast (ri, shield holds 1 ice))" by world priority 80 in hits at 3140 4700
+  take swing_arrow_ice
+  take phase_tw_done_ri_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_arrow_ice__tw_done_ri_ci2 "Ice arrow hits (Twinrova hovers after her ice blast (ri, shield holds 2 ice))" by world priority 80 in hits at 3000 4770
+  take swing_arrow_ice
+  take phase_tw_done_ri_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_arrow_ice__tw_done_lf_c0 "Ice arrow hits (Twinrova hovers after her fire blast (lf, no charge))" by world priority 80 in hits at 3140 4770
+  take swing_arrow_ice
+  take phase_tw_done_lf_c0
+  give phase_tw_fly_l_c0
+
+verb hit_arrow_ice__tw_done_lf_cf1 "Ice arrow hits (Twinrova hovers after her fire blast (lf, shield holds 1 fire))" by world priority 80 in hits at 3000 4840
+  take swing_arrow_ice
+  take phase_tw_done_lf_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_arrow_ice__tw_done_lf_cf2 "Ice arrow hits (Twinrova hovers after her fire blast (lf, shield holds 2 fire))" by world priority 80 in hits at 3140 4840
+  take swing_arrow_ice
+  take phase_tw_done_lf_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_arrow_ice__tw_done_lf_ci1 "Ice arrow hits (Twinrova hovers after her fire blast (lf, shield holds 1 ice))" by world priority 80 in hits at 3000 4910
+  take swing_arrow_ice
+  take phase_tw_done_lf_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_arrow_ice__tw_done_lf_ci2 "Ice arrow hits (Twinrova hovers after her fire blast (lf, shield holds 2 ice))" by world priority 80 in hits at 3140 4910
+  take swing_arrow_ice
+  take phase_tw_done_lf_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_arrow_ice__tw_done_li_c0 "Ice arrow hits (Twinrova hovers after her ice blast (li, no charge))" by world priority 80 in hits at 3000 4980
+  take swing_arrow_ice
+  take phase_tw_done_li_c0
+  give phase_tw_fly_l_c0
+
+verb hit_arrow_ice__tw_done_li_cf1 "Ice arrow hits (Twinrova hovers after her ice blast (li, shield holds 1 fire))" by world priority 80 in hits at 3140 4980
+  take swing_arrow_ice
+  take phase_tw_done_li_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_arrow_ice__tw_done_li_cf2 "Ice arrow hits (Twinrova hovers after her ice blast (li, shield holds 2 fire))" by world priority 80 in hits at 3000 5050
+  take swing_arrow_ice
+  take phase_tw_done_li_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_arrow_ice__tw_done_li_ci1 "Ice arrow hits (Twinrova hovers after her ice blast (li, shield holds 1 ice))" by world priority 80 in hits at 3140 5050
+  take swing_arrow_ice
+  take phase_tw_done_li_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_arrow_ice__tw_done_li_ci2 "Ice arrow hits (Twinrova hovers after her ice blast (li, shield holds 2 ice))" by world priority 80 in hits at 3000 5120
+  take swing_arrow_ice
+  take phase_tw_done_li_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_arrow_ice__tw_stun_r "Ice arrow hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3140 5120
+  take swing_arrow_ice
+  need phase_tw_stun_r
+  give 2 dmg_twinrova
+
+verb hit_arrow_ice__tw_getup_r "Ice arrow hits (Twinrova gets up (r))" by world priority 80 in hits at 3000 5190
+  take swing_arrow_ice
+  take phase_tw_getup_r
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_ice__tw_getup_l "Ice arrow hits (Twinrova gets up (l))" by world priority 80 in hits at 3140 5190
+  take swing_arrow_ice
+  take phase_tw_getup_l
+  give phase_tw_fly_l_c0
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3140 5260
+  take swing_arrow_light
+
+verb hit_arrow_light__fly_0 "Light arrow hits (The sisters fly to a new spot (0 hits))" by world priority 80 in hits at 3000 5330
+  take swing_arrow_light
+  take phase_fly_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_arrow_light__turn_0 "Light arrow hits (A sister turns on Link (0 hits))" by world priority 80 in hits at 3140 5330
+  take swing_arrow_light
+  take phase_turn_0
+  give phase_spin_0
+  give timer_spin_0
+
+verb hit_arrow_light__fly_1 "Light arrow hits (The sisters fly to a new spot (1 hits))" by world priority 80 in hits at 3000 5400
+  take swing_arrow_light
+  take phase_fly_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_arrow_light__turn_1 "Light arrow hits (A sister turns on Link (1 hits))" by world priority 80 in hits at 3140 5400
+  take swing_arrow_light
+  take phase_turn_1
+  give phase_spin_1
+  give timer_spin_1
+
+verb hit_arrow_light__fly_2 "Light arrow hits (The sisters fly to a new spot (2 hits))" by world priority 80 in hits at 3000 5470
+  take swing_arrow_light
+  take phase_fly_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_arrow_light__turn_2 "Light arrow hits (A sister turns on Link (2 hits))" by world priority 80 in hits at 3140 5470
+  take swing_arrow_light
+  take phase_turn_2
+  give phase_spin_2
+  give timer_spin_2
+
+verb hit_arrow_light__fly_3 "Light arrow hits (The sisters fly to a new spot (3 hits))" by world priority 80 in hits at 3000 5540
+  take swing_arrow_light
+  take phase_fly_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_arrow_light__turn_3 "Light arrow hits (A sister turns on Link (3 hits))" by world priority 80 in hits at 3140 5540
+  take swing_arrow_light
+  take phase_turn_3
+  give phase_spin_3
+  give timer_spin_3
+
+verb hit_arrow_light__tw_done_rf_c0 "Light arrow hits (Twinrova hovers after her fire blast (rf, no charge))" by world priority 80 in hits at 3000 5610
+  take swing_arrow_light
+  take phase_tw_done_rf_c0
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_light__tw_done_rf_cf1 "Light arrow hits (Twinrova hovers after her fire blast (rf, shield holds 1 fire))" by world priority 80 in hits at 3140 5610
+  take swing_arrow_light
+  take phase_tw_done_rf_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_arrow_light__tw_done_rf_cf2 "Light arrow hits (Twinrova hovers after her fire blast (rf, shield holds 2 fire))" by world priority 80 in hits at 3000 5680
+  take swing_arrow_light
+  take phase_tw_done_rf_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_arrow_light__tw_done_rf_ci1 "Light arrow hits (Twinrova hovers after her fire blast (rf, shield holds 1 ice))" by world priority 80 in hits at 3140 5680
+  take swing_arrow_light
+  take phase_tw_done_rf_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_arrow_light__tw_done_rf_ci2 "Light arrow hits (Twinrova hovers after her fire blast (rf, shield holds 2 ice))" by world priority 80 in hits at 3000 5750
+  take swing_arrow_light
+  take phase_tw_done_rf_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_arrow_light__tw_done_ri_c0 "Light arrow hits (Twinrova hovers after her ice blast (ri, no charge))" by world priority 80 in hits at 3140 5750
+  take swing_arrow_light
+  take phase_tw_done_ri_c0
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_light__tw_done_ri_cf1 "Light arrow hits (Twinrova hovers after her ice blast (ri, shield holds 1 fire))" by world priority 80 in hits at 3000 5820
+  take swing_arrow_light
+  take phase_tw_done_ri_cf1
+  give phase_tw_fly_r_cf1
+
+verb hit_arrow_light__tw_done_ri_cf2 "Light arrow hits (Twinrova hovers after her ice blast (ri, shield holds 2 fire))" by world priority 80 in hits at 3140 5820
+  take swing_arrow_light
+  take phase_tw_done_ri_cf2
+  give phase_tw_fly_r_cf2
+
+verb hit_arrow_light__tw_done_ri_ci1 "Light arrow hits (Twinrova hovers after her ice blast (ri, shield holds 1 ice))" by world priority 80 in hits at 3000 5890
+  take swing_arrow_light
+  take phase_tw_done_ri_ci1
+  give phase_tw_fly_r_ci1
+
+verb hit_arrow_light__tw_done_ri_ci2 "Light arrow hits (Twinrova hovers after her ice blast (ri, shield holds 2 ice))" by world priority 80 in hits at 3140 5890
+  take swing_arrow_light
+  take phase_tw_done_ri_ci2
+  give phase_tw_fly_r_ci2
+
+verb hit_arrow_light__tw_done_lf_c0 "Light arrow hits (Twinrova hovers after her fire blast (lf, no charge))" by world priority 80 in hits at 3000 5960
+  take swing_arrow_light
+  take phase_tw_done_lf_c0
+  give phase_tw_fly_l_c0
+
+verb hit_arrow_light__tw_done_lf_cf1 "Light arrow hits (Twinrova hovers after her fire blast (lf, shield holds 1 fire))" by world priority 80 in hits at 3140 5960
+  take swing_arrow_light
+  take phase_tw_done_lf_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_arrow_light__tw_done_lf_cf2 "Light arrow hits (Twinrova hovers after her fire blast (lf, shield holds 2 fire))" by world priority 80 in hits at 3000 6030
+  take swing_arrow_light
+  take phase_tw_done_lf_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_arrow_light__tw_done_lf_ci1 "Light arrow hits (Twinrova hovers after her fire blast (lf, shield holds 1 ice))" by world priority 80 in hits at 3140 6030
+  take swing_arrow_light
+  take phase_tw_done_lf_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_arrow_light__tw_done_lf_ci2 "Light arrow hits (Twinrova hovers after her fire blast (lf, shield holds 2 ice))" by world priority 80 in hits at 3000 6100
+  take swing_arrow_light
+  take phase_tw_done_lf_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_arrow_light__tw_done_li_c0 "Light arrow hits (Twinrova hovers after her ice blast (li, no charge))" by world priority 80 in hits at 3140 6100
+  take swing_arrow_light
+  take phase_tw_done_li_c0
+  give phase_tw_fly_l_c0
+
+verb hit_arrow_light__tw_done_li_cf1 "Light arrow hits (Twinrova hovers after her ice blast (li, shield holds 1 fire))" by world priority 80 in hits at 3000 6170
+  take swing_arrow_light
+  take phase_tw_done_li_cf1
+  give phase_tw_fly_l_cf1
+
+verb hit_arrow_light__tw_done_li_cf2 "Light arrow hits (Twinrova hovers after her ice blast (li, shield holds 2 fire))" by world priority 80 in hits at 3140 6170
+  take swing_arrow_light
+  take phase_tw_done_li_cf2
+  give phase_tw_fly_l_cf2
+
+verb hit_arrow_light__tw_done_li_ci1 "Light arrow hits (Twinrova hovers after her ice blast (li, shield holds 1 ice))" by world priority 80 in hits at 3000 6240
+  take swing_arrow_light
+  take phase_tw_done_li_ci1
+  give phase_tw_fly_l_ci1
+
+verb hit_arrow_light__tw_done_li_ci2 "Light arrow hits (Twinrova hovers after her ice blast (li, shield holds 2 ice))" by world priority 80 in hits at 3140 6240
+  take swing_arrow_light
+  take phase_tw_done_li_ci2
+  give phase_tw_fly_l_ci2
+
+verb hit_arrow_light__tw_stun_r "Light arrow hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 6310
+  take swing_arrow_light
+  need phase_tw_stun_r
+  give 2 dmg_twinrova
+
+verb hit_arrow_light__tw_getup_r "Light arrow hits (Twinrova gets up (r))" by world priority 80 in hits at 3140 6310
+  take swing_arrow_light
+  take phase_tw_getup_r
+  give phase_tw_fly_r_c0
+
+verb hit_arrow_light__tw_getup_l "Light arrow hits (Twinrova gets up (l))" by world priority 80 in hits at 3000 6380
+  take swing_arrow_light
+  take phase_tw_getup_l
+  give phase_tw_fly_l_c0
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 6450
+  take swing_magic_fire
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3140 6450
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3140 6520
+  take swing_shield
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3140 6590
+  take swing_spin_giant
+
+verb hit_spin_giant__tw_stun_r "Two-handed spin attack hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 6660
+  take swing_spin_giant
+  need phase_tw_stun_r
+  give 4 dmg_twinrova
+
+verb hit_spin_giant__tw_stun_l "Two-handed spin attack hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3140 6660
+  take swing_spin_giant
+  need phase_tw_stun_l
+  give 4 dmg_twinrova
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 6730
+  take swing_spin_giant
+  need range_far
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3000 6800
+  take swing_spin_master
+
+verb hit_spin_master__tw_stun_r "Master Sword spin attack hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3140 6800
+  take swing_spin_master
+  need phase_tw_stun_r
+  give 2 dmg_twinrova
+
+verb hit_spin_master__tw_stun_l "Master Sword spin attack hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3000 6870
+  take swing_spin_master
+  need phase_tw_stun_l
+  give 2 dmg_twinrova
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3140 6870
+  take swing_spin_master
+  need range_far
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3140 6940
+  take swing_jump_giant
+
+verb hit_jump_giant__tw_stun_r "Two-handed jump attack hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 7010
+  take swing_jump_giant
+  need phase_tw_stun_r
+  give 8 dmg_twinrova
+
+verb hit_jump_giant__tw_stun_l "Two-handed jump attack hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3140 7010
+  take swing_jump_giant
+  need phase_tw_stun_l
+  give 8 dmg_twinrova
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3140 7080
+  take swing_jump_giant_self
+
+verb hit_jump_giant_self__tw_stun_r "Two-handed jump attack hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 7150
+  take swing_jump_giant_self
+  need phase_tw_stun_r
+  give 8 dmg_twinrova
+
+verb hit_jump_giant_self__tw_stun_l "Two-handed jump attack hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3140 7150
+  take swing_jump_giant_self
+  need phase_tw_stun_l
+  give 8 dmg_twinrova
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3000 7220
+  take swing_jump_giant_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 7290
+  take swing_jump_master
+
+verb hit_jump_master__tw_stun_r "Master Sword jump attack hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3140 7290
+  take swing_jump_master
+  need phase_tw_stun_r
+  give 4 dmg_twinrova
+
+verb hit_jump_master__tw_stun_l "Master Sword jump attack hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3000 7360
+  take swing_jump_master
+  need phase_tw_stun_l
+  give 4 dmg_twinrova
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 7430
+  take swing_jump_master_self
+
+verb hit_jump_master_self__tw_stun_r "Master Sword jump attack hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3140 7430
+  take swing_jump_master_self
+  need phase_tw_stun_r
+  give 4 dmg_twinrova
+
+verb hit_jump_master_self__tw_stun_l "Master Sword jump attack hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3000 7500
+  take swing_jump_master_self
+  need phase_tw_stun_l
+  give 4 dmg_twinrova
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3140 7500
+  take swing_jump_master_self
+  need range_far
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3140 7570
+  take swing_hammer_jump
+
+verb hit_hammer_jump__tw_stun_r "Hammer jump attack hits (Twinrova lies stunned on the floor (r))" by world priority 80 in hits at 3000 7640
+  take swing_hammer_jump
+  need phase_tw_stun_r
+  give 4 dmg_twinrova
+
+verb hit_hammer_jump__tw_stun_l "Hammer jump attack hits (Twinrova lies stunned on the floor (l))" by world priority 80 in hits at 3140 7640
+  take swing_hammer_jump
+  need phase_tw_stun_l
+  give 4 dmg_twinrova
+
+verb miss_reflect_beam_fire "Koume's fire beam, sent back has no effect" by world priority 79 in hits at 3140 7710
+  take swing_reflect_beam_fire
+
+verb hit_reflect_beam_fire__shoot_beam_fire_0 "Koume's fire beam, sent back hits (Koume's fire beam is out (0 hits))" by world priority 80 in hits at 3000 7780
+  take swing_reflect_beam_fire
+  take phase_shoot_beam_fire_0
+  give phase_hit_1
+  give 3 timer_hit_1
+
+verb hit_reflect_beam_fire__shoot_beam_ice_0 "Koume's fire beam, sent back hits (Kotake's ice beam is out (0 hits))" by world priority 80 in hits at 3140 7780
+  take swing_reflect_beam_fire
+  take phase_shoot_beam_ice_0
+  give phase_hit_1
+  give 3 timer_hit_1
+
+verb hit_reflect_beam_fire__shoot_beam_fire_1 "Koume's fire beam, sent back hits (Koume's fire beam is out (1 hits))" by world priority 80 in hits at 3000 7850
+  take swing_reflect_beam_fire
+  take phase_shoot_beam_fire_1
+  give phase_hit_2
+  give 3 timer_hit_2
+
+verb hit_reflect_beam_fire__shoot_beam_ice_1 "Koume's fire beam, sent back hits (Kotake's ice beam is out (1 hits))" by world priority 80 in hits at 3140 7850
+  take swing_reflect_beam_fire
+  take phase_shoot_beam_ice_1
+  give phase_hit_2
+  give 3 timer_hit_2
+
+verb hit_reflect_beam_fire__shoot_beam_fire_2 "Koume's fire beam, sent back hits (Koume's fire beam is out (2 hits))" by world priority 80 in hits at 3000 7920
+  take swing_reflect_beam_fire
+  take phase_shoot_beam_fire_2
+  give phase_hit_3
+  give 3 timer_hit_3
+
+verb hit_reflect_beam_fire__shoot_beam_ice_2 "Koume's fire beam, sent back hits (Kotake's ice beam is out (2 hits))" by world priority 80 in hits at 3140 7920
+  take swing_reflect_beam_fire
+  take phase_shoot_beam_ice_2
+  give phase_hit_3
+  give 3 timer_hit_3
+
+verb hit_reflect_beam_fire__shoot_beam_fire_3 "Koume's fire beam, sent back hits (Koume's fire beam is out (3 hits))" by world priority 80 in hits at 3000 7990
+  take swing_reflect_beam_fire
+  take phase_shoot_beam_fire_3
+  give phase_hit_4
+  give 3 timer_hit_4
+
+verb hit_reflect_beam_fire__shoot_beam_ice_3 "Koume's fire beam, sent back hits (Kotake's ice beam is out (3 hits))" by world priority 80 in hits at 3140 7990
+  take swing_reflect_beam_fire
+  take phase_shoot_beam_ice_3
+  give phase_hit_4
+  give 3 timer_hit_4
+
+verb miss_reflect_beam_ice "Kotake's ice beam, sent back has no effect" by world priority 79 in hits at 3140 8060
+  take swing_reflect_beam_ice
+
+verb hit_reflect_beam_ice__shoot_beam_fire_0 "Kotake's ice beam, sent back hits (Koume's fire beam is out (0 hits))" by world priority 80 in hits at 3000 8130
+  take swing_reflect_beam_ice
+  take phase_shoot_beam_fire_0
+  give phase_hit_1
+  give 3 timer_hit_1
+
+verb hit_reflect_beam_ice__shoot_beam_ice_0 "Kotake's ice beam, sent back hits (Kotake's ice beam is out (0 hits))" by world priority 80 in hits at 3140 8130
+  take swing_reflect_beam_ice
+  take phase_shoot_beam_ice_0
+  give phase_hit_1
+  give 3 timer_hit_1
+
+verb hit_reflect_beam_ice__shoot_beam_fire_1 "Kotake's ice beam, sent back hits (Koume's fire beam is out (1 hits))" by world priority 80 in hits at 3000 8200
+  take swing_reflect_beam_ice
+  take phase_shoot_beam_fire_1
+  give phase_hit_2
+  give 3 timer_hit_2
+
+verb hit_reflect_beam_ice__shoot_beam_ice_1 "Kotake's ice beam, sent back hits (Kotake's ice beam is out (1 hits))" by world priority 80 in hits at 3140 8200
+  take swing_reflect_beam_ice
+  take phase_shoot_beam_ice_1
+  give phase_hit_2
+  give 3 timer_hit_2
+
+verb hit_reflect_beam_ice__shoot_beam_fire_2 "Kotake's ice beam, sent back hits (Koume's fire beam is out (2 hits))" by world priority 80 in hits at 3000 8270
+  take swing_reflect_beam_ice
+  take phase_shoot_beam_fire_2
+  give phase_hit_3
+  give 3 timer_hit_3
+
+verb hit_reflect_beam_ice__shoot_beam_ice_2 "Kotake's ice beam, sent back hits (Kotake's ice beam is out (2 hits))" by world priority 80 in hits at 3140 8270
+  take swing_reflect_beam_ice
+  take phase_shoot_beam_ice_2
+  give phase_hit_3
+  give 3 timer_hit_3
+
+verb hit_reflect_beam_ice__shoot_beam_fire_3 "Kotake's ice beam, sent back hits (Koume's fire beam is out (3 hits))" by world priority 80 in hits at 3000 8340
+  take swing_reflect_beam_ice
+  take phase_shoot_beam_fire_3
+  give phase_hit_4
+  give 3 timer_hit_4
+
+verb hit_reflect_beam_ice__shoot_beam_ice_3 "Kotake's ice beam, sent back hits (Kotake's ice beam is out (3 hits))" by world priority 80 in hits at 3140 8340
+  take swing_reflect_beam_ice
+  take phase_shoot_beam_ice_3
+  give phase_hit_4
+  give 3 timer_hit_4
+
+verb miss_reflect_blast_fire "Twinrova's fire blast, sent back has no effect" by world priority 79 in hits at 3140 8410
+  take swing_reflect_blast_fire
+
+verb hit_reflect_blast_fire__tw_done_rf_c0 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (rf, no charge))" by world priority 80 in hits at 3000 8480
+  take swing_reflect_blast_fire
+  take phase_tw_done_rf_c0
+  give phase_tw_done_rf_cf1
+  give 3 timer_tw_done_rf_cf1
+
+verb hit_reflect_blast_fire__tw_done_rf_cf1 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (rf, shield holds 1 fire))" by world priority 80 in hits at 3140 8480
+  take swing_reflect_blast_fire
+  take phase_tw_done_rf_cf1
+  give phase_tw_done_rf_cf2
+  give 3 timer_tw_done_rf_cf2
+
+verb hit_reflect_blast_fire__tw_done_rf_cf2 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (rf, shield holds 2 fire))" by world priority 80 in hits at 3000 8550
+  take swing_reflect_blast_fire
+  take phase_tw_done_rf_cf2
+  give phase_tw_done_aim_r
+  give 3 timer_tw_done_aim_r
+
+verb hit_reflect_blast_fire__tw_done_rf_ci1 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (rf, shield holds 1 ice))" by world priority 80 in hits at 3140 8550
+  take swing_reflect_blast_fire
+  take phase_tw_done_rf_ci1
+  give phase_tw_done_rf_c0
+  give 3 timer_tw_done_rf_c0
+
+verb hit_reflect_blast_fire__tw_done_rf_ci2 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (rf, shield holds 2 ice))" by world priority 80 in hits at 3000 8620
+  take swing_reflect_blast_fire
+  take phase_tw_done_rf_ci2
+  give phase_tw_done_rf_c0
+  give 3 timer_tw_done_rf_c0
+
+verb hit_reflect_blast_fire__tw_done_lf_c0 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (lf, no charge))" by world priority 80 in hits at 3140 8620
+  take swing_reflect_blast_fire
+  take phase_tw_done_lf_c0
+  give phase_tw_done_lf_cf1
+  give 3 timer_tw_done_lf_cf1
+
+verb hit_reflect_blast_fire__tw_done_lf_cf1 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (lf, shield holds 1 fire))" by world priority 80 in hits at 3000 8690
+  take swing_reflect_blast_fire
+  take phase_tw_done_lf_cf1
+  give phase_tw_done_lf_cf2
+  give 3 timer_tw_done_lf_cf2
+
+verb hit_reflect_blast_fire__tw_done_lf_cf2 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (lf, shield holds 2 fire))" by world priority 80 in hits at 3140 8690
+  take swing_reflect_blast_fire
+  take phase_tw_done_lf_cf2
+  give phase_tw_done_aim_l
+  give 3 timer_tw_done_aim_l
+
+verb hit_reflect_blast_fire__tw_done_lf_ci1 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (lf, shield holds 1 ice))" by world priority 80 in hits at 3000 8760
+  take swing_reflect_blast_fire
+  take phase_tw_done_lf_ci1
+  give phase_tw_done_lf_c0
+  give 3 timer_tw_done_lf_c0
+
+verb hit_reflect_blast_fire__tw_done_lf_ci2 "Twinrova's fire blast, sent back hits (Twinrova hovers after her fire blast (lf, shield holds 2 ice))" by world priority 80 in hits at 3140 8760
+  take swing_reflect_blast_fire
+  take phase_tw_done_lf_ci2
+  give phase_tw_done_lf_c0
+  give 3 timer_tw_done_lf_c0
+
+verb miss_reflect_blast_ice "Twinrova's ice blast, sent back has no effect" by world priority 79 in hits at 3140 8830
+  take swing_reflect_blast_ice
+
+verb hit_reflect_blast_ice__tw_done_ri_c0 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (ri, no charge))" by world priority 80 in hits at 3000 8900
+  take swing_reflect_blast_ice
+  take phase_tw_done_ri_c0
+  give phase_tw_done_ri_ci1
+  give 3 timer_tw_done_ri_ci1
+
+verb hit_reflect_blast_ice__tw_done_ri_cf1 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (ri, shield holds 1 fire))" by world priority 80 in hits at 3140 8900
+  take swing_reflect_blast_ice
+  take phase_tw_done_ri_cf1
+  give phase_tw_done_ri_c0
+  give 3 timer_tw_done_ri_c0
+
+verb hit_reflect_blast_ice__tw_done_ri_cf2 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (ri, shield holds 2 fire))" by world priority 80 in hits at 3000 8970
+  take swing_reflect_blast_ice
+  take phase_tw_done_ri_cf2
+  give phase_tw_done_ri_c0
+  give 3 timer_tw_done_ri_c0
+
+verb hit_reflect_blast_ice__tw_done_ri_ci1 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (ri, shield holds 1 ice))" by world priority 80 in hits at 3140 8970
+  take swing_reflect_blast_ice
+  take phase_tw_done_ri_ci1
+  give phase_tw_done_ri_ci2
+  give 3 timer_tw_done_ri_ci2
+
+verb hit_reflect_blast_ice__tw_done_ri_ci2 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (ri, shield holds 2 ice))" by world priority 80 in hits at 3000 9040
+  take swing_reflect_blast_ice
+  take phase_tw_done_ri_ci2
+  give phase_tw_done_aim_r
+  give 3 timer_tw_done_aim_r
+
+verb hit_reflect_blast_ice__tw_done_li_c0 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (li, no charge))" by world priority 80 in hits at 3140 9040
+  take swing_reflect_blast_ice
+  take phase_tw_done_li_c0
+  give phase_tw_done_li_ci1
+  give 3 timer_tw_done_li_ci1
+
+verb hit_reflect_blast_ice__tw_done_li_cf1 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (li, shield holds 1 fire))" by world priority 80 in hits at 3000 9110
+  take swing_reflect_blast_ice
+  take phase_tw_done_li_cf1
+  give phase_tw_done_li_c0
+  give 3 timer_tw_done_li_c0
+
+verb hit_reflect_blast_ice__tw_done_li_cf2 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (li, shield holds 2 fire))" by world priority 80 in hits at 3140 9110
+  take swing_reflect_blast_ice
+  take phase_tw_done_li_cf2
+  give phase_tw_done_li_c0
+  give 3 timer_tw_done_li_c0
+
+verb hit_reflect_blast_ice__tw_done_li_ci1 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (li, shield holds 1 ice))" by world priority 80 in hits at 3000 9180
+  take swing_reflect_blast_ice
+  take phase_tw_done_li_ci1
+  give phase_tw_done_li_ci2
+  give 3 timer_tw_done_li_ci2
+
+verb hit_reflect_blast_ice__tw_done_li_ci2 "Twinrova's ice blast, sent back hits (Twinrova hovers after her ice blast (li, shield holds 2 ice))" by world priority 80 in hits at 3140 9180
+  take swing_reflect_blast_ice
+  take phase_tw_done_li_ci2
+  give phase_tw_done_aim_l
+  give 3 timer_tw_done_aim_l
+
+verb twinrova_empty_in_tw_stun_r "Twinrova runs out (Twinrova lies stunned on the floor (r))" by world priority 90 in enemy_health at 2360 360
+  unless hp_twinrova
+  unless hp_twinrova_2
+  take alive_twinrova
+  take phase_tw_stun_r
+  give link_wins
+
+verb twinrova_empty_in_tw_stun_l "Twinrova runs out (Twinrova lies stunned on the floor (l))" by world priority 90 in enemy_health at 2500 360
+  unless hp_twinrova
+  unless hp_twinrova_2
+  take alive_twinrova
+  take phase_tw_stun_l
+  give link_wins
+
+verb twinrova_falls_to_2_in_tw_stun_r "Twinrova drops to 2 (Twinrova lies stunned on the floor (r))" by world priority 89 in enemy_health at 2360 430
+  take above_twinrova_2
+  need alive_twinrova
+  unless hp_twinrova
+  take phase_tw_stun_r
+  give phase_tw_stun_l
+  give 8 timer_tw_stun_l
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1060
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1060
+  take link_turn
+  unless status_freeze
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1130
+  take link_turn
+  unless status_freeze
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1130
+  take link_turn
+  unless status_freeze
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1200
+  take link_turn
+  unless status_freeze
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1200
+  take link_turn
+  unless status_freeze
+  need range_far
+  give link_withdraws
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2680 1270
+  take link_turn
+  unless status_freeze
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2820 1270
+  take link_turn
+  unless status_freeze
+  take has_blue_potion
+  give 80 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2680 1340
+  take link_turn
+  unless status_freeze
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2820 1340
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 1410
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Twinrova gets ready" by world priority 70 in enemy at 2040 5960
+  take enemy_turn
+  give enemy_act
+
+verb fly_0_ticks "The sisters fly to a new spot (0 hits): a beat passes" by world priority 71 in enemy at 2180 5960
+  take enemy_turn
+  need phase_fly_0
+  take timer_fly_0
+  give enemy_act
+
+verb fly_0_step_1 "A sister arrives and turns on Link" by world priority 69 in enemy at 2040 6030
+  take enemy_act
+  take phase_fly_0
+  give phase_turn_0
+  give 3 timer_turn_0
+  unless timer_fly_0
+  give beat_end
+
+verb fly_0_step_2 "A sister flies into Link" by world priority 69 in enemy at 2180 6030
+  take enemy_act
+  need phase_fly_0
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb fly_0_holds "The sisters fly to a new spot (0 hits): nothing changes" by world priority 68 in enemy at 2040 6100
+  take enemy_act
+  need phase_fly_0
+  give beat_end
+
+verb turn_0_ticks "A sister turns on Link (0 hits): a beat passes" by world priority 71 in enemy at 2180 6100
+  take enemy_turn
+  need phase_turn_0
+  take timer_turn_0
+  give enemy_act
+
+verb turn_0_step_1 "Koume raises her scepter" by world priority 69 in enemy at 2040 6170
+  take enemy_act
+  take phase_turn_0
+  give phase_shoot_charge_fire_0
+  give 4 timer_shoot_charge_fire_0
+  unless timer_turn_0
+  give beat_end
+
+verb turn_0_step_2 "Kotake raises her scepter" by world priority 69 in enemy at 2180 6170
+  take enemy_act
+  take phase_turn_0
+  give phase_shoot_charge_ice_0
+  give 4 timer_shoot_charge_ice_0
+  unless timer_turn_0
+  give beat_end
+
+verb turn_0_step_3 "She was not at a pillar, so she flies on" by world priority 69 weight 2 in enemy at 2040 6240
+  take enemy_act
+  take phase_turn_0
+  give phase_fly_0
+  give 4 timer_fly_0
+  unless timer_turn_0
+  give beat_end
+
+verb turn_0_step_4 "A sister flies into Link" by world priority 69 in enemy at 2180 6240
+  take enemy_act
+  need phase_turn_0
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb turn_0_holds "A sister turns on Link (0 hits): nothing changes" by world priority 68 in enemy at 2040 6310
+  take enemy_act
+  need phase_turn_0
+  give beat_end
+
+verb spin_0_ticks "A sister spins away from a shot (0 hits): a beat passes" by world priority 71 in enemy at 2180 6310
+  take enemy_turn
+  need phase_spin_0
+  take timer_spin_0
+  give enemy_act
+
+verb spin_0_step_1 "The sister flies on" by world priority 69 in enemy at 2040 6380
+  take enemy_act
+  take phase_spin_0
+  give phase_fly_0
+  give 4 timer_fly_0
+  unless timer_spin_0
+  give beat_end
+
+verb spin_0_step_2 "A sister flies into Link" by world priority 69 in enemy at 2180 6380
+  take enemy_act
+  need phase_spin_0
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_fire_0_ticks "Koume charges her fire beam (0 hits): a beat passes" by world priority 71 in enemy at 2040 6450
+  take enemy_turn
+  need phase_shoot_charge_fire_0
+  take timer_shoot_charge_fire_0
+  give enemy_act
+
+verb shoot_charge_fire_0_step_1 "Koume fires her fire beam" by world priority 69 in enemy at 2180 6450
+  take enemy_act
+  take phase_shoot_charge_fire_0
+  give phase_shoot_beam_fire_0
+  unless timer_shoot_charge_fire_0
+  give incoming_beam_fire
+  give beat_end
+
+verb shoot_charge_fire_0_step_2 "A sister flies into Link" by world priority 69 in enemy at 2040 6520
+  take enemy_act
+  need phase_shoot_charge_fire_0
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_fire_0_holds "Koume charges her fire beam (0 hits): nothing changes" by world priority 68 in enemy at 2180 6520
+  take enemy_act
+  need phase_shoot_charge_fire_0
+  give beat_end
+
+verb shoot_beam_fire_0_step_1 "Koume's beam dies away" by world priority 69 in enemy at 2040 6590
+  take enemy_act
+  take phase_shoot_beam_fire_0
+  give phase_fly_0
+  give 4 timer_fly_0
+  give beat_end
+  need range_far
+
+verb shoot_beam_fire_0_step_2 "Koume's beam dies away as she flies into Link" by world priority 69 in enemy at 2180 6590
+  take enemy_act
+  take phase_shoot_beam_fire_0
+  give phase_fly_0
+  give 4 timer_fly_0
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_ice_0_ticks "Kotake charges her ice beam (0 hits): a beat passes" by world priority 71 in enemy at 2040 6660
+  take enemy_turn
+  need phase_shoot_charge_ice_0
+  take timer_shoot_charge_ice_0
+  give enemy_act
+
+verb shoot_charge_ice_0_step_1 "Kotake fires her ice beam" by world priority 69 in enemy at 2180 6660
+  take enemy_act
+  take phase_shoot_charge_ice_0
+  give phase_shoot_beam_ice_0
+  unless timer_shoot_charge_ice_0
+  give incoming_beam_ice
+  give beat_end
+
+verb shoot_charge_ice_0_step_2 "A sister flies into Link" by world priority 69 in enemy at 2040 6730
+  take enemy_act
+  need phase_shoot_charge_ice_0
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_ice_0_holds "Kotake charges her ice beam (0 hits): nothing changes" by world priority 68 in enemy at 2180 6730
+  take enemy_act
+  need phase_shoot_charge_ice_0
+  give beat_end
+
+verb shoot_beam_ice_0_step_1 "Kotake's beam dies away" by world priority 69 in enemy at 2040 6800
+  take enemy_act
+  take phase_shoot_beam_ice_0
+  give phase_fly_0
+  give 4 timer_fly_0
+  give beat_end
+  need range_far
+
+verb shoot_beam_ice_0_step_2 "Kotake's beam dies away as she flies into Link" by world priority 69 in enemy at 2180 6800
+  take enemy_act
+  take phase_shoot_beam_ice_0
+  give phase_fly_0
+  give 4 timer_fly_0
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb fly_1_ticks "The sisters fly to a new spot (1 hits): a beat passes" by world priority 71 in enemy at 2040 6870
+  take enemy_turn
+  need phase_fly_1
+  take timer_fly_1
+  give enemy_act
+
+verb fly_1_step_1 "A sister arrives and turns on Link" by world priority 69 in enemy at 2180 6870
+  take enemy_act
+  take phase_fly_1
+  give phase_turn_1
+  give 3 timer_turn_1
+  unless timer_fly_1
+  give beat_end
+
+verb fly_1_step_2 "A sister flies into Link" by world priority 69 in enemy at 2040 6940
+  take enemy_act
+  need phase_fly_1
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb fly_1_holds "The sisters fly to a new spot (1 hits): nothing changes" by world priority 68 in enemy at 2180 6940
+  take enemy_act
+  need phase_fly_1
+  give beat_end
+
+verb turn_1_ticks "A sister turns on Link (1 hits): a beat passes" by world priority 71 in enemy at 2040 7010
+  take enemy_turn
+  need phase_turn_1
+  take timer_turn_1
+  give enemy_act
+
+verb turn_1_step_1 "Koume raises her scepter" by world priority 69 in enemy at 2180 7010
+  take enemy_act
+  take phase_turn_1
+  give phase_shoot_charge_fire_1
+  give 4 timer_shoot_charge_fire_1
+  unless timer_turn_1
+  give beat_end
+
+verb turn_1_step_2 "Kotake raises her scepter" by world priority 69 in enemy at 2040 7080
+  take enemy_act
+  take phase_turn_1
+  give phase_shoot_charge_ice_1
+  give 4 timer_shoot_charge_ice_1
+  unless timer_turn_1
+  give beat_end
+
+verb turn_1_step_3 "She was not at a pillar, so she flies on" by world priority 69 weight 2 in enemy at 2180 7080
+  take enemy_act
+  take phase_turn_1
+  give phase_fly_1
+  give 4 timer_fly_1
+  unless timer_turn_1
+  give beat_end
+
+verb turn_1_step_4 "A sister flies into Link" by world priority 69 in enemy at 2040 7150
+  take enemy_act
+  need phase_turn_1
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb turn_1_holds "A sister turns on Link (1 hits): nothing changes" by world priority 68 in enemy at 2180 7150
+  take enemy_act
+  need phase_turn_1
+  give beat_end
+
+verb spin_1_ticks "A sister spins away from a shot (1 hits): a beat passes" by world priority 71 in enemy at 2040 7220
+  take enemy_turn
+  need phase_spin_1
+  take timer_spin_1
+  give enemy_act
+
+verb spin_1_step_1 "The sister flies on" by world priority 69 in enemy at 2180 7220
+  take enemy_act
+  take phase_spin_1
+  give phase_fly_1
+  give 4 timer_fly_1
+  unless timer_spin_1
+  give beat_end
+
+verb spin_1_step_2 "A sister flies into Link" by world priority 69 in enemy at 2040 7290
+  take enemy_act
+  need phase_spin_1
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_fire_1_ticks "Koume charges her fire beam (1 hits): a beat passes" by world priority 71 in enemy at 2180 7290
+  take enemy_turn
+  need phase_shoot_charge_fire_1
+  take timer_shoot_charge_fire_1
+  give enemy_act
+
+verb shoot_charge_fire_1_step_1 "Koume fires her fire beam" by world priority 69 in enemy at 2040 7360
+  take enemy_act
+  take phase_shoot_charge_fire_1
+  give phase_shoot_beam_fire_1
+  unless timer_shoot_charge_fire_1
+  give incoming_beam_fire
+  give beat_end
+
+verb shoot_charge_fire_1_step_2 "A sister flies into Link" by world priority 69 in enemy at 2180 7360
+  take enemy_act
+  need phase_shoot_charge_fire_1
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_fire_1_holds "Koume charges her fire beam (1 hits): nothing changes" by world priority 68 in enemy at 2040 7430
+  take enemy_act
+  need phase_shoot_charge_fire_1
+  give beat_end
+
+verb shoot_beam_fire_1_step_1 "Koume's beam dies away" by world priority 69 in enemy at 2180 7430
+  take enemy_act
+  take phase_shoot_beam_fire_1
+  give phase_fly_1
+  give 4 timer_fly_1
+  give beat_end
+  need range_far
+
+verb shoot_beam_fire_1_step_2 "Koume's beam dies away as she flies into Link" by world priority 69 in enemy at 2040 7500
+  take enemy_act
+  take phase_shoot_beam_fire_1
+  give phase_fly_1
+  give 4 timer_fly_1
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_ice_1_ticks "Kotake charges her ice beam (1 hits): a beat passes" by world priority 71 in enemy at 2180 7500
+  take enemy_turn
+  need phase_shoot_charge_ice_1
+  take timer_shoot_charge_ice_1
+  give enemy_act
+
+verb shoot_charge_ice_1_step_1 "Kotake fires her ice beam" by world priority 69 in enemy at 2040 7570
+  take enemy_act
+  take phase_shoot_charge_ice_1
+  give phase_shoot_beam_ice_1
+  unless timer_shoot_charge_ice_1
+  give incoming_beam_ice
+  give beat_end
+
+verb shoot_charge_ice_1_step_2 "A sister flies into Link" by world priority 69 in enemy at 2180 7570
+  take enemy_act
+  need phase_shoot_charge_ice_1
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_ice_1_holds "Kotake charges her ice beam (1 hits): nothing changes" by world priority 68 in enemy at 2040 7640
+  take enemy_act
+  need phase_shoot_charge_ice_1
+  give beat_end
+
+verb shoot_beam_ice_1_step_1 "Kotake's beam dies away" by world priority 69 in enemy at 2180 7640
+  take enemy_act
+  take phase_shoot_beam_ice_1
+  give phase_fly_1
+  give 4 timer_fly_1
+  give beat_end
+  need range_far
+
+verb shoot_beam_ice_1_step_2 "Kotake's beam dies away as she flies into Link" by world priority 69 in enemy at 2040 7710
+  take enemy_act
+  take phase_shoot_beam_ice_1
+  give phase_fly_1
+  give 4 timer_fly_1
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb fly_2_ticks "The sisters fly to a new spot (2 hits): a beat passes" by world priority 71 in enemy at 2180 7710
+  take enemy_turn
+  need phase_fly_2
+  take timer_fly_2
+  give enemy_act
+
+verb fly_2_step_1 "A sister arrives and turns on Link" by world priority 69 in enemy at 2040 7780
+  take enemy_act
+  take phase_fly_2
+  give phase_turn_2
+  give 3 timer_turn_2
+  unless timer_fly_2
+  give beat_end
+
+verb fly_2_step_2 "A sister flies into Link" by world priority 69 in enemy at 2180 7780
+  take enemy_act
+  need phase_fly_2
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb fly_2_holds "The sisters fly to a new spot (2 hits): nothing changes" by world priority 68 in enemy at 2040 7850
+  take enemy_act
+  need phase_fly_2
+  give beat_end
+
+verb turn_2_ticks "A sister turns on Link (2 hits): a beat passes" by world priority 71 in enemy at 2180 7850
+  take enemy_turn
+  need phase_turn_2
+  take timer_turn_2
+  give enemy_act
+
+verb turn_2_step_1 "Koume raises her scepter" by world priority 69 in enemy at 2040 7920
+  take enemy_act
+  take phase_turn_2
+  give phase_shoot_charge_fire_2
+  give 4 timer_shoot_charge_fire_2
+  unless timer_turn_2
+  give beat_end
+
+verb turn_2_step_2 "Kotake raises her scepter" by world priority 69 in enemy at 2180 7920
+  take enemy_act
+  take phase_turn_2
+  give phase_shoot_charge_ice_2
+  give 4 timer_shoot_charge_ice_2
+  unless timer_turn_2
+  give beat_end
+
+verb turn_2_step_3 "She was not at a pillar, so she flies on" by world priority 69 weight 2 in enemy at 2040 7990
+  take enemy_act
+  take phase_turn_2
+  give phase_fly_2
+  give 4 timer_fly_2
+  unless timer_turn_2
+  give beat_end
+
+verb turn_2_step_4 "A sister flies into Link" by world priority 69 in enemy at 2180 7990
+  take enemy_act
+  need phase_turn_2
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb turn_2_holds "A sister turns on Link (2 hits): nothing changes" by world priority 68 in enemy at 2040 8060
+  take enemy_act
+  need phase_turn_2
+  give beat_end
+
+verb spin_2_ticks "A sister spins away from a shot (2 hits): a beat passes" by world priority 71 in enemy at 2180 8060
+  take enemy_turn
+  need phase_spin_2
+  take timer_spin_2
+  give enemy_act
+
+verb spin_2_step_1 "The sister flies on" by world priority 69 in enemy at 2040 8130
+  take enemy_act
+  take phase_spin_2
+  give phase_fly_2
+  give 4 timer_fly_2
+  unless timer_spin_2
+  give beat_end
+
+verb spin_2_step_2 "A sister flies into Link" by world priority 69 in enemy at 2180 8130
+  take enemy_act
+  need phase_spin_2
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_fire_2_ticks "Koume charges her fire beam (2 hits): a beat passes" by world priority 71 in enemy at 2040 8200
+  take enemy_turn
+  need phase_shoot_charge_fire_2
+  take timer_shoot_charge_fire_2
+  give enemy_act
+
+verb shoot_charge_fire_2_step_1 "Koume fires her fire beam" by world priority 69 in enemy at 2180 8200
+  take enemy_act
+  take phase_shoot_charge_fire_2
+  give phase_shoot_beam_fire_2
+  unless timer_shoot_charge_fire_2
+  give incoming_beam_fire
+  give beat_end
+
+verb shoot_charge_fire_2_step_2 "A sister flies into Link" by world priority 69 in enemy at 2040 8270
+  take enemy_act
+  need phase_shoot_charge_fire_2
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_fire_2_holds "Koume charges her fire beam (2 hits): nothing changes" by world priority 68 in enemy at 2180 8270
+  take enemy_act
+  need phase_shoot_charge_fire_2
+  give beat_end
+
+verb shoot_beam_fire_2_step_1 "Koume's beam dies away" by world priority 69 in enemy at 2040 8340
+  take enemy_act
+  take phase_shoot_beam_fire_2
+  give phase_fly_2
+  give 4 timer_fly_2
+  give beat_end
+  need range_far
+
+verb shoot_beam_fire_2_step_2 "Koume's beam dies away as she flies into Link" by world priority 69 in enemy at 2180 8340
+  take enemy_act
+  take phase_shoot_beam_fire_2
+  give phase_fly_2
+  give 4 timer_fly_2
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_ice_2_ticks "Kotake charges her ice beam (2 hits): a beat passes" by world priority 71 in enemy at 2040 8410
+  take enemy_turn
+  need phase_shoot_charge_ice_2
+  take timer_shoot_charge_ice_2
+  give enemy_act
+
+verb shoot_charge_ice_2_step_1 "Kotake fires her ice beam" by world priority 69 in enemy at 2180 8410
+  take enemy_act
+  take phase_shoot_charge_ice_2
+  give phase_shoot_beam_ice_2
+  unless timer_shoot_charge_ice_2
+  give incoming_beam_ice
+  give beat_end
+
+verb shoot_charge_ice_2_step_2 "A sister flies into Link" by world priority 69 in enemy at 2040 8480
+  take enemy_act
+  need phase_shoot_charge_ice_2
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_ice_2_holds "Kotake charges her ice beam (2 hits): nothing changes" by world priority 68 in enemy at 2180 8480
+  take enemy_act
+  need phase_shoot_charge_ice_2
+  give beat_end
+
+verb shoot_beam_ice_2_step_1 "Kotake's beam dies away" by world priority 69 in enemy at 2040 8550
+  take enemy_act
+  take phase_shoot_beam_ice_2
+  give phase_fly_2
+  give 4 timer_fly_2
+  give beat_end
+  need range_far
+
+verb shoot_beam_ice_2_step_2 "Kotake's beam dies away as she flies into Link" by world priority 69 in enemy at 2180 8550
+  take enemy_act
+  take phase_shoot_beam_ice_2
+  give phase_fly_2
+  give 4 timer_fly_2
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb fly_3_ticks "The sisters fly to a new spot (3 hits): a beat passes" by world priority 71 in enemy at 2040 8620
+  take enemy_turn
+  need phase_fly_3
+  take timer_fly_3
+  give enemy_act
+
+verb fly_3_step_1 "A sister arrives and turns on Link" by world priority 69 in enemy at 2180 8620
+  take enemy_act
+  take phase_fly_3
+  give phase_turn_3
+  give 3 timer_turn_3
+  unless timer_fly_3
+  give beat_end
+
+verb fly_3_step_2 "A sister flies into Link" by world priority 69 in enemy at 2040 8690
+  take enemy_act
+  need phase_fly_3
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb fly_3_holds "The sisters fly to a new spot (3 hits): nothing changes" by world priority 68 in enemy at 2180 8690
+  take enemy_act
+  need phase_fly_3
+  give beat_end
+
+verb turn_3_ticks "A sister turns on Link (3 hits): a beat passes" by world priority 71 in enemy at 2040 8760
+  take enemy_turn
+  need phase_turn_3
+  take timer_turn_3
+  give enemy_act
+
+verb turn_3_step_1 "Koume raises her scepter" by world priority 69 in enemy at 2180 8760
+  take enemy_act
+  take phase_turn_3
+  give phase_shoot_charge_fire_3
+  give 4 timer_shoot_charge_fire_3
+  unless timer_turn_3
+  give beat_end
+
+verb turn_3_step_2 "Kotake raises her scepter" by world priority 69 in enemy at 2040 8830
+  take enemy_act
+  take phase_turn_3
+  give phase_shoot_charge_ice_3
+  give 4 timer_shoot_charge_ice_3
+  unless timer_turn_3
+  give beat_end
+
+verb turn_3_step_3 "She was not at a pillar, so she flies on" by world priority 69 weight 2 in enemy at 2180 8830
+  take enemy_act
+  take phase_turn_3
+  give phase_fly_3
+  give 4 timer_fly_3
+  unless timer_turn_3
+  give beat_end
+
+verb turn_3_step_4 "A sister flies into Link" by world priority 69 in enemy at 2040 8900
+  take enemy_act
+  need phase_turn_3
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb turn_3_holds "A sister turns on Link (3 hits): nothing changes" by world priority 68 in enemy at 2180 8900
+  take enemy_act
+  need phase_turn_3
+  give beat_end
+
+verb spin_3_ticks "A sister spins away from a shot (3 hits): a beat passes" by world priority 71 in enemy at 2040 8970
+  take enemy_turn
+  need phase_spin_3
+  take timer_spin_3
+  give enemy_act
+
+verb spin_3_step_1 "The sister flies on" by world priority 69 in enemy at 2180 8970
+  take enemy_act
+  take phase_spin_3
+  give phase_fly_3
+  give 4 timer_fly_3
+  unless timer_spin_3
+  give beat_end
+
+verb spin_3_step_2 "A sister flies into Link" by world priority 69 in enemy at 2040 9040
+  take enemy_act
+  need phase_spin_3
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_fire_3_ticks "Koume charges her fire beam (3 hits): a beat passes" by world priority 71 in enemy at 2180 9040
+  take enemy_turn
+  need phase_shoot_charge_fire_3
+  take timer_shoot_charge_fire_3
+  give enemy_act
+
+verb shoot_charge_fire_3_step_1 "Koume fires her fire beam" by world priority 69 in enemy at 2040 9110
+  take enemy_act
+  take phase_shoot_charge_fire_3
+  give phase_shoot_beam_fire_3
+  unless timer_shoot_charge_fire_3
+  give incoming_beam_fire
+  give beat_end
+
+verb shoot_charge_fire_3_step_2 "A sister flies into Link" by world priority 69 in enemy at 2180 9110
+  take enemy_act
+  need phase_shoot_charge_fire_3
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_fire_3_holds "Koume charges her fire beam (3 hits): nothing changes" by world priority 68 in enemy at 2040 9180
+  take enemy_act
+  need phase_shoot_charge_fire_3
+  give beat_end
+
+verb shoot_beam_fire_3_step_1 "Koume's beam dies away" by world priority 69 in enemy at 2180 9180
+  take enemy_act
+  take phase_shoot_beam_fire_3
+  give phase_fly_3
+  give 4 timer_fly_3
+  give beat_end
+  need range_far
+
+verb shoot_beam_fire_3_step_2 "Koume's beam dies away as she flies into Link" by world priority 69 in enemy at 2040 9250
+  take enemy_act
+  take phase_shoot_beam_fire_3
+  give phase_fly_3
+  give 4 timer_fly_3
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_ice_3_ticks "Kotake charges her ice beam (3 hits): a beat passes" by world priority 71 in enemy at 2180 9250
+  take enemy_turn
+  need phase_shoot_charge_ice_3
+  take timer_shoot_charge_ice_3
+  give enemy_act
+
+verb shoot_charge_ice_3_step_1 "Kotake fires her ice beam" by world priority 69 in enemy at 2040 9320
+  take enemy_act
+  take phase_shoot_charge_ice_3
+  give phase_shoot_beam_ice_3
+  unless timer_shoot_charge_ice_3
+  give incoming_beam_ice
+  give beat_end
+
+verb shoot_charge_ice_3_step_2 "A sister flies into Link" by world priority 69 in enemy at 2180 9320
+  take enemy_act
+  need phase_shoot_charge_ice_3
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb shoot_charge_ice_3_holds "Kotake charges her ice beam (3 hits): nothing changes" by world priority 68 in enemy at 2040 9390
+  take enemy_act
+  need phase_shoot_charge_ice_3
+  give beat_end
+
+verb shoot_beam_ice_3_step_1 "Kotake's beam dies away" by world priority 69 in enemy at 2180 9390
+  take enemy_act
+  take phase_shoot_beam_ice_3
+  give phase_fly_3
+  give 4 timer_fly_3
+  give beat_end
+  need range_far
+
+verb shoot_beam_ice_3_step_2 "Kotake's beam dies away as she flies into Link" by world priority 69 in enemy at 2040 9460
+  take enemy_act
+  take phase_shoot_beam_ice_3
+  give phase_fly_3
+  give 4 timer_fly_3
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb hit_1_ticks "A sister reels from her twin's beam (1 hits): a beat passes" by world priority 71 in enemy at 2180 9460
+  take enemy_turn
+  need phase_hit_1
+  take timer_hit_1
+  give enemy_act
+
+verb hit_1_step_1 "A sister flies into Link" by world priority 69 in enemy at 2040 9530
+  take enemy_act
+  need phase_hit_1
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb hit_1_step_2 "The sister recovers and flies off" by world priority 69 in enemy at 2180 9530
+  take enemy_act
+  take phase_hit_1
+  give phase_fly_1
+  give 4 timer_fly_1
+  unless timer_hit_1
+  give beat_end
+
+verb hit_1_holds "A sister reels from her twin's beam (1 hits): nothing changes" by world priority 68 in enemy at 2040 9600
+  take enemy_act
+  need phase_hit_1
+  give beat_end
+
+verb hit_2_ticks "A sister reels from her twin's beam (2 hits): a beat passes" by world priority 71 in enemy at 2180 9600
+  take enemy_turn
+  need phase_hit_2
+  take timer_hit_2
+  give enemy_act
+
+verb hit_2_step_1 "A sister flies into Link" by world priority 69 in enemy at 2040 9670
+  take enemy_act
+  need phase_hit_2
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb hit_2_step_2 "The sister recovers and flies off" by world priority 69 in enemy at 2180 9670
+  take enemy_act
+  take phase_hit_2
+  give phase_fly_2
+  give 4 timer_fly_2
+  unless timer_hit_2
+  give beat_end
+
+verb hit_2_holds "A sister reels from her twin's beam (2 hits): nothing changes" by world priority 68 in enemy at 2040 9740
+  take enemy_act
+  need phase_hit_2
+  give beat_end
+
+verb hit_3_ticks "A sister reels from her twin's beam (3 hits): a beat passes" by world priority 71 in enemy at 2180 9740
+  take enemy_turn
+  need phase_hit_3
+  take timer_hit_3
+  give enemy_act
+
+verb hit_3_step_1 "A sister flies into Link" by world priority 69 in enemy at 2040 9810
+  take enemy_act
+  need phase_hit_3
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb hit_3_step_2 "The sister recovers and flies off" by world priority 69 in enemy at 2180 9810
+  take enemy_act
+  take phase_hit_3
+  give phase_fly_3
+  give 4 timer_fly_3
+  unless timer_hit_3
+  give beat_end
+
+verb hit_3_holds "A sister reels from her twin's beam (3 hits): nothing changes" by world priority 68 in enemy at 2040 9880
+  take enemy_act
+  need phase_hit_3
+  give beat_end
+
+verb hit_4_ticks "A sister reels from her twin's beam (4 hits): a beat passes" by world priority 71 in enemy at 2180 9880
+  take enemy_turn
+  need phase_hit_4
+  take timer_hit_4
+  give enemy_act
+
+verb hit_4_step_1 "A sister flies into Link" by world priority 69 in enemy at 2040 9950
+  take enemy_act
+  need phase_hit_4
+  give incoming_sister_body
+  give beat_end
+  need range_near
+
+verb hit_4_step_2 "Four hits: Koume and Kotake fuse into Twinrova" by world priority 69 in enemy at 2180 9950
+  take enemy_act
+  take phase_hit_4
+  give phase_tw_fly_r_c0
+  unless timer_hit_4
+  give beat_end
+
+verb hit_4_holds "A sister reels from her twin's beam (4 hits): nothing changes" by world priority 68 in enemy at 2040 10020
+  take enemy_act
+  need phase_hit_4
+  give beat_end
+
+verb tw_fly_r_c0_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10020
+  take enemy_act
+  take phase_tw_fly_r_c0
+  give phase_tw_done_rf_c0
+  give 3 timer_tw_done_rf_c0
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_r_c0_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10090
+  take enemy_act
+  take phase_tw_fly_r_c0
+  give phase_tw_done_ri_c0
+  give 3 timer_tw_done_ri_c0
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_r_cf1_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10090
+  take enemy_act
+  take phase_tw_fly_r_cf1
+  give phase_tw_done_rf_cf1
+  give 3 timer_tw_done_rf_cf1
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_r_cf1_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10160
+  take enemy_act
+  take phase_tw_fly_r_cf1
+  give phase_tw_done_ri_cf1
+  give 3 timer_tw_done_ri_cf1
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_r_cf2_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10160
+  take enemy_act
+  take phase_tw_fly_r_cf2
+  give phase_tw_done_rf_cf2
+  give 3 timer_tw_done_rf_cf2
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_r_cf2_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10230
+  take enemy_act
+  take phase_tw_fly_r_cf2
+  give phase_tw_done_ri_cf2
+  give 3 timer_tw_done_ri_cf2
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_r_ci1_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10230
+  take enemy_act
+  take phase_tw_fly_r_ci1
+  give phase_tw_done_rf_ci1
+  give 3 timer_tw_done_rf_ci1
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_r_ci1_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10300
+  take enemy_act
+  take phase_tw_fly_r_ci1
+  give phase_tw_done_ri_ci1
+  give 3 timer_tw_done_ri_ci1
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_r_ci2_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10300
+  take enemy_act
+  take phase_tw_fly_r_ci2
+  give phase_tw_done_rf_ci2
+  give 3 timer_tw_done_rf_ci2
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_r_ci2_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10370
+  take enemy_act
+  take phase_tw_fly_r_ci2
+  give phase_tw_done_ri_ci2
+  give 3 timer_tw_done_ri_ci2
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_l_c0_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10370
+  take enemy_act
+  take phase_tw_fly_l_c0
+  give phase_tw_done_lf_c0
+  give 3 timer_tw_done_lf_c0
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_l_c0_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10440
+  take enemy_act
+  take phase_tw_fly_l_c0
+  give phase_tw_done_li_c0
+  give 3 timer_tw_done_li_c0
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_l_cf1_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10440
+  take enemy_act
+  take phase_tw_fly_l_cf1
+  give phase_tw_done_lf_cf1
+  give 3 timer_tw_done_lf_cf1
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_l_cf1_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10510
+  take enemy_act
+  take phase_tw_fly_l_cf1
+  give phase_tw_done_li_cf1
+  give 3 timer_tw_done_li_cf1
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_l_cf2_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10510
+  take enemy_act
+  take phase_tw_fly_l_cf2
+  give phase_tw_done_lf_cf2
+  give 3 timer_tw_done_lf_cf2
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_l_cf2_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10580
+  take enemy_act
+  take phase_tw_fly_l_cf2
+  give phase_tw_done_li_cf2
+  give 3 timer_tw_done_li_cf2
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_l_ci1_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10580
+  take enemy_act
+  take phase_tw_fly_l_ci1
+  give phase_tw_done_lf_ci1
+  give 3 timer_tw_done_lf_ci1
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_l_ci1_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10650
+  take enemy_act
+  take phase_tw_fly_l_ci1
+  give phase_tw_done_li_ci1
+  give 3 timer_tw_done_li_ci1
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_fly_l_ci2_step_1 "Twinrova fires a fire blast" by world priority 69 in enemy at 2180 10650
+  take enemy_act
+  take phase_tw_fly_l_ci2
+  give phase_tw_done_lf_ci2
+  give 3 timer_tw_done_lf_ci2
+  give incoming_blast_fire
+  give beat_end
+
+verb tw_fly_l_ci2_step_2 "Twinrova fires a ice blast" by world priority 69 in enemy at 2040 10720
+  take enemy_act
+  take phase_tw_fly_l_ci2
+  give phase_tw_done_li_ci2
+  give 3 timer_tw_done_li_ci2
+  give incoming_blast_ice
+  give beat_end
+
+verb tw_done_rf_c0_ticks "Twinrova hovers after her fire blast (rf, no charge): a beat passes" by world priority 71 in enemy at 2180 10720
+  take enemy_turn
+  need phase_tw_done_rf_c0
+  take timer_tw_done_rf_c0
+  give enemy_act
+
+verb tw_done_rf_c0_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 10790
+  take enemy_act
+  take phase_tw_done_rf_c0
+  give phase_tw_fly_r_c0
+  unless timer_tw_done_rf_c0
+  give beat_end
+
+verb tw_done_rf_c0_holds "Twinrova hovers after her fire blast (rf, no charge): nothing changes" by world priority 68 in enemy at 2180 10790
+  take enemy_act
+  need phase_tw_done_rf_c0
+  give beat_end
+
+verb tw_done_rf_cf1_ticks "Twinrova hovers after her fire blast (rf, shield holds 1 fire): a beat passes" by world priority 71 in enemy at 2040 10860
+  take enemy_turn
+  need phase_tw_done_rf_cf1
+  take timer_tw_done_rf_cf1
+  give enemy_act
+
+verb tw_done_rf_cf1_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 10860
+  take enemy_act
+  take phase_tw_done_rf_cf1
+  give phase_tw_fly_r_cf1
+  unless timer_tw_done_rf_cf1
+  give beat_end
+
+verb tw_done_rf_cf1_holds "Twinrova hovers after her fire blast (rf, shield holds 1 fire): nothing changes" by world priority 68 in enemy at 2040 10930
+  take enemy_act
+  need phase_tw_done_rf_cf1
+  give beat_end
+
+verb tw_done_rf_cf2_ticks "Twinrova hovers after her fire blast (rf, shield holds 2 fire): a beat passes" by world priority 71 in enemy at 2180 10930
+  take enemy_turn
+  need phase_tw_done_rf_cf2
+  take timer_tw_done_rf_cf2
+  give enemy_act
+
+verb tw_done_rf_cf2_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 11000
+  take enemy_act
+  take phase_tw_done_rf_cf2
+  give phase_tw_fly_r_cf2
+  unless timer_tw_done_rf_cf2
+  give beat_end
+
+verb tw_done_rf_cf2_holds "Twinrova hovers after her fire blast (rf, shield holds 2 fire): nothing changes" by world priority 68 in enemy at 2180 11000
+  take enemy_act
+  need phase_tw_done_rf_cf2
+  give beat_end
+
+verb tw_done_rf_ci1_ticks "Twinrova hovers after her fire blast (rf, shield holds 1 ice): a beat passes" by world priority 71 in enemy at 2040 11070
+  take enemy_turn
+  need phase_tw_done_rf_ci1
+  take timer_tw_done_rf_ci1
+  give enemy_act
+
+verb tw_done_rf_ci1_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 11070
+  take enemy_act
+  take phase_tw_done_rf_ci1
+  give phase_tw_fly_r_ci1
+  unless timer_tw_done_rf_ci1
+  give beat_end
+
+verb tw_done_rf_ci1_holds "Twinrova hovers after her fire blast (rf, shield holds 1 ice): nothing changes" by world priority 68 in enemy at 2040 11140
+  take enemy_act
+  need phase_tw_done_rf_ci1
+  give beat_end
+
+verb tw_done_rf_ci2_ticks "Twinrova hovers after her fire blast (rf, shield holds 2 ice): a beat passes" by world priority 71 in enemy at 2180 11140
+  take enemy_turn
+  need phase_tw_done_rf_ci2
+  take timer_tw_done_rf_ci2
+  give enemy_act
+
+verb tw_done_rf_ci2_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 11210
+  take enemy_act
+  take phase_tw_done_rf_ci2
+  give phase_tw_fly_r_ci2
+  unless timer_tw_done_rf_ci2
+  give beat_end
+
+verb tw_done_rf_ci2_holds "Twinrova hovers after her fire blast (rf, shield holds 2 ice): nothing changes" by world priority 68 in enemy at 2180 11210
+  take enemy_act
+  need phase_tw_done_rf_ci2
+  give beat_end
+
+verb tw_done_ri_c0_ticks "Twinrova hovers after her ice blast (ri, no charge): a beat passes" by world priority 71 in enemy at 2040 11280
+  take enemy_turn
+  need phase_tw_done_ri_c0
+  take timer_tw_done_ri_c0
+  give enemy_act
+
+verb tw_done_ri_c0_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 11280
+  take enemy_act
+  take phase_tw_done_ri_c0
+  give phase_tw_fly_r_c0
+  unless timer_tw_done_ri_c0
+  give beat_end
+
+verb tw_done_ri_c0_holds "Twinrova hovers after her ice blast (ri, no charge): nothing changes" by world priority 68 in enemy at 2040 11350
+  take enemy_act
+  need phase_tw_done_ri_c0
+  give beat_end
+
+verb tw_done_ri_cf1_ticks "Twinrova hovers after her ice blast (ri, shield holds 1 fire): a beat passes" by world priority 71 in enemy at 2180 11350
+  take enemy_turn
+  need phase_tw_done_ri_cf1
+  take timer_tw_done_ri_cf1
+  give enemy_act
+
+verb tw_done_ri_cf1_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 11420
+  take enemy_act
+  take phase_tw_done_ri_cf1
+  give phase_tw_fly_r_cf1
+  unless timer_tw_done_ri_cf1
+  give beat_end
+
+verb tw_done_ri_cf1_holds "Twinrova hovers after her ice blast (ri, shield holds 1 fire): nothing changes" by world priority 68 in enemy at 2180 11420
+  take enemy_act
+  need phase_tw_done_ri_cf1
+  give beat_end
+
+verb tw_done_ri_cf2_ticks "Twinrova hovers after her ice blast (ri, shield holds 2 fire): a beat passes" by world priority 71 in enemy at 2040 11490
+  take enemy_turn
+  need phase_tw_done_ri_cf2
+  take timer_tw_done_ri_cf2
+  give enemy_act
+
+verb tw_done_ri_cf2_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 11490
+  take enemy_act
+  take phase_tw_done_ri_cf2
+  give phase_tw_fly_r_cf2
+  unless timer_tw_done_ri_cf2
+  give beat_end
+
+verb tw_done_ri_cf2_holds "Twinrova hovers after her ice blast (ri, shield holds 2 fire): nothing changes" by world priority 68 in enemy at 2040 11560
+  take enemy_act
+  need phase_tw_done_ri_cf2
+  give beat_end
+
+verb tw_done_ri_ci1_ticks "Twinrova hovers after her ice blast (ri, shield holds 1 ice): a beat passes" by world priority 71 in enemy at 2180 11560
+  take enemy_turn
+  need phase_tw_done_ri_ci1
+  take timer_tw_done_ri_ci1
+  give enemy_act
+
+verb tw_done_ri_ci1_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 11630
+  take enemy_act
+  take phase_tw_done_ri_ci1
+  give phase_tw_fly_r_ci1
+  unless timer_tw_done_ri_ci1
+  give beat_end
+
+verb tw_done_ri_ci1_holds "Twinrova hovers after her ice blast (ri, shield holds 1 ice): nothing changes" by world priority 68 in enemy at 2180 11630
+  take enemy_act
+  need phase_tw_done_ri_ci1
+  give beat_end
+
+verb tw_done_ri_ci2_ticks "Twinrova hovers after her ice blast (ri, shield holds 2 ice): a beat passes" by world priority 71 in enemy at 2040 11700
+  take enemy_turn
+  need phase_tw_done_ri_ci2
+  take timer_tw_done_ri_ci2
+  give enemy_act
+
+verb tw_done_ri_ci2_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 11700
+  take enemy_act
+  take phase_tw_done_ri_ci2
+  give phase_tw_fly_r_ci2
+  unless timer_tw_done_ri_ci2
+  give beat_end
+
+verb tw_done_ri_ci2_holds "Twinrova hovers after her ice blast (ri, shield holds 2 ice): nothing changes" by world priority 68 in enemy at 2040 11770
+  take enemy_act
+  need phase_tw_done_ri_ci2
+  give beat_end
+
+verb tw_done_lf_c0_ticks "Twinrova hovers after her fire blast (lf, no charge): a beat passes" by world priority 71 in enemy at 2180 11770
+  take enemy_turn
+  need phase_tw_done_lf_c0
+  take timer_tw_done_lf_c0
+  give enemy_act
+
+verb tw_done_lf_c0_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 11840
+  take enemy_act
+  take phase_tw_done_lf_c0
+  give phase_tw_fly_l_c0
+  unless timer_tw_done_lf_c0
+  give beat_end
+
+verb tw_done_lf_c0_holds "Twinrova hovers after her fire blast (lf, no charge): nothing changes" by world priority 68 in enemy at 2180 11840
+  take enemy_act
+  need phase_tw_done_lf_c0
+  give beat_end
+
+verb tw_done_lf_cf1_ticks "Twinrova hovers after her fire blast (lf, shield holds 1 fire): a beat passes" by world priority 71 in enemy at 2040 11910
+  take enemy_turn
+  need phase_tw_done_lf_cf1
+  take timer_tw_done_lf_cf1
+  give enemy_act
+
+verb tw_done_lf_cf1_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 11910
+  take enemy_act
+  take phase_tw_done_lf_cf1
+  give phase_tw_fly_l_cf1
+  unless timer_tw_done_lf_cf1
+  give beat_end
+
+verb tw_done_lf_cf1_holds "Twinrova hovers after her fire blast (lf, shield holds 1 fire): nothing changes" by world priority 68 in enemy at 2040 11980
+  take enemy_act
+  need phase_tw_done_lf_cf1
+  give beat_end
+
+verb tw_done_lf_cf2_ticks "Twinrova hovers after her fire blast (lf, shield holds 2 fire): a beat passes" by world priority 71 in enemy at 2180 11980
+  take enemy_turn
+  need phase_tw_done_lf_cf2
+  take timer_tw_done_lf_cf2
+  give enemy_act
+
+verb tw_done_lf_cf2_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 12050
+  take enemy_act
+  take phase_tw_done_lf_cf2
+  give phase_tw_fly_l_cf2
+  unless timer_tw_done_lf_cf2
+  give beat_end
+
+verb tw_done_lf_cf2_holds "Twinrova hovers after her fire blast (lf, shield holds 2 fire): nothing changes" by world priority 68 in enemy at 2180 12050
+  take enemy_act
+  need phase_tw_done_lf_cf2
+  give beat_end
+
+verb tw_done_lf_ci1_ticks "Twinrova hovers after her fire blast (lf, shield holds 1 ice): a beat passes" by world priority 71 in enemy at 2040 12120
+  take enemy_turn
+  need phase_tw_done_lf_ci1
+  take timer_tw_done_lf_ci1
+  give enemy_act
+
+verb tw_done_lf_ci1_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 12120
+  take enemy_act
+  take phase_tw_done_lf_ci1
+  give phase_tw_fly_l_ci1
+  unless timer_tw_done_lf_ci1
+  give beat_end
+
+verb tw_done_lf_ci1_holds "Twinrova hovers after her fire blast (lf, shield holds 1 ice): nothing changes" by world priority 68 in enemy at 2040 12190
+  take enemy_act
+  need phase_tw_done_lf_ci1
+  give beat_end
+
+verb tw_done_lf_ci2_ticks "Twinrova hovers after her fire blast (lf, shield holds 2 ice): a beat passes" by world priority 71 in enemy at 2180 12190
+  take enemy_turn
+  need phase_tw_done_lf_ci2
+  take timer_tw_done_lf_ci2
+  give enemy_act
+
+verb tw_done_lf_ci2_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 12260
+  take enemy_act
+  take phase_tw_done_lf_ci2
+  give phase_tw_fly_l_ci2
+  unless timer_tw_done_lf_ci2
+  give beat_end
+
+verb tw_done_lf_ci2_holds "Twinrova hovers after her fire blast (lf, shield holds 2 ice): nothing changes" by world priority 68 in enemy at 2180 12260
+  take enemy_act
+  need phase_tw_done_lf_ci2
+  give beat_end
+
+verb tw_done_li_c0_ticks "Twinrova hovers after her ice blast (li, no charge): a beat passes" by world priority 71 in enemy at 2040 12330
+  take enemy_turn
+  need phase_tw_done_li_c0
+  take timer_tw_done_li_c0
+  give enemy_act
+
+verb tw_done_li_c0_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 12330
+  take enemy_act
+  take phase_tw_done_li_c0
+  give phase_tw_fly_l_c0
+  unless timer_tw_done_li_c0
+  give beat_end
+
+verb tw_done_li_c0_holds "Twinrova hovers after her ice blast (li, no charge): nothing changes" by world priority 68 in enemy at 2040 12400
+  take enemy_act
+  need phase_tw_done_li_c0
+  give beat_end
+
+verb tw_done_li_cf1_ticks "Twinrova hovers after her ice blast (li, shield holds 1 fire): a beat passes" by world priority 71 in enemy at 2180 12400
+  take enemy_turn
+  need phase_tw_done_li_cf1
+  take timer_tw_done_li_cf1
+  give enemy_act
+
+verb tw_done_li_cf1_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 12470
+  take enemy_act
+  take phase_tw_done_li_cf1
+  give phase_tw_fly_l_cf1
+  unless timer_tw_done_li_cf1
+  give beat_end
+
+verb tw_done_li_cf1_holds "Twinrova hovers after her ice blast (li, shield holds 1 fire): nothing changes" by world priority 68 in enemy at 2180 12470
+  take enemy_act
+  need phase_tw_done_li_cf1
+  give beat_end
+
+verb tw_done_li_cf2_ticks "Twinrova hovers after her ice blast (li, shield holds 2 fire): a beat passes" by world priority 71 in enemy at 2040 12540
+  take enemy_turn
+  need phase_tw_done_li_cf2
+  take timer_tw_done_li_cf2
+  give enemy_act
+
+verb tw_done_li_cf2_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 12540
+  take enemy_act
+  take phase_tw_done_li_cf2
+  give phase_tw_fly_l_cf2
+  unless timer_tw_done_li_cf2
+  give beat_end
+
+verb tw_done_li_cf2_holds "Twinrova hovers after her ice blast (li, shield holds 2 fire): nothing changes" by world priority 68 in enemy at 2040 12610
+  take enemy_act
+  need phase_tw_done_li_cf2
+  give beat_end
+
+verb tw_done_li_ci1_ticks "Twinrova hovers after her ice blast (li, shield holds 1 ice): a beat passes" by world priority 71 in enemy at 2180 12610
+  take enemy_turn
+  need phase_tw_done_li_ci1
+  take timer_tw_done_li_ci1
+  give enemy_act
+
+verb tw_done_li_ci1_step_1 "Twinrova flies off" by world priority 69 in enemy at 2040 12680
+  take enemy_act
+  take phase_tw_done_li_ci1
+  give phase_tw_fly_l_ci1
+  unless timer_tw_done_li_ci1
+  give beat_end
+
+verb tw_done_li_ci1_holds "Twinrova hovers after her ice blast (li, shield holds 1 ice): nothing changes" by world priority 68 in enemy at 2180 12680
+  take enemy_act
+  need phase_tw_done_li_ci1
+  give beat_end
+
+verb tw_done_li_ci2_ticks "Twinrova hovers after her ice blast (li, shield holds 2 ice): a beat passes" by world priority 71 in enemy at 2040 12750
+  take enemy_turn
+  need phase_tw_done_li_ci2
+  take timer_tw_done_li_ci2
+  give enemy_act
+
+verb tw_done_li_ci2_step_1 "Twinrova flies off" by world priority 69 in enemy at 2180 12750
+  take enemy_act
+  take phase_tw_done_li_ci2
+  give phase_tw_fly_l_ci2
+  unless timer_tw_done_li_ci2
+  give beat_end
+
+verb tw_done_li_ci2_holds "Twinrova hovers after her ice blast (li, shield holds 2 ice): nothing changes" by world priority 68 in enemy at 2040 12820
+  take enemy_act
+  need phase_tw_done_li_ci2
+  give beat_end
+
+verb tw_done_aim_r_ticks "The shield holds the third blast and fires it back at Twinrova, who hovers (r): a beat passes" by world priority 71 in enemy at 2180 12820
+  take enemy_turn
+  need phase_tw_done_aim_r
+  take timer_tw_done_aim_r
+  give enemy_act
+
+verb tw_done_aim_r_step_1 "The sent-back blast reaches Twinrova and stuns her" by world priority 69 in enemy at 2040 12890
+  take enemy_act
+  take phase_tw_done_aim_r
+  give phase_tw_stun_r
+  give 8 timer_tw_stun_r
+  unless timer_tw_done_aim_r
+  give beat_end
+
+verb tw_done_aim_r_holds "The shield holds the third blast and fires it back at Twinrova, who hovers (r): nothing changes" by world priority 68 in enemy at 2180 12890
+  take enemy_act
+  need phase_tw_done_aim_r
+  give beat_end
+
+verb tw_stun_r_ticks "Twinrova lies stunned on the floor (r): a beat passes" by world priority 71 in enemy at 2040 12960
+  take enemy_turn
+  need phase_tw_stun_r
+  take timer_tw_stun_r
+  give enemy_act
+
+verb tw_stun_r_step_1 "Twinrova comes to" by world priority 69 in enemy at 2180 12960
+  take enemy_act
+  take phase_tw_stun_r
+  give phase_tw_getup_r
+  give 3 timer_tw_getup_r
+  unless timer_tw_stun_r
+  give beat_end
+
+verb tw_stun_r_holds "Twinrova lies stunned on the floor (r): nothing changes" by world priority 68 in enemy at 2040 13030
+  take enemy_act
+  need phase_tw_stun_r
+  give beat_end
+
+verb tw_getup_r_ticks "Twinrova gets up (r): a beat passes" by world priority 71 in enemy at 2180 13030
+  take enemy_turn
+  need phase_tw_getup_r
+  take timer_tw_getup_r
+  give enemy_act
+
+verb tw_getup_r_step_1_near "Twinrova rises and flies off" by world priority 69 in enemy at 2040 13100
+  take enemy_act
+  take phase_tw_getup_r
+  give phase_tw_fly_r_c0
+  unless timer_tw_getup_r
+  give beat_end
+  take range_near
+  give range_far
+
+verb tw_getup_r_step_1_far "Twinrova rises and flies off" by world priority 69 in enemy at 2180 13100
+  take enemy_act
+  take phase_tw_getup_r
+  give phase_tw_fly_r_c0
+  unless timer_tw_getup_r
+  give beat_end
+  need range_far
+
+verb tw_getup_r_holds "Twinrova gets up (r): nothing changes" by world priority 68 in enemy at 2040 13170
+  take enemy_act
+  need phase_tw_getup_r
+  give beat_end
+
+verb tw_done_aim_l_ticks "The shield holds the third blast and fires it back at Twinrova, who hovers (l): a beat passes" by world priority 71 in enemy at 2180 13170
+  take enemy_turn
+  need phase_tw_done_aim_l
+  take timer_tw_done_aim_l
+  give enemy_act
+
+verb tw_done_aim_l_step_1 "The sent-back blast reaches Twinrova and stuns her" by world priority 69 in enemy at 2040 13240
+  take enemy_act
+  take phase_tw_done_aim_l
+  give phase_tw_stun_l
+  give 8 timer_tw_stun_l
+  unless timer_tw_done_aim_l
+  give beat_end
+
+verb tw_done_aim_l_holds "The shield holds the third blast and fires it back at Twinrova, who hovers (l): nothing changes" by world priority 68 in enemy at 2180 13240
+  take enemy_act
+  need phase_tw_done_aim_l
+  give beat_end
+
+verb tw_stun_l_ticks "Twinrova lies stunned on the floor (l): a beat passes" by world priority 71 in enemy at 2040 13310
+  take enemy_turn
+  need phase_tw_stun_l
+  take timer_tw_stun_l
+  give enemy_act
+
+verb tw_stun_l_step_1 "Twinrova comes to" by world priority 69 in enemy at 2180 13310
+  take enemy_act
+  take phase_tw_stun_l
+  give phase_tw_getup_l
+  give 3 timer_tw_getup_l
+  unless timer_tw_stun_l
+  give beat_end
+
+verb tw_stun_l_holds "Twinrova lies stunned on the floor (l): nothing changes" by world priority 68 in enemy at 2040 13380
+  take enemy_act
+  need phase_tw_stun_l
+  give beat_end
+
+verb tw_getup_l_ticks "Twinrova gets up (l): a beat passes" by world priority 71 in enemy at 2180 13380
+  take enemy_turn
+  need phase_tw_getup_l
+  take timer_tw_getup_l
+  give enemy_act
+
+verb tw_getup_l_step_1_near "Twinrova rises and flies off" by world priority 69 in enemy at 2040 13450
+  take enemy_act
+  take phase_tw_getup_l
+  give phase_tw_fly_l_c0
+  unless timer_tw_getup_l
+  give beat_end
+  take range_near
+  give range_far
+
+verb tw_getup_l_step_1_far "Twinrova rises and flies off" by world priority 69 in enemy at 2180 13450
+  take enemy_act
+  take phase_tw_getup_l
+  give phase_tw_fly_l_c0
+  unless timer_tw_getup_l
+  give beat_end
+  need range_far
+
+verb tw_getup_l_holds "Twinrova gets up (l): nothing changes" by world priority 68 in enemy at 2040 13520
+  take enemy_act
+  need phase_tw_getup_l
+  give beat_end
+
+verb sister_body_blocked_hylian_shield "A sister's body: blocked by the hylian shield" by world priority 60 in attacks at 3460 80
+  take incoming_sister_body
+  need guard_with_hylian_shield
+
+verb sister_body_blocked_mirror_shield "A sister's body: blocked by the mirror shield" by world priority 60 in attacks at 3320 150
+  take incoming_sister_body
+  need guard_with_mirror_shield
+
+verb sister_body_dodged "A sister's body: dodged" by world priority 60 in attacks at 3460 150
+  take incoming_sister_body
+  need link_dodge
+  unless link_guard
+
+verb sister_body_nayru "A sister's body: Nayru's Love holds" by world priority 60 in attacks at 3320 220
+  take incoming_sister_body
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb sister_body_lands "A sister's body hits Link" by world priority 60 in attacks at 3460 220
+  take incoming_sister_body
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 16 link_dmg
+
+verb sister_body_lands_dd "A sister's body hits Link" by world priority 60 in attacks at 3320 290
+  take incoming_sister_body
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 8 link_dmg
+
+verb beam_fire_reflected_mirror_shield "Koume's fire beam: sent back by the mirror shield" by world priority 61 in attacks at 3320 360
+  take incoming_beam_fire
+  need guard_with_mirror_shield
+  give swing_reflect_beam_fire
+
+verb beam_fire_blocked_hylian_shield "Koume's fire beam: blocked by the hylian shield" by world priority 60 in attacks at 3460 360
+  take incoming_beam_fire
+  need guard_with_hylian_shield
+
+verb beam_fire_blocked_mirror_shield "Koume's fire beam: blocked by the mirror shield" by world priority 60 in attacks at 3320 430
+  take incoming_beam_fire
+  need guard_with_mirror_shield
+
+verb beam_fire_dodged "Koume's fire beam: dodged" by world priority 60 in attacks at 3460 430
+  take incoming_beam_fire
+  need link_dodge
+  unless link_guard
+
+verb beam_fire_nayru "Koume's fire beam: Nayru's Love holds" by world priority 60 in attacks at 3320 500
+  take incoming_beam_fire
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb beam_fire_lands "Koume's fire beam hits Link" by world priority 60 in attacks at 3460 500
+  take incoming_beam_fire
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 16 link_dmg
+  give 5 status_burn
+  unless status_burn
+
+verb beam_fire_lands_again "Koume's fire beam hits Link again" by world priority 60 in attacks at 3320 570
+  take incoming_beam_fire
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 16 link_dmg
+  need status_burn
+
+verb beam_fire_lands_dd "Koume's fire beam hits Link" by world priority 60 in attacks at 3460 570
+  take incoming_beam_fire
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 8 link_dmg
+  give 5 status_burn
+  unless status_burn
+
+verb beam_fire_lands_dd_again "Koume's fire beam hits Link again" by world priority 60 in attacks at 3320 640
+  take incoming_beam_fire
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 8 link_dmg
+  need status_burn
+
+verb beam_ice_reflected_mirror_shield "Kotake's ice beam: sent back by the mirror shield" by world priority 61 in attacks at 3320 710
+  take incoming_beam_ice
+  need guard_with_mirror_shield
+  give swing_reflect_beam_ice
+
+verb beam_ice_blocked_hylian_shield "Kotake's ice beam: blocked by the hylian shield" by world priority 60 in attacks at 3460 710
+  take incoming_beam_ice
+  need guard_with_hylian_shield
+
+verb beam_ice_blocked_mirror_shield "Kotake's ice beam: blocked by the mirror shield" by world priority 60 in attacks at 3320 780
+  take incoming_beam_ice
+  need guard_with_mirror_shield
+
+verb beam_ice_dodged "Kotake's ice beam: dodged" by world priority 60 in attacks at 3460 780
+  take incoming_beam_ice
+  need link_dodge
+  unless link_guard
+
+verb beam_ice_nayru "Kotake's ice beam: Nayru's Love holds" by world priority 60 in attacks at 3320 850
+  take incoming_beam_ice
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb beam_ice_lands "Kotake's ice beam hits Link" by world priority 60 in attacks at 3460 850
+  take incoming_beam_ice
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 16 link_dmg
+  give 5 status_freeze
+  unless status_freeze
+
+verb beam_ice_lands_again "Kotake's ice beam hits Link again" by world priority 60 in attacks at 3320 920
+  take incoming_beam_ice
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 16 link_dmg
+  need status_freeze
+
+verb beam_ice_lands_dd "Kotake's ice beam hits Link" by world priority 60 in attacks at 3460 920
+  take incoming_beam_ice
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 8 link_dmg
+  give 5 status_freeze
+  unless status_freeze
+
+verb beam_ice_lands_dd_again "Kotake's ice beam hits Link again" by world priority 60 in attacks at 3320 990
+  take incoming_beam_ice
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 8 link_dmg
+  need status_freeze
+
+verb blast_fire_reflected_mirror_shield "Twinrova's fire blast: sent back by the mirror shield" by world priority 61 in attacks at 3320 1060
+  take incoming_blast_fire
+  need guard_with_mirror_shield
+  give swing_reflect_blast_fire
+
+verb blast_fire_blocked_hylian_shield "Twinrova's fire blast: blocked by the hylian shield" by world priority 60 in attacks at 3460 1060
+  take incoming_blast_fire
+  need guard_with_hylian_shield
+
+verb blast_fire_blocked_mirror_shield "Twinrova's fire blast: blocked by the mirror shield" by world priority 60 in attacks at 3320 1130
+  take incoming_blast_fire
+  need guard_with_mirror_shield
+
+verb blast_fire_dodged "Twinrova's fire blast: dodged" by world priority 60 in attacks at 3460 1130
+  take incoming_blast_fire
+  need link_dodge
+  unless link_guard
+
+verb blast_fire_nayru "Twinrova's fire blast: Nayru's Love holds" by world priority 60 in attacks at 3320 1200
+  take incoming_blast_fire
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb blast_fire_landing_moves__tw_done_rf_ci1 "Twinrova's fire blast landing changes the fight" by world priority 59 in attacks at 3320 1270
+  take landed_blast_fire
+  take phase_tw_done_rf_ci1
+  give phase_tw_done_rf_c0
+  give 3 timer_tw_done_rf_c0
+
+verb blast_fire_landing_moves__tw_done_rf_ci2 "Twinrova's fire blast landing changes the fight" by world priority 59 in attacks at 3460 1270
+  take landed_blast_fire
+  take phase_tw_done_rf_ci2
+  give phase_tw_done_rf_c0
+  give 3 timer_tw_done_rf_c0
+
+verb blast_fire_landing_moves__tw_done_lf_ci1 "Twinrova's fire blast landing changes the fight" by world priority 59 in attacks at 3320 1340
+  take landed_blast_fire
+  take phase_tw_done_lf_ci1
+  give phase_tw_done_lf_c0
+  give 3 timer_tw_done_lf_c0
+
+verb blast_fire_landing_moves__tw_done_lf_ci2 "Twinrova's fire blast landing changes the fight" by world priority 59 in attacks at 3460 1340
+  take landed_blast_fire
+  take phase_tw_done_lf_ci2
+  give phase_tw_done_lf_c0
+  give 3 timer_tw_done_lf_c0
+
+verb blast_fire_landing_settles "Twinrova's fire blast landed" by world priority 58 in attacks at 3320 1410
+  take landed_blast_fire
+  unless phase_tw_done_rf_ci1
+  unless phase_tw_done_rf_ci2
+  unless phase_tw_done_lf_ci1
+  unless phase_tw_done_lf_ci2
+
+verb blast_fire_lands "Twinrova's fire blast hits Link" by world priority 60 in attacks at 3460 1410
+  take incoming_blast_fire
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 24 link_dmg
+  give 5 status_burn
+  give landed_blast_fire
+  unless status_burn
+
+verb blast_fire_lands_again "Twinrova's fire blast hits Link again" by world priority 60 in attacks at 3320 1480
+  take incoming_blast_fire
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 24 link_dmg
+  need status_burn
+  give landed_blast_fire
+
+verb blast_fire_lands_dd "Twinrova's fire blast hits Link" by world priority 60 in attacks at 3460 1480
+  take incoming_blast_fire
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 12 link_dmg
+  give 5 status_burn
+  give landed_blast_fire
+  unless status_burn
+
+verb blast_fire_lands_dd_again "Twinrova's fire blast hits Link again" by world priority 60 in attacks at 3320 1550
+  take incoming_blast_fire
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 12 link_dmg
+  need status_burn
+  give landed_blast_fire
+
+verb blast_ice_reflected_mirror_shield "Twinrova's ice blast: sent back by the mirror shield" by world priority 61 in attacks at 3320 1620
+  take incoming_blast_ice
+  need guard_with_mirror_shield
+  give swing_reflect_blast_ice
+
+verb blast_ice_blocked_hylian_shield "Twinrova's ice blast: blocked by the hylian shield" by world priority 60 in attacks at 3460 1620
+  take incoming_blast_ice
+  need guard_with_hylian_shield
+
+verb blast_ice_blocked_mirror_shield "Twinrova's ice blast: blocked by the mirror shield" by world priority 60 in attacks at 3320 1690
+  take incoming_blast_ice
+  need guard_with_mirror_shield
+
+verb blast_ice_dodged "Twinrova's ice blast: dodged" by world priority 60 in attacks at 3460 1690
+  take incoming_blast_ice
+  need link_dodge
+  unless link_guard
+
+verb blast_ice_nayru "Twinrova's ice blast: Nayru's Love holds" by world priority 60 in attacks at 3320 1760
+  take incoming_blast_ice
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb blast_ice_landing_moves__tw_done_ri_cf1 "Twinrova's ice blast landing changes the fight" by world priority 59 in attacks at 3320 1830
+  take landed_blast_ice
+  take phase_tw_done_ri_cf1
+  give phase_tw_done_ri_c0
+  give 3 timer_tw_done_ri_c0
+
+verb blast_ice_landing_moves__tw_done_ri_cf2 "Twinrova's ice blast landing changes the fight" by world priority 59 in attacks at 3460 1830
+  take landed_blast_ice
+  take phase_tw_done_ri_cf2
+  give phase_tw_done_ri_c0
+  give 3 timer_tw_done_ri_c0
+
+verb blast_ice_landing_moves__tw_done_li_cf1 "Twinrova's ice blast landing changes the fight" by world priority 59 in attacks at 3320 1900
+  take landed_blast_ice
+  take phase_tw_done_li_cf1
+  give phase_tw_done_li_c0
+  give 3 timer_tw_done_li_c0
+
+verb blast_ice_landing_moves__tw_done_li_cf2 "Twinrova's ice blast landing changes the fight" by world priority 59 in attacks at 3460 1900
+  take landed_blast_ice
+  take phase_tw_done_li_cf2
+  give phase_tw_done_li_c0
+  give 3 timer_tw_done_li_c0
+
+verb blast_ice_landing_settles "Twinrova's ice blast landed" by world priority 58 in attacks at 3320 1970
+  take landed_blast_ice
+  unless phase_tw_done_ri_cf1
+  unless phase_tw_done_ri_cf2
+  unless phase_tw_done_li_cf1
+  unless phase_tw_done_li_cf2
+
+verb blast_ice_lands "Twinrova's ice blast hits Link" by world priority 60 in attacks at 3460 1970
+  take incoming_blast_ice
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 24 link_dmg
+  give 5 status_freeze
+  give landed_blast_ice
+  unless status_freeze
+
+verb blast_ice_lands_again "Twinrova's ice blast hits Link again" by world priority 60 in attacks at 3320 2040
+  take incoming_blast_ice
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 24 link_dmg
+  need status_freeze
+  give landed_blast_ice
+
+verb blast_ice_lands_dd "Twinrova's ice blast hits Link" by world priority 60 in attacks at 3460 2040
+  take incoming_blast_ice
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 12 link_dmg
+  give 5 status_freeze
+  give landed_blast_ice
+  unless status_freeze
+
+verb blast_ice_lands_dd_again "Twinrova's ice blast hits Link again" by world priority 60 in attacks at 3320 2110
+  take incoming_blast_ice
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give 12 link_dmg
+  need status_freeze
+  give landed_blast_ice
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 580 290
+  need beat_end
+  take link_dodge
+
+verb burn_ticks "Link: burn wears on" by world priority 48 in beat at 580 430
+  take beat_end
+  take status_burn
+  give tick_burn
+  give 10 link_dmg
+
+verb burn_idle "Link: no burn" by world priority 48 in beat at 440 500
+  take beat_end
+  unless status_burn
+  give tick_burn
+
+verb freeze_ticks "Link: freeze wears on" by world priority 47 in beat at 580 500
+  take tick_burn
+  take status_freeze
+  give tick_freeze
+  give 5 link_dmg
+
+verb freeze_idle "Link: no freeze" by world priority 47 in beat at 440 570
+  take tick_burn
+  unless status_freeze
+  give tick_freeze
+
+verb nayru_ticks "Link: nayru wears on" by world priority 46 in beat at 580 570
+  take tick_freeze
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 46 in beat at 440 640
+  take tick_freeze
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 45 in beat at 440 710
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 45 in beat at 580 710
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 45 in beat at 440 780
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 45 in beat at 580 780
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 440 850
+  take lens_count
+  unless lens_on
+
+verb link_helpless_freeze "Link cannot act: freeze" by world priority 40 in beat at 580 850
+  take link_turn
+  need status_freeze
+  give enemy_turn

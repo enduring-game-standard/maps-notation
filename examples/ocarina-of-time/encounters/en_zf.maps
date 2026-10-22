@@ -1,0 +1,4615 @@
+maps 2
+title "Ocarina of Time combat: Link vs Lizalfos"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state age_adult "Link is an adult" in setup at 120 150
+state choose_variant "Which Lizalfos" in setup at 260 150
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Lizalfos answers" in beat at 580 80
+state enemy_act "Lizalfos acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 4/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 120 220
+state link_wins "Lizalfos defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state has_master_sword "Has master sword" in gear at 1860 570
+state has_hookshot "Has hookshot" in gear at 1720 640
+state has_megaton_hammer "Has megaton hammer" in gear at 1860 640
+state has_bow "Has bow" in gear at 1720 710
+state has_bombchus "Has bombchus" in gear at 1860 710
+state has_mirror_shield "Has mirror shield" in gear at 1720 780
+state has_biggoron_sword "Has biggoron sword" in gear at 1860 780
+state has_giants_knife "Has giants knife" in gear at 1720 850
+state has_double_defense "Has double defense" in gear at 1860 850
+state has_fire_arrows "Has fire arrows" in gear at 1720 920
+state has_ice_arrows "Has ice arrows" in gear at 1860 920
+state has_light_arrows "Has light arrows" in gear at 1720 990
+state has_blue_potion "Has blue potion" in gear at 1860 990
+state phase_idle_lizalfos "Lizalfos stands ready" in enemy at 2040 80
+state timer_idle_lizalfos "Lizalfos stands ready: beats left" in enemy at 2180 80
+state phase_walk_lizalfos "Lizalfos walks at Link" in enemy at 2180 150
+state phase_circle_lizalfos "Lizalfos circles Link" in enemy at 2040 220
+state timer_circle_lizalfos "Lizalfos circles Link: beats left" in enemy at 2180 220
+state phase_attack_lizalfos "Lizalfos slashes" in enemy at 2180 290
+state phase_jump_forward_lizalfos "Lizalfos leaps at Link" in enemy at 2040 360
+state phase_jump_attack_lizalfos "Lizalfos jump-attacks" in enemy at 2180 360
+state phase_damaged_lizalfos "Lizalfos reels from a hit" in enemy at 2040 430
+state phase_stunned_lizalfos "Lizalfos is stunned" in enemy at 2180 430
+state timer_stunned_lizalfos "Lizalfos is stunned: beats left" in enemy at 2040 500
+state phase_idle_dinolfos "Dinolfos stands ready" in enemy at 2040 570
+state timer_idle_dinolfos "Dinolfos stands ready: beats left" in enemy at 2180 570
+state phase_walk_dinolfos "Dinolfos walks at Link" in enemy at 2180 640
+state phase_circle_dinolfos "Dinolfos circles Link" in enemy at 2040 710
+state timer_circle_dinolfos "Dinolfos circles Link: beats left" in enemy at 2180 710
+state phase_attack_dinolfos "Dinolfos slashes" in enemy at 2180 780
+state phase_jump_forward_dinolfos "Dinolfos leaps at Link" in enemy at 2040 850
+state phase_jump_attack_dinolfos "Dinolfos jump-attacks" in enemy at 2180 850
+state phase_damaged_dinolfos "Dinolfos reels from a hit" in enemy at 2040 920
+state phase_stunned_dinolfos "Dinolfos is stunned" in enemy at 2180 920
+state timer_stunned_dinolfos "Dinolfos is stunned: beats left" in enemy at 2040 990
+state phase_jump_back_dinolfos "Dinolfos jumps back" in enemy at 2040 1060
+state phase_idle_paired "Paired Lizalfos stands ready" in enemy at 2180 1060
+state timer_idle_paired "Paired Lizalfos stands ready: beats left" in enemy at 2040 1130
+state phase_walk_paired "Paired Lizalfos walks at Link" in enemy at 2040 1200
+state phase_circle_paired "Paired Lizalfos circles Link" in enemy at 2180 1200
+state timer_circle_paired "Paired Lizalfos circles Link: beats left" in enemy at 2040 1270
+state phase_attack_paired "Paired Lizalfos slashes" in enemy at 2040 1340
+state phase_jump_forward_paired "Paired Lizalfos leaps at Link" in enemy at 2180 1340
+state phase_jump_attack_paired "Paired Lizalfos jump-attacks" in enemy at 2040 1410
+state phase_damaged_paired "Paired Lizalfos reels from a hit" in enemy at 2180 1410
+state phase_stunned_paired "Paired Lizalfos is stunned" in enemy at 2040 1480
+state timer_stunned_paired "Paired Lizalfos is stunned: beats left" in enemy at 2180 1480
+state phase_away_paired "Paired Lizalfos retreats while its partner fights" in enemy at 2180 1550
+state timer_away_paired "Paired Lizalfos retreats while its partner fights: beats left" in enemy at 2040 1620
+state hp_lizalfos "Lizalfos: health" marks 6 in enemy_health at 2360 80
+state alive_lizalfos "Lizalfos: standing" marks 1 in enemy_health at 2500 80
+state dmg_lizalfos "Lizalfos: damage" in enemy_health at 2360 150
+state hp_dinolfos "Dinolfos: health" marks 12 in enemy_health at 2500 150
+state alive_dinolfos "Dinolfos: standing" marks 1 in enemy_health at 2360 220
+state dmg_dinolfos "Dinolfos: damage" in enemy_health at 2500 220
+state hp_paired "Paired Lizalfos: health" marks 3 in enemy_health at 2360 290
+state hp_paired_3 "Paired Lizalfos: health up to 3" marks 3 in enemy_health at 2500 290
+state above_paired_3 "Paired Lizalfos: above 3" marks 1 in enemy_health at 2360 360
+state alive_paired "Paired Lizalfos: standing" marks 1 in enemy_health at 2500 360
+state dmg_paired "Paired Lizalfos: damage" in enemy_health at 2360 430
+state status_nayru "Link: nayru (beats left)" in link_state at 1220 290
+state lens_on "Lens of Truth on" in link_state at 1080 360
+state link_guard "Link holds up his shield" in link_state at 1220 360
+state link_dodge "Link dodges" in link_state at 1080 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3000 710
+state swing_slingshot "Slingshot seed on its way" in hits at 3140 1410
+state swing_explosive "Explosion on its way" in hits at 3000 2180
+state swing_boomerang "Boomerang on its way" in hits at 3140 2880
+state swing_arrow_normal "Arrow on its way" in hits at 3140 3510
+state swing_hammer_swing "Hammer swing on its way" in hits at 3000 4280
+state swing_hookshot "Hookshot on its way" in hits at 3140 4980
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3140 5610
+state swing_slash_master "Master Sword slash on its way" in hits at 3000 6380
+state swing_slash_giant "Two-handed sword slash on its way" in hits at 3140 7080
+state swing_arrow_fire "Fire arrow on its way" in hits at 3000 7850
+state swing_arrow_ice "Ice arrow on its way" in hits at 3140 8550
+state swing_arrow_light "Light arrow on its way" in hits at 3140 9180
+state swing_magic_fire "Din's Fire on its way" in hits at 3000 9950
+state swing_shield "Shield on its way" in hits at 3140 10020
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 10090
+state swing_spin_giant "Two-handed spin attack on its way" in hits at 3140 10860
+state swing_spin_master "Master Sword spin attack on its way" in hits at 3140 11630
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3140 12400
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 13170
+state swing_jump_giant "Two-handed jump attack on its way" in hits at 3000 13940
+state swing_jump_giant_self "Two-handed jump attack on its way" in hits at 3140 14640
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3140 15410
+state swing_jump_master_self "Master Sword jump attack on its way" in hits at 3000 16180
+state swing_hammer_jump "Hammer jump attack on its way" in hits at 3000 16950
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1080 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1220 710
+state guard_with_mirror_shield "Shield up: mirror shield" in link_state at 1080 780
+state incoming_slash "Sword slash incoming" in attacks at 3320 80
+state tick_nayru "Beat ends: nayru checked" in beat at 580 360
+state lens_count "The Lens: beats toward the next cost" in beat at 440 500
+
+verb idle_lizalfos_timer_clears "Lizalfos stands ready is over" by world priority 100 in enemy at 2040 150
+  take timer_idle_lizalfos
+  unless phase_idle_lizalfos
+
+verb circle_lizalfos_timer_clears "Lizalfos circles Link is over" by world priority 100 in enemy at 2040 290
+  take timer_circle_lizalfos
+  unless phase_circle_lizalfos
+
+verb stunned_lizalfos_timer_clears "Lizalfos is stunned is over" by world priority 100 in enemy at 2180 500
+  take timer_stunned_lizalfos
+  unless phase_stunned_lizalfos
+
+verb idle_dinolfos_timer_clears "Dinolfos stands ready is over" by world priority 100 in enemy at 2040 640
+  take timer_idle_dinolfos
+  unless phase_idle_dinolfos
+
+verb circle_dinolfos_timer_clears "Dinolfos circles Link is over" by world priority 100 in enemy at 2040 780
+  take timer_circle_dinolfos
+  unless phase_circle_dinolfos
+
+verb stunned_dinolfos_timer_clears "Dinolfos is stunned is over" by world priority 100 in enemy at 2180 990
+  take timer_stunned_dinolfos
+  unless phase_stunned_dinolfos
+
+verb idle_paired_timer_clears "Paired Lizalfos stands ready is over" by world priority 100 in enemy at 2180 1130
+  take timer_idle_paired
+  unless phase_idle_paired
+
+verb circle_paired_timer_clears "Paired Lizalfos circles Link is over" by world priority 100 in enemy at 2180 1270
+  take timer_circle_paired
+  unless phase_circle_paired
+
+verb stunned_paired_timer_clears "Paired Lizalfos is stunned is over" by world priority 100 in enemy at 2040 1550
+  take timer_stunned_paired
+  unless phase_stunned_paired
+
+verb away_paired_timer_clears "Paired Lizalfos retreats while its partner fights is over" by world priority 100 in enemy at 2180 1620
+  take timer_away_paired
+  unless phase_away_paired
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give choose_variant
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 260 360
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 120 430
+  take choose_age
+  give age_child
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give choose_variant
+
+verb fight_adult_blade "Fight as adult Link: adult blade (2 hearts)" by link in setup at 260 430
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_hookshot
+  give has_megaton_hammer
+  give has_bow
+  give has_bombs
+  give has_bombchus
+  give choose_variant
+
+verb fight_adult_spin "Fight as adult Link: adult spin (2 hearts)" by link in setup at 120 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_giant "Fight as adult Link: adult giant (2 hearts)" by link in setup at 260 500
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_biggoron_sword
+  give has_giants_knife
+  give has_magic
+  give has_double_defense
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_arrows "Fight as adult Link: adult arrows (2 hearts)" by link in setup at 120 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_mirror_shield
+  give has_bow
+  give has_fire_arrows
+  give has_ice_arrows
+  give has_light_arrows
+  give has_magic
+  give 8 magic
+  give 40 magic_spent
+  give choose_variant
+
+verb fight_adult_dins "Fight as adult Link: adult dins (2 hearts)" by link in setup at 260 570
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give choose_variant
+
+verb fight_adult_nayru "Fight as adult Link: adult nayru (2 hearts)" by link in setup at 120 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give choose_variant
+
+verb fight_adult_lens "Fight as adult Link: adult lens (2 hearts)" by link in setup at 260 640
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give choose_variant
+
+verb fight_adult_bottles "Fight as adult Link: adult bottles (2 hearts)" by link in setup at 120 710
+  take choose_age
+  give age_adult
+  give 8 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_master_sword
+  give has_hylian_shield
+  give has_fairy
+  give has_blue_potion
+  give has_double_defense
+  give choose_variant
+
+verb variant_lizalfos "Lizalfos" by world priority 30 in setup at 260 710
+  take choose_variant
+  give phase_idle_lizalfos
+  give timer_idle_lizalfos
+  give range_far
+  give link_turn
+
+verb variant_dinolfos "Dinolfos" by world priority 30 in setup at 120 780
+  take choose_variant
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  give range_far
+  give link_turn
+
+verb variant_paired_a "Paired Lizalfos that fights first" by world priority 30 in setup at 260 780
+  take choose_variant
+  give phase_idle_paired
+  give timer_idle_paired
+  give range_far
+  give link_turn
+
+verb variant_paired_b "Paired Lizalfos that waits its turn" by world priority 30 in setup at 120 850
+  take choose_variant
+  give phase_away_paired
+  give 5 timer_away_paired
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1220 430
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1080 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1220 500
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1080 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1220 570
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1080 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1220 640
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 8 link_heal
+
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb lizalfos_hurt "Lizalfos loses health" by world priority 97 in enemy_health at 2500 430
+  take dmg_lizalfos
+  take hp_lizalfos
+
+verb lizalfos_overkill "Lizalfos has no health left to lose" by world priority 96 in enemy_health at 2360 500
+  take dmg_lizalfos
+  unless hp_lizalfos
+
+verb dinolfos_hurt "Dinolfos loses health" by world priority 97 in enemy_health at 2500 500
+  take dmg_dinolfos
+  take hp_dinolfos
+
+verb dinolfos_overkill "Dinolfos has no health left to lose" by world priority 96 in enemy_health at 2360 570
+  take dmg_dinolfos
+  unless hp_dinolfos
+
+verb paired_hurt "Paired Lizalfos loses health" by world priority 97 in enemy_health at 2500 570
+  take dmg_paired
+  take hp_paired
+
+verb paired_hurt_3 "Paired Lizalfos loses health (3 or less)" by world priority 97 in enemy_health at 2360 640
+  take dmg_paired
+  take hp_paired_3
+  unless hp_paired
+
+verb paired_overkill "Paired Lizalfos has no health left to lose" by world priority 96 in enemy_health at 2500 640
+  take dmg_paired
+  unless hp_paired
+  unless hp_paired_3
+
+verb link_deku_nut_1 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_nut_2 "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2820 80
+  take link_turn
+  need age_adult
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2680 150
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2820 150
+  take link_turn
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2680 220
+  take link_turn
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_1_2 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 220
+  take link_turn
+  need age_adult
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_explosive_2 "Bombchu explosion (spawns an En_Bom with timer 0, so the same 8-damage blast)" by link in link_moves at 2680 290
+  take link_turn
+  need age_adult
+  need has_bombchus
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2820 290
+  take link_turn
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_arrow_normal "Bow arrow (also ARROW_NORMAL_HORSE on Epona, same flag)" by link in link_moves at 2680 360
+  take link_turn
+  need age_adult
+  need has_bow
+  give swing_arrow_normal
+  give enemy_turn
+
+verb link_hammer_swing "Megaton Hammer swing" by link in link_moves at 2820 360
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_swing
+  give enemy_turn
+
+verb link_hookshot "Hookshot or Longshot tip (same Arms_Hook actor)" by link in link_moves at 2680 430
+  take link_turn
+  need age_adult
+  need has_hookshot
+  give swing_hookshot
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 430
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_slash_master "Master Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 500
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_slash_master
+  give enemy_turn
+
+verb link_slash_giant_1 "Giant's Knife slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 500
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_slash_giant_2 "Biggoron Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2680 570
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_slash_giant
+  give enemy_turn
+
+verb link_arrow_fire "Fire Arrow (falls back to a normal arrow if the magic request fails)" by link in link_moves at 2820 570
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_fire_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_fire
+  give enemy_turn
+
+verb link_arrow_ice "Ice Arrow" by link in link_moves at 2680 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_ice_arrows
+  need has_magic
+  take 4 magic
+  give 4 magic_spent
+  give swing_arrow_ice
+  give enemy_turn
+
+verb link_arrow_light "Light Arrow" by link in link_moves at 2820 640
+  take link_turn
+  need age_adult
+  need has_bow
+  need has_light_arrows
+  need has_magic
+  take 8 magic
+  give 8 magic_spent
+  give swing_arrow_light
+  give enemy_turn
+
+verb link_magic_fire_1 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 710
+  take link_turn
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_magic_fire_2 "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2820 710
+  take link_turn
+  need age_adult
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 780
+  take link_turn
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_1 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 780
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 850
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_3 "Mirror Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 850
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 920
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_giant_1 "Giant's Knife quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_2 "Giant's Knife charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 990
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_3 "Biggoron Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_giant_4 "Biggoron Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1060
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_giant
+  give enemy_turn
+
+verb link_spin_master_1 "Master Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2680 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  give swing_spin_master
+  give enemy_turn
+
+verb link_spin_master_2 "Master Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2820 1130
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_master
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2680 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1200
+  take link_turn
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_giant_1 "Giant's Knife jump slash (Z-target + A)" by link in link_moves at 2680 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_2 "Giant's Knife great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1270
+  take link_turn
+  need age_adult
+  need has_giants_knife
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_giant_3 "Biggoron Sword jump slash (Z-target + A)" by link in link_moves at 2680 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need range_near
+  give swing_jump_giant
+  give enemy_turn
+
+verb link_jump_giant_4 "Biggoron Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1340
+  take link_turn
+  need age_adult
+  need has_biggoron_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_giant_self
+  give enemy_turn
+
+verb link_jump_master_1 "Master Sword jump slash (Z-target + A)" by link in link_moves at 2680 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_jump_master_2 "Master Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2820 1410
+  take link_turn
+  need age_adult
+  need has_master_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_master_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2680 1480
+  take link_turn
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb link_hammer_jump "Megaton Hammer jump attack" by link in link_moves at 2820 1480
+  take link_turn
+  need age_adult
+  need has_megaton_hammer
+  need range_near
+  give swing_hammer_jump
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb hit_deku_nut__idle_lizalfos "Deku Nut flash hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 150
+  take swing_deku_nut
+  take phase_idle_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_deku_nut__walk_lizalfos "Deku Nut flash hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 150
+  take swing_deku_nut
+  take phase_walk_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_deku_nut__circle_lizalfos "Deku Nut flash hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 220
+  take swing_deku_nut
+  take phase_circle_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_deku_nut__attack_lizalfos "Deku Nut flash hits (Lizalfos slashes)" by world priority 80 in hits at 3140 220
+  take swing_deku_nut
+  take phase_attack_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_deku_nut__jump_forward_lizalfos "Deku Nut flash hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 290
+  take swing_deku_nut
+  take phase_jump_forward_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_deku_nut__idle_dinolfos "Deku Nut flash hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 290
+  take swing_deku_nut
+  take phase_idle_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_deku_nut__walk_dinolfos "Deku Nut flash hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 360
+  take swing_deku_nut
+  take phase_walk_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_deku_nut__circle_dinolfos "Deku Nut flash hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 360
+  take swing_deku_nut
+  take phase_circle_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_deku_nut__attack_dinolfos "Deku Nut flash hits (Dinolfos slashes)" by world priority 80 in hits at 3000 430
+  take swing_deku_nut
+  take phase_attack_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_deku_nut__jump_forward_dinolfos "Deku Nut flash hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 430
+  take swing_deku_nut
+  take phase_jump_forward_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_deku_nut__jump_back_dinolfos "Deku Nut flash hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 500
+  take swing_deku_nut
+  take phase_jump_back_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_deku_nut__idle_paired "Deku Nut flash hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 500
+  take swing_deku_nut
+  take phase_idle_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_deku_nut__walk_paired "Deku Nut flash hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 570
+  take swing_deku_nut
+  take phase_walk_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_deku_nut__circle_paired "Deku Nut flash hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 570
+  take swing_deku_nut
+  take phase_circle_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_deku_nut__attack_paired "Deku Nut flash hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 640
+  take swing_deku_nut
+  take phase_attack_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_deku_nut__jump_forward_paired "Deku Nut flash hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 640
+  take swing_deku_nut
+  take phase_jump_forward_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3140 710
+  take swing_deku_stick
+
+verb hit_deku_stick__idle_lizalfos "Deku Stick hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 780
+  take swing_deku_stick
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_deku_stick__walk_lizalfos "Deku Stick hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 780
+  take swing_deku_stick
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_deku_stick__circle_lizalfos "Deku Stick hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 850
+  take swing_deku_stick
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_deku_stick__attack_lizalfos "Deku Stick hits (Lizalfos slashes)" by world priority 80 in hits at 3140 850
+  take swing_deku_stick
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_deku_stick__jump_forward_lizalfos "Deku Stick hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 920
+  take swing_deku_stick
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_deku_stick__stunned_lizalfos "Deku Stick hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 920
+  take swing_deku_stick
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_deku_stick__idle_dinolfos "Deku Stick hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 990
+  take swing_deku_stick
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_deku_stick__walk_dinolfos "Deku Stick hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 990
+  take swing_deku_stick
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_deku_stick__circle_dinolfos "Deku Stick hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 1060
+  take swing_deku_stick
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_deku_stick__attack_dinolfos "Deku Stick hits (Dinolfos slashes)" by world priority 80 in hits at 3140 1060
+  take swing_deku_stick
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_deku_stick__jump_forward_dinolfos "Deku Stick hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 1130
+  take swing_deku_stick
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_deku_stick__stunned_dinolfos "Deku Stick hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 1130
+  take swing_deku_stick
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_deku_stick__jump_back_dinolfos "Deku Stick hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 1200
+  take swing_deku_stick
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_deku_stick__idle_paired "Deku Stick hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 1200
+  take swing_deku_stick
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_deku_stick__walk_paired "Deku Stick hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 1270
+  take swing_deku_stick
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_deku_stick__circle_paired "Deku Stick hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 1270
+  take swing_deku_stick
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_deku_stick__attack_paired "Deku Stick hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 1340
+  take swing_deku_stick
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_deku_stick__jump_forward_paired "Deku Stick hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 1340
+  take swing_deku_stick
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_deku_stick__stunned_paired "Deku Stick hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 1410
+  take swing_deku_stick
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3000 1480
+  take swing_slingshot
+
+verb hit_slingshot__idle_lizalfos "Slingshot seed hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 1480
+  take swing_slingshot
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slingshot__walk_lizalfos "Slingshot seed hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 1550
+  take swing_slingshot
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slingshot__circle_lizalfos "Slingshot seed hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 1550
+  take swing_slingshot
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slingshot__attack_lizalfos "Slingshot seed hits (Lizalfos slashes)" by world priority 80 in hits at 3000 1620
+  take swing_slingshot
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slingshot__jump_forward_lizalfos "Slingshot seed hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 1620
+  take swing_slingshot
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slingshot__stunned_lizalfos "Slingshot seed hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 1690
+  take swing_slingshot
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slingshot__idle_dinolfos "Slingshot seed hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 1690
+  take swing_slingshot
+  take phase_idle_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slingshot__walk_dinolfos "Slingshot seed hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 1760
+  take swing_slingshot
+  take phase_walk_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slingshot__circle_dinolfos "Slingshot seed hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 1760
+  take swing_slingshot
+  take phase_circle_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slingshot__attack_dinolfos "Slingshot seed hits (Dinolfos slashes)" by world priority 80 in hits at 3000 1830
+  take swing_slingshot
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slingshot__jump_forward_dinolfos "Slingshot seed hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 1830
+  take swing_slingshot
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slingshot__stunned_dinolfos "Slingshot seed hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 1900
+  take swing_slingshot
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slingshot__jump_back_dinolfos "Slingshot seed hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 1900
+  take swing_slingshot
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slingshot__idle_paired "Slingshot seed hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 1970
+  take swing_slingshot
+  take phase_idle_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give dmg_paired
+
+verb hit_slingshot__walk_paired "Slingshot seed hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 1970
+  take swing_slingshot
+  take phase_walk_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give dmg_paired
+
+verb hit_slingshot__circle_paired "Slingshot seed hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 2040
+  take swing_slingshot
+  take phase_circle_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give dmg_paired
+
+verb hit_slingshot__attack_paired "Slingshot seed hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 2040
+  take swing_slingshot
+  take phase_attack_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give dmg_paired
+
+verb hit_slingshot__jump_forward_paired "Slingshot seed hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 2110
+  take swing_slingshot
+  take phase_jump_forward_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give dmg_paired
+
+verb hit_slingshot__stunned_paired "Slingshot seed hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 2110
+  take swing_slingshot
+  take phase_stunned_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give dmg_paired
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3140 2180
+  take swing_explosive
+
+verb hit_explosive__idle_lizalfos "Explosion hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 2250
+  take swing_explosive
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_explosive__walk_lizalfos "Explosion hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 2250
+  take swing_explosive
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_explosive__circle_lizalfos "Explosion hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 2320
+  take swing_explosive
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_explosive__attack_lizalfos "Explosion hits (Lizalfos slashes)" by world priority 80 in hits at 3140 2320
+  take swing_explosive
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_explosive__jump_forward_lizalfos "Explosion hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 2390
+  take swing_explosive
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_explosive__stunned_lizalfos "Explosion hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 2390
+  take swing_explosive
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_explosive__idle_dinolfos "Explosion hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 2460
+  take swing_explosive
+  take phase_idle_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_explosive__walk_dinolfos "Explosion hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 2460
+  take swing_explosive
+  take phase_walk_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_explosive__circle_dinolfos "Explosion hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 2530
+  take swing_explosive
+  take phase_circle_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_explosive__attack_dinolfos "Explosion hits (Dinolfos slashes)" by world priority 80 in hits at 3140 2530
+  take swing_explosive
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_explosive__jump_forward_dinolfos "Explosion hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 2600
+  take swing_explosive
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_explosive__stunned_dinolfos "Explosion hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 2600
+  take swing_explosive
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_explosive__jump_back_dinolfos "Explosion hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 2670
+  take swing_explosive
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_explosive__idle_paired "Explosion hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 2670
+  take swing_explosive
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_explosive__walk_paired "Explosion hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 2740
+  take swing_explosive
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_explosive__circle_paired "Explosion hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 2740
+  take swing_explosive
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_explosive__attack_paired "Explosion hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 2810
+  take swing_explosive
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_explosive__jump_forward_paired "Explosion hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 2810
+  take swing_explosive
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_explosive__stunned_paired "Explosion hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 2880
+  take swing_explosive
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3000 2950
+  take swing_boomerang
+
+verb hit_boomerang__idle_lizalfos "Boomerang hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 2950
+  take swing_boomerang
+  take phase_idle_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_boomerang__walk_lizalfos "Boomerang hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 3020
+  take swing_boomerang
+  take phase_walk_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_boomerang__circle_lizalfos "Boomerang hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 3020
+  take swing_boomerang
+  take phase_circle_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_boomerang__attack_lizalfos "Boomerang hits (Lizalfos slashes)" by world priority 80 in hits at 3000 3090
+  take swing_boomerang
+  take phase_attack_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_boomerang__jump_forward_lizalfos "Boomerang hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 3090
+  take swing_boomerang
+  take phase_jump_forward_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_boomerang__idle_dinolfos "Boomerang hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 3160
+  take swing_boomerang
+  take phase_idle_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_boomerang__walk_dinolfos "Boomerang hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 3160
+  take swing_boomerang
+  take phase_walk_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_boomerang__circle_dinolfos "Boomerang hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 3230
+  take swing_boomerang
+  take phase_circle_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_boomerang__attack_dinolfos "Boomerang hits (Dinolfos slashes)" by world priority 80 in hits at 3140 3230
+  take swing_boomerang
+  take phase_attack_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_boomerang__jump_forward_dinolfos "Boomerang hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 3300
+  take swing_boomerang
+  take phase_jump_forward_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_boomerang__jump_back_dinolfos "Boomerang hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 3300
+  take swing_boomerang
+  take phase_jump_back_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_boomerang__idle_paired "Boomerang hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 3370
+  take swing_boomerang
+  take phase_idle_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_boomerang__walk_paired "Boomerang hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 3370
+  take swing_boomerang
+  take phase_walk_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_boomerang__circle_paired "Boomerang hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 3440
+  take swing_boomerang
+  take phase_circle_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_boomerang__attack_paired "Boomerang hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 3440
+  take swing_boomerang
+  take phase_attack_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_boomerang__jump_forward_paired "Boomerang hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 3510
+  take swing_boomerang
+  take phase_jump_forward_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb miss_arrow_normal "Arrow has no effect" by world priority 79 in hits at 3000 3580
+  take swing_arrow_normal
+
+verb hit_arrow_normal__idle_lizalfos "Arrow hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 3580
+  take swing_arrow_normal
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_normal__walk_lizalfos "Arrow hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 3650
+  take swing_arrow_normal
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_normal__circle_lizalfos "Arrow hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 3650
+  take swing_arrow_normal
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_normal__attack_lizalfos "Arrow hits (Lizalfos slashes)" by world priority 80 in hits at 3000 3720
+  take swing_arrow_normal
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_normal__jump_forward_lizalfos "Arrow hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 3720
+  take swing_arrow_normal
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_normal__stunned_lizalfos "Arrow hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 3790
+  take swing_arrow_normal
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_normal__idle_dinolfos "Arrow hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 3790
+  take swing_arrow_normal
+  take phase_idle_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_normal__walk_dinolfos "Arrow hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 3860
+  take swing_arrow_normal
+  take phase_walk_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_normal__circle_dinolfos "Arrow hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 3860
+  take swing_arrow_normal
+  take phase_circle_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_normal__attack_dinolfos "Arrow hits (Dinolfos slashes)" by world priority 80 in hits at 3000 3930
+  take swing_arrow_normal
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_normal__jump_forward_dinolfos "Arrow hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 3930
+  take swing_arrow_normal
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_normal__stunned_dinolfos "Arrow hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 4000
+  take swing_arrow_normal
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_normal__jump_back_dinolfos "Arrow hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 4000
+  take swing_arrow_normal
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_normal__idle_paired "Arrow hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 4070
+  take swing_arrow_normal
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_arrow_normal__walk_paired "Arrow hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 4070
+  take swing_arrow_normal
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_arrow_normal__circle_paired "Arrow hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 4140
+  take swing_arrow_normal
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_arrow_normal__attack_paired "Arrow hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 4140
+  take swing_arrow_normal
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_arrow_normal__jump_forward_paired "Arrow hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 4210
+  take swing_arrow_normal
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_arrow_normal__stunned_paired "Arrow hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 4210
+  take swing_arrow_normal
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb miss_hammer_swing "Hammer swing has no effect" by world priority 79 in hits at 3140 4280
+  take swing_hammer_swing
+
+verb hit_hammer_swing__idle_lizalfos "Hammer swing hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 4350
+  take swing_hammer_swing
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_hammer_swing__walk_lizalfos "Hammer swing hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 4350
+  take swing_hammer_swing
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_hammer_swing__circle_lizalfos "Hammer swing hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 4420
+  take swing_hammer_swing
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_hammer_swing__attack_lizalfos "Hammer swing hits (Lizalfos slashes)" by world priority 80 in hits at 3140 4420
+  take swing_hammer_swing
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_hammer_swing__jump_forward_lizalfos "Hammer swing hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 4490
+  take swing_hammer_swing
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_hammer_swing__stunned_lizalfos "Hammer swing hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 4490
+  take swing_hammer_swing
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_hammer_swing__idle_dinolfos "Hammer swing hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 4560
+  take swing_hammer_swing
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_hammer_swing__walk_dinolfos "Hammer swing hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 4560
+  take swing_hammer_swing
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_hammer_swing__circle_dinolfos "Hammer swing hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 4630
+  take swing_hammer_swing
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_hammer_swing__attack_dinolfos "Hammer swing hits (Dinolfos slashes)" by world priority 80 in hits at 3140 4630
+  take swing_hammer_swing
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_hammer_swing__jump_forward_dinolfos "Hammer swing hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 4700
+  take swing_hammer_swing
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_hammer_swing__stunned_dinolfos "Hammer swing hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 4700
+  take swing_hammer_swing
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_hammer_swing__jump_back_dinolfos "Hammer swing hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 4770
+  take swing_hammer_swing
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_hammer_swing__idle_paired "Hammer swing hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 4770
+  take swing_hammer_swing
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_hammer_swing__walk_paired "Hammer swing hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 4840
+  take swing_hammer_swing
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_hammer_swing__circle_paired "Hammer swing hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 4840
+  take swing_hammer_swing
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_hammer_swing__attack_paired "Hammer swing hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 4910
+  take swing_hammer_swing
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_hammer_swing__jump_forward_paired "Hammer swing hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 4910
+  take swing_hammer_swing
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_hammer_swing__stunned_paired "Hammer swing hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 4980
+  take swing_hammer_swing
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb miss_hookshot "Hookshot has no effect" by world priority 79 in hits at 3000 5050
+  take swing_hookshot
+
+verb hit_hookshot__idle_lizalfos "Hookshot hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 5050
+  take swing_hookshot
+  take phase_idle_lizalfos
+  give phase_jump_attack_lizalfos
+
+verb hit_hookshot__walk_lizalfos "Hookshot hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 5120
+  take swing_hookshot
+  take phase_walk_lizalfos
+  give phase_jump_attack_lizalfos
+
+verb hit_hookshot__circle_lizalfos "Hookshot hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 5120
+  take swing_hookshot
+  take phase_circle_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_hookshot__attack_lizalfos "Hookshot hits (Lizalfos slashes)" by world priority 80 in hits at 3000 5190
+  take swing_hookshot
+  take phase_attack_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_hookshot__jump_forward_lizalfos "Hookshot hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 5190
+  take swing_hookshot
+  take phase_jump_forward_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+
+verb hit_hookshot__idle_dinolfos "Hookshot hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 5260
+  take swing_hookshot
+  take phase_idle_dinolfos
+  give phase_jump_attack_dinolfos
+
+verb hit_hookshot__walk_dinolfos "Hookshot hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 5260
+  take swing_hookshot
+  take phase_walk_dinolfos
+  give phase_jump_attack_dinolfos
+
+verb hit_hookshot__circle_dinolfos "Hookshot hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 5330
+  take swing_hookshot
+  take phase_circle_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_hookshot__attack_dinolfos "Hookshot hits (Dinolfos slashes)" by world priority 80 in hits at 3140 5330
+  take swing_hookshot
+  take phase_attack_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_hookshot__jump_forward_dinolfos "Hookshot hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 5400
+  take swing_hookshot
+  take phase_jump_forward_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_hookshot__jump_back_dinolfos "Hookshot hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 5400
+  take swing_hookshot
+  take phase_jump_back_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+
+verb hit_hookshot__idle_paired "Hookshot hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 5470
+  take swing_hookshot
+  take phase_idle_paired
+  give phase_jump_attack_paired
+
+verb hit_hookshot__walk_paired "Hookshot hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 5470
+  take swing_hookshot
+  take phase_walk_paired
+  give phase_jump_attack_paired
+
+verb hit_hookshot__circle_paired "Hookshot hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 5540
+  take swing_hookshot
+  take phase_circle_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_hookshot__attack_paired "Hookshot hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 5540
+  take swing_hookshot
+  take phase_attack_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb hit_hookshot__jump_forward_paired "Hookshot hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 5610
+  take swing_hookshot
+  take phase_jump_forward_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3000 5680
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__idle_lizalfos "Kokiri Sword slash hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 5680
+  take swing_slash_kokiri
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slash_kokiri__walk_lizalfos "Kokiri Sword slash hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 5750
+  take swing_slash_kokiri
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slash_kokiri__circle_lizalfos "Kokiri Sword slash hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 5750
+  take swing_slash_kokiri
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slash_kokiri__attack_lizalfos "Kokiri Sword slash hits (Lizalfos slashes)" by world priority 80 in hits at 3000 5820
+  take swing_slash_kokiri
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slash_kokiri__jump_forward_lizalfos "Kokiri Sword slash hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 5820
+  take swing_slash_kokiri
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slash_kokiri__stunned_lizalfos "Kokiri Sword slash hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 5890
+  take swing_slash_kokiri
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_slash_kokiri__idle_dinolfos "Kokiri Sword slash hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 5890
+  take swing_slash_kokiri
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_kokiri__walk_dinolfos "Kokiri Sword slash hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 5960
+  take swing_slash_kokiri
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_kokiri__circle_dinolfos "Kokiri Sword slash hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 5960
+  take swing_slash_kokiri
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_kokiri__attack_dinolfos "Kokiri Sword slash hits (Dinolfos slashes)" by world priority 80 in hits at 3000 6030
+  take swing_slash_kokiri
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slash_kokiri__jump_forward_dinolfos "Kokiri Sword slash hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 6030
+  take swing_slash_kokiri
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slash_kokiri__stunned_dinolfos "Kokiri Sword slash hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 6100
+  take swing_slash_kokiri
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slash_kokiri__jump_back_dinolfos "Kokiri Sword slash hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 6100
+  take swing_slash_kokiri
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_slash_kokiri__idle_paired "Kokiri Sword slash hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 6170
+  take swing_slash_kokiri
+  take phase_idle_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_slash_kokiri__walk_paired "Kokiri Sword slash hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 6170
+  take swing_slash_kokiri
+  take phase_walk_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_slash_kokiri__circle_paired "Kokiri Sword slash hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 6240
+  take swing_slash_kokiri
+  take phase_circle_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_slash_kokiri__attack_paired "Kokiri Sword slash hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 6240
+  take swing_slash_kokiri
+  take phase_attack_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_slash_kokiri__jump_forward_paired "Kokiri Sword slash hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 6310
+  take swing_slash_kokiri
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_slash_kokiri__stunned_paired "Kokiri Sword slash hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 6310
+  take swing_slash_kokiri
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb miss_slash_master "Master Sword slash has no effect" by world priority 79 in hits at 3140 6380
+  take swing_slash_master
+
+verb hit_slash_master__idle_lizalfos "Master Sword slash hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 6450
+  take swing_slash_master
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_slash_master__walk_lizalfos "Master Sword slash hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 6450
+  take swing_slash_master
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_slash_master__circle_lizalfos "Master Sword slash hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 6520
+  take swing_slash_master
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_slash_master__attack_lizalfos "Master Sword slash hits (Lizalfos slashes)" by world priority 80 in hits at 3140 6520
+  take swing_slash_master
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_slash_master__jump_forward_lizalfos "Master Sword slash hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 6590
+  take swing_slash_master
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_slash_master__stunned_lizalfos "Master Sword slash hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 6590
+  take swing_slash_master
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_slash_master__idle_dinolfos "Master Sword slash hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 6660
+  take swing_slash_master
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_master__walk_dinolfos "Master Sword slash hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 6660
+  take swing_slash_master
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_master__circle_dinolfos "Master Sword slash hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 6730
+  take swing_slash_master
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_master__attack_dinolfos "Master Sword slash hits (Dinolfos slashes)" by world priority 80 in hits at 3140 6730
+  take swing_slash_master
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_slash_master__jump_forward_dinolfos "Master Sword slash hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 6800
+  take swing_slash_master
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_slash_master__stunned_dinolfos "Master Sword slash hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 6800
+  take swing_slash_master
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_slash_master__jump_back_dinolfos "Master Sword slash hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 6870
+  take swing_slash_master
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_slash_master__idle_paired "Master Sword slash hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 6870
+  take swing_slash_master
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_slash_master__walk_paired "Master Sword slash hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 6940
+  take swing_slash_master
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_slash_master__circle_paired "Master Sword slash hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 6940
+  take swing_slash_master
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_slash_master__attack_paired "Master Sword slash hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 7010
+  take swing_slash_master
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_slash_master__jump_forward_paired "Master Sword slash hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 7010
+  take swing_slash_master
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_slash_master__stunned_paired "Master Sword slash hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 7080
+  take swing_slash_master
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb miss_slash_giant "Two-handed sword slash has no effect" by world priority 79 in hits at 3000 7150
+  take swing_slash_giant
+
+verb hit_slash_giant__idle_lizalfos "Two-handed sword slash hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 7150
+  take swing_slash_giant
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_slash_giant__walk_lizalfos "Two-handed sword slash hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 7220
+  take swing_slash_giant
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_slash_giant__circle_lizalfos "Two-handed sword slash hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 7220
+  take swing_slash_giant
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_slash_giant__attack_lizalfos "Two-handed sword slash hits (Lizalfos slashes)" by world priority 80 in hits at 3000 7290
+  take swing_slash_giant
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_slash_giant__jump_forward_lizalfos "Two-handed sword slash hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 7290
+  take swing_slash_giant
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_slash_giant__stunned_lizalfos "Two-handed sword slash hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 7360
+  take swing_slash_giant
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_slash_giant__idle_dinolfos "Two-handed sword slash hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 7360
+  take swing_slash_giant
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_giant__walk_dinolfos "Two-handed sword slash hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 7430
+  take swing_slash_giant
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_giant__circle_dinolfos "Two-handed sword slash hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 7430
+  take swing_slash_giant
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_slash_giant__attack_dinolfos "Two-handed sword slash hits (Dinolfos slashes)" by world priority 80 in hits at 3000 7500
+  take swing_slash_giant
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_slash_giant__jump_forward_dinolfos "Two-handed sword slash hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 7500
+  take swing_slash_giant
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_slash_giant__stunned_dinolfos "Two-handed sword slash hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 7570
+  take swing_slash_giant
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_slash_giant__jump_back_dinolfos "Two-handed sword slash hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 7570
+  take swing_slash_giant
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_slash_giant__idle_paired "Two-handed sword slash hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 7640
+  take swing_slash_giant
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_slash_giant__walk_paired "Two-handed sword slash hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 7640
+  take swing_slash_giant
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_slash_giant__circle_paired "Two-handed sword slash hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 7710
+  take swing_slash_giant
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_slash_giant__attack_paired "Two-handed sword slash hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 7710
+  take swing_slash_giant
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_slash_giant__jump_forward_paired "Two-handed sword slash hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 7780
+  take swing_slash_giant
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_slash_giant__stunned_paired "Two-handed sword slash hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 7780
+  take swing_slash_giant
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb miss_arrow_fire "Fire arrow has no effect" by world priority 79 in hits at 3140 7850
+  take swing_arrow_fire
+
+verb hit_arrow_fire__idle_lizalfos "Fire arrow hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 7920
+  take swing_arrow_fire
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_fire__walk_lizalfos "Fire arrow hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 7920
+  take swing_arrow_fire
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_fire__circle_lizalfos "Fire arrow hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 7990
+  take swing_arrow_fire
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_fire__attack_lizalfos "Fire arrow hits (Lizalfos slashes)" by world priority 80 in hits at 3140 7990
+  take swing_arrow_fire
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_fire__jump_forward_lizalfos "Fire arrow hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 8060
+  take swing_arrow_fire
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_fire__stunned_lizalfos "Fire arrow hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 8060
+  take swing_arrow_fire
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_fire__idle_dinolfos "Fire arrow hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 8130
+  take swing_arrow_fire
+  take phase_idle_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_fire__walk_dinolfos "Fire arrow hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 8130
+  take swing_arrow_fire
+  take phase_walk_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_fire__circle_dinolfos "Fire arrow hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 8200
+  take swing_arrow_fire
+  take phase_circle_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_fire__attack_dinolfos "Fire arrow hits (Dinolfos slashes)" by world priority 80 in hits at 3140 8200
+  take swing_arrow_fire
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_fire__jump_forward_dinolfos "Fire arrow hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 8270
+  take swing_arrow_fire
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_fire__stunned_dinolfos "Fire arrow hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 8270
+  take swing_arrow_fire
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_fire__jump_back_dinolfos "Fire arrow hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 8340
+  take swing_arrow_fire
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_fire__idle_paired "Fire arrow hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 8340
+  take swing_arrow_fire
+  take phase_idle_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_fire__walk_paired "Fire arrow hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 8410
+  take swing_arrow_fire
+  take phase_walk_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_fire__circle_paired "Fire arrow hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 8410
+  take swing_arrow_fire
+  take phase_circle_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_fire__attack_paired "Fire arrow hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 8480
+  take swing_arrow_fire
+  take phase_attack_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_fire__jump_forward_paired "Fire arrow hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 8480
+  take swing_arrow_fire
+  take phase_jump_forward_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_fire__stunned_paired "Fire arrow hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 8550
+  take swing_arrow_fire
+  take phase_stunned_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb miss_arrow_ice "Ice arrow has no effect" by world priority 79 in hits at 3000 8620
+  take swing_arrow_ice
+
+verb hit_arrow_ice__idle_lizalfos "Ice arrow hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 8620
+  take swing_arrow_ice
+  take phase_idle_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_arrow_ice__walk_lizalfos "Ice arrow hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 8690
+  take swing_arrow_ice
+  take phase_walk_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_arrow_ice__circle_lizalfos "Ice arrow hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 8690
+  take swing_arrow_ice
+  take phase_circle_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_arrow_ice__attack_lizalfos "Ice arrow hits (Lizalfos slashes)" by world priority 80 in hits at 3000 8760
+  take swing_arrow_ice
+  take phase_attack_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_arrow_ice__jump_forward_lizalfos "Ice arrow hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 8760
+  take swing_arrow_ice
+  take phase_jump_forward_lizalfos
+  give phase_stunned_lizalfos
+  give 4 timer_stunned_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_arrow_ice__idle_dinolfos "Ice arrow hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 8830
+  take swing_arrow_ice
+  take phase_idle_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_arrow_ice__walk_dinolfos "Ice arrow hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 8830
+  take swing_arrow_ice
+  take phase_walk_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_arrow_ice__circle_dinolfos "Ice arrow hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 8900
+  take swing_arrow_ice
+  take phase_circle_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_arrow_ice__attack_dinolfos "Ice arrow hits (Dinolfos slashes)" by world priority 80 in hits at 3140 8900
+  take swing_arrow_ice
+  take phase_attack_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_arrow_ice__jump_forward_dinolfos "Ice arrow hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 8970
+  take swing_arrow_ice
+  take phase_jump_forward_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_arrow_ice__jump_back_dinolfos "Ice arrow hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 8970
+  take swing_arrow_ice
+  take phase_jump_back_dinolfos
+  give phase_stunned_dinolfos
+  give 4 timer_stunned_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_arrow_ice__idle_paired "Ice arrow hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 9040
+  take swing_arrow_ice
+  take phase_idle_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+  give 4 dmg_paired
+
+verb hit_arrow_ice__walk_paired "Ice arrow hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 9040
+  take swing_arrow_ice
+  take phase_walk_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+  give 4 dmg_paired
+
+verb hit_arrow_ice__circle_paired "Ice arrow hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 9110
+  take swing_arrow_ice
+  take phase_circle_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+  give 4 dmg_paired
+
+verb hit_arrow_ice__attack_paired "Ice arrow hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 9110
+  take swing_arrow_ice
+  take phase_attack_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+  give 4 dmg_paired
+
+verb hit_arrow_ice__jump_forward_paired "Ice arrow hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 9180
+  take swing_arrow_ice
+  take phase_jump_forward_paired
+  give phase_stunned_paired
+  give 4 timer_stunned_paired
+  give 4 dmg_paired
+
+verb miss_arrow_light "Light arrow has no effect" by world priority 79 in hits at 3000 9250
+  take swing_arrow_light
+
+verb hit_arrow_light__idle_lizalfos "Light arrow hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 9250
+  take swing_arrow_light
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_light__walk_lizalfos "Light arrow hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 9320
+  take swing_arrow_light
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_light__circle_lizalfos "Light arrow hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 9320
+  take swing_arrow_light
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_light__attack_lizalfos "Light arrow hits (Lizalfos slashes)" by world priority 80 in hits at 3000 9390
+  take swing_arrow_light
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_light__jump_forward_lizalfos "Light arrow hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 9390
+  take swing_arrow_light
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_light__stunned_lizalfos "Light arrow hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 9460
+  take swing_arrow_light
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_arrow_light__idle_dinolfos "Light arrow hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 9460
+  take swing_arrow_light
+  take phase_idle_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_light__walk_dinolfos "Light arrow hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 9530
+  take swing_arrow_light
+  take phase_walk_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_light__circle_dinolfos "Light arrow hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 9530
+  take swing_arrow_light
+  take phase_circle_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_light__attack_dinolfos "Light arrow hits (Dinolfos slashes)" by world priority 80 in hits at 3000 9600
+  take swing_arrow_light
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_light__jump_forward_dinolfos "Light arrow hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 9600
+  take swing_arrow_light
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_light__stunned_dinolfos "Light arrow hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 9670
+  take swing_arrow_light
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_light__jump_back_dinolfos "Light arrow hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 9670
+  take swing_arrow_light
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_arrow_light__idle_paired "Light arrow hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 9740
+  take swing_arrow_light
+  take phase_idle_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_light__walk_paired "Light arrow hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 9740
+  take swing_arrow_light
+  take phase_walk_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_light__circle_paired "Light arrow hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 9810
+  take swing_arrow_light
+  take phase_circle_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_light__attack_paired "Light arrow hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 9810
+  take swing_arrow_light
+  take phase_attack_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_light__jump_forward_paired "Light arrow hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 9880
+  take swing_arrow_light
+  take phase_jump_forward_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb hit_arrow_light__stunned_paired "Light arrow hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 9880
+  take swing_arrow_light
+  take phase_stunned_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+  give 2 dmg_paired
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3140 9950
+  take swing_magic_fire
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 10020
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 10090
+  take swing_shield
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3000 10160
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__idle_lizalfos "Kokiri spin attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 10160
+  take swing_spin_kokiri
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_spin_kokiri__walk_lizalfos "Kokiri spin attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 10230
+  take swing_spin_kokiri
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_spin_kokiri__circle_lizalfos "Kokiri spin attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 10230
+  take swing_spin_kokiri
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_spin_kokiri__attack_lizalfos "Kokiri spin attack hits (Lizalfos slashes)" by world priority 80 in hits at 3000 10300
+  take swing_spin_kokiri
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_spin_kokiri__jump_forward_lizalfos "Kokiri spin attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 10300
+  take swing_spin_kokiri
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_spin_kokiri__stunned_lizalfos "Kokiri spin attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 10370
+  take swing_spin_kokiri
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give dmg_lizalfos
+
+verb hit_spin_kokiri__idle_dinolfos "Kokiri spin attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 10370
+  take swing_spin_kokiri
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_kokiri__walk_dinolfos "Kokiri spin attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 10440
+  take swing_spin_kokiri
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_kokiri__circle_dinolfos "Kokiri spin attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 10440
+  take swing_spin_kokiri
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_kokiri__attack_dinolfos "Kokiri spin attack hits (Dinolfos slashes)" by world priority 80 in hits at 3000 10510
+  take swing_spin_kokiri
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_spin_kokiri__jump_forward_dinolfos "Kokiri spin attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 10510
+  take swing_spin_kokiri
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_spin_kokiri__stunned_dinolfos "Kokiri spin attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 10580
+  take swing_spin_kokiri
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_spin_kokiri__jump_back_dinolfos "Kokiri spin attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 10580
+  take swing_spin_kokiri
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give dmg_dinolfos
+
+verb hit_spin_kokiri__idle_paired "Kokiri spin attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 10650
+  take swing_spin_kokiri
+  take phase_idle_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_spin_kokiri__walk_paired "Kokiri spin attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 10650
+  take swing_spin_kokiri
+  take phase_walk_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_spin_kokiri__circle_paired "Kokiri spin attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 10720
+  take swing_spin_kokiri
+  take phase_circle_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_spin_kokiri__attack_paired "Kokiri spin attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 10720
+  take swing_spin_kokiri
+  take phase_attack_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_spin_kokiri__jump_forward_paired "Kokiri spin attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 10790
+  take swing_spin_kokiri
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb hit_spin_kokiri__stunned_paired "Kokiri spin attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 10790
+  take swing_spin_kokiri
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give dmg_paired
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3000 10860
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_spin_giant "Two-handed spin attack has no effect" by world priority 79 in hits at 3000 10930
+  take swing_spin_giant
+
+verb hit_spin_giant__idle_lizalfos "Two-handed spin attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 10930
+  take swing_spin_giant
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_spin_giant__walk_lizalfos "Two-handed spin attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 11000
+  take swing_spin_giant
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_spin_giant__circle_lizalfos "Two-handed spin attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 11000
+  take swing_spin_giant
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_spin_giant__attack_lizalfos "Two-handed spin attack hits (Lizalfos slashes)" by world priority 80 in hits at 3000 11070
+  take swing_spin_giant
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_spin_giant__jump_forward_lizalfos "Two-handed spin attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 11070
+  take swing_spin_giant
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_spin_giant__stunned_lizalfos "Two-handed spin attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 11140
+  take swing_spin_giant
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_spin_giant__idle_dinolfos "Two-handed spin attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 11140
+  take swing_spin_giant
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_giant__walk_dinolfos "Two-handed spin attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 11210
+  take swing_spin_giant
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_giant__circle_dinolfos "Two-handed spin attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 11210
+  take swing_spin_giant
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_giant__attack_dinolfos "Two-handed spin attack hits (Dinolfos slashes)" by world priority 80 in hits at 3000 11280
+  take swing_spin_giant
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_spin_giant__jump_forward_dinolfos "Two-handed spin attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 11280
+  take swing_spin_giant
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_spin_giant__stunned_dinolfos "Two-handed spin attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 11350
+  take swing_spin_giant
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_spin_giant__jump_back_dinolfos "Two-handed spin attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 11350
+  take swing_spin_giant
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_spin_giant__idle_paired "Two-handed spin attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 11420
+  take swing_spin_giant
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_spin_giant__walk_paired "Two-handed spin attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 11420
+  take swing_spin_giant
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_spin_giant__circle_paired "Two-handed spin attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 11490
+  take swing_spin_giant
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_spin_giant__attack_paired "Two-handed spin attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 11490
+  take swing_spin_giant
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_spin_giant__jump_forward_paired "Two-handed spin attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 11560
+  take swing_spin_giant
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_spin_giant__stunned_paired "Two-handed spin attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 11560
+  take swing_spin_giant
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb miss_spin_giant_far "Two-handed spin attack misses: too far" by world priority 81 in hits at 3000 11630
+  take swing_spin_giant
+  need range_far
+
+verb miss_spin_master "Master Sword spin attack has no effect" by world priority 79 in hits at 3000 11700
+  take swing_spin_master
+
+verb hit_spin_master__idle_lizalfos "Master Sword spin attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 11700
+  take swing_spin_master
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_spin_master__walk_lizalfos "Master Sword spin attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 11770
+  take swing_spin_master
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_spin_master__circle_lizalfos "Master Sword spin attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 11770
+  take swing_spin_master
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_spin_master__attack_lizalfos "Master Sword spin attack hits (Lizalfos slashes)" by world priority 80 in hits at 3000 11840
+  take swing_spin_master
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_spin_master__jump_forward_lizalfos "Master Sword spin attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 11840
+  take swing_spin_master
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_spin_master__stunned_lizalfos "Master Sword spin attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 11910
+  take swing_spin_master
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_spin_master__idle_dinolfos "Master Sword spin attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 11910
+  take swing_spin_master
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_master__walk_dinolfos "Master Sword spin attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 11980
+  take swing_spin_master
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_master__circle_dinolfos "Master Sword spin attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 11980
+  take swing_spin_master
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_spin_master__attack_dinolfos "Master Sword spin attack hits (Dinolfos slashes)" by world priority 80 in hits at 3000 12050
+  take swing_spin_master
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_spin_master__jump_forward_dinolfos "Master Sword spin attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 12050
+  take swing_spin_master
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_spin_master__stunned_dinolfos "Master Sword spin attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 12120
+  take swing_spin_master
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_spin_master__jump_back_dinolfos "Master Sword spin attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 12120
+  take swing_spin_master
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_spin_master__idle_paired "Master Sword spin attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 12190
+  take swing_spin_master
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_spin_master__walk_paired "Master Sword spin attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 12190
+  take swing_spin_master
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_spin_master__circle_paired "Master Sword spin attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 12260
+  take swing_spin_master
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_spin_master__attack_paired "Master Sword spin attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 12260
+  take swing_spin_master
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_spin_master__jump_forward_paired "Master Sword spin attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 12330
+  take swing_spin_master
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_spin_master__stunned_paired "Master Sword spin attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 12330
+  take swing_spin_master
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb miss_spin_master_far "Master Sword spin attack misses: too far" by world priority 81 in hits at 3000 12400
+  take swing_spin_master
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 12470
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__idle_lizalfos "Kokiri jump attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 12470
+  take swing_jump_kokiri
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri__walk_lizalfos "Kokiri jump attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 12540
+  take swing_jump_kokiri
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri__circle_lizalfos "Kokiri jump attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 12540
+  take swing_jump_kokiri
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri__attack_lizalfos "Kokiri jump attack hits (Lizalfos slashes)" by world priority 80 in hits at 3000 12610
+  take swing_jump_kokiri
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri__jump_forward_lizalfos "Kokiri jump attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 12610
+  take swing_jump_kokiri
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri__stunned_lizalfos "Kokiri jump attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 12680
+  take swing_jump_kokiri
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri__idle_dinolfos "Kokiri jump attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 12680
+  take swing_jump_kokiri
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_kokiri__walk_dinolfos "Kokiri jump attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 12750
+  take swing_jump_kokiri
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_kokiri__circle_dinolfos "Kokiri jump attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 12750
+  take swing_jump_kokiri
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_kokiri__attack_dinolfos "Kokiri jump attack hits (Dinolfos slashes)" by world priority 80 in hits at 3000 12820
+  take swing_jump_kokiri
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_jump_kokiri__jump_forward_dinolfos "Kokiri jump attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 12820
+  take swing_jump_kokiri
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_jump_kokiri__stunned_dinolfos "Kokiri jump attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 12890
+  take swing_jump_kokiri
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_jump_kokiri__jump_back_dinolfos "Kokiri jump attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 12890
+  take swing_jump_kokiri
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_jump_kokiri__idle_paired "Kokiri jump attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 12960
+  take swing_jump_kokiri
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri__walk_paired "Kokiri jump attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 12960
+  take swing_jump_kokiri
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri__circle_paired "Kokiri jump attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 13030
+  take swing_jump_kokiri
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri__attack_paired "Kokiri jump attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 13030
+  take swing_jump_kokiri
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri__jump_forward_paired "Kokiri jump attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 13100
+  take swing_jump_kokiri
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri__stunned_paired "Kokiri jump attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 13100
+  take swing_jump_kokiri
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 13170
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__idle_lizalfos "Kokiri jump attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 13240
+  take swing_jump_kokiri_self
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri_self__walk_lizalfos "Kokiri jump attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 13240
+  take swing_jump_kokiri_self
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri_self__circle_lizalfos "Kokiri jump attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 13310
+  take swing_jump_kokiri_self
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri_self__attack_lizalfos "Kokiri jump attack hits (Lizalfos slashes)" by world priority 80 in hits at 3140 13310
+  take swing_jump_kokiri_self
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri_self__jump_forward_lizalfos "Kokiri jump attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 13380
+  take swing_jump_kokiri_self
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri_self__stunned_lizalfos "Kokiri jump attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 13380
+  take swing_jump_kokiri_self
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 2 dmg_lizalfos
+
+verb hit_jump_kokiri_self__idle_dinolfos "Kokiri jump attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 13450
+  take swing_jump_kokiri_self
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_kokiri_self__walk_dinolfos "Kokiri jump attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 13450
+  take swing_jump_kokiri_self
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_kokiri_self__circle_dinolfos "Kokiri jump attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 13520
+  take swing_jump_kokiri_self
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_kokiri_self__attack_dinolfos "Kokiri jump attack hits (Dinolfos slashes)" by world priority 80 in hits at 3140 13520
+  take swing_jump_kokiri_self
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_jump_kokiri_self__jump_forward_dinolfos "Kokiri jump attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 13590
+  take swing_jump_kokiri_self
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_jump_kokiri_self__stunned_dinolfos "Kokiri jump attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 13590
+  take swing_jump_kokiri_self
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_jump_kokiri_self__jump_back_dinolfos "Kokiri jump attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 13660
+  take swing_jump_kokiri_self
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 2 dmg_dinolfos
+
+verb hit_jump_kokiri_self__idle_paired "Kokiri jump attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 13660
+  take swing_jump_kokiri_self
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri_self__walk_paired "Kokiri jump attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 13730
+  take swing_jump_kokiri_self
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri_self__circle_paired "Kokiri jump attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 13730
+  take swing_jump_kokiri_self
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri_self__attack_paired "Kokiri jump attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 13800
+  take swing_jump_kokiri_self
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri_self__jump_forward_paired "Kokiri jump attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 13800
+  take swing_jump_kokiri_self
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb hit_jump_kokiri_self__stunned_paired "Kokiri jump attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 13870
+  take swing_jump_kokiri_self
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 2 dmg_paired
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3140 13870
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_giant "Two-handed jump attack has no effect" by world priority 79 in hits at 3140 13940
+  take swing_jump_giant
+
+verb hit_jump_giant__idle_lizalfos "Two-handed jump attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 14010
+  take swing_jump_giant
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant__walk_lizalfos "Two-handed jump attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 14010
+  take swing_jump_giant
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant__circle_lizalfos "Two-handed jump attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 14080
+  take swing_jump_giant
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant__attack_lizalfos "Two-handed jump attack hits (Lizalfos slashes)" by world priority 80 in hits at 3140 14080
+  take swing_jump_giant
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant__jump_forward_lizalfos "Two-handed jump attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 14150
+  take swing_jump_giant
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant__stunned_lizalfos "Two-handed jump attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 14150
+  take swing_jump_giant
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant__idle_dinolfos "Two-handed jump attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 14220
+  take swing_jump_giant
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_giant__walk_dinolfos "Two-handed jump attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 14220
+  take swing_jump_giant
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_giant__circle_dinolfos "Two-handed jump attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 14290
+  take swing_jump_giant
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_giant__attack_dinolfos "Two-handed jump attack hits (Dinolfos slashes)" by world priority 80 in hits at 3140 14290
+  take swing_jump_giant
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 8 dmg_dinolfos
+
+verb hit_jump_giant__jump_forward_dinolfos "Two-handed jump attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 14360
+  take swing_jump_giant
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 8 dmg_dinolfos
+
+verb hit_jump_giant__stunned_dinolfos "Two-handed jump attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 14360
+  take swing_jump_giant
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 8 dmg_dinolfos
+
+verb hit_jump_giant__jump_back_dinolfos "Two-handed jump attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 14430
+  take swing_jump_giant
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 8 dmg_dinolfos
+
+verb hit_jump_giant__idle_paired "Two-handed jump attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 14430
+  take swing_jump_giant
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant__walk_paired "Two-handed jump attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 14500
+  take swing_jump_giant
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant__circle_paired "Two-handed jump attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 14500
+  take swing_jump_giant
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant__attack_paired "Two-handed jump attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 14570
+  take swing_jump_giant
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant__jump_forward_paired "Two-handed jump attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 14570
+  take swing_jump_giant
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant__stunned_paired "Two-handed jump attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 14640
+  take swing_jump_giant
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb miss_jump_giant_self "Two-handed jump attack has no effect" by world priority 79 in hits at 3000 14710
+  take swing_jump_giant_self
+
+verb hit_jump_giant_self__idle_lizalfos "Two-handed jump attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 14710
+  take swing_jump_giant_self
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant_self__walk_lizalfos "Two-handed jump attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 14780
+  take swing_jump_giant_self
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant_self__circle_lizalfos "Two-handed jump attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 14780
+  take swing_jump_giant_self
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant_self__attack_lizalfos "Two-handed jump attack hits (Lizalfos slashes)" by world priority 80 in hits at 3000 14850
+  take swing_jump_giant_self
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant_self__jump_forward_lizalfos "Two-handed jump attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 14850
+  take swing_jump_giant_self
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant_self__stunned_lizalfos "Two-handed jump attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 14920
+  take swing_jump_giant_self
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 8 dmg_lizalfos
+
+verb hit_jump_giant_self__idle_dinolfos "Two-handed jump attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 14920
+  take swing_jump_giant_self
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_giant_self__walk_dinolfos "Two-handed jump attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 14990
+  take swing_jump_giant_self
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_giant_self__circle_dinolfos "Two-handed jump attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 14990
+  take swing_jump_giant_self
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_giant_self__attack_dinolfos "Two-handed jump attack hits (Dinolfos slashes)" by world priority 80 in hits at 3000 15060
+  take swing_jump_giant_self
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 8 dmg_dinolfos
+
+verb hit_jump_giant_self__jump_forward_dinolfos "Two-handed jump attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 15060
+  take swing_jump_giant_self
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 8 dmg_dinolfos
+
+verb hit_jump_giant_self__stunned_dinolfos "Two-handed jump attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 15130
+  take swing_jump_giant_self
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 8 dmg_dinolfos
+
+verb hit_jump_giant_self__jump_back_dinolfos "Two-handed jump attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 15130
+  take swing_jump_giant_self
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 8 dmg_dinolfos
+
+verb hit_jump_giant_self__idle_paired "Two-handed jump attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 15200
+  take swing_jump_giant_self
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant_self__walk_paired "Two-handed jump attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 15200
+  take swing_jump_giant_self
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant_self__circle_paired "Two-handed jump attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 15270
+  take swing_jump_giant_self
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant_self__attack_paired "Two-handed jump attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 15270
+  take swing_jump_giant_self
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant_self__jump_forward_paired "Two-handed jump attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 15340
+  take swing_jump_giant_self
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb hit_jump_giant_self__stunned_paired "Two-handed jump attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 15340
+  take swing_jump_giant_self
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 8 dmg_paired
+
+verb miss_jump_giant_self_far "Two-handed jump attack misses: too far" by world priority 81 in hits at 3000 15410
+  take swing_jump_giant_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3000 15480
+  take swing_jump_master
+
+verb hit_jump_master__idle_lizalfos "Master Sword jump attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3140 15480
+  take swing_jump_master
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master__walk_lizalfos "Master Sword jump attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3000 15550
+  take swing_jump_master
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master__circle_lizalfos "Master Sword jump attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3140 15550
+  take swing_jump_master
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master__attack_lizalfos "Master Sword jump attack hits (Lizalfos slashes)" by world priority 80 in hits at 3000 15620
+  take swing_jump_master
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master__jump_forward_lizalfos "Master Sword jump attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3140 15620
+  take swing_jump_master
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master__stunned_lizalfos "Master Sword jump attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3000 15690
+  take swing_jump_master
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master__idle_dinolfos "Master Sword jump attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3140 15690
+  take swing_jump_master
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_master__walk_dinolfos "Master Sword jump attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3000 15760
+  take swing_jump_master
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_master__circle_dinolfos "Master Sword jump attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3140 15760
+  take swing_jump_master
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_master__attack_dinolfos "Master Sword jump attack hits (Dinolfos slashes)" by world priority 80 in hits at 3000 15830
+  take swing_jump_master
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_jump_master__jump_forward_dinolfos "Master Sword jump attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3140 15830
+  take swing_jump_master
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_jump_master__stunned_dinolfos "Master Sword jump attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3000 15900
+  take swing_jump_master
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_jump_master__jump_back_dinolfos "Master Sword jump attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3140 15900
+  take swing_jump_master
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_jump_master__idle_paired "Master Sword jump attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3000 15970
+  take swing_jump_master
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master__walk_paired "Master Sword jump attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3140 15970
+  take swing_jump_master
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master__circle_paired "Master Sword jump attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3000 16040
+  take swing_jump_master
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master__attack_paired "Master Sword jump attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3140 16040
+  take swing_jump_master
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master__jump_forward_paired "Master Sword jump attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3000 16110
+  take swing_jump_master
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master__stunned_paired "Master Sword jump attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3140 16110
+  take swing_jump_master
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb miss_jump_master_self "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 16180
+  take swing_jump_master_self
+
+verb hit_jump_master_self__idle_lizalfos "Master Sword jump attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 16250
+  take swing_jump_master_self
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master_self__walk_lizalfos "Master Sword jump attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 16250
+  take swing_jump_master_self
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master_self__circle_lizalfos "Master Sword jump attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 16320
+  take swing_jump_master_self
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master_self__attack_lizalfos "Master Sword jump attack hits (Lizalfos slashes)" by world priority 80 in hits at 3140 16320
+  take swing_jump_master_self
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master_self__jump_forward_lizalfos "Master Sword jump attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 16390
+  take swing_jump_master_self
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master_self__stunned_lizalfos "Master Sword jump attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 16390
+  take swing_jump_master_self
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_jump_master_self__idle_dinolfos "Master Sword jump attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 16460
+  take swing_jump_master_self
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_master_self__walk_dinolfos "Master Sword jump attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 16460
+  take swing_jump_master_self
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_master_self__circle_dinolfos "Master Sword jump attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 16530
+  take swing_jump_master_self
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_jump_master_self__attack_dinolfos "Master Sword jump attack hits (Dinolfos slashes)" by world priority 80 in hits at 3140 16530
+  take swing_jump_master_self
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_jump_master_self__jump_forward_dinolfos "Master Sword jump attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 16600
+  take swing_jump_master_self
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_jump_master_self__stunned_dinolfos "Master Sword jump attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 16600
+  take swing_jump_master_self
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_jump_master_self__jump_back_dinolfos "Master Sword jump attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 16670
+  take swing_jump_master_self
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_jump_master_self__idle_paired "Master Sword jump attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 16670
+  take swing_jump_master_self
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master_self__walk_paired "Master Sword jump attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 16740
+  take swing_jump_master_self
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master_self__circle_paired "Master Sword jump attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 16740
+  take swing_jump_master_self
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master_self__attack_paired "Master Sword jump attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 16810
+  take swing_jump_master_self
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master_self__jump_forward_paired "Master Sword jump attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 16810
+  take swing_jump_master_self
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_jump_master_self__stunned_paired "Master Sword jump attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 16880
+  take swing_jump_master_self
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb miss_jump_master_self_far "Master Sword jump attack misses: too far" by world priority 81 in hits at 3140 16880
+  take swing_jump_master_self
+  need range_far
+
+verb miss_hammer_jump "Hammer jump attack has no effect" by world priority 79 in hits at 3140 16950
+  take swing_hammer_jump
+
+verb hit_hammer_jump__idle_lizalfos "Hammer jump attack hits (Lizalfos stands ready)" by world priority 80 in hits at 3000 17020
+  take swing_hammer_jump
+  take phase_idle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_hammer_jump__walk_lizalfos "Hammer jump attack hits (Lizalfos walks at Link)" by world priority 80 in hits at 3140 17020
+  take swing_hammer_jump
+  take phase_walk_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_hammer_jump__circle_lizalfos "Hammer jump attack hits (Lizalfos circles Link)" by world priority 80 in hits at 3000 17090
+  take swing_hammer_jump
+  take phase_circle_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_hammer_jump__attack_lizalfos "Hammer jump attack hits (Lizalfos slashes)" by world priority 80 in hits at 3140 17090
+  take swing_hammer_jump
+  take phase_attack_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_hammer_jump__jump_forward_lizalfos "Hammer jump attack hits (Lizalfos leaps at Link)" by world priority 80 in hits at 3000 17160
+  take swing_hammer_jump
+  take phase_jump_forward_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_hammer_jump__stunned_lizalfos "Hammer jump attack hits (Lizalfos is stunned)" by world priority 80 in hits at 3140 17160
+  take swing_hammer_jump
+  take phase_stunned_lizalfos
+  give phase_damaged_lizalfos
+  give 4 dmg_lizalfos
+
+verb hit_hammer_jump__idle_dinolfos "Hammer jump attack hits (Dinolfos stands ready)" by world priority 80 in hits at 3000 17230
+  take swing_hammer_jump
+  take phase_idle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_hammer_jump__walk_dinolfos "Hammer jump attack hits (Dinolfos walks at Link)" by world priority 80 in hits at 3140 17230
+  take swing_hammer_jump
+  take phase_walk_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_hammer_jump__circle_dinolfos "Hammer jump attack hits (Dinolfos circles Link)" by world priority 80 in hits at 3000 17300
+  take swing_hammer_jump
+  take phase_circle_dinolfos
+  give phase_jump_back_dinolfos
+
+verb hit_hammer_jump__attack_dinolfos "Hammer jump attack hits (Dinolfos slashes)" by world priority 80 in hits at 3140 17300
+  take swing_hammer_jump
+  take phase_attack_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_hammer_jump__jump_forward_dinolfos "Hammer jump attack hits (Dinolfos leaps at Link)" by world priority 80 in hits at 3000 17370
+  take swing_hammer_jump
+  take phase_jump_forward_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_hammer_jump__stunned_dinolfos "Hammer jump attack hits (Dinolfos is stunned)" by world priority 80 in hits at 3140 17370
+  take swing_hammer_jump
+  take phase_stunned_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_hammer_jump__jump_back_dinolfos "Hammer jump attack hits (Dinolfos jumps back)" by world priority 80 in hits at 3000 17440
+  take swing_hammer_jump
+  take phase_jump_back_dinolfos
+  give phase_damaged_dinolfos
+  give 4 dmg_dinolfos
+
+verb hit_hammer_jump__idle_paired "Hammer jump attack hits (Paired Lizalfos stands ready)" by world priority 80 in hits at 3140 17440
+  take swing_hammer_jump
+  take phase_idle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_hammer_jump__walk_paired "Hammer jump attack hits (Paired Lizalfos walks at Link)" by world priority 80 in hits at 3000 17510
+  take swing_hammer_jump
+  take phase_walk_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_hammer_jump__circle_paired "Hammer jump attack hits (Paired Lizalfos circles Link)" by world priority 80 in hits at 3140 17510
+  take swing_hammer_jump
+  take phase_circle_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_hammer_jump__attack_paired "Hammer jump attack hits (Paired Lizalfos slashes)" by world priority 80 in hits at 3000 17580
+  take swing_hammer_jump
+  take phase_attack_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_hammer_jump__jump_forward_paired "Hammer jump attack hits (Paired Lizalfos leaps at Link)" by world priority 80 in hits at 3140 17580
+  take swing_hammer_jump
+  take phase_jump_forward_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb hit_hammer_jump__stunned_paired "Hammer jump attack hits (Paired Lizalfos is stunned)" by world priority 80 in hits at 3000 17650
+  take swing_hammer_jump
+  take phase_stunned_paired
+  give phase_damaged_paired
+  give 4 dmg_paired
+
+verb lizalfos_empty_in_damaged_lizalfos "Lizalfos runs out (Lizalfos reels from a hit)" by world priority 90 in enemy_health at 2360 710
+  unless hp_lizalfos
+  take alive_lizalfos
+  take phase_damaged_lizalfos
+  give link_wins
+
+verb lizalfos_empty_in_stunned_lizalfos "Lizalfos runs out (Lizalfos is stunned)" by world priority 90 in enemy_health at 2500 710
+  unless hp_lizalfos
+  take alive_lizalfos
+  take phase_stunned_lizalfos
+  give link_wins
+
+verb dinolfos_empty_in_damaged_dinolfos "Dinolfos runs out (Dinolfos reels from a hit)" by world priority 90 in enemy_health at 2360 780
+  unless hp_dinolfos
+  take alive_dinolfos
+  take phase_damaged_dinolfos
+  give link_wins
+
+verb dinolfos_empty_in_stunned_dinolfos "Dinolfos runs out (Dinolfos is stunned)" by world priority 90 in enemy_health at 2500 780
+  unless hp_dinolfos
+  take alive_dinolfos
+  take phase_stunned_dinolfos
+  give link_wins
+
+verb paired_empty_in_damaged_paired "Paired Lizalfos runs out (Paired Lizalfos reels from a hit)" by world priority 90 in enemy_health at 2360 850
+  unless hp_paired
+  unless hp_paired_3
+  take alive_paired
+  take phase_damaged_paired
+  give link_wins
+
+verb paired_empty_in_stunned_paired "Paired Lizalfos runs out (Paired Lizalfos is stunned)" by world priority 90 in enemy_health at 2500 850
+  unless hp_paired
+  unless hp_paired_3
+  take alive_paired
+  take phase_stunned_paired
+  give link_wins
+
+verb paired_empty_in_away_paired "Paired Lizalfos runs out (Paired Lizalfos retreats while its partner fights)" by world priority 90 in enemy_health at 2360 920
+  unless hp_paired
+  unless hp_paired_3
+  take alive_paired
+  take phase_away_paired
+  give link_wins
+
+verb paired_falls_to_3_in_damaged_paired "Paired Lizalfos drops to 3 (Paired Lizalfos reels from a hit)" by world priority 89 in enemy_health at 2500 920
+  take above_paired_3
+  need alive_paired
+  unless hp_paired
+  take phase_damaged_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+
+verb paired_falls_to_3_in_stunned_paired "Paired Lizalfos drops to 3 (Paired Lizalfos is stunned)" by world priority 89 in enemy_health at 2360 990
+  take above_paired_3
+  need alive_paired
+  unless hp_paired
+  take phase_stunned_paired
+  give phase_away_paired
+  give 5 timer_away_paired
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 1550
+  take link_turn
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 1550
+  take link_turn
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_adult "Link raises the hylian shield" by link in link_moves at 2680 1620
+  take link_turn
+  need age_adult
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_guards_mirror_shield "Link raises the mirror shield" by link in link_moves at 2820 1620
+  take link_turn
+  need age_adult
+  need has_mirror_shield
+  give link_guard
+  give guard_with_mirror_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 1690
+  take link_turn
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 1690
+  take link_turn
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 1760
+  take link_turn
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 1760
+  take link_turn
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 1830
+  take link_turn
+  take has_red_potion
+  give 8 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 1830
+  take link_turn
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_drinks_blue_potion "Link drinks a blue potion" by link in link_moves at 2680 1900
+  take link_turn
+  take has_blue_potion
+  give 8 link_heal
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2820 1900
+  take link_turn
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2680 1970
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2820 1970
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Lizalfos gets ready" by world priority 70 in enemy at 2040 1690
+  take enemy_turn
+  give enemy_act
+
+verb idle_lizalfos_ticks "Lizalfos stands ready: a beat passes" by world priority 71 in enemy at 2180 1690
+  take enemy_turn
+  need phase_idle_lizalfos
+  take timer_idle_lizalfos
+  give enemy_act
+
+verb idle_lizalfos_step_1 "Lizalfos walks in" by world priority 69 weight 70 in enemy at 2040 1760
+  take enemy_act
+  take phase_idle_lizalfos
+  give phase_walk_lizalfos
+  unless timer_idle_lizalfos
+  give beat_end
+  need range_near
+
+verb idle_lizalfos_step_2 "Lizalfos starts circling" by world priority 69 weight 30 in enemy at 2180 1760
+  take enemy_act
+  take phase_idle_lizalfos
+  give phase_circle_lizalfos
+  give timer_circle_lizalfos
+  unless timer_idle_lizalfos
+  give beat_end
+  need range_near
+
+verb idle_lizalfos_step_3 "Lizalfos circles from mid range" by world priority 69 weight 51 in enemy at 2040 1830
+  take enemy_act
+  take phase_idle_lizalfos
+  give phase_circle_lizalfos
+  give timer_circle_lizalfos
+  unless timer_idle_lizalfos
+  give beat_end
+  need range_far
+
+verb idle_lizalfos_step_4 "Lizalfos walks in" by world priority 69 weight 49 in enemy at 2180 1830
+  take enemy_act
+  take phase_idle_lizalfos
+  give phase_walk_lizalfos
+  unless timer_idle_lizalfos
+  give beat_end
+  need range_far
+
+verb walk_lizalfos_step_1 "Lizalfos reaches Link and raises its sword" by world priority 69 weight 190 in enemy at 2040 1900
+  take enemy_act
+  take phase_walk_lizalfos
+  give phase_attack_lizalfos
+  give beat_end
+  need range_near
+
+verb walk_lizalfos_step_2 "Lizalfos sidesteps instead" by world priority 69 weight 5 in enemy at 2180 1900
+  take enemy_act
+  take phase_walk_lizalfos
+  give phase_circle_lizalfos
+  give timer_circle_lizalfos
+  give beat_end
+  need range_near
+
+verb walk_lizalfos_step_3 "Lizalfos stops short" by world priority 69 weight 5 in enemy at 2040 1970
+  take enemy_act
+  take phase_walk_lizalfos
+  give phase_idle_lizalfos
+  give timer_idle_lizalfos
+  give beat_end
+  need range_near
+
+verb walk_lizalfos_step_4 "Lizalfos closes in" by world priority 69 weight 9 in enemy at 2180 1970
+  take enemy_act
+  need phase_walk_lizalfos
+  give beat_end
+  take range_far
+  give range_near
+
+verb walk_lizalfos_step_5 "Lizalfos pauses" by world priority 69 in enemy at 2040 2040
+  take enemy_act
+  take phase_walk_lizalfos
+  give phase_idle_lizalfos
+  give timer_idle_lizalfos
+  give beat_end
+  need range_far
+
+verb circle_lizalfos_ticks "Lizalfos circles Link: a beat passes" by world priority 71 in enemy at 2180 2040
+  take enemy_turn
+  need phase_circle_lizalfos
+  take timer_circle_lizalfos
+  give enemy_act
+
+verb circle_lizalfos_step_1 "Lizalfos turns in to slash" by world priority 69 in enemy at 2040 2110
+  take enemy_act
+  take phase_circle_lizalfos
+  give phase_attack_lizalfos
+  unless timer_circle_lizalfos
+  give beat_end
+  need range_near
+
+verb circle_lizalfos_step_2 "Lizalfos walks in" by world priority 69 weight 3 in enemy at 2180 2110
+  take enemy_act
+  take phase_circle_lizalfos
+  give phase_walk_lizalfos
+  unless timer_circle_lizalfos
+  give beat_end
+  need range_near
+
+verb circle_lizalfos_step_3 "Lizalfos leaps in" by world priority 69 in enemy at 2040 2180
+  take enemy_act
+  take phase_circle_lizalfos
+  give phase_jump_forward_lizalfos
+  unless timer_circle_lizalfos
+  give beat_end
+  need range_far
+
+verb circle_lizalfos_step_4 "Lizalfos walks in" by world priority 69 in enemy at 2180 2180
+  take enemy_act
+  take phase_circle_lizalfos
+  give phase_walk_lizalfos
+  unless timer_circle_lizalfos
+  give beat_end
+  need range_far
+
+verb attack_lizalfos_step_1 "Lizalfos slashes and steps back" by world priority 69 weight 30 in enemy at 2040 2250
+  take enemy_act
+  take phase_attack_lizalfos
+  give phase_idle_lizalfos
+  give timer_idle_lizalfos
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_lizalfos_step_2 "Lizalfos slashes and circles" by world priority 69 weight 21 in enemy at 2180 2250
+  take enemy_act
+  take phase_attack_lizalfos
+  give phase_circle_lizalfos
+  give timer_circle_lizalfos
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_lizalfos_step_3 "Lizalfos slashes again" by world priority 69 weight 49 in enemy at 2040 2320
+  take enemy_act
+  need phase_attack_lizalfos
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_lizalfos_step_4 "Lizalfos slashes at air" by world priority 69 in enemy at 2180 2320
+  take enemy_act
+  take phase_attack_lizalfos
+  give phase_idle_lizalfos
+  give timer_idle_lizalfos
+  give beat_end
+  need range_far
+
+verb jump_forward_lizalfos_step_1_near "Lizalfos lands" by world priority 69 in enemy at 2040 2390
+  take enemy_act
+  take phase_jump_forward_lizalfos
+  give phase_walk_lizalfos
+  give beat_end
+  need range_near
+
+verb jump_forward_lizalfos_step_1_far "Lizalfos lands" by world priority 69 in enemy at 2180 2390
+  take enemy_act
+  take phase_jump_forward_lizalfos
+  give phase_walk_lizalfos
+  give beat_end
+  take range_far
+  give range_near
+
+verb jump_attack_lizalfos_step_1_near "Lizalfos lands its jump attack" by world priority 69 in enemy at 2040 2460
+  take enemy_act
+  take phase_jump_attack_lizalfos
+  give phase_attack_lizalfos
+  give beat_end
+  need range_near
+
+verb jump_attack_lizalfos_step_1_far "Lizalfos lands its jump attack" by world priority 69 in enemy at 2180 2460
+  take enemy_act
+  take phase_jump_attack_lizalfos
+  give phase_attack_lizalfos
+  give beat_end
+  take range_far
+  give range_near
+
+verb damaged_lizalfos_step_1 "Lizalfos recovers with a jump attack" by world priority 69 in enemy at 2040 2530
+  take enemy_act
+  take phase_damaged_lizalfos
+  give phase_jump_attack_lizalfos
+  give beat_end
+  need range_near
+
+verb damaged_lizalfos_step_2 "Lizalfos recovers" by world priority 69 in enemy at 2180 2530
+  take enemy_act
+  take phase_damaged_lizalfos
+  give phase_idle_lizalfos
+  give timer_idle_lizalfos
+  give beat_end
+  need range_far
+
+verb stunned_lizalfos_ticks "Lizalfos is stunned: a beat passes" by world priority 71 in enemy at 2040 2600
+  take enemy_turn
+  need phase_stunned_lizalfos
+  take timer_stunned_lizalfos
+  give enemy_act
+
+verb stunned_lizalfos_step_1 "Lizalfos shakes off the stun and slashes" by world priority 69 weight 7 in enemy at 2180 2600
+  take enemy_act
+  take phase_stunned_lizalfos
+  give phase_attack_lizalfos
+  unless timer_stunned_lizalfos
+  give beat_end
+  need range_near
+
+verb stunned_lizalfos_step_2 "Lizalfos shakes off the stun" by world priority 69 in enemy at 2040 2670
+  take enemy_act
+  take phase_stunned_lizalfos
+  give phase_idle_lizalfos
+  give timer_idle_lizalfos
+  unless timer_stunned_lizalfos
+  give beat_end
+  need range_near
+
+verb stunned_lizalfos_step_3 "Lizalfos shakes off the stun" by world priority 69 in enemy at 2180 2670
+  take enemy_act
+  take phase_stunned_lizalfos
+  give phase_idle_lizalfos
+  give timer_idle_lizalfos
+  unless timer_stunned_lizalfos
+  give beat_end
+  need range_far
+
+verb stunned_lizalfos_holds "Lizalfos is stunned: nothing changes" by world priority 68 in enemy at 2040 2740
+  take enemy_act
+  need phase_stunned_lizalfos
+  give beat_end
+
+verb idle_dinolfos_ticks "Dinolfos stands ready: a beat passes" by world priority 71 in enemy at 2180 2740
+  take enemy_turn
+  need phase_idle_dinolfos
+  take timer_idle_dinolfos
+  give enemy_act
+
+verb idle_dinolfos_step_1 "Dinolfos walks in" by world priority 69 weight 70 in enemy at 2040 2810
+  take enemy_act
+  take phase_idle_dinolfos
+  give phase_walk_dinolfos
+  unless timer_idle_dinolfos
+  give beat_end
+  need range_near
+
+verb idle_dinolfos_step_2 "Dinolfos starts circling" by world priority 69 weight 30 in enemy at 2180 2810
+  take enemy_act
+  take phase_idle_dinolfos
+  give phase_circle_dinolfos
+  give timer_circle_dinolfos
+  unless timer_idle_dinolfos
+  give beat_end
+  need range_near
+
+verb idle_dinolfos_step_3 "Dinolfos leaps in from mid range" by world priority 69 weight 30 in enemy at 2040 2880
+  take enemy_act
+  take phase_idle_dinolfos
+  give phase_jump_forward_dinolfos
+  unless timer_idle_dinolfos
+  give beat_end
+  need range_far
+
+verb idle_dinolfos_step_4 "Dinolfos walks in" by world priority 69 weight 49 in enemy at 2180 2880
+  take enemy_act
+  take phase_idle_dinolfos
+  give phase_walk_dinolfos
+  unless timer_idle_dinolfos
+  give beat_end
+  need range_far
+
+verb idle_dinolfos_step_5 "Dinolfos starts circling" by world priority 69 weight 21 in enemy at 2040 2950
+  take enemy_act
+  take phase_idle_dinolfos
+  give phase_circle_dinolfos
+  give timer_circle_dinolfos
+  unless timer_idle_dinolfos
+  give beat_end
+  need range_far
+
+verb walk_dinolfos_step_1 "Dinolfos reaches Link and raises its sword" by world priority 69 weight 190 in enemy at 2180 2950
+  take enemy_act
+  take phase_walk_dinolfos
+  give phase_attack_dinolfos
+  give beat_end
+  need range_near
+
+verb walk_dinolfos_step_2 "Dinolfos sidesteps instead" by world priority 69 weight 5 in enemy at 2040 3020
+  take enemy_act
+  take phase_walk_dinolfos
+  give phase_circle_dinolfos
+  give timer_circle_dinolfos
+  give beat_end
+  need range_near
+
+verb walk_dinolfos_step_3 "Dinolfos stops short" by world priority 69 weight 5 in enemy at 2180 3020
+  take enemy_act
+  take phase_walk_dinolfos
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  give beat_end
+  need range_near
+
+verb walk_dinolfos_step_4 "Dinolfos closes in" by world priority 69 weight 9 in enemy at 2040 3090
+  take enemy_act
+  need phase_walk_dinolfos
+  give beat_end
+  take range_far
+  give range_near
+
+verb walk_dinolfos_step_5 "Dinolfos pauses" by world priority 69 in enemy at 2180 3090
+  take enemy_act
+  take phase_walk_dinolfos
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  give beat_end
+  need range_far
+
+verb walk_dinolfos_step_6 "Dinolfos leaps in" by world priority 69 in enemy at 2040 3160
+  take enemy_act
+  take phase_walk_dinolfos
+  give phase_jump_forward_dinolfos
+  give beat_end
+  need range_far
+
+verb circle_dinolfos_ticks "Dinolfos circles Link: a beat passes" by world priority 71 in enemy at 2180 3160
+  take enemy_turn
+  need phase_circle_dinolfos
+  take timer_circle_dinolfos
+  give enemy_act
+
+verb circle_dinolfos_step_1 "Dinolfos turns in to slash" by world priority 69 in enemy at 2040 3230
+  take enemy_act
+  take phase_circle_dinolfos
+  give phase_attack_dinolfos
+  unless timer_circle_dinolfos
+  give beat_end
+  need range_near
+
+verb circle_dinolfos_step_2 "Dinolfos walks in" by world priority 69 weight 3 in enemy at 2180 3230
+  take enemy_act
+  take phase_circle_dinolfos
+  give phase_walk_dinolfos
+  unless timer_circle_dinolfos
+  give beat_end
+  need range_near
+
+verb circle_dinolfos_step_3 "Dinolfos leaps in" by world priority 69 in enemy at 2040 3300
+  take enemy_act
+  take phase_circle_dinolfos
+  give phase_jump_forward_dinolfos
+  unless timer_circle_dinolfos
+  give beat_end
+  need range_far
+
+verb circle_dinolfos_step_4 "Dinolfos walks in" by world priority 69 in enemy at 2180 3300
+  take enemy_act
+  take phase_circle_dinolfos
+  give phase_walk_dinolfos
+  unless timer_circle_dinolfos
+  give beat_end
+  need range_far
+
+verb attack_dinolfos_step_1 "Dinolfos slashes and steps back" by world priority 69 weight 30 in enemy at 2040 3370
+  take enemy_act
+  take phase_attack_dinolfos
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_dinolfos_step_2 "Dinolfos slashes and circles" by world priority 69 weight 21 in enemy at 2180 3370
+  take enemy_act
+  take phase_attack_dinolfos
+  give phase_circle_dinolfos
+  give timer_circle_dinolfos
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_dinolfos_step_3 "Dinolfos slashes again" by world priority 69 weight 49 in enemy at 2040 3440
+  take enemy_act
+  need phase_attack_dinolfos
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_dinolfos_step_4 "Dinolfos slashes at air" by world priority 69 in enemy at 2180 3440
+  take enemy_act
+  take phase_attack_dinolfos
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  give beat_end
+  need range_far
+
+verb jump_forward_dinolfos_step_1_near "Dinolfos lands slashing" by world priority 69 in enemy at 2040 3510
+  take enemy_act
+  take phase_jump_forward_dinolfos
+  give phase_attack_dinolfos
+  give beat_end
+  need range_near
+
+verb jump_forward_dinolfos_step_1_far "Dinolfos lands slashing" by world priority 69 in enemy at 2180 3510
+  take enemy_act
+  take phase_jump_forward_dinolfos
+  give phase_attack_dinolfos
+  give beat_end
+  take range_far
+  give range_near
+
+verb jump_attack_dinolfos_step_1_near "Dinolfos lands its jump attack" by world priority 69 in enemy at 2040 3580
+  take enemy_act
+  take phase_jump_attack_dinolfos
+  give phase_attack_dinolfos
+  give beat_end
+  need range_near
+
+verb jump_attack_dinolfos_step_1_far "Dinolfos lands its jump attack" by world priority 69 in enemy at 2180 3580
+  take enemy_act
+  take phase_jump_attack_dinolfos
+  give phase_attack_dinolfos
+  give beat_end
+  take range_far
+  give range_near
+
+verb damaged_dinolfos_step_1 "Dinolfos recovers and slashes" by world priority 69 in enemy at 2040 3650
+  take enemy_act
+  take phase_damaged_dinolfos
+  give phase_attack_dinolfos
+  give beat_end
+  need range_near
+
+verb damaged_dinolfos_step_2 "Dinolfos recovers" by world priority 69 in enemy at 2180 3650
+  take enemy_act
+  take phase_damaged_dinolfos
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  give beat_end
+  need range_far
+
+verb stunned_dinolfos_ticks "Dinolfos is stunned: a beat passes" by world priority 71 in enemy at 2040 3720
+  take enemy_turn
+  need phase_stunned_dinolfos
+  take timer_stunned_dinolfos
+  give enemy_act
+
+verb stunned_dinolfos_step_1 "Dinolfos shakes off the stun and slashes" by world priority 69 in enemy at 2180 3720
+  take enemy_act
+  take phase_stunned_dinolfos
+  give phase_attack_dinolfos
+  unless timer_stunned_dinolfos
+  give beat_end
+  need range_near
+
+verb stunned_dinolfos_step_2 "Dinolfos shakes off the stun" by world priority 69 in enemy at 2040 3790
+  take enemy_act
+  take phase_stunned_dinolfos
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  unless timer_stunned_dinolfos
+  give beat_end
+  need range_far
+
+verb stunned_dinolfos_holds "Dinolfos is stunned: nothing changes" by world priority 68 in enemy at 2180 3790
+  take enemy_act
+  need phase_stunned_dinolfos
+  give beat_end
+
+verb jump_back_dinolfos_step_1_near "Dinolfos lands and circles" by world priority 69 in enemy at 2040 3860
+  take enemy_act
+  take phase_jump_back_dinolfos
+  give phase_circle_dinolfos
+  give timer_circle_dinolfos
+  give beat_end
+  take range_near
+  give range_far
+
+verb jump_back_dinolfos_step_1_far "Dinolfos lands and circles" by world priority 69 in enemy at 2180 3860
+  take enemy_act
+  take phase_jump_back_dinolfos
+  give phase_circle_dinolfos
+  give timer_circle_dinolfos
+  give beat_end
+  need range_far
+
+verb jump_back_dinolfos_step_2_near "Dinolfos lands" by world priority 69 in enemy at 2040 3930
+  take enemy_act
+  take phase_jump_back_dinolfos
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  give beat_end
+  take range_near
+  give range_far
+
+verb jump_back_dinolfos_step_2_far "Dinolfos lands" by world priority 69 in enemy at 2180 3930
+  take enemy_act
+  take phase_jump_back_dinolfos
+  give phase_idle_dinolfos
+  give timer_idle_dinolfos
+  give beat_end
+  need range_far
+
+verb idle_paired_ticks "Paired Lizalfos stands ready: a beat passes" by world priority 71 in enemy at 2040 4000
+  take enemy_turn
+  need phase_idle_paired
+  take timer_idle_paired
+  give enemy_act
+
+verb idle_paired_step_1 "Paired Lizalfos walks in" by world priority 69 weight 70 in enemy at 2180 4000
+  take enemy_act
+  take phase_idle_paired
+  give phase_walk_paired
+  unless timer_idle_paired
+  give beat_end
+  need range_near
+
+verb idle_paired_step_2 "Paired Lizalfos starts circling" by world priority 69 weight 30 in enemy at 2040 4070
+  take enemy_act
+  take phase_idle_paired
+  give phase_circle_paired
+  give timer_circle_paired
+  unless timer_idle_paired
+  give beat_end
+  need range_near
+
+verb idle_paired_step_3 "Paired Lizalfos circles from mid range" by world priority 69 weight 51 in enemy at 2180 4070
+  take enemy_act
+  take phase_idle_paired
+  give phase_circle_paired
+  give timer_circle_paired
+  unless timer_idle_paired
+  give beat_end
+  need range_far
+
+verb idle_paired_step_4 "Paired Lizalfos walks in" by world priority 69 weight 49 in enemy at 2040 4140
+  take enemy_act
+  take phase_idle_paired
+  give phase_walk_paired
+  unless timer_idle_paired
+  give beat_end
+  need range_far
+
+verb walk_paired_step_1 "Paired Lizalfos reaches Link and raises its sword" by world priority 69 weight 190 in enemy at 2180 4140
+  take enemy_act
+  take phase_walk_paired
+  give phase_attack_paired
+  give beat_end
+  need range_near
+
+verb walk_paired_step_2 "Paired Lizalfos sidesteps instead" by world priority 69 weight 5 in enemy at 2040 4210
+  take enemy_act
+  take phase_walk_paired
+  give phase_circle_paired
+  give timer_circle_paired
+  give beat_end
+  need range_near
+
+verb walk_paired_step_3 "Paired Lizalfos stops short" by world priority 69 weight 5 in enemy at 2180 4210
+  take enemy_act
+  take phase_walk_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  give beat_end
+  need range_near
+
+verb walk_paired_step_4 "Paired Lizalfos closes in" by world priority 69 weight 9 in enemy at 2040 4280
+  take enemy_act
+  need phase_walk_paired
+  give beat_end
+  take range_far
+  give range_near
+
+verb walk_paired_step_5 "Paired Lizalfos pauses" by world priority 69 in enemy at 2180 4280
+  take enemy_act
+  take phase_walk_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  give beat_end
+  need range_far
+
+verb circle_paired_ticks "Paired Lizalfos circles Link: a beat passes" by world priority 71 in enemy at 2040 4350
+  take enemy_turn
+  need phase_circle_paired
+  take timer_circle_paired
+  give enemy_act
+
+verb circle_paired_step_1 "Paired Lizalfos turns in to slash" by world priority 69 in enemy at 2180 4350
+  take enemy_act
+  take phase_circle_paired
+  give phase_attack_paired
+  unless timer_circle_paired
+  give beat_end
+  need range_near
+
+verb circle_paired_step_2 "Paired Lizalfos walks in" by world priority 69 weight 3 in enemy at 2040 4420
+  take enemy_act
+  take phase_circle_paired
+  give phase_walk_paired
+  unless timer_circle_paired
+  give beat_end
+  need range_near
+
+verb circle_paired_step_3 "Paired Lizalfos leaps in" by world priority 69 in enemy at 2180 4420
+  take enemy_act
+  take phase_circle_paired
+  give phase_jump_forward_paired
+  unless timer_circle_paired
+  give beat_end
+  need range_far
+
+verb circle_paired_step_4 "Paired Lizalfos walks in" by world priority 69 in enemy at 2040 4490
+  take enemy_act
+  take phase_circle_paired
+  give phase_walk_paired
+  unless timer_circle_paired
+  give beat_end
+  need range_far
+
+verb attack_paired_step_1 "Paired Lizalfos slashes and steps back" by world priority 69 weight 30 in enemy at 2180 4490
+  take enemy_act
+  take phase_attack_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_paired_step_2 "Paired Lizalfos slashes and circles" by world priority 69 weight 21 in enemy at 2040 4560
+  take enemy_act
+  take phase_attack_paired
+  give phase_circle_paired
+  give timer_circle_paired
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_paired_step_3 "Paired Lizalfos slashes again" by world priority 69 weight 49 in enemy at 2180 4560
+  take enemy_act
+  need phase_attack_paired
+  give incoming_slash
+  give beat_end
+  need range_near
+
+verb attack_paired_step_4 "Paired Lizalfos slashes at air" by world priority 69 in enemy at 2040 4630
+  take enemy_act
+  take phase_attack_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  give beat_end
+  need range_far
+
+verb jump_forward_paired_step_1_near "Paired Lizalfos lands" by world priority 69 in enemy at 2180 4630
+  take enemy_act
+  take phase_jump_forward_paired
+  give phase_walk_paired
+  give beat_end
+  need range_near
+
+verb jump_forward_paired_step_1_far "Paired Lizalfos lands" by world priority 69 in enemy at 2040 4700
+  take enemy_act
+  take phase_jump_forward_paired
+  give phase_walk_paired
+  give beat_end
+  take range_far
+  give range_near
+
+verb jump_attack_paired_step_1_near "Paired Lizalfos lands its jump attack" by world priority 69 in enemy at 2180 4700
+  take enemy_act
+  take phase_jump_attack_paired
+  give phase_attack_paired
+  give beat_end
+  need range_near
+
+verb jump_attack_paired_step_1_far "Paired Lizalfos lands its jump attack" by world priority 69 in enemy at 2040 4770
+  take enemy_act
+  take phase_jump_attack_paired
+  give phase_attack_paired
+  give beat_end
+  take range_far
+  give range_near
+
+verb damaged_paired_step_1 "Paired Lizalfos recovers with a jump attack" by world priority 69 in enemy at 2180 4770
+  take enemy_act
+  take phase_damaged_paired
+  give phase_jump_attack_paired
+  give beat_end
+  need range_near
+
+verb damaged_paired_step_2 "Paired Lizalfos recovers" by world priority 69 in enemy at 2040 4840
+  take enemy_act
+  take phase_damaged_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  give beat_end
+  need range_far
+
+verb stunned_paired_ticks "Paired Lizalfos is stunned: a beat passes" by world priority 71 in enemy at 2180 4840
+  take enemy_turn
+  need phase_stunned_paired
+  take timer_stunned_paired
+  give enemy_act
+
+verb stunned_paired_step_1 "Paired Lizalfos shakes off the stun and slashes" by world priority 69 weight 7 in enemy at 2040 4910
+  take enemy_act
+  take phase_stunned_paired
+  give phase_attack_paired
+  unless timer_stunned_paired
+  give beat_end
+  need range_near
+
+verb stunned_paired_step_2 "Paired Lizalfos shakes off the stun" by world priority 69 in enemy at 2180 4910
+  take enemy_act
+  take phase_stunned_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  unless timer_stunned_paired
+  give beat_end
+  need range_near
+
+verb stunned_paired_step_3 "Paired Lizalfos shakes off the stun" by world priority 69 in enemy at 2040 4980
+  take enemy_act
+  take phase_stunned_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  unless timer_stunned_paired
+  give beat_end
+  need range_far
+
+verb stunned_paired_holds "Paired Lizalfos is stunned: nothing changes" by world priority 68 in enemy at 2180 4980
+  take enemy_act
+  need phase_stunned_paired
+  give beat_end
+
+verb away_paired_ticks "Paired Lizalfos retreats while its partner fights: a beat passes" by world priority 71 in enemy at 2040 5050
+  take enemy_turn
+  need phase_away_paired
+  take timer_away_paired
+  give enemy_act
+
+verb away_paired_step_1_near "Paired Lizalfos jumps back in when its partner retreats" by world priority 69 in enemy at 2180 5050
+  take enemy_act
+  take phase_away_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  unless timer_away_paired
+  give beat_end
+  take range_near
+  give range_far
+
+verb away_paired_step_1_far "Paired Lizalfos jumps back in when its partner retreats" by world priority 69 in enemy at 2040 5120
+  take enemy_act
+  take phase_away_paired
+  give phase_idle_paired
+  give timer_idle_paired
+  unless timer_away_paired
+  give beat_end
+  need range_far
+
+verb away_paired_holds "Paired Lizalfos retreats while its partner fights: nothing changes" by world priority 68 in enemy at 2180 5120
+  take enemy_act
+  need phase_away_paired
+  give beat_end
+
+verb slash_blocked_deku_shield "Sword slash: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+  take incoming_slash
+  need guard_with_deku_shield
+
+verb slash_blocked_hylian_shield "Sword slash: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_slash
+  need guard_with_hylian_shield
+
+verb slash_blocked_mirror_shield "Sword slash: blocked by the mirror shield" by world priority 60 in attacks at 3460 150
+  take incoming_slash
+  need guard_with_mirror_shield
+
+verb slash_dodged "Sword slash: dodged" by world priority 60 in attacks at 3320 220
+  take incoming_slash
+  need link_dodge
+  unless link_guard
+
+verb slash_nayru "Sword slash: Nayru's Love holds" by world priority 60 in attacks at 3460 220
+  take incoming_slash
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb slash_lands "Sword slash hits Link" by world priority 60 in attacks at 3320 290
+  take incoming_slash
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  unless has_double_defense
+  give 2 link_dmg
+
+verb slash_lands_dd "Sword slash hits Link" by world priority 60 in attacks at 3460 290
+  take incoming_slash
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  need has_double_defense
+  give link_dmg
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lowers_mirror_shield "Link lowers the mirror shield" by world priority 50 in beat at 580 290
+  need beat_end
+  take guard_with_mirror_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 440 360
+  need beat_end
+  take link_dodge
+
+verb nayru_ticks "Link: nayru wears on" by world priority 48 in beat at 440 430
+  take beat_end
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 48 in beat at 580 430
+  take beat_end
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 47 in beat at 580 500
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 47 in beat at 440 570
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 47 in beat at 580 570
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 47 in beat at 440 640
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 640
+  take lens_count
+  unless lens_on

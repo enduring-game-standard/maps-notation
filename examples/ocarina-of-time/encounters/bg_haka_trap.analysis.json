@@ -1,0 +1,335 @@
+{
+ "positions": 21918,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "fall_slow_timer_clears",
+  "lift_slow_timer_clears",
+  "fall_fast_timer_clears",
+  "lift_fast_timer_clears",
+  "wall_burn_timer_clears",
+  "link_hurt_overkill"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "guillotine",
+   "positions": 371,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 120,
+    "Link falls": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 206
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "guillotine_fast",
+   "positions": 251,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 80,
+    "Link falls": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 155
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "spiked_wall",
+   "positions": 126,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 40,
+    "Link falls": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 80
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "guillotine",
+   "positions": 75,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 24,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 66
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "guillotine_fast",
+   "positions": 51,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 16,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 52
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "spiked_wall",
+   "positions": 26,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 22
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "guillotine",
+   "positions": 581,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 192,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 349
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "guillotine_fast",
+   "positions": 389,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 128,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 230
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "spiked_wall",
+   "positions": 195,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 64,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 134
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "guillotine",
+   "positions": 519,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 168,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 238
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "guillotine_fast",
+   "positions": 351,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 112,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 177
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "spiked_wall",
+   "positions": 209,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 16,
+    "Link wins": 25
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 109
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "guillotine",
+   "positions": 436,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 144,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 229
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "guillotine_fast",
+   "positions": 292,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 96,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 176
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "spiked_wall",
+   "positions": 145,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 48,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 93
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "guillotine",
+   "positions": 1632,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 528,
+    "Link falls": 47
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 690
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "guillotine_fast",
+   "positions": 1104,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 352,
+    "Link falls": 47
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 514
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "spiked_wall",
+   "positions": 554,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 47
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 261
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "guillotine",
+   "positions": 5211,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1728,
+    "Link falls": 26
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1709
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "guillotine_fast",
+   "positions": 3483,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1152,
+    "Link falls": 26
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1207
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "spiked_wall",
+   "positions": 1742,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 26
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 629
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "guillotine",
+   "positions": 2073,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 672,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 939
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "guillotine_fast",
+   "positions": 1401,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 448,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 670
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "spiked_wall",
+   "positions": 701,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 350
+  }
+ ]
+}

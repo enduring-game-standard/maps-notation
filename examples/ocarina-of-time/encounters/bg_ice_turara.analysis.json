@@ -1,0 +1,324 @@
+{
+ "positions": 32208,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "shiver_once_timer_clears",
+  "shiver_regrow_timer_clears",
+  "regrow_timer_clears",
+  "link_hurt_overkill"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "adult_arrows",
+   "variant": "stalactite",
+   "positions": 61,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 20
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 49
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "stalactite_regrow",
+   "positions": 1011,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 320,
+    "Link falls": 10
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 550
+  },
+  {
+   "kit": "adult_arrows",
+   "variant": "stalagmite",
+   "positions": 21,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 5,
+    "Link wins": 5
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 15
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "stalactite",
+   "positions": 13,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 14
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "stalactite_regrow",
+   "positions": 203,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 64,
+    "Link falls": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 127
+  },
+  {
+   "kit": "adult_blade",
+   "variant": "stalagmite",
+   "positions": 6,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1,
+    "Link wins": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "stalactite",
+   "positions": 25,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 22
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "stalactite_regrow",
+   "positions": 1605,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 512,
+    "Link falls": 4
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 860
+  },
+  {
+   "kit": "adult_bottles",
+   "variant": "stalagmite",
+   "positions": 9,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 2,
+    "Link wins": 2
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 8
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "stalactite",
+   "positions": 85,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 48
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "stalactite_regrow",
+   "positions": 1415,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 448,
+    "Link falls": 14
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 621
+  },
+  {
+   "kit": "adult_dins",
+   "variant": "stalagmite",
+   "positions": 29,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 7,
+    "Link wins": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 12
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "stalactite",
+   "positions": 37,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 12
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 28
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "stalactite_regrow",
+   "positions": 1204,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 384,
+    "Link falls": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 587
+  },
+  {
+   "kit": "adult_giant",
+   "variant": "stalagmite",
+   "positions": 13,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 3,
+    "Link wins": 3
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 10
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "stalactite",
+   "positions": 265,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 88
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 130
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "stalactite_regrow",
+   "positions": 4448,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1408,
+    "Link falls": 47
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1797
+  },
+  {
+   "kit": "adult_lens",
+   "variant": "stalagmite",
+   "positions": 92,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 22,
+    "Link wins": 25
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 33
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "stalactite",
+   "positions": 859,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 286
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 305
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "stalactite_regrow",
+   "positions": 14411,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 4600,
+    "Link falls": 26
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 4583
+  },
+  {
+   "kit": "adult_nayru",
+   "variant": "stalagmite",
+   "positions": 289,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 72,
+    "Link wins": 72
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 82
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "stalactite",
+   "positions": 337,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 177
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "stalactite_regrow",
+   "positions": 5657,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1792,
+    "Link falls": 56
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 2462
+  },
+  {
+   "kit": "adult_spin",
+   "variant": "stalagmite",
+   "positions": 113,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 28,
+    "Link wins": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 53
+  }
+ ]
+}

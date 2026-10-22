@@ -1,0 +1,3884 @@
+maps 2
+title "Ocarina of Time combat: Link vs Barinade"
+
+seat link "Link" color "#3a7d44"
+group setup "setup"
+group beat "beat"
+group range "range"
+group link_state "link state"
+group outcomes "outcomes"
+group gear "gear"
+group enemy "enemy"
+group enemy_health "enemy health"
+group link_moves "link moves"
+group hits "hits"
+group attacks "attacks"
+
+state choose_age "Link sets out" marks 1 in setup at 120 80
+state age_child "Link is a child" in setup at 260 80
+state link_turn "Link's move" in beat at 440 80
+state enemy_turn "Barinade answers" in beat at 580 80
+state enemy_act "Barinade acts" in beat at 440 150
+state beat_end "End of the beat" in beat at 580 150
+state range_near "Near" in range at 760 80
+state range_far "Far" in range at 900 80
+state link_hp "Link's health (1 mark = 2/16 heart)" in link_state at 1080 80
+state link_missing "Link's lost health" in link_state at 1220 80
+state link_dmg "Damage to Link" in link_state at 1080 150
+state link_heal "Healing for Link" in link_state at 1220 150
+state magic "Magic (1 mark = 1 units)" in link_state at 1080 220
+state magic_spent "Magic spent" in link_state at 1220 220
+state magic_refill "Magic coming back" in link_state at 1080 290
+state in_fight "The fight is on" in setup at 120 150
+state link_wins "Barinade defeated" ends "Link wins" in outcomes at 1400 80
+state link_falls "Link falls" ends "Link falls" in outcomes at 1540 80
+state link_withdraws "Link withdraws" ends "Link withdraws" in outcomes at 1400 150
+state has_deku_nuts "Has deku nuts" in gear at 1720 80
+state has_kokiri_sword "Has kokiri sword" in gear at 1860 80
+state has_deku_shield "Has deku shield" in gear at 1720 150
+state has_deku_sticks "Has deku sticks" in gear at 1860 150
+state has_slingshot "Has slingshot" in gear at 1720 220
+state has_boomerang "Has boomerang" in gear at 1860 220
+state has_bombs "Has bombs" in gear at 1720 290
+state has_magic "Has magic" in gear at 1860 290
+state has_green_potion "Has green potion" in gear at 1720 360
+state has_dins_fire "Has dins fire" in gear at 1860 360
+state has_hylian_shield "Has hylian shield" in gear at 1720 430
+state has_nayrus_love "Has nayrus love" in gear at 1860 430
+state has_lens_of_truth "Has lens of truth" in gear at 1720 500
+state has_fairy "Has fairy" in gear at 1860 500
+state has_red_potion "Has red potion" in gear at 1720 570
+state phase_p1_3 "Barinade hangs from the ceiling by 3 umbilical cords" in enemy at 2040 80
+state phase_p1_2 "Barinade hangs from the ceiling by 2 umbilical cords" in enemy at 2180 80
+state phase_p1_1 "Barinade hangs from the ceiling by 1 umbilical cord" in enemy at 2040 150
+state phase_p2_move_5 "Barinade sways, 5 Bari circling and sparking" in enemy at 2180 150
+state timer_p2_move_5 "Barinade sways, 5 Bari circling and sparking: beats left" in enemy at 2040 220
+state phase_p2_pause_5 "Barinade pauses, 5 Bari hanging still" in enemy at 2040 290
+state timer_p2_pause_5 "Barinade pauses, 5 Bari hanging still: beats left" in enemy at 2180 290
+state phase_p2_stun_5 "Barinade is stunned, 5 Bari left" in enemy at 2180 360
+state timer_p2_stun_5 "Barinade is stunned, 5 Bari left: beats left" in enemy at 2040 430
+state phase_p2_move_4 "Barinade sways, 4 Bari circling and sparking" in enemy at 2040 500
+state timer_p2_move_4 "Barinade sways, 4 Bari circling and sparking: beats left" in enemy at 2180 500
+state phase_p2_pause_4 "Barinade pauses, 4 Bari hanging still" in enemy at 2180 570
+state timer_p2_pause_4 "Barinade pauses, 4 Bari hanging still: beats left" in enemy at 2040 640
+state phase_p2_stun_4 "Barinade is stunned, 4 Bari left" in enemy at 2040 710
+state timer_p2_stun_4 "Barinade is stunned, 4 Bari left: beats left" in enemy at 2180 710
+state phase_p2_move_3 "Barinade sways, 3 Bari circling and sparking" in enemy at 2180 780
+state timer_p2_move_3 "Barinade sways, 3 Bari circling and sparking: beats left" in enemy at 2040 850
+state phase_p2_pause_3 "Barinade pauses, 3 Bari hanging still" in enemy at 2040 920
+state timer_p2_pause_3 "Barinade pauses, 3 Bari hanging still: beats left" in enemy at 2180 920
+state phase_p2_stun_3 "Barinade is stunned, 3 Bari left" in enemy at 2180 990
+state timer_p2_stun_3 "Barinade is stunned, 3 Bari left: beats left" in enemy at 2040 1060
+state phase_p2_move_2 "Barinade sways, 2 Bari circling and sparking" in enemy at 2040 1130
+state timer_p2_move_2 "Barinade sways, 2 Bari circling and sparking: beats left" in enemy at 2180 1130
+state phase_p2_pause_2 "Barinade pauses, 2 Bari hanging still" in enemy at 2180 1200
+state timer_p2_pause_2 "Barinade pauses, 2 Bari hanging still: beats left" in enemy at 2040 1270
+state phase_p2_stun_2 "Barinade is stunned, 2 Bari left" in enemy at 2040 1340
+state timer_p2_stun_2 "Barinade is stunned, 2 Bari left: beats left" in enemy at 2180 1340
+state phase_p2_move_1 "Barinade sways, 1 Bari circling and sparking" in enemy at 2180 1410
+state timer_p2_move_1 "Barinade sways, 1 Bari circling and sparking: beats left" in enemy at 2040 1480
+state phase_p2_pause_1 "Barinade pauses, 1 Bari hanging still" in enemy at 2040 1550
+state timer_p2_pause_1 "Barinade pauses, 1 Bari hanging still: beats left" in enemy at 2180 1550
+state phase_p2_stun_1 "Barinade is stunned, 1 Bari left" in enemy at 2180 1620
+state timer_p2_stun_1 "Barinade is stunned, 1 Bari left: beats left" in enemy at 2040 1690
+state phase_p3_act_move_5 "Barinade roams the floor, 5 Bari spinning around it" in enemy at 2040 1760
+state timer_p3_act_move_5 "Barinade roams the floor, 5 Bari spinning around it: beats left" in enemy at 2180 1760
+state phase_p3_act_halt_5 "Barinade halts, 5 Bari holding it still" in enemy at 2180 1830
+state timer_p3_act_halt_5 "Barinade halts, 5 Bari holding it still: beats left" in enemy at 2040 1900
+state phase_p3_stun_5 "Barinade is stunned, 5 Bari stunned with it" in enemy at 2040 1970
+state timer_p3_stun_5 "Barinade is stunned, 5 Bari stunned with it: beats left" in enemy at 2180 1970
+state phase_p3_act_move_4 "Barinade roams the floor, 4 Bari spinning around it" in enemy at 2180 2040
+state timer_p3_act_move_4 "Barinade roams the floor, 4 Bari spinning around it: beats left" in enemy at 2040 2110
+state phase_p3_act_halt_4 "Barinade halts, 4 Bari holding it still" in enemy at 2040 2180
+state timer_p3_act_halt_4 "Barinade halts, 4 Bari holding it still: beats left" in enemy at 2180 2180
+state phase_p3_stun_4 "Barinade is stunned, 4 Bari stunned with it" in enemy at 2180 2250
+state timer_p3_stun_4 "Barinade is stunned, 4 Bari stunned with it: beats left" in enemy at 2040 2320
+state phase_p3_act_move_3 "Barinade roams the floor, 3 Bari spinning around it" in enemy at 2040 2390
+state timer_p3_act_move_3 "Barinade roams the floor, 3 Bari spinning around it: beats left" in enemy at 2180 2390
+state phase_p3_act_halt_3 "Barinade halts, 3 Bari holding it still" in enemy at 2180 2460
+state timer_p3_act_halt_3 "Barinade halts, 3 Bari holding it still: beats left" in enemy at 2040 2530
+state phase_p3_stun_3 "Barinade is stunned, 3 Bari stunned with it" in enemy at 2040 2600
+state timer_p3_stun_3 "Barinade is stunned, 3 Bari stunned with it: beats left" in enemy at 2180 2600
+state phase_p3_act_move_2 "Barinade roams the floor, 2 Bari spinning around it" in enemy at 2180 2670
+state timer_p3_act_move_2 "Barinade roams the floor, 2 Bari spinning around it: beats left" in enemy at 2040 2740
+state phase_p3_act_halt_2 "Barinade halts, 2 Bari holding it still" in enemy at 2040 2810
+state timer_p3_act_halt_2 "Barinade halts, 2 Bari holding it still: beats left" in enemy at 2180 2810
+state phase_p3_stun_2 "Barinade is stunned, 2 Bari stunned with it" in enemy at 2180 2880
+state timer_p3_stun_2 "Barinade is stunned, 2 Bari stunned with it: beats left" in enemy at 2040 2950
+state phase_p3_act_move_1 "Barinade roams the floor, 1 Bari spinning around it" in enemy at 2040 3020
+state timer_p3_act_move_1 "Barinade roams the floor, 1 Bari spinning around it: beats left" in enemy at 2180 3020
+state phase_p3_act_halt_1 "Barinade halts, 1 Bari holding it still" in enemy at 2180 3090
+state timer_p3_act_halt_1 "Barinade halts, 1 Bari holding it still: beats left" in enemy at 2040 3160
+state phase_p3_stun_1 "Barinade is stunned, 1 Bari stunned with it" in enemy at 2040 3230
+state timer_p3_stun_1 "Barinade is stunned, 1 Bari stunned with it: beats left" in enemy at 2180 3230
+state phase_p4_roam_1 "Barinade spins after Link (round 1)" in enemy at 2180 3300
+state timer_p4_roam_1 "Barinade spins after Link (round 1): beats left" in enemy at 2040 3370
+state phase_p4_stun_1 "Barinade is stunned, its core open (round 1)" in enemy at 2040 3440
+state timer_p4_stun_1 "Barinade is stunned, its core open (round 1): beats left" in enemy at 2180 3440
+state phase_p4_restun_1 "Barinade is stunned, its core open (round 1, stunned again)" in enemy at 2180 3510
+state timer_p4_restun_1 "Barinade is stunned, its core open (round 1, stunned again): beats left" in enemy at 2040 3580
+state phase_p4_dive_1 "Barinade dives under the floor (round 1)" in enemy at 2040 3650
+state timer_p4_dive_1 "Barinade dives under the floor (round 1): beats left" in enemy at 2180 3650
+state phase_p4_sink_1 "Barinade sinks away after a beating (round 1)" in enemy at 2180 3720
+state timer_p4_sink_1 "Barinade sinks away after a beating (round 1): beats left" in enemy at 2040 3790
+state phase_p4_roam_2 "Barinade spins after Link (round 2)" in enemy at 2040 3860
+state timer_p4_roam_2 "Barinade spins after Link (round 2): beats left" in enemy at 2180 3860
+state phase_p4_stun_2 "Barinade is stunned, its core open (round 2)" in enemy at 2180 3930
+state timer_p4_stun_2 "Barinade is stunned, its core open (round 2): beats left" in enemy at 2040 4000
+state phase_p4_restun_2 "Barinade is stunned, its core open (round 2, stunned again)" in enemy at 2040 4070
+state timer_p4_restun_2 "Barinade is stunned, its core open (round 2, stunned again): beats left" in enemy at 2180 4070
+state phase_p4_dive_2 "Barinade dives under the floor (round 2)" in enemy at 2180 4140
+state timer_p4_dive_2 "Barinade dives under the floor (round 2): beats left" in enemy at 2040 4210
+state phase_p4_sink_2 "Barinade sinks away after a beating (round 2)" in enemy at 2040 4280
+state timer_p4_sink_2 "Barinade sinks away after a beating (round 2): beats left" in enemy at 2180 4280
+state phase_p4_roam_3 "Barinade spins after Link (round 3)" in enemy at 2180 4350
+state timer_p4_roam_3 "Barinade spins after Link (round 3): beats left" in enemy at 2040 4420
+state phase_p4_stun_3 "Barinade is stunned, its core open (round 3)" in enemy at 2040 4490
+state timer_p4_stun_3 "Barinade is stunned, its core open (round 3): beats left" in enemy at 2180 4490
+state phase_p4_restun_3 "Barinade is stunned, its core open (round 3, stunned again)" in enemy at 2180 4560
+state timer_p4_restun_3 "Barinade is stunned, its core open (round 3, stunned again): beats left" in enemy at 2040 4630
+state phase_p4_dive_3 "Barinade dives under the floor (round 3)" in enemy at 2040 4700
+state timer_p4_dive_3 "Barinade dives under the floor (round 3): beats left" in enemy at 2180 4700
+state hp_core "Barinade's core: health" marks 4 in enemy_health at 2360 80
+state hp_core_9 "Barinade's core: health up to 9" marks 3 in enemy_health at 2500 80
+state hp_core_6 "Barinade's core: health up to 6" marks 3 in enemy_health at 2360 150
+state hp_core_3 "Barinade's core: health up to 3" marks 3 in enemy_health at 2500 150
+state above_core_9 "Barinade's core: above 9" marks 1 in enemy_health at 2360 220
+state above_core_6 "Barinade's core: above 6" marks 1 in enemy_health at 2500 220
+state above_core_3 "Barinade's core: above 3" marks 1 in enemy_health at 2360 290
+state alive_core "Barinade's core: standing" marks 1 in enemy_health at 2500 290
+state dmg_core "Barinade's core: damage" in enemy_health at 2360 360
+state status_shock "Link: shock (beats left)" in link_state at 1220 290
+state status_nayru "Link: nayru (beats left)" in link_state at 1080 360
+state lens_on "Lens of Truth on" in link_state at 1220 360
+state link_guard "Link holds up his shield" in link_state at 1080 430
+state link_dodge "Link dodges" in link_state at 1220 430
+state swing_deku_nut "Deku Nut flash on its way" in hits at 3000 80
+state swing_deku_stick "Deku Stick on its way" in hits at 3140 640
+state swing_slingshot "Slingshot seed on its way" in hits at 3000 1480
+state swing_explosive "Explosion on its way" in hits at 3140 2040
+state swing_boomerang "Boomerang on its way" in hits at 3000 2670
+state swing_slash_kokiri "Kokiri Sword slash on its way" in hits at 3000 4210
+state swing_magic_fire "Din's Fire on its way" in hits at 3140 4980
+state swing_shield "Shield on its way" in hits at 3140 5610
+state swing_spin_kokiri "Kokiri spin attack on its way" in hits at 3140 5680
+state swing_jump_kokiri "Kokiri jump attack on its way" in hits at 3140 6520
+state swing_jump_kokiri_self "Kokiri jump attack on its way" in hits at 3000 7360
+state swing_jump_master "Master Sword jump attack on its way" in hits at 3000 8200
+state guard_with_deku_shield "Shield up: deku shield" in link_state at 1220 710
+state guard_with_hylian_shield "Shield up: hylian shield" in link_state at 1080 780
+state incoming_body_touch "Barinade's electrified body incoming" in attacks at 3320 80
+state incoming_bari_touch "Bari contact incoming" in attacks at 3460 290
+state incoming_lightning "Lightning beam incoming" in attacks at 3320 570
+state tick_shock "Beat ends: shock checked" in beat at 440 360
+state tick_nayru "Beat ends: nayru checked" in beat at 580 360
+state lens_count "The Lens: beats toward the next cost" in beat at 440 570
+
+verb p2_move_5_timer_clears "Barinade sways, 5 Bari circling and sparking is over" by world priority 100 in enemy at 2180 220
+  take timer_p2_move_5
+  unless phase_p2_move_5
+
+verb p2_pause_5_timer_clears "Barinade pauses, 5 Bari hanging still is over" by world priority 100 in enemy at 2040 360
+  take timer_p2_pause_5
+  unless phase_p2_pause_5
+
+verb p2_stun_5_timer_clears "Barinade is stunned, 5 Bari left is over" by world priority 100 in enemy at 2180 430
+  take timer_p2_stun_5
+  unless phase_p2_stun_5
+
+verb p2_move_4_timer_clears "Barinade sways, 4 Bari circling and sparking is over" by world priority 100 in enemy at 2040 570
+  take timer_p2_move_4
+  unless phase_p2_move_4
+
+verb p2_pause_4_timer_clears "Barinade pauses, 4 Bari hanging still is over" by world priority 100 in enemy at 2180 640
+  take timer_p2_pause_4
+  unless phase_p2_pause_4
+
+verb p2_stun_4_timer_clears "Barinade is stunned, 4 Bari left is over" by world priority 100 in enemy at 2040 780
+  take timer_p2_stun_4
+  unless phase_p2_stun_4
+
+verb p2_move_3_timer_clears "Barinade sways, 3 Bari circling and sparking is over" by world priority 100 in enemy at 2180 850
+  take timer_p2_move_3
+  unless phase_p2_move_3
+
+verb p2_pause_3_timer_clears "Barinade pauses, 3 Bari hanging still is over" by world priority 100 in enemy at 2040 990
+  take timer_p2_pause_3
+  unless phase_p2_pause_3
+
+verb p2_stun_3_timer_clears "Barinade is stunned, 3 Bari left is over" by world priority 100 in enemy at 2180 1060
+  take timer_p2_stun_3
+  unless phase_p2_stun_3
+
+verb p2_move_2_timer_clears "Barinade sways, 2 Bari circling and sparking is over" by world priority 100 in enemy at 2040 1200
+  take timer_p2_move_2
+  unless phase_p2_move_2
+
+verb p2_pause_2_timer_clears "Barinade pauses, 2 Bari hanging still is over" by world priority 100 in enemy at 2180 1270
+  take timer_p2_pause_2
+  unless phase_p2_pause_2
+
+verb p2_stun_2_timer_clears "Barinade is stunned, 2 Bari left is over" by world priority 100 in enemy at 2040 1410
+  take timer_p2_stun_2
+  unless phase_p2_stun_2
+
+verb p2_move_1_timer_clears "Barinade sways, 1 Bari circling and sparking is over" by world priority 100 in enemy at 2180 1480
+  take timer_p2_move_1
+  unless phase_p2_move_1
+
+verb p2_pause_1_timer_clears "Barinade pauses, 1 Bari hanging still is over" by world priority 100 in enemy at 2040 1620
+  take timer_p2_pause_1
+  unless phase_p2_pause_1
+
+verb p2_stun_1_timer_clears "Barinade is stunned, 1 Bari left is over" by world priority 100 in enemy at 2180 1690
+  take timer_p2_stun_1
+  unless phase_p2_stun_1
+
+verb p3_act_move_5_timer_clears "Barinade roams the floor, 5 Bari spinning around it is over" by world priority 100 in enemy at 2040 1830
+  take timer_p3_act_move_5
+  unless phase_p3_act_move_5
+
+verb p3_act_halt_5_timer_clears "Barinade halts, 5 Bari holding it still is over" by world priority 100 in enemy at 2180 1900
+  take timer_p3_act_halt_5
+  unless phase_p3_act_halt_5
+
+verb p3_stun_5_timer_clears "Barinade is stunned, 5 Bari stunned with it is over" by world priority 100 in enemy at 2040 2040
+  take timer_p3_stun_5
+  unless phase_p3_stun_5
+
+verb p3_act_move_4_timer_clears "Barinade roams the floor, 4 Bari spinning around it is over" by world priority 100 in enemy at 2180 2110
+  take timer_p3_act_move_4
+  unless phase_p3_act_move_4
+
+verb p3_act_halt_4_timer_clears "Barinade halts, 4 Bari holding it still is over" by world priority 100 in enemy at 2040 2250
+  take timer_p3_act_halt_4
+  unless phase_p3_act_halt_4
+
+verb p3_stun_4_timer_clears "Barinade is stunned, 4 Bari stunned with it is over" by world priority 100 in enemy at 2180 2320
+  take timer_p3_stun_4
+  unless phase_p3_stun_4
+
+verb p3_act_move_3_timer_clears "Barinade roams the floor, 3 Bari spinning around it is over" by world priority 100 in enemy at 2040 2460
+  take timer_p3_act_move_3
+  unless phase_p3_act_move_3
+
+verb p3_act_halt_3_timer_clears "Barinade halts, 3 Bari holding it still is over" by world priority 100 in enemy at 2180 2530
+  take timer_p3_act_halt_3
+  unless phase_p3_act_halt_3
+
+verb p3_stun_3_timer_clears "Barinade is stunned, 3 Bari stunned with it is over" by world priority 100 in enemy at 2040 2670
+  take timer_p3_stun_3
+  unless phase_p3_stun_3
+
+verb p3_act_move_2_timer_clears "Barinade roams the floor, 2 Bari spinning around it is over" by world priority 100 in enemy at 2180 2740
+  take timer_p3_act_move_2
+  unless phase_p3_act_move_2
+
+verb p3_act_halt_2_timer_clears "Barinade halts, 2 Bari holding it still is over" by world priority 100 in enemy at 2040 2880
+  take timer_p3_act_halt_2
+  unless phase_p3_act_halt_2
+
+verb p3_stun_2_timer_clears "Barinade is stunned, 2 Bari stunned with it is over" by world priority 100 in enemy at 2180 2950
+  take timer_p3_stun_2
+  unless phase_p3_stun_2
+
+verb p3_act_move_1_timer_clears "Barinade roams the floor, 1 Bari spinning around it is over" by world priority 100 in enemy at 2040 3090
+  take timer_p3_act_move_1
+  unless phase_p3_act_move_1
+
+verb p3_act_halt_1_timer_clears "Barinade halts, 1 Bari holding it still is over" by world priority 100 in enemy at 2180 3160
+  take timer_p3_act_halt_1
+  unless phase_p3_act_halt_1
+
+verb p3_stun_1_timer_clears "Barinade is stunned, 1 Bari stunned with it is over" by world priority 100 in enemy at 2040 3300
+  take timer_p3_stun_1
+  unless phase_p3_stun_1
+
+verb p4_roam_1_timer_clears "Barinade spins after Link (round 1) is over" by world priority 100 in enemy at 2180 3370
+  take timer_p4_roam_1
+  unless phase_p4_roam_1
+
+verb p4_stun_1_timer_clears "Barinade is stunned, its core open (round 1) is over" by world priority 100 in enemy at 2040 3510
+  take timer_p4_stun_1
+  unless phase_p4_stun_1
+
+verb p4_restun_1_timer_clears "Barinade is stunned, its core open (round 1, stunned again) is over" by world priority 100 in enemy at 2180 3580
+  take timer_p4_restun_1
+  unless phase_p4_restun_1
+
+verb p4_dive_1_timer_clears "Barinade dives under the floor (round 1) is over" by world priority 100 in enemy at 2040 3720
+  take timer_p4_dive_1
+  unless phase_p4_dive_1
+
+verb p4_sink_1_timer_clears "Barinade sinks away after a beating (round 1) is over" by world priority 100 in enemy at 2180 3790
+  take timer_p4_sink_1
+  unless phase_p4_sink_1
+
+verb p4_roam_2_timer_clears "Barinade spins after Link (round 2) is over" by world priority 100 in enemy at 2040 3930
+  take timer_p4_roam_2
+  unless phase_p4_roam_2
+
+verb p4_stun_2_timer_clears "Barinade is stunned, its core open (round 2) is over" by world priority 100 in enemy at 2180 4000
+  take timer_p4_stun_2
+  unless phase_p4_stun_2
+
+verb p4_restun_2_timer_clears "Barinade is stunned, its core open (round 2, stunned again) is over" by world priority 100 in enemy at 2040 4140
+  take timer_p4_restun_2
+  unless phase_p4_restun_2
+
+verb p4_dive_2_timer_clears "Barinade dives under the floor (round 2) is over" by world priority 100 in enemy at 2180 4210
+  take timer_p4_dive_2
+  unless phase_p4_dive_2
+
+verb p4_sink_2_timer_clears "Barinade sinks away after a beating (round 2) is over" by world priority 100 in enemy at 2040 4350
+  take timer_p4_sink_2
+  unless phase_p4_sink_2
+
+verb p4_roam_3_timer_clears "Barinade spins after Link (round 3) is over" by world priority 100 in enemy at 2180 4420
+  take timer_p4_roam_3
+  unless phase_p4_roam_3
+
+verb p4_stun_3_timer_clears "Barinade is stunned, its core open (round 3) is over" by world priority 100 in enemy at 2040 4560
+  take timer_p4_stun_3
+  unless phase_p4_stun_3
+
+verb p4_restun_3_timer_clears "Barinade is stunned, its core open (round 3, stunned again) is over" by world priority 100 in enemy at 2180 4630
+  take timer_p4_restun_3
+  unless phase_p4_restun_3
+
+verb p4_dive_3_timer_clears "Barinade dives under the floor (round 3) is over" by world priority 100 in enemy at 2040 4770
+  take timer_p4_dive_3
+  unless phase_p4_dive_3
+
+verb fight_child_blade "Fight as child Link: child blade (2 hearts)" by link in setup at 260 150
+  take choose_age
+  give age_child
+  give 16 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_deku_sticks
+  give has_slingshot
+  give has_boomerang
+  give has_bombs
+  give phase_p1_3
+  give range_far
+  give link_turn
+
+verb fight_child_spin "Fight as child Link: child spin (2 hearts)" by link in setup at 120 220
+  take choose_age
+  give age_child
+  give 16 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_green_potion
+  give 4 magic
+  give 44 magic_spent
+  give phase_p1_3
+  give range_far
+  give link_turn
+
+verb fight_child_dins "Fight as child Link: child dins (2 hearts)" by link in setup at 260 220
+  take choose_age
+  give age_child
+  give 16 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_dins_fire
+  give 12 magic
+  give 36 magic_spent
+  give phase_p1_3
+  give range_far
+  give link_turn
+
+verb fight_child_nayru "Fight as child Link: child nayru (2 hearts)" by link in setup at 120 290
+  take choose_age
+  give age_child
+  give 16 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_hylian_shield
+  give has_magic
+  give has_nayrus_love
+  give 24 magic
+  give 24 magic_spent
+  give phase_p1_3
+  give range_far
+  give link_turn
+
+verb fight_child_lens "Fight as child Link: child lens (2 hearts)" by link in setup at 260 290
+  take choose_age
+  give age_child
+  give 16 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_magic
+  give has_lens_of_truth
+  give 4 magic
+  give 44 magic_spent
+  give phase_p1_3
+  give range_far
+  give link_turn
+
+verb fight_child_bottles "Fight as child Link: child bottles (2 hearts)" by link in setup at 120 360
+  take choose_age
+  give age_child
+  give 16 link_hp
+  give in_fight
+  give 2 has_deku_nuts
+  give has_kokiri_sword
+  give has_deku_shield
+  give has_fairy
+  give has_red_potion
+  give phase_p1_3
+  give range_far
+  give link_turn
+
+verb link_heals "Link heals" by world priority 99 in link_state at 1080 500
+  take link_heal
+  take link_missing
+  give link_hp
+
+verb link_heal_overflows "Link is at full health" by world priority 99 in link_state at 1220 500
+  take link_heal
+  unless link_missing
+
+verb magic_refills "Magic refills" by world priority 98 in link_state at 1080 570
+  take magic_refill
+  take magic_spent
+  give magic
+
+verb magic_refill_overflows "Magic is full" by world priority 98 in link_state at 1220 570
+  take magic_refill
+  unless magic_spent
+
+verb link_hurt "Link loses health" by world priority 95 in link_state at 1080 640
+  take link_dmg
+  take link_hp
+  give link_missing
+
+verb link_hurt_overkill "Link has no health left to lose" by world priority 94 in link_state at 1220 640
+  take link_dmg
+  unless link_hp
+
+verb fairy_revives_link "A bottled fairy revives Link" by world priority 92 in link_state at 1080 710
+  need in_fight
+  unless link_hp
+  take has_fairy
+  give 16 link_heal
+
+verb link_fell "Link falls" by world priority 91 in outcomes at 1540 150
+  need in_fight
+  unless link_hp
+  unless has_fairy
+  give link_falls
+
+verb core_hurt "Barinade's core loses health" by world priority 97 in enemy_health at 2500 360
+  take dmg_core
+  take hp_core
+
+verb core_hurt_9 "Barinade's core loses health (9 or less)" by world priority 97 in enemy_health at 2360 430
+  take dmg_core
+  take hp_core_9
+  unless hp_core
+
+verb core_hurt_6 "Barinade's core loses health (6 or less)" by world priority 97 in enemy_health at 2500 430
+  take dmg_core
+  take hp_core_6
+  unless hp_core
+  unless hp_core_9
+
+verb core_hurt_3 "Barinade's core loses health (3 or less)" by world priority 97 in enemy_health at 2360 500
+  take dmg_core
+  take hp_core_3
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+
+verb core_overkill "Barinade's core has no health left to lose" by world priority 96 in enemy_health at 2500 500
+  take dmg_core
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  unless hp_core_3
+
+verb link_deku_nut "Deku Nut thrown; on impact it spawns En_M_Fire1, a 200-radius flash cylinder carrying DMG_DEKU_NUT" by link in link_moves at 2680 80
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_nuts
+  give swing_deku_nut
+  give enemy_turn
+
+verb link_deku_stick "Deku Stick swing (every swing direction is forced to a forward slash)" by link in link_moves at 2820 80
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_deku_stick
+  give enemy_turn
+
+verb link_slingshot "Slingshot seed (child only: the projectile type is ARROW_SEED when not adult)" by link in link_moves at 2680 150
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_slingshot
+  give swing_slingshot
+  give enemy_turn
+
+verb link_explosive_1 "Bomb explosion (8 + rot.z high byte; the player spawns it with rot.z 0); AT_TYPE_ALL, so it also hurts Link" by link in link_moves at 2820 150
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_bombs
+  give swing_explosive
+  give enemy_turn
+
+verb link_boomerang "Boomerang" by link in link_moves at 2680 220
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_boomerang
+  give swing_boomerang
+  give enemy_turn
+
+verb link_slash_kokiri "Kokiri Sword slash (horizontal, vertical, thrust, combo finishers, and crouch stab fold in here; crouch stab sets no flags of its own and keeps the quads' last dmgFlags, src/overlays/actors/ovl_player_actor/z_player.c:8966)" by link in link_moves at 2820 220
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_slash_kokiri
+  give enemy_turn
+
+verb link_magic_fire "Din's Fire; collider damage starts at 1 and is rewritten each frame to actionTimer + 25 while expanding, then actionTimer" by link in link_moves at 2680 290
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_dins_fire
+  need has_magic
+  take 12 magic
+  give 12 magic_spent
+  give swing_magic_fire
+  give enemy_turn
+
+verb link_shield_1 "Deku Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2820 290
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_shield_2 "Hylian Shield raised: the shield quad is set as AT with DMG_SHIELD while shielding" by link in link_moves at 2680 360
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_hylian_shield
+  need range_near
+  give swing_shield
+  give enemy_turn
+
+verb link_spin_kokiri_1 "Kokiri Sword quick spin (stick rotation + B); En_M_Thunder carries the spin flags only when the magic meter is acquired and idle, at no cost; without it the swing hits with slash flags" by link in link_moves at 2820 360
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_spin_kokiri_2 "Kokiri Sword charged spin released below 85% charge (params 0x200 >> 8 = 2 magic, requested at 10% charge)" by link in link_moves at 2680 430
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_spin_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_1 "Kokiri Sword jump slash (Z-target + A)" by link in link_moves at 2820 430
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need range_near
+  give swing_jump_kokiri
+  give enemy_turn
+
+verb link_jump_kokiri_2 "Kokiri Sword great spin: charged spin released at or above 85% charge, En_M_Thunder switches to jump flags (2 magic)" by link in link_moves at 2680 500
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_kokiri_sword
+  need has_magic
+  take 2 magic
+  give 2 magic_spent
+  give swing_jump_kokiri_self
+  give enemy_turn
+
+verb link_jump_master_3 "Deku Stick jump slash: the stick row of the melee table emits DMG_JUMP_MASTER, so a child gets Master Sword jump damage" by link in link_moves at 2820 500
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_sticks
+  need range_near
+  give swing_jump_master
+  give enemy_turn
+
+verb miss_deku_nut "Deku Nut flash has no effect" by world priority 79 in hits at 3140 80
+  take swing_deku_nut
+
+verb hit_deku_nut__p2_pause_5 "Deku Nut flash hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3000 150
+  take swing_deku_nut
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_deku_nut__p2_stun_5 "Deku Nut flash hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3140 150
+  take swing_deku_nut
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_deku_nut__p2_pause_4 "Deku Nut flash hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3000 220
+  take swing_deku_nut
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_deku_nut__p2_stun_4 "Deku Nut flash hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3140 220
+  take swing_deku_nut
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_deku_nut__p2_pause_3 "Deku Nut flash hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3000 290
+  take swing_deku_nut
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_deku_nut__p2_stun_3 "Deku Nut flash hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3140 290
+  take swing_deku_nut
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_deku_nut__p2_pause_2 "Deku Nut flash hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3000 360
+  take swing_deku_nut
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_deku_nut__p2_stun_2 "Deku Nut flash hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3140 360
+  take swing_deku_nut
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_deku_nut__p2_pause_1 "Deku Nut flash hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3000 430
+  take swing_deku_nut
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_deku_nut__p2_stun_1 "Deku Nut flash hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3140 430
+  take swing_deku_nut
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_deku_nut__p3_stun_5 "Deku Nut flash hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3000 500
+  take swing_deku_nut
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_deku_nut__p3_stun_4 "Deku Nut flash hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3140 500
+  take swing_deku_nut
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_deku_nut__p3_stun_3 "Deku Nut flash hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3000 570
+  take swing_deku_nut
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_deku_nut__p3_stun_2 "Deku Nut flash hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3140 570
+  take swing_deku_nut
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_deku_nut__p3_stun_1 "Deku Nut flash hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3000 640
+  take swing_deku_nut
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb miss_deku_stick "Deku Stick has no effect" by world priority 79 in hits at 3000 710
+  take swing_deku_stick
+
+verb hit_deku_stick__p2_pause_5 "Deku Stick hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3140 710
+  take swing_deku_stick
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_deku_stick__p2_stun_5 "Deku Stick hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3000 780
+  take swing_deku_stick
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_deku_stick__p2_pause_4 "Deku Stick hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3140 780
+  take swing_deku_stick
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_deku_stick__p2_stun_4 "Deku Stick hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3000 850
+  take swing_deku_stick
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_deku_stick__p2_pause_3 "Deku Stick hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3140 850
+  take swing_deku_stick
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_deku_stick__p2_stun_3 "Deku Stick hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3000 920
+  take swing_deku_stick
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_deku_stick__p2_pause_2 "Deku Stick hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3140 920
+  take swing_deku_stick
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_deku_stick__p2_stun_2 "Deku Stick hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3000 990
+  take swing_deku_stick
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_deku_stick__p2_pause_1 "Deku Stick hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3140 990
+  take swing_deku_stick
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_deku_stick__p2_stun_1 "Deku Stick hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3000 1060
+  take swing_deku_stick
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_deku_stick__p3_stun_5 "Deku Stick hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3140 1060
+  take swing_deku_stick
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_deku_stick__p3_stun_4 "Deku Stick hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3000 1130
+  take swing_deku_stick
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_deku_stick__p3_stun_3 "Deku Stick hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3140 1130
+  take swing_deku_stick
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_deku_stick__p3_stun_2 "Deku Stick hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3000 1200
+  take swing_deku_stick
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_deku_stick__p3_stun_1 "Deku Stick hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3140 1200
+  take swing_deku_stick
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb hit_deku_stick__p4_stun_1 "Deku Stick hits (Barinade is stunned, its core open (round 1))" by world priority 80 in hits at 3000 1270
+  take swing_deku_stick
+  need phase_p4_stun_1
+  give 2 dmg_core
+
+verb hit_deku_stick__p4_restun_1 "Deku Stick hits (Barinade is stunned, its core open (round 1, stunned again))" by world priority 80 in hits at 3140 1270
+  take swing_deku_stick
+  need phase_p4_restun_1
+  give 2 dmg_core
+
+verb hit_deku_stick__p4_stun_2 "Deku Stick hits (Barinade is stunned, its core open (round 2))" by world priority 80 in hits at 3000 1340
+  take swing_deku_stick
+  need phase_p4_stun_2
+  give 2 dmg_core
+
+verb hit_deku_stick__p4_restun_2 "Deku Stick hits (Barinade is stunned, its core open (round 2, stunned again))" by world priority 80 in hits at 3140 1340
+  take swing_deku_stick
+  need phase_p4_restun_2
+  give 2 dmg_core
+
+verb hit_deku_stick__p4_stun_3 "Deku Stick hits (Barinade is stunned, its core open (round 3))" by world priority 80 in hits at 3000 1410
+  take swing_deku_stick
+  need phase_p4_stun_3
+  give 2 dmg_core
+
+verb hit_deku_stick__p4_restun_3 "Deku Stick hits (Barinade is stunned, its core open (round 3, stunned again))" by world priority 80 in hits at 3140 1410
+  take swing_deku_stick
+  need phase_p4_restun_3
+  give 2 dmg_core
+
+verb miss_slingshot "Slingshot seed has no effect" by world priority 79 in hits at 3140 1480
+  take swing_slingshot
+
+verb hit_slingshot__p2_pause_5 "Slingshot seed hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3000 1550
+  take swing_slingshot
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_slingshot__p2_stun_5 "Slingshot seed hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3140 1550
+  take swing_slingshot
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_slingshot__p2_pause_4 "Slingshot seed hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3000 1620
+  take swing_slingshot
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_slingshot__p2_stun_4 "Slingshot seed hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3140 1620
+  take swing_slingshot
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_slingshot__p2_pause_3 "Slingshot seed hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3000 1690
+  take swing_slingshot
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_slingshot__p2_stun_3 "Slingshot seed hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3140 1690
+  take swing_slingshot
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_slingshot__p2_pause_2 "Slingshot seed hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3000 1760
+  take swing_slingshot
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_slingshot__p2_stun_2 "Slingshot seed hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3140 1760
+  take swing_slingshot
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_slingshot__p2_pause_1 "Slingshot seed hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3000 1830
+  take swing_slingshot
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_slingshot__p2_stun_1 "Slingshot seed hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3140 1830
+  take swing_slingshot
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_slingshot__p3_stun_5 "Slingshot seed hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3000 1900
+  take swing_slingshot
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_slingshot__p3_stun_4 "Slingshot seed hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3140 1900
+  take swing_slingshot
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_slingshot__p3_stun_3 "Slingshot seed hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3000 1970
+  take swing_slingshot
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_slingshot__p3_stun_2 "Slingshot seed hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3140 1970
+  take swing_slingshot
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_slingshot__p3_stun_1 "Slingshot seed hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3000 2040
+  take swing_slingshot
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb miss_explosive "Explosion has no effect" by world priority 79 in hits at 3000 2110
+  take swing_explosive
+
+verb hit_explosive__p2_pause_5 "Explosion hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3140 2110
+  take swing_explosive
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_explosive__p2_stun_5 "Explosion hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3000 2180
+  take swing_explosive
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_explosive__p2_pause_4 "Explosion hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3140 2180
+  take swing_explosive
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_explosive__p2_stun_4 "Explosion hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3000 2250
+  take swing_explosive
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_explosive__p2_pause_3 "Explosion hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3140 2250
+  take swing_explosive
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_explosive__p2_stun_3 "Explosion hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3000 2320
+  take swing_explosive
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_explosive__p2_pause_2 "Explosion hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3140 2320
+  take swing_explosive
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_explosive__p2_stun_2 "Explosion hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3000 2390
+  take swing_explosive
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_explosive__p2_pause_1 "Explosion hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3140 2390
+  take swing_explosive
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_explosive__p2_stun_1 "Explosion hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3000 2460
+  take swing_explosive
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_explosive__p3_stun_5 "Explosion hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3140 2460
+  take swing_explosive
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_explosive__p3_stun_4 "Explosion hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3000 2530
+  take swing_explosive
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_explosive__p3_stun_3 "Explosion hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3140 2530
+  take swing_explosive
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_explosive__p3_stun_2 "Explosion hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3000 2600
+  take swing_explosive
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_explosive__p3_stun_1 "Explosion hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3140 2600
+  take swing_explosive
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb miss_boomerang "Boomerang has no effect" by world priority 79 in hits at 3140 2670
+  take swing_boomerang
+
+verb hit_boomerang__p1_3 "Boomerang hits (Barinade hangs from the ceiling by 3 umbilical cords)" by world priority 80 in hits at 3000 2740
+  take swing_boomerang
+  take phase_p1_3
+  give phase_p1_2
+
+verb hit_boomerang__p1_2 "Boomerang hits (Barinade hangs from the ceiling by 2 umbilical cords)" by world priority 80 in hits at 3140 2740
+  take swing_boomerang
+  take phase_p1_2
+  give phase_p1_1
+
+verb hit_boomerang__p1_1 "Boomerang hits (Barinade hangs from the ceiling by 1 umbilical cord)" by world priority 80 in hits at 3000 2810
+  take swing_boomerang
+  take phase_p1_1
+  give phase_p2_move_5
+  give 13 timer_p2_move_5
+
+verb hit_boomerang__p2_move_5 "Boomerang hits (Barinade sways, 5 Bari circling and sparking)" by world priority 80 in hits at 3140 2810
+  take swing_boomerang
+  take phase_p2_move_5
+  give phase_p2_stun_5
+  give 8 timer_p2_stun_5
+
+verb hit_boomerang__p2_pause_5 "Boomerang hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3000 2880
+  take swing_boomerang
+  take phase_p2_pause_5
+  give phase_p2_stun_5
+  give 8 timer_p2_stun_5
+
+verb hit_boomerang__p2_stun_5 "Boomerang hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3140 2880
+  take swing_boomerang
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_boomerang__p2_move_4 "Boomerang hits (Barinade sways, 4 Bari circling and sparking)" by world priority 80 in hits at 3000 2950
+  take swing_boomerang
+  take phase_p2_move_4
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_boomerang__p2_pause_4 "Boomerang hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3140 2950
+  take swing_boomerang
+  take phase_p2_pause_4
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_boomerang__p2_stun_4 "Boomerang hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3000 3020
+  take swing_boomerang
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_boomerang__p2_move_3 "Boomerang hits (Barinade sways, 3 Bari circling and sparking)" by world priority 80 in hits at 3140 3020
+  take swing_boomerang
+  take phase_p2_move_3
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_boomerang__p2_pause_3 "Boomerang hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3000 3090
+  take swing_boomerang
+  take phase_p2_pause_3
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_boomerang__p2_stun_3 "Boomerang hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3140 3090
+  take swing_boomerang
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_boomerang__p2_move_2 "Boomerang hits (Barinade sways, 2 Bari circling and sparking)" by world priority 80 in hits at 3000 3160
+  take swing_boomerang
+  take phase_p2_move_2
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_boomerang__p2_pause_2 "Boomerang hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3140 3160
+  take swing_boomerang
+  take phase_p2_pause_2
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_boomerang__p2_stun_2 "Boomerang hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3000 3230
+  take swing_boomerang
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_boomerang__p2_move_1 "Boomerang hits (Barinade sways, 1 Bari circling and sparking)" by world priority 80 in hits at 3140 3230
+  take swing_boomerang
+  take phase_p2_move_1
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_boomerang__p2_pause_1 "Boomerang hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3000 3300
+  take swing_boomerang
+  take phase_p2_pause_1
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_boomerang__p2_stun_1 "Boomerang hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3140 3300
+  take swing_boomerang
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_boomerang__p3_act_move_5 "Boomerang hits (Barinade roams the floor, 5 Bari spinning around it)" by world priority 80 in hits at 3000 3370
+  take swing_boomerang
+  take phase_p3_act_move_5
+  give phase_p3_stun_5
+  give 7 timer_p3_stun_5
+
+verb hit_boomerang__p3_act_halt_5 "Boomerang hits (Barinade halts, 5 Bari holding it still)" by world priority 80 in hits at 3140 3370
+  take swing_boomerang
+  take phase_p3_act_halt_5
+  give phase_p3_stun_5
+  give 7 timer_p3_stun_5
+
+verb hit_boomerang__p3_stun_5 "Boomerang hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3000 3440
+  take swing_boomerang
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_boomerang__p3_act_move_4 "Boomerang hits (Barinade roams the floor, 4 Bari spinning around it)" by world priority 80 in hits at 3140 3440
+  take swing_boomerang
+  take phase_p3_act_move_4
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_boomerang__p3_act_halt_4 "Boomerang hits (Barinade halts, 4 Bari holding it still)" by world priority 80 in hits at 3000 3510
+  take swing_boomerang
+  take phase_p3_act_halt_4
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_boomerang__p3_stun_4 "Boomerang hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3140 3510
+  take swing_boomerang
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_boomerang__p3_act_move_3 "Boomerang hits (Barinade roams the floor, 3 Bari spinning around it)" by world priority 80 in hits at 3000 3580
+  take swing_boomerang
+  take phase_p3_act_move_3
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_boomerang__p3_act_halt_3 "Boomerang hits (Barinade halts, 3 Bari holding it still)" by world priority 80 in hits at 3140 3580
+  take swing_boomerang
+  take phase_p3_act_halt_3
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_boomerang__p3_stun_3 "Boomerang hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3000 3650
+  take swing_boomerang
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_boomerang__p3_act_move_2 "Boomerang hits (Barinade roams the floor, 2 Bari spinning around it)" by world priority 80 in hits at 3140 3650
+  take swing_boomerang
+  take phase_p3_act_move_2
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_boomerang__p3_act_halt_2 "Boomerang hits (Barinade halts, 2 Bari holding it still)" by world priority 80 in hits at 3000 3720
+  take swing_boomerang
+  take phase_p3_act_halt_2
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_boomerang__p3_stun_2 "Boomerang hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3140 3720
+  take swing_boomerang
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_boomerang__p3_act_move_1 "Boomerang hits (Barinade roams the floor, 1 Bari spinning around it)" by world priority 80 in hits at 3000 3790
+  take swing_boomerang
+  take phase_p3_act_move_1
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_boomerang__p3_act_halt_1 "Boomerang hits (Barinade halts, 1 Bari holding it still)" by world priority 80 in hits at 3140 3790
+  take swing_boomerang
+  take phase_p3_act_halt_1
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_boomerang__p3_stun_1 "Boomerang hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3000 3860
+  take swing_boomerang
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb hit_boomerang__p4_roam_1 "Boomerang hits (Barinade spins after Link (round 1))" by world priority 80 in hits at 3140 3860
+  take swing_boomerang
+  take phase_p4_roam_1
+  give phase_p4_stun_1
+  give 8 timer_p4_stun_1
+
+verb hit_boomerang__p4_stun_1 "Boomerang hits (Barinade is stunned, its core open (round 1))" by world priority 80 in hits at 3000 3930
+  take swing_boomerang
+  take phase_p4_stun_1
+  give phase_p4_restun_1
+  give 8 timer_p4_restun_1
+
+verb hit_boomerang__p4_restun_1 "Boomerang hits (Barinade is stunned, its core open (round 1, stunned again))" by world priority 80 in hits at 3140 3930
+  take swing_boomerang
+  take phase_p4_restun_1
+  give phase_p4_stun_1
+  give 8 timer_p4_stun_1
+
+verb hit_boomerang__p4_roam_2 "Boomerang hits (Barinade spins after Link (round 2))" by world priority 80 in hits at 3000 4000
+  take swing_boomerang
+  take phase_p4_roam_2
+  give phase_p4_stun_2
+  give 8 timer_p4_stun_2
+
+verb hit_boomerang__p4_stun_2 "Boomerang hits (Barinade is stunned, its core open (round 2))" by world priority 80 in hits at 3140 4000
+  take swing_boomerang
+  take phase_p4_stun_2
+  give phase_p4_restun_2
+  give 8 timer_p4_restun_2
+
+verb hit_boomerang__p4_restun_2 "Boomerang hits (Barinade is stunned, its core open (round 2, stunned again))" by world priority 80 in hits at 3000 4070
+  take swing_boomerang
+  take phase_p4_restun_2
+  give phase_p4_stun_2
+  give 8 timer_p4_stun_2
+
+verb hit_boomerang__p4_roam_3 "Boomerang hits (Barinade spins after Link (round 3))" by world priority 80 in hits at 3140 4070
+  take swing_boomerang
+  take phase_p4_roam_3
+  give phase_p4_stun_3
+  give 8 timer_p4_stun_3
+
+verb hit_boomerang__p4_stun_3 "Boomerang hits (Barinade is stunned, its core open (round 3))" by world priority 80 in hits at 3000 4140
+  take swing_boomerang
+  take phase_p4_stun_3
+  give phase_p4_restun_3
+  give 8 timer_p4_restun_3
+
+verb hit_boomerang__p4_restun_3 "Boomerang hits (Barinade is stunned, its core open (round 3, stunned again))" by world priority 80 in hits at 3140 4140
+  take swing_boomerang
+  take phase_p4_restun_3
+  give phase_p4_stun_3
+  give 8 timer_p4_stun_3
+
+verb miss_slash_kokiri "Kokiri Sword slash has no effect" by world priority 79 in hits at 3140 4210
+  take swing_slash_kokiri
+
+verb hit_slash_kokiri__p2_pause_5 "Kokiri Sword slash hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3000 4280
+  take swing_slash_kokiri
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_slash_kokiri__p2_stun_5 "Kokiri Sword slash hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3140 4280
+  take swing_slash_kokiri
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_slash_kokiri__p2_pause_4 "Kokiri Sword slash hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3000 4350
+  take swing_slash_kokiri
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_slash_kokiri__p2_stun_4 "Kokiri Sword slash hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3140 4350
+  take swing_slash_kokiri
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_slash_kokiri__p2_pause_3 "Kokiri Sword slash hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3000 4420
+  take swing_slash_kokiri
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_slash_kokiri__p2_stun_3 "Kokiri Sword slash hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3140 4420
+  take swing_slash_kokiri
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_slash_kokiri__p2_pause_2 "Kokiri Sword slash hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3000 4490
+  take swing_slash_kokiri
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_slash_kokiri__p2_stun_2 "Kokiri Sword slash hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3140 4490
+  take swing_slash_kokiri
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_slash_kokiri__p2_pause_1 "Kokiri Sword slash hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3000 4560
+  take swing_slash_kokiri
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_slash_kokiri__p2_stun_1 "Kokiri Sword slash hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3140 4560
+  take swing_slash_kokiri
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_slash_kokiri__p3_stun_5 "Kokiri Sword slash hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3000 4630
+  take swing_slash_kokiri
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_slash_kokiri__p3_stun_4 "Kokiri Sword slash hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3140 4630
+  take swing_slash_kokiri
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_slash_kokiri__p3_stun_3 "Kokiri Sword slash hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3000 4700
+  take swing_slash_kokiri
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_slash_kokiri__p3_stun_2 "Kokiri Sword slash hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3140 4700
+  take swing_slash_kokiri
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_slash_kokiri__p3_stun_1 "Kokiri Sword slash hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3000 4770
+  take swing_slash_kokiri
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb hit_slash_kokiri__p4_stun_1 "Kokiri Sword slash hits (Barinade is stunned, its core open (round 1))" by world priority 80 in hits at 3140 4770
+  take swing_slash_kokiri
+  need phase_p4_stun_1
+  give dmg_core
+
+verb hit_slash_kokiri__p4_restun_1 "Kokiri Sword slash hits (Barinade is stunned, its core open (round 1, stunned again))" by world priority 80 in hits at 3000 4840
+  take swing_slash_kokiri
+  need phase_p4_restun_1
+  give dmg_core
+
+verb hit_slash_kokiri__p4_stun_2 "Kokiri Sword slash hits (Barinade is stunned, its core open (round 2))" by world priority 80 in hits at 3140 4840
+  take swing_slash_kokiri
+  need phase_p4_stun_2
+  give dmg_core
+
+verb hit_slash_kokiri__p4_restun_2 "Kokiri Sword slash hits (Barinade is stunned, its core open (round 2, stunned again))" by world priority 80 in hits at 3000 4910
+  take swing_slash_kokiri
+  need phase_p4_restun_2
+  give dmg_core
+
+verb hit_slash_kokiri__p4_stun_3 "Kokiri Sword slash hits (Barinade is stunned, its core open (round 3))" by world priority 80 in hits at 3140 4910
+  take swing_slash_kokiri
+  need phase_p4_stun_3
+  give dmg_core
+
+verb hit_slash_kokiri__p4_restun_3 "Kokiri Sword slash hits (Barinade is stunned, its core open (round 3, stunned again))" by world priority 80 in hits at 3000 4980
+  take swing_slash_kokiri
+  need phase_p4_restun_3
+  give dmg_core
+
+verb miss_magic_fire "Din's Fire has no effect" by world priority 79 in hits at 3000 5050
+  take swing_magic_fire
+
+verb hit_magic_fire__p2_pause_5 "Din's Fire hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3140 5050
+  take swing_magic_fire
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_magic_fire__p2_stun_5 "Din's Fire hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3000 5120
+  take swing_magic_fire
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_magic_fire__p2_pause_4 "Din's Fire hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3140 5120
+  take swing_magic_fire
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_magic_fire__p2_stun_4 "Din's Fire hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3000 5190
+  take swing_magic_fire
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_magic_fire__p2_pause_3 "Din's Fire hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3140 5190
+  take swing_magic_fire
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_magic_fire__p2_stun_3 "Din's Fire hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3000 5260
+  take swing_magic_fire
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_magic_fire__p2_pause_2 "Din's Fire hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3140 5260
+  take swing_magic_fire
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_magic_fire__p2_stun_2 "Din's Fire hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3000 5330
+  take swing_magic_fire
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_magic_fire__p2_pause_1 "Din's Fire hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3140 5330
+  take swing_magic_fire
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_magic_fire__p2_stun_1 "Din's Fire hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3000 5400
+  take swing_magic_fire
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_magic_fire__p3_stun_5 "Din's Fire hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3140 5400
+  take swing_magic_fire
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_magic_fire__p3_stun_4 "Din's Fire hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3000 5470
+  take swing_magic_fire
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_magic_fire__p3_stun_3 "Din's Fire hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3140 5470
+  take swing_magic_fire
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_magic_fire__p3_stun_2 "Din's Fire hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3000 5540
+  take swing_magic_fire
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_magic_fire__p3_stun_1 "Din's Fire hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3140 5540
+  take swing_magic_fire
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb miss_magic_fire_far "Din's Fire misses: too far" by world priority 81 in hits at 3000 5610
+  take swing_magic_fire
+  need range_far
+
+verb miss_shield "Shield has no effect" by world priority 79 in hits at 3000 5680
+  take swing_shield
+
+verb miss_spin_kokiri "Kokiri spin attack has no effect" by world priority 79 in hits at 3000 5750
+  take swing_spin_kokiri
+
+verb hit_spin_kokiri__p2_pause_5 "Kokiri spin attack hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3140 5750
+  take swing_spin_kokiri
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_spin_kokiri__p2_stun_5 "Kokiri spin attack hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3000 5820
+  take swing_spin_kokiri
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_spin_kokiri__p2_pause_4 "Kokiri spin attack hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3140 5820
+  take swing_spin_kokiri
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_spin_kokiri__p2_stun_4 "Kokiri spin attack hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3000 5890
+  take swing_spin_kokiri
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_spin_kokiri__p2_pause_3 "Kokiri spin attack hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3140 5890
+  take swing_spin_kokiri
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_spin_kokiri__p2_stun_3 "Kokiri spin attack hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3000 5960
+  take swing_spin_kokiri
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_spin_kokiri__p2_pause_2 "Kokiri spin attack hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3140 5960
+  take swing_spin_kokiri
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_spin_kokiri__p2_stun_2 "Kokiri spin attack hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3000 6030
+  take swing_spin_kokiri
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_spin_kokiri__p2_pause_1 "Kokiri spin attack hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3140 6030
+  take swing_spin_kokiri
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_spin_kokiri__p2_stun_1 "Kokiri spin attack hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3000 6100
+  take swing_spin_kokiri
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_spin_kokiri__p3_stun_5 "Kokiri spin attack hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3140 6100
+  take swing_spin_kokiri
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_spin_kokiri__p3_stun_4 "Kokiri spin attack hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3000 6170
+  take swing_spin_kokiri
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_spin_kokiri__p3_stun_3 "Kokiri spin attack hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3140 6170
+  take swing_spin_kokiri
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_spin_kokiri__p3_stun_2 "Kokiri spin attack hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3000 6240
+  take swing_spin_kokiri
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_spin_kokiri__p3_stun_1 "Kokiri spin attack hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3140 6240
+  take swing_spin_kokiri
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb hit_spin_kokiri__p4_stun_1 "Kokiri spin attack hits (Barinade is stunned, its core open (round 1))" by world priority 80 in hits at 3000 6310
+  take swing_spin_kokiri
+  need phase_p4_stun_1
+  give dmg_core
+
+verb hit_spin_kokiri__p4_restun_1 "Kokiri spin attack hits (Barinade is stunned, its core open (round 1, stunned again))" by world priority 80 in hits at 3140 6310
+  take swing_spin_kokiri
+  need phase_p4_restun_1
+  give dmg_core
+
+verb hit_spin_kokiri__p4_stun_2 "Kokiri spin attack hits (Barinade is stunned, its core open (round 2))" by world priority 80 in hits at 3000 6380
+  take swing_spin_kokiri
+  need phase_p4_stun_2
+  give dmg_core
+
+verb hit_spin_kokiri__p4_restun_2 "Kokiri spin attack hits (Barinade is stunned, its core open (round 2, stunned again))" by world priority 80 in hits at 3140 6380
+  take swing_spin_kokiri
+  need phase_p4_restun_2
+  give dmg_core
+
+verb hit_spin_kokiri__p4_stun_3 "Kokiri spin attack hits (Barinade is stunned, its core open (round 3))" by world priority 80 in hits at 3000 6450
+  take swing_spin_kokiri
+  need phase_p4_stun_3
+  give dmg_core
+
+verb hit_spin_kokiri__p4_restun_3 "Kokiri spin attack hits (Barinade is stunned, its core open (round 3, stunned again))" by world priority 80 in hits at 3140 6450
+  take swing_spin_kokiri
+  need phase_p4_restun_3
+  give dmg_core
+
+verb miss_spin_kokiri_far "Kokiri spin attack misses: too far" by world priority 81 in hits at 3000 6520
+  take swing_spin_kokiri
+  need range_far
+
+verb miss_jump_kokiri "Kokiri jump attack has no effect" by world priority 79 in hits at 3000 6590
+  take swing_jump_kokiri
+
+verb hit_jump_kokiri__p2_pause_5 "Kokiri jump attack hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3140 6590
+  take swing_jump_kokiri
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_jump_kokiri__p2_stun_5 "Kokiri jump attack hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3000 6660
+  take swing_jump_kokiri
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_jump_kokiri__p2_pause_4 "Kokiri jump attack hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3140 6660
+  take swing_jump_kokiri
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_jump_kokiri__p2_stun_4 "Kokiri jump attack hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3000 6730
+  take swing_jump_kokiri
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_jump_kokiri__p2_pause_3 "Kokiri jump attack hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3140 6730
+  take swing_jump_kokiri
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_jump_kokiri__p2_stun_3 "Kokiri jump attack hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3000 6800
+  take swing_jump_kokiri
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_jump_kokiri__p2_pause_2 "Kokiri jump attack hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3140 6800
+  take swing_jump_kokiri
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_jump_kokiri__p2_stun_2 "Kokiri jump attack hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3000 6870
+  take swing_jump_kokiri
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_jump_kokiri__p2_pause_1 "Kokiri jump attack hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3140 6870
+  take swing_jump_kokiri
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_jump_kokiri__p2_stun_1 "Kokiri jump attack hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3000 6940
+  take swing_jump_kokiri
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_jump_kokiri__p3_stun_5 "Kokiri jump attack hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3140 6940
+  take swing_jump_kokiri
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_jump_kokiri__p3_stun_4 "Kokiri jump attack hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3000 7010
+  take swing_jump_kokiri
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_jump_kokiri__p3_stun_3 "Kokiri jump attack hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3140 7010
+  take swing_jump_kokiri
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_jump_kokiri__p3_stun_2 "Kokiri jump attack hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3000 7080
+  take swing_jump_kokiri
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_jump_kokiri__p3_stun_1 "Kokiri jump attack hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3140 7080
+  take swing_jump_kokiri
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb hit_jump_kokiri__p4_stun_1 "Kokiri jump attack hits (Barinade is stunned, its core open (round 1))" by world priority 80 in hits at 3000 7150
+  take swing_jump_kokiri
+  need phase_p4_stun_1
+  give 2 dmg_core
+
+verb hit_jump_kokiri__p4_restun_1 "Kokiri jump attack hits (Barinade is stunned, its core open (round 1, stunned again))" by world priority 80 in hits at 3140 7150
+  take swing_jump_kokiri
+  need phase_p4_restun_1
+  give 2 dmg_core
+
+verb hit_jump_kokiri__p4_stun_2 "Kokiri jump attack hits (Barinade is stunned, its core open (round 2))" by world priority 80 in hits at 3000 7220
+  take swing_jump_kokiri
+  need phase_p4_stun_2
+  give 2 dmg_core
+
+verb hit_jump_kokiri__p4_restun_2 "Kokiri jump attack hits (Barinade is stunned, its core open (round 2, stunned again))" by world priority 80 in hits at 3140 7220
+  take swing_jump_kokiri
+  need phase_p4_restun_2
+  give 2 dmg_core
+
+verb hit_jump_kokiri__p4_stun_3 "Kokiri jump attack hits (Barinade is stunned, its core open (round 3))" by world priority 80 in hits at 3000 7290
+  take swing_jump_kokiri
+  need phase_p4_stun_3
+  give 2 dmg_core
+
+verb hit_jump_kokiri__p4_restun_3 "Kokiri jump attack hits (Barinade is stunned, its core open (round 3, stunned again))" by world priority 80 in hits at 3140 7290
+  take swing_jump_kokiri
+  need phase_p4_restun_3
+  give 2 dmg_core
+
+verb miss_jump_kokiri_self "Kokiri jump attack has no effect" by world priority 79 in hits at 3140 7360
+  take swing_jump_kokiri_self
+
+verb hit_jump_kokiri_self__p2_pause_5 "Kokiri jump attack hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3000 7430
+  take swing_jump_kokiri_self
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_jump_kokiri_self__p2_stun_5 "Kokiri jump attack hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3140 7430
+  take swing_jump_kokiri_self
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_jump_kokiri_self__p2_pause_4 "Kokiri jump attack hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3000 7500
+  take swing_jump_kokiri_self
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_jump_kokiri_self__p2_stun_4 "Kokiri jump attack hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3140 7500
+  take swing_jump_kokiri_self
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_jump_kokiri_self__p2_pause_3 "Kokiri jump attack hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3000 7570
+  take swing_jump_kokiri_self
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_jump_kokiri_self__p2_stun_3 "Kokiri jump attack hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3140 7570
+  take swing_jump_kokiri_self
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_jump_kokiri_self__p2_pause_2 "Kokiri jump attack hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3000 7640
+  take swing_jump_kokiri_self
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_jump_kokiri_self__p2_stun_2 "Kokiri jump attack hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3140 7640
+  take swing_jump_kokiri_self
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_jump_kokiri_self__p2_pause_1 "Kokiri jump attack hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3000 7710
+  take swing_jump_kokiri_self
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_jump_kokiri_self__p2_stun_1 "Kokiri jump attack hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3140 7710
+  take swing_jump_kokiri_self
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_jump_kokiri_self__p3_stun_5 "Kokiri jump attack hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3000 7780
+  take swing_jump_kokiri_self
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_jump_kokiri_self__p3_stun_4 "Kokiri jump attack hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3140 7780
+  take swing_jump_kokiri_self
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_jump_kokiri_self__p3_stun_3 "Kokiri jump attack hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3000 7850
+  take swing_jump_kokiri_self
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_jump_kokiri_self__p3_stun_2 "Kokiri jump attack hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3140 7850
+  take swing_jump_kokiri_self
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_jump_kokiri_self__p3_stun_1 "Kokiri jump attack hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3000 7920
+  take swing_jump_kokiri_self
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb hit_jump_kokiri_self__p4_stun_1 "Kokiri jump attack hits (Barinade is stunned, its core open (round 1))" by world priority 80 in hits at 3140 7920
+  take swing_jump_kokiri_self
+  need phase_p4_stun_1
+  give 2 dmg_core
+
+verb hit_jump_kokiri_self__p4_restun_1 "Kokiri jump attack hits (Barinade is stunned, its core open (round 1, stunned again))" by world priority 80 in hits at 3000 7990
+  take swing_jump_kokiri_self
+  need phase_p4_restun_1
+  give 2 dmg_core
+
+verb hit_jump_kokiri_self__p4_stun_2 "Kokiri jump attack hits (Barinade is stunned, its core open (round 2))" by world priority 80 in hits at 3140 7990
+  take swing_jump_kokiri_self
+  need phase_p4_stun_2
+  give 2 dmg_core
+
+verb hit_jump_kokiri_self__p4_restun_2 "Kokiri jump attack hits (Barinade is stunned, its core open (round 2, stunned again))" by world priority 80 in hits at 3000 8060
+  take swing_jump_kokiri_self
+  need phase_p4_restun_2
+  give 2 dmg_core
+
+verb hit_jump_kokiri_self__p4_stun_3 "Kokiri jump attack hits (Barinade is stunned, its core open (round 3))" by world priority 80 in hits at 3140 8060
+  take swing_jump_kokiri_self
+  need phase_p4_stun_3
+  give 2 dmg_core
+
+verb hit_jump_kokiri_self__p4_restun_3 "Kokiri jump attack hits (Barinade is stunned, its core open (round 3, stunned again))" by world priority 80 in hits at 3000 8130
+  take swing_jump_kokiri_self
+  need phase_p4_restun_3
+  give 2 dmg_core
+
+verb miss_jump_kokiri_self_far "Kokiri jump attack misses: too far" by world priority 81 in hits at 3140 8130
+  take swing_jump_kokiri_self
+  need range_far
+
+verb miss_jump_master "Master Sword jump attack has no effect" by world priority 79 in hits at 3140 8200
+  take swing_jump_master
+
+verb hit_jump_master__p2_pause_5 "Master Sword jump attack hits (Barinade pauses, 5 Bari hanging still)" by world priority 80 in hits at 3000 8270
+  take swing_jump_master
+  take phase_p2_pause_5
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+
+verb hit_jump_master__p2_stun_5 "Master Sword jump attack hits (Barinade is stunned, 5 Bari left)" by world priority 80 in hits at 3140 8270
+  take swing_jump_master
+  take phase_p2_stun_5
+  give phase_p2_stun_4
+  give 8 timer_p2_stun_4
+
+verb hit_jump_master__p2_pause_4 "Master Sword jump attack hits (Barinade pauses, 4 Bari hanging still)" by world priority 80 in hits at 3000 8340
+  take swing_jump_master
+  take phase_p2_pause_4
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+
+verb hit_jump_master__p2_stun_4 "Master Sword jump attack hits (Barinade is stunned, 4 Bari left)" by world priority 80 in hits at 3140 8340
+  take swing_jump_master
+  take phase_p2_stun_4
+  give phase_p2_stun_3
+  give 8 timer_p2_stun_3
+
+verb hit_jump_master__p2_pause_3 "Master Sword jump attack hits (Barinade pauses, 3 Bari hanging still)" by world priority 80 in hits at 3000 8410
+  take swing_jump_master
+  take phase_p2_pause_3
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+
+verb hit_jump_master__p2_stun_3 "Master Sword jump attack hits (Barinade is stunned, 3 Bari left)" by world priority 80 in hits at 3140 8410
+  take swing_jump_master
+  take phase_p2_stun_3
+  give phase_p2_stun_2
+  give 8 timer_p2_stun_2
+
+verb hit_jump_master__p2_pause_2 "Master Sword jump attack hits (Barinade pauses, 2 Bari hanging still)" by world priority 80 in hits at 3000 8480
+  take swing_jump_master
+  take phase_p2_pause_2
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+
+verb hit_jump_master__p2_stun_2 "Master Sword jump attack hits (Barinade is stunned, 2 Bari left)" by world priority 80 in hits at 3140 8480
+  take swing_jump_master
+  take phase_p2_stun_2
+  give phase_p2_stun_1
+  give 8 timer_p2_stun_1
+
+verb hit_jump_master__p2_pause_1 "Master Sword jump attack hits (Barinade pauses, 1 Bari hanging still)" by world priority 80 in hits at 3000 8550
+  take swing_jump_master
+  take phase_p2_pause_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_jump_master__p2_stun_1 "Master Sword jump attack hits (Barinade is stunned, 1 Bari left)" by world priority 80 in hits at 3140 8550
+  take swing_jump_master
+  take phase_p2_stun_1
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+
+verb hit_jump_master__p3_stun_5 "Master Sword jump attack hits (Barinade is stunned, 5 Bari stunned with it)" by world priority 80 in hits at 3000 8620
+  take swing_jump_master
+  take phase_p3_stun_5
+  give phase_p3_stun_4
+  give 7 timer_p3_stun_4
+
+verb hit_jump_master__p3_stun_4 "Master Sword jump attack hits (Barinade is stunned, 4 Bari stunned with it)" by world priority 80 in hits at 3140 8620
+  take swing_jump_master
+  take phase_p3_stun_4
+  give phase_p3_stun_3
+  give 7 timer_p3_stun_3
+
+verb hit_jump_master__p3_stun_3 "Master Sword jump attack hits (Barinade is stunned, 3 Bari stunned with it)" by world priority 80 in hits at 3000 8690
+  take swing_jump_master
+  take phase_p3_stun_3
+  give phase_p3_stun_2
+  give 7 timer_p3_stun_2
+
+verb hit_jump_master__p3_stun_2 "Master Sword jump attack hits (Barinade is stunned, 2 Bari stunned with it)" by world priority 80 in hits at 3140 8690
+  take swing_jump_master
+  take phase_p3_stun_2
+  give phase_p3_stun_1
+  give 7 timer_p3_stun_1
+
+verb hit_jump_master__p3_stun_1 "Master Sword jump attack hits (Barinade is stunned, 1 Bari stunned with it)" by world priority 80 in hits at 3000 8760
+  take swing_jump_master
+  take phase_p3_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+
+verb hit_jump_master__p4_stun_1 "Master Sword jump attack hits (Barinade is stunned, its core open (round 1))" by world priority 80 in hits at 3140 8760
+  take swing_jump_master
+  need phase_p4_stun_1
+  give 4 dmg_core
+
+verb hit_jump_master__p4_restun_1 "Master Sword jump attack hits (Barinade is stunned, its core open (round 1, stunned again))" by world priority 80 in hits at 3000 8830
+  take swing_jump_master
+  need phase_p4_restun_1
+  give 4 dmg_core
+
+verb hit_jump_master__p4_stun_2 "Master Sword jump attack hits (Barinade is stunned, its core open (round 2))" by world priority 80 in hits at 3140 8830
+  take swing_jump_master
+  need phase_p4_stun_2
+  give 4 dmg_core
+
+verb hit_jump_master__p4_restun_2 "Master Sword jump attack hits (Barinade is stunned, its core open (round 2, stunned again))" by world priority 80 in hits at 3000 8900
+  take swing_jump_master
+  need phase_p4_restun_2
+  give 4 dmg_core
+
+verb hit_jump_master__p4_stun_3 "Master Sword jump attack hits (Barinade is stunned, its core open (round 3))" by world priority 80 in hits at 3140 8900
+  take swing_jump_master
+  need phase_p4_stun_3
+  give 4 dmg_core
+
+verb hit_jump_master__p4_restun_3 "Master Sword jump attack hits (Barinade is stunned, its core open (round 3, stunned again))" by world priority 80 in hits at 3000 8970
+  take swing_jump_master
+  need phase_p4_restun_3
+  give 4 dmg_core
+
+verb core_empty_in_p4_stun_1 "Barinade's core runs out (Barinade is stunned, its core open (round 1))" by world priority 90 in enemy_health at 2360 570
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  unless hp_core_3
+  take alive_core
+  take phase_p4_stun_1
+  give link_wins
+
+verb core_empty_in_p4_restun_1 "Barinade's core runs out (Barinade is stunned, its core open (round 1, stunned again))" by world priority 90 in enemy_health at 2500 570
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  unless hp_core_3
+  take alive_core
+  take phase_p4_restun_1
+  give link_wins
+
+verb core_empty_in_p4_stun_2 "Barinade's core runs out (Barinade is stunned, its core open (round 2))" by world priority 90 in enemy_health at 2360 640
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  unless hp_core_3
+  take alive_core
+  take phase_p4_stun_2
+  give link_wins
+
+verb core_empty_in_p4_restun_2 "Barinade's core runs out (Barinade is stunned, its core open (round 2, stunned again))" by world priority 90 in enemy_health at 2500 640
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  unless hp_core_3
+  take alive_core
+  take phase_p4_restun_2
+  give link_wins
+
+verb core_empty_in_p4_stun_3 "Barinade's core runs out (Barinade is stunned, its core open (round 3))" by world priority 90 in enemy_health at 2360 710
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  unless hp_core_3
+  take alive_core
+  take phase_p4_stun_3
+  give link_wins
+
+verb core_empty_in_p4_restun_3 "Barinade's core runs out (Barinade is stunned, its core open (round 3, stunned again))" by world priority 90 in enemy_health at 2500 710
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  unless hp_core_3
+  take alive_core
+  take phase_p4_restun_3
+  give link_wins
+
+verb core_falls_to_9_in_p4_stun_1 "Barinade's core drops to 9 (Barinade is stunned, its core open (round 1))" by world priority 89 in enemy_health at 2360 780
+  take above_core_9
+  need alive_core
+  unless hp_core
+  take phase_p4_stun_1
+  give phase_p4_sink_1
+  give 12 timer_p4_sink_1
+
+verb core_falls_to_9_in_p4_restun_1 "Barinade's core drops to 9 (Barinade is stunned, its core open (round 1, stunned again))" by world priority 89 in enemy_health at 2500 780
+  take above_core_9
+  need alive_core
+  unless hp_core
+  take phase_p4_restun_1
+  give phase_p4_sink_1
+  give 12 timer_p4_sink_1
+
+verb core_falls_to_6_in_p4_stun_2 "Barinade's core drops to 6 (Barinade is stunned, its core open (round 2))" by world priority 89 in enemy_health at 2360 850
+  take above_core_6
+  need alive_core
+  unless hp_core
+  unless hp_core_9
+  take phase_p4_stun_2
+  give phase_p4_sink_2
+  give 12 timer_p4_sink_2
+
+verb core_falls_to_6_in_p4_restun_2 "Barinade's core drops to 6 (Barinade is stunned, its core open (round 2, stunned again))" by world priority 89 in enemy_health at 2500 850
+  take above_core_6
+  need alive_core
+  unless hp_core
+  unless hp_core_9
+  take phase_p4_restun_2
+  give phase_p4_sink_2
+  give 12 timer_p4_sink_2
+
+verb core_falls_to_3_in_p4_stun_3 "Barinade's core drops to 3 (Barinade is stunned, its core open (round 3))" by world priority 89 in enemy_health at 2360 920
+  take above_core_3
+  need alive_core
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  take phase_p4_stun_3
+  give link_wins
+
+verb core_falls_to_3_in_p4_restun_3 "Barinade's core drops to 3 (Barinade is stunned, its core open (round 3, stunned again))" by world priority 89 in enemy_health at 2500 920
+  take above_core_3
+  need alive_core
+  unless hp_core
+  unless hp_core_9
+  unless hp_core_6
+  take phase_p4_restun_3
+  give link_wins
+
+verb link_guards_deku_shield "Link raises the deku shield" by link in link_moves at 2680 570
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_deku_shield
+  give link_guard
+  give guard_with_deku_shield
+  give enemy_turn
+
+verb link_guards_hylian_shield_child "Link raises the hylian shield" by link in link_moves at 2820 570
+  take link_turn
+  unless status_shock
+  need age_child
+  need has_hylian_shield
+  give link_guard
+  give guard_with_hylian_shield
+  give enemy_turn
+
+verb link_dodges "Link backflips or sidehops" by link in link_moves at 2680 640
+  take link_turn
+  unless status_shock
+  give link_dodge
+  give enemy_turn
+
+verb link_closes_in "Link closes in" by link in link_moves at 2820 640
+  take link_turn
+  unless status_shock
+  take range_far
+  give range_near
+  give enemy_turn
+
+verb link_backs_off "Link backs off" by link in link_moves at 2680 710
+  take link_turn
+  unless status_shock
+  take range_near
+  give range_far
+  give enemy_turn
+
+verb link_leaves "Link leaves the fight" by link in link_moves at 2820 710
+  take link_turn
+  unless status_shock
+  need range_far
+  give link_withdraws
+
+verb link_drinks_red_potion "Link drinks a red potion" by link in link_moves at 2680 780
+  take link_turn
+  unless status_shock
+  take has_red_potion
+  give 16 link_heal
+  give enemy_turn
+
+verb link_drinks_green_potion "Link drinks a green potion" by link in link_moves at 2820 780
+  take link_turn
+  unless status_shock
+  take has_green_potion
+  give 48 magic_refill
+  give enemy_turn
+
+verb link_casts_nayrus_love "Link casts Nayru's Love" by link in link_moves at 2680 850
+  take link_turn
+  unless status_shock
+  need has_nayrus_love
+  unless status_nayru
+  take 24 magic
+  give 24 magic_spent
+  give 60 status_nayru
+  give enemy_turn
+
+verb link_lens_on "Link looks through the Lens of Truth" by link in link_moves at 2820 850
+  take link_turn
+  unless lens_on
+  need has_lens_of_truth
+  need magic
+  give lens_on
+  give link_turn
+
+verb link_lens_off "Link puts the Lens away" by link in link_moves at 2680 920
+  take link_turn
+  take lens_on
+  give link_turn
+
+verb enemy_ready "Barinade gets ready" by world priority 70 in enemy at 2180 4770
+  take enemy_turn
+  give enemy_act
+
+verb p1_3_step_1 "A zapper fires its beam" by world priority 69 in enemy at 2040 4840
+  take enemy_act
+  need phase_p1_3
+  give incoming_lightning
+  give beat_end
+
+verb p1_3_step_2 "The zappers are still charging" by world priority 69 in enemy at 2180 4840
+  take enemy_act
+  need phase_p1_3
+  give beat_end
+
+verb p1_3_step_3 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 4910
+  take enemy_act
+  need phase_p1_3
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p1_2_step_1 "A zapper fires its beam" by world priority 69 in enemy at 2180 4910
+  take enemy_act
+  need phase_p1_2
+  give incoming_lightning
+  give beat_end
+
+verb p1_2_step_2 "The zappers are still charging" by world priority 69 in enemy at 2040 4980
+  take enemy_act
+  need phase_p1_2
+  give beat_end
+
+verb p1_2_step_3 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 4980
+  take enemy_act
+  need phase_p1_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p1_1_step_1 "A zapper fires its beam" by world priority 69 in enemy at 2040 5050
+  take enemy_act
+  need phase_p1_1
+  give incoming_lightning
+  give beat_end
+
+verb p1_1_step_2 "The zappers are still charging" by world priority 69 in enemy at 2180 5050
+  take enemy_act
+  need phase_p1_1
+  give beat_end
+
+verb p1_1_step_3 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 5120
+  take enemy_act
+  need phase_p1_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_move_5_ticks "Barinade sways, 5 Bari circling and sparking: a beat passes" by world priority 71 in enemy at 2180 5120
+  take enemy_turn
+  need phase_p2_move_5
+  take timer_p2_move_5
+  give enemy_act
+
+verb p2_move_5_step_1 "Barinade stops swaying" by world priority 69 in enemy at 2040 5190
+  take enemy_act
+  take phase_p2_move_5
+  give phase_p2_pause_5
+  give 13 timer_p2_pause_5
+  unless timer_p2_move_5
+  give beat_end
+
+verb p2_move_5_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 5190
+  take enemy_act
+  need phase_p2_move_5
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p2_move_5_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 5260
+  take enemy_act
+  need phase_p2_move_5
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p2_move_5_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 5260
+  take enemy_act
+  need phase_p2_move_5
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_move_5_holds "Barinade sways, 5 Bari circling and sparking: nothing changes" by world priority 68 in enemy at 2040 5330
+  take enemy_act
+  need phase_p2_move_5
+  give beat_end
+
+verb p2_pause_5_ticks "Barinade pauses, 5 Bari hanging still: a beat passes" by world priority 71 in enemy at 2180 5330
+  take enemy_turn
+  need phase_p2_pause_5
+  take timer_p2_pause_5
+  give enemy_act
+
+verb p2_pause_5_step_1 "Barinade sways again" by world priority 69 in enemy at 2040 5400
+  take enemy_act
+  take phase_p2_pause_5
+  give phase_p2_move_5
+  give 13 timer_p2_move_5
+  unless timer_p2_pause_5
+  give beat_end
+
+verb p2_pause_5_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2180 5400
+  take enemy_act
+  need phase_p2_pause_5
+  give incoming_lightning
+  give beat_end
+
+verb p2_pause_5_step_3 "The zappers are still charging" by world priority 69 in enemy at 2040 5470
+  take enemy_act
+  need phase_p2_pause_5
+  give beat_end
+
+verb p2_pause_5_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 5470
+  take enemy_act
+  need phase_p2_pause_5
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_stun_5_ticks "Barinade is stunned, 5 Bari left: a beat passes" by world priority 71 in enemy at 2040 5540
+  take enemy_turn
+  need phase_p2_stun_5
+  take timer_p2_stun_5
+  give enemy_act
+
+verb p2_stun_5_step_1 "Barinade recovers" by world priority 69 in enemy at 2180 5540
+  take enemy_act
+  take phase_p2_stun_5
+  give phase_p2_move_5
+  give 13 timer_p2_move_5
+  unless timer_p2_stun_5
+  give beat_end
+
+verb p2_stun_5_holds "Barinade is stunned, 5 Bari left: nothing changes" by world priority 68 in enemy at 2040 5610
+  take enemy_act
+  need phase_p2_stun_5
+  give beat_end
+
+verb p2_move_4_ticks "Barinade sways, 4 Bari circling and sparking: a beat passes" by world priority 71 in enemy at 2180 5610
+  take enemy_turn
+  need phase_p2_move_4
+  take timer_p2_move_4
+  give enemy_act
+
+verb p2_move_4_step_1 "Barinade stops swaying" by world priority 69 in enemy at 2040 5680
+  take enemy_act
+  take phase_p2_move_4
+  give phase_p2_pause_4
+  give 13 timer_p2_pause_4
+  unless timer_p2_move_4
+  give beat_end
+
+verb p2_move_4_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 5680
+  take enemy_act
+  need phase_p2_move_4
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p2_move_4_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 5750
+  take enemy_act
+  need phase_p2_move_4
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p2_move_4_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 5750
+  take enemy_act
+  need phase_p2_move_4
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_move_4_holds "Barinade sways, 4 Bari circling and sparking: nothing changes" by world priority 68 in enemy at 2040 5820
+  take enemy_act
+  need phase_p2_move_4
+  give beat_end
+
+verb p2_pause_4_ticks "Barinade pauses, 4 Bari hanging still: a beat passes" by world priority 71 in enemy at 2180 5820
+  take enemy_turn
+  need phase_p2_pause_4
+  take timer_p2_pause_4
+  give enemy_act
+
+verb p2_pause_4_step_1 "Barinade sways again" by world priority 69 in enemy at 2040 5890
+  take enemy_act
+  take phase_p2_pause_4
+  give phase_p2_move_4
+  give 13 timer_p2_move_4
+  unless timer_p2_pause_4
+  give beat_end
+
+verb p2_pause_4_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2180 5890
+  take enemy_act
+  need phase_p2_pause_4
+  give incoming_lightning
+  give beat_end
+
+verb p2_pause_4_step_3 "The zappers are still charging" by world priority 69 in enemy at 2040 5960
+  take enemy_act
+  need phase_p2_pause_4
+  give beat_end
+
+verb p2_pause_4_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 5960
+  take enemy_act
+  need phase_p2_pause_4
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_stun_4_ticks "Barinade is stunned, 4 Bari left: a beat passes" by world priority 71 in enemy at 2040 6030
+  take enemy_turn
+  need phase_p2_stun_4
+  take timer_p2_stun_4
+  give enemy_act
+
+verb p2_stun_4_step_1 "Barinade recovers" by world priority 69 in enemy at 2180 6030
+  take enemy_act
+  take phase_p2_stun_4
+  give phase_p2_move_4
+  give 13 timer_p2_move_4
+  unless timer_p2_stun_4
+  give beat_end
+
+verb p2_stun_4_holds "Barinade is stunned, 4 Bari left: nothing changes" by world priority 68 in enemy at 2040 6100
+  take enemy_act
+  need phase_p2_stun_4
+  give beat_end
+
+verb p2_move_3_ticks "Barinade sways, 3 Bari circling and sparking: a beat passes" by world priority 71 in enemy at 2180 6100
+  take enemy_turn
+  need phase_p2_move_3
+  take timer_p2_move_3
+  give enemy_act
+
+verb p2_move_3_step_1 "Barinade stops swaying" by world priority 69 in enemy at 2040 6170
+  take enemy_act
+  take phase_p2_move_3
+  give phase_p2_pause_3
+  give 13 timer_p2_pause_3
+  unless timer_p2_move_3
+  give beat_end
+
+verb p2_move_3_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 6170
+  take enemy_act
+  need phase_p2_move_3
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p2_move_3_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 6240
+  take enemy_act
+  need phase_p2_move_3
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p2_move_3_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 6240
+  take enemy_act
+  need phase_p2_move_3
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_move_3_holds "Barinade sways, 3 Bari circling and sparking: nothing changes" by world priority 68 in enemy at 2040 6310
+  take enemy_act
+  need phase_p2_move_3
+  give beat_end
+
+verb p2_pause_3_ticks "Barinade pauses, 3 Bari hanging still: a beat passes" by world priority 71 in enemy at 2180 6310
+  take enemy_turn
+  need phase_p2_pause_3
+  take timer_p2_pause_3
+  give enemy_act
+
+verb p2_pause_3_step_1 "Barinade sways again" by world priority 69 in enemy at 2040 6380
+  take enemy_act
+  take phase_p2_pause_3
+  give phase_p2_move_3
+  give 13 timer_p2_move_3
+  unless timer_p2_pause_3
+  give beat_end
+
+verb p2_pause_3_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2180 6380
+  take enemy_act
+  need phase_p2_pause_3
+  give incoming_lightning
+  give beat_end
+
+verb p2_pause_3_step_3 "The zappers are still charging" by world priority 69 in enemy at 2040 6450
+  take enemy_act
+  need phase_p2_pause_3
+  give beat_end
+
+verb p2_pause_3_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 6450
+  take enemy_act
+  need phase_p2_pause_3
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_stun_3_ticks "Barinade is stunned, 3 Bari left: a beat passes" by world priority 71 in enemy at 2040 6520
+  take enemy_turn
+  need phase_p2_stun_3
+  take timer_p2_stun_3
+  give enemy_act
+
+verb p2_stun_3_step_1 "Barinade recovers" by world priority 69 in enemy at 2180 6520
+  take enemy_act
+  take phase_p2_stun_3
+  give phase_p2_move_3
+  give 13 timer_p2_move_3
+  unless timer_p2_stun_3
+  give beat_end
+
+verb p2_stun_3_holds "Barinade is stunned, 3 Bari left: nothing changes" by world priority 68 in enemy at 2040 6590
+  take enemy_act
+  need phase_p2_stun_3
+  give beat_end
+
+verb p2_move_2_ticks "Barinade sways, 2 Bari circling and sparking: a beat passes" by world priority 71 in enemy at 2180 6590
+  take enemy_turn
+  need phase_p2_move_2
+  take timer_p2_move_2
+  give enemy_act
+
+verb p2_move_2_step_1 "Barinade stops swaying" by world priority 69 in enemy at 2040 6660
+  take enemy_act
+  take phase_p2_move_2
+  give phase_p2_pause_2
+  give 13 timer_p2_pause_2
+  unless timer_p2_move_2
+  give beat_end
+
+verb p2_move_2_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 6660
+  take enemy_act
+  need phase_p2_move_2
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p2_move_2_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 6730
+  take enemy_act
+  need phase_p2_move_2
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p2_move_2_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 6730
+  take enemy_act
+  need phase_p2_move_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_move_2_holds "Barinade sways, 2 Bari circling and sparking: nothing changes" by world priority 68 in enemy at 2040 6800
+  take enemy_act
+  need phase_p2_move_2
+  give beat_end
+
+verb p2_pause_2_ticks "Barinade pauses, 2 Bari hanging still: a beat passes" by world priority 71 in enemy at 2180 6800
+  take enemy_turn
+  need phase_p2_pause_2
+  take timer_p2_pause_2
+  give enemy_act
+
+verb p2_pause_2_step_1 "Barinade sways again" by world priority 69 in enemy at 2040 6870
+  take enemy_act
+  take phase_p2_pause_2
+  give phase_p2_move_2
+  give 13 timer_p2_move_2
+  unless timer_p2_pause_2
+  give beat_end
+
+verb p2_pause_2_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2180 6870
+  take enemy_act
+  need phase_p2_pause_2
+  give incoming_lightning
+  give beat_end
+
+verb p2_pause_2_step_3 "The zappers are still charging" by world priority 69 in enemy at 2040 6940
+  take enemy_act
+  need phase_p2_pause_2
+  give beat_end
+
+verb p2_pause_2_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 6940
+  take enemy_act
+  need phase_p2_pause_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_stun_2_ticks "Barinade is stunned, 2 Bari left: a beat passes" by world priority 71 in enemy at 2040 7010
+  take enemy_turn
+  need phase_p2_stun_2
+  take timer_p2_stun_2
+  give enemy_act
+
+verb p2_stun_2_step_1 "Barinade recovers" by world priority 69 in enemy at 2180 7010
+  take enemy_act
+  take phase_p2_stun_2
+  give phase_p2_move_2
+  give 13 timer_p2_move_2
+  unless timer_p2_stun_2
+  give beat_end
+
+verb p2_stun_2_holds "Barinade is stunned, 2 Bari left: nothing changes" by world priority 68 in enemy at 2040 7080
+  take enemy_act
+  need phase_p2_stun_2
+  give beat_end
+
+verb p2_move_1_ticks "Barinade sways, 1 Bari circling and sparking: a beat passes" by world priority 71 in enemy at 2180 7080
+  take enemy_turn
+  need phase_p2_move_1
+  take timer_p2_move_1
+  give enemy_act
+
+verb p2_move_1_step_1 "Barinade stops swaying" by world priority 69 in enemy at 2040 7150
+  take enemy_act
+  take phase_p2_move_1
+  give phase_p2_pause_1
+  give 13 timer_p2_pause_1
+  unless timer_p2_move_1
+  give beat_end
+
+verb p2_move_1_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 7150
+  take enemy_act
+  need phase_p2_move_1
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p2_move_1_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 7220
+  take enemy_act
+  need phase_p2_move_1
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p2_move_1_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 7220
+  take enemy_act
+  need phase_p2_move_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_move_1_holds "Barinade sways, 1 Bari circling and sparking: nothing changes" by world priority 68 in enemy at 2040 7290
+  take enemy_act
+  need phase_p2_move_1
+  give beat_end
+
+verb p2_pause_1_ticks "Barinade pauses, 1 Bari hanging still: a beat passes" by world priority 71 in enemy at 2180 7290
+  take enemy_turn
+  need phase_p2_pause_1
+  take timer_p2_pause_1
+  give enemy_act
+
+verb p2_pause_1_step_1 "Barinade sways again" by world priority 69 in enemy at 2040 7360
+  take enemy_act
+  take phase_p2_pause_1
+  give phase_p2_move_1
+  give 13 timer_p2_move_1
+  unless timer_p2_pause_1
+  give beat_end
+
+verb p2_pause_1_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2180 7360
+  take enemy_act
+  need phase_p2_pause_1
+  give incoming_lightning
+  give beat_end
+
+verb p2_pause_1_step_3 "The zappers are still charging" by world priority 69 in enemy at 2040 7430
+  take enemy_act
+  need phase_p2_pause_1
+  give beat_end
+
+verb p2_pause_1_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 7430
+  take enemy_act
+  need phase_p2_pause_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p2_stun_1_ticks "Barinade is stunned, 1 Bari left: a beat passes" by world priority 71 in enemy at 2040 7500
+  take enemy_turn
+  need phase_p2_stun_1
+  take timer_p2_stun_1
+  give enemy_act
+
+verb p2_stun_1_step_1 "Barinade recovers" by world priority 69 in enemy at 2180 7500
+  take enemy_act
+  take phase_p2_stun_1
+  give phase_p2_move_1
+  give 13 timer_p2_move_1
+  unless timer_p2_stun_1
+  give beat_end
+
+verb p2_stun_1_holds "Barinade is stunned, 1 Bari left: nothing changes" by world priority 68 in enemy at 2040 7570
+  take enemy_act
+  need phase_p2_stun_1
+  give beat_end
+
+verb p3_act_move_5_ticks "Barinade roams the floor, 5 Bari spinning around it: a beat passes" by world priority 71 in enemy at 2180 7570
+  take enemy_turn
+  need phase_p3_act_move_5
+  take timer_p3_act_move_5
+  give enemy_act
+
+verb p3_act_move_5_step_1 "The Bari stop and hold Barinade still" by world priority 69 in enemy at 2040 7640
+  take enemy_act
+  take phase_p3_act_move_5
+  give phase_p3_act_halt_5
+  give 6 timer_p3_act_halt_5
+  unless timer_p3_act_move_5
+  give beat_end
+
+verb p3_act_move_5_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 7640
+  take enemy_act
+  need phase_p3_act_move_5
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_5_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 7710
+  take enemy_act
+  need phase_p3_act_move_5
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_move_5_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 7710
+  take enemy_act
+  need phase_p3_act_move_5
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_5_step_5 "The zappers hold while Barinade moves" by world priority 69 in enemy at 2040 7780
+  take enemy_act
+  need phase_p3_act_move_5
+  give beat_end
+
+verb p3_act_halt_5_ticks "Barinade halts, 5 Bari holding it still: a beat passes" by world priority 71 in enemy at 2180 7780
+  take enemy_turn
+  need phase_p3_act_halt_5
+  take timer_p3_act_halt_5
+  give enemy_act
+
+verb p3_act_halt_5_step_1 "The Bari let Barinade move again" by world priority 69 in enemy at 2040 7850
+  take enemy_act
+  take phase_p3_act_halt_5
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+  unless timer_p3_act_halt_5
+  give beat_end
+
+verb p3_act_halt_5_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 7850
+  take enemy_act
+  need phase_p3_act_halt_5
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_5_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 7920
+  take enemy_act
+  need phase_p3_act_halt_5
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_halt_5_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 7920
+  take enemy_act
+  need phase_p3_act_halt_5
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_5_step_5 "A zapper fires its beam" by world priority 69 in enemy at 2040 7990
+  take enemy_act
+  need phase_p3_act_halt_5
+  give incoming_lightning
+  give beat_end
+
+verb p3_act_halt_5_step_6 "The zappers are still charging" by world priority 69 in enemy at 2180 7990
+  take enemy_act
+  need phase_p3_act_halt_5
+  give beat_end
+
+verb p3_stun_5_ticks "Barinade is stunned, 5 Bari stunned with it: a beat passes" by world priority 71 in enemy at 2040 8060
+  take enemy_turn
+  need phase_p3_stun_5
+  take timer_p3_stun_5
+  give enemy_act
+
+verb p3_stun_5_step_1 "Barinade and its Bari recover" by world priority 69 in enemy at 2180 8060
+  take enemy_act
+  take phase_p3_stun_5
+  give phase_p3_act_move_5
+  give 19 timer_p3_act_move_5
+  unless timer_p3_stun_5
+  give beat_end
+
+verb p3_stun_5_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 8130
+  take enemy_act
+  need phase_p3_stun_5
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_stun_5_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 8130
+  take enemy_act
+  need phase_p3_stun_5
+  give incoming_lightning
+  give beat_end
+
+verb p3_stun_5_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 8200
+  take enemy_act
+  need phase_p3_stun_5
+  give beat_end
+
+verb p3_act_move_4_ticks "Barinade roams the floor, 4 Bari spinning around it: a beat passes" by world priority 71 in enemy at 2180 8200
+  take enemy_turn
+  need phase_p3_act_move_4
+  take timer_p3_act_move_4
+  give enemy_act
+
+verb p3_act_move_4_step_1 "The Bari stop and hold Barinade still" by world priority 69 in enemy at 2040 8270
+  take enemy_act
+  take phase_p3_act_move_4
+  give phase_p3_act_halt_4
+  give 6 timer_p3_act_halt_4
+  unless timer_p3_act_move_4
+  give beat_end
+
+verb p3_act_move_4_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 8270
+  take enemy_act
+  need phase_p3_act_move_4
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_4_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 8340
+  take enemy_act
+  need phase_p3_act_move_4
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_move_4_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 8340
+  take enemy_act
+  need phase_p3_act_move_4
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_4_step_5 "The zappers hold while Barinade moves" by world priority 69 in enemy at 2040 8410
+  take enemy_act
+  need phase_p3_act_move_4
+  give beat_end
+
+verb p3_act_halt_4_ticks "Barinade halts, 4 Bari holding it still: a beat passes" by world priority 71 in enemy at 2180 8410
+  take enemy_turn
+  need phase_p3_act_halt_4
+  take timer_p3_act_halt_4
+  give enemy_act
+
+verb p3_act_halt_4_step_1 "The Bari let Barinade move again" by world priority 69 in enemy at 2040 8480
+  take enemy_act
+  take phase_p3_act_halt_4
+  give phase_p3_act_move_4
+  give 19 timer_p3_act_move_4
+  unless timer_p3_act_halt_4
+  give beat_end
+
+verb p3_act_halt_4_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 8480
+  take enemy_act
+  need phase_p3_act_halt_4
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_4_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 8550
+  take enemy_act
+  need phase_p3_act_halt_4
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_halt_4_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 8550
+  take enemy_act
+  need phase_p3_act_halt_4
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_4_step_5 "A zapper fires its beam" by world priority 69 in enemy at 2040 8620
+  take enemy_act
+  need phase_p3_act_halt_4
+  give incoming_lightning
+  give beat_end
+
+verb p3_act_halt_4_step_6 "The zappers are still charging" by world priority 69 in enemy at 2180 8620
+  take enemy_act
+  need phase_p3_act_halt_4
+  give beat_end
+
+verb p3_stun_4_ticks "Barinade is stunned, 4 Bari stunned with it: a beat passes" by world priority 71 in enemy at 2040 8690
+  take enemy_turn
+  need phase_p3_stun_4
+  take timer_p3_stun_4
+  give enemy_act
+
+verb p3_stun_4_step_1 "Barinade and its Bari recover" by world priority 69 in enemy at 2180 8690
+  take enemy_act
+  take phase_p3_stun_4
+  give phase_p3_act_move_4
+  give 19 timer_p3_act_move_4
+  unless timer_p3_stun_4
+  give beat_end
+
+verb p3_stun_4_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 8760
+  take enemy_act
+  need phase_p3_stun_4
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_stun_4_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 8760
+  take enemy_act
+  need phase_p3_stun_4
+  give incoming_lightning
+  give beat_end
+
+verb p3_stun_4_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 8830
+  take enemy_act
+  need phase_p3_stun_4
+  give beat_end
+
+verb p3_act_move_3_ticks "Barinade roams the floor, 3 Bari spinning around it: a beat passes" by world priority 71 in enemy at 2180 8830
+  take enemy_turn
+  need phase_p3_act_move_3
+  take timer_p3_act_move_3
+  give enemy_act
+
+verb p3_act_move_3_step_1 "The Bari stop and hold Barinade still" by world priority 69 in enemy at 2040 8900
+  take enemy_act
+  take phase_p3_act_move_3
+  give phase_p3_act_halt_3
+  give 6 timer_p3_act_halt_3
+  unless timer_p3_act_move_3
+  give beat_end
+
+verb p3_act_move_3_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 8900
+  take enemy_act
+  need phase_p3_act_move_3
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_3_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 8970
+  take enemy_act
+  need phase_p3_act_move_3
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_move_3_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 8970
+  take enemy_act
+  need phase_p3_act_move_3
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_3_step_5 "The zappers hold while Barinade moves" by world priority 69 in enemy at 2040 9040
+  take enemy_act
+  need phase_p3_act_move_3
+  give beat_end
+
+verb p3_act_halt_3_ticks "Barinade halts, 3 Bari holding it still: a beat passes" by world priority 71 in enemy at 2180 9040
+  take enemy_turn
+  need phase_p3_act_halt_3
+  take timer_p3_act_halt_3
+  give enemy_act
+
+verb p3_act_halt_3_step_1 "The Bari let Barinade move again" by world priority 69 in enemy at 2040 9110
+  take enemy_act
+  take phase_p3_act_halt_3
+  give phase_p3_act_move_3
+  give 19 timer_p3_act_move_3
+  unless timer_p3_act_halt_3
+  give beat_end
+
+verb p3_act_halt_3_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 9110
+  take enemy_act
+  need phase_p3_act_halt_3
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_3_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 9180
+  take enemy_act
+  need phase_p3_act_halt_3
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_halt_3_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 9180
+  take enemy_act
+  need phase_p3_act_halt_3
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_3_step_5 "A zapper fires its beam" by world priority 69 in enemy at 2040 9250
+  take enemy_act
+  need phase_p3_act_halt_3
+  give incoming_lightning
+  give beat_end
+
+verb p3_act_halt_3_step_6 "The zappers are still charging" by world priority 69 in enemy at 2180 9250
+  take enemy_act
+  need phase_p3_act_halt_3
+  give beat_end
+
+verb p3_stun_3_ticks "Barinade is stunned, 3 Bari stunned with it: a beat passes" by world priority 71 in enemy at 2040 9320
+  take enemy_turn
+  need phase_p3_stun_3
+  take timer_p3_stun_3
+  give enemy_act
+
+verb p3_stun_3_step_1 "Barinade and its Bari recover" by world priority 69 in enemy at 2180 9320
+  take enemy_act
+  take phase_p3_stun_3
+  give phase_p3_act_move_3
+  give 19 timer_p3_act_move_3
+  unless timer_p3_stun_3
+  give beat_end
+
+verb p3_stun_3_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 9390
+  take enemy_act
+  need phase_p3_stun_3
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_stun_3_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 9390
+  take enemy_act
+  need phase_p3_stun_3
+  give incoming_lightning
+  give beat_end
+
+verb p3_stun_3_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 9460
+  take enemy_act
+  need phase_p3_stun_3
+  give beat_end
+
+verb p3_act_move_2_ticks "Barinade roams the floor, 2 Bari spinning around it: a beat passes" by world priority 71 in enemy at 2180 9460
+  take enemy_turn
+  need phase_p3_act_move_2
+  take timer_p3_act_move_2
+  give enemy_act
+
+verb p3_act_move_2_step_1 "The Bari stop and hold Barinade still" by world priority 69 in enemy at 2040 9530
+  take enemy_act
+  take phase_p3_act_move_2
+  give phase_p3_act_halt_2
+  give 6 timer_p3_act_halt_2
+  unless timer_p3_act_move_2
+  give beat_end
+
+verb p3_act_move_2_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 9530
+  take enemy_act
+  need phase_p3_act_move_2
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_2_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 9600
+  take enemy_act
+  need phase_p3_act_move_2
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_move_2_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 9600
+  take enemy_act
+  need phase_p3_act_move_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_2_step_5 "The zappers hold while Barinade moves" by world priority 69 in enemy at 2040 9670
+  take enemy_act
+  need phase_p3_act_move_2
+  give beat_end
+
+verb p3_act_halt_2_ticks "Barinade halts, 2 Bari holding it still: a beat passes" by world priority 71 in enemy at 2180 9670
+  take enemy_turn
+  need phase_p3_act_halt_2
+  take timer_p3_act_halt_2
+  give enemy_act
+
+verb p3_act_halt_2_step_1 "The Bari let Barinade move again" by world priority 69 in enemy at 2040 9740
+  take enemy_act
+  take phase_p3_act_halt_2
+  give phase_p3_act_move_2
+  give 19 timer_p3_act_move_2
+  unless timer_p3_act_halt_2
+  give beat_end
+
+verb p3_act_halt_2_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 9740
+  take enemy_act
+  need phase_p3_act_halt_2
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_2_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 9810
+  take enemy_act
+  need phase_p3_act_halt_2
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_halt_2_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 9810
+  take enemy_act
+  need phase_p3_act_halt_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_2_step_5 "A zapper fires its beam" by world priority 69 in enemy at 2040 9880
+  take enemy_act
+  need phase_p3_act_halt_2
+  give incoming_lightning
+  give beat_end
+
+verb p3_act_halt_2_step_6 "The zappers are still charging" by world priority 69 in enemy at 2180 9880
+  take enemy_act
+  need phase_p3_act_halt_2
+  give beat_end
+
+verb p3_stun_2_ticks "Barinade is stunned, 2 Bari stunned with it: a beat passes" by world priority 71 in enemy at 2040 9950
+  take enemy_turn
+  need phase_p3_stun_2
+  take timer_p3_stun_2
+  give enemy_act
+
+verb p3_stun_2_step_1 "Barinade and its Bari recover" by world priority 69 in enemy at 2180 9950
+  take enemy_act
+  take phase_p3_stun_2
+  give phase_p3_act_move_2
+  give 19 timer_p3_act_move_2
+  unless timer_p3_stun_2
+  give beat_end
+
+verb p3_stun_2_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 10020
+  take enemy_act
+  need phase_p3_stun_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_stun_2_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 10020
+  take enemy_act
+  need phase_p3_stun_2
+  give incoming_lightning
+  give beat_end
+
+verb p3_stun_2_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 10090
+  take enemy_act
+  need phase_p3_stun_2
+  give beat_end
+
+verb p3_act_move_1_ticks "Barinade roams the floor, 1 Bari spinning around it: a beat passes" by world priority 71 in enemy at 2180 10090
+  take enemy_turn
+  need phase_p3_act_move_1
+  take timer_p3_act_move_1
+  give enemy_act
+
+verb p3_act_move_1_step_1 "The Bari stop and hold Barinade still" by world priority 69 in enemy at 2040 10160
+  take enemy_act
+  take phase_p3_act_move_1
+  give phase_p3_act_halt_1
+  give 6 timer_p3_act_halt_1
+  unless timer_p3_act_move_1
+  give beat_end
+
+verb p3_act_move_1_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 10160
+  take enemy_act
+  need phase_p3_act_move_1
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_1_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 10230
+  take enemy_act
+  need phase_p3_act_move_1
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_move_1_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 10230
+  take enemy_act
+  need phase_p3_act_move_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_move_1_step_5 "The zappers hold while Barinade moves" by world priority 69 in enemy at 2040 10300
+  take enemy_act
+  need phase_p3_act_move_1
+  give beat_end
+
+verb p3_act_halt_1_ticks "Barinade halts, 1 Bari holding it still: a beat passes" by world priority 71 in enemy at 2180 10300
+  take enemy_turn
+  need phase_p3_act_halt_1
+  take timer_p3_act_halt_1
+  give enemy_act
+
+verb p3_act_halt_1_step_1 "The Bari let Barinade move again" by world priority 69 in enemy at 2040 10370
+  take enemy_act
+  take phase_p3_act_halt_1
+  give phase_p3_act_move_1
+  give 19 timer_p3_act_move_1
+  unless timer_p3_act_halt_1
+  give beat_end
+
+verb p3_act_halt_1_step_2 "A Bari touches Link" by world priority 69 in enemy at 2180 10370
+  take enemy_act
+  need phase_p3_act_halt_1
+  give incoming_bari_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_1_step_3 "A Bari's arc shocks Link" by world priority 69 in enemy at 2040 10440
+  take enemy_act
+  need phase_p3_act_halt_1
+  give incoming_lightning
+  give beat_end
+  need range_near
+
+verb p3_act_halt_1_step_4 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 10440
+  take enemy_act
+  need phase_p3_act_halt_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_act_halt_1_step_5 "A zapper fires its beam" by world priority 69 in enemy at 2040 10510
+  take enemy_act
+  need phase_p3_act_halt_1
+  give incoming_lightning
+  give beat_end
+
+verb p3_act_halt_1_step_6 "The zappers are still charging" by world priority 69 in enemy at 2180 10510
+  take enemy_act
+  need phase_p3_act_halt_1
+  give beat_end
+
+verb p3_stun_1_ticks "Barinade is stunned, 1 Bari stunned with it: a beat passes" by world priority 71 in enemy at 2040 10580
+  take enemy_turn
+  need phase_p3_stun_1
+  take timer_p3_stun_1
+  give enemy_act
+
+verb p3_stun_1_step_1 "Barinade and its Bari recover" by world priority 69 in enemy at 2180 10580
+  take enemy_act
+  take phase_p3_stun_1
+  give phase_p3_act_move_1
+  give 19 timer_p3_act_move_1
+  unless timer_p3_stun_1
+  give beat_end
+
+verb p3_stun_1_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 10650
+  take enemy_act
+  need phase_p3_stun_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p3_stun_1_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 10650
+  take enemy_act
+  need phase_p3_stun_1
+  give incoming_lightning
+  give beat_end
+
+verb p3_stun_1_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 10720
+  take enemy_act
+  need phase_p3_stun_1
+  give beat_end
+
+verb p4_roam_1_ticks "Barinade spins after Link (round 1): a beat passes" by world priority 71 in enemy at 2180 10720
+  take enemy_turn
+  need phase_p4_roam_1
+  take timer_p4_roam_1
+  give enemy_act
+
+verb p4_roam_1_step_1 "Barinade dives" by world priority 69 in enemy at 2040 10790
+  take enemy_act
+  take phase_p4_roam_1
+  give phase_p4_dive_1
+  give 16 timer_p4_dive_1
+  unless timer_p4_roam_1
+  give beat_end
+
+verb p4_roam_1_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 10790
+  take enemy_act
+  need phase_p4_roam_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p4_roam_1_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2040 10860
+  take enemy_act
+  need phase_p4_roam_1
+  give incoming_lightning
+  give beat_end
+
+verb p4_roam_1_step_4 "The zappers are still charging" by world priority 69 in enemy at 2180 10860
+  take enemy_act
+  need phase_p4_roam_1
+  give beat_end
+
+verb p4_stun_1_ticks "Barinade is stunned, its core open (round 1): a beat passes" by world priority 71 in enemy at 2040 10930
+  take enemy_turn
+  need phase_p4_stun_1
+  take timer_p4_stun_1
+  give enemy_act
+
+verb p4_stun_1_step_1 "Barinade spins up again" by world priority 69 in enemy at 2180 10930
+  take enemy_act
+  take phase_p4_stun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+  unless timer_p4_stun_1
+  give beat_end
+
+verb p4_stun_1_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2040 11000
+  take enemy_act
+  need phase_p4_stun_1
+  give incoming_lightning
+  give beat_end
+
+verb p4_stun_1_step_3 "The zappers are still charging" by world priority 69 in enemy at 2180 11000
+  take enemy_act
+  need phase_p4_stun_1
+  give beat_end
+
+verb p4_restun_1_ticks "Barinade is stunned, its core open (round 1, stunned again): a beat passes" by world priority 71 in enemy at 2040 11070
+  take enemy_turn
+  need phase_p4_restun_1
+  take timer_p4_restun_1
+  give enemy_act
+
+verb p4_restun_1_step_1 "Barinade spins up again" by world priority 69 in enemy at 2180 11070
+  take enemy_act
+  take phase_p4_restun_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+  unless timer_p4_restun_1
+  give beat_end
+
+verb p4_restun_1_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2040 11140
+  take enemy_act
+  need phase_p4_restun_1
+  give incoming_lightning
+  give beat_end
+
+verb p4_restun_1_step_3 "The zappers are still charging" by world priority 69 in enemy at 2180 11140
+  take enemy_act
+  need phase_p4_restun_1
+  give beat_end
+
+verb p4_dive_1_ticks "Barinade dives under the floor (round 1): a beat passes" by world priority 71 in enemy at 2040 11210
+  take enemy_turn
+  need phase_p4_dive_1
+  take timer_p4_dive_1
+  give enemy_act
+
+verb p4_dive_1_step_1 "Barinade surfaces" by world priority 69 in enemy at 2180 11210
+  take enemy_act
+  take phase_p4_dive_1
+  give phase_p4_roam_1
+  give 19 timer_p4_roam_1
+  unless timer_p4_dive_1
+  give beat_end
+
+verb p4_dive_1_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 11280
+  take enemy_act
+  need phase_p4_dive_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p4_dive_1_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 11280
+  take enemy_act
+  need phase_p4_dive_1
+  give incoming_lightning
+  give beat_end
+
+verb p4_dive_1_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 11350
+  take enemy_act
+  need phase_p4_dive_1
+  give beat_end
+
+verb p4_sink_1_ticks "Barinade sinks away after a beating (round 1): a beat passes" by world priority 71 in enemy at 2180 11350
+  take enemy_turn
+  need phase_p4_sink_1
+  take timer_p4_sink_1
+  give enemy_act
+
+verb p4_sink_1_step_1 "Barinade surfaces, faster" by world priority 69 in enemy at 2040 11420
+  take enemy_act
+  take phase_p4_sink_1
+  give phase_p4_roam_2
+  give 19 timer_p4_roam_2
+  unless timer_p4_sink_1
+  give beat_end
+
+verb p4_sink_1_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 11420
+  take enemy_act
+  need phase_p4_sink_1
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p4_sink_1_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2040 11490
+  take enemy_act
+  need phase_p4_sink_1
+  give incoming_lightning
+  give beat_end
+
+verb p4_sink_1_step_4 "The zappers are still charging" by world priority 69 in enemy at 2180 11490
+  take enemy_act
+  need phase_p4_sink_1
+  give beat_end
+
+verb p4_roam_2_ticks "Barinade spins after Link (round 2): a beat passes" by world priority 71 in enemy at 2040 11560
+  take enemy_turn
+  need phase_p4_roam_2
+  take timer_p4_roam_2
+  give enemy_act
+
+verb p4_roam_2_step_1 "Barinade dives" by world priority 69 in enemy at 2180 11560
+  take enemy_act
+  take phase_p4_roam_2
+  give phase_p4_dive_2
+  give 16 timer_p4_dive_2
+  unless timer_p4_roam_2
+  give beat_end
+
+verb p4_roam_2_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 11630
+  take enemy_act
+  need phase_p4_roam_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p4_roam_2_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 11630
+  take enemy_act
+  need phase_p4_roam_2
+  give incoming_lightning
+  give beat_end
+
+verb p4_roam_2_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 11700
+  take enemy_act
+  need phase_p4_roam_2
+  give beat_end
+
+verb p4_stun_2_ticks "Barinade is stunned, its core open (round 2): a beat passes" by world priority 71 in enemy at 2180 11700
+  take enemy_turn
+  need phase_p4_stun_2
+  take timer_p4_stun_2
+  give enemy_act
+
+verb p4_stun_2_step_1 "Barinade spins up again" by world priority 69 in enemy at 2040 11770
+  take enemy_act
+  take phase_p4_stun_2
+  give phase_p4_roam_2
+  give 19 timer_p4_roam_2
+  unless timer_p4_stun_2
+  give beat_end
+
+verb p4_stun_2_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2180 11770
+  take enemy_act
+  need phase_p4_stun_2
+  give incoming_lightning
+  give beat_end
+
+verb p4_stun_2_step_3 "The zappers are still charging" by world priority 69 in enemy at 2040 11840
+  take enemy_act
+  need phase_p4_stun_2
+  give beat_end
+
+verb p4_restun_2_ticks "Barinade is stunned, its core open (round 2, stunned again): a beat passes" by world priority 71 in enemy at 2180 11840
+  take enemy_turn
+  need phase_p4_restun_2
+  take timer_p4_restun_2
+  give enemy_act
+
+verb p4_restun_2_step_1 "Barinade spins up again" by world priority 69 in enemy at 2040 11910
+  take enemy_act
+  take phase_p4_restun_2
+  give phase_p4_roam_2
+  give 19 timer_p4_roam_2
+  unless timer_p4_restun_2
+  give beat_end
+
+verb p4_restun_2_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2180 11910
+  take enemy_act
+  need phase_p4_restun_2
+  give incoming_lightning
+  give beat_end
+
+verb p4_restun_2_step_3 "The zappers are still charging" by world priority 69 in enemy at 2040 11980
+  take enemy_act
+  need phase_p4_restun_2
+  give beat_end
+
+verb p4_dive_2_ticks "Barinade dives under the floor (round 2): a beat passes" by world priority 71 in enemy at 2180 11980
+  take enemy_turn
+  need phase_p4_dive_2
+  take timer_p4_dive_2
+  give enemy_act
+
+verb p4_dive_2_step_1 "Barinade surfaces" by world priority 69 in enemy at 2040 12050
+  take enemy_act
+  take phase_p4_dive_2
+  give phase_p4_roam_2
+  give 19 timer_p4_roam_2
+  unless timer_p4_dive_2
+  give beat_end
+
+verb p4_dive_2_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 12050
+  take enemy_act
+  need phase_p4_dive_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p4_dive_2_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2040 12120
+  take enemy_act
+  need phase_p4_dive_2
+  give incoming_lightning
+  give beat_end
+
+verb p4_dive_2_step_4 "The zappers are still charging" by world priority 69 in enemy at 2180 12120
+  take enemy_act
+  need phase_p4_dive_2
+  give beat_end
+
+verb p4_sink_2_ticks "Barinade sinks away after a beating (round 2): a beat passes" by world priority 71 in enemy at 2040 12190
+  take enemy_turn
+  need phase_p4_sink_2
+  take timer_p4_sink_2
+  give enemy_act
+
+verb p4_sink_2_step_1 "Barinade surfaces, faster" by world priority 69 in enemy at 2180 12190
+  take enemy_act
+  take phase_p4_sink_2
+  give phase_p4_roam_3
+  give 19 timer_p4_roam_3
+  unless timer_p4_sink_2
+  give beat_end
+
+verb p4_sink_2_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 12260
+  take enemy_act
+  need phase_p4_sink_2
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p4_sink_2_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 12260
+  take enemy_act
+  need phase_p4_sink_2
+  give incoming_lightning
+  give beat_end
+
+verb p4_sink_2_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 12330
+  take enemy_act
+  need phase_p4_sink_2
+  give beat_end
+
+verb p4_roam_3_ticks "Barinade spins after Link (round 3): a beat passes" by world priority 71 in enemy at 2180 12330
+  take enemy_turn
+  need phase_p4_roam_3
+  take timer_p4_roam_3
+  give enemy_act
+
+verb p4_roam_3_step_1 "Barinade dives" by world priority 69 in enemy at 2040 12400
+  take enemy_act
+  take phase_p4_roam_3
+  give phase_p4_dive_3
+  give 16 timer_p4_dive_3
+  unless timer_p4_roam_3
+  give beat_end
+
+verb p4_roam_3_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2180 12400
+  take enemy_act
+  need phase_p4_roam_3
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p4_roam_3_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2040 12470
+  take enemy_act
+  need phase_p4_roam_3
+  give incoming_lightning
+  give beat_end
+
+verb p4_roam_3_step_4 "The zappers are still charging" by world priority 69 in enemy at 2180 12470
+  take enemy_act
+  need phase_p4_roam_3
+  give beat_end
+
+verb p4_stun_3_ticks "Barinade is stunned, its core open (round 3): a beat passes" by world priority 71 in enemy at 2040 12540
+  take enemy_turn
+  need phase_p4_stun_3
+  take timer_p4_stun_3
+  give enemy_act
+
+verb p4_stun_3_step_1 "Barinade spins up again" by world priority 69 in enemy at 2180 12540
+  take enemy_act
+  take phase_p4_stun_3
+  give phase_p4_roam_3
+  give 19 timer_p4_roam_3
+  unless timer_p4_stun_3
+  give beat_end
+
+verb p4_stun_3_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2040 12610
+  take enemy_act
+  need phase_p4_stun_3
+  give incoming_lightning
+  give beat_end
+
+verb p4_stun_3_step_3 "The zappers are still charging" by world priority 69 in enemy at 2180 12610
+  take enemy_act
+  need phase_p4_stun_3
+  give beat_end
+
+verb p4_restun_3_ticks "Barinade is stunned, its core open (round 3, stunned again): a beat passes" by world priority 71 in enemy at 2040 12680
+  take enemy_turn
+  need phase_p4_restun_3
+  take timer_p4_restun_3
+  give enemy_act
+
+verb p4_restun_3_step_1 "Barinade spins up again" by world priority 69 in enemy at 2180 12680
+  take enemy_act
+  take phase_p4_restun_3
+  give phase_p4_roam_3
+  give 19 timer_p4_roam_3
+  unless timer_p4_restun_3
+  give beat_end
+
+verb p4_restun_3_step_2 "A zapper fires its beam" by world priority 69 in enemy at 2040 12750
+  take enemy_act
+  need phase_p4_restun_3
+  give incoming_lightning
+  give beat_end
+
+verb p4_restun_3_step_3 "The zappers are still charging" by world priority 69 in enemy at 2180 12750
+  take enemy_act
+  need phase_p4_restun_3
+  give beat_end
+
+verb p4_dive_3_ticks "Barinade dives under the floor (round 3): a beat passes" by world priority 71 in enemy at 2040 12820
+  take enemy_turn
+  need phase_p4_dive_3
+  take timer_p4_dive_3
+  give enemy_act
+
+verb p4_dive_3_step_1 "Barinade surfaces" by world priority 69 in enemy at 2180 12820
+  take enemy_act
+  take phase_p4_dive_3
+  give phase_p4_roam_3
+  give 19 timer_p4_roam_3
+  unless timer_p4_dive_3
+  give beat_end
+
+verb p4_dive_3_step_2 "Barinade's body shocks Link" by world priority 69 in enemy at 2040 12890
+  take enemy_act
+  need phase_p4_dive_3
+  give incoming_body_touch
+  give beat_end
+  need range_near
+
+verb p4_dive_3_step_3 "A zapper fires its beam" by world priority 69 in enemy at 2180 12890
+  take enemy_act
+  need phase_p4_dive_3
+  give incoming_lightning
+  give beat_end
+
+verb p4_dive_3_step_4 "The zappers are still charging" by world priority 69 in enemy at 2040 12960
+  take enemy_act
+  need phase_p4_dive_3
+  give beat_end
+
+verb body_touch_blocked_deku_shield "Barinade's electrified body: blocked by the deku shield" by world priority 60 in attacks at 3460 80
+  take incoming_body_touch
+  need guard_with_deku_shield
+
+verb body_touch_blocked_hylian_shield "Barinade's electrified body: blocked by the hylian shield" by world priority 60 in attacks at 3320 150
+  take incoming_body_touch
+  need guard_with_hylian_shield
+
+verb body_touch_dodged "Barinade's electrified body: dodged" by world priority 60 in attacks at 3460 150
+  take incoming_body_touch
+  need link_dodge
+  unless link_guard
+
+verb body_touch_nayru "Barinade's electrified body: Nayru's Love holds" by world priority 60 in attacks at 3320 220
+  take incoming_body_touch
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb body_touch_lands "Barinade's electrified body hits Link" by world priority 60 in attacks at 3460 220
+  take incoming_body_touch
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  give 4 link_dmg
+  give status_shock
+  unless status_shock
+
+verb body_touch_lands_again "Barinade's electrified body hits Link again" by world priority 60 in attacks at 3320 290
+  take incoming_body_touch
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  give 4 link_dmg
+  need status_shock
+
+verb bari_touch_blocked_deku_shield "Bari contact: blocked by the deku shield" by world priority 60 in attacks at 3320 360
+  take incoming_bari_touch
+  need guard_with_deku_shield
+
+verb bari_touch_blocked_hylian_shield "Bari contact: blocked by the hylian shield" by world priority 60 in attacks at 3460 360
+  take incoming_bari_touch
+  need guard_with_hylian_shield
+
+verb bari_touch_dodged "Bari contact: dodged" by world priority 60 in attacks at 3320 430
+  take incoming_bari_touch
+  need link_dodge
+  unless link_guard
+
+verb bari_touch_nayru "Bari contact: Nayru's Love holds" by world priority 60 in attacks at 3460 430
+  take incoming_bari_touch
+  need status_nayru
+  unless link_guard
+  unless link_dodge
+
+verb bari_touch_lands "Bari contact hits Link" by world priority 60 in attacks at 3320 500
+  take incoming_bari_touch
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  give 2 link_dmg
+  give status_shock
+  unless status_shock
+
+verb bari_touch_lands_again "Bari contact hits Link again" by world priority 60 in attacks at 3460 500
+  take incoming_bari_touch
+  unless link_guard
+  unless link_dodge
+  unless status_nayru
+  give 2 link_dmg
+  need status_shock
+
+verb lightning_dodged "Lightning beam: dodged" by world priority 60 in attacks at 3460 570
+  take incoming_lightning
+  need link_dodge
+
+verb lightning_nayru "Lightning beam: Nayru's Love holds" by world priority 60 in attacks at 3320 640
+  take incoming_lightning
+  need status_nayru
+  unless link_dodge
+
+verb lightning_lands "Lightning beam hits Link" by world priority 60 in attacks at 3460 640
+  take incoming_lightning
+  unless link_dodge
+  unless status_nayru
+  give 2 link_dmg
+  give status_shock
+  unless status_shock
+
+verb lightning_lands_again "Lightning beam hits Link again" by world priority 60 in attacks at 3320 710
+  take incoming_lightning
+  unless link_dodge
+  unless status_nayru
+  give 2 link_dmg
+  need status_shock
+
+verb link_lowers_shield "Link lowers his shield" by world priority 50 in beat at 440 220
+  need beat_end
+  take link_guard
+
+verb link_lowers_deku_shield "Link lowers the deku shield" by world priority 50 in beat at 580 220
+  need beat_end
+  take guard_with_deku_shield
+
+verb link_lowers_hylian_shield "Link lowers the hylian shield" by world priority 50 in beat at 440 290
+  need beat_end
+  take guard_with_hylian_shield
+
+verb link_lands "Link lands from his dodge" by world priority 50 in beat at 580 290
+  need beat_end
+  take link_dodge
+
+verb shock_ticks "Link: shock wears on" by world priority 48 in beat at 440 430
+  take beat_end
+  take status_shock
+  give tick_shock
+
+verb shock_idle "Link: no shock" by world priority 48 in beat at 580 430
+  take beat_end
+  unless status_shock
+  give tick_shock
+
+verb nayru_ticks "Link: nayru wears on" by world priority 47 in beat at 440 500
+  take tick_shock
+  take status_nayru
+  give tick_nayru
+
+verb nayru_idle "Link: no nayru" by world priority 47 in beat at 580 500
+  take tick_shock
+  unless status_nayru
+  give tick_nayru
+
+verb lens_ticks "The Lens wears on" by world priority 46 in beat at 580 570
+  take tick_nayru
+  need lens_on
+  need magic
+  unless 3 lens_count
+  give lens_count
+  give link_turn
+
+verb lens_costs "The Lens takes its toll" by world priority 46 in beat at 440 640
+  take tick_nayru
+  need lens_on
+  need magic
+  take 3 lens_count
+  give link_turn
+  take magic
+  give magic_spent
+
+verb lens_fades "The Lens runs out of magic" by world priority 46 in beat at 580 640
+  take tick_nayru
+  take lens_on
+  unless magic
+  give link_turn
+
+verb lens_idle "The Lens is off" by world priority 46 in beat at 440 710
+  take tick_nayru
+  unless lens_on
+  give link_turn
+
+verb lens_count_clears "The Lens count resets" by world priority 100 in beat at 580 710
+  take lens_count
+  unless lens_on
+
+verb link_helpless_shock "Link cannot act: shock" by world priority 40 in beat at 440 780
+  take link_turn
+  need status_shock
+  give enemy_turn

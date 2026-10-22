@@ -1,0 +1,128 @@
+{
+ "positions": 11627,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "link_heals",
+  "link_hurt_overkill",
+  "fairy_revives_link",
+  "hit_deku_stick__up",
+  "hit_deku_stick__looking",
+  "hit_deku_stick__throw",
+  "hit_deku_stick__up_after_throw",
+  "hit_slash_kokiri__up",
+  "hit_slash_kokiri__looking",
+  "hit_slash_kokiri__throw",
+  "hit_slash_kokiri__up_after_throw",
+  "hit_magic_fire__up",
+  "hit_magic_fire__looking",
+  "hit_magic_fire__throw",
+  "hit_magic_fire__up_after_throw",
+  "hit_spin_kokiri__up",
+  "hit_spin_kokiri__looking",
+  "hit_spin_kokiri__throw",
+  "hit_spin_kokiri__up_after_throw",
+  "hit_jump_kokiri__up",
+  "hit_jump_kokiri__looking",
+  "hit_jump_kokiri__throw",
+  "hit_jump_kokiri__up_after_throw",
+  "hit_jump_kokiri_self__up",
+  "hit_jump_kokiri_self__looking",
+  "hit_jump_kokiri_self__throw",
+  "hit_jump_kokiri_self__up_after_throw",
+  "hit_jump_master__up",
+  "hit_jump_master__looking",
+  "hit_jump_master__throw",
+  "hit_jump_master__up_after_throw",
+  "miss_reflect_nut",
+  "hit_reflect_nut__up",
+  "hit_reflect_nut__looking",
+  "hit_reflect_nut__throw",
+  "hit_reflect_nut__burrow",
+  "nut_blocked_deku_shield"
+ ],
+ "kitSplit": {},
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 26,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 18
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 76,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 24
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 37
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 708,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 7
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 270
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 2226,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 704,
+    "Link falls": 25
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 776
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 5762,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 1724,
+    "Link falls": 13
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1697
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 2829,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 896,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1047
+  }
+ ]
+}

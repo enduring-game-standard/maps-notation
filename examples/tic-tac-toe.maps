@@ -1,0 +1,295 @@
+maps 2
+title "Tic-Tac-Toe"
+
+seat x "X" color "#e4572e"
+seat o "O" color "#2e86ab"
+group turn "Whose turn"
+group board "The board"
+group judge "The judge"
+
+state x_to_move "X to move" marks 1 in turn at 120 260
+state o_to_move "O to move" in turn at 120 540
+state squares_left "Squares left" marks 9 in turn at 120 400
+state empty_1 "1 empty" marks 1 in board at 360 155
+state x_1 "X on 1" in board at 305 250
+state o_1 "O on 1" in board at 415 250
+state empty_2 "2 empty" marks 1 in board at 560 155
+state x_2 "X on 2" in board at 505 250
+state o_2 "O on 2" in board at 615 250
+state empty_3 "3 empty" marks 1 in board at 760 155
+state x_3 "X on 3" in board at 705 250
+state o_3 "O on 3" in board at 815 250
+state empty_4 "4 empty" marks 1 in board at 360 355
+state x_4 "X on 4" in board at 305 450
+state o_4 "O on 4" in board at 415 450
+state empty_5 "5 empty" marks 1 in board at 560 355
+state x_5 "X on 5" in board at 505 450
+state o_5 "O on 5" in board at 615 450
+state empty_6 "6 empty" marks 1 in board at 760 355
+state x_6 "X on 6" in board at 705 450
+state o_6 "O on 6" in board at 815 450
+state empty_7 "7 empty" marks 1 in board at 360 555
+state x_7 "X on 7" in board at 305 650
+state o_7 "O on 7" in board at 415 650
+state empty_8 "8 empty" marks 1 in board at 560 555
+state x_8 "X on 8" in board at 505 650
+state o_8 "O on 8" in board at 615 650
+state empty_9 "9 empty" marks 1 in board at 760 555
+state x_9 "X on 9" in board at 705 650
+state o_9 "O on 9" in board at 815 650
+state judge_x "Judge X's move" in judge at 1080 260
+state x_won "X wins" ends "X wins" in judge at 1360 260
+state judge_o "Judge O's move" in judge at 1080 780
+state o_won "O wins" ends "O wins" in judge at 1360 780
+state drawn "Draw" ends "Draw" in judge at 1360 400
+
+verb x_marks_1 "X marks 1" by x in board at 305 195
+  take x_to_move
+  take empty_1
+  take squares_left
+  give x_1
+  give judge_x
+
+verb x_marks_2 "X marks 2" by x in board at 505 195
+  take x_to_move
+  take empty_2
+  take squares_left
+  give x_2
+  give judge_x
+
+verb x_marks_3 "X marks 3" by x in board at 705 195
+  take x_to_move
+  take empty_3
+  take squares_left
+  give x_3
+  give judge_x
+
+verb x_marks_4 "X marks 4" by x in board at 305 395
+  take x_to_move
+  take empty_4
+  take squares_left
+  give x_4
+  give judge_x
+
+verb x_marks_5 "X marks 5" by x in board at 505 395
+  take x_to_move
+  take empty_5
+  take squares_left
+  give x_5
+  give judge_x
+
+verb x_marks_6 "X marks 6" by x in board at 705 395
+  take x_to_move
+  take empty_6
+  take squares_left
+  give x_6
+  give judge_x
+
+verb x_marks_7 "X marks 7" by x in board at 305 595
+  take x_to_move
+  take empty_7
+  take squares_left
+  give x_7
+  give judge_x
+
+verb x_marks_8 "X marks 8" by x in board at 505 595
+  take x_to_move
+  take empty_8
+  take squares_left
+  give x_8
+  give judge_x
+
+verb x_marks_9 "X marks 9" by x in board at 705 595
+  take x_to_move
+  take empty_9
+  take squares_left
+  give x_9
+  give judge_x
+
+verb o_marks_1 "O marks 1" by o in board at 415 195
+  take o_to_move
+  take empty_1
+  take squares_left
+  give o_1
+  give judge_o
+
+verb o_marks_2 "O marks 2" by o in board at 615 195
+  take o_to_move
+  take empty_2
+  take squares_left
+  give o_2
+  give judge_o
+
+verb o_marks_3 "O marks 3" by o in board at 815 195
+  take o_to_move
+  take empty_3
+  take squares_left
+  give o_3
+  give judge_o
+
+verb o_marks_4 "O marks 4" by o in board at 415 395
+  take o_to_move
+  take empty_4
+  take squares_left
+  give o_4
+  give judge_o
+
+verb o_marks_5 "O marks 5" by o in board at 615 395
+  take o_to_move
+  take empty_5
+  take squares_left
+  give o_5
+  give judge_o
+
+verb o_marks_6 "O marks 6" by o in board at 815 395
+  take o_to_move
+  take empty_6
+  take squares_left
+  give o_6
+  give judge_o
+
+verb o_marks_7 "O marks 7" by o in board at 415 595
+  take o_to_move
+  take empty_7
+  take squares_left
+  give o_7
+  give judge_o
+
+verb o_marks_8 "O marks 8" by o in board at 615 595
+  take o_to_move
+  take empty_8
+  take squares_left
+  give o_8
+  give judge_o
+
+verb o_marks_9 "O marks 9" by o in board at 815 595
+  take o_to_move
+  take empty_9
+  take squares_left
+  give o_9
+  give judge_o
+
+verb x_line_123 "X has 1-2-3" by world priority 2 in judge at 1220 35
+  need x_1
+  need x_2
+  need x_3
+  take judge_x
+  give x_won
+
+verb x_line_456 "X has 4-5-6" by world priority 2 in judge at 1220 65
+  need x_4
+  need x_5
+  need x_6
+  take judge_x
+  give x_won
+
+verb x_line_789 "X has 7-8-9" by world priority 2 in judge at 1220 95
+  need x_7
+  need x_8
+  need x_9
+  take judge_x
+  give x_won
+
+verb x_line_147 "X has 1-4-7" by world priority 2 in judge at 1220 125
+  need x_1
+  need x_4
+  need x_7
+  take judge_x
+  give x_won
+
+verb x_line_258 "X has 2-5-8" by world priority 2 in judge at 1220 155
+  need x_2
+  need x_5
+  need x_8
+  take judge_x
+  give x_won
+
+verb x_line_369 "X has 3-6-9" by world priority 2 in judge at 1220 185
+  need x_3
+  need x_6
+  need x_9
+  take judge_x
+  give x_won
+
+verb x_line_159 "X has 1-5-9" by world priority 2 in judge at 1220 215
+  need x_1
+  need x_5
+  need x_9
+  take judge_x
+  give x_won
+
+verb x_line_357 "X has 3-5-7" by world priority 2 in judge at 1220 245
+  need x_3
+  need x_5
+  need x_7
+  take judge_x
+  give x_won
+
+verb pass_to_o "Pass to O" by world in judge at 1080 380
+  take judge_x
+  give o_to_move
+
+verb o_line_123 "O has 1-2-3" by world priority 2 in judge at 1220 555
+  need o_1
+  need o_2
+  need o_3
+  take judge_o
+  give o_won
+
+verb o_line_456 "O has 4-5-6" by world priority 2 in judge at 1220 585
+  need o_4
+  need o_5
+  need o_6
+  take judge_o
+  give o_won
+
+verb o_line_789 "O has 7-8-9" by world priority 2 in judge at 1220 615
+  need o_7
+  need o_8
+  need o_9
+  take judge_o
+  give o_won
+
+verb o_line_147 "O has 1-4-7" by world priority 2 in judge at 1220 645
+  need o_1
+  need o_4
+  need o_7
+  take judge_o
+  give o_won
+
+verb o_line_258 "O has 2-5-8" by world priority 2 in judge at 1220 675
+  need o_2
+  need o_5
+  need o_8
+  take judge_o
+  give o_won
+
+verb o_line_369 "O has 3-6-9" by world priority 2 in judge at 1220 705
+  need o_3
+  need o_6
+  need o_9
+  take judge_o
+  give o_won
+
+verb o_line_159 "O has 1-5-9" by world priority 2 in judge at 1220 735
+  need o_1
+  need o_5
+  need o_9
+  take judge_o
+  give o_won
+
+verb o_line_357 "O has 3-5-7" by world priority 2 in judge at 1220 765
+  need o_3
+  need o_5
+  need o_7
+  take judge_o
+  give o_won
+
+verb pass_to_x "Pass to X" by world in judge at 1080 660
+  take judge_o
+  give x_to_move
+
+verb board_full "Board full" by world priority 1 in judge at 1220 400
+  take judge_x
+  unless squares_left
+  give drawn

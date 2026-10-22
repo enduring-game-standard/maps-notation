@@ -1,0 +1,192 @@
+import { standardLoadouts } from '../loadouts'
+import type { ActorSpec, Attack, Cite, Gear, Phase, Reaction, Step } from '../../spec'
+
+const F = 'src/overlays/actors/ovl_En_Rr/z_en_rr.c'
+const at = (line: number): Cite => `${F}:${line}`
+
+/*
+ * Reported gaps (z_en_rr.c):
+ * - The 110-frame grab lockout after a release (316, checked at 531) is a timer of its own that keeps running through a wound
+ *   (40 frames, 478) or a stun (80 frames, 526) and through a reach; nothing resets it (360-376, 409-434, decrement at 805-807).
+ *   The model ties it to the spat phases, so a hit during the lockout, or the end of a reach made in it, lets it grab up to about
+ *   3 beats early.
+ * - The reach phase's 20 frames are the EXTEND timer (242); the STOP, OPEN and GAPE steps add 5 and 2 more (624, 631) before the
+ *   20-frame close (638). 27 frames is still one beat.
+ * - The mouth cylinder is AC_HARD (131): a hit that lands there bounces with no damage (440-446). Which cylinder a hit finds is
+ *   geometry, so the model lets every hit reach the body.
+ */
+/**
+ * `retreat` is set when a release eats something (lines 326, 333) and cleared when the retreat ends (line 766).
+ * It decides where the next reach leads (line 266), so every phase it can outlive comes in both kinds.
+ */
+type Fed = '' | '_fed'
+const FED: Fed[] = ['', '_fed']
+const who = (f: Fed) => (f ? 'Like Like (it has eaten gear)' : 'Like Like')
+/** What `Inventory_DeleteEquipment` can take: any shield but the Mirror Shield, any tunic but the Kokiri Tunic. */
+const EDIBLE: Gear[] = ['deku_shield', 'hylian_shield', 'goron_tunic', 'zora_tunic']
+
+const phases: Phase[] = [
+  ...FED.flatMap((f): Phase[] => [
+    { id: `approach${f}`, label: `${who(f)} creeps toward Link`, cite: at(603) },
+    { id: `reach${f}`, label: `${who(f)} stretches up, opens and gapes to swallow Link`, frames: { value: 20, cite: at(242) }, cite: at(613) },
+    { id: `gape${f}`, label: `${who(f)} closes its gaping mouth`, frames: { value: 20, cite: at(638) }, cite: at(643) },
+    { id: `approach_spat${f}`, label: `${who(f)} has just spat Link out and cannot grab yet`, frames: { value: 110, cite: at(316) }, cite: at(531) },
+    { id: `reach_spat${f}`, label: `${who(f)} reaches for Link, but cannot grab yet`, frames: { value: 20, cite: at(242) }, cite: at(613) },
+    { id: `gape_spat${f}`, label: `${who(f)} closes its mouth, but cannot grab yet`, frames: { value: 20, cite: at(638) }, cite: at(643) },
+    { id: `damage${f}`, label: `${who(f)} reels from a wound`, hittable: 'none', frames: { value: 40, cite: at(478) }, cite: at(832) },
+    { id: `stunned${f}`, label: `${who(f)} is stunned`, frames: { value: 80, cite: at(526) }, cite: at(777) },
+  ]),
+  /** A reach ends in a retreat once it has eaten (line 268), so only the unfed Like Like waits out this timer. */
+  { id: 'approach_wait', label: 'Like Like creeps toward Link after a reach', frames: { value: 60, cite: at(270) }, cite: at(606) },
+  { id: 'retreat', label: 'Like Like backs away with its meal', frames: { value: 100, cite: at(267) }, cite: at(764) },
+]
+
+/**
+ * Contact swallows Link (line 540); the release up to 100 frames later (lines 278, 659) eats what it can (lines 322-335),
+ * throws him with 8 damage (line 349), and decides `retreat` by whether it ate. One attack carries the whole swallow,
+ * landing on the contact beat, so the step reads Link's gear before the theft resolves. The release tries the shield
+ * (line 322) and then the tunic (line 329) in the same call, so one contact takes both; the steal effect does the same.
+ * Each edible gear gets its own step only because a step's gear guard is all-of: holding both enables two steps with
+ * the same target and attack.
+ */
+const grabFrom = (from: string, fed: boolean): Step[] => {
+  const base = { from, range: 'near' as const, move: 'far' as const, attack: 'swallow' }
+  if (fed) return [{ ...base, to: 'approach_spat_fed', label: 'Like Like swallows Link and spits him out', cite: at(540) }]
+  return [
+    ...EDIBLE.map((g): Step => ({ ...base, to: 'approach_spat_fed', label: `Like Like swallows Link and finds his ${g.replace(/_/g, ' ')} to eat`, gear: [{ gear: g, has: true }], cite: at(326) })),
+    { ...base, to: 'approach_spat', label: 'Like Like swallows Link and finds nothing to eat', gear: EDIBLE.map((g) => ({ gear: g, has: false })), cite: at(351) },
+  ]
+}
+
+const steps: Step[] = [
+  ...FED.flatMap((f): Step[] => [
+    { from: `approach${f}`, to: `approach${f}`, label: 'Like Like creeps closer', range: 'far', move: 'near', cite: at(609) },
+    { from: `approach${f}`, to: `reach${f}`, label: 'Like Like rears up to swallow', range: 'near', cite: at(607) },
+    ...grabFrom(`approach${f}`, !!f),
+    ...grabFrom(`reach${f}`, !!f),
+    { from: `reach${f}`, to: `gape${f}`, label: 'Like Like gapes, then closes its mouth', afterTimer: true, cite: at(640) },
+    ...grabFrom(`gape${f}`, !!f),
+    { from: `gape${f}`, to: f ? 'retreat' : 'approach_wait', label: f ? 'Like Like settles and backs away' : 'Like Like settles', afterTimer: true, cite: at(f ? 268 : 271) },
+    { from: `approach_spat${f}`, to: `approach_spat${f}`, label: 'Like Like creeps closer', range: 'far', move: 'near', cite: at(609) },
+    { from: `approach_spat${f}`, to: `approach${f}`, label: 'Like Like can grab again', afterTimer: true, cite: at(531) },
+    { from: `approach_spat${f}`, to: `reach_spat${f}`, label: 'Like Like rears up, its grab still locked out', range: 'near', cite: at(607) },
+    { from: `reach_spat${f}`, to: `gape_spat${f}`, label: 'Like Like gapes, then closes its mouth', afterTimer: true, cite: at(640) },
+    { from: `gape_spat${f}`, to: f ? 'retreat' : 'approach_wait', label: f ? 'Like Like settles and backs away' : 'Like Like settles', afterTimer: true, cite: at(f ? 268 : 271) },
+    { from: `damage${f}`, to: `approach${f}`, label: 'Like Like recovers', afterTimer: true, cite: at(673) },
+    { from: `stunned${f}`, to: `approach${f}`, label: 'Like Like recovers', afterTimer: true, cite: at(783) },
+  ]),
+  { from: 'approach_wait', to: 'approach_wait', label: 'Like Like creeps closer', range: 'far', move: 'near', cite: at(609) },
+  { from: 'approach_wait', to: 'reach', label: 'Like Like rears up to swallow', range: 'near', afterTimer: true, cite: at(607) },
+  ...grabFrom('approach_wait', false),
+  { from: 'retreat', to: 'retreat', label: 'Like Like backs away', range: 'near', move: 'far', cite: at(772) },
+  ...grabFrom('retreat', true),
+  { from: 'retreat', to: 'approach', label: 'Like Like stops backing away', afterTimer: true, cite: at(767) },
+]
+
+const attacks: Attack[] = [
+  {
+    id: 'swallow',
+    label: 'Like Like swallows Link',
+    damage: 8,
+    effect: { kind: 'steal', gear: EDIBLE },
+    blockable: false,
+    dodgeable: true,
+    source: at(349),
+  },
+]
+
+const allTo = (to: (f: Fed) => string) => {
+  const m: Record<string, string> = {}
+  for (const f of FED)
+    for (const p of ['approach', 'reach', 'gape', 'approach_spat', 'reach_spat', 'gape_spat', 'damage', 'stunned']) m[`${p}${f}`] = to(f)
+  m.approach_wait = to('')
+  m.retreat = to('_fed')
+  return m
+}
+
+const reactions: Record<string, Reaction> = {
+  RR_DMG_REACT_NONE: { damage: false, note: 'reaction 0 matches no case of the switch', cite: at(458) },
+  RR_DMG_REACT_NORMAL: { damage: true, to: allTo((f) => `damage${f}`), note: 'damage, 40 frames of invincibility, then EnRr_SetupDamage', cite: at(484) },
+  RR_DMG_REACT_LIGHT_ARROW: { damage: true, to: allTo((f) => `damage${f}`), note: 'falls through to the NORMAL case; only the drop differs', cite: at(459) },
+  RR_DMG_REACT_SHDW_ARROW: { damage: true, to: allTo((f) => `damage${f}`), note: 'falls through to the NORMAL case', cite: at(462) },
+  RR_DMG_REACT_WIND_ARROW: { damage: true, to: allTo((f) => `damage${f}`), note: 'falls through to the NORMAL case', cite: at(465) },
+  RR_DMG_REACT_SPRT_ARROW: { damage: true, to: allTo((f) => `damage${f}`), note: 'falls through to the NORMAL case', cite: at(468) },
+  RR_DMG_REACT_FIRE: {
+    damage: true,
+    note: 'both fire rows deal 4, its whole health (line 194), so fire always kills; the red-flash stun it would start (line 497) is never lived through',
+    cite: at(491),
+  },
+  RR_DMG_REACT_ICE: { damage: true, to: allTo((f) => `stunned${f}`), note: 'damage and a blue flash, then stunned', cite: at(514) },
+  RR_DMG_REACT_LIGHT_MAGIC: { damage: true, to: allTo((f) => `stunned${f}`), note: 'damage and a gray flash, then stunned', cite: at(522) },
+  RR_DMG_REACT_STUN: { damage: false, to: allTo((f) => `stunned${f}`), note: 'Boomerang and Hookshot stun under a blue flash', cite: at(527) },
+}
+
+export const enRr: ActorSpec = {
+  overlay: 'ovl_En_Rr',
+  name: 'Like Like',
+  role: 'enemy',
+  summary:
+    'A tube that creeps at Link and swallows him on contact. It holds him for up to 100 frames, then spits him out with a large knockback that costs 8 health and eats his shield (unless it is the Mirror Shield) and his tunic (unless it is the Kokiri Tunic). Having eaten, it backs away after its next reach.',
+  cite: at(187),
+  pools: [{ id: 'body', label: 'Like Like', hp: { value: 4, cite: at(194) }, then: 'defeated' }],
+  damage: { kind: 'decomp', table: 'sDamageTable', reactions },
+  phases,
+  start: 'approach',
+  range: 'far',
+  steps,
+  attacks,
+  actionFuncs: {
+    EnRr_Approach: 'approach*',
+    EnRr_Reach: 'reach*',
+    EnRr_GrabPlayer: {
+      excluded:
+        'the hold is folded into the swallow attack, which lands the release at once: the hold ends in the release that steals and throws him (line 660) when its 100 frames run out or Link breaks free (line 659), when a damaging hit lands (lines 481-482), or when a stun wears off (lines 780-781), and a killing hit still throws him first (lines 349, 353-357); the grab has no AT source to carry its own attack, and one attack carries one effect, so the theft is carried and the hold is not',
+      cite: at(659),
+    },
+    EnRr_Damage: 'damage*',
+    EnRr_Stunned: 'stunned*',
+    EnRr_Retreat: 'retreat',
+    EnRr_Death: { excluded: 'death animation and drops after the finishing blow; the encounter has already ended', cite: at(685) },
+  },
+  atSources: {
+    [at(349)]: 'swallow',
+    [at(118)]: {
+      excluded: "the body cylinder's base is AT_NONE and EnRr never calls CollisionCheck_SetAT, so this element never strikes; touching the body starts the swallow instead (line 533)",
+      cite: at(111),
+    },
+    [at(137)]: {
+      excluded: "the mouth cylinder's base is AT_NONE and EnRr never calls CollisionCheck_SetAT, so this element never strikes; touching the mouth starts the swallow instead (line 533)",
+      cite: at(130),
+    },
+  },
+  loadouts: [
+    ...standardLoadouts(['child', 'adult']),
+    /**
+     * No standard kit wears a tunic other than Kokiri, so this kit adds the Goron Tunic beside the Hylian Shield. One
+     * release deletes both (lines 323 and 330), so a single swallow strips Link of shield and tunic together.
+     */
+    { id: 'adult_tunic', age: 'adult', hearts: 2, gear: ['deku_nuts', 'master_sword', 'hylian_shield', 'goron_tunic'] },
+  ],
+  expected: {
+    deadVerbs: {
+      damage_timer_clears: 'the reel after a wound is left only when its timer runs out, since nothing can hit it then',
+      damage_fed_timer_clears: 'as damage_timer_clears',
+      link_hurt_overkill: 'the swallow costs 8 (4 with Double Defense), which divides the 2-heart bar, so it never costs more than Link has left',
+      approach_wait_holds: 'far it creeps closer and near it can always swallow, so it always acts',
+      ...Object.fromEntries(
+        ['slash_giant', 'spin_giant', 'jump_giant', 'jump_giant_self'].map((k) => [
+          `miss_${k}`,
+          "a two-handed sword hit deals 4, the Like Like's whole health, so in the kit that carries one it never lives to reel from a wound, the only phase that ignores a hit",
+        ]),
+      ),
+      ...Object.fromEntries(
+        ['arrow_ice', 'arrow_light', 'spin_master', 'jump_master_self'].map((k) => [
+          `hit_${k}__stunned`,
+          'only the Boomerang and Hookshot stun without killing, and no kit that carries this attack (magic arrows, or magic spins) carries either',
+        ]),
+      ),
+      body_empty_in_stunned_fed:
+        'only an ice arrow both wounds it and leaves it stunned, and the one kit with ice arrows has the Mirror Shield and no tunic, so its Like Like never eats',
+    },
+  },
+}

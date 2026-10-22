@@ -1,0 +1,346 @@
+{
+ "positions": 32424,
+ "complete": true,
+ "outcomes": [
+  "Link falls",
+  "Link wins",
+  "Link withdraws"
+ ],
+ "stalls": 0,
+ "livelocks": 0,
+ "deadVerbs": [
+  "p4_dive_1_timer_clears",
+  "p4_sink_1_timer_clears",
+  "p4_dive_2_timer_clears",
+  "p4_sink_2_timer_clears",
+  "p4_dive_3_timer_clears",
+  "core_overkill",
+  "core_empty_in_p4_stun_1",
+  "core_empty_in_p4_restun_1",
+  "core_empty_in_p4_stun_2",
+  "core_empty_in_p4_restun_2",
+  "body_touch_lands_again",
+  "bari_touch_lands_again",
+  "lightning_lands_again",
+  "link_helpless_shock"
+ ],
+ "kitSplit": {
+  "hit_magic_fire__p2_pause_5": [
+   "swing_magic_fire",
+   "phase_p2_pause_5"
+  ],
+  "hit_magic_fire__p2_stun_5": [
+   "swing_magic_fire",
+   "phase_p2_stun_5"
+  ],
+  "hit_magic_fire__p2_pause_4": [
+   "swing_magic_fire",
+   "phase_p2_pause_4"
+  ],
+  "hit_magic_fire__p2_stun_4": [
+   "swing_magic_fire",
+   "phase_p2_stun_4"
+  ],
+  "hit_magic_fire__p2_pause_3": [
+   "swing_magic_fire",
+   "phase_p2_pause_3"
+  ],
+  "hit_magic_fire__p2_stun_3": [
+   "swing_magic_fire",
+   "phase_p2_stun_3"
+  ],
+  "hit_magic_fire__p2_pause_2": [
+   "swing_magic_fire",
+   "phase_p2_pause_2"
+  ],
+  "hit_magic_fire__p2_stun_2": [
+   "swing_magic_fire",
+   "phase_p2_stun_2"
+  ],
+  "hit_magic_fire__p2_pause_1": [
+   "swing_magic_fire",
+   "phase_p2_pause_1"
+  ],
+  "hit_magic_fire__p2_stun_1": [
+   "swing_magic_fire",
+   "phase_p2_stun_1"
+  ],
+  "hit_magic_fire__p3_stun_5": [
+   "swing_magic_fire",
+   "phase_p3_stun_5"
+  ],
+  "hit_magic_fire__p3_stun_4": [
+   "swing_magic_fire",
+   "phase_p3_stun_4"
+  ],
+  "hit_magic_fire__p3_stun_3": [
+   "swing_magic_fire",
+   "phase_p3_stun_3"
+  ],
+  "hit_magic_fire__p3_stun_2": [
+   "swing_magic_fire",
+   "phase_p3_stun_2"
+  ],
+  "hit_magic_fire__p3_stun_1": [
+   "swing_magic_fire",
+   "phase_p3_stun_1"
+  ],
+  "hit_spin_kokiri__p2_pause_5": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_5"
+  ],
+  "hit_spin_kokiri__p2_stun_5": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_5"
+  ],
+  "hit_spin_kokiri__p2_pause_4": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_4"
+  ],
+  "hit_spin_kokiri__p2_stun_4": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_4"
+  ],
+  "hit_spin_kokiri__p2_pause_3": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_3"
+  ],
+  "hit_spin_kokiri__p2_stun_3": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_3"
+  ],
+  "hit_spin_kokiri__p2_pause_2": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_2"
+  ],
+  "hit_spin_kokiri__p2_stun_2": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_2"
+  ],
+  "hit_spin_kokiri__p2_pause_1": [
+   "swing_spin_kokiri",
+   "phase_p2_pause_1"
+  ],
+  "hit_spin_kokiri__p2_stun_1": [
+   "swing_spin_kokiri",
+   "phase_p2_stun_1"
+  ],
+  "hit_spin_kokiri__p3_stun_5": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_5"
+  ],
+  "hit_spin_kokiri__p3_stun_4": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_4"
+  ],
+  "hit_spin_kokiri__p3_stun_3": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_3"
+  ],
+  "hit_spin_kokiri__p3_stun_2": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_2"
+  ],
+  "hit_spin_kokiri__p3_stun_1": [
+   "swing_spin_kokiri",
+   "phase_p3_stun_1"
+  ],
+  "hit_spin_kokiri__p4_stun_1": [
+   "swing_spin_kokiri",
+   "phase_p4_stun_1"
+  ],
+  "hit_spin_kokiri__p4_restun_1": [
+   "swing_spin_kokiri",
+   "phase_p4_restun_1"
+  ],
+  "hit_spin_kokiri__p4_stun_2": [
+   "swing_spin_kokiri",
+   "phase_p4_stun_2"
+  ],
+  "hit_spin_kokiri__p4_restun_2": [
+   "swing_spin_kokiri",
+   "phase_p4_restun_2"
+  ],
+  "hit_spin_kokiri__p4_stun_3": [
+   "swing_spin_kokiri",
+   "phase_p4_stun_3"
+  ],
+  "hit_spin_kokiri__p4_restun_3": [
+   "swing_spin_kokiri",
+   "phase_p4_restun_3"
+  ],
+  "hit_jump_kokiri_self__p2_pause_5": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_5"
+  ],
+  "hit_jump_kokiri_self__p2_stun_5": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_5"
+  ],
+  "hit_jump_kokiri_self__p2_pause_4": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_4"
+  ],
+  "hit_jump_kokiri_self__p2_stun_4": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_4"
+  ],
+  "hit_jump_kokiri_self__p2_pause_3": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_3"
+  ],
+  "hit_jump_kokiri_self__p2_stun_3": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_3"
+  ],
+  "hit_jump_kokiri_self__p2_pause_2": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_2"
+  ],
+  "hit_jump_kokiri_self__p2_stun_2": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_2"
+  ],
+  "hit_jump_kokiri_self__p2_pause_1": [
+   "swing_jump_kokiri_self",
+   "phase_p2_pause_1"
+  ],
+  "hit_jump_kokiri_self__p2_stun_1": [
+   "swing_jump_kokiri_self",
+   "phase_p2_stun_1"
+  ],
+  "hit_jump_kokiri_self__p3_stun_5": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_5"
+  ],
+  "hit_jump_kokiri_self__p3_stun_4": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_4"
+  ],
+  "hit_jump_kokiri_self__p3_stun_3": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_3"
+  ],
+  "hit_jump_kokiri_self__p3_stun_2": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_2"
+  ],
+  "hit_jump_kokiri_self__p3_stun_1": [
+   "swing_jump_kokiri_self",
+   "phase_p3_stun_1"
+  ],
+  "hit_jump_kokiri_self__p4_stun_1": [
+   "swing_jump_kokiri_self",
+   "phase_p4_stun_1"
+  ],
+  "hit_jump_kokiri_self__p4_restun_1": [
+   "swing_jump_kokiri_self",
+   "phase_p4_restun_1"
+  ],
+  "hit_jump_kokiri_self__p4_stun_2": [
+   "swing_jump_kokiri_self",
+   "phase_p4_stun_2"
+  ],
+  "hit_jump_kokiri_self__p4_restun_2": [
+   "swing_jump_kokiri_self",
+   "phase_p4_restun_2"
+  ],
+  "hit_jump_kokiri_self__p4_stun_3": [
+   "swing_jump_kokiri_self",
+   "phase_p4_stun_3"
+  ],
+  "hit_jump_kokiri_self__p4_restun_3": [
+   "swing_jump_kokiri_self",
+   "phase_p4_restun_3"
+  ],
+  "bari_touch_blocked_hylian_shield": [
+   "incoming_bari_touch",
+   "guard_with_hylian_shield"
+  ],
+  "bari_touch_nayru": [
+   "incoming_bari_touch",
+   "status_nayru"
+  ]
+ },
+ "slices": [
+  {
+   "kit": "child_blade",
+   "variant": "",
+   "positions": 28933,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 8288,
+    "Link falls": 3476,
+    "Link wins": 496
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 58159
+  },
+  {
+   "kit": "child_bottles",
+   "variant": "",
+   "positions": 105,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 32,
+    "Link falls": 8
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 185
+  },
+  {
+   "kit": "child_dins",
+   "variant": "",
+   "positions": 197,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 56,
+    "Link falls": 28
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 366
+  },
+  {
+   "kit": "child_lens",
+   "variant": "",
+   "positions": 623,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 176,
+    "Link falls": 94
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1071
+  },
+  {
+   "kit": "child_nayru",
+   "variant": "",
+   "positions": 1781,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 576,
+    "Link falls": 52
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1909
+  },
+  {
+   "kit": "child_spin",
+   "variant": "",
+   "positions": 785,
+   "complete": true,
+   "outcomes": {
+    "Link withdraws": 224,
+    "Link falls": 112
+   },
+   "stalls": 0,
+   "livelocks": 0,
+   "ms": 1444
+  }
+ ]
+}
