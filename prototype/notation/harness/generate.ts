@@ -111,7 +111,7 @@ while (made < COUNT && tries < 5000) {
     ...vs.map((v, i) => ({ id: `${name}-gate${i}`, criteria: ['possibility'], question: `What must hold for ${v.label} to be said, and what does saying it change?`,
       answer: net.arcs.filter((x) => x.verb === v.id).map((x) => `${x.kind}${x.count > 1 ? ' ' + x.count : ''} ${net.states.find((s) => s.id === x.state)!.label}`).join('; ') })),
     { id: `${name}-open`, criteria: ['possibility', 'conversation'], question: 'At the start, once the world falls silent, who speaks and which verbs can they say?',
-      answer: open.length ? `${speakerOf(open[0])}: ${[...new Set(open)].map((v) => net.verbs.find((x) => x.id === v)!.label).join(', ')}` : 'nobody' },
+      answer: open.length ? [...new Set(open.map(speakerOf))].map((who) => `${who}: ${[...new Set(open.filter((v) => speakerOf(v) === who))].map((v) => net.verbs.find((x) => x.id === v)!.label).join(', ')}`).join('; ') : 'nobody' },
     { id: `${name}-ent`, criteria: ['entity'], question: 'How many separate things are each always in exactly one state here, and which states belong to each?',
       answer: 'Entities A.. by letter: ' + [...new Set(net.states.filter((s) => /^[a-z]\d/.test(s.id)).map((s) => s.label[0]))].map((L) => `${L}: ${net.states.filter((s) => s.label[0] === L && /\d/.test(s.label)).map((s) => s.label).join(', ')}`).join('; ') },
     { id: `${name}-contact`, criteria: ['contact'], question: "Which verbs depend on the state of a different entity than the one they move, and on which state?",

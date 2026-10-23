@@ -80,7 +80,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v2, v6"
+     "answer": "Player 1: v2; Player 2: v6"
     },
     {
      "id": "g01-ent",
@@ -177,7 +177,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v4, v6, v8, v10"
+     "answer": "Player 1: v1, v4; Player 2: v6, v8, v10"
     },
     {
      "id": "g02-ent",
@@ -367,7 +367,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v5"
+     "answer": "Player 1: v1; Player 2: v5"
     },
     {
      "id": "g04-ent",
@@ -466,7 +466,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v4"
+     "answer": "Player 1: v1; Player 2: v4"
     },
     {
      "id": "g05-ent",
@@ -566,7 +566,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v3, v5, v7, v9, v11"
+     "answer": "Player 1: v1, v3, v5, v7, v9; Player 2: v11"
     },
     {
      "id": "g06-ent",
@@ -664,7 +664,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v6"
+     "answer": "Player 1: v1; Player 2: v6"
     },
     {
      "id": "g07-ent",
@@ -765,7 +765,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v5, v7, v9, v11"
+     "answer": "Player 1: v1, v5, v7, v9; Player 2: v11"
     },
     {
      "id": "g08-ent",
@@ -870,7 +870,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v12"
+     "answer": "Player 1: v1; Player 2: v12"
     },
     {
      "id": "g09-ent",
@@ -967,7 +967,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v6"
+     "answer": "Player 1: v1; Player 2: v6"
     },
     {
      "id": "g10-ent",
@@ -1064,7 +1064,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v4"
+     "answer": "Player 1: v1; Player 2: v4"
     },
     {
      "id": "g11-ent",
@@ -1163,7 +1163,7 @@
       "conversation"
      ],
      "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-     "answer": "Player 1: v1, v6"
+     "answer": "Player 1: v1; Player 2: v6"
     },
     {
      "id": "g12-ent",
