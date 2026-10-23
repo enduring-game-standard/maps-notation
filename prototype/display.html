@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MAPS display: diagram vs score (prototype, throwaway)</title>
+<style>
+  :root { --ink:#1d1d1f; --dim:#8a8a8e; --rule:#d9d6cf; --paper:#fbfaf7; --ctl:#1f5fd6; --world:#6b6b70; --content:#b45309; --contact:#7c3aed; --loop:#dc2626; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:24px 28px 90px; background:var(--paper); color:var(--ink); font:13px/1.4 ui-sans-serif, system-ui, sans-serif; }
+  h1 { font-size:20px; margin:0 0 4px; } h2 { font-size:16px; margin:34px 0 4px; } .sub { color:#3a3a3c; max-width:980px; margin:0 0 12px; }
+  .row { display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; }
+  .sheet { background:#fff; border:1px solid var(--rule); border-radius:6px; padding:14px 16px; }
+  .sheet h3 { margin:0; font-size:15px; } .meta { color:var(--dim); font-size:12px; margin:1px 0 6px; }
+  .kind { display:inline-block; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; border:1px solid currentColor; border-radius:3px; padding:0 4px; margin-right:6px; }
+  .kind.capability { color:var(--ctl); } .kind.content { color:var(--content); } .kind.instance { color:#047857; }
+  .ctlbox { display:inline-flex; gap:6px; align-items:center; font-size:12px; border:1px dashed #9aa; border-radius:4px; padding:2px 8px; margin:2px 0 8px; color:#334; }
+  .ctlbox b { color:var(--ctl); }
+  .numbers { font-size:12px; margin:0 0 8px; } .numbers span { display:inline-block; background:#f1efe8; border-radius:3px; padding:0 6px; margin:0 4px 2px 0; }
+  .note { font-size:12px; color:#6b4a1a; max-width:560px; margin:0 0 8px; }
+  .partbar { border-top:3px solid var(--ink); margin:12px 0 6px; padding-top:3px; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--dim); }
+  .partbar.first { border-top-width:1px; }
+  .partbar b { color:var(--content); }
+  .g { display:inline-block; font-size:11px; border-radius:3px; padding:0 4px; margin:1px 2px 1px 0; white-space:nowrap; }
+  .g.self { background:#eef2ff; color:#3730a3; } .g.content { background:#fdf2e3; color:var(--content); }
+  .g.contact { background:#f3e8ff; color:var(--contact); font-weight:600; } .g.meter, .g.instance { background:#ecfdf5; color:#047857; font-weight:600; }
+  .fx { font-size:11px; color:var(--loop); font-weight:600; }
+  .count { font-size:11px; color:#555; font-style:italic; }
+  .v-controller { color:var(--ctl); font-weight:650; } .v-world { color:var(--world); font-style:italic; }
+  .who { font-size:10.5px; color:var(--dim); }
+  .only { outline:2px solid #f59e0b; outline-offset:1px; border-radius:3px; background:#fffbeb; }
+  .inloop { box-shadow: inset 0 -2px 0 var(--loop); }
+  .loopno { display:inline-block; background:var(--loop); color:#fff; border-radius:8px; font-size:10px; font-weight:700; padding:0 5px; margin-left:3px; }
+  .cout { font-size:11px; color:var(--contact); }
+  .legend { display:flex; flex-wrap:wrap; gap:14px; font-size:12px; color:#3a3a3c; margin:6px 0 4px; max-width:1200px; }
+  .noname .lbl { color:transparent !important; background:#e6e3dc; border-radius:2px; }
+  .noname .v-controller .lbl { background:#c7d2fe; } .noname .v-world .lbl { background:#e4e4e7; }
+  .noname .g { color:transparent !important; } .noname .g::before { content:'·'; color:#999; }
+
+  /* B: score */
+  table.score { border-collapse:collapse; }
+  table.score th { font-size:10.5px; font-weight:600; color:var(--dim); text-transform:uppercase; letter-spacing:.04em; text-align:left; padding:2px 8px; border-bottom:1px solid var(--rule); }
+  table.score td { padding:2px 8px; vertical-align:top; border-bottom:1px solid #f1efe8; }
+  table.score td.st { font-weight:650; white-space:nowrap; }
+  table.score tr.srow td { padding-top:7px; border-bottom:none; }
+  table.score td.obs { border-left:2px solid #c7d2fe; max-width:230px; } table.score td.app { border-left:2px solid #d4d4d8; }
+  table.score td.res { white-space:nowrap; }
+  .homepill { border:2px solid var(--ink); border-radius:10px; padding:0 7px; }
+
+  /* A: diagram */
+  .dia { position:relative; }
+  .dia svg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
+  .pill { position:absolute; transform:translateX(-50%); border:1.5px solid var(--ink); border-radius:12px; padding:1px 9px; background:#fff; white-space:nowrap; font-weight:600; z-index:2; }
+  .pill.home { border-width:3px; } .pill.end { border:none; background:none; } .pill.exit { border:none; color:var(--content); background:none; }
+  .pill.ref { border-style:dashed; font-weight:400; }
+  .vbox { position:absolute; transform:translateX(-50%); width:150px; text-align:center; background:#fff; z-index:2; padding:1px 2px; border-radius:3px; }
+  .vbox.controller { border:1.5px solid var(--ctl); } .vbox.world { border:1.5px solid #c4c4c8; background:#f6f6f7; }
+  .vbox .g { white-space:normal; }
+  .row.pair { flex-wrap:nowrap; overflow-x:auto; }
+  .tags { position:absolute; transform:translateX(-50%); width:160px; font-size:11.5px; text-align:center; z-index:2; }
+  .tags div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  .bar { position:fixed; left:50%; transform:translateX(-50%); bottom:14px; background:var(--ink); color:#fff; border-radius:999px; padding:6px; display:flex; gap:4px; z-index:9; }
+  .bar button { background:none; color:#ddd; border:0; border-radius:999px; padding:6px 14px; font:inherit; cursor:pointer; }
+  .bar button.on { background:#fff; color:var(--ink); font-weight:600; }
+  .loopbox { margin:14px 0 0; padding:10px 14px; border-left:3px solid var(--loop); background:#fff; max-width:900px; }
+  .loopbox ol { margin:4px 0 4px 18px; padding:0; }
+  .schema td { padding:3px 10px 3px 0; vertical-align:top; } .schema td:first-child { font-weight:600; color:var(--content); white-space:nowrap; }
+</style>
+</head>
+<body>
+<h1>The #14 design, drawn twice. Prototype, throwaway.</h1>
+<p class="sub">The same data, two fundamentally different drawings. Switch with the bar at the bottom, or keys <b>1</b> and <b>2</b>. <b>A, the diagram:</b> a net with a fixed grammar. Home is at the top, down is further from home, a heavy bar is no return, and both arcs of every verb are drawn. <b>B, the score:</b> fixed staves, one row per verb, read left to right as the conversation. The controller observes, says the verb, and the world applies it.</p>
+<div class="legend" id="legend"></div>
+<div id="out"></div>
+<div class="bar"><button id="bA">1 · A diagram</button><button id="bB">2 · B score</button><button id="bN">names off</button></div>
+<script src="display-data.js"></script>
+<script>
+const byKey = Object.fromEntries(ALL.map(s => [s.key, s]));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const L = t => `<span class="lbl">${esc(t)}</span>`;
+const stateLabel = (k, id) => byKey[k].states.find(s => s[0] === id)[1];
+
+function analyze(S) {
+  const label = Object.fromEntries(S.states.map(s => [s[0], s[1]]));
+  const ids = S.states.map(s => s[0]);
+  const rank = { controller: 0, world: 1 };
+  const out = Object.fromEntries(ids.map(i => [i, S.verbs.filter(v => v.from === i).sort((a, b) => (a.to > b.to) - (a.to < b.to) || rank[a.by] - rank[b.by] || (a.name > b.name) - (a.name < b.name))]));
+  let n = 0; const idx = {}, low = {}, st = [], on = {}, comp = {}, comps = [];
+  const sc = v => { idx[v] = low[v] = n++; st.push(v); on[v] = 1;
+    for (const e of out[v]) { if (idx[e.to] === undefined) { sc(e.to); low[v] = Math.min(low[v], low[e.to]); } else if (on[e.to]) low[v] = Math.min(low[v], idx[e.to]); }
+    if (low[v] === idx[v]) { const c = []; let w; do { w = st.pop(); on[w] = 0; comp[w] = comps.length; c.push(w); } while (w !== v); comps.push(c); } };
+  ids.forEach(i => idx[i] === undefined && sc(i));
+  const dwells = c => c.length > 1 || out[c[0]].some(v => v.to === c[0]);
+  const terminal = id => out[id].length === 0;
+  const homes = S.homes ?? [S.home];
+  const order = [], seen = new Set();
+  for (const q = [S.start ?? S.home]; q.length;) { const s = q.shift(); if (seen.has(s)) continue; seen.add(s);
+    if (dwells(comps[comp[s]]) && !order.includes(comp[s])) order.push(comp[s]); out[s].forEach(v => q.push(v.to)); }
+  const partOf = id => dwells(comps[comp[id]]) ? order.indexOf(comp[id]) : -1;
+  const parts = order.map((c, pi) => {
+    const home = comps[c].find(s => homes.includes(s)) ?? comps[c].slice().sort()[0];
+    const parent = { [home]: null }, via = new Map();
+    for (const q = [home]; q.length;) { const s = q.shift();
+      for (const v of out[s]) { const t = v.to; if (t in parent || terminal(t)) continue;
+        if (partOf(t) === pi || partOf(t) === -1) { parent[t] = s; via.set(v, t); q.push(t); } } }
+    const node = (id, depth) => {
+      const nd = { id, label: label[id], depth, tags: [], kids: [] }; const tree = [];
+      for (const v of out[id]) { const t = v.to;
+        if (via.get(v) === t && parent[t] === id) tree.push({ kind: 'state', v, node: node(t, depth + 1) });
+        else if (t === id) nd.tags.push({ k: '↻', v, note: 'stays' });
+        else if (t === home) nd.tags.push({ k: '↩', v, note: 'home' });
+        else if (t === parent[id]) nd.tags.push({ k: '↰', v, note: `back to ${label[t]}` });
+        else if (terminal(t)) nd.kids.push({ kind: 'end', v, label: label[t] });
+        else if (partOf(t) !== pi && partOf(t) !== -1) nd.kids.push({ kind: 'exit', v, label: label[t], part: partOf(t) });
+        else nd.kids.push({ kind: 'ref', v, label: label[t] }); }
+      tree.sort((a, b) => b.node.size - a.node.size || (a.v.name > b.v.name) - (a.v.name < b.v.name));
+      nd.kids = [...tree, ...nd.kids];
+      nd.size = 1 + tree.reduce((t, k) => t + k.node.size, 0) + nd.kids.length - tree.length;
+      return nd;
+    };
+    return { home, tree: node(home, 0), name: S.partNames?.[home] };
+  });
+  let start = null;
+  if (S.start && partOf(S.start) === -1) { const v = out[S.start][0]; start = { from: label[S.start], v, into: label[v.to] }; }
+  return { parts, start, label };
+}
+
+function contactsOut(S) {
+  const res = {};
+  for (const T of ALL) for (const v of T.verbs ?? []) for (const g of v.gates) if (g[0] === 'contact' && g[1] === S.key) (res[g[2]] ??= []).push({ T, v });
+  return res;
+}
+
+// A loop read off the gates and effects: a verb lowers a meter, the lower meter takes away a verb, that verb's
+// state is what another entity's verb needs, the only other way to that verb's outcome needs a state reached by a
+// verb with a gate the first verb shares.
+function findLoops() {
+  const verbs = ALL.flatMap(S => (S.verbs ?? []).map(v => ({ S, v })));
+  const loops = [];
+  for (const a of verbs) for (const e of a.v.effects ?? []) {
+    const [, mk, meter, d] = e; if (d >= 0) continue;
+    for (const lost of verbs.filter(x => x.S.key === mk && x.v.gates.some(g => g[0] === 'meter' && g[1] === meter && g[2] === 'full')))
+      for (const user of verbs.filter(x => x.v.gates.some(g => g[0] === 'contact' && g[1] === mk && g[2] === lost.v.to)))
+        for (const alt of verbs.filter(x => x.S === user.S && x.v !== user.v && x.v.from === user.v.from && x.v.to === user.v.to))
+          for (const g of alt.v.gates.filter(g => g[0] === 'contact'))
+            for (const via of verbs.filter(x => x.S.key === g[1] && x.v.to === g[2]))
+              for (const shared of via.v.gates.filter(h => a.v.gates.some(k => k.join() === h.join())))
+                loops.push({ steps: [a, lost, user, alt, via], meter, shared });
+  }
+  return loops;
+}
+
+const gateHtml = g => {
+  if (g[0] === 'self') return `<span class="g self">◇ ${L(g[1])}</span>`;
+  if (g[0] === 'content') return `<span class="g content">▢ ${L(g[1])}</span>`;
+  if (g[0] === 'contact') return `<span class="g contact">● ${L(`${byKey[g[1]].title.split(' (')[0]}: ${stateLabel(g[1], g[2])}`)}</span>`;
+  if (g[0] === 'meter') return `<span class="g meter">▮ ${L(`${g[1]} ${g[2]}`)}</span>`;
+  if (g[0] === 'instance') return `<span class="g instance">◎ ${L(stateLabel(g[1], g[2]))}</span>`;
+};
+const fxHtml = v => (v.effects ?? []).map(([, k, m, d]) => `<span class="fx">${esc(m)} ${d > 0 ? '+' : '−'}${Math.abs(d)}</span>`).join(' ');
+let LOOPV = new Map(), ONLY = new Set();
+const verbName = v => `<span class="v-${v.by} ${ONLY.has(v) ? 'only' : ''} ${LOOPV.has(v) ? 'inloop' : ''}">${L(v.name)}</span>${LOOPV.has(v) ? `<span class="loopno">${LOOPV.get(v)}</span>` : ''}${v.who ? ` <span class="who">${esc(v.who)}</span>` : ''}`;
+
+function header(S) {
+  const k = S.kind.startsWith('capability') ? 'capability' : S.kind.startsWith('content schema') ? 'content' : 'instance';
+  const ctl = S.controller ? `<div class="ctlbox">controller <b>${esc(S.controller.who)}</b>${S.controller.note ? ` <span>${esc(S.controller.note)}</span>` : ''}</div>` : '';
+  const nums = [...(S.numbers ?? []), ...(S.meters ?? []).map(([m, n, u]) => `${m}: ${n} ${u}`)];
+  return `<h3><span class="kind ${k}">${esc(S.kind)}</span>${esc(S.title)}</h3><div class="meta">${esc(S.game)}</div>${ctl}
+    ${nums.length ? `<div class="numbers">${nums.map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}${S.note ? `<p class="note">${esc(S.note)}</p>` : ''}`;
+}
+
+/* B: the score */
+function score(S) {
+  if (S.kind === 'content schema') return schemaHtml(S);
+  const A = analyze(S), co = contactsOut(S); const rows = [];
+  const resHtml = (k) => {
+    if (k.kind === 'state') return `→ <b>${L(k.node.label)}</b>`;
+    if (k.kind === 'end') return `→ ✕ <b>${L(k.label)}</b>`;
+    if (k.kind === 'exit') return `→ <b style="color:var(--content)">⇓ ${L(k.label)}</b> <span class="who">part ${k.part + 1}</span>`;
+    if (k.kind === 'ref') return `→ <span style="border-bottom:1px dashed #999">${L(k.label)}</span>`;
+    return `${k.k} ${esc(k.note)}`;
+  };
+  const vrow = (v, res) => `<tr><td></td><td class="obs">${v.gates.map(gateHtml).join('') || '<span class="who">nothing</span>'}</td>
+    <td>${verbName(v)}${v.count ? `<div class="count">${L(v.count)}</div>` : ''}</td><td class="app">${fxHtml(v)}</td><td class="res">${res}</td></tr>`;
+  const block = (nd, isHome) => {
+    const cout = (co[nd.id] ?? []).map(({ T, v }) => `<div class="cout">● ${L(`${T.title.split(' (')[0]}: ${v.name}`)} needs this</div>`).join('');
+    rows.push(`<tr class="srow"><td class="st" style="padding-left:${8 + nd.depth * 16}px">${isHome ? `<span class="homepill">⌂ ${L(nd.label)}</span>` : L(nd.label)}${cout}</td><td colspan="4"></td></tr>`);
+    for (const k of nd.kids) rows.push(vrow(k.v, resHtml(k)));
+    for (const t of nd.tags) rows.push(vrow(t.v, resHtml(t)));
+    for (const k of nd.kids) if (k.kind === 'state') block(k.node, false);
+  };
+  const body = A.parts.map((p, pi) => { rows.length = 0; block(p.tree, true);
+    return `<div class="partbar ${pi ? '' : 'first'}">${pi ? '<b>⇓ no return</b> · ' : ''}part ${pi + 1}${p.name ? ` · ${esc(p.name)}` : ''}</div>
+      <table class="score"><tr><th>state</th><th>controller observes</th><th>says</th><th>world applies</th><th>then</th></tr>${rows.join('')}</table>`; }).join('');
+  const start = A.start ? `<p>starts ${L(A.start.from)}, ${verbName(A.start.v)} ${A.start.v.gates.map(gateHtml).join('')} → ${L(A.start.into)}</p>` : '';
+  return `<div class="sheet">${header(S)}${start}${body}</div>`;
+}
+
+/* A: the diagram */
+function diagram(S) {
+  if (S.kind === 'content schema') return schemaHtml(S);
+  const A = analyze(S), co = contactsOut(S);
+  const W = 150, H = 215, PAD = 16;
+  const partsHtml = A.parts.map((p, pi) => {
+    let slot = 0; const items = []; const lines = [];
+    const place = (nd) => {
+      const kids = nd.kids.map(k => k.kind === 'state' ? { k, x: place(k.node) } : { k, x: (slot++ + 0.5) * W });
+      const x = kids.length ? (kids[0].x + kids[kids.length - 1].x) / 2 : (slot++ + 0.5) * W;
+      nd.x = x; nd.kidsPos = kids; return x;
+    };
+    place(p.tree);
+    const draw = nd => {
+      const y = nd.depth * H;
+      const cout = (co[nd.id] ?? []).map(({ T, v }) => `<div class="cout">● ${L(`${T.title.split(' (')[0]}: ${v.name}`)}</div>`).join('');
+      items.push(`<div class="pill ${nd.depth === 0 ? 'home' : ''}" style="left:${nd.x}px;top:${y}px">${nd.depth === 0 ? '⌂ ' : ''}${L(nd.label)}</div>`);
+      items.push(`<div class="tags" style="left:${nd.x}px;top:${y + 26}px">${cout}${nd.tags.map(t => `<div>${t.k} ${verbName(t.v)}</div>`).join('')}</div>`);
+      for (const { k, x } of nd.kidsPos) {
+        const vy = y + 26 + 16 * (nd.tags.length + (co[nd.id]?.length ?? 0)) + 14, cy = (nd.depth + 1) * H;
+        items.push(`<div class="vbox ${k.v.by}" style="left:${x}px;top:${vy}px">${verbName(k.v)}<div>${k.v.gates.map(gateHtml).join('')}${fxHtml(k.v)}</div>${k.v.count ? `<div class="count">${L(k.v.count)}</div>` : ''}</div>`);
+        lines.push(`<path d="M${nd.x} ${y + 22} C ${nd.x} ${vy - 10}, ${x} ${vy - 30}, ${x} ${vy}" stroke="#a5b4fc" stroke-width="1.5" fill="none"/>`);
+        lines.push(`<line x1="${x}" y1="${vy + 30}" x2="${x}" y2="${cy - 3}" stroke="#444" stroke-width="1.5" marker-end="url(#ar)"/>`);
+        if (k.kind === 'state') draw(k.node);
+        else { const t = k.kind === 'end' ? `✕ ${k.label}` : k.kind === 'exit' ? `⇓ ${k.label}` : k.label;
+          items.push(`<div class="pill ${k.kind}" style="left:${x}px;top:${cy}px">${L(t)}</div>`); }
+      }
+    };
+    draw(p.tree);
+    const depth = (nd) => Math.max(nd.depth, ...nd.kids.map(k => k.kind === 'state' ? depth(k.node) : nd.depth + 1));
+    const h = depth(p.tree) * H + 40, w = slot * W;
+    return `<div class="partbar ${pi ? '' : 'first'}">${pi ? '<b>⇓ no return</b> · ' : ''}part ${pi + 1}${p.name ? ` · ${esc(p.name)}` : ''}</div>
+      <div class="dia" style="width:${w}px;height:${h}px;margin-left:${PAD}px"><svg width="${w}" height="${h}"><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#444"/></marker></defs>${lines.join('')}</svg>${items.join('')}</div>`;
+  }).join('');
+  const start = A.start ? `<p>starts ${L(A.start.from)}, ${verbName(A.start.v)} ${A.start.v.gates.map(gateHtml).join('')} → ${L(A.start.into)}</p>` : '';
+  return `<div class="sheet">${header(S)}${start}${partsHtml}</div>`;
+}
+
+function schemaHtml(S) {
+  const inst = byKey.deku;
+  const used = t => inst.verbs.filter(v => v.gates.some(g => g[1] === t)).length;
+  return `<div class="sheet">${header(S)}<table class="schema">${S.things.map(([t, c]) => `<tr><td>▢ ${L(t)}</td><td>${L(c)}</td><td class="who">${used(t)} verbs in the instance</td></tr>`).join('')}</table></div>`;
+}
+
+const LEGEND = `<span><b class="v-controller">verb a controller chooses</b></span><span><i class="v-world">verb the world does on its own</i></span>
+  <span>observed: <span class="g self">◇ Link's own other state</span><span class="g content">▢ content</span><span class="g contact">● another entity's state</span><span class="g meter">▮ a count</span><span class="g instance">◎ where the two stand</span></span>
+  <span>↩ home · ↰ one step back · ↻ stays · ✕ ends · ⇓ no return</span><span><span class="only">verb only one side has</span></span><span><span class="loopno">1</span> step of a loop</span>`;
+
+let mode = 'A', noname = false;
+function paint() {
+  const draw = mode === 'A' ? diagram : score;
+  const loops = findLoops();
+  LOOPV = new Map();
+  const ch = byKey['sword-child'], ad = byKey['sword-adult'];
+  ONLY = new Set([...ch.verbs, ...ad.verbs].filter(v => v.age));
+  const l = loops[0];
+  const loopText = l ? `<div class="loopbox"><b>Loop, reinforcing</b> <span class="who">read off the gates and effects above</span><ol>
+    <li><b>Link: ${esc(l.steps[0].v.name)}</b> lowers ${esc(l.meter)}.</li>
+    <li>With ${esc(l.meter)} not full, Link can't <b>${esc(l.steps[1].v.name)}</b>, so the Octorok can't be <b>${esc(l.steps[2].v.name)}</b> by it.</li>
+    <li>The other way it is <b>${esc(l.steps[3].v.name)}</b> needs Link <b>${esc(stateLabel(l.steps[3].v.gates[0][1], l.steps[3].v.gates[0][2]))}</b>, and only <b>${esc(l.steps[4].v.name)}</b> gets him there.</li>
+    <li><b>${esc(l.steps[4].v.name)}</b> needs them ${esc(stateLabel(l.shared[1], l.shared[2]))}, and so does <b>${esc(l.steps[0].v.name)}</b>. Back to 1.</li></ol></div>` : '';
+  document.getElementById('legend').innerHTML = LEGEND;
+  document.getElementById('out').innerHTML = `
+    <h2>Capability schemas</h2><p class="sub">What each entity can be and do, whoever controls it. The controller sits outside, as a chooser. Contact is a gate on another entity's state, and the state that is gated shows who needs it.</p>
+    <div class="row">${draw(byKey.goomba)}${draw(byKey.octorok)}</div>
+    <h2>Compare by name: child and adult Link's sword</h2><p class="sub">A lineage: the same entity at two ages. Highlighted verbs exist on one side only.</p>
+    <div class="row pair">${draw(ch)}${draw(ad)}</div>
+    <h2>Compare by shape: Goomba and Red Octorok, names off</h2><p class="sub">Unrelated games. With every name hidden, what is left is the design's shape.</p>
+    <div class="row pair noname">${draw(byKey.goomba)}${draw(byKey.octorok)}</div>
+    <h2>Content: the schema and one instance</h2><p class="sub">The schema is the kinds of things a world can hold and what they do to Link. The instance arranges them, and reads as a walkthrough of Link's verbs.</p>
+    <div class="row">${draw(byKey['deku-schema'])}</div><div class="row" style="margin-top:20px">${draw(byKey.deku)}</div>
+    <h2>Feedback, across two entities and where they stand</h2>
+    <div class="row">${(loops[0]?.steps.forEach((s, i) => LOOPV.set(s.v, i + 1)), '')}${draw(byKey.z1link)}${draw(byKey.octorok)}${draw(byKey.reach)}</div>${loopText}`;
+  document.body.classList.toggle('noname', noname);
+  bA.className = mode === 'A' ? 'on' : ''; bB.className = mode === 'B' ? 'on' : ''; bN.className = noname ? 'on' : '';
+}
+bA.onclick = () => { mode = 'A'; paint(); }; bB.onclick = () => { mode = 'B'; paint(); };
+bN.onclick = () => { noname = !noname; paint(); };
+addEventListener('keydown', e => { if (e.key === '1') bA.onclick(); if (e.key === '2') bB.onclick(); });
+mode = new URLSearchParams(location.search).get('v') === 'B' ? 'B' : 'A';
+paint();
+</script>
+</body>
+</html>
