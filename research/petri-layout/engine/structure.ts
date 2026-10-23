@@ -182,3 +182,40 @@ function hash(s: string): string {
   for (let i = 0; i < s.length; i++) { h1 = Math.imul(h1 ^ s.charCodeAt(i), 16777619); h2 = Math.imul(h2 + s.charCodeAt(i), 2246822519) }
   return (h1 >>> 0).toString(36) + (h2 >>> 0).toString(36)
 }
+
+export type LaneOrder = { anchor: NodeId; stage: Map<NodeId, number>; returnArcs: { from: NodeId; to: NodeId }[] }
+
+// Cut a lane open at its anchor and number its nodes by distance from it (R2). Choice branches share a stage.
+export function laneOrder(net: Net, s: Structure, spine: Spine): LaneOrder {
+  const P = new Set(spine.places), T = new Set(spine.transitions)
+  const tokens = new Map(net.places.map((p) => [p.id, p.tokens]))
+  const inLane = (t: NodeId) => [...s.pre.get(t)!.keys()].filter((p) => P.has(p))
+  const outLane = (t: NodeId) => [...s.post.get(t)!.keys()].filter((p) => P.has(p))
+  const sources = spine.places.filter((p) => !spine.transitions.some((t) => outLane(t).includes(p)))
+  const sourceTs = spine.transitions.filter((t) => inLane(t).length === 0)
+  const key = (n: NodeId) => s.canon.get(n)!
+  const byKey = (a: NodeId, b: NodeId) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0)
+  let anchor: NodeId
+  const marked = spine.places.filter((p) => (tokens.get(p) ?? 0) > 0)
+  if (sourceTs.length) anchor = sourceTs.sort(byKey)[0]
+  else if (sources.length) anchor = sources.sort((a, b) => (tokens.get(b) ?? 0) - (tokens.get(a) ?? 0) || byKey(a, b))[0]
+  else if (marked.length) anchor = marked.sort((a, b) => (tokens.get(b) ?? 0) - (tokens.get(a) ?? 0) || byKey(a, b))[0]
+  else {
+    const choices = spine.places.filter((p) => spine.transitions.filter((t) => inLane(t).includes(p)).length > 1).sort(byKey)
+    anchor = choices[0] ?? spine.places.slice().sort(byKey)[0]
+  }
+  const stage = new Map<NodeId, number>([[anchor, 0]])
+  const returnArcs: { from: NodeId; to: NodeId }[] = []
+  const queue = [anchor]
+  while (queue.length) {
+    const n = queue.shift()!
+    const next = P.has(n)
+      ? spine.transitions.filter((t) => inLane(t).includes(n)).sort(byKey)
+      : outLane(n).sort(byKey)
+    for (const m of next) {
+      if (m === anchor) { returnArcs.push({ from: n, to: m }); continue }
+      if (!stage.has(m)) { stage.set(m, stage.get(n)! + 1); queue.push(m) }
+    }
+  }
+  return { anchor, stage, returnArcs }
+}
