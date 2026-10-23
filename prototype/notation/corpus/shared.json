@@ -1,0 +1,38 @@
+[
+  {
+    "name": "enemy clock",
+    "files": ["duel-first.maps", "duel-revised.maps", "duel-held.maps", "stamina-souls.maps", "stamina-hunter.maps", "stamina-third.maps"],
+    "states": ["idle", "windup", "attack", "recover", "ebeat"],
+    "verbs": ["tell", "swing", "steady"]
+  },
+  {
+    "name": "the beat",
+    "files": ["duel-first.maps", "duel-revised.maps", "duel-held.maps", "stamina-souls.maps", "stamina-hunter.maps", "stamina-third.maps"],
+    "states": ["beat", "ebeat", "after"],
+    "verbs": ["tick", "end"]
+  },
+  {
+    "name": "Link's stances",
+    "files": ["duel-first.maps", "duel-revised.maps", "duel-held.maps", "stamina-souls.maps", "stamina-hunter.maps", "stamina-third.maps"],
+    "states": ["neutral", "guarding", "rolling", "striking", "beat", "after"],
+    "verbs": ["wait", "strike", "guard", "lower", "roll", "rollend"]
+  },
+  {
+    "name": "contacts",
+    "files": ["duel-first.maps", "duel-revised.maps", "duel-held.maps", "stamina-souls.maps", "stamina-hunter.maps", "stamina-third.maps"],
+    "states": ["neutral", "rolling", "striking", "idle", "attack", "recover", "link_hit", "enemy_hit"],
+    "verbs": ["punish", "hit", "evade", "whiff"]
+  },
+  {
+    "name": "block that pushes Link back",
+    "files": ["duel-revised.maps", "duel-held.maps", "stamina-souls.maps", "stamina-hunter.maps", "stamina-third.maps"],
+    "states": ["guarding", "attack", "idle"],
+    "verbs": ["block"]
+  },
+  {
+    "name": "stamina recovery",
+    "files": ["stamina-souls.maps", "stamina-hunter.maps", "stamina-third.maps"],
+    "states": ["stamina", "breath"],
+    "verbs": ["catch_breath", "breath_spent"]
+  }
+]

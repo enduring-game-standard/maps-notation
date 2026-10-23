@@ -1,0 +1,49 @@
+maps 2
+title "Call the coin"
+
+seat caller "Caller" color "#7b2cbf"
+
+state coin "Coin in hand" marks 1
+state heads "Heads, covered" seen-by none
+state tails "Tails, covered" seen-by none
+state may_call "Caller may call" marks 1
+state said_heads "Called heads"
+state said_tails "Called tails"
+state caller_won "Caller wins" ends "Caller wins"
+state caller_lost "Caller loses" ends "Caller loses"
+
+verb flip_heads "Lands heads" by world
+  take coin
+  give heads
+
+verb flip_tails "Lands tails" by world
+  take coin
+  give tails
+
+verb call_heads "Call heads" by caller
+  take may_call
+  give said_heads
+
+verb call_tails "Call tails" by caller
+  take may_call
+  give said_tails
+
+verb right_heads "Heads, as called" by world
+  take heads
+  take said_heads
+  give caller_won
+
+verb right_tails "Tails, as called" by world
+  take tails
+  take said_tails
+  give caller_won
+
+verb wrong_heads "Heads, called tails" by world
+  take heads
+  take said_tails
+  give caller_lost
+
+verb wrong_tails "Tails, called heads" by world
+  take tails
+  take said_heads
+  give caller_lost

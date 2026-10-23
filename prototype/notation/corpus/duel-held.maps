@@ -1,0 +1,115 @@
+maps 2
+title "Duel, held-swing draft: Link against one armed enemy"
+
+seat link "Link" color "#2a9d8f"
+
+state neutral "Link stands ready" marks 1
+state guarding "Link behind the shield"
+state rolling "Link rolling"
+state striking "Link's strike in the air"
+state idle "Enemy idle" marks 1
+state windup "Enemy winding up"
+state delay "Enemy holding the swing"
+state attack "Enemy's blow coming"
+state recover "Enemy recovering"
+state beat "Link's beat"
+state ebeat "Enemy's beat"
+state after "After the enemy moves"
+state link_hit "Link is hit" ends "Link takes a hit"
+state enemy_hit "Enemy is hit" ends "Link lands a hit"
+
+verb wait "Hold" by link
+  unless beat
+  give beat
+
+verb strike "Strike" by link
+  take neutral
+  give striking
+  give beat
+
+
+verb guard "Raise the shield" by link
+  take neutral
+  give guarding
+  give beat
+
+verb lower "Lower the shield" by link
+  take guarding
+  give neutral
+  give beat
+
+verb roll "Roll" by link
+  take neutral
+  give rolling
+  give beat
+
+verb punish "The strike lands in the opening" by world priority 15
+  take recover
+  need striking
+  give idle
+  give enemy_hit
+
+
+verb catch "The strike catches the held swing" by world priority 13
+  take delay
+  need striking
+  give idle
+  give enemy_hit
+
+verb hit "The blow hits Link" by world priority 12
+  take attack
+  need neutral
+  give idle
+  give link_hit
+
+verb block "The shield stops it and pushes Link back" by world priority 11
+  take attack
+  need guarding
+  give idle
+
+verb evade "The blow whiffs over the roll" by world priority 10
+  take attack
+  need rolling
+  give recover
+
+verb whiff "The strike finishes" by world priority 9
+  take striking
+  give neutral
+
+verb tick "The beat passes" by world priority 8
+  take beat
+  give ebeat
+  give after
+
+verb tell "The enemy winds up" by world priority 7
+  take idle
+  take ebeat
+  give windup
+
+verb swing "The enemy swings" by world priority 6 weight 3
+  take windup
+  take ebeat
+  give attack
+
+verb feint "The enemy holds the swing back" by world priority 6 weight 2
+  take windup
+  take ebeat
+  give delay
+
+verb late "The late swing comes" by world priority 5
+  take delay
+  take ebeat
+  give attack
+
+verb steady "The enemy steadies" by world priority 4
+  take recover
+  take ebeat
+  give idle
+
+verb rollend "Link comes out of the roll" by world priority 3
+  take rolling
+  take after
+  give neutral
+
+verb end "The beat is over" by world priority 2
+  take after
