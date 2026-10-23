@@ -15,11 +15,14 @@ const missing = ids.filter((id) => !hand[id])
 const both = ids.filter((id) => hand[id] && (drawn[id] ?? drawn[id + '#0']))
 const at = (id: string) => drawn[id] ?? drawn[id + '#0']
 // pairwise order agreement: for each pair, do both drawings put them in the same left/right and above/below order? Ties within 8px count as ties.
+// Ties are within 2% of each drawing's own extent, since the hand drawing uses its own units.
 const agree = (f: (id: string) => number, g: (id: string) => number) => {
   let same = 0, n = 0
-  const sgn = (d: number) => (Math.abs(d) < 8 ? 0 : Math.sign(d))
+  const tol = (h: (id: string) => number) => { const v = both.map(h); return (Math.max(...v) - Math.min(...v)) * 0.02 }
+  const tf = tol(f), tg = tol(g)
+  const sgn = (d: number, t: number) => (Math.abs(d) <= t ? 0 : Math.sign(d))
   for (let i = 0; i < both.length; i++) for (let j = i + 1; j < both.length; j++) {
-    const a = sgn(f(both[i]) - f(both[j])), b = sgn(g(both[i]) - g(both[j]))
+    const a = sgn(f(both[i]) - f(both[j]), tf), b = sgn(g(both[i]) - g(both[j]), tg)
     n++; if (a === b) same++
   }
   return n ? Math.round((same / n) * 100) : 0
