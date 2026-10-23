@@ -4,9 +4,16 @@ import { PLACE_R, type Layout, type Pt } from './layout.ts'
 // Peterson's drawing style: thin circles, short thick bars, filled arrowheads, italic labels, dots for tokens.
 export function renderSvg(net: Net, layout: Layout, opts: { title?: string } = {}): string {
   const pts: Pt[] = []
-  for (const n of Object.values(layout.nodes)) {
+  for (const [id, n] of Object.entries(layout.nodes)) {
     pts.push({ x: n.x - 40, y: n.y - 30 }, { x: n.x + 40, y: n.y + 30 })
-    if (n.label) pts.push({ x: n.label.x + (n.label.anchor === 'start' ? 110 : n.label.anchor === 'end' ? -110 : 0), y: n.label.y })
+    const node = net.places.find((p) => p.id === id) ?? net.transitions.find((t) => t.id === id)
+    if (n.label && node) {
+      const lines = wrap(node.label ?? node.id, 16)
+      const w = Math.max(...lines.map((l) => l.length)) * 6.6
+      const x0 = n.label.anchor === 'start' ? n.label.x : n.label.anchor === 'end' ? n.label.x - w : n.label.x - w / 2
+      const h = (lines.length * 14) / 2 + 6
+      pts.push({ x: x0, y: n.label.y - h }, { x: x0 + w, y: n.label.y + h })
+    }
   }
   for (const a of layout.arcs) pts.push(...a.path)
   const minX = Math.min(...pts.map((p) => p.x)) - 10, maxX = Math.max(...pts.map((p) => p.x)) + 10

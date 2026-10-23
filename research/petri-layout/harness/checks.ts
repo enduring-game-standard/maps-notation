@@ -20,7 +20,7 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
   for (const [k, v] of want) if (v !== 0) failures.push(`arc ${k} drawn ${v > 0 ? 'missing' : 'extra'}`)
   for (const r of lay.arcs) {
     const s = r.path[0], e = r.path[r.path.length - 1]
-    if (dist(s, lay.nodes[r.from]) > PLACE_R + 30 || dist(e, lay.nodes[r.to]) > PLACE_R + 30) failures.push(`arc ${r.from}>${r.to} does not start and end at its nodes`)
+    if (offNode(s, lay.nodes[r.from]) > 6 || offNode(e, lay.nodes[r.to]) > 6) failures.push(`arc ${r.from}>${r.to} does not start and end at its nodes`)
   }
 
   // nodes keep clear of one another
@@ -50,7 +50,7 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
     for (const other of ids) {
       if (other === id) continue
       const n = lay.nodes[other]
-      if (n.kind === 'place' && Math.abs(L.y - n.y) < PLACE_R && labelSpanHits(L, n.x, PLACE_R)) { failures.push(`label of ${id} covers ${other}`); break }
+      if (n.kind === 'place' && Math.abs(L.y - n.y) < PLACE_R && labelSpanHits(L, labelWidth(net, id), n.x, PLACE_R)) { failures.push(`label of ${id} covers ${other}`); break }
     }
   }
 
@@ -85,8 +85,23 @@ function segDist(p: Pt, x: number, y: number, ang: number, len: number) {
   const t = Math.max(-len / 2, Math.min(len / 2, (p.x - x) * ux + (p.y - y) * uy))
   return Math.hypot(p.x - (x + ux * t), p.y - (y + uy * t))
 }
-function labelSpanHits(L: { x: number; anchor: string }, cx: number, r: number) {
-  const w = 60
+// distance from a point to a node's outline: a circle's rim, or a bar's segment
+function offNode(p: Pt, n: Layout['nodes'][string]) {
+  return n.kind === 'place' ? Math.abs(dist(p, n) - PLACE_R) : segDist(p, n.x, n.y, n.angle, n.length)
+}
+
+// the renderer wraps labels at 16 characters, 13 px italic serif: about 6.2 px a character
+function labelWidth(net: Net, id: string) {
+  const node = net.places.find((p) => p.id === id) ?? net.transitions.find((t) => t.id === id)!
+  const text = node.label ?? id
+  const lines: string[] = []
+  let cur = ''
+  for (const w of text.split(' ')) { if (cur && (cur + ' ' + w).length > 16) { lines.push(cur); cur = w } else cur = cur ? cur + ' ' + w : w }
+  if (cur) lines.push(cur)
+  return Math.max(...lines.map((l) => l.length)) * 6.2
+}
+
+function labelSpanHits(L: { x: number; anchor: string }, w: number, cx: number, r: number) {
   const x0 = L.anchor === 'start' ? L.x : L.anchor === 'end' ? L.x - w : L.x - w / 2
   return cx + r > x0 && cx - r < x0 + w
 }
