@@ -1,0 +1,145 @@
+<!doctype html>
+<!-- PROTOTYPE, throwaway. Two ways to draw a possibility structure as a conversation, on Link's OoT vocabulary. -->
+<meta charset="utf-8">
+<title>Possibility prototype</title>
+<style>
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 0; color: #222; }
+  header { padding: 10px 16px; border-bottom: 1px solid #ccc; display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  header b { margin-right: 4px; }
+  .chips label { margin-right: 8px; white-space: nowrap; }
+  main { display: flex; gap: 16px; padding: 12px 16px; }
+  #view { flex: 1; overflow: auto; }
+  #side { width: 340px; flex: none; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #e4e4e4; padding: 0; text-align: center; }
+  th.col { writing-mode: vertical-rl; transform: rotate(180deg); font-weight: normal; font-size: 12px; padding: 4px 2px; height: 120px; }
+  th.col.sel { background: #fff3c4; }
+  th.fam { text-align: left; background: #f4f4f4; padding: 2px 6px; font-size: 12px; }
+  td.name { text-align: left; padding: 1px 8px; white-space: nowrap; cursor: pointer; }
+  td.c { width: 22px; height: 20px; cursor: pointer; font-size: 13px; }
+  td.c.sel { outline: 2px solid #e0a800; }
+  .live { color: #1a5fd0; } .dock { color: #1a5fd0; opacity: .6; } .shut { color: #c33; } .unk { color: #999; }
+  .gain { background: #e3f3e3; } .loss { background: #f8e0e0; }
+  .ex p { margin: 2px 0; } .ex .p { color: #1a5fd0; } .ex .w { color: #555; padding-left: 18px; }
+  .ex .p::before { content: 'player  '; font-size: 11px; opacity: .6; } .ex .w::before { content: 'world  '; font-size: 11px; opacity: .6; }
+  .turn { display: block; margin: 3px 0; cursor: pointer; color: #6a3fb5; }
+  .note { color: #666; font-size: 12px; }
+  button.v { padding: 4px 10px; } button.v.on { background: #222; color: #fff; }
+  svg text { font: 12px system-ui, sans-serif; }
+  .petal { cursor: pointer; }
+</style>
+<header>
+  <span><b>Design</b><button class="v" data-v="staff">1 vocabulary staff</button> <button class="v" data-v="rosette">2 rosette</button></span>
+  <span><b>Age</b><label><input type="radio" name="age" value="child" checked> child</label> <label><input type="radio" name="age" value="adult"> adult</label>
+    <label title="mark what the other age can say and this one cannot"><input type="checkbox" id="delta"> show the difference from the other age</label></span>
+  <span class="chips"><b>The level offers</b><span id="content"></span></span>
+</header>
+<main><div id="view"></div><div id="side"></div></main>
+<script src="link-vocabulary.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const params = new URLSearchParams(location.search);
+const state = { view: params.get('v') || 'staff', age: 'child', offered: new Set(), sel: null, verb: null, delta: false };
+const shieldFor = age => age === 'child' ? 'deku' : 'hylian';
+const key = s => [s.medium, s.stance, s.hands].join('/');
+const label = s => s.medium !== 'ground' ? MEDIUM_LABEL[s.medium] : `${STANCE_LABEL[s.stance]}, ${HAND_LABEL[s.hands]}`;
+const MARK = { live: ['●', 'live'], dock: ['○', 'dock'], shut: ['✕', 'shut'], '?': ['?', 'unk'], no: ['', ''] };
+const FAMILIES = ['fight', 'defend', 'move', 'level', 'items'];
+const contentName = id => CONTENT.find(c => c[0] === id)[1];
+
+function sits(age) { return situations(age, shieldFor(age)); }
+function other(age) { return age === 'child' ? 'adult' : 'child'; }
+// The same situation for the other age, if that age can be in it.
+function twin(s) { return sits(other(s.age)).find(t => key(t) === key(s)); }
+function said(v, s) { const st = status(v, s, state.offered); return st === 'live' || st === 'dock'; }
+function diff(v, s) {
+  if (!state.delta) return '';
+  const t = twin(s), here = said(v, s), there = t ? said(v, t) : false;
+  return here && !there ? 'gain' : !here && there ? 'loss' : '';
+}
+
+function exchange(v, s) {
+  const st = status(v, s, state.offered);
+  const steps = v.steps(s).map(([who, text]) => `<p class="${who}">${text}</p>`).join('');
+  const why = st === 'dock' ? `<p class="note">Waits on the level: needs ${contentName(v.needs)}.</p>`
+    : st === 'shut' ? `<p class="note">Shut here by ${contentName(v.shut)}.</p>`
+    : st === '?' ? `<p class="note">The catalog doesn't settle this case.</p>` : '';
+  return `<h3>${v.name}</h3>${why}<div class="ex">${steps}</div><p class="note">${v.cite || ''}</p>`;
+}
+
+function side() {
+  const s = state.sel;
+  if (!s) return $('#side').innerHTML = '<p class="note">Pick a situation.</p>';
+  const live = LOOPS.filter(v => said(v, s));
+  const turns = TURNS.filter(t => status(t, s, state.offered) !== 'no');
+  let h = `<h3>At rest: ${label(s)}</h3><p class="note">${live.length} things Link can say here, ${turns.length} ways to change what he can say.</p>`;
+  h += '<b>Turns</b>' + turns.map(t => {
+    const st = status(t, s, state.offered), to = t.to(s);
+    return `<span class="turn" data-to="${key(to)}">${t.name} → ${label(to)}${st === 'dock' ? ` (needs ${contentName(t.needs)})` : ''}</span>`;
+  }).join('');
+  if (state.verb) h += exchange(state.verb, s);
+  $('#side').innerHTML = h;
+  $('#side').querySelectorAll('.turn').forEach(el => el.onclick = () => { state.sel = sits(state.age).find(x => key(x) === el.dataset.to) || state.sel; state.verb = null; render(); });
+}
+
+function staff() {
+  const cols = sits(state.age);
+  let h = '<table><tr><th></th>' + cols.map(s => `<th class="col${state.sel && key(s) === key(state.sel) ? ' sel' : ''}">${label(s)}</th>`).join('') + '</tr>';
+  for (const fam of FAMILIES) {
+    h += `<tr><th class="fam" colspan="${cols.length + 1}">${fam}</th></tr>`;
+    for (const v of LOOPS.filter(v => v.family === fam)) {
+      const cells = cols.map((s, i) => {
+        const [m, cls] = MARK[status(v, s, state.offered)];
+        const sel = state.sel && state.verb === v && key(s) === key(state.sel) ? ' sel' : '';
+        return `<td class="c ${cls} ${diff(v, s)}${sel}" data-v="${v.id}" data-i="${i}">${m}</td>`;
+      });
+      if (cols.every(s => status(v, s, state.offered) === 'no' && !diff(v, s))) continue;
+      h += `<tr><td class="name">${v.name}${v.needs ? ` <span class="note">· ${contentName(v.needs)}</span>` : ''}</td>${cells.join('')}</tr>`;
+    }
+  }
+  h += '</table><p class="note">● Link can say it here. ○ Link could, if the level offered what it names. ✕ the level shuts it. ? unsettled in the catalog.' +
+    (state.delta ? ` Green: ${state.age} can, ${other(state.age)} can't. Red: ${other(state.age)} can, ${state.age} can't.` : '') + '</p>';
+  $('#view').innerHTML = h;
+  $('#view').querySelectorAll('td.c').forEach(td => td.onclick = () => { state.sel = cols[td.dataset.i]; state.verb = LOOPS.find(v => v.id === td.dataset.v); render(); });
+  $('#view').querySelectorAll('th.col').forEach((th, i) => th.onclick = () => { state.sel = cols[i]; state.verb = null; render(); });
+}
+
+function rosette() {
+  const s = state.sel || (state.sel = sits(state.age)[0]);
+  const t = twin(s);
+  const shown = LOOPS.filter(v => status(v, s, state.offered) !== 'no' || (state.delta && t && said(v, t)));
+  const W = 720, cx = W / 2, cy = 360, r0 = 70, r1 = 290;
+  let g = '';
+  shown.forEach((v, i) => {
+    const a = (i / shown.length) * 2 * Math.PI - Math.PI / 2, st = status(v, s, state.offered), d = diff(v, s);
+    const len = 60 + v.steps(s).length * 22, w = Math.PI / shown.length * 0.8;
+    const px = (rr, aa) => `${cx + rr * Math.cos(aa)},${cy + rr * Math.sin(aa)}`;
+    const color = d === 'loss' ? '#c33' : d === 'gain' ? '#2a8a2a' : st === 'shut' ? '#c33' : '#1a5fd0';
+    const dash = st === 'dock' || st === '?' || d === 'loss' ? 'stroke-dasharray="5 4"' : '';
+    const fill = st === 'live' ? color + '22' : 'none';
+    const tip = r0 + len;
+    g += `<path class="petal" data-v="${v.id}" d="M${px(r0, a - w)} Q${px(tip, a - w)} ${px(tip, a)} Q${px(tip, a + w)} ${px(r0, a + w)}" fill="${fill}" stroke="${color}" ${dash} stroke-width="${state.verb === v ? 3 : 1.5}"/>`;
+    const lx = cx + (tip + 8) * Math.cos(a), ly = cy + (tip + 8) * Math.sin(a);
+    g += `<text x="${lx}" y="${ly}" text-anchor="${Math.cos(a) < -0.2 ? 'end' : Math.cos(a) > 0.2 ? 'start' : 'middle'}" fill="${color}">${v.name}${st === 'dock' ? ' · ' + contentName(v.needs) : ''}</text>`;
+  });
+  g += `<circle cx="${cx}" cy="${cy}" r="${r0}" fill="#fff" stroke="#222"/><text x="${cx}" y="${cy - 6}" text-anchor="middle">at rest</text><text x="${cx}" y="${cy + 12}" text-anchor="middle" font-size="11">${label(s)}</text>`;
+  const dials = sits(state.age).map(x => `<button class="v${key(x) === key(s) ? ' on' : ''}" data-k="${key(x)}">${label(x)}</button>`).join(' ');
+  $('#view').innerHTML = `<div>${dials}</div><svg width="${W}" height="${2 * cy}">${g}</svg>
+    <p class="note">Each petal is one exchange out from rest and back; its length is how many lines the exchange runs. Solid: Link can say it here. Dashed: waits on the level. ${state.delta ? `Green: only ${state.age}. Red dashed: only ${other(state.age)}.` : ''} The buttons above are the situations at rest; the turns in the side panel move between them.</p>`;
+  $('#view').querySelectorAll('.petal').forEach(p => p.onclick = () => { state.verb = LOOPS.find(v => v.id === p.dataset.v); render(); });
+  $('#view').querySelectorAll('button[data-k]').forEach(b => b.onclick = () => { state.sel = sits(state.age).find(x => key(x) === b.dataset.k); state.verb = null; render(); });
+}
+
+function render() {
+  document.querySelectorAll('button.v[data-v]').forEach(b => b.classList.toggle('on', b.dataset.v === state.view));
+  (state.view === 'staff' ? staff : rosette)();
+  side();
+}
+
+$('#content').innerHTML = CONTENT.map(([id, name]) => `<label><input type="checkbox" value="${id}"> ${name}</label>`).join('');
+$('#content').onchange = e => { e.target.checked ? state.offered.add(e.target.value) : state.offered.delete(e.target.value); render(); };
+document.querySelectorAll('button.v[data-v]').forEach(b => b.onclick = () => { state.view = b.dataset.v; history.replaceState(null, '', '?v=' + state.view); render(); });
+document.querySelectorAll('input[name=age]').forEach(r => r.onchange = () => { state.age = r.value; state.sel = state.sel && sits(state.age).find(x => key(x) === key(state.sel)) || null; state.verb = null; render(); });
+$('#delta').onchange = e => { state.delta = e.target.checked; render(); };
+render();
+</script>
