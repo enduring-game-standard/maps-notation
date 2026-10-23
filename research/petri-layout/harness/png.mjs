@@ -1,4 +1,3 @@
-// Rasterize every SVG under out/<design>/ to PNG, plus a side-by-side PNG with Peterson's figure for book nets.
 // usage: node harness/png.mjs <design> [net]
 import { createRequire } from 'node:module'
 import { readdirSync, readFileSync, existsSync } from 'node:fs'

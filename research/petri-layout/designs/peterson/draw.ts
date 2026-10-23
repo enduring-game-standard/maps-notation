@@ -13,17 +13,15 @@ const len = (a: V) => Math.hypot(a.x, a.y)
 const unit = (a: V): V => { const l = len(a) || 1; return { x: a.x / l, y: a.y / l } }
 const lerp = (a: V, b: V, t: number): V => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t })
 
-// Turn a plan into the output contract: positions, bars, arc routes and labels.
 export function draw(g: Graph, plan: Plan): Layout {
   const down = plan.frame === 'down'
-  const F: V = down ? { x: 0, y: 1 } : { x: 1, y: 0 } // along the flow
-  const C: V = down ? { x: 1, y: 0 } : { x: 0, y: 1 } // across it
+  const F: V = down ? { x: 0, y: 1 } : { x: 1, y: 0 }
+  const C: V = down ? { x: 1, y: 0 } : { x: 0, y: 1 }
   const xy = (p: FC): V => add(mul(F, p.f), mul(C, p.c))
   const nodes: Layout['nodes'] = {}
   const { net } = g
 
   for (const p of net.places) { const q = xy(plan.pos.get(p.id)!); nodes[p.id] = { kind: 'place', x: q.x, y: q.y } }
-  // R19: a bar is long enough that each arc on one face has its own point
   for (const t of net.transitions) {
     const q = xy(plan.pos.get(t.id)!)
     const dir = plan.bar.get(t.id)!
@@ -34,7 +32,6 @@ export function draw(g: Graph, plan: Plan): Layout {
       const r = xy(plan.pos.get(o)!)
       faces[dot(sub(r, q), nrm) >= 0 ? 0 : 1] += 1
     }
-    // R11: a bar whose arcs fan to both sides spans them, as far as its arcs can reach its ends
     const spread = [...g.ins.get(t.id)!.map((o) => arcKey(o, t.id)), ...g.outs.get(t.id)!.map((o) => arcKey(t.id, o))]
       .filter((k) => { const h = plan.hints.get(k)?.kind; return h === 'free' || h === 'lane' })
       .map((k) => { const o = k.split('>').find((x) => x !== t.id)!; return dot(sub(xy(plan.pos.get(o)!), q), { x: Math.cos(angle), y: Math.sin(angle) }) })
@@ -68,7 +65,6 @@ function route(nodes: Layout['nodes'], from: NodeId, to: NodeId, hint: Hint, F: 
   const A = nodes[from], B = nodes[to]
   if (hint.kind === 'lane') { const s = attach(A, B), e = attach(B, A); return [s, lerp(s, e, 1 / 3), lerp(s, e, 2 / 3), e] }
   if (hint.kind === 'loop' && paired) {
-    // a lens: the two arcs of a self-loop bow apart (R13)
     const place = A.kind === 'place' ? A : B
     const ab = sub(B, A), nrm = unit({ x: -ab.y, y: ab.x })
     const sgn = A === place ? 1 : -1
@@ -96,8 +92,6 @@ function ringArc(A: PlaceBox | BarBox, B: PlaceBox | BarBox, r: number): Pt[] {
   return [p(a), add(p(a), mul(tg(a), k)), sub(p(b), mul(tg(b), k)), p(b)]
 }
 
-// R7: out of the bar's outer end and down, up the outside channel, and into the target from before it
-// (the anchor) or from the side (a back-jump to a mid-lane place). Only as wide as the channel the plan cleared.
 function around(nodes: Layout['nodes'], from: NodeId, to: NodeId, h: Extract<Hint, { kind: 'around' }>, F: V, C: V): Pt[] {
   const T = nodes[from], M = nodes[to]
   const fc = (p: V) => ({ f: dot(p, F), c: dot(p, C) })
@@ -113,11 +107,10 @@ function around(nodes: Layout['nodes'], from: NodeId, to: NodeId, h: Extract<Hin
   if (h.entry === 'before') {
     const k3 = Math.max(26, Math.abs(h.channel - m.c) * 0.75)
     const top = { f: m.f - 6, c: h.channel }
-    const a = (h.side * h.shift) / PLACE_R // a second return into one place arrives beside the first
+    const a = (h.side * h.shift) / PLACE_R
     const E = { f: m.f - PLACE_R * Math.cos(a), c: m.c + PLACE_R * Math.sin(a) }
     seg3 = [pt(top.f, top.c), pt(top.f - k3, top.c), pt(E.f - k3, E.c), pt(E.f, E.c)]
   } else {
-    // into a mid-lane place from its upstream outer corner, clear of whatever sits beside it
     const k3 = Math.max(30, Math.abs(h.channel - m.c) * 0.6)
     const top = { f: m.f, c: h.channel }
     const d = Math.SQRT1_2
@@ -128,9 +121,6 @@ function around(nodes: Layout['nodes'], from: NodeId, to: NodeId, h: Extract<Hin
   return [...seg1, lerp(B0, T0, 1 / 3), lerp(B0, T0, 2 / 3), ...seg3]
 }
 
-// R20: one smooth curve. R7: an arc leaves a bar from its downstream face and enters one from its upstream
-// face, so a release dips and curves back and an acquire arrives from above. A curve that would run through
-// a node bows out, first to the preferred side.
 function smooth(nodes: Layout['nodes'], from: NodeId, to: NodeId, prefer: Side, hook: boolean, F: V, C: V): Pt[] {
   const A = nodes[from], B = nodes[to]
   const ab = sub(B, A), dist = len(ab)
@@ -141,14 +131,13 @@ function smooth(nodes: Layout['nodes'], from: NodeId, to: NodeId, prefer: Side, 
     const along = Math.max(-h + 3, Math.min(h - 3, dot(sub(other, n), u)))
     let dir: V
     const rel = sub(other, n)
-    // far out to the side of a bar across the flow: leave or enter by the end of the bar, along it
     if (Math.abs(dot(nrm, F)) > 0.8 && Math.abs(dot(rel, C)) > 2 * Math.abs(dot(rel, F)) + 20) {
       const e = mul(u, Math.sign(dot(rel, u)) || 1)
       const face = mul(nrm, (Math.sign(dot(rel, nrm)) || 1) * 2)
       return { p: add(add(n, mul(e, h - 3)), face), t: leaving ? e : mul(e, -1) }
     }
-    if (hook && Math.abs(dot(nrm, F)) > 0.8) dir = mul(nrm, Math.sign(dot(nrm, F)) * (leaving ? 1 : -1)) // across the flow: down out, down in
-    else dir = mul(nrm, Math.sign(dot(sub(other, n), nrm)) || 1) // along the flow or on a ring: face the other end
+    if (hook && Math.abs(dot(nrm, F)) > 0.8) dir = mul(nrm, Math.sign(dot(nrm, F)) * (leaving ? 1 : -1))
+    else dir = mul(nrm, Math.sign(dot(sub(other, n), nrm)) || 1)
     return { p: add(add(n, mul(u, along)), mul(dir, 2)), t: leaving ? dir : mul(dir, -1) }
   }
   const build = (bow: V): Pt[] => {
@@ -194,7 +183,6 @@ function segDist(p: V, n: BarBox) {
   return Math.hypot(p.x - (n.x + ux * t), p.y - (n.y + uy * t))
 }
 
-// R19: arcs meeting one face of a bar get their own points, in the order their routes arrive.
 function spreadOnBars(nodes: Layout['nodes'], arcs: ArcRoute[]) {
   for (const [id, n] of Object.entries(nodes)) {
     if (n.kind !== 'transition') continue
@@ -224,12 +212,10 @@ function spreadOnBars(nodes: Layout['nodes'], arcs: ArcRoute[]) {
   }
 }
 
-// R21: a label goes where no arc leaves its node, on its preferred side first.
 function placeLabels(g: Graph, plan: Plan, nodes: Layout['nodes'], arcs: ArcRoute[], F: V, C: V) {
   const samples = arcs.map((a) => sampleBezier(a.path, 40))
   const placed = new Map<NodeId, { x0: number; x1: number; y0: number; y1: number }>()
   const ids = Object.keys(nodes).sort(g.byKey)
-  // twice: the second pass moves a label knowing where every other label went
   for (const id of [...ids, ...ids]) {
     const n = nodes[id]
     const boxes = [...placed].filter(([o]) => o !== id).map(([, b]) => b)
@@ -285,7 +271,6 @@ function placeLabels(g: Graph, plan: Plan, nodes: Layout['nodes'], arcs: ArcRout
       for (const o of boxes) if (o.x0 < b.x1 + 3 && b.x0 < o.x1 + 3 && o.y0 < b.y1 && b.y0 < o.y1) k += 40
       return k
     }
-    // the preferred spots first; when every one is crossed, the same directions a little farther out
     const near = cands.length
     for (const step of [10, 22]) for (const c of cands.slice(0, near)) {
       const v = unit(sub(c, n))

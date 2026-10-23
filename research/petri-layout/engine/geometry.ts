@@ -1,17 +1,14 @@
 import { PLACE_R, type BarBox, type PlaceBox, type Pt } from './layout.ts'
 
-// Where a line from `toward` meets the outline of a node.
 export function attach(n: PlaceBox | BarBox, toward: Pt): Pt {
   const dx = toward.x - n.x, dy = toward.y - n.y, L = Math.hypot(dx, dy) || 1
   if (n.kind === 'place') return { x: n.x + (dx / L) * PLACE_R, y: n.y + (dy / L) * PLACE_R }
-  // a bar: slide along the bar to the foot of the perpendicular, clamped to its ends, then step off it
   const ux = Math.cos(n.angle), uy = Math.sin(n.angle)
   const along = Math.max(-n.length / 2, Math.min(n.length / 2, dx * ux + dy * uy))
   const side = Math.sign(-dx * uy + dy * ux) || 1
   return { x: n.x + ux * along - uy * side * 2, y: n.y + uy * along + ux * side * 2 }
 }
 
-// A straight arc as a one-segment cubic.
 export function straight(a: Pt, b: Pt): Pt[] {
   return [a, lerp(a, b, 1 / 3), lerp(a, b, 2 / 3), b]
 }

@@ -2,10 +2,10 @@ import type { Net } from '../engine/net.ts'
 import { PLACE_R, type Layout, type Pt } from '../engine/layout.ts'
 import { sampleBezier } from '../engine/geometry.ts'
 import { ruleChecks } from './rules.ts'
+import { labelWidth, wrapLabel } from '../engine/label.ts'
 
 export type CheckResult = { failures: string[]; notes: string[] }
 
-// Hygiene and invariance checks every layout must pass, then the rule checks.
 export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): CheckResult {
   const failures: string[] = []
   const notes: string[] = []
@@ -13,7 +13,6 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
   for (const id of ids) if (!lay.nodes[id] || !Number.isFinite(lay.nodes[id].x) || !Number.isFinite(lay.nodes[id].y)) failures.push(`node ${id} has no position`)
   if (failures.length) return { failures, notes }
 
-  // every arc drawn, from its source to its target
   const want = new Map<string, number>()
   for (const a of net.arcs) want.set(`${a.from}>${a.to}`, (want.get(`${a.from}>${a.to}`) ?? 0) + 1)
   for (const r of lay.arcs) want.set(`${r.from}>${r.to}`, (want.get(`${r.from}>${r.to}`) ?? 0) - 1)
@@ -23,12 +22,10 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
     if (offNode(s, lay.nodes[r.from]) > 6 || offNode(e, lay.nodes[r.to]) > 6) failures.push(`arc ${r.from}>${r.to} does not start and end at its nodes`)
   }
 
-  // nodes keep clear of one another: circles by their rims, bars by their segments
   for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) {
     if (gap(lay.nodes[ids[i]], lay.nodes[ids[j]]) < 4) failures.push(`nodes ${ids[i]} and ${ids[j]} overlap`)
   }
 
-  // an arc never runs through a node it does not touch
   for (const r of lay.arcs) {
     const pts = sampleBezier(r.path, 24)
     for (const id of ids) {
@@ -41,7 +38,6 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
     }
   }
 
-  // labels clear of nodes, of other labels, and of arcs: a label's text box as the renderer draws it
   const boxes = ids.filter((id) => lay.nodes[id].label).map((id) => ({ id, ...labelBox(net, id, lay.nodes[id].label!) }))
   const inBox = (p: Pt, b: Box) => p.x > b.x0 && p.x < b.x1 && p.y > b.y0 && p.y < b.y1
   for (const b of boxes) {
@@ -59,13 +55,11 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
     }
   }
 
-  // the same structure gives the same picture: shuffled declaration order and renamed ids change nothing
   const again = layout(shuffleAndRename(net, 1))
   const back = (id: string) => 'n' + ids.indexOf(id)
   const pic = (l: Layout, name: (id: string) => string) => ids.map((id) => `${name(id)}:${Math.round(l.nodes[id].x)},${Math.round(l.nodes[id].y)}`).sort().join(' ')
-  const renamedPic = ids.map((id, i) => `n${i}:${Math.round(again.nodes['n' + i].x)},${Math.round(again.nodes['n' + i].y)}`).sort().join(' ')
+  const renamedPic = ids.map((_, i) => `n${i}:${Math.round(again.nodes['n' + i].x)},${Math.round(again.nodes['n' + i].y)}`).sort().join(' ')
   if (pic(lay, back) !== renamedPic) {
-    // nets with identical parts may swap them; that is fine only if the node at each position plays the same role
     if (isAutomorphicSwap(net, lay, again, ids)) notes.push('identical parts swapped under renaming')
     else failures.push('layout depends on declaration order or ids')
   }
@@ -98,21 +92,15 @@ function segDist(p: Pt, x: number, y: number, ang: number, len: number) {
   const t = Math.max(-len / 2, Math.min(len / 2, (p.x - x) * ux + (p.y - y) * uy))
   return Math.hypot(p.x - (x + ux * t), p.y - (y + uy * t))
 }
-// distance from a point to a node's outline: a circle's rim, or a bar's segment
 function offNode(p: Pt, n: Layout['nodes'][string]) {
   return n.kind === 'place' ? Math.abs(dist(p, n) - PLACE_R) : segDist(p, n.x, n.y, n.angle, n.length)
 }
 
 type Box = { x0: number; x1: number; y0: number; y1: number }
-// the renderer wraps labels at 16 characters, 13 px italic serif, 14 px lines centered on the spot; lowercase runs
-// at most about 6.2 px a character. The box is shrunk a pixel all round so a touch is not a hit.
 function labelBox(net: Net, id: string, L: { x: number; y: number; anchor: string }): Box {
   const node = net.places.find((p) => p.id === id) ?? net.transitions.find((t) => t.id === id)!
-  const lines: string[] = []
-  let cur = ''
-  for (const w of (node.label ?? id).split(' ')) { if (cur && (cur + ' ' + w).length > 16) { lines.push(cur); cur = w } else cur = cur ? cur + ' ' + w : w }
-  if (cur) lines.push(cur)
-  const w = Math.max(...lines.map((l) => l.length)) * 6.2
+  const lines = wrapLabel(node.label ?? id)
+  const w = labelWidth(lines)
   const x0 = L.anchor === 'start' ? L.x : L.anchor === 'end' ? L.x - w : L.x - w / 2
   const half = (lines.length - 1) * 7
   return { x0: x0 + 1, x1: x0 + w - 1, y0: L.y - half - 5, y1: L.y + half + 6 }

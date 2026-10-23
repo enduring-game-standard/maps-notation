@@ -1,4 +1,3 @@
-// The rule checks must pass Peterson's own drawings. Coordinates measured from the 300 dpi clips.
 import { readFileSync } from 'node:fs'
 import { parseNet } from '../engine/net.ts'
 import { ruleChecks } from '../harness/rules.ts'

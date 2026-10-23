@@ -1,10 +1,11 @@
 import type { Net, NodeId } from '../engine/net.ts'
 import type { Layout, Pt } from '../engine/layout.ts'
-import { analyze, laneOrders, laneRing, type Structure } from '../engine/structure.ts'
+import { analyze, isLoneCycle, isRingWithTails, laneOrders, laneRing, readsOnly } from '../engine/structure.ts'
 import { sampleBezier } from '../engine/geometry.ts'
 
-// One assertion per rule in RULES.md, stated on the structure vocabulary. Each failure names its rule.
-// A frame says, for one lane, how far along the flow a point is and how far off the lane's line it is.
+// how far a node may sit past what it relates to, and the extra row a common start may take above its bars
+const NEAR = 30, ROW_ROOM = 60
+
 type Frame = { flow: (p: Pt) => number; off: (p: Pt) => number }
 
 export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]; notes: string[] } {
@@ -16,14 +17,9 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
   const at = (id: NodeId) => lay.nodes[id]
   const onTwoLanes = (t: NodeId) => (s.spineOfTransition.get(t)?.length ?? 0) > 1
 
-  // R15: a lone cycle, or one unbranched cycle of three or more places with tails hung on it, is a ring
   const sp0 = s.spines[0]
-  const ringWithTails = s.spines.length === 1 && !sp0.open && sp0.places.length >= 3
-    && !sp0.places.some((p) => sp0.transitions.filter((t) => s.pre.get(t)!.has(p) && !s.post.get(t)!.has(p)).length > 1)
-  if (isLoneCycle(net, s) || ringWithTails) {
-    const reads = (t: string) => [...s.pre.get(t)!.keys()].filter((p) => sp0.places.includes(p)).every((p) => s.post.get(t)!.has(p))
-    const ids = isLoneCycle(net, s) ? [...net.places, ...net.transitions].map((n) => n.id) : [...sp0.places, ...sp0.transitions.filter((t) => !reads(t))]
-    // a regular polygon: the places equally far from its center, and the bars equally far (a circle or a polygon)
+  if (isLoneCycle(net, s) || isRingWithTails(s)) {
+    const ids = isLoneCycle(net, s) ? [...net.places, ...net.transitions].map((n) => n.id) : [...sp0.places, ...sp0.transitions.filter((t) => !readsOnly(s, t, new Set(sp0.places)))]
     const ps = ids.filter((i) => at(i).kind === 'place'), ts = ids.filter((i) => at(i).kind === 'transition')
     const c = { x: avg(ps.map((i) => at(i).x)), y: avg(ps.map((i) => at(i).y)) }
     const even = (xs: string[]) => { const ds = xs.map((i) => Math.hypot(at(i).x - c.x, at(i).y - c.y)); return Math.max(...ds) - Math.min(...ds) <= 0.15 * avg(ds) }
@@ -31,8 +27,6 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     return { failures, notes }
   }
 
-  // R3 and R5: one flow direction. A ring of identical lanes runs outward from a center; otherwise lanes run down
-  // when there are two or more, right when there is one.
   const ring = laneRing(net, s)
   const center = ring ? centroid(lanes.map((l) => at(l.ord.anchor))) : { x: 0, y: 0 }
   const frames = lanes.map(({ ord }) => {
@@ -62,8 +56,6 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
       const cur = Math.min(...byStage.get(stages[i])!.map((n) => F.flow(at(n))))
       if (cur <= prev + TOL) { failures.push(`R3 ${name}: stage ${stages[i]} does not come after stage ${stages[i - 1]}`); break }
     }
-    // R1: a stage holding one node sits on the lane's line, except a bar the lane shares with another lane (R11);
-    // R10: a stage holding several (a choice's branches) is one row
     for (const k of stages) {
       const ns = byStage.get(k)!
       if (ns.length === 1) {
@@ -72,7 +64,6 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
         failures.push(`R10 ${name}: alternatives at stage ${k} are not on one row`); break
       }
     }
-    // R18: a bar on the lane crosses it
     for (const t of sp.transitions) {
       const n = at(t)
       if (n.kind !== 'transition' || onTwoLanes(t) || byStage.get(ord.stage.get(t) ?? -1)?.length !== 1) continue
@@ -81,7 +72,6 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     }
   })
 
-  // R3, C10: lane nodes at one stage are level, across every lane
   const level = new Map<number, { n: NodeId; f: number }[]>()
   lanes.forEach(({ ord }, li) => { for (const [n, k] of ord.stage) level.set(k, [...(level.get(k) ?? []), { n, f: frames[li].flow(at(n)) }]) })
   for (const [k, xs] of [...level].sort((a, b) => a[0] - b[0])) {
@@ -89,7 +79,6 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     if (Math.max(...fs) - Math.min(...fs) > TOL) { failures.push(`R3 stage ${k} is not level across lanes (${xs.map((x) => x.n).join(' ')})`); break }
   }
 
-  // R4: a place shared by two lanes sits between them, and between its transitions along the flow
   for (const p of net.places) {
     const role = s.placeRole.get(p.id)!
     if (role.kind !== 'shared') continue
@@ -102,7 +91,6 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
       if (!between) failures.push(`R4 shared place ${p.id} is not between its lanes`)
     }
     if (ring) {
-      // R5: on a wheel, a shared place sits just inside the bars that take it, outside the anchors
       const r = frames[0].flow(at(p.id))
       const takers = net.arcs.filter((a) => a.from === p.id).map((a) => frames[0].flow(at(a.to)))
       if (!(r < Math.min(...takers) && r > Math.max(...lanes.map((l) => frames[0].flow(at(l.ord.anchor)))))) failures.push(`R5 shared place ${p.id} is not just inside its takers`)
@@ -112,12 +100,10 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     const ts = net.arcs.filter((a) => a.from === p.id || a.to === p.id).map((a) => (a.from === p.id ? a.to : a.from))
     const fs = ts.map((t) => F.flow(at(t)))
     const f = F.flow(at(p.id))
-    // a common start (nothing refills it) may sit a row before the bars that take from it
-    const before = net.arcs.some((a) => a.to === p.id) ? 30 : 90
-    if (f < Math.min(...fs) - TOL - before || f > Math.max(...fs) + TOL + 30) failures.push(`R4 shared place ${p.id} is not between its transitions along the flow`)
+    const before = net.arcs.some((a) => a.to === p.id) ? NEAR : NEAR + ROW_ROOM
+    if (f < Math.min(...fs) - TOL - before || f > Math.max(...fs) + TOL + NEAR) failures.push(`R4 shared place ${p.id} is not between its transitions along the flow`)
   }
 
-  // R7: a return arc runs on one side of its lane, the side away from its shared places when they are all on one side
   lanes.forEach(({ ord }, li) => {
     const F = frames[li]
     for (const r of ord.returnArcs) {
@@ -132,11 +118,9 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     }
   })
 
-  // R13: self-loop partners sit tight, unless the loop couples two lanes (a lane's state read by another lane's step)
   for (const { place, transition } of s.selfLoops) {
     const role = s.placeRole.get(place)!
     if (role.kind === 'spine' && (s.spineOfTransition.get(transition) ?? []).some((k) => k !== role.spine)) continue
-    // a hub that also serves other bars is placed by R9, not pinned to one loop
     if (role.kind !== 'spine' && net.arcs.some((a) => (a.from === place && a.to !== transition) || (a.to === place && a.from !== transition))) continue
     const d = Math.hypot(at(place).x - at(transition).x, at(place).y - at(transition).y)
     if (d > 110) failures.push(`R13 self-loop ${place}/${transition} is ${Math.round(d)} apart`)
@@ -166,13 +150,6 @@ function angleBetween(p: Pt, a: Pt, b: Pt, c: Pt) {
 
 function touches(net: Net, p: NodeId, ord: { stage: Map<NodeId, number> }) {
   return net.arcs.some((a) => (a.from === p && ord.stage.has(a.to)) || (a.to === p && ord.stage.has(a.from)))
-}
-
-function isLoneCycle(net: Net, s: Structure) {
-  if (s.spines.length !== 1 || s.spines[0].open) return false
-  const sp = s.spines[0]
-  return sp.places.length === net.places.length && sp.transitions.length === net.transitions.length
-    && sp.places.length >= 2 && sp.transitions.every((t) => s.pre.get(t)!.size === 1 && s.post.get(t)!.size === 1)
 }
 
 const centroid = (ps: Pt[]) => ({ x: avg(ps.map((p) => p.x)), y: avg(ps.map((p) => p.y)) })

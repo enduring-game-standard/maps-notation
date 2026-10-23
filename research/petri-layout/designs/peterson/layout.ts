@@ -1,6 +1,6 @@
 import type { Net, NodeId } from '../../engine/net.ts'
 import type { Layout } from '../../engine/layout.ts'
-import { analyze, laneOrders, laneRing, type Structure } from '../../engine/structure.ts'
+import { analyze, isLoneCycle, isRingWithTails, laneOrders, laneRing } from '../../engine/structure.ts'
 import { arcKey, buildGraph, type FC, type Graph, type Hint, type Plan, type Side } from './model.ts'
 import { lanePlan, ROW } from './lanes.ts'
 import { draw } from './draw.ts'
@@ -12,28 +12,10 @@ export function layout(net: Net): Layout {
   if (isLoneCycle(net, s)) return draw(g, ringPlan(g))
   const ring = laneRing(net, s)
   if (ring) return draw(g, spokePlan(g, ring))
-  if (s.spines.length && !isRingWithTails(g)) return draw(g, lanePlan(g))
+  if (s.spines.length && !isRingWithTails(s)) return draw(g, lanePlan(g))
   return draw(g, shapePlan(g))
 }
 
-// R15: one unbranched cycle of three or more places, with only tails hung on it (2.9), is a ring too
-function isRingWithTails(g: Graph) {
-  const { s } = g
-  if (s.spines.length !== 1 || s.spines[0].open || s.spines[0].places.length < 3) return false
-  const sp = s.spines[0]
-  const branches = sp.places.some((p) => sp.transitions.filter((t) => s.pre.get(t)!.has(p) && !s.post.get(t)!.has(p)).length > 1)
-  return !branches
-}
-
-// R15: a net that is one cycle and nothing else.
-function isLoneCycle(net: Net, s: Structure) {
-  if (s.spines.length !== 1 || s.spines[0].open) return false
-  const sp = s.spines[0]
-  return sp.places.length === net.places.length && sp.transitions.length === net.transitions.length
-    && sp.places.length >= 2 && sp.transitions.every((t) => s.pre.get(t)!.size === 1 && s.post.get(t)!.size === 1)
-}
-
-// R15: a regular ring, anchor at the top, firing order clockwise, bars across the ring.
 function ringPlan(g: Graph): Plan {
   const ord = laneOrders(g.net, g.s)[0]
   const seq = [...ord.stage].sort((a, b) => a[1] - b[1]).map(([n]) => n)
@@ -50,15 +32,12 @@ function ringPlan(g: Graph): Plan {
   return { frame: 'right', pos, bar, barSpan: new Map(), hints, labelSide }
 }
 
-// R5: peers in a ring of shared places are spokes of a wheel. Each lane runs outward from its anchor on its own
-// radius, bars across it; a shared place sits on the bisector between its two lanes, just inside the bars that take
-// it; every return swings back on the same rotational side, so the copies are exact rotations of each other (R6).
 function spokePlan(g: Graph, ring: number[]): Plan {
   const { net, s } = g
   const ords = laneOrders(net, s)
   const n = ring.length
   const r0 = Math.max(110, 100 / Math.sin(Math.PI / n))
-  const step = ROW * 1.25 // a tilted spoke needs room for a level label between its nodes
+  const step = ROW * 1.25
   const angle = new Map<number, number>()
   ring.forEach((li, k) => angle.set(li, Math.PI / 2 + (2 * Math.PI * k) / n))
   const at = (th: number, r: number): FC => ({ f: r * Math.cos(th), c: r * Math.sin(th) })
@@ -73,7 +52,7 @@ function spokePlan(g: Graph, ring: number[]): Plan {
       pos.set(id, at(th, r0 + k * step))
       if (!g.isPlace(id)) bar.set(id, { angle: th + Math.PI / 2 })
       labelSide.set(id, -1)
-      labelDir.set(id, { x: Math.sin(th), y: -Math.cos(th) }) // the rotational side away from the petal
+      labelDir.set(id, { x: Math.sin(th), y: -Math.cos(th) })
     }
   }
   for (const p of net.places) {
@@ -85,7 +64,7 @@ function spokePlan(g: Graph, ring: number[]): Plan {
     const takes = g.outs.get(p.id)!.map((t) => ords[spokeOf.get(t)!].stage.get(t)!)
     pos.set(p.id, at((ta + tb) / 2, r0 + (Math.min(...takes) - 0.5) * step))
     labelSide.set(p.id, 1)
-    labelDir.set(p.id, { x: -Math.cos((ta + tb) / 2), y: -Math.sin((ta + tb) / 2) }) // toward the center, clear of the release arcs
+    labelDir.set(p.id, { x: -Math.cos((ta + tb) / 2), y: -Math.sin((ta + tb) / 2) })
   }
   for (const a of net.arcs) {
     const li = spokeOf.get(a.from), lj = spokeOf.get(a.to)

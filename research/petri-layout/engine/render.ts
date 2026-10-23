@@ -1,17 +1,17 @@
 import type { Net } from './net.ts'
 import { PLACE_R, type Layout, type Pt } from './layout.ts'
+import { LABEL_LINE, labelWidth, wrapLabel } from './label.ts'
 
-// Peterson's drawing style: thin circles, short thick bars, filled arrowheads, italic labels, dots for tokens.
 export function renderSvg(net: Net, layout: Layout, opts: { title?: string } = {}): string {
   const pts: Pt[] = []
   for (const [id, n] of Object.entries(layout.nodes)) {
     pts.push({ x: n.x - 40, y: n.y - 30 }, { x: n.x + 40, y: n.y + 30 })
     const node = net.places.find((p) => p.id === id) ?? net.transitions.find((t) => t.id === id)
     if (n.label && node) {
-      const lines = wrap(node.label ?? node.id, 16)
-      const w = Math.max(...lines.map((l) => l.length)) * 6.6
+      const lines = wrapLabel(node.label ?? node.id)
+      const w = labelWidth(lines) + 6
       const x0 = n.label.anchor === 'start' ? n.label.x : n.label.anchor === 'end' ? n.label.x - w : n.label.x - w / 2
-      const h = (lines.length * 14) / 2 + 6
+      const h = (lines.length * LABEL_LINE) / 2 + 6
       pts.push({ x: x0, y: n.label.y - h }, { x: x0 + w, y: n.label.y + h })
     }
   }
@@ -49,8 +49,8 @@ export function renderSvg(net: Net, layout: Layout, opts: { title?: string } = {
     const n = layout.nodes[node.id]
     const text = node.label ?? node.id
     if (!n.label || !text) continue
-    const lines = wrap(text, 16)
-    lines.forEach((ln, i) => out.push(`<text x="${f(n.label!.x)}" y="${f(n.label!.y + (i - (lines.length - 1) / 2) * 14 + 4)}" font-size="13" font-style="italic" text-anchor="${n.label!.anchor}">${esc(ln)}</text>`))
+    const lines = wrapLabel(text)
+    lines.forEach((ln, i) => out.push(`<text x="${f(n.label!.x)}" y="${f(n.label!.y + (i - (lines.length - 1) / 2) * LABEL_LINE + 4)}" font-size="13" font-style="italic" text-anchor="${n.label!.anchor}">${esc(ln)}</text>`))
   }
   out.push('</svg>')
   return out.join('\n')
@@ -87,10 +87,3 @@ function bezierMid(p: Pt[]): Pt {
 const spread = (n: number, gap: number) => Array.from({ length: n }, (_, i) => (i - (n - 1) / 2) * gap)
 const f = (v: number) => (Math.round(v * 10) / 10).toString()
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
-function wrap(s: string, w: number): string[] {
-  const words = s.split(' '), lines: string[] = []
-  let cur = ''
-  for (const word of words) { if (cur && (cur + ' ' + word).length > w) { lines.push(cur); cur = word } else cur = cur ? cur + ' ' + word : word }
-  if (cur) lines.push(cur)
-  return lines
-}

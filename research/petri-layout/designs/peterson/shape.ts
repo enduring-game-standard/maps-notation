@@ -1,22 +1,18 @@
 import type { NodeId } from '../../engine/net.ts'
-import { laneOrders } from '../../engine/structure.ts'
+import { laneOrders, readsOnly } from '../../engine/structure.ts'
 import { arcKey, mean, type FC, type Graph, type Hint, type Plan, type Side } from './model.ts'
 
-const HOP = 72 // one arc on the page
+const HOP = 72
 
-// C12, R15: a net with no actors to line up (no lanes, or one cycle with things hung on it) is drawn as its shape.
-// Its main cycle is a ring in firing order, the anchor on the left; everything else sits as far from each node as it
-// is in the net, so a loop looks like a loop and a hub sits among what it serves (2.9, 4.15, 4.23, 4.27).
 export function shapePlan(g: Graph): Plan {
   const { net, s } = g
   const ids = [...net.places, ...net.transitions].map((n) => n.id).sort(g.byKey)
-  const ring = s.spines.length === 1 ? laneRing(g) : longestCycle(g, ids)
+  const ring = s.spines.length === 1 ? cycleOfLane(g) : longestCycle(g, ids)
   const d = hops(g, ids)
 
   const pos = new Map<NodeId, { x: number; y: number }>()
   const r = Math.max(HOP, (ring.length * HOP) / (2 * Math.PI))
   ring.forEach((n, k) => { const th = Math.PI + (2 * Math.PI * k) / ring.length; pos.set(n, { x: r * Math.cos(th), y: r * Math.sin(th) }) })
-  // the rest enters next to what it touches, outside the ring, in a fixed order
   for (let left = ids.filter((n) => !pos.has(n)); left.length;) {
     const n = left.find((m) => g.nbrs.get(m)!.some((x) => pos.has(x))) ?? left[0]
     const near = g.nbrs.get(n)!.filter((x) => pos.has(x)).map((x) => pos.get(x)!)
@@ -27,7 +23,6 @@ export function shapePlan(g: Graph): Plan {
     left = left.filter((m) => m !== n)
   }
 
-  // stress majorization: page distance follows net distance, near pairs weighted most; the ring stays a regular polygon
   const pinned = new Set(ring)
   for (let it = 0; it < 300; it++) {
     const next = new Map<NodeId, { x: number; y: number }>()
@@ -46,14 +41,12 @@ export function shapePlan(g: Graph): Plan {
     for (const [i, p] of next) if (!pinned.has(i)) pos.set(i, p)
   }
 
-  // nodes the net cannot tell apart land on one spot; part them, each pair along a fixed direction
   for (let it = 0; it < 60; it++) {
     let moved = false
     for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) {
       if (pinned.has(ids[i]) && pinned.has(ids[j])) continue
       const a = pos.get(ids[i])!, b = pos.get(ids[j])!
       const dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy)
-      // a bar is long: anything beside it keeps a full hop away
       const min = g.isPlace(ids[i]) && g.isPlace(ids[j]) ? HOP * 0.75 : HOP
       if (L >= min) continue
       const ux = L > 1e-3 ? dx / L : Math.cos(j), uy = L > 1e-3 ? dy / L : Math.sin(j)
@@ -65,45 +58,48 @@ export function shapePlan(g: Graph): Plan {
     if (!moved) break
   }
 
-  // R2: the anchor (the ring's first node) on the left
   const a = pos.get(ring[0])!, c0 = { x: mean([...pos.values()].map((p) => p.x)), y: mean([...pos.values()].map((p) => p.y)) }
-  const turn = Math.PI - Math.atan2(a.y - c0.y, a.x - c0.x)
+  // tokens travel left to right on the whole: turn the arcs' summed direction to the right, or, around a balanced
+  // ring, put its first node on the left
+  let fx = 0, fy = 0
+  for (const x of g.net.arcs) {
+    if (g.outs.get(x.to)!.includes(x.from)) continue
+    const p = pos.get(x.from)!, q = pos.get(x.to)!, L = Math.hypot(q.x - p.x, q.y - p.y) || 1
+    fx += (q.x - p.x) / L; fy += (q.y - p.y) / L
+  }
+  const flowing = Math.hypot(fx, fy) > 0.25 * g.net.arcs.length
+  const turn = flowing ? -Math.atan2(fy, fx) : Math.PI - Math.atan2(a.y - c0.y, a.x - c0.x)
   const rot = (p: { x: number; y: number }) => ({ x: (p.x - c0.x) * Math.cos(turn) - (p.y - c0.y) * Math.sin(turn), y: (p.x - c0.x) * Math.sin(turn) + (p.y - c0.y) * Math.cos(turn) })
   let place = new Map([...pos].map(([n, p]) => [n, rot(p)]))
-  // the ring runs clockwise on the page (y down)
   if (ring.length >= 3 && orientation(ring.map((n) => place.get(n)!)) < 0) place = new Map([...place].map(([n, p]) => [n, { x: p.x, y: -p.y }]))
 
   const out = new Map<NodeId, FC>([...place].map(([n, p]) => [n, { f: p.x, c: p.y }]))
   const bar: Plan['bar'] = new Map(), hints = new Map<string, Hint>(), labelSide = new Map<NodeId, Side>()
   for (const t of net.transitions) {
-    // R18: a bar crosses the way its tokens travel, from its inputs toward its outputs
     const p = place.get(t.id)!
     const ins = g.ins.get(t.id)!.filter((x) => !g.outs.get(t.id)!.includes(x)).map((x) => place.get(x)!)
     const outs = g.outs.get(t.id)!.filter((x) => !g.ins.get(t.id)!.includes(x)).map((x) => place.get(x)!)
     const from = ins.length ? { x: mean(ins.map((q) => q.x)), y: mean(ins.map((q) => q.y)) } : p
     const to = outs.length ? { x: mean(outs.map((q) => q.x)), y: mean(outs.map((q) => q.y)) } : p
     const dir = Math.hypot(to.x - from.x, to.y - from.y) > 1 ? Math.atan2(to.y - from.y, to.x - from.x) : 0
-    bar.set(t.id, { angle: dir + Math.PI / 2 })
+    // upright across a flow that runs more across the page than down it, level otherwise
+    bar.set(t.id, { angle: Math.abs(Math.cos(dir)) >= Math.abs(Math.sin(dir)) ? Math.PI / 2 : 0 })
   }
   for (const n of ids) labelSide.set(n, 1)
   for (const x of net.arcs) {
     const loop = g.outs.get(x.to)!.includes(x.from)
     hints.set(arcKey(x.from, x.to), loop ? { kind: 'loop' } : { kind: 'free', prefer: 1, hook: false })
   }
-  // labels go away from the drawing's center
   const labelDir = new Map([...place].map(([n, p]) => { const L = Math.hypot(p.x, p.y); return [n, L > 1 ? { x: p.x / L, y: p.y / L } : { x: 0, y: 1 }] }))
   return { frame: 'right', pos: out, bar, barSpan: new Map(), hints, labelSide, labelDir }
 }
 
-function laneRing(g: Graph): NodeId[] {
+function cycleOfLane(g: Graph): NodeId[] {
   const ord = laneOrders(g.net, g.s)[0]
   const P = new Set(g.s.spines[0].places)
-  // a bar that only reads a ring place hangs off the ring
-  const reads = (t: NodeId) => [...g.s.pre.get(t)!.keys()].filter((p) => P.has(p)).every((p) => g.s.post.get(t)!.has(p))
-  return [...ord.stage].filter(([n]) => g.isPlace(n) || !reads(n)).sort((a, b) => a[1] - b[1] || g.byKey(a[0], b[0])).map(([n]) => n)
+  return [...ord.stage].filter(([n]) => g.isPlace(n) || !readsOnly(g.s, n, P)).sort((a, b) => a[1] - b[1] || g.byKey(a[0], b[0])).map(([n]) => n)
 }
 
-// the longest directed cycle, ignoring self-loops; it starts at its most marked place
 function longestCycle(g: Graph, ids: NodeId[]): NodeId[] {
   let best: NodeId[] = []
   let steps = 0

@@ -1,39 +1,35 @@
 import type { Net, NodeId } from '../../engine/net.ts'
 import type { Structure } from '../../engine/structure.ts'
 
-// Positions are planned in a flow frame: f runs along the reading direction, c across it.
-// 'down' (two or more lanes): x = c, y = f. 'right' (one lane or none): x = f, y = c.
 export type Frame = 'down' | 'right'
 export type FC = { f: number; c: number }
 export type Side = -1 | 1
 
-// How an arc should be drawn, decided by the rule that placed its ends.
 export type Hint =
-  | { kind: 'lane' } // consecutive nodes of one lane: straight
-  | { kind: 'loop' } // self-loop pair or tight side condition: a lens
-  | { kind: 'around'; side: Side; channel: number; entry: 'before' | 'side'; shift: number } // return or back-jump, outside the lane
-  | { kind: 'free'; prefer: Side; hook?: boolean } // one smooth curve, bowed toward `prefer` when something is in the way;
-  // with `hook`, it meets its bar along the flow (R7), else on the face toward its other end
-  | { kind: 'ring'; r: number } // along a ring centered on the origin (R15)
-  | { kind: 'petal'; side: Side; d: number } // a spoke's return, beside the spoke on one rotational side (R5, R7)
+  | { kind: 'lane' }
+  | { kind: 'loop' }
+  | { kind: 'around'; side: Side; channel: number; entry: 'before' | 'side'; shift: number }
+  | { kind: 'free'; prefer: Side; hook?: boolean }
+  | { kind: 'ring'; r: number }
+  | { kind: 'petal'; side: Side; d: number }
 
-export type BarDir = 'across' | 'along' | { angle: number } // across the flow, along it, or fixed (rings)
+export type BarDir = 'across' | 'along' | { angle: number }
 
 export type Plan = {
   frame: Frame
   pos: Map<NodeId, FC>
   bar: Map<NodeId, BarDir>
-  barSpan: Map<NodeId, number> // minimum bar length for forks and joins that span lanes
-  hints: Map<string, Hint> // keyed by `${from}>${to}`
-  labelSide: Map<NodeId, Side> // preferred side across the flow for each node's label
-  labelDir?: Map<NodeId, { x: number; y: number }> // a preferred direction on the page, where the flow is not one direction (spokes)
+  barSpan: Map<NodeId, number>
+  hints: Map<string, Hint>
+  labelSide: Map<NodeId, Side>
+  labelDir?: Map<NodeId, { x: number; y: number }>
 }
 
 export type Graph = {
   net: Net
   s: Structure
   isPlace: (n: NodeId) => boolean
-  ins: Map<NodeId, NodeId[]> // all arc sources into n (inhibitors included)
+  ins: Map<NodeId, NodeId[]>
   outs: Map<NodeId, NodeId[]>
   nbrs: Map<NodeId, NodeId[]>
   tokens: Map<NodeId, number>

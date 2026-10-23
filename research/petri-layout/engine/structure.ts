@@ -1,29 +1,27 @@
 import type { Net, NodeId } from './net.ts'
 
-// The vocabulary the placement rules are written in, detected from the net alone.
-
 export type Spine = {
   places: NodeId[]
   transitions: NodeId[]
-  open: boolean // runs from the environment (a source) to the environment (a sink) instead of closing on itself
+  open: boolean
   marked: number
 }
 
 export type PlaceRole =
   | { kind: 'spine'; spine: number }
-  | { kind: 'shared'; spines: number[] } // its transitions lie on two or more spines
-  | { kind: 'side'; spine: number } // its transitions all lie on one spine
-  | { kind: 'free' } // touches no spine transition
+  | { kind: 'shared'; spines: number[] }
+  | { kind: 'side'; spine: number }
+  | { kind: 'free' }
 
 export type Structure = {
-  pre: Map<NodeId, Map<NodeId, number>> // transition -> input place -> weight (inhibitors excluded)
+  pre: Map<NodeId, Map<NodeId, number>>
   post: Map<NodeId, Map<NodeId, number>>
   spines: Spine[]
   placeRole: Map<NodeId, PlaceRole>
   spineOfTransition: Map<NodeId, number[]>
   selfLoops: { place: NodeId; transition: NodeId }[]
-  canon: Map<NodeId, string> // a name-blind, order-blind structural signature per node
-  shape: Map<NodeId, string> // the same, blind to the marking too
+  canon: Map<NodeId, string>
+  shape: Map<NodeId, string>
 }
 
 export function analyze(net: Net): Structure {
@@ -40,9 +38,8 @@ export function analyze(net: Net): Structure {
   const shape = signatures(net, false)
   const tokens = new Map(net.places.map((p) => [p.id, p.tokens]))
 
-  // A transition that only produces or only consumes talks to the environment; it does not have to conserve tokens.
-  const balanced = net.transitions.map((t) => t.id).filter((t) => pre.get(t)!.size > 0 && post.get(t)!.size > 0)
-  const supports = minimalSemiflowSupports(net.places.map((p) => p.id), balanced, pre, post)
+  const throughput = net.transitions.map((t) => t.id).filter((t) => pre.get(t)!.size > 0 && post.get(t)!.size > 0)
+  const supports = minimalSemiflowSupports(net.places.map((p) => p.id), throughput, pre, post)
   const filled = (p: NodeId) => net.transitions.some((t) => post.get(t.id)!.has(p))
   const drained = (p: NodeId) => net.transitions.some((t) => pre.get(t.id)!.has(p))
 
@@ -61,7 +58,6 @@ export function analyze(net: Net): Structure {
       ts.push(t.id)
     }
     if (!ok) continue
-    // a lone place that only its own self-loops touch is a condition beside a spine, not a spine
     if (places.length === 1 && ts.every((t) => pre.get(t)!.has(places[0]) && post.get(t)!.has(places[0]))) continue
     candidates.push({ places, transitions: ts, open, marked: places.reduce((n, p) => n + (tokens.get(p) ?? 0), 0) })
   }
@@ -76,7 +72,6 @@ export function analyze(net: Net): Structure {
     if (placeRole.has(p.id)) continue
     const touching = net.transitions.filter((t) => pre.get(t.id)!.has(p.id) || post.get(t.id)!.has(p.id)
       || net.arcs.some((a) => a.inhibitor && a.from === p.id && a.to === t.id))
-    // a transition on no lane (one that starts two lanes from a common start) counts toward the lanes it feeds
     const near = (t: NodeId) => spineOfTransition.get(t) ?? [...post.get(t)!.keys(), ...pre.get(t)!.keys()]
       .flatMap((q) => { const r = placeRole.get(q); return r?.kind === 'spine' ? [r.spine] : [] })
     const sp = [...new Set(touching.flatMap((t) => near(t.id)))].sort((a, b) => a - b)
@@ -89,7 +84,6 @@ export function analyze(net: Net): Structure {
   return { pre, post, spines, placeRole, spineOfTransition, selfLoops, canon, shape }
 }
 
-// Farkas: minimal supports of nonnegative integer y with yC = 0.
 function minimalSemiflowSupports(rows: string[], cols: string[], pre: Map<string, Map<string, number>>, post: Map<string, Map<string, number>>): string[][] {
   type Row = { c: number[]; y: number[] }
   const C = rows.map((r) => cols.map((t) => (post.get(t)!.get(r) ?? 0) - (pre.get(t)!.get(r) ?? 0)))
@@ -116,8 +110,6 @@ function minimalSemiflowSupports(rows: string[], cols: string[], pre: Map<string
 
 function gcd(a: number, b: number): number { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a }
 
-// Pick the spines: the disjoint set of components that covers the most places, then the fewest spines,
-// then the most marked. Ties break on structure only, never on names or order.
 function chooseCover(cands: Spine[], canon: Map<NodeId, string>, starts: Set<NodeId>): Spine[] {
   const key = (s: Spine) => s.places.map((p) => canon.get(p)!).sort().join('|')
   const sorted = cands.slice().sort((a, b) => b.places.length - a.places.length || b.marked - a.marked || cmp(key(a), key(b)))
@@ -133,7 +125,6 @@ function chooseCover(cands: Spine[], canon: Map<NodeId, string>, starts: Set<Nod
     for (let k = i; k < sorted.length; k++) {
       const s = sorted[k]
       const overlap = s.places.filter((p) => used.has(p))
-      // two lanes may share one place only if it is a start: marked, and never refilled
       if (overlap.length > 1 || (overlap.length === 1 && (!starts.has(overlap[0]) || used.get(overlap[0])! > 1))) continue
       s.places.forEach((p) => used.set(p, (used.get(p) ?? 0) + 1))
       chosen.push(s)
@@ -146,8 +137,6 @@ function chooseCover(cands: Spine[], canon: Map<NodeId, string>, starts: Set<Nod
   return best
 }
 
-// A marked place on two lanes is their common start: it leaves both lanes and is drawn between them, and the
-// transitions that take from it leave the lanes too (they start both). Each lane keeps the steps that move its own token.
 function splitCommonStarts(spines: Spine[], net: Net, pre: Map<NodeId, Map<NodeId, number>>, post: Map<NodeId, Map<NodeId, number>>): Spine[] {
   const count = new Map<NodeId, number>()
   spines.forEach((s) => s.places.forEach((p) => count.set(p, (count.get(p) ?? 0) + 1)))
@@ -167,9 +156,6 @@ function splitCommonStarts(spines: Spine[], net: Net, pre: Map<NodeId, Map<NodeI
   })
 }
 
-// A cycle whose every transition already lies on another spine owns no step of its own: it couples
-// spines (a buffer's full/empty pair, a pool) and is drawn as shared places, not as a spine.
-// (a bar that only reads another lane's place, taking it and putting it back, does not lie on that lane)
 function demoteCouplers(spines: Spine[], canon: Map<NodeId, string>, pre: Map<NodeId, Map<NodeId, number>>, post: Map<NodeId, Map<NodeId, number>>): Spine[] {
   const key = (s: Spine) => s.places.map((p) => canon.get(p)!).sort().join('|')
   const moves = (o: Spine, t: NodeId) => o.places.some((p) => pre.get(t)!.has(p) !== post.get(t)!.has(p))
@@ -185,7 +171,6 @@ function demoteCouplers(spines: Spine[], canon: Map<NodeId, string>, pre: Map<No
 
 const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0)
 
-// Weisfeiler-Lehman refinement over kind, tokens, arc weights and directions.
 function signatures(net: Net, withTokens: boolean): Map<NodeId, string> {
   const nbr = new Map<NodeId, string[]>()
   const add = (n: NodeId, s: string) => nbr.set(n, [...(nbr.get(n) ?? []), s])
@@ -214,11 +199,10 @@ function hash(s: string): string {
 export type LaneOrder = {
   anchor: NodeId
   stage: Map<NodeId, number>
-  returnArcs: { from: NodeId; to: NodeId }[] // close the cycle into the anchor (R7)
-  backArcs: { from: NodeId; to: NodeId }[] // jump back to an earlier node other than the anchor (R14)
+  returnArcs: { from: NodeId; to: NodeId }[]
+  backArcs: { from: NodeId; to: NodeId }[]
 }
 
-// Where a lane wants to start (R2): its source, else the role its peers hold their token in, else its token.
 function laneAnchor(net: Net, s: Structure, spine: Spine): NodeId {
   const P = new Set(spine.places), T = new Set(spine.transitions)
   const tokens = new Map(net.places.map((p) => [p.id, p.tokens]))
@@ -233,11 +217,9 @@ function laneAnchor(net: Net, s: Structure, spine: Spine): NodeId {
   const sourceTs = spine.transitions.filter((t) => inLane(t).length === 0).sort(byKey)
   const sources = spine.places.filter((p) => !filledInLane(p)).sort(most)
   const marked = spine.places.filter((p) => (tokens.get(p) ?? 0) > 0).sort(most)
-  // a lane cut off from a common start begins where that start feeds it
   const entered = spine.places.filter((p) => net.transitions.some((t) => !T.has(t.id) && s.post.get(t.id)!.has(p)
     && [...s.pre.get(t.id)!.keys()].some((q) => s.placeRole.get(q)?.kind === 'shared' && (tokens.get(q) ?? 0) > 0))).sort(byKey)
   const choices = spine.places.filter((p) => succ(p).length > 1).sort(byKey)
-  // R6: lanes of one shape start at the same role, the one most of them hold their token in
   const sig = (sp: Spine) => [...sp.places, ...sp.transitions].map((x) => s.shape.get(x)!).sort().join('|')
   const peers = s.spines.filter((o) => sig(o) === sig(spine))
   const votes = new Map<string, number>()
@@ -247,10 +229,6 @@ function laneAnchor(net: Net, s: Structure, spine: Spine): NodeId {
   return sourceTs[0] ?? sources[0] ?? peerMarked[0] ?? marked[0] ?? entered[0] ?? choices[0] ?? spine.places.slice().sort(byKey)[0]
 }
 
-// Cut every lane open at once (R2) and number all lane nodes by the longest forward path, so lanes joined by a
-// shared bar agree on its level (R3, C10), a choice's branches share stages and their merge comes after the longer
-// branch (R10). The lanes are walked from their anchors, most constrained first; an arc back into a node still on the
-// walk is cut. Each lane then starts at its earliest node; a cut arc into it is a return (R7), any other a back-jump (R14).
 export function laneOrders(net: Net, s: Structure): LaneOrder[] {
   const key = (n: NodeId) => s.canon.get(n)!
   const byKey = (a: NodeId, b: NodeId) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0)
@@ -259,7 +237,6 @@ export function laneOrders(net: Net, s: Structure): LaneOrder[] {
   s.spines.forEach((sp, i) => {
     for (const t of sp.transitions) {
       for (const p of s.pre.get(t)!.keys()) if (P[i].has(p)) succ.set(p, [...(succ.get(p) ?? []), t])
-      // a bar that puts back the place it took has only read it; the give-back is not a step forward
       for (const p of s.post.get(t)!.keys()) if (P[i].has(p) && !s.pre.get(t)!.has(p)) succ.set(t, [...(succ.get(t) ?? []), p])
     }
   })
@@ -306,13 +283,10 @@ export function laneOrders(net: Net, s: Structure): LaneOrder[] {
   })
 }
 
-// an arc of this lane: a place of the lane into one of its transitions, or one of its transitions into a place of it
 function laneArc(s: Structure, sp: Spine, a: NodeId, b: NodeId) {
   return sp.places.includes(a) ? sp.transitions.includes(b) && s.pre.get(b)!.has(a) : sp.transitions.includes(a) && sp.places.includes(b) && s.post.get(a)!.has(b)
 }
 
-// R5: three or more lanes of one shape, each sharing places with exactly its two neighbors, form a ring.
-// Returns the lanes in ring order, or null.
 export function laneRing(net: Net, s: Structure): number[] | null {
   const n = s.spines.length
   if (n < 3) return null
@@ -334,4 +308,23 @@ export function laneRing(net: Net, s: Structure): number[] | null {
     order.push(next)
   }
   return nb.get(order[n - 1])!.has(0) ? order : null
+}
+
+// t takes from these places only what it puts back: it reads them
+export function readsOnly(s: Structure, t: NodeId, places: Set<NodeId>): boolean {
+  return [...s.pre.get(t)!.keys()].filter((p) => places.has(p)).every((p) => s.post.get(t)!.has(p))
+}
+
+export function isLoneCycle(net: Net, s: Structure): boolean {
+  if (s.spines.length !== 1 || s.spines[0].open) return false
+  const sp = s.spines[0]
+  return sp.places.length === net.places.length && sp.transitions.length === net.transitions.length
+    && sp.places.length >= 2 && sp.transitions.every((t) => s.pre.get(t)!.size === 1 && s.post.get(t)!.size === 1)
+}
+
+// one unbranched cycle of three or more places, with only tails hung on it
+export function isRingWithTails(s: Structure): boolean {
+  if (s.spines.length !== 1 || s.spines[0].open || s.spines[0].places.length < 3) return false
+  const sp = s.spines[0]
+  return !sp.places.some((p) => sp.transitions.filter((t) => s.pre.get(t)!.has(p) && !s.post.get(t)!.has(p)).length > 1)
 }
