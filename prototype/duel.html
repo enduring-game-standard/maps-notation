@@ -1,0 +1,162 @@
+<!doctype html>
+<!-- PROTOTYPE, throwaway. Three ways to read one designed exchange as a conversation: a straight Petri net, a script, a chart. -->
+<meta charset="utf-8">
+<title>Duel prototype</title>
+<style>
+  body { font: 14px/1.45 system-ui, sans-serif; margin: 0; color: #222; }
+  header { padding: 10px 16px; border-bottom: 1px solid #ccc; display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+  button { padding: 4px 10px; } button.on { background: #222; color: #fff; }
+  main { display: flex; gap: 20px; padding: 12px 16px; }
+  #view { flex: 1; overflow: auto; }
+  #side { width: 360px; flex: none; }
+  .note { color: #666; font-size: 12px; }
+  .link { color: #1a5fd0; } .world { color: #555; }
+  .good { color: #1d7a1d; } .bad { color: #c33; }
+  .flag { background: #fff3c4; padding: 2px 6px; margin: 3px 0; border-radius: 3px; font-size: 13px; }
+  .flag.same { background: #ffe3cc; }
+  svg text { font: 11px system-ui, sans-serif; }
+  .tr { cursor: pointer; }
+  .moment { border: 1px solid #ddd; border-radius: 6px; padding: 8px 12px; margin: 0 0 12px; max-width: 640px; }
+  .moment.here { border-color: #e0a800; box-shadow: 0 0 0 2px #fff3c4; }
+  .moment h4 { margin: 0 0 6px; }
+  .opt { margin: 6px 0 6px 4px; }
+  .opt .ans { margin-left: 22px; }
+  .opt .ans div::before { content: 'world  '; font-size: 11px; opacity: .6; }
+  .opt.best > .say { font-weight: 600; }
+  a.go { color: #6a3fb5; cursor: pointer; text-decoration: underline; }
+  table.chart { border-collapse: collapse; }
+  table.chart th, table.chart td { border: 1px solid #ddd; padding: 6px 8px; vertical-align: top; }
+  table.chart td { min-width: 150px; }
+  .bar { display: flex; align-items: center; gap: 6px; font-size: 12px; margin: 2px 0; }
+  .bar i { display: inline-block; height: 9px; background: #1a5fd0; border-radius: 2px; }
+  .bar.best { font-weight: 600; }
+  .loop { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
+  .loop span.step { border: 1px solid #ccc; border-radius: 4px; padding: 3px 7px; }
+</style>
+<header>
+  <span><b>Draft</b> <button data-d="first">first draft</button> <button data-d="revised">revised</button> <button data-d="mixup">with a held swing</button></span>
+  <span><b>Read it as</b> <button data-v="net">1 Petri net</button> <button data-v="script">2 script</button> <button data-v="chart">3 chart</button></span>
+</header>
+<main><div id="view"></div><div id="side"></div></main>
+<script src="duel.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const q = new URLSearchParams(location.search);
+const st = { draft: q.get('d') || 'first', view: q.get('v') || 'net', here: null, log: [] };
+let net, ex;
+
+const ENEMY = { idle: 'The enemy stands guarded.', windup: 'The enemy winds up.', delay: 'The enemy holds the swing back.', attack: 'The blow is coming.', recover: 'The enemy is off balance.' };
+const LINK = { neutral: 'Link stands ready.', guard: 'Link has the shield up.', roll: 'Link is rolling.', strike: 'Link is swinging.' };
+const describe = k => { const m = k.split('+'); return [m.find(p => ENEMY[p]), m.find(p => LINK[p])].map(p => ENEMY[p] || LINK[p]).join(' '); };
+const said = b => b.answer.filter(w => !w.quiet);
+const pct = p => p < 1 ? `${Math.round(p * 100)}% ` : '';
+const sign = o => o > 0 ? '<span class="good">Link lands a hit</span>' : o < 0 ? '<span class="bad">Link takes a hit</span>' : '';
+const best = r => r.options.reduce((a, b) => b.worth > a.worth ? b : a);
+
+function load() {
+  net = duel(st.draft); ex = explore(net);
+  st.here = ex.start; st.log = [];
+}
+
+function side() {
+  const all = [...ex.rests].flatMap(([k, r]) => r.flags.map(f => ({ ...f, k })));
+  const loop = ex.settled.map(s => `<span class="step">${describe(s.rest).split('. ')[0]}. <b class="link">${s.said.label}</b>${s.outcome > 0 ? ' <span class="good">hit</span>' : ''}</span>`).join(' → ');
+  $('#side').innerHTML = `<h3>What a player who plays it well will do</h3><div class="loop">${loop} ↺</div>
+    <p class="note">The loop a player settles into when they always take the best answer, judged five exchanges ahead, and the enemy does its likeliest thing.</p>
+    <h3>Findings</h3>${all.map(f => `<div class="flag ${f.kind}"><a class="go" data-k="${f.k}">${describe(f.k)}</a> ${f.text}.</div>`).join('')}
+    ${st.view === 'net' ? `<h3>Conversation so far</h3>${st.log.map(l => `<div><span class="link">Link: ${l.said}</span><br><span class="world">${l.answer}</span> ${sign(l.outcome)}</div>`).join('') || '<p class="note">Click a blue verb that is lit to say it.</p>'}` : ''}`;
+  $('#side').querySelectorAll('a.go').forEach(a => a.onclick = () => { st.here = a.dataset.k; render(); });
+}
+
+// 1. A straight Petri net: places are circles, verbs are boxes, a dot is a token. Link's verbs are blue, the world's grey.
+const POS = {
+  neutral: [90, 90], guard: [90, 210], roll: [90, 330], strike: [90, 450],
+  idle: [930, 90], windup: [930, 200], delay: [930, 300], attack: [930, 400], recover: [930, 500],
+  beatE: [660, 600], beatL: [300, 600],
+  wait: [250, 40], strike_: [250, 450], gstrike: [250, 380], guard_: [250, 160], lower: [250, 260], roll_: [250, 330],
+  punish: [500, 80], interrupt: [500, 140], armor: [500, 140], catch: [500, 195], bounce: [500, 250], hit: [500, 310], trade: [500, 370], block: [500, 430], evade: [500, 490],
+  tell: [760, 145], swing: [760, 250], feint: [760, 300], late: [760, 350], recover_: [760, 470],
+  rollend: [250, 520], whiff: [380, 540], endE: [760, 600], endL: [400, 640],
+};
+const pos = v => POS[net.places.includes(v.id) ? v.id + '_' : v.id] || POS[v.id];
+function petri() {
+  const m = ex.rests.get(st.here).m, r = ex.rests.get(st.here);
+  const flagged = new Map(r.flags.flatMap(f => f.verbs.map(id => [id, f.kind])));
+  const fired = new Map((st.lastAnswer || []).map((w, i) => [w.id, i + 1]));
+  let g = '<defs><marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#888"/></marker></defs>';
+  const edge = (a, b, kind) => {
+    const [x1, y1] = a, [x2, y2] = b, d = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / d, uy = (y2 - y1) / d;
+    const sx = x1 + ux * 20, sy = y1 + uy * 20, ex_ = x2 - ux * 20, ey = y2 - uy * 20;
+    if (kind === 'need') return `<line x1="${sx}" y1="${sy}" x2="${ex_}" y2="${ey}" stroke="#999" stroke-dasharray="3 3"/>`;
+    if (kind === 'unless') return `<line x1="${sx}" y1="${sy}" x2="${ex_}" y2="${ey}" stroke="#c33" stroke-width=".8"/><circle cx="${ex_}" cy="${ey}" r="3" fill="#fff" stroke="#c33"/>`;
+    return `<line x1="${sx}" y1="${sy}" x2="${ex_}" y2="${ey}" stroke="#aaa" marker-end="url(#ar)"/>`;
+  };
+  for (const v of net.verbs) {
+    const at = pos(v);
+    v.take.forEach(p => g += edge(POS[p], at, 'take'));
+    v.give.forEach(p => g += edge(at, POS[p], 'give'));
+    v.need.forEach(p => g += edge(POS[p], at, 'need'));
+    v.unless.forEach(p => g += edge(POS[p], at, 'unless'));
+  }
+  for (const p of net.places) {
+    const [x, y] = POS[p];
+    g += `<circle cx="${x}" cy="${y}" r="20" fill="#fff" stroke="#222"/>${m.has(p) ? `<circle cx="${x}" cy="${y}" r="6" fill="#222"/>` : ''}<text x="${x}" y="${y + 34}" text-anchor="middle">${p}</text>`;
+  }
+  for (const v of net.verbs) {
+    const [x, y] = pos(v), on = v.by === 'link' && enabled(v, m), isLink = v.by === 'link';
+    const f = flagged.get(v.id), stroke = f === 'only' ? '#e0a800' : f === 'same' ? '#e07a00' : isLink ? '#1a5fd0' : '#777';
+    const w = v.quiet ? 40 : 110;
+    g += `<g class="${isLink ? 'tr' : ''}" data-v="${v.id}"><rect x="${x - w / 2}" y="${y - 11}" width="${w}" height="22" rx="2" fill="${on ? '#dbe7ff' : fired.has(v.id) ? '#eee' : '#fff'}" stroke="${stroke}" stroke-width="${f ? 3 : 1}" opacity="${isLink && !on ? .45 : 1}"/>
+      <text x="${x}" y="${y + 4}" text-anchor="middle" fill="${isLink ? '#1a5fd0' : '#444'}">${fired.has(v.id) ? fired.get(v.id) + '. ' : ''}${v.quiet ? 'beat ends' : v.id}${v.weight ? ' ×' + v.weight : ''}</text></g>`;
+  }
+  $('#view').innerHTML = `<p><b>${describe(st.here)}</b> <button id="reset">start over</button></p><svg width="1000" height="680">${g}</svg>
+    <p class="note">Arrows take and give tokens. Dashed lines need a token without taking it. A red line ending in a ring means "unless". World verbs answer top to bottom within a column, contact first; the numbers show the order they just fired in. ×n is a weight where the world picks. Yellow and orange outlines are the findings for this moment.</p>`;
+  $('#view').querySelectorAll('g.tr').forEach(el => el.onclick = () => {
+    const v = net.verbs.find(v => v.id === el.dataset.v);
+    if (!enabled(v, m)) return;
+    const o = r.options.find(o => o.said === v);
+    let x = Math.random(), b = o.branches.find(b => (x -= b.p) < 0) || o.branches[0];
+    st.log.unshift({ said: v.label, answer: said(b).map(w => w.label).join('; '), outcome: b.outcome });
+    st.lastAnswer = said(b); st.here = key(b.next); render();
+  });
+  $('#reset').onclick = () => { st.here = ex.start; st.log = []; st.lastAnswer = []; render(); };
+}
+
+// 2. A script: each moment the player can be in, every line Link can say there, and how the world answers.
+function script() {
+  const order = [ex.start, ...[...ex.rests.keys()].filter(k => k !== ex.start)];
+  const loopAt = new Map(ex.settled.map(s => [s.rest, s.said]));
+  $('#view').innerHTML = order.map(k => {
+    const r = ex.rests.get(k), b = best(r);
+    const opts = r.options.map(o => `<div class="opt${o === b ? ' best' : ''}"><div class="say link">${loopAt.get(k) === o.said ? '★ ' : ''}Link: ${o.said.label} <span class="note">worth ${o.worth}</span></div>
+      <div class="ans">${o.branches.map(br => `<div class="world">${pct(br.p)}${said(br).map(w => w.label).join('; ')}. ${sign(br.outcome)} <a class="go" data-k="${key(br.next)}">→ ${describe(key(br.next))}</a></div>`).join('')}</div></div>`).join('');
+    return `<div class="moment${k === st.here ? ' here' : ''}" id="m-${k}"><h4>${describe(k)}</h4>${r.flags.map(f => `<div class="flag ${f.kind}">${f.text}.</div>`).join('')}${opts}</div>`;
+  }).join('') + '<p class="note">★ marks what a player who plays it well says. "Worth" counts hits landed minus hits taken over the next five exchanges, if the player keeps choosing well.</p>';
+  $('#view').querySelectorAll('a.go').forEach(a => a.onclick = () => { st.here = a.dataset.k; render(); document.getElementById('m-' + st.here).scrollIntoView({ block: 'center' }); });
+}
+
+// 3. A chart: the enemy's tells across, Link's stance down; each cell ranks what Link can say there.
+function chart() {
+  const enemy = ['idle', 'windup', 'delay', 'recover'].filter(p => net.places.includes(p)), link = ['neutral', 'guard'];
+  const lo = Math.min(...[...ex.rests.values()].flatMap(r => r.options.map(o => o.worth))), hi = Math.max(...[...ex.rests.values()].flatMap(r => r.options.map(o => o.worth)));
+  const cell = (e, l) => {
+    const k = [...ex.rests.keys()].find(k => k.split('+').includes(e) && k.split('+').includes(l));
+    if (!k) return '<td class="note">never happens</td>';
+    const r = ex.rests.get(k), b = best(r);
+    const bars = [...r.options].sort((a, c) => c.worth - a.worth).map(o => `<div class="bar${o === b ? ' best' : ''}"><i style="width:${8 + 70 * (o.worth - lo) / (hi - lo || 1)}px; background:${o.outcome > 0 ? '#1d7a1d' : o.outcome < 0 ? '#c33' : '#1a5fd0'}"></i>${o.said.label}</div>`).join('');
+    return `<td>${bars}${r.flags.map(f => `<div class="flag ${f.kind}">${f.text}</div>`).join('')}</td>`;
+  };
+  $('#view').innerHTML = `<table class="chart"><tr><th></th>${enemy.map(e => `<th>${ENEMY[e]}</th>`).join('')}</tr>${link.map(l => `<tr><th>${LINK[l]}</th>${enemy.map(e => cell(e, l)).join('')}</tr>`).join('')}</table>
+    <p class="note">Each bar is what an answer is worth over the next five exchanges, if the player keeps choosing well. Green bars land a hit right away, red bars take one.</p>`;
+}
+
+function render() {
+  document.querySelectorAll('button[data-d]').forEach(b => b.classList.toggle('on', b.dataset.d === st.draft));
+  document.querySelectorAll('button[data-v]').forEach(b => b.classList.toggle('on', b.dataset.v === st.view));
+  ({ net: petri, script, chart })[st.view]();
+  side();
+}
+document.querySelectorAll('button[data-d]').forEach(b => b.onclick = () => { st.draft = b.dataset.d; load(); st.lastAnswer = []; history.replaceState(null, '', `?d=${st.draft}&v=${st.view}`); render(); });
+document.querySelectorAll('button[data-v]').forEach(b => b.onclick = () => { st.view = b.dataset.v; history.replaceState(null, '', `?d=${st.draft}&v=${st.view}`); render(); });
+load(); render();
+</script>
