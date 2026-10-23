@@ -216,9 +216,8 @@ export type LaneOrder = {
   backArcs: { from: NodeId; to: NodeId }[] // jump back to an earlier node other than the anchor (R14)
 }
 
-// Cut a lane open at its anchor (R2) and number its nodes by the longest forward path from it, so a choice's branches
-// share stages and their merge comes after the longer branch (R10).
-export function laneOrder(net: Net, s: Structure, spine: Spine): LaneOrder {
+// Where a lane wants to start (R2): its source, else the role its peers hold their token in, else its token.
+function laneAnchor(net: Net, s: Structure, spine: Spine): NodeId {
   const P = new Set(spine.places), T = new Set(spine.transitions)
   const tokens = new Map(net.places.map((p) => [p.id, p.tokens]))
   const inLane = (t: NodeId) => [...s.pre.get(t)!.keys()].filter((p) => P.has(p))
@@ -243,35 +242,70 @@ export function laneOrder(net: Net, s: Structure, spine: Spine): LaneOrder {
   for (const o of peers) for (const p of o.places) if ((tokens.get(p) ?? 0) > 0) votes.set(s.shape.get(p)!, (votes.get(s.shape.get(p)!) ?? 0) + 1)
   const role = [...votes].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0]?.[0]
   const peerMarked = peers.length > 1 && role ? spine.places.filter((p) => s.shape.get(p) === role).sort(byKey) : []
-  const anchor = sourceTs[0] ?? sources[0] ?? peerMarked[0] ?? marked[0] ?? entered[0] ?? choices[0] ?? spine.places.slice().sort(byKey)[0]
+  return sourceTs[0] ?? sources[0] ?? peerMarked[0] ?? marked[0] ?? entered[0] ?? choices[0] ?? spine.places.slice().sort(byKey)[0]
+}
 
-  const returnArcs: LaneOrder['returnArcs'] = [], backArcs: LaneOrder['backArcs'] = []
-  const back = new Set<string>()
+// Cut every lane open at once (R2) and number all lane nodes by the longest forward path, so lanes joined by a
+// shared bar agree on its level (R3, C10), a choice's branches share stages and their merge comes after the longer
+// branch (R10). The lanes are walked from their anchors, most constrained first; an arc back into a node still on the
+// walk is cut. Each lane then starts at its earliest node; a cut arc into it is a return (R7), any other a back-jump (R14).
+export function laneOrders(net: Net, s: Structure): LaneOrder[] {
+  const key = (n: NodeId) => s.canon.get(n)!
+  const byKey = (a: NodeId, b: NodeId) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0)
+  const P = s.spines.map((sp) => new Set(sp.places))
+  const succ = new Map<NodeId, NodeId[]>()
+  s.spines.forEach((sp, i) => {
+    for (const t of sp.transitions) {
+      for (const p of s.pre.get(t)!.keys()) if (P[i].has(p)) succ.set(p, [...(succ.get(p) ?? []), t])
+      for (const p of s.post.get(t)!.keys()) if (P[i].has(p)) succ.set(t, [...(succ.get(t) ?? []), p])
+    }
+  })
+  const next = (n: NodeId) => [...new Set(succ.get(n) ?? [])].sort(byKey)
+  const anchors = s.spines.map((sp) => laneAnchor(net, s, sp))
+  const rank = (i: number) => (s.spines[i].open ? 0 : 1)
+  const roots = anchors.map((a, i) => ({ a, i })).sort((x, y) => rank(x.i) - rank(y.i) || byKey(x.a, y.a)).map((x) => x.a)
+  const cut = new Set<string>()
   const state = new Map<NodeId, 1 | 2>()
   const visit = (n: NodeId) => {
     state.set(n, 1)
-    for (const m of succ(n)) {
-      if (m === anchor) { returnArcs.push({ from: n, to: m }); back.add(n + '>' + m); continue }
-      if (state.get(m) === 1) { backArcs.push({ from: n, to: m }); back.add(n + '>' + m); continue }
+    for (const m of next(n)) {
+      if (state.get(m) === 1 || anchors.includes(m)) { cut.add(n + '>' + m); continue }
       if (!state.has(m)) visit(m)
     }
     state.set(n, 2)
   }
-  visit(anchor)
-  // nodes the anchor cannot reach (a second entry) hang from their own entry
-  for (const n of [...sourceTs, ...sources, ...spine.places, ...spine.transitions]) if (!state.has(n)) visit(n)
-  const stage = new Map<NodeId, number>()
+  for (const r of roots) if (!state.has(r)) visit(r)
+  for (const sp of s.spines) for (const n of [...sp.places, ...sp.transitions].sort(byKey)) if (!state.has(n)) visit(n)
   const preds = new Map<NodeId, NodeId[]>()
-  for (const n of state.keys()) for (const m of succ(n)) if (!back.has(n + '>' + m)) preds.set(m, [...(preds.get(m) ?? []), n])
+  for (const n of state.keys()) for (const m of next(n)) if (!cut.has(n + '>' + m)) preds.set(m, [...(preds.get(m) ?? []), n])
+  const row = new Map<NodeId, number>()
   const depth = (n: NodeId): number => {
-    if (stage.has(n)) return stage.get(n)!
-    stage.set(n, 0)
+    if (row.has(n)) return row.get(n)!
+    row.set(n, 0)
     const d = Math.max(-1, ...(preds.get(n) ?? []).map(depth)) + 1
-    stage.set(n, d)
+    row.set(n, d)
     return d
   }
   for (const n of state.keys()) depth(n)
-  return { anchor, stage, returnArcs, backArcs }
+
+  return s.spines.map((sp, i) => {
+    const nodes = [...sp.places, ...sp.transitions]
+    const stage = new Map(nodes.map((n) => [n, row.get(n)!]))
+    const first = Math.min(...stage.values())
+    const anchor = stage.get(anchors[i]) === first ? anchors[i] : nodes.filter((n) => stage.get(n) === first).sort(byKey)[0]
+    const mine = new Set(nodes)
+    const returnArcs: LaneOrder['returnArcs'] = [], backArcs: LaneOrder['backArcs'] = []
+    for (const n of nodes) for (const m of next(n)) {
+      if (!mine.has(m) || !cut.has(n + '>' + m) || !laneArc(s, sp, n, m)) continue
+      ;(m === anchor ? returnArcs : backArcs).push({ from: n, to: m })
+    }
+    return { anchor, stage, returnArcs, backArcs }
+  })
+}
+
+// an arc of this lane: a place of the lane into one of its transitions, or one of its transitions into a place of it
+function laneArc(s: Structure, sp: Spine, a: NodeId, b: NodeId) {
+  return sp.places.includes(a) ? sp.transitions.includes(b) && s.pre.get(b)!.has(a) : sp.transitions.includes(a) && sp.places.includes(b) && s.post.get(a)!.has(b)
 }
 
 // R5: three or more lanes of one shape, each sharing places with exactly its two neighbors, form a ring.

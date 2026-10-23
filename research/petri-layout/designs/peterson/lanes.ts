@@ -1,5 +1,5 @@
 import type { NodeId } from '../../engine/net.ts'
-import { laneOrder, type LaneOrder, type Spine } from '../../engine/structure.ts'
+import { laneOrders, type LaneOrder, type Spine } from '../../engine/structure.ts'
 import { arcKey, mean, type FC, type Graph, type Hint, type Plan, type Side } from './model.ts'
 import { labelExtent } from './text.ts'
 
@@ -25,7 +25,6 @@ type Lane = {
   sp: Spine
   ord: LaneOrder
   unbranched: boolean
-  off: number // row of stage 0
   pos: number // index across the flow (R4 lane order)
   outer: Side // the side away from the lanes it couples to (R7)
   satSide: Side // where side places and loops go (R9, R13)
@@ -41,11 +40,12 @@ export function lanePlan(g: Graph): Plan {
   const { net, s } = g
   const frame = s.spines.length >= 2 ? 'down' : 'right'
   S = spacing(g, frame)
+  const ords = laneOrders(net, s)
   const lanes: Lane[] = s.spines.map((sp, i) => {
-    const ord = laneOrder(net, s, sp)
+    const ord = ords[i]
     const counts = new Map<number, number>()
     for (const k of ord.stage.values()) counts.set(k, (counts.get(k) ?? 0) + 1)
-    return { i, sp, ord, unbranched: [...counts.values()].every((c) => c === 1), off: 0, pos: 0, outer: -1, satSide: -1, retSide: 1, col: 0,
+    return { i, sp, ord, unbranched: [...counts.values()].every((c) => c === 1), pos: 0, outer: -1, satSide: -1, retSide: 1, col: 0,
       track: new Map(), profile: [], labelRoom: { [-1]: 0, [1]: 0 } as Record<Side, number>, retRoom: { [-1]: 0, [1]: 0 } as Record<Side, number> }
   })
   const lanesOf = new Map<NodeId, number[]>()
@@ -55,9 +55,8 @@ export function lanePlan(g: Graph): Plan {
   for (const [n, ls] of lanesOf) primary.set(n, ls.slice().sort((a, b) => Number(lanes[b].unbranched) - Number(lanes[a].unbranched) || a - b)[0])
   const own = (L: Lane, n: NodeId) => primary.get(n) === L.i
 
-  alignRows(lanes, lanesOf)
   const row = new Map<NodeId, number>()
-  for (const [n, li] of primary) row.set(n, lanes[li].ord.stage.get(n)! + lanes[li].off)
+  for (const [n, li] of primary) row.set(n, lanes[li].ord.stage.get(n)!)
 
   orderLanes(g, lanes, lanesOf)
   const byPos = lanes.slice().sort((a, b) => a.pos - b.pos)
@@ -79,7 +78,11 @@ export function lanePlan(g: Graph): Plan {
   // what is not on a lane: shared places between lanes, everything else beside its lane
   const onLane = (n: NodeId) => lanesOf.has(n)
   const shared = net.places.map((p) => p.id).filter((p) => s.placeRole.get(p)!.kind === 'shared').sort(g.byKey)
-  const loose = [...net.places, ...net.transitions].map((n) => n.id).filter((n) => !onLane(n) && !shared.includes(n)).sort(g.byKey)
+  // R11: a bar on no lane that feeds two or more lanes starts them; it sits across them, a row before the first it feeds
+  const starters = net.transitions.map((t) => t.id).filter((t) => !onLane(t)
+    && new Set(g.outs.get(t)!.flatMap((p) => lanesOf.get(p) ?? [])).size >= 2).sort(g.byKey)
+  for (const t of starters) row.set(t, Math.min(...g.outs.get(t)!.filter(onLane).map((p) => row.get(p)!)) - 1)
+  const loose = [...net.places, ...net.transitions].map((n) => n.id).filter((n) => !onLane(n) && !shared.includes(n) && !starters.includes(n)).sort(g.byKey)
   const comps = components(g, loose)
   const satPos = new Map<NodeId, FC>() // c relative to the home lane's line, f in rows
   const home = new Map<NodeId, number>()
@@ -124,6 +127,12 @@ export function lanePlan(g: Graph): Plan {
   }
   for (const [n, p] of satPos) pos.set(n, { f: row.get(n)! * S.row, c: lanes[home.get(n)!].col + p.c })
 
+  const fed = (t: NodeId) => [...new Set(g.outs.get(t)!.flatMap((p) => lanesOf.get(p) ?? []))].map((i) => lanes[i].col)
+  const mid = (t: NodeId) => (Math.min(...fed(t)) + Math.max(...fed(t))) / 2
+  const startRows = new Map<number, NodeId[]>()
+  for (const t of starters) startRows.set(row.get(t)!, [...(startRows.get(row.get(t)!) ?? []), t])
+  for (const ts of startRows.values()) ts.sort((a, b) => mid(a) - mid(b) || g.byKey(a, b))
+    .forEach((t, k) => pos.set(t, { f: row.get(t)! * S.row, c: mid(t) + (k - (ts.length - 1) / 2) * (2 * S.half + 40) }))
   const spans = [...barSpan.keys()].map((t) => { const ps = lanesOf.get(t)!.map((i) => lanes[i].pos); return { row: row.get(t)!, lo: Math.min(...ps), hi: Math.max(...ps) } })
   placeShared(g, shared, byPos, lanes, lanesOf, row, pos, ext, spans)
 
@@ -184,33 +193,10 @@ function routeHints(g: Graph, lanes: Lane[], lanesOf: Map<NodeId, number[]>, pri
   return hints
 }
 
-// R3, C10: lanes that share a transition align on it; otherwise every lane starts at the top row.
-function alignRows(lanes: Lane[], lanesOf: Map<NodeId, number[]>) {
-  const fixed = new Set<number>()
-  for (const root of lanes) {
-    if (fixed.has(root.i)) continue
-    const comp = [root.i]
-    fixed.add(root.i)
-    root.off = 0
-    for (let k = 0; k < comp.length; k++) {
-      const A = lanes[comp[k]]
-      for (const [n, ls] of lanesOf) {
-        if (!ls.includes(A.i)) continue
-        for (const j of ls) {
-          if (fixed.has(j)) continue
-          lanes[j].off = A.off + A.ord.stage.get(n)! - lanes[j].ord.stage.get(n)!
-          fixed.add(j)
-          comp.push(j)
-        }
-      }
-    }
-    const min = Math.min(...comp.map((i) => lanes[i].off))
-    for (const i of comp) lanes[i].off -= min
-  }
-}
-
+// a transition on no lane (one that starts lanes from a common start) touches the lanes it feeds
 function touchingLanes(g: Graph, p: NodeId, lanesOf: Map<NodeId, number[]>): number[] {
-  return [...new Set(g.nbrs.get(p)!.flatMap((t) => lanesOf.get(t) ?? []))].sort((a, b) => a - b)
+  const near = (t: NodeId) => lanesOf.get(t) ?? g.nbrs.get(t)!.flatMap((q) => lanesOf.get(q) ?? [])
+  return [...new Set(g.nbrs.get(p)!.flatMap(near))].sort((a, b) => a - b)
 }
 
 // R4: lanes ordered so each shared place's lanes are adjacent, the giver before the taker.
@@ -493,10 +479,12 @@ function placeShared(g: Graph, shared: NodeId[], byPos: Lane[], lanes: Lane[], l
     const firstTs = ts.filter((t) => (lanesOf.get(t) ?? []).includes(first.i))
     const takes = firstTs.filter((t) => g.outs.get(p)!.includes(t)), gives = firstTs.filter((t) => g.ins.get(p)!.includes(t))
     let level: number
-    if (takes.length && gives.length) { const fr = firstTs.map((t) => row.get(t)!); level = (Math.min(...fr) + Math.max(...fr)) / 2 }
+    // a resource sits level with the first state that holds it, just after its taker
+    if (takes.length && gives.length) level = Math.min(Math.min(...takes.map((t) => row.get(t)!)) + 1, Math.max(...gives.map((t) => row.get(t)!)))
     else {
       const w = g.ins.get(p)!.map((t) => row.get(t)!), r = g.outs.get(p)!.map((t) => row.get(t)!)
-      level = w.length && r.length ? (mean(w) + mean(r)) / 2 : mean(rs)
+      // a start nothing refills sits a row before the bars that take from it
+      level = w.length && r.length ? (mean(w) + mean(r)) / 2 : w.length ? mean(rs) : Math.min(...rs) - 1
     }
     const gap = Math.floor((ls[0].pos + ls[ls.length - 1].pos) / 2)
     gaps.set(gap, [...(gaps.get(gap) ?? []), { p, level, lo: Math.min(...rs), hi: Math.max(...rs) }])

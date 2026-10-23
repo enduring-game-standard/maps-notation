@@ -78,6 +78,11 @@ function route(nodes: Layout['nodes'], from: NodeId, to: NodeId, hint: Hint, F: 
   }
   if (hint.kind === 'around') return around(nodes, from, to, hint, F, C)
   if (hint.kind === 'ring') return ringArc(A, B, hint.r)
+  if (hint.kind === 'petal') {
+    const n = mul(unit({ x: -(B.y - A.y), y: B.x - A.x }), hint.side)
+    const s = attach(A, add(A, mul(n, 60))), e = add(B, mul(n, PLACE_R))
+    return [s, add(s, mul(n, hint.d * 1.4)), add(e, mul(n, hint.d * 1.4)), e]
+  }
   return smooth(nodes, from, to, hint.kind === 'free' ? hint.prefer : 1, hint.kind === 'free' ? hint.hook ?? true : true, F, C)
 }
 

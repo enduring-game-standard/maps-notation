@@ -23,11 +23,9 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
     if (offNode(s, lay.nodes[r.from]) > 6 || offNode(e, lay.nodes[r.to]) > 6) failures.push(`arc ${r.from}>${r.to} does not start and end at its nodes`)
   }
 
-  // nodes keep clear of one another
-  const boxes = ids.map((id) => ({ id, ...extent(lay, id) }))
-  for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
-    const a = boxes[i], b = boxes[j]
-    if (a.x0 < b.x1 + 4 && b.x0 < a.x1 + 4 && a.y0 < b.y1 + 4 && b.y0 < a.y1 + 4) failures.push(`nodes ${a.id} and ${b.id} overlap`)
+  // nodes keep clear of one another: circles by their rims, bars by their segments
+  for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) {
+    if (gap(lay.nodes[ids[i]], lay.nodes[ids[j]]) < 4) failures.push(`nodes ${ids[i]} and ${ids[j]} overlap`)
   }
 
   // an arc never runs through a node it does not touch
@@ -72,11 +70,19 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
   return { failures, notes }
 }
 
-function extent(lay: Layout, id: string) {
-  const n = lay.nodes[id]
-  if (n.kind === 'place') return { x0: n.x - PLACE_R, x1: n.x + PLACE_R, y0: n.y - PLACE_R, y1: n.y + PLACE_R }
-  const dx = Math.abs(Math.cos(n.angle)) * n.length / 2, dy = Math.abs(Math.sin(n.angle)) * n.length / 2
-  return { x0: n.x - dx - 1.5, x1: n.x + dx + 1.5, y0: n.y - dy - 1.5, y1: n.y + dy + 1.5 }
+type Node = Layout['nodes'][string]
+function gap(a: Node, b: Node): number {
+  if (a.kind === 'place' && b.kind === 'place') return dist(a, b) - 2 * PLACE_R
+  if (a.kind === 'place' && b.kind === 'transition') return segDist(a, b.x, b.y, b.angle, b.length) - PLACE_R - 1.5
+  if (b.kind === 'place' && a.kind === 'transition') return segDist(b, a.x, a.y, a.angle, a.length) - PLACE_R - 1.5
+  if (a.kind !== 'transition' || b.kind !== 'transition') return Infinity
+  const ends = (n: Node & { kind: 'transition' }) => [-1, 1].map((k) => ({ x: n.x + k * Math.cos(n.angle) * n.length / 2, y: n.y + k * Math.sin(n.angle) * n.length / 2 }))
+  if (segmentsCross(ends(a), ends(b))) return 0
+  return Math.min(...ends(a).map((e) => segDist(e, b.x, b.y, b.angle, b.length)), ...ends(b).map((e) => segDist(e, a.x, a.y, a.angle, a.length))) - 3
+}
+function segmentsCross([p, q]: Pt[], [r, s]: Pt[]) {
+  const o = (a: Pt, b: Pt, c: Pt) => Math.sign((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x))
+  return o(p, q, r) * o(p, q, s) < 0 && o(r, s, p) * o(r, s, q) < 0
 }
 
 const dist = (a: Pt, b: Pt) => Math.hypot(a.x - b.x, a.y - b.y)

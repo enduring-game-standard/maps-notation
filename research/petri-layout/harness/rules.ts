@@ -1,6 +1,6 @@
 import type { Net, NodeId } from '../engine/net.ts'
 import type { Layout, Pt } from '../engine/layout.ts'
-import { analyze, laneOrder, laneRing, type Structure } from '../engine/structure.ts'
+import { analyze, laneOrders, laneRing, type Structure } from '../engine/structure.ts'
 import { sampleBezier } from '../engine/geometry.ts'
 
 // One assertion per rule in RULES.md, stated on the structure vocabulary. Each failure names its rule.
@@ -11,7 +11,8 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
   const failures: string[] = []
   const notes: string[] = []
   const s = analyze(net)
-  const lanes = s.spines.map((sp) => ({ sp, ord: laneOrder(net, s, sp) }))
+  const ords = laneOrders(net, s)
+  const lanes = s.spines.map((sp, i) => ({ sp, ord: ords[i] }))
   const at = (id: NodeId) => lay.nodes[id]
   const onTwoLanes = (t: NodeId) => (s.spineOfTransition.get(t)?.length ?? 0) > 1
 
@@ -73,16 +74,12 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     }
   })
 
-  // R3: peers of one shape align stage against stage
-  for (let i = 0; i < lanes.length; i++) for (let j = i + 1; j < lanes.length; j++) {
-    const A = lanes[i], B = lanes[j]
-    if (A.ord.stage.size !== B.ord.stage.size || A.sp.open !== B.sp.open) continue
-    const fa = new Map<number, number>(), fb = new Map<number, number>()
-    for (const [n, k] of A.ord.stage) if (!onTwoLanes(n)) fa.set(k, frames[i].flow(at(n)))
-    for (const [n, k] of B.ord.stage) if (!onTwoLanes(n)) fb.set(k, frames[j].flow(at(n)))
-    for (const [k, v] of fa) if (fb.has(k) && Math.abs(fb.get(k)! - v) > TOL) {
-      failures.push(`R3 lanes @${A.ord.anchor} and @${B.ord.anchor}: stage ${k} not level`); break
-    }
+  // R3, C10: lane nodes at one stage are level, across every lane
+  const level = new Map<number, { n: NodeId; f: number }[]>()
+  lanes.forEach(({ ord }, li) => { for (const [n, k] of ord.stage) level.set(k, [...(level.get(k) ?? []), { n, f: frames[li].flow(at(n)) }]) })
+  for (const [k, xs] of [...level].sort((a, b) => a[0] - b[0])) {
+    const fs = xs.map((x) => x.f)
+    if (Math.max(...fs) - Math.min(...fs) > TOL) { failures.push(`R3 stage ${k} is not level across lanes (${xs.map((x) => x.n).join(' ')})`); break }
   }
 
   // R4: a place shared by two lanes sits between them, and between its transitions along the flow
@@ -101,7 +98,9 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     const ts = net.arcs.filter((a) => a.from === p.id || a.to === p.id).map((a) => (a.from === p.id ? a.to : a.from))
     const fs = ts.map((t) => F.flow(at(t)))
     const f = F.flow(at(p.id))
-    if (f < Math.min(...fs) - TOL - 30 || f > Math.max(...fs) + TOL + 30) failures.push(`R4 shared place ${p.id} is not between its transitions along the flow`)
+    // a common start (nothing refills it) may sit a row before the bars that take from it
+    const before = net.arcs.some((a) => a.to === p.id) ? 30 : 90
+    if (f < Math.min(...fs) - TOL - before || f > Math.max(...fs) + TOL + 30) failures.push(`R4 shared place ${p.id} is not between its transitions along the flow`)
   }
 
   // R7: a return arc runs on one side of its lane, the side away from its shared places when they are all on one side

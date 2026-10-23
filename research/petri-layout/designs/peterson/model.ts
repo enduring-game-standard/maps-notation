@@ -15,6 +15,7 @@ export type Hint =
   | { kind: 'free'; prefer: Side; hook?: boolean } // one smooth curve, bowed toward `prefer` when something is in the way;
   // with `hook`, it meets its bar along the flow (R7), else on the face toward its other end
   | { kind: 'ring'; r: number } // along a ring centered on the origin (R15)
+  | { kind: 'petal'; side: Side; d: number } // a spoke's return, beside the spoke on one rotational side (R5, R7)
 
 export type BarDir = 'across' | 'along' | { angle: number } // across the flow, along it, or fixed (rings)
 
