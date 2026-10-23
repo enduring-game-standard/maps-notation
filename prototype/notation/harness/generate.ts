@@ -17,6 +17,7 @@ const pick = <T>(xs: T[]) => xs[Math.floor(rand() * xs.length)]
 const SHAPES = ['cycle', 'chain', 'star', 'branch'] as const
 const COLORS = ['#1f6feb', '#c2410c']
 
+const entities: { name: string; states: string[]; by: string }[] = []
 function generate(n: number): Net {
   const net: Net = { title: `Generated ${String(n).padStart(2, '0')}`, seats: [], groups: [], states: [], verbs: [], arcs: [] }
   const seats = int(1, 2)
@@ -28,7 +29,7 @@ function generate(n: number): Net {
     net.verbs.push({ id, label: `v${vn}`, by, priority: by === WORLD ? priority : 0, weight: by === WORLD ? weight : 1, x: 0, y: 0 })
     return id
   }
-  const entities: { name: string; states: string[]; by: string }[] = []
+  entities.length = 0
   const E = int(2, 4)
   for (let e = 0; e < E; e++) {
     const name = String.fromCharCode(65 + e)
@@ -104,7 +105,8 @@ while (made < COUNT && tries < 5000) {
   const root = a.nodes.get(a.root[0])
   const open = root?.next.map((n) => n.verb) ?? []
   const vs = [...net.verbs].sort(() => rand() - 0.5).slice(0, 3)
-  questions[name + '.maps'] = [
+  const truth = { entities: Object.fromEntries(entities.map((en) => [en.name, en.states])), contacts: net.arcs.filter((x) => (x.kind === 'need' || x.kind === 'unless')).map((x) => `${x.kind}|${x.state}|${x.verb}`) }
+  questions[name + '.maps'] = { truth, questions: [
     ...vs.map((v, i) => ({ id: `${name}-who${i}`, criteria: ['conversation'], question: `Who says ${v.label}?`, answer: speakerOf(v.id) })),
     ...vs.map((v, i) => ({ id: `${name}-gate${i}`, criteria: ['possibility'], question: `What must hold for ${v.label} to be said, and what does saying it change?`,
       answer: net.arcs.filter((x) => x.verb === v.id).map((x) => `${x.kind}${x.count > 1 ? ' ' + x.count : ''} ${net.states.find((s) => s.id === x.state)!.label}`).join('; ') })),
@@ -114,7 +116,7 @@ while (made < COUNT && tries < 5000) {
       answer: 'Entities A.. by letter: ' + [...new Set(net.states.filter((s) => /^[a-z]\d/.test(s.id)).map((s) => s.label[0]))].map((L) => `${L}: ${net.states.filter((s) => s.label[0] === L && /\d/.test(s.label)).map((s) => s.label).join(', ')}`).join('; ') },
     { id: `${name}-contact`, criteria: ['contact'], question: "Which verbs depend on the state of a different entity than the one they move, and on which state?",
       answer: net.arcs.filter((x) => (x.kind === 'need' || x.kind === 'unless')).map((x) => `${net.verbs.find((v) => v.id === x.verb)!.label} ${x.kind} ${net.states.find((s) => s.id === x.state)!.label}`).join('; ') },
-  ]
+  ]}
 }
 writeFileSync(join(OUT, 'questions.json'), JSON.stringify({ about: 'Auto-generated blind-read questions; answers derived from the arcs and the engine root moment.', files: questions }, null, 1))
 console.log(`made ${made} nets in ${tries} tries`)

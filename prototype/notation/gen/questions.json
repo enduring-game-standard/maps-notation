@@ -1,905 +1,1187 @@
 {
  "about": "Auto-generated blind-read questions; answers derived from the arcs and the engine root moment.",
  "files": {
-  "g01.maps": [
-   {
-    "id": "g01-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v5?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g01-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v8?",
-    "answer": "the world"
-   },
-   {
-    "id": "g01-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v11?",
-    "answer": "the world"
-   },
-   {
-    "id": "g01-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v5 to be said, and what does saying it change?",
-    "answer": "take A5; give A1"
-   },
-   {
-    "id": "g01-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v8 to be said, and what does saying it change?",
-    "answer": "take B3; give B4"
-   },
-   {
-    "id": "g01-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v11 to be said, and what does saying it change?",
-    "answer": "take B6; give B1"
-   },
-   {
-    "id": "g01-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v2, v6"
-   },
-   {
-    "id": "g01-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5; B: B1, B2, B3, B4, B5, B6"
-   },
-   {
-    "id": "g01-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v6 need A2"
-   }
-  ],
-  "g02.maps": [
-   {
-    "id": "g02-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v1?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g02-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v8?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g02-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v2?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g02-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v1 to be said, and what does saying it change?",
-    "answer": "take A1; give A2"
-   },
-   {
-    "id": "g02-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v8 to be said, and what does saying it change?",
-    "answer": "take B1; give B3"
-   },
-   {
-    "id": "g02-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v2 to be said, and what does saying it change?",
-    "answer": "take A2; give A3"
-   },
-   {
-    "id": "g02-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v4, v6, v8, v10"
-   },
-   {
-    "id": "g02-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5; B: B1, B2, B3, B4"
-   },
-   {
-    "id": "g02-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v3 unless B3"
-   }
-  ],
-  "g03.maps": [
-   {
-    "id": "g03-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v1?",
-    "answer": "the world"
-   },
-   {
-    "id": "g03-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v4?",
-    "answer": "the world"
-   },
-   {
-    "id": "g03-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v2?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g03-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v1 to be said, and what does saying it change?",
-    "answer": "take A1; give A2"
-   },
-   {
-    "id": "g03-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v4 to be said, and what does saying it change?",
-    "answer": "take B2; give B3"
-   },
-   {
-    "id": "g03-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v2 to be said, and what does saying it change?",
-    "answer": "take A2; give A1; take Pool"
-   },
-   {
-    "id": "g03-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v2"
-   },
-   {
-    "id": "g03-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2; B: B1, B2, B3, B4, B5"
-   },
-   {
-    "id": "g03-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v7 need A1; v8 unless Pool"
-   }
-  ],
-  "g04.maps": [
-   {
-    "id": "g04-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v2?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g04-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v5?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g04-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v4?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g04-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v2 to be said, and what does saying it change?",
-    "answer": "take A2; give A3"
-   },
-   {
-    "id": "g04-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v5 to be said, and what does saying it change?",
-    "answer": "take B1; give B2"
-   },
-   {
-    "id": "g04-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v4 to be said, and what does saying it change?",
-    "answer": "take A4; give A1"
-   },
-   {
-    "id": "g04-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v5"
-   },
-   {
-    "id": "g04-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4; B: B1, B2"
-   },
-   {
-    "id": "g04-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v6 need A2"
-   }
-  ],
-  "g05.maps": [
-   {
-    "id": "g05-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v4?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g05-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v6?",
-    "answer": "the world"
-   },
-   {
-    "id": "g05-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v2?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g05-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v4 to be said, and what does saying it change?",
-    "answer": "take B1; give B2; need A1"
-   },
-   {
-    "id": "g05-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v6 to be said, and what does saying it change?",
-    "answer": "take C1; give C2"
-   },
-   {
-    "id": "g05-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v2 to be said, and what does saying it change?",
-    "answer": "take A2; give A3; need C2; take Pool"
-   },
-   {
-    "id": "g05-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v4"
-   },
-   {
-    "id": "g05-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3; B: B1, B2; C: C1, C2"
-   },
-   {
-    "id": "g05-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v2 need C2; v4 need A1; v7 unless Pool"
-   }
-  ],
-  "g06.maps": [
-   {
-    "id": "g06-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v6?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g06-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v3?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g06-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v15?",
-    "answer": "the world"
-   },
-   {
-    "id": "g06-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v6 to be said, and what does saying it change?",
-    "answer": "take A4; give A1"
-   },
-   {
-    "id": "g06-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v3 to be said, and what does saying it change?",
-    "answer": "take A1; give A3"
-   },
-   {
-    "id": "g06-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v15 to be said, and what does saying it change?",
-    "answer": "need A5; need B4; give Over"
-   },
-   {
-    "id": "g06-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v3, v5, v7, v9, v11"
-   },
-   {
-    "id": "g06-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5, A6; B: B1, B2, B3, B4"
-   },
-   {
-    "id": "g06-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v9 need B1; v15 need A5; v15 need B4"
-   }
-  ],
-  "g07.maps": [
-   {
-    "id": "g07-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v5?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g07-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v6?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g07-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v7?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g07-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v5 to be said, and what does saying it change?",
-    "answer": "take A5; give A1"
-   },
-   {
-    "id": "g07-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v6 to be said, and what does saying it change?",
-    "answer": "take B1; give B2"
-   },
-   {
-    "id": "g07-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v7 to be said, and what does saying it change?",
-    "answer": "take B2; give B3"
-   },
-   {
-    "id": "g07-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v6"
-   },
-   {
-    "id": "g07-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5; B: B1, B2, B3"
-   },
-   {
-    "id": "g07-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v4 unless B3; v10 need A4; v10 need B1"
-   }
-  ],
-  "g08.maps": [
-   {
-    "id": "g08-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v7?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g08-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v1?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g08-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v2?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g08-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v7 to be said, and what does saying it change?",
-    "answer": "take A1; give A5"
-   },
-   {
-    "id": "g08-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v1 to be said, and what does saying it change?",
-    "answer": "take A1; give A2"
-   },
-   {
-    "id": "g08-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v2 to be said, and what does saying it change?",
-    "answer": "take A2; give A1"
-   },
-   {
-    "id": "g08-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v5, v7, v9, v11"
-   },
-   {
-    "id": "g08-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5, A6; B: B1, B2, B3, B4"
-   },
-   {
-    "id": "g08-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v3 unless B1; v10 need B3; v15 need A4; v15 need B3"
-   }
-  ],
-  "g09.maps": [
-   {
-    "id": "g09-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v7?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g09-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v12?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g09-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v1?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g09-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v7 to be said, and what does saying it change?",
-    "answer": "take B1; give B2; unless A5"
-   },
-   {
-    "id": "g09-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v12 to be said, and what does saying it change?",
-    "answer": "take B6; give B1"
-   },
-   {
-    "id": "g09-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v1 to be said, and what does saying it change?",
-    "answer": "take A1; give A2"
-   },
-   {
-    "id": "g09-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v12"
-   },
-   {
-    "id": "g09-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5, A6; B: B1, B2, B3, B4, B5, B6"
-   },
-   {
-    "id": "g09-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v7 unless A5; v5 need B2; v13 need A1; v14 need A5; v15 need A2; v15 need B1"
-   }
-  ],
-  "g10.maps": [
-   {
-    "id": "g10-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v3?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g10-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v1?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g10-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v5?",
-    "answer": "the world"
-   },
-   {
-    "id": "g10-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v3 to be said, and what does saying it change?",
-    "answer": "take A3; give A4"
-   },
-   {
-    "id": "g10-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v1 to be said, and what does saying it change?",
-    "answer": "take A1; give A2"
-   },
-   {
-    "id": "g10-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v5 to be said, and what does saying it change?",
-    "answer": "take B1; give B2"
-   },
-   {
-    "id": "g10-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v6"
-   },
-   {
-    "id": "g10-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4; B: B1, B2, B3, B4"
-   },
-   {
-    "id": "g10-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v2 need B2; v9 unless Pool"
-   }
-  ],
-  "g11.maps": [
-   {
-    "id": "g11-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v6?",
-    "answer": "the world"
-   },
-   {
-    "id": "g11-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v7?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g11-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v3?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g11-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v6 to be said, and what does saying it change?",
-    "answer": "take B3; give B4"
-   },
-   {
-    "id": "g11-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v7 to be said, and what does saying it change?",
-    "answer": "take B4; give B5; unless A1; need B4"
-   },
-   {
-    "id": "g11-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v3 to be said, and what does saying it change?",
-    "answer": "take A3; give A1"
-   },
-   {
-    "id": "g11-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v4"
-   },
-   {
-    "id": "g11-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3; B: B1, B2, B3, B4, B5"
-   },
-   {
-    "id": "g11-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v7 unless A1; v7 need B4"
-   }
-  ],
-  "g12.maps": [
-   {
-    "id": "g12-who0",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v7?",
-    "answer": "Player 2"
-   },
-   {
-    "id": "g12-who1",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v3?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g12-who2",
-    "criteria": [
-     "conversation"
-    ],
-    "question": "Who says v2?",
-    "answer": "Player 1"
-   },
-   {
-    "id": "g12-gate0",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v7 to be said, and what does saying it change?",
-    "answer": "take B2; give B3; need A2"
-   },
-   {
-    "id": "g12-gate1",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v3 to be said, and what does saying it change?",
-    "answer": "take A3; give A4"
-   },
-   {
-    "id": "g12-gate2",
-    "criteria": [
-     "possibility"
-    ],
-    "question": "What must hold for v2 to be said, and what does saying it change?",
-    "answer": "take A2; give A3"
-   },
-   {
-    "id": "g12-open",
-    "criteria": [
-     "possibility",
-     "conversation"
-    ],
-    "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
-    "answer": "Player 1: v1, v6"
-   },
-   {
-    "id": "g12-ent",
-    "criteria": [
-     "entity"
-    ],
-    "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
-    "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5; B: B1, B2, B3, B4, B5"
-   },
-   {
-    "id": "g12-contact",
-    "criteria": [
-     "contact"
-    ],
-    "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
-    "answer": "v7 need A2; v5 unless B4"
-   }
-  ]
+  "g01.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4",
+      "b5",
+      "b6"
+     ]
+    },
+    "contacts": [
+     "need|a2|v6"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g01-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v5?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g01-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v8?",
+     "answer": "the world"
+    },
+    {
+     "id": "g01-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v11?",
+     "answer": "the world"
+    },
+    {
+     "id": "g01-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v5 to be said, and what does saying it change?",
+     "answer": "take A5; give A1"
+    },
+    {
+     "id": "g01-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v8 to be said, and what does saying it change?",
+     "answer": "take B3; give B4"
+    },
+    {
+     "id": "g01-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v11 to be said, and what does saying it change?",
+     "answer": "take B6; give B1"
+    },
+    {
+     "id": "g01-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v2, v6"
+    },
+    {
+     "id": "g01-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5; B: B1, B2, B3, B4, B5, B6"
+    },
+    {
+     "id": "g01-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v6 need A2"
+    }
+   ]
+  },
+  "g02.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4"
+     ]
+    },
+    "contacts": [
+     "unless|b3|v3"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g02-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v1?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g02-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v8?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g02-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v2?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g02-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v1 to be said, and what does saying it change?",
+     "answer": "take A1; give A2"
+    },
+    {
+     "id": "g02-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v8 to be said, and what does saying it change?",
+     "answer": "take B1; give B3"
+    },
+    {
+     "id": "g02-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v2 to be said, and what does saying it change?",
+     "answer": "take A2; give A3"
+    },
+    {
+     "id": "g02-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v4, v6, v8, v10"
+    },
+    {
+     "id": "g02-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5; B: B1, B2, B3, B4"
+    },
+    {
+     "id": "g02-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v3 unless B3"
+    }
+   ]
+  },
+  "g03.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4",
+      "b5"
+     ]
+    },
+    "contacts": [
+     "need|a1|v7",
+     "unless|pool|v8"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g03-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v1?",
+     "answer": "the world"
+    },
+    {
+     "id": "g03-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v4?",
+     "answer": "the world"
+    },
+    {
+     "id": "g03-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v2?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g03-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v1 to be said, and what does saying it change?",
+     "answer": "take A1; give A2"
+    },
+    {
+     "id": "g03-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v4 to be said, and what does saying it change?",
+     "answer": "take B2; give B3"
+    },
+    {
+     "id": "g03-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v2 to be said, and what does saying it change?",
+     "answer": "take A2; give A1; take Pool"
+    },
+    {
+     "id": "g03-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v2"
+    },
+    {
+     "id": "g03-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2; B: B1, B2, B3, B4, B5"
+    },
+    {
+     "id": "g03-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v7 need A1; v8 unless Pool"
+    }
+   ]
+  },
+  "g04.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4"
+     ],
+     "B": [
+      "b1",
+      "b2"
+     ]
+    },
+    "contacts": [
+     "need|a2|v6"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g04-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v2?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g04-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v5?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g04-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v4?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g04-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v2 to be said, and what does saying it change?",
+     "answer": "take A2; give A3"
+    },
+    {
+     "id": "g04-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v5 to be said, and what does saying it change?",
+     "answer": "take B1; give B2"
+    },
+    {
+     "id": "g04-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v4 to be said, and what does saying it change?",
+     "answer": "take A4; give A1"
+    },
+    {
+     "id": "g04-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v5"
+    },
+    {
+     "id": "g04-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4; B: B1, B2"
+    },
+    {
+     "id": "g04-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v6 need A2"
+    }
+   ]
+  },
+  "g05.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3"
+     ],
+     "B": [
+      "b1",
+      "b2"
+     ],
+     "C": [
+      "c1",
+      "c2"
+     ]
+    },
+    "contacts": [
+     "need|c2|v2",
+     "need|a1|v4",
+     "unless|pool|v7"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g05-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v4?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g05-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v6?",
+     "answer": "the world"
+    },
+    {
+     "id": "g05-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v2?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g05-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v4 to be said, and what does saying it change?",
+     "answer": "take B1; give B2; need A1"
+    },
+    {
+     "id": "g05-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v6 to be said, and what does saying it change?",
+     "answer": "take C1; give C2"
+    },
+    {
+     "id": "g05-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v2 to be said, and what does saying it change?",
+     "answer": "take A2; give A3; need C2; take Pool"
+    },
+    {
+     "id": "g05-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v4"
+    },
+    {
+     "id": "g05-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3; B: B1, B2; C: C1, C2"
+    },
+    {
+     "id": "g05-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v2 need C2; v4 need A1; v7 unless Pool"
+    }
+   ]
+  },
+  "g06.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5",
+      "a6"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4"
+     ]
+    },
+    "contacts": [
+     "need|b1|v9",
+     "need|a5|v15",
+     "need|b4|v15"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g06-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v6?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g06-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v3?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g06-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v15?",
+     "answer": "the world"
+    },
+    {
+     "id": "g06-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v6 to be said, and what does saying it change?",
+     "answer": "take A4; give A1"
+    },
+    {
+     "id": "g06-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v3 to be said, and what does saying it change?",
+     "answer": "take A1; give A3"
+    },
+    {
+     "id": "g06-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v15 to be said, and what does saying it change?",
+     "answer": "need A5; need B4; give Over"
+    },
+    {
+     "id": "g06-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v3, v5, v7, v9, v11"
+    },
+    {
+     "id": "g06-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5, A6; B: B1, B2, B3, B4"
+    },
+    {
+     "id": "g06-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v9 need B1; v15 need A5; v15 need B4"
+    }
+   ]
+  },
+  "g07.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3"
+     ]
+    },
+    "contacts": [
+     "unless|b3|v4",
+     "need|a4|v10",
+     "need|b1|v10"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g07-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v5?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g07-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v6?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g07-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v7?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g07-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v5 to be said, and what does saying it change?",
+     "answer": "take A5; give A1"
+    },
+    {
+     "id": "g07-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v6 to be said, and what does saying it change?",
+     "answer": "take B1; give B2"
+    },
+    {
+     "id": "g07-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v7 to be said, and what does saying it change?",
+     "answer": "take B2; give B3"
+    },
+    {
+     "id": "g07-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v6"
+    },
+    {
+     "id": "g07-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5; B: B1, B2, B3"
+    },
+    {
+     "id": "g07-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v4 unless B3; v10 need A4; v10 need B1"
+    }
+   ]
+  },
+  "g08.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5",
+      "a6"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4"
+     ]
+    },
+    "contacts": [
+     "unless|b1|v3",
+     "need|b3|v10",
+     "need|a4|v15",
+     "need|b3|v15"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g08-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v7?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g08-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v1?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g08-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v2?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g08-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v7 to be said, and what does saying it change?",
+     "answer": "take A1; give A5"
+    },
+    {
+     "id": "g08-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v1 to be said, and what does saying it change?",
+     "answer": "take A1; give A2"
+    },
+    {
+     "id": "g08-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v2 to be said, and what does saying it change?",
+     "answer": "take A2; give A1"
+    },
+    {
+     "id": "g08-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v5, v7, v9, v11"
+    },
+    {
+     "id": "g08-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5, A6; B: B1, B2, B3, B4"
+    },
+    {
+     "id": "g08-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v3 unless B1; v10 need B3; v15 need A4; v15 need B3"
+    }
+   ]
+  },
+  "g09.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5",
+      "a6"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4",
+      "b5",
+      "b6"
+     ]
+    },
+    "contacts": [
+     "unless|a5|v7",
+     "need|b2|v5",
+     "need|a1|v13",
+     "need|a5|v14",
+     "need|a2|v15",
+     "need|b1|v15"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g09-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v7?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g09-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v12?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g09-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v1?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g09-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v7 to be said, and what does saying it change?",
+     "answer": "take B1; give B2; unless A5"
+    },
+    {
+     "id": "g09-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v12 to be said, and what does saying it change?",
+     "answer": "take B6; give B1"
+    },
+    {
+     "id": "g09-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v1 to be said, and what does saying it change?",
+     "answer": "take A1; give A2"
+    },
+    {
+     "id": "g09-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v12"
+    },
+    {
+     "id": "g09-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5, A6; B: B1, B2, B3, B4, B5, B6"
+    },
+    {
+     "id": "g09-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v7 unless A5; v5 need B2; v13 need A1; v14 need A5; v15 need A2; v15 need B1"
+    }
+   ]
+  },
+  "g10.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4"
+     ]
+    },
+    "contacts": [
+     "need|b2|v2",
+     "unless|pool|v9"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g10-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v3?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g10-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v1?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g10-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v5?",
+     "answer": "the world"
+    },
+    {
+     "id": "g10-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v3 to be said, and what does saying it change?",
+     "answer": "take A3; give A4"
+    },
+    {
+     "id": "g10-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v1 to be said, and what does saying it change?",
+     "answer": "take A1; give A2"
+    },
+    {
+     "id": "g10-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v5 to be said, and what does saying it change?",
+     "answer": "take B1; give B2"
+    },
+    {
+     "id": "g10-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v6"
+    },
+    {
+     "id": "g10-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4; B: B1, B2, B3, B4"
+    },
+    {
+     "id": "g10-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v2 need B2; v9 unless Pool"
+    }
+   ]
+  },
+  "g11.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4",
+      "b5"
+     ]
+    },
+    "contacts": [
+     "unless|a1|v7",
+     "need|b4|v7"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g11-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v6?",
+     "answer": "the world"
+    },
+    {
+     "id": "g11-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v7?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g11-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v3?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g11-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v6 to be said, and what does saying it change?",
+     "answer": "take B3; give B4"
+    },
+    {
+     "id": "g11-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v7 to be said, and what does saying it change?",
+     "answer": "take B4; give B5; unless A1; need B4"
+    },
+    {
+     "id": "g11-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v3 to be said, and what does saying it change?",
+     "answer": "take A3; give A1"
+    },
+    {
+     "id": "g11-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v4"
+    },
+    {
+     "id": "g11-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3; B: B1, B2, B3, B4, B5"
+    },
+    {
+     "id": "g11-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v7 unless A1; v7 need B4"
+    }
+   ]
+  },
+  "g12.maps": {
+   "truth": {
+    "entities": {
+     "A": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5"
+     ],
+     "B": [
+      "b1",
+      "b2",
+      "b3",
+      "b4",
+      "b5"
+     ]
+    },
+    "contacts": [
+     "need|a2|v7",
+     "unless|b4|v5"
+    ]
+   },
+   "questions": [
+    {
+     "id": "g12-who0",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v7?",
+     "answer": "Player 2"
+    },
+    {
+     "id": "g12-who1",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v3?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g12-who2",
+     "criteria": [
+      "conversation"
+     ],
+     "question": "Who says v2?",
+     "answer": "Player 1"
+    },
+    {
+     "id": "g12-gate0",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v7 to be said, and what does saying it change?",
+     "answer": "take B2; give B3; need A2"
+    },
+    {
+     "id": "g12-gate1",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v3 to be said, and what does saying it change?",
+     "answer": "take A3; give A4"
+    },
+    {
+     "id": "g12-gate2",
+     "criteria": [
+      "possibility"
+     ],
+     "question": "What must hold for v2 to be said, and what does saying it change?",
+     "answer": "take A2; give A3"
+    },
+    {
+     "id": "g12-open",
+     "criteria": [
+      "possibility",
+      "conversation"
+     ],
+     "question": "At the start, once the world falls silent, who speaks and which verbs can they say?",
+     "answer": "Player 1: v1, v6"
+    },
+    {
+     "id": "g12-ent",
+     "criteria": [
+      "entity"
+     ],
+     "question": "How many separate things are each always in exactly one state here, and which states belong to each?",
+     "answer": "Entities A.. by letter: A: A1, A2, A3, A4, A5; B: B1, B2, B3, B4, B5"
+    },
+    {
+     "id": "g12-contact",
+     "criteria": [
+      "contact"
+     ],
+     "question": "Which verbs depend on the state of a different entity than the one they move, and on which state?",
+     "answer": "v7 need A2; v5 unless B4"
+    }
+   ]
+  }
  }
 }
