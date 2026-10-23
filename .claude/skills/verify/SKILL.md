@@ -20,7 +20,7 @@ Each criterion comes from the user's own words, the map, the coherent-design tic
 | `compare-shape` `compare-name` | Same structure gives the same shape; named variants show what changed. | #14, map Notes, book 11:75 | blind read on pairs; deterministic, name-blind, order-blind, position-blind, local delta (proxy) |
 | `loop` | A feedback loop jumps out. | #22 | blind read |
 | `default` | One convention draws every net, with no per-subject tuning, like staff notation for all music. | user | harness runs every design on every corpus and generated net; the worst net counts |
-| `readable` | A readable net, not a tangle: nodes placed with intent, lines routed with care, no connection hidden. The dining philosophers figure is the standard. | user | coverage (no hidden arc), clutter counts (proxy), written screenshot critique, independent critic |
+| `readable` | A readable net, not a tangle: nodes placed with intent, lines routed with care, no connection hidden. The dining philosophers figure is the standard. | user | written screenshot critique of what each placement and route says, independent critic; coverage (no hidden arc); clutter counts only as a diagnostic, never a target |
 | `napkin` | A designer can draw it by hand from its rules. | #11, #14 | hand-reproduction by a fresh reader given only the rules |
 | `earns-place` | Every element exists for a stated reason; removing it costs a reader something. | user | declared purpose per element; ablation blind read |
 | `radical` | The six designs differ at the root, not in styling. | user | declared axes; rank correlation of placements between designs; critic |
@@ -28,6 +28,7 @@ Each criterion comes from the user's own words, the map, the coherent-design tic
 
 Hard rules the user already gave. Breaking one fails the prototype without further checks:
 
+- Never optimize a number. Counts (crossings, drift, napkin agreement, blind-read totals) are diagnostics that point at a place to look, never goals or targets. The goal is what each node's placement says: every position and every route has a stated meaning a reader can see. A brief, a design note, or a verdict that names a count as the target is a failure. Crossings are allowed; the dining philosophers figure has them.
 - Never test against or design from the Ocarina atlas (`examples/ocarina-of-time/`).
 - Examples never shape a design. A convention is designed from the criteria and the sources, then tested across many nets. Never tune a design to one subject (Goomba, Link, a dungeon, stamina, the duel).
 - Every claim to the user carries its evidence or is labeled inference. Never pass on a caveat you cannot explain.
