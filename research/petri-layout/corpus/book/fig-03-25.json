@@ -1,0 +1,128 @@
+{
+  "name": "flowchart-program",
+  "source": "Peterson fig 3.25",
+  "places": [
+    {
+      "id": "p1"
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    },
+    {
+      "id": "p5"
+    },
+    {
+      "id": "p6"
+    },
+    {
+      "id": "p7"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "a"
+    },
+    {
+      "id": "t2",
+      "label": "b.T"
+    },
+    {
+      "id": "t3",
+      "label": "b.F"
+    },
+    {
+      "id": "t4",
+      "label": "c.T"
+    },
+    {
+      "id": "t5",
+      "label": "c.F"
+    },
+    {
+      "id": "t6",
+      "label": "d"
+    },
+    {
+      "id": "t7",
+      "label": "e"
+    },
+    {
+      "id": "t8",
+      "label": "f"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p2",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p6"
+    },
+    {
+      "from": "p3",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p5"
+    },
+    {
+      "from": "p3",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "p4"
+    },
+    {
+      "from": "p4",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "p5"
+    },
+    {
+      "from": "p5",
+      "to": "t7"
+    },
+    {
+      "from": "t7",
+      "to": "p2"
+    },
+    {
+      "from": "p6",
+      "to": "t8"
+    },
+    {
+      "from": "t8",
+      "to": "p7"
+    }
+  ],
+  "note": "Places are unlabeled; ids invented top to bottom. Transition labels as printed. Actions per fig 3.23: a Input(y1); Input(y2); y3 := 1. b y1 > 0?. c odd(y1)?. d y3 := y3 * y2; y1 := y1 - 1. e y2 := y2 * y2; y1 := y1 / 2. f Output(y3). The figure routes c.F through d and c.T straight to e, the reverse of flowchart 3.22 (c T goes to d); transcribed as the figure prints it. Unmarked."
+}

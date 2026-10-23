@@ -1,0 +1,240 @@
+{
+  "name": "complex-machine-shop",
+  "source": "Peterson fig 3.2",
+  "places": [
+    {
+      "id": "a",
+      "label": "An order has arrived and is waiting for machining by M1"
+    },
+    {
+      "id": "b",
+      "label": "An order has been processed by M1 and is waiting to be processed by M2 or M3"
+    },
+    {
+      "id": "c",
+      "label": "The order is complete"
+    },
+    {
+      "id": "d",
+      "label": "Machine M1 is idle",
+      "tokens": 1
+    },
+    {
+      "id": "e",
+      "label": "Machine M2 is idle",
+      "tokens": 1
+    },
+    {
+      "id": "f",
+      "label": "Machine M3 is idle",
+      "tokens": 1
+    },
+    {
+      "id": "g",
+      "label": "Operator F1 is idle",
+      "tokens": 1
+    },
+    {
+      "id": "h",
+      "label": "Operator F2 is idle",
+      "tokens": 1
+    },
+    {
+      "id": "i",
+      "label": "Machine M1 is being operated by F1"
+    },
+    {
+      "id": "j",
+      "label": "Machine M1 is being operated by F2"
+    },
+    {
+      "id": "k",
+      "label": "Machine M2 is being operated by F1"
+    },
+    {
+      "id": "l",
+      "label": "Machine M3 is being operated by F2"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "An order arrives"
+    },
+    {
+      "id": "t2",
+      "label": "Operator F1 starts the order on machine M1"
+    },
+    {
+      "id": "t3",
+      "label": "Operator F1 finishes the order on machine M1"
+    },
+    {
+      "id": "t4",
+      "label": "Operator F2 starts the order on machine M1"
+    },
+    {
+      "id": "t5",
+      "label": "Operator F2 finishes the order on machine M1"
+    },
+    {
+      "id": "t6",
+      "label": "Operator F1 starts the order on M2"
+    },
+    {
+      "id": "t7",
+      "label": "Operator F1 finishes the order on M2"
+    },
+    {
+      "id": "t8",
+      "label": "Operator F2 starts the order on M3"
+    },
+    {
+      "id": "t9",
+      "label": "Operator F2 finishes the order on M3"
+    },
+    {
+      "id": "t10",
+      "label": "The order is sent for delivery"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "t1",
+      "to": "a"
+    },
+    {
+      "from": "a",
+      "to": "t2"
+    },
+    {
+      "from": "g",
+      "to": "t2"
+    },
+    {
+      "from": "d",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "i"
+    },
+    {
+      "from": "i",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "b"
+    },
+    {
+      "from": "t3",
+      "to": "g"
+    },
+    {
+      "from": "t3",
+      "to": "d"
+    },
+    {
+      "from": "a",
+      "to": "t4"
+    },
+    {
+      "from": "h",
+      "to": "t4"
+    },
+    {
+      "from": "d",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "j"
+    },
+    {
+      "from": "j",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "b"
+    },
+    {
+      "from": "t5",
+      "to": "h"
+    },
+    {
+      "from": "t5",
+      "to": "d"
+    },
+    {
+      "from": "b",
+      "to": "t6"
+    },
+    {
+      "from": "g",
+      "to": "t6"
+    },
+    {
+      "from": "e",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "k"
+    },
+    {
+      "from": "k",
+      "to": "t7"
+    },
+    {
+      "from": "t7",
+      "to": "c"
+    },
+    {
+      "from": "t7",
+      "to": "g"
+    },
+    {
+      "from": "t7",
+      "to": "e"
+    },
+    {
+      "from": "b",
+      "to": "t8"
+    },
+    {
+      "from": "f",
+      "to": "t8"
+    },
+    {
+      "from": "h",
+      "to": "t8"
+    },
+    {
+      "from": "t8",
+      "to": "l"
+    },
+    {
+      "from": "l",
+      "to": "t9"
+    },
+    {
+      "from": "t9",
+      "to": "c"
+    },
+    {
+      "from": "t9",
+      "to": "f"
+    },
+    {
+      "from": "t9",
+      "to": "h"
+    },
+    {
+      "from": "c",
+      "to": "t10"
+    }
+  ],
+  "note": "Places use the printed letters a-l; transitions printed 1-10 are t1-t10. Labels from the condition and event lists on pp. 33-34; arcs match the printed pre/postcondition table."
+}

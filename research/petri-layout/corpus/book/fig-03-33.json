@@ -1,0 +1,93 @@
+{
+  "name": "readers-writers",
+  "source": "Peterson fig 3.33",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 4
+    },
+    {
+      "id": "p2",
+      "label": "Reading"
+    },
+    {
+      "id": "p3",
+      "tokens": 3
+    },
+    {
+      "id": "p4",
+      "tokens": 2
+    },
+    {
+      "id": "p5",
+      "label": "Writing"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "p3",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p1"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p4",
+      "to": "t3"
+    },
+    {
+      "from": "p3",
+      "to": "t3",
+      "weight": 3
+    },
+    {
+      "from": "t3",
+      "to": "p5"
+    },
+    {
+      "from": "p5",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p4"
+    },
+    {
+      "from": "t4",
+      "to": "p3",
+      "weight": 3
+    }
+  ],
+  "note": "Tokens are symbolic in the figure: p1 holds s (readers), p4 holds t (writers), p3 holds n (reader bound); stand-ins s=4, t=2, n=3. The two hollow bundle arcs labeled n (p3 to t3, t4 to p3) get weight 3 to match n=3. Ids invented; the left column is captioned Readers and the right Writers."
+}

@@ -1,0 +1,139 @@
+{
+  "name": "resource-allocation",
+  "source": "Peterson fig 4.6",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 1
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4",
+      "label": "resource q",
+      "tokens": 1
+    },
+    {
+      "id": "p5",
+      "label": "resource r",
+      "tokens": 1
+    },
+    {
+      "id": "p6",
+      "tokens": 1
+    },
+    {
+      "id": "p7"
+    },
+    {
+      "id": "p8"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    },
+    {
+      "id": "t5"
+    },
+    {
+      "id": "t6"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "p4",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "p5",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p3",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p1"
+    },
+    {
+      "from": "t3",
+      "to": "p4"
+    },
+    {
+      "from": "t3",
+      "to": "p5"
+    },
+    {
+      "from": "p6",
+      "to": "t4"
+    },
+    {
+      "from": "p5",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p7"
+    },
+    {
+      "from": "p7",
+      "to": "t5"
+    },
+    {
+      "from": "p4",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "p8"
+    },
+    {
+      "from": "p8",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "p6"
+    },
+    {
+      "from": "t6",
+      "to": "p4"
+    },
+    {
+      "from": "t6",
+      "to": "p5"
+    }
+  ],
+  "note": "Process a is p1-p3 with t1-t3; process b is p6-p8 with t4-t6 (column headings printed). Resource labels from the caption. a takes q then r; b takes r then q, so the net can deadlock."
+}

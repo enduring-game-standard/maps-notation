@@ -1,0 +1,81 @@
+{
+  "name": "oxalic-acid-redox",
+  "source": "Peterson fig 3.38",
+  "places": [
+    {
+      "id": "H2C2O4",
+      "label": "H2C2O4",
+      "tokens": 2
+    },
+    {
+      "id": "CO2",
+      "label": "CO2"
+    },
+    {
+      "id": "H+",
+      "label": "H+"
+    },
+    {
+      "id": "e-",
+      "label": "e-"
+    },
+    {
+      "id": "H2O2",
+      "label": "H2O2",
+      "tokens": 3
+    },
+    {
+      "id": "H2O",
+      "label": "H2O"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "H2C2O4",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "CO2",
+      "weight": 2
+    },
+    {
+      "from": "t1",
+      "to": "H+",
+      "weight": 2
+    },
+    {
+      "from": "t1",
+      "to": "e-",
+      "weight": 2
+    },
+    {
+      "from": "H+",
+      "to": "t2",
+      "weight": 2
+    },
+    {
+      "from": "e-",
+      "to": "t2",
+      "weight": 2
+    },
+    {
+      "from": "H2O2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "H2O",
+      "weight": 2
+    }
+  ],
+  "note": "Transitions unlabeled: t1 is H2C2O4 -> 2CO2 + 2H+ + 2e-, t2 is 2e- + 2H+ + H2O2 -> 2H2O (equations from p. 74). Double-line arcs are weight 2."
+}

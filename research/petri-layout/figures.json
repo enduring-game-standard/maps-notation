@@ -544,14 +544,15 @@
   "page": "p-063",
   "caption": "Figure 3.16 The composite Petri net machine which is a serial composition of the Petri",
   "box": [
-   173,
-   149,
-   938,
-   1125
+   160,
+   140,
+   960,
+   1340
   ],
   "height": 976,
   "kind": "net",
-  "rotated": true
+  "rotated": true,
+  "note": "clip cut by hand: the clipper missed the left half of this sideways figure"
  },
  {
   "file": "fig-03-17.png",
@@ -565,8 +566,7 @@
    1383
   ],
   "height": 1320,
-  "kind": "net",
-  "rotated": true
+  "kind": "net"
  },
  {
   "file": "fig-03-18.png",

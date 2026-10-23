@@ -1,0 +1,76 @@
+{
+  "name": "vector-addition-system",
+  "source": "Peterson fig 8.19",
+  "places": [
+    {
+      "id": "p1"
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2",
+      "weight": 2
+    },
+    {
+      "from": "p1",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p4"
+    },
+    {
+      "from": "p3",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p2"
+    },
+    {
+      "from": "t3",
+      "to": "p4"
+    },
+    {
+      "from": "p2",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p3"
+    },
+    {
+      "from": "t4",
+      "to": "p4"
+    }
+  ],
+  "note": "t1 to p2 is two parallel arcs (weight 2). Arcs checked against the printed vectors b1=(-1,2,0,0), b2=(-1,0,0,1), b3=(0,1,-1,1), b4=(0,-1,1,1). Unmarked."
+}

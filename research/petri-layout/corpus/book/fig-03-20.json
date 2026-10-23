@@ -1,0 +1,99 @@
+{
+  "name": "multi-unit-control",
+  "source": "Peterson fig 3.20",
+  "places": [
+    {
+      "id": "p1",
+      "label": "Instruction uses unit u and registers i, j, and k"
+    },
+    {
+      "id": "p2",
+      "label": "Unit u is free",
+      "tokens": 1
+    },
+    {
+      "id": "p3",
+      "label": "Register i is free",
+      "tokens": 1
+    },
+    {
+      "id": "p4",
+      "label": "Register j is free",
+      "tokens": 1
+    },
+    {
+      "id": "p5",
+      "label": "Register k is free",
+      "tokens": 1
+    },
+    {
+      "id": "p6",
+      "label": "Ready to decode next instruction"
+    },
+    {
+      "id": "p7",
+      "label": "Unit u operating with registers i, j, k"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "Issue instruction"
+    },
+    {
+      "id": "t2",
+      "label": "Instruction completed"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "p2",
+      "to": "t1"
+    },
+    {
+      "from": "p3",
+      "to": "t1"
+    },
+    {
+      "from": "p4",
+      "to": "t1"
+    },
+    {
+      "from": "p5",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p6"
+    },
+    {
+      "from": "t1",
+      "to": "p7"
+    },
+    {
+      "from": "p7",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p2"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "t2",
+      "to": "p4"
+    },
+    {
+      "from": "t2",
+      "to": "p5"
+    }
+  ],
+  "note": "Ids invented, left column top to bottom then right; labels are the printed text."
+}

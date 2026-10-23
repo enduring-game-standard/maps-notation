@@ -1,0 +1,85 @@
+{
+  "name": "producer-consumer",
+  "source": "Peterson fig 3.29",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 1
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "B",
+      "label": "B"
+    },
+    {
+      "id": "p3",
+      "tokens": 1
+    },
+    {
+      "id": "p4"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "Produce"
+    },
+    {
+      "id": "t2",
+      "label": "Put in buffer"
+    },
+    {
+      "id": "t3",
+      "label": "Remove from buffer"
+    },
+    {
+      "id": "t4",
+      "label": "Consume"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p1"
+    },
+    {
+      "from": "t2",
+      "to": "B"
+    },
+    {
+      "from": "p3",
+      "to": "t3"
+    },
+    {
+      "from": "B",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p4"
+    },
+    {
+      "from": "p4",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p3"
+    }
+  ],
+  "note": "Producer places p1, p2 and consumer places p3, p4 are unlabeled; ids invented top to bottom. B is the buffer. Rounded boxes group Producer (p1, t1, p2, t2) and Consumer (p3, t3, p4, t4)."
+}

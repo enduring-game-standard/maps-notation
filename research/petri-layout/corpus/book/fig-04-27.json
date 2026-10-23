@@ -1,0 +1,100 @@
+{
+  "name": "matrix-analysis-2",
+  "source": "Peterson fig 4.27",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 1
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    },
+    {
+      "id": "p5"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    },
+    {
+      "id": "t5"
+    },
+    {
+      "id": "t6"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2",
+      "weight": 2
+    },
+    {
+      "from": "t1",
+      "to": "p3"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p2"
+    },
+    {
+      "from": "t3",
+      "to": "p3"
+    },
+    {
+      "from": "p2",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p4"
+    },
+    {
+      "from": "p5",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "p2",
+      "weight": 2
+    },
+    {
+      "from": "p3",
+      "to": "t6"
+    },
+    {
+      "from": "p4",
+      "to": "t6",
+      "weight": 2
+    },
+    {
+      "from": "t6",
+      "to": "p5"
+    }
+  ],
+  "note": "Double arcs are weight 2 (t1 to p2, t5 to p2, p4 to t6); checked against the firing-vector solution on p. 111. t2 is a self-loop on p2; t3 is a source transition."
+}

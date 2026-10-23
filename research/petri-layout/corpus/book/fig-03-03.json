@@ -1,0 +1,76 @@
+{
+  "name": "simple-computer-system",
+  "source": "Peterson fig 3.3",
+  "places": [
+    {
+      "id": "p1",
+      "label": "A job is waiting"
+    },
+    {
+      "id": "p2",
+      "label": "The processor is idle",
+      "tokens": 1
+    },
+    {
+      "id": "p3",
+      "label": "A job is being processed"
+    },
+    {
+      "id": "p4",
+      "label": "A job is waiting to be output"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "A job is put in input queue"
+    },
+    {
+      "id": "t2",
+      "label": "A job is started"
+    },
+    {
+      "id": "t3",
+      "label": "A job is completed"
+    },
+    {
+      "id": "t4",
+      "label": "A job is output"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "t1",
+      "to": "p1"
+    },
+    {
+      "from": "p1",
+      "to": "t2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p3",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p4"
+    },
+    {
+      "from": "t3",
+      "to": "p2"
+    },
+    {
+      "from": "p4",
+      "to": "t4"
+    }
+  ],
+  "note": "Ids invented top to bottom; labels are the text printed beside each node. t1 is a source and t4 a sink."
+}

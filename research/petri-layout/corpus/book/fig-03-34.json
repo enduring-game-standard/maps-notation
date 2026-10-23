@@ -1,0 +1,56 @@
+{
+  "name": "semaphore-p-v",
+  "source": "Peterson fig 3.34",
+  "places": [
+    {
+      "id": "p1"
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "S",
+      "label": "S"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "P(S)"
+    },
+    {
+      "id": "t2",
+      "label": "V(S)"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "S",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "t2",
+      "to": "S"
+    }
+  ],
+  "note": "Process places p1-p3 are unlabeled; ids invented top to bottom. Unmarked."
+}

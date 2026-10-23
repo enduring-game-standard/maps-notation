@@ -1,0 +1,98 @@
+{
+  "name": "inhibitor-arc",
+  "source": "Peterson fig 7.5",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 1
+    },
+    {
+      "id": "p2",
+      "tokens": 1
+    },
+    {
+      "id": "p3",
+      "tokens": 1
+    },
+    {
+      "id": "p4",
+      "tokens": 1
+    },
+    {
+      "id": "b1"
+    },
+    {
+      "id": "b2"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "d1"
+    },
+    {
+      "id": "c1"
+    },
+    {
+      "id": "d2"
+    },
+    {
+      "id": "c2"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "d1"
+    },
+    {
+      "from": "d1",
+      "to": "p1"
+    },
+    {
+      "from": "d1",
+      "to": "b1"
+    },
+    {
+      "from": "b1",
+      "to": "c1"
+    },
+    {
+      "from": "p2",
+      "to": "c1"
+    },
+    {
+      "from": "c1",
+      "to": "p2"
+    },
+    {
+      "from": "p3",
+      "to": "d2"
+    },
+    {
+      "from": "d2",
+      "to": "p3"
+    },
+    {
+      "from": "d2",
+      "to": "b2"
+    },
+    {
+      "from": "b2",
+      "to": "c2"
+    },
+    {
+      "from": "p4",
+      "to": "c2"
+    },
+    {
+      "from": "c2",
+      "to": "p4"
+    },
+    {
+      "from": "b1",
+      "to": "c2",
+      "inhibitor": true
+    }
+  ],
+  "note": "b1 to c2 is an inhibitor arc (small circle at c2). Each of p1-p4 forms a self-loop with its transition (p1-d1, p2-c1, p3-d2, p4-c2). Ids as printed."
+}

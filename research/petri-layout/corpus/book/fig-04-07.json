@@ -1,0 +1,80 @@
+{
+  "name": "liveness-levels",
+  "source": "Peterson fig 4.7",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 1
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t0"
+    },
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p1",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p1"
+    },
+    {
+      "from": "t3",
+      "to": "p3"
+    },
+    {
+      "from": "p3",
+      "to": "t2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p2"
+    },
+    {
+      "from": "p1",
+      "to": "t0"
+    },
+    {
+      "from": "p2",
+      "to": "t0"
+    },
+    {
+      "from": "t0",
+      "to": "p4"
+    }
+  ],
+  "note": "Places unlabeled; ids invented (p1 left, p2 right, p3 top, p4 bottom). Transitions as printed, t0-t3. t3 has a self-loop with p1 and t2 a self-loop with p2."
+}
