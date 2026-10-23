@@ -41,14 +41,21 @@ export function checkAll(net: Net, lay: Layout, layout: (n: Net) => Layout): Che
     }
   }
 
-  // labels clear of nodes
-  for (const id of ids) {
-    const L = lay.nodes[id].label
-    if (!L) continue
+  // labels clear of nodes, of other labels, and of arcs: a label's text box as the renderer draws it
+  const boxes = ids.filter((id) => lay.nodes[id].label).map((id) => ({ id, ...labelBox(net, id, lay.nodes[id].label!) }))
+  const inBox = (p: Pt, b: Box) => p.x > b.x0 && p.x < b.x1 && p.y > b.y0 && p.y < b.y1
+  for (const b of boxes) {
     for (const other of ids) {
-      if (other === id) continue
+      if (other === b.id) continue
       const n = lay.nodes[other]
-      if (n.kind === 'place' && Math.abs(L.y - n.y) < PLACE_R && labelSpanHits(L, labelWidth(net, id), n.x, PLACE_R)) { failures.push(`label of ${id} covers ${other}`); break }
+      const hit = n.kind === 'place'
+        ? Math.hypot(Math.max(b.x0 - n.x, 0, n.x - b.x1), Math.max(b.y0 - n.y, 0, n.y - b.y1)) < PLACE_R
+        : sampleSeg(n).some((p) => inBox(p, b))
+      if (hit) { failures.push(`label of ${b.id} covers ${other}`); break }
+    }
+    for (const o of boxes) if (o.id > b.id && o.x0 < b.x1 && b.x0 < o.x1 && o.y0 < b.y1 && b.y0 < o.y1) failures.push(`labels of ${b.id} and ${o.id} overlap`)
+    for (const r of lay.arcs) {
+      if (sampleBezier(r.path, 40).filter((p) => inBox(p, b)).length >= 3) { failures.push(`arc ${r.from}>${r.to} runs through the label of ${b.id}`); break }
     }
   }
 
@@ -96,20 +103,23 @@ function offNode(p: Pt, n: Layout['nodes'][string]) {
   return n.kind === 'place' ? Math.abs(dist(p, n) - PLACE_R) : segDist(p, n.x, n.y, n.angle, n.length)
 }
 
-// the renderer wraps labels at 16 characters, 13 px italic serif: about 6.2 px a character
-function labelWidth(net: Net, id: string) {
+type Box = { x0: number; x1: number; y0: number; y1: number }
+// the renderer wraps labels at 16 characters, 13 px italic serif, 14 px lines centered on the spot; lowercase runs
+// at most about 6.2 px a character. The box is shrunk a pixel all round so a touch is not a hit.
+function labelBox(net: Net, id: string, L: { x: number; y: number; anchor: string }): Box {
   const node = net.places.find((p) => p.id === id) ?? net.transitions.find((t) => t.id === id)!
-  const text = node.label ?? id
   const lines: string[] = []
   let cur = ''
-  for (const w of text.split(' ')) { if (cur && (cur + ' ' + w).length > 16) { lines.push(cur); cur = w } else cur = cur ? cur + ' ' + w : w }
+  for (const w of (node.label ?? id).split(' ')) { if (cur && (cur + ' ' + w).length > 16) { lines.push(cur); cur = w } else cur = cur ? cur + ' ' + w : w }
   if (cur) lines.push(cur)
-  return Math.max(...lines.map((l) => l.length)) * 6.2
+  const w = Math.max(...lines.map((l) => l.length)) * 6.2
+  const x0 = L.anchor === 'start' ? L.x : L.anchor === 'end' ? L.x - w : L.x - w / 2
+  const half = (lines.length - 1) * 7
+  return { x0: x0 + 1, x1: x0 + w - 1, y0: L.y - half - 5, y1: L.y + half + 6 }
 }
 
-function labelSpanHits(L: { x: number; anchor: string }, w: number, cx: number, r: number) {
-  const x0 = L.anchor === 'start' ? L.x : L.anchor === 'end' ? L.x - w : L.x - w / 2
-  return cx + r > x0 && cx - r < x0 + w
+function sampleSeg(n: Layout['nodes'][string] & { kind: 'transition' }): Pt[] {
+  return Array.from({ length: 9 }, (_, i) => { const t = (i / 8 - 0.5) * n.length; return { x: n.x + Math.cos(n.angle) * t, y: n.y + Math.sin(n.angle) * t } })
 }
 
 export function shuffleAndRename(net: Net, seed: number): Net {

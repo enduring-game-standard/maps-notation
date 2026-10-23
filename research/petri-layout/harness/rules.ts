@@ -94,6 +94,13 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
         : lanes.length >= 2 ? strictly(at(p.id).x, at(lanes[i].ord.anchor).x, at(lanes[j].ord.anchor).x, TOL) : si !== 0 && sj !== 0
       if (!between) failures.push(`R4 shared place ${p.id} is not between its lanes`)
     }
+    if (ring) {
+      // R5: on a wheel, a shared place sits just inside the bars that take it, outside the anchors
+      const r = frames[0].flow(at(p.id))
+      const takers = net.arcs.filter((a) => a.from === p.id).map((a) => frames[0].flow(at(a.to)))
+      if (!(r < Math.min(...takers) && r > Math.max(...lanes.map((l) => frames[0].flow(at(l.ord.anchor)))))) failures.push(`R5 shared place ${p.id} is not just inside its takers`)
+      continue
+    }
     const F = frames[role.spines[0]]
     const ts = net.arcs.filter((a) => a.from === p.id || a.to === p.id).map((a) => (a.from === p.id ? a.to : a.from))
     const fs = ts.map((t) => F.flow(at(t)))
@@ -118,8 +125,10 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     }
   })
 
-  // R13: self-loop partners sit tight
+  // R13: self-loop partners sit tight, unless the loop couples two lanes (a lane's state read by another lane's step)
   for (const { place, transition } of s.selfLoops) {
+    const role = s.placeRole.get(place)!
+    if (role.kind === 'spine' && (s.spineOfTransition.get(transition) ?? []).some((k) => k !== role.spine)) continue
     const d = Math.hypot(at(place).x - at(transition).x, at(place).y - at(transition).y)
     if (d > 110) failures.push(`R13 self-loop ${place}/${transition} is ${Math.round(d)} apart`)
   }

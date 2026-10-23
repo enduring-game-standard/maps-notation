@@ -13,7 +13,8 @@ function spacing(g: Graph, frame: 'down' | 'right') {
   const ext = [...g.net.places, ...g.net.transitions].map((n) => labelExtent(g, n.id))
   const w = Math.max(...ext.map((e) => e.w)), h = Math.max(...ext.map((e) => e.h))
   const grow = Math.max(0, h - 14)
-  return { row: Math.max(BASE.row, Math.ceil(w) + 10), half: BASE.half + grow, exc: BASE.exc + grow, mingap: BASE.mingap + grow, satGap: BASE.satGap + grow, track: BASE.track + grow }
+  // two bars side by side across the flow leave room for a label line between them
+  return { row: Math.max(BASE.row, Math.ceil(w) + 10), half: BASE.half + grow, exc: BASE.exc + grow, mingap: BASE.mingap + 20 + grow, satGap: BASE.satGap + 16 + grow, track: BASE.track + 16 + grow }
 }
 const NODE_HALF = 20
 const CORE_SHARED = 150 // a gap that holds shared places (R4)
@@ -105,8 +106,10 @@ export function lanePlan(g: Graph): Plan {
   byPos.forEach((L, k) => {
     if (k > 0) {
       const prev = byPos[k - 1]
-      const hasShared = shared.some((p) => { const ls = touchingLanes(g, p, lanesOf); return ls.includes(prev.i) && ls.includes(L.i) })
-      c += ext(prev, 1) + (hasShared ? CORE_SHARED : CORE_EMPTY) + ext(L, -1)
+      const between = shared.filter((p) => { const ls = touchingLanes(g, p, lanesOf); return ls.includes(prev.i) && ls.includes(L.i) })
+      // a gap that holds shared places is wide enough for a label beside each of them
+      const core = between.length ? Math.max(CORE_SHARED, ...between.map((p) => 2 * (NODE_HALF + 13 + labelExtent(g, p).w))) : CORE_EMPTY
+      c += ext(prev, 1) + core + ext(L, -1)
     }
     L.col = c
   })

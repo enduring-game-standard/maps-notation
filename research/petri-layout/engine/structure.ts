@@ -66,7 +66,7 @@ export function analyze(net: Net): Structure {
     candidates.push({ places, transitions: ts, open, marked: places.reduce((n, p) => n + (tokens.get(p) ?? 0), 0) })
   }
 
-  const spines = splitCommonStarts(demoteCouplers(chooseCover(candidates, canon, new Set(net.places.filter((p) => p.tokens > 0 && !filled(p.id)).map((p) => p.id))), canon), net, pre, post)
+  const spines = splitCommonStarts(demoteCouplers(chooseCover(candidates, canon, new Set(net.places.filter((p) => p.tokens > 0 && !filled(p.id)).map((p) => p.id))), canon, pre, post), net, pre, post)
   const spineOfTransition = new Map<NodeId, number[]>()
   spines.forEach((s, i) => s.transitions.forEach((t) => spineOfTransition.set(t, [...(spineOfTransition.get(t) ?? []), i])))
 
@@ -169,11 +169,13 @@ function splitCommonStarts(spines: Spine[], net: Net, pre: Map<NodeId, Map<NodeI
 
 // A cycle whose every transition already lies on another spine owns no step of its own: it couples
 // spines (a buffer's full/empty pair, a pool) and is drawn as shared places, not as a spine.
-function demoteCouplers(spines: Spine[], canon: Map<NodeId, string>): Spine[] {
+// (a bar that only reads another lane's place, taking it and putting it back, does not lie on that lane)
+function demoteCouplers(spines: Spine[], canon: Map<NodeId, string>, pre: Map<NodeId, Map<NodeId, number>>, post: Map<NodeId, Map<NodeId, number>>): Spine[] {
   const key = (s: Spine) => s.places.map((p) => canon.get(p)!).sort().join('|')
+  const moves = (o: Spine, t: NodeId) => o.places.some((p) => pre.get(t)!.has(p) !== post.get(t)!.has(p))
   let out = spines.slice()
   for (;;) {
-    const owns = (s: Spine) => s.transitions.some((t) => !out.some((o) => o !== s && o.transitions.includes(t)))
+    const owns = (s: Spine) => s.transitions.some((t) => !out.some((o) => o !== s && o.transitions.includes(t) && moves(o, t)))
     const idle = out.filter((s) => !owns(s))
     if (idle.length === 0 || out.length === 1) return out
     idle.sort((a, b) => b.marked - a.marked || a.places.length - b.places.length || cmp(key(a), key(b)))
@@ -257,7 +259,8 @@ export function laneOrders(net: Net, s: Structure): LaneOrder[] {
   s.spines.forEach((sp, i) => {
     for (const t of sp.transitions) {
       for (const p of s.pre.get(t)!.keys()) if (P[i].has(p)) succ.set(p, [...(succ.get(p) ?? []), t])
-      for (const p of s.post.get(t)!.keys()) if (P[i].has(p)) succ.set(t, [...(succ.get(t) ?? []), p])
+      // a bar that puts back the place it took has only read it; the give-back is not a step forward
+      for (const p of s.post.get(t)!.keys()) if (P[i].has(p) && !s.pre.get(t)!.has(p)) succ.set(t, [...(succ.get(t) ?? []), p])
     }
   })
   const next = (n: NodeId) => [...new Set(succ.get(n) ?? [])].sort(byKey)

@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { parseNet } from '../engine/net.ts'
 import { analyze } from '../engine/structure.ts'
-for (const dir of ['corpus/book', 'corpus/heldout']) for (const f of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
+for (const dir of ['corpus/book', 'corpus/heldout', 'corpus/blind']) for (const f of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
   const net = parseNet(JSON.parse(readFileSync(`${dir}/${f}`, 'utf8')))
   const t0 = Date.now()
   const s = analyze(net)

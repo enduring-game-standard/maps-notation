@@ -26,6 +26,7 @@ export type Plan = {
   barSpan: Map<NodeId, number> // minimum bar length for forks and joins that span lanes
   hints: Map<string, Hint> // keyed by `${from}>${to}`
   labelSide: Map<NodeId, Side> // preferred side across the flow for each node's label
+  labelDir?: Map<NodeId, { x: number; y: number }> // a preferred direction on the page, where the flow is not one direction (spokes)
 }
 
 export type Graph = {

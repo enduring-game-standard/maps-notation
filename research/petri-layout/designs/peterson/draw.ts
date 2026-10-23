@@ -226,11 +226,13 @@ function spreadOnBars(nodes: Layout['nodes'], arcs: ArcRoute[]) {
 
 // R21: a label goes where no arc leaves its node, on its preferred side first.
 function placeLabels(g: Graph, plan: Plan, nodes: Layout['nodes'], arcs: ArcRoute[], F: V, C: V) {
-  const samples = arcs.map((a) => sampleBezier(a.path, 20))
-  const boxes: { x0: number; x1: number; y0: number; y1: number }[] = []
+  const samples = arcs.map((a) => sampleBezier(a.path, 40))
+  const placed = new Map<NodeId, { x0: number; x1: number; y0: number; y1: number }>()
   const ids = Object.keys(nodes).sort(g.byKey)
-  for (const id of ids) {
+  // twice: the second pass moves a label knowing where every other label went
+  for (const id of [...ids, ...ids]) {
     const n = nodes[id]
+    const boxes = [...placed].filter(([o]) => o !== id).map(([, b]) => b)
     const { w, h } = labelExtent(g, id)
     const side = plan.labelSide.get(id) ?? 1
     const cands: LabelSpot[] = []
@@ -242,7 +244,9 @@ function placeLabels(g: Graph, plan: Plan, nodes: Layout['nodes'], arcs: ArcRout
     const vert = (v: V, k: number): LabelSpot => { const p = off(v, k); return { x: p.x, y: p.y + (dot(v, { x: 0, y: 1 }) > 0 ? h / 2 + 2 : -h / 2 + 2), anchor: 'middle' } }
     const ext = n.kind === 'place' ? PLACE_R + 5 : n.length / 2 + 5
     const thin = n.kind === 'place' ? PLACE_R + 5 : 7
-    const across = mul(C, side), back = mul(C, -side)
+    const dir = plan.labelDir?.get(id)
+    const across = dir ?? mul(C, side), back = mul(across, -1)
+    const Fl = dir ? { x: across.y, y: -across.x } : F
     const isX = (v: V) => Math.abs(v.x) > 0.5
     const pushDir = (v: V, k: number) => cands.push(isX(v) ? horiz(v, k, v.x) : vert(v, k))
     if (n.kind === 'transition') {
@@ -254,40 +258,42 @@ function placeLabels(g: Graph, plan: Plan, nodes: Layout['nodes'], arcs: ArcRout
       for (const e of ends) for (const s of [1, -1]) { const p = add(off(e, ext - 8), mul(nrm, s * 14)); cands.push(isX(e) ? { x: p.x, y: p.y, anchor: e.x > 0 ? 'start' : 'end' } : { x: p.x, y: p.y + (e.y > 0 ? h / 2 + 2 : -h / 2 + 2), anchor: 'middle' }) }
     } else {
       pushDir(across, ext); pushDir(back, ext)
-      pushDir(F, ext); pushDir(mul(F, -1), ext)
-      for (const d of [add(across, mul(F, -1)), add(across, F), add(back, mul(F, -1)), add(back, F)]) {
+      pushDir(Fl, ext); pushDir(mul(Fl, -1), ext)
+      for (const d of [add(across, mul(Fl, -1)), add(across, Fl), add(back, mul(Fl, -1)), add(back, Fl)]) {
         const v = unit(d), p = off(v, PLACE_R + 4)
         cands.push({ x: p.x, y: p.y + (v.y > 0 ? h / 2 : -h / 2 + 4), anchor: v.x > 0 ? 'start' : 'end' })
       }
     }
-    // the text's own box, and the 60px span the harness reads a label as
     const boxOf = (L: LabelSpot) => {
-      const left = (width: number) => (L.anchor === 'start' ? L.x : L.anchor === 'end' ? L.x - width : L.x - width / 2)
-      const x0 = left(w), wx0 = left(Math.max(w, 60))
+      const x0 = L.anchor === 'start' ? L.x : L.anchor === 'end' ? L.x - w : L.x - w / 2
       const y0 = L.y - h / 2 - 2
-      return { x0, x1: x0 + w, y0, y1: y0 + h + 2, wx0, wx1: wx0 + Math.max(w, 60) }
+      return { x0, x1: x0 + w, y0, y1: y0 + h + 2 }
     }
     const conflicts = (L: LabelSpot) => {
       const b = boxOf(L)
+      const hits = (p: V, m: number) => p.x > b.x0 - m && p.x < b.x1 + m && p.y > b.y0 - m && p.y < b.y1 + m
       let k = 0
-      for (const [oid, o] of Object.entries(nodes)) {
+      for (const o of Object.values(nodes)) {
         if (o.kind === 'place') {
-          if (o.x + PLACE_R > b.x0 - 2 && o.x - PLACE_R < b.x1 + 2 && o.y + PLACE_R > b.y0 - 2 && o.y - PLACE_R < b.y1 + 2) k += 10
-          // the harness reads a label as 60px wide
-          if (oid !== id && Math.abs(L.y - o.y) < PLACE_R && o.x + PLACE_R > b.wx0 && o.x - PLACE_R < b.wx1) k += 100
+          if (Math.hypot(Math.max(b.x0 - o.x, 0, o.x - b.x1), Math.max(b.y0 - o.y, 0, o.y - b.y1)) < PLACE_R + 2) k += 10
         } else {
-          const dx = Math.abs(Math.cos(o.angle)) * o.length / 2, dy = Math.abs(Math.sin(o.angle)) * o.length / 2
-          if (o.x + dx > b.x0 - 2 && o.x - dx < b.x1 + 2 && o.y + dy > b.y0 - 2 && o.y - dy < b.y1 + 2) k += 10
+          const u = { x: Math.cos(o.angle), y: Math.sin(o.angle) }
+          if (Array.from({ length: 9 }, (_, i) => add(o, mul(u, (i / 8 - 0.5) * o.length))).some((p) => hits(p, 2))) k += 10
         }
       }
-      for (const pts of samples) if (pts.some((p) => p.x > b.x0 - 1 && p.x < b.x1 + 1 && p.y > b.y0 - 1 && p.y < b.y1 + 1)) k += 3
+      for (const pts of samples) { const inside = pts.filter((p) => p.x > b.x0 - 1 && p.x < b.x1 + 1 && p.y > b.y0 - 1 && p.y < b.y1 + 1).length; if (inside) k += inside >= 2 ? 30 : 3 }
       for (const o of boxes) if (o.x0 < b.x1 + 3 && b.x0 < o.x1 + 3 && o.y0 < b.y1 && b.y0 < o.y1) k += 40
       return k
+    }
+    // the preferred spots first; when every one is crossed, the same directions a little farther out
+    const near = cands.length
+    for (const step of [10, 22]) for (const c of cands.slice(0, near)) {
+      const v = unit(sub(c, n))
+      cands.push({ ...c, x: c.x + v.x * step, y: c.y + v.y * step })
     }
     let best = cands[0], bestK = Infinity
     for (const c of cands) { const k = conflicts(c); if (k < bestK) { best = c; bestK = k } if (k === 0) break }
     n.label = best
-    const b = boxOf(best)
-    boxes.push(b)
+    placed.set(id, boxOf(best))
   }
 }

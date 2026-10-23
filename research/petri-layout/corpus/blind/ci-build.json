@@ -1,0 +1,185 @@
+{
+  "name": "ci-build",
+  "source": "blind",
+  "note": "A CI pipeline forks four parallel tasks (compile, lint, docs, tests) and joins them into a green build. Tests can fail and retry, bounded by a retry budget.",
+  "places": [
+    {
+      "id": "push",
+      "label": "commit pushed",
+      "tokens": 1
+    },
+    {
+      "id": "cp",
+      "label": "compile pending"
+    },
+    {
+      "id": "lp",
+      "label": "lint pending"
+    },
+    {
+      "id": "dp",
+      "label": "docs pending"
+    },
+    {
+      "id": "tp",
+      "label": "tests pending"
+    },
+    {
+      "id": "cd",
+      "label": "compiled"
+    },
+    {
+      "id": "ld",
+      "label": "lint clean"
+    },
+    {
+      "id": "dd",
+      "label": "docs built"
+    },
+    {
+      "id": "td",
+      "label": "tests passed"
+    },
+    {
+      "id": "tf",
+      "label": "tests failed"
+    },
+    {
+      "id": "rb",
+      "label": "retries left",
+      "tokens": 2
+    },
+    {
+      "id": "green",
+      "label": "build green"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "fork",
+      "label": "Start pipeline"
+    },
+    {
+      "id": "comp",
+      "label": "Compile"
+    },
+    {
+      "id": "lint",
+      "label": "Lint"
+    },
+    {
+      "id": "docs",
+      "label": "Build docs"
+    },
+    {
+      "id": "tpass",
+      "label": "Tests pass"
+    },
+    {
+      "id": "tfail",
+      "label": "Tests fail"
+    },
+    {
+      "id": "retry",
+      "label": "Retry tests"
+    },
+    {
+      "id": "join",
+      "label": "Publish artifact"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "push",
+      "to": "fork"
+    },
+    {
+      "from": "fork",
+      "to": "cp"
+    },
+    {
+      "from": "fork",
+      "to": "lp"
+    },
+    {
+      "from": "fork",
+      "to": "dp"
+    },
+    {
+      "from": "fork",
+      "to": "tp"
+    },
+    {
+      "from": "cp",
+      "to": "comp"
+    },
+    {
+      "from": "comp",
+      "to": "cd"
+    },
+    {
+      "from": "lp",
+      "to": "lint"
+    },
+    {
+      "from": "lint",
+      "to": "ld"
+    },
+    {
+      "from": "dp",
+      "to": "docs"
+    },
+    {
+      "from": "docs",
+      "to": "dd"
+    },
+    {
+      "from": "tp",
+      "to": "tpass"
+    },
+    {
+      "from": "tpass",
+      "to": "td"
+    },
+    {
+      "from": "tp",
+      "to": "tfail"
+    },
+    {
+      "from": "tfail",
+      "to": "tf"
+    },
+    {
+      "from": "tf",
+      "to": "retry"
+    },
+    {
+      "from": "rb",
+      "to": "retry"
+    },
+    {
+      "from": "retry",
+      "to": "tp"
+    },
+    {
+      "from": "cd",
+      "to": "join"
+    },
+    {
+      "from": "ld",
+      "to": "join"
+    },
+    {
+      "from": "dd",
+      "to": "join"
+    },
+    {
+      "from": "td",
+      "to": "join"
+    },
+    {
+      "from": "join",
+      "to": "green"
+    }
+  ]
+}

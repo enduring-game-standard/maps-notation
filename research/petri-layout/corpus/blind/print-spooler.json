@@ -1,0 +1,121 @@
+{
+  "name": "print-spooler",
+  "source": "blind",
+  "note": "Three applications submit print jobs to a spool queue served by one printer. Jobs can be canceled while queued, and the printer can jam mid-job.",
+  "places": [
+    {
+      "id": "app",
+      "label": "jobs not yet submitted",
+      "tokens": 3
+    },
+    {
+      "id": "q",
+      "label": "spool queue"
+    },
+    {
+      "id": "idle",
+      "label": "printer idle",
+      "tokens": 1
+    },
+    {
+      "id": "pr",
+      "label": "printing"
+    },
+    {
+      "id": "jam",
+      "label": "paper jam"
+    },
+    {
+      "id": "done",
+      "label": "printed jobs"
+    },
+    {
+      "id": "cx",
+      "label": "canceled jobs"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "sub",
+      "label": "Submit job"
+    },
+    {
+      "id": "st",
+      "label": "Start printing"
+    },
+    {
+      "id": "fin",
+      "label": "Finish job"
+    },
+    {
+      "id": "jm",
+      "label": "Jam"
+    },
+    {
+      "id": "clr",
+      "label": "Clear jam"
+    },
+    {
+      "id": "can",
+      "label": "Cancel queued job"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "app",
+      "to": "sub"
+    },
+    {
+      "from": "sub",
+      "to": "q"
+    },
+    {
+      "from": "q",
+      "to": "st"
+    },
+    {
+      "from": "idle",
+      "to": "st"
+    },
+    {
+      "from": "st",
+      "to": "pr"
+    },
+    {
+      "from": "pr",
+      "to": "fin"
+    },
+    {
+      "from": "fin",
+      "to": "idle"
+    },
+    {
+      "from": "fin",
+      "to": "done"
+    },
+    {
+      "from": "pr",
+      "to": "jm"
+    },
+    {
+      "from": "jm",
+      "to": "jam"
+    },
+    {
+      "from": "jam",
+      "to": "clr"
+    },
+    {
+      "from": "clr",
+      "to": "pr"
+    },
+    {
+      "from": "q",
+      "to": "can"
+    },
+    {
+      "from": "can",
+      "to": "cx"
+    }
+  ]
+}

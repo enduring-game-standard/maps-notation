@@ -1,0 +1,144 @@
+{
+  "name": "bank-account",
+  "source": "blind",
+  "note": "A bank account where concurrent deposits and withdrawals each take a shared lock. A withdrawal with no funds available is rejected (inhibitor on funds).",
+  "places": [
+    {
+      "id": "dq",
+      "label": "deposit requests",
+      "tokens": 2
+    },
+    {
+      "id": "wq",
+      "label": "withdraw requests",
+      "tokens": 2
+    },
+    {
+      "id": "lk",
+      "label": "account lock free",
+      "tokens": 1
+    },
+    {
+      "id": "dg",
+      "label": "depositing"
+    },
+    {
+      "id": "wg",
+      "label": "withdrawing"
+    },
+    {
+      "id": "bal",
+      "label": "balance units",
+      "tokens": 1
+    },
+    {
+      "id": "dd",
+      "label": "deposit confirmed"
+    },
+    {
+      "id": "wd",
+      "label": "cash dispensed"
+    },
+    {
+      "id": "wr",
+      "label": "withdrawal rejected"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "bd",
+      "label": "Begin deposit"
+    },
+    {
+      "id": "cd",
+      "label": "Commit deposit"
+    },
+    {
+      "id": "bw",
+      "label": "Begin withdraw"
+    },
+    {
+      "id": "cw",
+      "label": "Commit withdraw"
+    },
+    {
+      "id": "rw",
+      "label": "Reject: insufficient funds"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "dq",
+      "to": "bd"
+    },
+    {
+      "from": "lk",
+      "to": "bd"
+    },
+    {
+      "from": "bd",
+      "to": "dg"
+    },
+    {
+      "from": "dg",
+      "to": "cd"
+    },
+    {
+      "from": "cd",
+      "to": "bal"
+    },
+    {
+      "from": "cd",
+      "to": "lk"
+    },
+    {
+      "from": "cd",
+      "to": "dd"
+    },
+    {
+      "from": "wq",
+      "to": "bw"
+    },
+    {
+      "from": "lk",
+      "to": "bw"
+    },
+    {
+      "from": "bw",
+      "to": "wg"
+    },
+    {
+      "from": "wg",
+      "to": "cw"
+    },
+    {
+      "from": "bal",
+      "to": "cw"
+    },
+    {
+      "from": "cw",
+      "to": "lk"
+    },
+    {
+      "from": "cw",
+      "to": "wd"
+    },
+    {
+      "from": "wg",
+      "to": "rw"
+    },
+    {
+      "from": "bal",
+      "to": "rw",
+      "inhibitor": true
+    },
+    {
+      "from": "rw",
+      "to": "lk"
+    },
+    {
+      "from": "rw",
+      "to": "wr"
+    }
+  ]
+}

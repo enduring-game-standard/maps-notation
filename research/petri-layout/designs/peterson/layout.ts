@@ -48,19 +48,22 @@ function spokePlan(g: Graph, ring: number[]): Plan {
   const ords = laneOrders(net, s)
   const n = ring.length
   const r0 = Math.max(110, 100 / Math.sin(Math.PI / n))
+  const step = ROW * 1.25 // a tilted spoke needs room for a level label between its nodes
   const angle = new Map<number, number>()
   ring.forEach((li, k) => angle.set(li, Math.PI / 2 + (2 * Math.PI * k) / n))
   const at = (th: number, r: number): FC => ({ f: r * Math.cos(th), c: r * Math.sin(th) })
   const pos = new Map<NodeId, FC>(), bar: Plan['bar'] = new Map(), hints = new Map<string, Hint>(), labelSide = new Map<NodeId, Side>()
   const spokeOf = new Map<NodeId, number>()
+  const labelDir = new Map<NodeId, { x: number; y: number }>()
   for (const li of ring) {
     const th = angle.get(li)!
     for (const [id, k] of ords[li].stage) {
       if (spokeOf.has(id)) continue
       spokeOf.set(id, li)
-      pos.set(id, at(th, r0 + k * ROW))
+      pos.set(id, at(th, r0 + k * step))
       if (!g.isPlace(id)) bar.set(id, { angle: th + Math.PI / 2 })
       labelSide.set(id, -1)
+      labelDir.set(id, { x: Math.sin(th), y: -Math.cos(th) }) // the rotational side away from the petal
     }
   }
   for (const p of net.places) {
@@ -70,8 +73,9 @@ function spokePlan(g: Graph, ring: number[]): Plan {
     let ta = angle.get(a)!, tb = angle.get(b)!
     if (Math.abs(tb - ta) > Math.PI) tb += tb < ta ? 2 * Math.PI : -2 * Math.PI
     const takes = g.outs.get(p.id)!.map((t) => ords[spokeOf.get(t)!].stage.get(t)!)
-    pos.set(p.id, at((ta + tb) / 2, r0 + (Math.min(...takes) - 0.5) * ROW))
+    pos.set(p.id, at((ta + tb) / 2, r0 + (Math.min(...takes) - 0.5) * step))
     labelSide.set(p.id, 1)
+    labelDir.set(p.id, { x: -Math.cos((ta + tb) / 2), y: -Math.sin((ta + tb) / 2) }) // toward the center, clear of the release arcs
   }
   for (const a of net.arcs) {
     const li = spokeOf.get(a.from), lj = spokeOf.get(a.to)
@@ -80,7 +84,7 @@ function spokePlan(g: Graph, ring: number[]): Plan {
     else if (li !== undefined && li === lj) hints.set(k, { kind: 'lane' })
     else hints.set(k, { kind: 'free', prefer: 1, hook: false })
   }
-  return { frame: 'right', pos, bar, barSpan: new Map(), hints, labelSide }
+  return { frame: 'right', pos, bar, barSpan: new Map(), hints, labelSide, labelDir }
 }
 
 // C12: no lane structure. Layers along the flow from the marked places and sources; feedback arcs bow outside;

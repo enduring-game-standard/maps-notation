@@ -1,0 +1,211 @@
+{
+  "name": "elevator",
+  "source": "blind",
+  "note": "An elevator car moving between three floors. It moves only with the door closed, and opens the door at a floor only to serve a pending call there.",
+  "places": [
+    {
+      "id": "f1",
+      "label": "at floor 1",
+      "tokens": 1
+    },
+    {
+      "id": "f2",
+      "label": "at floor 2"
+    },
+    {
+      "id": "f3",
+      "label": "at floor 3"
+    },
+    {
+      "id": "dc",
+      "label": "door closed",
+      "tokens": 1
+    },
+    {
+      "id": "do",
+      "label": "door open"
+    },
+    {
+      "id": "c1",
+      "label": "call at floor 1"
+    },
+    {
+      "id": "c2",
+      "label": "call at floor 2",
+      "tokens": 1
+    },
+    {
+      "id": "c3",
+      "label": "call at floor 3",
+      "tokens": 1
+    }
+  ],
+  "transitions": [
+    {
+      "id": "u12",
+      "label": "Go up 1 to 2"
+    },
+    {
+      "id": "u23",
+      "label": "Go up 2 to 3"
+    },
+    {
+      "id": "d32",
+      "label": "Go down 3 to 2"
+    },
+    {
+      "id": "d21",
+      "label": "Go down 2 to 1"
+    },
+    {
+      "id": "o1",
+      "label": "Open door at 1"
+    },
+    {
+      "id": "o2",
+      "label": "Open door at 2"
+    },
+    {
+      "id": "o3",
+      "label": "Open door at 3"
+    },
+    {
+      "id": "cl",
+      "label": "Close door"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "f1",
+      "to": "u12"
+    },
+    {
+      "from": "dc",
+      "to": "u12"
+    },
+    {
+      "from": "u12",
+      "to": "f2"
+    },
+    {
+      "from": "u12",
+      "to": "dc"
+    },
+    {
+      "from": "f2",
+      "to": "u23"
+    },
+    {
+      "from": "dc",
+      "to": "u23"
+    },
+    {
+      "from": "u23",
+      "to": "f3"
+    },
+    {
+      "from": "u23",
+      "to": "dc"
+    },
+    {
+      "from": "f3",
+      "to": "d32"
+    },
+    {
+      "from": "dc",
+      "to": "d32"
+    },
+    {
+      "from": "d32",
+      "to": "f2"
+    },
+    {
+      "from": "d32",
+      "to": "dc"
+    },
+    {
+      "from": "f2",
+      "to": "d21"
+    },
+    {
+      "from": "dc",
+      "to": "d21"
+    },
+    {
+      "from": "d21",
+      "to": "f1"
+    },
+    {
+      "from": "d21",
+      "to": "dc"
+    },
+    {
+      "from": "f1",
+      "to": "o1"
+    },
+    {
+      "from": "dc",
+      "to": "o1"
+    },
+    {
+      "from": "c1",
+      "to": "o1"
+    },
+    {
+      "from": "o1",
+      "to": "f1"
+    },
+    {
+      "from": "o1",
+      "to": "do"
+    },
+    {
+      "from": "f2",
+      "to": "o2"
+    },
+    {
+      "from": "dc",
+      "to": "o2"
+    },
+    {
+      "from": "c2",
+      "to": "o2"
+    },
+    {
+      "from": "o2",
+      "to": "f2"
+    },
+    {
+      "from": "o2",
+      "to": "do"
+    },
+    {
+      "from": "f3",
+      "to": "o3"
+    },
+    {
+      "from": "dc",
+      "to": "o3"
+    },
+    {
+      "from": "c3",
+      "to": "o3"
+    },
+    {
+      "from": "o3",
+      "to": "f3"
+    },
+    {
+      "from": "o3",
+      "to": "do"
+    },
+    {
+      "from": "do",
+      "to": "cl"
+    },
+    {
+      "from": "cl",
+      "to": "dc"
+    }
+  ]
+}

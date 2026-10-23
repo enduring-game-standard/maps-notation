@@ -1,0 +1,131 @@
+{
+  "name": "assembly-cell",
+  "source": "blind",
+  "note": "Two feeders supply parts A and B; an assembler joins one of each into a unit placed in an output bin of capacity 3, modeled with a complementary free-slot place.",
+  "places": [
+    {
+      "id": "sa",
+      "label": "part A stock",
+      "tokens": 5
+    },
+    {
+      "id": "sb",
+      "label": "part B stock",
+      "tokens": 4
+    },
+    {
+      "id": "ba",
+      "label": "part A at assembler"
+    },
+    {
+      "id": "bb",
+      "label": "part B at assembler"
+    },
+    {
+      "id": "ai",
+      "label": "assembler idle",
+      "tokens": 1
+    },
+    {
+      "id": "as",
+      "label": "assembling"
+    },
+    {
+      "id": "bin",
+      "label": "units in output bin"
+    },
+    {
+      "id": "free",
+      "label": "free bin slots",
+      "tokens": 3
+    },
+    {
+      "id": "ship",
+      "label": "units shipped"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "fa",
+      "label": "Feed part A"
+    },
+    {
+      "id": "fb",
+      "label": "Feed part B"
+    },
+    {
+      "id": "st",
+      "label": "Start assembly"
+    },
+    {
+      "id": "fin",
+      "label": "Place unit in bin"
+    },
+    {
+      "id": "un",
+      "label": "Unload bin"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "sa",
+      "to": "fa"
+    },
+    {
+      "from": "fa",
+      "to": "ba"
+    },
+    {
+      "from": "sb",
+      "to": "fb"
+    },
+    {
+      "from": "fb",
+      "to": "bb"
+    },
+    {
+      "from": "ba",
+      "to": "st"
+    },
+    {
+      "from": "bb",
+      "to": "st"
+    },
+    {
+      "from": "ai",
+      "to": "st"
+    },
+    {
+      "from": "st",
+      "to": "as"
+    },
+    {
+      "from": "as",
+      "to": "fin"
+    },
+    {
+      "from": "free",
+      "to": "fin"
+    },
+    {
+      "from": "fin",
+      "to": "bin"
+    },
+    {
+      "from": "fin",
+      "to": "ai"
+    },
+    {
+      "from": "bin",
+      "to": "un"
+    },
+    {
+      "from": "un",
+      "to": "free"
+    },
+    {
+      "from": "un",
+      "to": "ship"
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "name": "irregular",
+  "source": "blind",
+  "note": "No meaning: eight places and seven transitions wired irregularly, with one weight-2 arc and one inhibitor arc.",
+  "places": [
+    {
+      "id": "p1",
+      "label": "amber",
+      "tokens": 2
+    },
+    {
+      "id": "p2",
+      "label": "basalt"
+    },
+    {
+      "id": "p3",
+      "label": "cobalt",
+      "tokens": 1
+    },
+    {
+      "id": "p4",
+      "label": "dune"
+    },
+    {
+      "id": "p5",
+      "label": "ember"
+    },
+    {
+      "id": "p6",
+      "label": "fjord",
+      "tokens": 1
+    },
+    {
+      "id": "p7",
+      "label": "garnet"
+    },
+    {
+      "id": "p8",
+      "label": "heron"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "kite"
+    },
+    {
+      "id": "t2",
+      "label": "lumen"
+    },
+    {
+      "id": "t3",
+      "label": "mire"
+    },
+    {
+      "id": "t4",
+      "label": "nadir"
+    },
+    {
+      "id": "t5",
+      "label": "onyx"
+    },
+    {
+      "id": "t6",
+      "label": "prism"
+    },
+    {
+      "id": "t7",
+      "label": "quill"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "t1",
+      "to": "p4"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "p3",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p5"
+    },
+    {
+      "from": "p4",
+      "to": "t3"
+    },
+    {
+      "from": "p7",
+      "to": "t3",
+      "inhibitor": true
+    },
+    {
+      "from": "t3",
+      "to": "p6"
+    },
+    {
+      "from": "t3",
+      "to": "p8",
+      "weight": 2
+    },
+    {
+      "from": "p5",
+      "to": "t4"
+    },
+    {
+      "from": "p6",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p3"
+    },
+    {
+      "from": "t4",
+      "to": "p7"
+    },
+    {
+      "from": "p8",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "p1"
+    },
+    {
+      "from": "p7",
+      "to": "t6"
+    },
+    {
+      "from": "p8",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "p2"
+    },
+    {
+      "from": "p6",
+      "to": "t7"
+    },
+    {
+      "from": "t7",
+      "to": "p4"
+    },
+    {
+      "from": "t7",
+      "to": "p5"
+    }
+  ]
+}
