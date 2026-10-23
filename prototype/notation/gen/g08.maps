@@ -1,0 +1,80 @@
+maps 2
+title "Generated g08"
+
+seat p1 "Player 1" color "#1f6feb"
+seat p2 "Player 2" color "#c2410c"
+
+state a1 "A1" marks 1 at 0 0
+state a2 "A2" at 0 0
+state a3 "A3" at 0 0
+state a4 "A4" at 0 0
+state a5 "A5" at 0 0
+state a6 "A6" at 0 0
+state b1 "B1" marks 1 at 0 0
+state b2 "B2" at 0 0
+state b3 "B3" at 0 0
+state b4 "B4" at 0 0
+state end "Over" ends "Over" at 0 0
+
+verb v1 "v1" by p1 at 0 0
+  take a1
+  give a2
+
+verb v2 "v2" by p1 at 0 0
+  take a2
+  give a1
+
+verb v3 "v3" by p1 at 0 0
+  take a1
+  give a3
+  unless b1
+
+verb v4 "v4" by p1 at 0 0
+  take a3
+  give a1
+
+verb v5 "v5" by p1 at 0 0
+  take a1
+  give a4
+
+verb v6 "v6" by world priority 2 at 0 0
+  take a4
+  give a1
+
+verb v7 "v7" by p1 at 0 0
+  take a1
+  give a5
+
+verb v8 "v8" by p1 at 0 0
+  take a5
+  give a1
+
+verb v9 "v9" by p1 at 0 0
+  take a1
+  give a6
+
+verb v10 "v10" by p1 at 0 0
+  take a6
+  give a1
+  need b3
+
+verb v11 "v11" by p2 at 0 0
+  take b1
+  give b2
+
+verb v12 "v12" by world priority 1 at 0 0
+  take b2
+  give b3
+
+verb v13 "v13" by p2 at 0 0
+  take b3
+  give b4
+
+verb v14 "v14" by p2 at 0 0
+  take b4
+  give b1
+
+verb v15 "v15" by world priority 5 at 0 0
+  need a4
+  need b3
+  give end
