@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MAPS sheets (prototype, throwaway)</title>
+<style>
+  :root { --ink: #1d1d1f; --dim: #8a8a8e; --rule: #d9d6cf; --paper: #fbfaf7;
+          --controller: #1f5fd6; --world: #6b6b70; --content: #d2550a; --col: 176px; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 28px 32px 60px; background: var(--paper); color: var(--ink);
+         font: 14px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h1 { font-size: 20px; margin: 0 0 6px; }
+  .lede { max-width: 980px; color: #3a3a3c; margin: 0 0 8px; }
+  .key { display: flex; gap: 18px; flex-wrap: wrap; color: #3a3a3c; font-size: 13px; margin: 10px 0 24px; }
+  .key b { font-weight: 600; }
+  .grid { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+  .sheet { background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px 14px; }
+  .sheet h2 { margin: 0; font-size: 16px; }
+  .meta { color: var(--dim); font-size: 12px; margin: 2px 0 10px; }
+  .says { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
+  .says p { margin: 0; font-weight: 600; font-size: 13px; max-width: 520px; }
+  .sil { display: grid; gap: 1px; flex: none; }
+  .sil i { width: 7px; height: 7px; background: #ece9e2; }
+  .sil i.on { background: var(--ink); }
+  .sil i.hub { background: var(--content); }
+  .start { font-size: 13px; color: #3a3a3c; margin: 0 0 8px; }
+  .section { border-top: 2px solid var(--ink); padding: 8px 0 6px; }
+  .section + .section { margin-top: 4px; }
+  .section .title { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+  .oneway { font-size: 12px; color: var(--content); margin: 2px 0 0; }
+  .outline { display: grid; grid-auto-rows: minmax(40px, auto); column-gap: 0; row-gap: 4px; }
+  .cell { display: flex; align-items: flex-start; gap: 4px; min-width: 0; }
+  .conn { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding-top: 1px; }
+  .verb { font-size: 12px; white-space: nowrap; }
+  .verb.controller { color: var(--controller); font-weight: 600; }
+  .verb.world { color: var(--world); font-style: italic; }
+  .verb.content { color: var(--content); font-weight: 600; }
+  .arrow { font-size: 12px; color: var(--dim); white-space: nowrap; }
+  .gate { font-size: 11px; color: var(--dim); display: none; white-space: normal; }
+  body.gates .gate { display: block; }
+  .step { display: flex; flex-direction: column; min-width: 0; }
+  .step .top { min-height: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(var(--col) - 14px); }
+  .step .bot { display: flex; align-items: center; gap: 4px; }
+  .branch { color: var(--dim); font-size: 13px; padding-top: 2px; }
+  .state { display: inline-block; border: 1.5px solid var(--ink); border-radius: 12px; padding: 1px 9px;
+           font-size: 13px; white-space: nowrap; background: #fff; }
+  .state.hub { border-width: 3px; font-weight: 700; padding: 2px 11px; }
+  .state.ref { border-style: dashed; color: #3a3a3c; }
+  .state.end { border: none; padding: 1px 2px; font-weight: 600; }
+  .state.exit { border: none; color: var(--content); font-weight: 600; padding: 1px 2px; }
+  .tags { font-size: 11.5px; color: #3a3a3c; margin-top: 3px; line-height: 1.35; }
+  .tags .line { display: block; white-space: nowrap; }
+  .tags .contact { color: var(--content); }
+  .meters { font-size: 12.5px; margin: 0 0 8px; }
+  .meters b { font-variant-numeric: tabular-nums; }
+  .loops { margin: 14px 0 0; padding: 10px 14px; border-left: 3px solid var(--content); background: #fff;
+           max-width: 980px; font-size: 13px; }
+  .loops b { color: var(--content); }
+  .toggle { position: fixed; right: 20px; bottom: 18px; background: var(--ink); color: #fff;
+            border-radius: 999px; padding: 8px 16px; font-size: 13px; cursor: pointer; user-select: none; }
+  .note { color: #8b3a00; font-size: 12px; margin: 0 0 8px; max-width: 900px; }
+</style>
+</head>
+<body>
+<h1>MAPS sheets. Prototype, throwaway.</h1>
+<p class="lede">One layout for every entity, worked out from why the earlier drawings were a mess. Each sheet is computed from the same states-and-verbs data as before; nothing is placed by hand.</p>
+<ul class="lede">
+  <li><b>Home is the anchor.</b> Each part of the sheet has one home state, the one the entity rests in, at the left edge.</li>
+  <li><b>Getting back home is never drawn.</b> Everything inside a part can return home, so a move that ends at home is a small <b>↩</b> note under the state it leaves from. Most lines in the old drawings were these returns.</li>
+  <li><b>Everything else reads left to right as a sentence.</b> Verb, the state it leads to, the next verb, and so on. The column is how many moves from home. A fork starts a new line under its parent, like an outline.</li>
+  <li><b>Parts stack top to bottom, split at points of no return.</b> Down only ever means you can't come back.</li>
+</ul>
+<div class="key">
+  <span><span class="state hub">home</span></span>
+  <span><span class="state">state</span></span>
+  <span><span class="state ref">already drawn</span> link back to a state on another line</span>
+  <span>⟷ there and back · ⟶ one way</span>
+  <span>↩ returns home · ↻ stays put</span>
+  <span><b>✕</b> ends · <b style="color:var(--content)">⇓</b> point of no return</span>
+  <span><b class="verb controller">controller chooses</b> · <i class="verb world">world does it on its own</i> · <b class="verb content">set off by contact or content</b></span>
+</div>
+<div id="out"></div>
+<div class="toggle" id="toggle">show gates</div>
+
+<script>
+const SPEAK = ['controller', 'world', 'content'];
+
+const SHEETS = [
+  {
+    key: 'goomba', title: 'Goomba', source: 'Super Mario Bros. (1985)', kind: 'capability schema',
+    root: 'dormant', homes: ['walking'],
+    states: [['dormant', 'dormant'], ['walking', 'walking'], ['falling', 'falling'],
+             ['squashed', 'squashed'], ['flipped', 'flipped'], ['gone', 'gone']],
+    verbs: [
+      ['wake', 'dormant', 'walking', 'content', 'screen reaches it'],
+      ['turn', 'walking', 'walking', 'content', 'hits wall or enemy'],
+      ['walk off ledge', 'walking', 'falling', 'world', 'no floor ahead'],
+      ['land', 'falling', 'walking', 'world', 'floor below'],
+      ['fall in pit', 'falling', 'gone', 'world', 'below screen'],
+      ['despawn', 'walking', 'gone', 'content', 'scrolls off left'],
+      ['stomped', 'walking', 'squashed', 'content', 'Mario falling onto it'],
+      ['fades', 'squashed', 'gone', 'world', 'timer'],
+      ['hit', 'walking', 'flipped', 'content', 'fireball, shell, star, block bumped below'],
+      ['falls away', 'flipped', 'gone', 'world', ''],
+    ],
+    contact: { walking: ['Mario touches it: Mario hurt'] },
+  },
+  {
+    key: 'link', title: "Link's sword", source: 'Ocarina of Time (1998)', kind: 'capability schema',
+    root: 'free', homes: ['free'],
+    states: [['free', 'free idle'], ['z', 'Z-target idle'], ['s1', 'swinging 1'], ['s2', 'swinging 2'],
+             ['charge', 'charging'], ['shield', 'shielding'], ['roll', 'rolling'], ['air', 'jump attack']],
+    verbs: [
+      ['slash', 'free', 's1', 'controller', 'B'],
+      ['again', 's1', 's2', 'controller', 'B, same direction'],
+      ['finisher', 's2', 'free', 'controller', 'B, third same-direction swing'],
+      ['settle', 's1', 'free', 'world', 'no input'],
+      ['settle', 's2', 'free', 'world', 'no input'],
+      ['hold B', 's1', 'charge', 'controller', 'B held right after a swing'],
+      ['hold B', 's2', 'charge', 'controller', 'B held right after a swing'],
+      ['spin', 'charge', 'free', 'controller', 'release under 85%'],
+      ['great spin', 'charge', 'free', 'controller', 'release at 85%+, or stick spin'],
+      ['cancel', 'charge', 'free', 'controller', 'release under 10%'],
+      ['quick spin', 'free', 'free', 'controller', 'stick spin, then B'],
+      ['roll', 'free', 'roll', 'controller', 'A + stick forward'],
+      ['roll slash', 'roll', 's1', 'controller', 'B from frame 15'],
+      ['roll ends', 'roll', 'free', 'world', ''],
+      ['shield', 'free', 'shield', 'controller', 'R held, shield equipped'],
+      ['crouch stab', 'shield', 'shield', 'controller', 'B, melee weapon'],
+      ['lower', 'shield', 'free', 'controller', 'release R'],
+      ['target', 'free', 'z', 'controller', 'Z'],
+      ['untarget', 'z', 'free', 'controller', 'release Z'],
+      ['vertical slash', 'z', 's1', 'controller', 'B, stick neutral'],
+      ['thrust', 'z', 's1', 'controller', 'B, stick forward'],
+      ['jump', 'z', 'air', 'controller', 'Z + A, melee weapon'],
+      ['finish strike', 'air', 'z', 'world', 'landing'],
+    ],
+  },
+  {
+    key: 'deku', title: 'Inside the Deku Tree', source: 'Ocarina of Time (1998)', kind: 'content instance',
+    root: 'L0', homes: ['L0', 'SL1', 'B1P', 'B2P'],
+    note: 'Link\'s progress through the dungeon. A state is a room plus what can\'t be undone: S = has the Slingshot, W1 = 1F web broken, W2 = B1 floor web burnt. Rooms alone are all reversible (vines lead back up), so the one-way steps are the item and the webs. Route checked against three walkthroughs and the decomp; where each vine lands and how the webs persist are unverified.',
+    flagNames: { '': 'before the Slingshot', 'S': 'has the Slingshot', 'S W1': '1F web broken', 'S W1 W2': 'B1 floor web burnt' },
+    states: [
+      ['L0', 'Lobby 1F', ''], ['F2_0', '2F', ''], ['SL0', 'Slingshot room', ''],
+      ['SL1', 'Slingshot room', 'S'], ['F2_1', '2F', 'S'], ['L1', 'Lobby 1F', 'S'], ['F3_1', '3F', 'S'], ['CP1', 'Compass room', 'S'],
+      ['B1P', 'B1 pool', 'S W1'], ['L1W', 'Lobby 1F', 'S W1'], ['B1H', 'Scrub hint room', 'S W1'], ['B1R', 'roller water room', 'S W1'],
+      ['B1T', 'torch room', 'S W1'], ['LV', 'Larva room', 'S W1'], ['B1L', 'B1 high ledge', 'S W1'],
+      ['B2P', 'B2 pool', 'S W1 W2'], ['B1P2', 'B1 pool', 'S W1 W2'], ['B2S', 'Scrub trio', 'S W1 W2'],
+      ['LAIR', "Gohma's lair", 'S W1 W2'], ['WIN', 'Gohma defeated', 'S W1 W2'],
+    ],
+    verbs: [
+      ['climb', 'L0', 'F2_0', 'controller', ''],
+      ['drop', 'F2_0', 'L0', 'controller', ''],
+      ['map chest', 'L0', 'L0', 'controller', 'top of the 1F ramp, optional'],
+      ['deflect nuts', 'F2_0', 'SL0', 'controller', 'shield against the Deku Scrub opens the door'],
+      ['open chest', 'SL0', 'SL1', 'content', 'chest gives the Slingshot'],
+      ['shoot ladder', 'SL1', 'F2_1', 'controller', 'Slingshot; the only way out'],
+      ['re-enter', 'F2_1', 'SL1', 'controller', ''],
+      ['drop', 'F2_1', 'L1', 'controller', ''],
+      ['climb', 'L1', 'F2_1', 'controller', ''],
+      ['shoot Skulltulas', 'F2_1', 'F3_1', 'controller', 'Slingshot: 3 Skullwalltulas off the vines'],
+      ['drop', 'F3_1', 'F2_1', 'controller', ''],
+      ['enter', 'F3_1', 'CP1', 'controller', 'floor switch, timed platforms; optional'],
+      ['torch exit', 'CP1', 'F3_1', 'controller', 'lit Deku Stick on a torch'],
+      ['jump onto web', 'F3_1', 'B1P', 'controller', 'long fall near center breaks the 1F web'],
+      ['climb vine', 'B1P', 'L1W', 'controller', 'vine back to the main level'],
+      ['drop in hole', 'L1W', 'B1P', 'controller', '1F web stays broken'],
+      ['burn door web', 'B1P', 'B1H', 'controller', 'floor switch, lit Deku Stick'],
+      ['back', 'B1H', 'B1P', 'controller', ''],
+      ['shoot eye', 'B1H', 'B1R', 'controller', 'Slingshot on the eye switch'],
+      ['back', 'B1R', 'B1H', 'controller', ''],
+      ['push block', 'B1R', 'B1T', 'controller', 'block under the high door'],
+      ['back', 'B1T', 'B1R', 'controller', ''],
+      ['light torches', 'B1T', 'LV', 'controller', '2 unlit torches'],
+      ['back', 'LV', 'B1T', 'controller', ''],
+      ['burn web, crawl', 'LV', 'B1L', 'controller', 'Larva room web, crawlspace to the high ledge'],
+      ['push block in', 'B1L', 'B1P', 'controller', 'block into the water makes a bridge'],
+      ['cross bridge', 'B1P', 'B1L', 'controller', 'only after the block is pushed in'],
+      ['burn floor web', 'B1L', 'B2P', 'content', 'lit Deku Stick; the drop'],
+      ['climb vine', 'B2P', 'B1P2', 'controller', 'vine back up'],
+      ['drop in hole', 'B1P2', 'B2P', 'controller', 'B1 floor web stays burnt'],
+      ['walk on', 'B2P', 'B2S', 'controller', ''],
+      ['back', 'B2S', 'B2P', 'controller', ''],
+      ['wrong order', 'B2S', 'B2S', 'world', 'scrubs reset'],
+      ['stun 2-3-1', 'B2S', 'LAIR', 'controller', 'middle, right, left opens the boss door'],
+      ['eye, slash', 'LAIR', 'WIN', 'controller', 'Slingshot or Deku Nut on the red eye, then sword'],
+    ],
+  },
+  {
+    key: 'z1link', title: 'Link (sword beam)', source: 'The Legend of Zelda (1986)', kind: 'capability schema',
+    root: 'stand', homes: ['stand'],
+    note: 'Counts sit on the sheet as meters. A verb shows what it needs from a meter and what it changes. Full-health beam rule checked on community wikis; half-heart damage is from memory.',
+    meters: { hearts: { max: 6, unit: 'half hearts' } },
+    states: [['stand', 'ready'], ['gone', 'game over']],
+    verbs: [
+      ['stab', 'stand', 'stand', 'controller', 'Octorok near'],
+      ['sword beam', 'stand', 'stand', 'controller', '', { needs: 'hearts = 6' }],
+      ['falls', 'stand', 'gone', 'world', '', { needs: 'hearts = 0' }],
+    ],
+  },
+  {
+    key: 'octorok', title: 'Red Octorok', source: 'The Legend of Zelda (1986)', kind: 'capability schema',
+    root: 'roam', homes: ['roam'],
+    states: [['roam', 'roaming'], ['dead', 'defeated']],
+    verbs: [
+      ['touch Link', 'roam', 'roam', 'content', 'Link near', { changes: 'Link hearts −1' }],
+      ['struck', 'roam', 'dead', 'content', 'Link stab or sword beam'],
+    ],
+  },
+];
+
+function analyze(S) {
+  const ids = S.states.map(s => s[0]);
+  const label = Object.fromEntries(S.states.map(s => [s[0], s[1]]));
+  const flags = Object.fromEntries(S.states.map(s => [s[0], s[2] ?? '']));
+  const verbs = S.verbs.map(([name, from, to, speaker, gate, fx]) => ({ name, from, to, speaker, gate, fx: fx || {} }));
+  const out = Object.fromEntries(ids.map(i => [i, verbs.filter(v => v.from === i)]));
+
+  let index = 0; const idx = {}, low = {}, stack = [], on = {}, comp = {}; const comps = [];
+  const strong = v => {
+    idx[v] = low[v] = index++; stack.push(v); on[v] = true;
+    for (const e of out[v]) {
+      if (idx[e.to] === undefined) { strong(e.to); low[v] = Math.min(low[v], low[e.to]); }
+      else if (on[e.to]) low[v] = Math.min(low[v], idx[e.to]);
+    }
+    if (low[v] === idx[v]) {
+      const c = []; let w;
+      do { w = stack.pop(); on[w] = false; comp[w] = comps.length; c.push(w); } while (w !== v);
+      comps.push(c);
+    }
+  };
+  ids.forEach(i => idx[i] === undefined && strong(i));
+
+  const dwells = c => c.length > 1 || out[c[0]].some(v => v.to === c[0]);
+  const terminal = id => out[id].length === 0;
+  const homeOf = c => comps[c].find(s => S.homes.includes(s)) ?? comps[c][0];
+
+  const order = [];
+  const seen = new Set();
+  const queue = [S.root];
+  while (queue.length) {
+    const s = queue.shift(); if (seen.has(s)) continue; seen.add(s);
+    const c = comp[s]; if (dwells(comps[c]) && !order.includes(c)) order.push(c);
+    out[s].forEach(v => queue.push(v.to));
+  }
+  const sectionOf = id => dwells(comps[comp[id]]) ? order.indexOf(comp[id]) : -1;
+
+  const sections = order.map((c, n) => {
+    const home = homeOf(c);
+    const parent = { [home]: null }, via = {};
+    const bfs = [home];
+    while (bfs.length) {
+      const s = bfs.shift();
+      for (const v of out[s]) {
+        const t = v.to;
+        if (t in parent || terminal(t)) continue;
+        const sec = sectionOf(t);
+        if (sec === n || (sec === -1 && !terminal(t))) { parent[t] = s; via[t] = v; bfs.push(t); }
+      }
+    }
+    const node = id => {
+      const n2 = { id, label: label[id], tags: [], kids: [] };
+      for (const v of out[id]) {
+        const t = v.to;
+        if (via[t] === v) continue;
+        if (parent[id] === t && via[id] && via[id].from === t) { n2.twoWay = true; continue; }
+        if (t === home && id !== home) { n2.tags.push({ k: '↩', v }); continue; }
+        if (t === id) { n2.tags.push({ k: '↻', v }); continue; }
+        if (terminal(t)) { n2.kids.push({ kind: 'end', v, label: label[t] }); continue; }
+        const sec = sectionOf(t);
+        if (sec !== n && sec !== -1) { n2.kids.push({ kind: 'exit', v, label: label[t], sec }); continue; }
+        n2.kids.push({ kind: 'ref', v, label: label[t] });
+      }
+      const tree = out[id].filter(v => via[v.to] === v).map(v => ({ kind: 'state', v, node: node(v.to) }));
+      n2.kids = [...tree, ...n2.kids];
+      return n2;
+    };
+    const tree = node(home);
+    for (const k of tree.kids) if (k.kind === 'state') k.node.twoWayHome = k.node.twoWay;
+    return { home, tree, flags: flags[home] };
+  });
+
+  let start = null;
+  if (sectionOf(S.root) === -1) {
+    const path = []; let s = S.root;
+    while (sectionOf(s) === -1 && out[s].length) { const v = out[s][0]; path.push({ s, v }); s = v.to; }
+    start = { path, into: s };
+  }
+  return { sections, start, label, verbs, comps, order, dwells };
+}
+
+const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const fxText = v => [v.fx.needs && `needs ${v.fx.needs}`, v.fx.changes].filter(Boolean).join('; ');
+const verbHtml = v => `<span class="verb ${v.speaker}" title="${esc(v.gate || '')}">${esc(v.name)}</span>`
+  + (fxText(v) ? ` <span class="contact" style="font-size:11px">${esc(fxText(v))}</span>` : '')
+  + (v.gate ? `<span class="gate">${esc(v.gate)}</span>` : '');
+const tagHtml = (n, S) => {
+  const lines = n.tags.map(t => `<span class="line">${t.k} ${verbHtml(t.v)}</span>`);
+  (S.contact?.[n.id] || []).forEach(c => lines.push(`<span class="line contact">contact: ${esc(c)}</span>`));
+  return lines.length ? `<div class="tags">${lines.join('')}</div>` : '';
+};
+
+function renderSection(sec, S, A, n) {
+  const cells = [];
+  const rows = [];
+  let row = 0;
+  const walk = (node, col, r, inVerb, branch, twoWay) => {
+    rows.push(r);
+    cells.push({ r, col, html: cellHtml({ node, inVerb, branch, twoWay, hub: col === 0 }) });
+    let first = true;
+    for (const k of node.kids) {
+      const rr = first ? r : ++row;
+      if (k.kind === 'state') walk(k.node, col + 1, rr, k.v, !first, k.node.twoWay);
+      else { rows.push(rr); cells.push({ r: rr, col: col + 1, html: cellHtml({ leaf: k, inVerb: k.v, branch: !first }) }); }
+      first = false;
+    }
+  };
+  const cellHtml = ({ node, leaf, inVerb, branch, twoWay, hub }) => {
+    const lead = branch ? '<span class="branch">└</span>' : '';
+    const top = inVerb ? `<div class="top">${verbHtml(inVerb)}</div>` : '';
+    const arrow = inVerb ? `<span class="arrow">${twoWay ? '⟷' : '⟶'}</span>` : '';
+    let target;
+    if (node) target = `<span class="state${hub ? ' hub' : ''}">${esc(node.label)}</span>`;
+    else {
+      const cls = { end: 'end', exit: 'exit', ref: 'ref' }[leaf.kind];
+      const text = leaf.kind === 'end' ? `✕ ${leaf.label}` : leaf.kind === 'exit' ? `⇓ ${leaf.label}` : leaf.label;
+      target = `<span class="state ${cls}">${esc(text)}</span>`;
+    }
+    return `<div class="cell">${lead}<div class="step">${top}<div class="bot">${arrow}${target}</div>${node ? tagHtml(node, S) : ''}</div></div>`;
+  };
+  walk(sec.tree, 0, 0, null, false, false);
+  const cols = Math.max(...cells.map(c => c.col)) + 1;
+  const body = cells.map(c => `<div style="grid-row:${c.r + 1};grid-column:${c.col + 1}">${c.html}</div>`).join('');
+  const title = S.flagNames ? `part ${n + 1} · ${S.flagNames[sec.flags] ?? sec.flags}` : `part ${n + 1}`;
+  return { html: `<div class="section"><div class="title">${esc(title)}</div><div class="outline" style="grid-template-columns:repeat(${cols}, var(--col))">${body}</div></div>`,
+           cells, rows: row + 1, cols };
+}
+
+function render(S) {
+  const A = analyze(S);
+  const parts = A.sections.map((sec, n) => renderSection(sec, S, A, n));
+  const ends = A.sections.flatMap(s => { const acc = []; const w = n => n.kids.forEach(k => k.kind === 'state' ? w(k.node) : k.kind === 'end' && acc.push(k)); w(s.tree); return acc; });
+  const branches = parts.reduce((a, p) => a + p.rows, 0);
+  const depth = Math.max(...parts.map(p => p.cols)) - 1;
+  let returns = 0; A.sections.forEach(sec => { const w = n => { returns += n.tags.filter(t => t.k === '↩').length; n.kids.forEach(k => k.kind === 'state' && w(k.node)); }; w(sec.tree); });
+  const says = [
+    A.sections.length === 1 ? 'one part' : `${A.sections.length} parts`,
+    `${branches} line${branches > 1 ? 's' : ''}`,
+    `${depth} move${depth > 1 ? 's' : ''} deep at most`,
+    ends.length ? `${ends.length} way${ends.length > 1 ? 's' : ''} to end` : 'never ends',
+    returns ? `${returns} way${returns > 1 ? 's' : ''} back home` : null,
+  ].filter(Boolean).join(' · ');
+
+  const silCols = Math.max(...parts.map(p => p.cols));
+  let sil = '';
+  parts.forEach((p, pi) => {
+    const occ = new Set(p.cells.map(c => `${c.r},${c.col}`));
+    for (let r = 0; r < p.rows; r++) for (let c = 0; c < silCols; c++)
+      sil += `<i class="${occ.has(`${r},${c}`) ? (c === 0 && r === 0 ? 'hub' : 'on') : ''}"></i>`;
+    if (pi < parts.length - 1) for (let c = 0; c < silCols; c++) sil += '<i style="background:transparent;height:3px"></i>';
+  });
+
+  const start = A.start ? `<p class="start">starts <span class="state">${esc(A.label[A.start.path[0].s])}</span> ${A.start.path.map(p => `${verbHtml(p.v)} ⟶`).join(' ')} ${esc(A.label[A.start.into])}</p>` : '';
+  const meters = S.meters ? `<p class="meters">${Object.entries(S.meters).map(([k, m]) => `meter <b>${esc(k)}</b> 0 to ${m.max} ${esc(m.unit)}`).join(' · ')}</p>` : '';
+  const verbCount = S.verbs.length;
+  return `<div class="sheet" id="${S.key}">
+    <h2>${esc(S.title)}</h2>
+    <div class="meta">${esc(S.source)} · ${esc(S.kind)} · ${S.states.length} states · ${verbCount} verbs</div>
+    ${S.note ? `<p class="note">${esc(S.note)}</p>` : ''}
+    <div class="says"><div class="sil" style="grid-template-columns:repeat(${silCols}, 7px)">${sil}</div><p>${esc(says)}</p></div>
+    ${meters}${start}${parts.map(p => p.html).join('')}
+  </div>`;
+}
+
+function loops(sheets) {
+  const all = sheets.flatMap(S => S.verbs.map(([name, from, to, speaker, gate, fx]) => ({ S, name, fx: fx || {} })));
+  const lines = [];
+  for (const a of all) {
+    const m = /^(\w+)?\s*(\w+) ([−+-])(\d+)$/.exec(a.fx.changes || ''); if (!m) continue;
+    const meter = m[2], down = m[3] !== '+';
+    for (const b of all) {
+      const n = /^(\w+) = (\d+)$/.exec(b.fx.needs || ''); if (!n || n[1] !== meter) continue;
+      const needsHigh = +n[2] > 0;
+      const effect = down === needsHigh ? 'takes away' : 'opens up';
+      lines.push(`<b>${esc(a.S.title)}: ${esc(a.name)}</b> ${down ? 'lowers' : 'raises'} ${esc(meter)}, and <b>${esc(b.S.title)}: ${esc(b.name)}</b> needs ${esc(meter)} ${n[2]}, so it ${effect} that verb.`);
+    }
+  }
+  return lines.length ? `<div class="loops"><div style="font-weight:600;margin-bottom:4px">Read across the two Zelda sheets (derived from the meters):</div>${lines.join('<br>')}<div style="margin-top:6px">Every hit the Octorok lands takes away the beam, so Link has to get close to stab, and getting close is what lets the Octorok land the next hit. That last step is player strategy, not a rule, so it is written here and not derived.</div></div>` : '';
+}
+
+const byKey = Object.fromEntries(SHEETS.map(s => [s.key, s]));
+document.getElementById('out').innerHTML =
+  `<div class="grid">${render(byKey.goomba)}${render(byKey.link)}</div>
+   <div class="grid" style="margin-top:24px">${render(byKey.deku)}</div>
+   <div class="grid" style="margin-top:24px">${render(byKey.z1link)}${render(byKey.octorok)}</div>
+   ${loops([byKey.z1link, byKey.octorok])}`;
+const t = document.getElementById('toggle');
+t.onclick = () => { document.body.classList.toggle('gates'); t.textContent = document.body.classList.contains('gates') ? 'hide gates' : 'show gates'; };
+</script>
+</body>
+</html>
