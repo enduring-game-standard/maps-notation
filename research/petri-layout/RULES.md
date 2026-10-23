@@ -46,7 +46,7 @@ When two rules disagree about a node, the lower number wins.
 
 ### Local structure
 
-**R9. Side places sit beside the stretch they serve, outside.** A side place used by one step sits beside that step, on the side away from shared places, with a tight loop. One used across several steps sits farther out, centered on the span. *Reader:* near means "used only here"; far and centered means "serves this stretch". (3.1, 3.2 e, f, g, h; thinly supported beyond 3.2.)
+**R9. Side places sit beside the stretch they serve, outside.** A hub (a side place that serves several bars, loops included) sits among the bars it serves, on the side where its off-lane bars are, centered on its span; its loops are separate curves, not lenses (4.23, 4.24: p3 above, between t1 and t3). A side place used by one step sits beside that step, on the side away from shared places, with a tight loop. One used across several steps sits farther out, centered on the span. *Reader:* near means "used only here"; far and centered means "serves this stretch". (3.1, 3.2 e, f, g, h; thinly supported beyond 3.2.)
 
 **R10. A choice is a row of alternatives that rejoin as a diamond.** The output transitions of a choice share one cross-row just after it, spread symmetrically about the lane; each branch continues as a parallel sub-line, stage against stage, and closes back onto the lane at the merge. *Reader:* one of these; none favored. (3.2, 3.25, 3.40, 2.21, 6.9.) When the competing transitions are on different lanes, each stays in its lane and the shared place reaches to both (R4).
 
@@ -54,7 +54,7 @@ When two rules disagree about a node, the lower number wins.
 
 **R12. Pairs sit as pairs.** Two places with the same inputs and outputs are mirrored about the line through those transitions. Complementary places (full/empty, item/slot) sit on one cross-row, either side of their line, or stacked together in the gap when they couple two lanes. *Reader:* two values of one thing. (2.4, 3.19, 3.31, 4.2.)
 
-**R13. Self-loops sit tight.** A transition that only loops on a lane place sits beside that place, across from the lane, joined by two short parallel arcs; if it also feeds or takes a shared place, it sits on the side facing that place (R7 outranks R9's outside). A place that only loops on a lane transition sits beside that bar, joined by a small lens. *Reader:* "may repeat here" or "needs this and gives it back". (6.2, 6.12, 4.9, 4.18; 3.39, 4.1, 7.11.)
+**R13. Self-loops sit tight.** Only a place whose every arc is a self-loop is pinned to its bar; a hub is placed by R9. A transition that only loops on a lane place sits beside that place, across from the lane, joined by two short parallel arcs; if it also feeds or takes a shared place, it sits on the side facing that place (R7 outranks R9's outside). A place that only loops on a lane transition sits beside that bar, joined by a small lens. *Reader:* "may repeat here" or "needs this and gives it back". (6.2, 6.12, 4.9, 4.18; 3.39, 4.1, 7.11.)
 
 **R14. Skips and back-jumps take opposite sides.** A transition joining two non-adjacent places of one lane bows away from the lane: forward skips on one side, backward jumps on the other. *Reader:* skip ahead versus go back. (3.25, 6.8, 8.19.)
 

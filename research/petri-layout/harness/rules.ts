@@ -136,6 +136,8 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
   for (const { place, transition } of s.selfLoops) {
     const role = s.placeRole.get(place)!
     if (role.kind === 'spine' && (s.spineOfTransition.get(transition) ?? []).some((k) => k !== role.spine)) continue
+    // a hub that also serves other bars is placed by R9, not pinned to one loop
+    if (role.kind !== 'spine' && net.arcs.some((a) => (a.from === place && a.to !== transition) || (a.to === place && a.from !== transition))) continue
     const d = Math.hypot(at(place).x - at(transition).x, at(place).y - at(transition).y)
     if (d > 110) failures.push(`R13 self-loop ${place}/${transition} is ${Math.round(d)} apart`)
   }

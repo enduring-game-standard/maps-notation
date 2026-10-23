@@ -180,7 +180,13 @@ function routeHints(g: Graph, lanes: Lane[], lanesOf: Map<NodeId, number[]>, pri
       hints.set(arcKey(r.from, r.to), { kind: 'around', side: r.side, channel: L.col + r.side * d, entry: r.to === L.ord.anchor ? 'before' : 'side', shift })
     }
   }
-  for (const { place, transition } of s.selfLoops) { hints.set(arcKey(place, transition), { kind: 'loop' }); hints.set(arcKey(transition, place), { kind: 'loop' }) }
+  // a lens only where the pair sits tight (R13); a hub's loop is two separate curves
+  const tightPair = (p: NodeId, t: NodeId) => g.nbrs.get(p)!.every((u) => s.selfLoops.some((l) => l.place === p && l.transition === u))
+    || isLoopTransition(g, t, lanesOf) || s.placeRole.get(p)!.kind === 'spine'
+  for (const { place, transition } of s.selfLoops) {
+    if (!tightPair(place, transition)) continue
+    hints.set(arcKey(place, transition), { kind: 'loop' }); hints.set(arcKey(transition, place), { kind: 'loop' })
+  }
   for (const a of net.arcs) {
     if (hints.has(arcKey(a.from, a.to))) continue
     const li = primary.get(a.from) ?? primary.get(a.to) ?? home.get(a.from) ?? home.get(a.to)
@@ -359,7 +365,8 @@ function satelliteRows(g: Graph, comps: NodeId[][], row: Map<NodeId, number>, on
     for (const n of comp) {
       const nb = g.nbrs.get(n)!
       const loops = g.s.selfLoops.filter((l) => l.place === n && onLane(l.transition)).map((l) => row.get(l.transition)!)
-      if (g.isPlace(n) && loops.length) out.set(n, mean(loops)) // R13: beside the bar it loops on
+      // R13: a place that only loops on lane bars sits beside them; a hub that serves more is placed by R9
+      if (g.isPlace(n) && loops.length && loops.length === nb.length) out.set(n, mean(loops))
       else if (g.isPlace(n) && nb.length && nb.every(onLane)) {
         const rs = nb.map((t) => row.get(t)!)
         // R16: an extra input enters just before its consumer; a by-product leaves just after its producer
@@ -453,7 +460,7 @@ function placeSatellites(g: Graph, lanes: Lane[], comps: NodeId[][], row: Map<No
     // R13: a side condition sits tight against its bar, on the other side if this one is taken
     // R13, R9: a side condition sits tight against its bar, and across a left-to-right lane any side place
     // takes the nearer side rather than stacking farther out on this one
-    const tight = G.nodes.length === 1 && g.s.selfLoops.some((l) => l.place === G.nodes[0] && onLane(l.transition))
+    const tight = G.nodes.length === 1 && g.nbrs.get(G.nodes[0])!.every((t) => g.s.selfLoops.some((l) => l.place === G.nodes[0] && l.transition === t && onLane(t)))
     const free = alternate && Math.abs(m) < 20 && !isSubLine(G)
     // R6: identical side places all take the side the first of them took
     const sig = G.nodes.map((n) => g.key(n)).sort().join('|')
