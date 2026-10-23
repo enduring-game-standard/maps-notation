@@ -1,0 +1,292 @@
+maps 2
+title "Number Scrabble"
+
+seat ann "Ann" color "#c2410c"
+seat bo "Bo" color "#1d4ed8"
+
+state pool_9 "9 in the pool" marks 1 at 0 0
+state pool_8 "8 in the pool" marks 1 at 0 0
+state pool_7 "7 in the pool" marks 1 at 0 0
+state pool_6 "6 in the pool" marks 1 at 0 0
+state pool_5 "5 in the pool" marks 1 at 0 0
+state pool_4 "4 in the pool" marks 1 at 0 0
+state pool_3 "3 in the pool" marks 1 at 0 0
+state pool_2 "2 in the pool" marks 1 at 0 0
+state pool_1 "1 in the pool" marks 1 at 0 0
+state ann_up "Ann to take" marks 1 at 0 0
+state ann_check "Check Ann's numbers" at 0 0
+state ann_wins "Ann wins" ends "Ann wins" at 0 0
+state bo_up "Bo to take" at 0 0
+state bo_check "Check Bo's numbers" at 0 0
+state bo_wins "Bo wins" ends "Bo wins" at 0 0
+state left "Numbers left" marks 9 at 0 0
+state tie "Nobody wins" ends "Nobody wins" at 0 0
+state ann_has_1 "Ann holds 1" at 0 0
+state ann_has_2 "Ann holds 2" at 0 0
+state ann_has_3 "Ann holds 3" at 0 0
+state ann_has_4 "Ann holds 4" at 0 0
+state ann_has_5 "Ann holds 5" at 0 0
+state ann_has_6 "Ann holds 6" at 0 0
+state ann_has_7 "Ann holds 7" at 0 0
+state ann_has_8 "Ann holds 8" at 0 0
+state ann_has_9 "Ann holds 9" at 0 0
+state bo_has_1 "Bo holds 1" at 0 0
+state bo_has_2 "Bo holds 2" at 0 0
+state bo_has_3 "Bo holds 3" at 0 0
+state bo_has_4 "Bo holds 4" at 0 0
+state bo_has_5 "Bo holds 5" at 0 0
+state bo_has_6 "Bo holds 6" at 0 0
+state bo_has_7 "Bo holds 7" at 0 0
+state bo_has_8 "Bo holds 8" at 0 0
+state bo_has_9 "Bo holds 9" at 0 0
+
+verb ann_takes_1 "Ann takes 1" by ann at 0 0
+  take pool_1
+  give ann_has_1
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_takes_2 "Ann takes 2" by ann at 0 0
+  take pool_2
+  give ann_has_2
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_takes_3 "Ann takes 3" by ann at 0 0
+  take pool_3
+  give ann_has_3
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_takes_4 "Ann takes 4" by ann at 0 0
+  take pool_4
+  give ann_has_4
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_takes_5 "Ann takes 5" by ann at 0 0
+  take pool_5
+  give ann_has_5
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_takes_6 "Ann takes 6" by ann at 0 0
+  take pool_6
+  give ann_has_6
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_takes_7 "Ann takes 7" by ann at 0 0
+  take pool_7
+  give ann_has_7
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_takes_8 "Ann takes 8" by ann at 0 0
+  take pool_8
+  give ann_has_8
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_takes_9 "Ann takes 9" by ann at 0 0
+  take pool_9
+  give ann_has_9
+  take ann_up
+  give ann_check
+  take left
+
+verb ann_hands_over "Hand over to bo" by world at 0 0
+  take ann_check
+  give bo_up
+
+verb ann_fifteen_159 "Ann holds 1+5+9" by world priority 2 at 0 0
+  take ann_check
+  give ann_wins
+  need ann_has_1
+  need ann_has_5
+  need ann_has_9
+
+verb ann_fifteen_168 "Ann holds 1+6+8" by world priority 2 at 0 0
+  take ann_check
+  give ann_wins
+  need ann_has_1
+  need ann_has_6
+  need ann_has_8
+
+verb ann_fifteen_249 "Ann holds 2+4+9" by world priority 2 at 0 0
+  take ann_check
+  give ann_wins
+  need ann_has_2
+  need ann_has_4
+  need ann_has_9
+
+verb ann_fifteen_258 "Ann holds 2+5+8" by world priority 2 at 0 0
+  take ann_check
+  give ann_wins
+  need ann_has_2
+  need ann_has_5
+  need ann_has_8
+
+verb ann_fifteen_267 "Ann holds 2+6+7" by world priority 2 at 0 0
+  take ann_check
+  give ann_wins
+  need ann_has_2
+  need ann_has_6
+  need ann_has_7
+
+verb ann_fifteen_348 "Ann holds 3+4+8" by world priority 2 at 0 0
+  take ann_check
+  give ann_wins
+  need ann_has_3
+  need ann_has_4
+  need ann_has_8
+
+verb ann_fifteen_357 "Ann holds 3+5+7" by world priority 2 at 0 0
+  take ann_check
+  give ann_wins
+  need ann_has_3
+  need ann_has_5
+  need ann_has_7
+
+verb ann_fifteen_456 "Ann holds 4+5+6" by world priority 2 at 0 0
+  take ann_check
+  give ann_wins
+  need ann_has_4
+  need ann_has_5
+  need ann_has_6
+
+verb bo_takes_1 "Bo takes 1" by bo at 0 0
+  take pool_1
+  give bo_has_1
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_takes_2 "Bo takes 2" by bo at 0 0
+  take pool_2
+  give bo_has_2
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_takes_3 "Bo takes 3" by bo at 0 0
+  take pool_3
+  give bo_has_3
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_takes_4 "Bo takes 4" by bo at 0 0
+  take pool_4
+  give bo_has_4
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_takes_5 "Bo takes 5" by bo at 0 0
+  take pool_5
+  give bo_has_5
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_takes_6 "Bo takes 6" by bo at 0 0
+  take pool_6
+  give bo_has_6
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_takes_7 "Bo takes 7" by bo at 0 0
+  take pool_7
+  give bo_has_7
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_takes_8 "Bo takes 8" by bo at 0 0
+  take pool_8
+  give bo_has_8
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_takes_9 "Bo takes 9" by bo at 0 0
+  take pool_9
+  give bo_has_9
+  take bo_up
+  give bo_check
+  take left
+
+verb bo_hands_over "Hand over to ann" by world at 0 0
+  take bo_check
+  give ann_up
+
+verb bo_fifteen_159 "Bo holds 1+5+9" by world priority 2 at 0 0
+  take bo_check
+  give bo_wins
+  need bo_has_1
+  need bo_has_5
+  need bo_has_9
+
+verb bo_fifteen_168 "Bo holds 1+6+8" by world priority 2 at 0 0
+  take bo_check
+  give bo_wins
+  need bo_has_1
+  need bo_has_6
+  need bo_has_8
+
+verb bo_fifteen_249 "Bo holds 2+4+9" by world priority 2 at 0 0
+  take bo_check
+  give bo_wins
+  need bo_has_2
+  need bo_has_4
+  need bo_has_9
+
+verb bo_fifteen_258 "Bo holds 2+5+8" by world priority 2 at 0 0
+  take bo_check
+  give bo_wins
+  need bo_has_2
+  need bo_has_5
+  need bo_has_8
+
+verb bo_fifteen_267 "Bo holds 2+6+7" by world priority 2 at 0 0
+  take bo_check
+  give bo_wins
+  need bo_has_2
+  need bo_has_6
+  need bo_has_7
+
+verb bo_fifteen_348 "Bo holds 3+4+8" by world priority 2 at 0 0
+  take bo_check
+  give bo_wins
+  need bo_has_3
+  need bo_has_4
+  need bo_has_8
+
+verb bo_fifteen_357 "Bo holds 3+5+7" by world priority 2 at 0 0
+  take bo_check
+  give bo_wins
+  need bo_has_3
+  need bo_has_5
+  need bo_has_7
+
+verb bo_fifteen_456 "Bo holds 4+5+6" by world priority 2 at 0 0
+  take bo_check
+  give bo_wins
+  need bo_has_4
+  need bo_has_5
+  need bo_has_6
+
+verb exhausted "Pool empty" by world priority 1 at 0 0
+  take ann_check
+  unless left
+  give tie

@@ -1,0 +1,1251 @@
+maps 2
+title "Link's moveset (Ocarina of Time)"
+
+seat link "Link's controller" color "#2a7d3f"
+seat level "The level" color "#8a5a00"
+seat clock "The clock" color "#5b6b8c"
+group act "What Link is doing"
+group tgt "Targeting"
+group hand "In hand"
+group shield "Shield"
+group age "Age"
+group boots "Boots"
+group str "Strength"
+group lens "Lens of Truth"
+group mask "Mask"
+group farore "Farore's Wind"
+group place "Place"
+group enemy "Enemy"
+group front "In front of Link"
+
+state on_foot "On foot" marks 1 in act at 0 0
+state airborne "In the air" in act at 0 0
+state backflip "Backflipping" in act at 0 0
+state hanging "Hanging from a ledge" in act at 0 0
+state climbing "Climbing" in act at 0 0
+state crawling "Crawling" in act at 0 0
+state rolling "Rolling" in act at 0 0
+state bonked "Bonked" in act at 0 0
+state swimming "Swimming" in act at 0 0
+state diving "Diving" in act at 0 0
+state sunk "Walking underwater" in act at 0 0
+state riding "Riding Epona" in act at 0 0
+state swinging "Swinging" in act at 0 0
+state charging "Charging a spin" in act at 0 0
+state charged "Spin ready" in act at 0 0
+state full "Great spin ready" in act at 0 0
+state spinning "Spinning" in act at 0 0
+state great_spin "Great spinning" in act at 0 0
+state jump_attack "Jump attack" in act at 0 0
+state finish "Landing strike" in act at 0 0
+state guarding "Guarding" in act at 0 0
+state guard_moving "Guarding on the move" in act at 0 0
+state crouch_stab "Crouch stab" in act at 0 0
+state looking "Looking around" in act at 0 0
+state aim_slingshot "Aiming the Slingshot" in act at 0 0
+state aim_bow "Aiming the Bow" in act at 0 0
+state aim_hookshot "Aiming the Hookshot" in act at 0 0
+state hooked "Pulled by the Hookshot" in act at 0 0
+state boomerang "Boomerang in flight" in act at 0 0
+state ocarina "Playing the ocarina" in act at 0 0
+state door "Going through a door" in act at 0 0
+state chest "Opening a chest" in act at 0 0
+state talking "Talking" in act at 0 0
+state pushing "Holding a block" in act at 0 0
+state knocked "Knocked back" in act at 0 0
+state free "Not targeting" marks 1 in tgt at 0 0
+state z "Z-targeting, no enemy" in tgt at 0 0
+state battle "Locked onto an enemy" in tgt at 0 0
+state empty "Nothing in hand" marks 1 in hand at 0 0
+state sword "Sword out" in hand at 0 0
+state big_sword "Biggoron's Sword out" in hand at 0 0
+state stick "Deku Stick out" in hand at 0 0
+state hammer "Megaton Hammer out" in hand at 0 0
+state object "Carrying something" in hand at 0 0
+state bottle "Bottle out" in hand at 0 0
+state no_shield "No shield" marks 1 in shield at 0 0
+state deku "Deku Shield" in shield at 0 0
+state hylian "Hylian Shield" in shield at 0 0
+state mirror "Mirror Shield" in shield at 0 0
+state child "Child" marks 1 in age at 0 0
+state adult "Adult" in age at 0 0
+state kokiri_boots "Kokiri Boots" marks 1 in boots at 0 0
+state iron "Iron Boots" in boots at 0 0
+state hover "Hover Boots" in boots at 0 0
+state no_str "No bracelet" marks 1 in str at 0 0
+state bracelet "Goron's Bracelet" in str at 0 0
+state silver "Silver Gauntlets" in str at 0 0
+state gold "Golden Gauntlets" in str at 0 0
+state lens_off "Lens away" marks 1 in lens at 0 0
+state lens_on "Looking through the Lens" in lens at 0 0
+state no_mask "No mask" marks 1 in mask at 0 0
+state mask "Wearing a mask" in mask at 0 0
+state no_point "No warp point" marks 1 in farore at 0 0
+state point "Warp point set" in farore at 0 0
+state outdoors "Not an indoor room" marks 1 in place at 0 0
+state indoors "In an indoor room" in place at 0 0
+state no_enemy "No enemy near" marks 1 in enemy at 0 0
+state enemy "An enemy near" in enemy at 0 0
+state nothing "Nothing in front" marks 1 in front at 0 0
+state door_front "A door" in front at 0 0
+state chest_front "A chest" in front at 0 0
+state ledge_front "A ledge" in front at 0 0
+state wall_front "A climbable wall" in front at 0 0
+state crawl_front "A crawlspace" in front at 0 0
+state block_front "A pushable block" in front at 0 0
+state talker_front "Someone to talk to" in front at 0 0
+state lift_front "Something to lift" in front at 0 0
+state rock_front "A silver rock" in front at 0 0
+state giant_front "A giant block" in front at 0 0
+state horse_front "Epona" in front at 0 0
+state pedestal_front "The Master Sword pedestal" in front at 0 0
+state soil_front "Soft soil" in front at 0 0
+state magic "Magic" marks 48 at 0 0
+state explosives "Explosives out" at 0 0
+
+# auto-jump: speed > 3, 20 units above the floor (P:5866-5870); Link has no jump button
+verb v1_run_off_an_edge "Run off an edge" by level at 0 0
+  take on_foot
+  give airborne
+
+# P:9615
+verb v2_land "Land" by clock at 0 0
+  take airborne
+  give on_foot
+
+# ledge under 150 units up (P:9615)
+verb v3_catch_a_ledge "Catch a ledge" by level at 0 0
+  take airborne
+  give hanging
+
+# func_8083A6AC
+verb v4_ease_off_an_edge "Ease off an edge" by level at 0 0
+  take on_foot
+  give hanging
+
+# P:12750
+verb v5_pull_up "Pull up" by link at 0 0
+  take hanging
+  give on_foot
+
+# P:12750
+verb v6_let_go "Let go" by link at 0 0
+  take hanging
+  give airborne
+
+# handler 12; height picks hop, step, or grab (P:11280-11291)
+verb v7_climb_onto_the_ledge "Climb onto the ledge" by link at 0 0
+  need on_foot
+  need ledge_front
+  unless object
+
+# climbable wall, ledge at least 79 up (P:7490)
+verb v8_grab_the_wall "Grab the wall" by link at 0 0
+  take on_foot
+  give climbing
+  need wall_front
+  unless object
+
+# P:10950
+verb v9_drop_off "Drop off" by link at 0 0
+  take climbing
+  give on_foot
+
+# P:7490
+verb v10_climb_over_the_top "Climb over the top" by level at 0 0
+  take climbing
+  give on_foot
+
+# child only (P:7610)
+verb v11_crawl_in "Crawl in" by link at 0 0
+  take on_foot
+  give crawling
+  need crawl_front
+  need child
+
+# P:7610
+verb v12_crawl_out "Crawl out" by level at 0 0
+  take crawling
+  give on_foot
+
+# handler Roll (P:6489); not in battle stance (P:4169)
+verb v13_roll "Roll" by link at 0 0
+  take on_foot
+  give rolling
+  need free
+
+# only with no melee weapon in hand (P:6400-6405)
+verb v14_roll_while_z_targeting "Roll while Z-targeting" by link at 0 0
+  take on_foot
+  give rolling
+  need z
+  unless sword
+  unless big_sword
+  unless stick
+  unless hammer
+
+# i-frames from frame 8 for 10 frames (P:9701)
+verb v15_roll_ends "Roll ends" by clock at 0 0
+  take rolling
+  give on_foot
+
+# from frame 15 (P:9749)
+verb v16_slash_out_of_the_roll "Slash out of the roll" by link at 0 0
+  take rolling
+  give swinging
+  unless empty
+  unless object
+  unless bottle
+
+# P:9749, P:2947-2955
+verb v17_draw_and_slash_out_of_the_roll "Draw and slash out of the roll" by link at 0 0
+  take rolling
+  give swinging
+  take empty
+  give sword
+
+# speed 7 or more (P:9716-9745)
+verb v18_bonk_into_a_wall "Bonk into a wall" by level at 0 0
+  take rolling
+  give bonked
+
+# P:9716
+verb v19_recover "Recover" by clock at 0 0
+  take bonked
+  give on_foot
+
+# Z-targeting, not indoors (P:6385-6410)
+verb v20_sidehop "Sidehop" by link at 0 0
+  take on_foot
+  give airborne
+  unless free
+  unless indoors
+
+# Z-targeting, not indoors; no air attack (P:9588)
+verb v21_backflip "Backflip" by link at 0 0
+  take on_foot
+  give backflip
+  unless free
+  unless indoors
+
+# P:9588
+verb v22_land "Land" by clock at 0 0
+  take backflip
+  give on_foot
+
+# P:3544
+verb v23_wade_into_deep_water "Wade into deep water" by level at 0 0
+  take on_foot
+  give swimming
+  unless iron
+
+# Iron Boots ignore buoyancy (P:11885)
+verb v24_sink_to_the_bottom "Sink to the bottom" by level at 0 0
+  take on_foot
+  give sunk
+  need iron
+
+# not with Iron Boots (P:6862)
+verb v25_dive "Dive" by link at 0 0
+  take swimming
+  give diving
+
+# depth by scale (P:10889)
+verb v26_surface "Surface" by clock at 0 0
+  take diving
+  give swimming
+
+# handler 12 while swimming (P:4169)
+verb v27_climb_out_of_the_water "Climb out of the water" by level at 0 0
+  take swimming
+  give on_foot
+
+# P:11885
+verb v28_walk_out_of_the_water "Walk out of the water" by level at 0 0
+  take sunk
+  give on_foot
+
+# handler 3 (P:7194); no age check found, the child has no horse (z_en_horse.c:876)
+verb v29_mount_epona "Mount Epona" by link at 0 0
+  take on_foot
+  give riding
+  need horse_front
+  need adult
+
+# P:7194
+verb v30_dismount "Dismount" by link at 0 0
+  take riding
+  give on_foot
+
+# six carrots (z_en_horse.c:3334)
+verb v31_spur_epona "Spur Epona" by link at 0 0
+  need riding
+
+# riding forces the Bow onto B (ZP:679-735)
+verb v32_shoot_from_the_saddle "Shoot from the saddle" by link at 0 0
+  need riding
+
+# P:5588
+verb v33_z_target "Z-target" by link at 0 0
+  take free
+  give z
+
+# a hostile target sets battle stance (P:4169)
+verb v34_lock_onto_the_enemy "Lock onto the enemy" by link at 0 0
+  take free
+  give battle
+  need enemy
+
+# P:5588
+verb v35_stop_targeting "Stop targeting" by link at 0 0
+  take z
+  give free
+
+# P:5588
+verb v36_stop_targeting "Stop targeting" by link at 0 0
+  take battle
+  give free
+
+# no target left
+verb v37_lose_the_lock "Lose the lock" by world at 0 0
+  take battle
+  give free
+  unless enemy
+
+# content
+verb v38_an_enemy_comes_near "An enemy comes near" by level at 0 0
+  take no_enemy
+  give enemy
+
+# content
+verb v39_the_enemy_leaves_or_dies "The enemy leaves or dies" by level at 0 0
+  take enemy
+  give no_enemy
+
+# handler 0, free stance only (P:6293)
+verb v40_look_around "Look around" by link at 0 0
+  take on_foot
+  give looking
+  need free
+
+# P:6293
+verb v41_stop_looking "Stop looking" by link at 0 0
+  take looking
+  give on_foot
+
+# R, shield equipped, not targeting (P:6504-6512)
+verb v42_raise_the_shield "Raise the shield" by link at 0 0
+  take on_foot
+  give guarding
+  need free
+  unless no_shield
+
+# a child with the Hylian Shield guards standing even when targeting (P:6510)
+verb v43_raise_the_hylian_shield_while_targeting "Raise the Hylian Shield while targeting" by link at 0 0
+  take on_foot
+  give guarding
+  unless free
+  need child
+  need hylian
+
+# Z + R, not a child with the Hylian Shield (P:2872-2880)
+verb v44_guard_on_the_move "Guard on the move" by link at 0 0
+  take on_foot
+  give guard_moving
+  unless free
+  unless no_shield
+  need adult
+
+# P:2872-2880
+verb v45_guard_on_the_move "Guard on the move" by link at 0 0
+  take on_foot
+  give guard_moving
+  unless free
+  need child
+  need deku
+
+# P:6504
+verb v46_lower_the_shield "Lower the shield" by link at 0 0
+  take guarding
+  give on_foot
+
+# P:2872
+verb v47_lower_the_shield "Lower the shield" by link at 0 0
+  take guard_moving
+  give on_foot
+
+# B with a melee weapon (P:8962)
+verb v48_crouch_stab "Crouch stab" by link at 0 0
+  take guarding
+  give crouch_stab
+  unless empty
+  unless object
+  unless bottle
+  need adult
+
+# not a child with the Hylian Shield (P:8963)
+verb v49_crouch_stab "Crouch stab" by link at 0 0
+  take guarding
+  give crouch_stab
+  unless empty
+  unless object
+  unless bottle
+  need child
+  unless hylian
+
+# repeatable (P:8962)
+verb v50_back_to_guarding "Back to guarding" by clock at 0 0
+  take crouch_stab
+  give guarding
+
+# bounce, no damage (P:4892-4920)
+verb v51_block_a_hit "Block a hit" by level at 0 0
+  need guarding
+
+# P:4892-4920
+verb v52_block_a_hit "Block a hit" by level at 0 0
+  need guard_moving
+
+# P:4922
+verb v53_fire_burns_the_deku_shield "Fire burns the Deku Shield" by level at 0 0
+  take deku
+  give no_shield
+  need guarding
+
+# handler 7 (P:14635); slash kinds share damage
+verb v54_slash "Slash" by link at 0 0
+  take on_foot
+  give swinging
+  unless empty
+  unless object
+  unless bottle
+  unless stick
+  unless hammer
+
+# one press draws and swings (P:2947-2955)
+verb v55_draw_and_slash "Draw and slash" by link at 0 0
+  take on_foot
+  give swinging
+  take empty
+  give sword
+
+# every direction is a forward slash (P:4487-4489)
+verb v56_swing_the_deku_stick "Swing the Deku Stick" by link at 0 0
+  take on_foot
+  give swinging
+  need stick
+
+# overhead swing sends a shockwave (P:14702-14720)
+verb v57_swing_the_megaton_hammer "Swing the Megaton Hammer" by link at 0 0
+  take on_foot
+  give swinging
+  need hammer
+
+# the third same-direction swing is the combo finisher, same damage (P:4527-4533)
+verb v58_swing_again "Swing again" by link at 0 0
+  need swinging
+  unless empty
+  unless object
+  unless bottle
+
+# breaks on a hit (P:9000)
+verb v59_the_deku_stick_breaks "The Deku Stick breaks" by level at 0 0
+  take stick
+  give empty
+  need swinging
+
+# P:14635
+verb v60_recover "Recover" by clock at 0 0
+  take swinging
+  give on_foot
+
+# hold B after a swing; not a Deku Stick (P:6573-6582); the Hammer is not excluded in code, unconfirmed in play
+verb v61_hold_to_charge_a_spin "Hold to charge a spin" by link at 0 0
+  take swinging
+  give charging
+  unless empty
+  unless object
+  unless bottle
+  unless stick
+
+# 2% a frame (P:9873)
+verb v62_charge_passes_10 "Charge passes 10%" by clock at 0 0
+  take charging
+  give charged
+
+# P:9829
+verb v63_charge_passes_85 "Charge passes 85%" by clock at 0 0
+  take charged
+  give full
+
+# below 10% cancels (P:9897-9901)
+verb v64_let_go_too_soon "Let go too soon" by link at 0 0
+  take charging
+  give on_foot
+
+# 2 magic, asked at 10% and spent on release (P:4432)
+verb v65_release_a_spin_with_magic "Release a spin with magic" by link at 0 0
+  take charged
+  give spinning
+  take 2 magic
+
+# without magic it is a spin with slash damage (z_en_m_thunder.c:103-108)
+verb v66_release_a_spin "Release a spin" by link at 0 0
+  take charged
+  give spinning
+  unless 2 magic
+
+# rotating the stick during the charge (P:9829)
+verb v67_spin_the_stick_and_release "Spin the stick and release" by link at 0 0
+  take charged
+  give great_spin
+  take 2 magic
+
+# z_en_m_thunder.c:103-108
+verb v68_spin_the_stick_and_release "Spin the stick and release" by link at 0 0
+  take charged
+  give great_spin
+  unless 2 magic
+
+# 85% charge or more, jump damage (P:9829)
+verb v69_release_a_great_spin "Release a great spin" by link at 0 0
+  take full
+  give great_spin
+  take 2 magic
+
+# z_en_m_thunder.c:103-108
+verb v70_release_a_great_spin "Release a great spin" by link at 0 0
+  take full
+  give great_spin
+  unless 2 magic
+
+# 8 i-frames on release (P:9836)
+verb v71_spin_ends "Spin ends" by clock at 0 0
+  take spinning
+  give on_foot
+
+# P:9836
+verb v72_spin_ends "Spin ends" by clock at 0 0
+  take great_spin
+  give on_foot
+
+# stick rotation then B; not a Stick or the Hammer (P:4378)
+verb v73_quick_spin "Quick spin" by link at 0 0
+  take on_foot
+  give spinning
+  unless empty
+  unless object
+  unless bottle
+  unless stick
+  unless hammer
+
+# P:4378, P:2947
+verb v74_draw_and_quick_spin "Draw and quick spin" by link at 0 0
+  take on_foot
+  give spinning
+  take empty
+  give sword
+
+# Z + A with a melee weapon, not indoors (P:6402-6403, P:6388)
+verb v75_jump_attack "Jump attack" by link at 0 0
+  take on_foot
+  give jump_attack
+  unless free
+  unless empty
+  unless object
+  unless bottle
+  unless indoors
+
+# B while airborne (P:9588)
+verb v76_jump_attack_from_the_air "Jump attack from the air" by link at 0 0
+  take airborne
+  give jump_attack
+  unless empty
+  unless object
+  unless bottle
+
+# JUMPSLASH_FINISH (P:9814-9817)
+verb v77_land_the_jump_attack "Land the jump attack" by clock at 0 0
+  take jump_attack
+  give finish
+
+# P:9817
+verb v78_recover "Recover" by clock at 0 0
+  take finish
+  give on_foot
+
+# A standing still (P:6493-6497)
+verb v79_put_away_the_sword "Put away the sword" by link at 0 0
+  take sword
+  give empty
+  need on_foot
+
+# two-handed (PL:886), adult gear (KS:778)
+verb v80_ready_the_biggoron_s_sword "Ready the Biggoron's Sword" by link at 0 0
+  take empty
+  give big_sword
+  need on_foot
+  need adult
+
+# P:6493
+verb v81_put_away_the_biggoron_s_sword "Put away the Biggoron's Sword" by link at 0 0
+  take big_sword
+  give empty
+  need on_foot
+
+# child item (KS:751)
+verb v82_ready_a_deku_stick "Ready a Deku Stick" by link at 0 0
+  take empty
+  give stick
+  need on_foot
+  need child
+
+# P:6493
+verb v83_put_away_the_deku_stick "Put away the Deku Stick" by link at 0 0
+  take stick
+  give empty
+  need on_foot
+
+# adult item (KS:751)
+verb v84_ready_the_megaton_hammer "Ready the Megaton Hammer" by link at 0 0
+  take empty
+  give hammer
+  need on_foot
+  need adult
+
+# P:6493
+verb v85_put_away_the_megaton_hammer "Put away the Megaton Hammer" by link at 0 0
+  take hammer
+  give empty
+  need on_foot
+
+# P:6614
+verb v86_take_out_a_bottle "Take out a bottle" by link at 0 0
+  take empty
+  give bottle
+  need on_foot
+
+# P:6493
+verb v87_put_away_the_bottle "Put away the bottle" by link at 0 0
+  take bottle
+  give empty
+  need on_foot
+
+# catch a bug or fairy (P:6614-6630)
+verb v88_swing_the_bottle "Swing the bottle" by link at 0 0
+  need bottle
+  need on_foot
+
+# allowed even when locked on (P:3600)
+verb v89_drink_from_the_bottle "Drink from the bottle" by link at 0 0
+  need bottle
+  need on_foot
+
+# hands empty (P:7413)
+verb v90_pick_up "Pick up" by link at 0 0
+  take empty
+  give object
+  need on_foot
+  need lift_front
+
+# Silver Gauntlets or better (P:7430-7433); a child is capped at the bracelet (PL:816)
+verb v91_lift_the_silver_rock "Lift the silver rock" by link at 0 0
+  take empty
+  give object
+  need on_foot
+  need rock_front
+  need adult
+  unless no_str
+  unless bracelet
+
+# Golden Gauntlets (P:7821-7824); a child is capped at the bracelet (PL:816)
+verb v92_lift_the_giant_block "Lift the giant block" by link at 0 0
+  take empty
+  give object
+  need on_foot
+  need giant_front
+  need gold
+  need adult
+
+# at most 3 explosives out (P:3553)
+verb v93_pull_out_a_bomb "Pull out a bomb" by link at 0 0
+  take empty
+  give object
+  need on_foot
+  unless 3 explosives
+  give explosives
+
+# moving (P:7461-7468)
+verb v94_throw "Throw" by link at 0 0
+  take object
+  give empty
+  need on_foot
+
+# standing still (P:7476-7478)
+verb v95_set_it_down "Set it down" by link at 0 0
+  take object
+  give empty
+  need on_foot
+
+# always set down (P:7465), cap of 3 (P:3553)
+verb v96_set_down_a_bombchu "Set down a Bombchu" by link at 0 0
+  need on_foot
+  unless object
+  unless 3 explosives
+  give explosives
+
+# P:3553
+verb v97_an_explosive_goes_off "An explosive goes off" by clock at 0 0
+  take explosives
+
+# child item (KS:751); carrying blocks items (P:2665)
+verb v98_ready_the_slingshot "Ready the Slingshot" by link at 0 0
+  take on_foot
+  give aim_slingshot
+  need child
+  unless object
+
+# first-person or Z-aim (P:3055)
+verb v99_fire_a_seed "Fire a seed" by link at 0 0
+  need aim_slingshot
+
+# P:3055
+verb v100_lower_the_slingshot "Lower the Slingshot" by link at 0 0
+  take aim_slingshot
+  give on_foot
+
+# adult item (KS:751)
+verb v101_ready_the_bow "Ready the Bow" by link at 0 0
+  take on_foot
+  give aim_bow
+  need adult
+  unless object
+
+# P:3055
+verb v102_shoot_an_arrow "Shoot an arrow" by link at 0 0
+  need aim_bow
+
+# 4 magic (P:1696)
+verb v103_shoot_a_fire_or_ice_arrow "Shoot a fire or ice arrow" by link at 0 0
+  need aim_bow
+  take 4 magic
+
+# 8 magic (P:1696)
+verb v104_shoot_a_light_arrow "Shoot a light arrow" by link at 0 0
+  need aim_bow
+  take 8 magic
+
+# P:3055
+verb v105_lower_the_bow "Lower the Bow" by link at 0 0
+  take aim_bow
+  give on_foot
+
+# adult item (KS:751)
+verb v106_ready_the_hookshot "Ready the Hookshot" by link at 0 0
+  take on_foot
+  give aim_hookshot
+  need adult
+  unless object
+
+# pulls small things to Link
+verb v107_fire_the_hookshot "Fire the Hookshot" by link at 0 0
+  need aim_hookshot
+
+# hookable surface (PL:624)
+verb v108_the_hook_catches "The hook catches" by level at 0 0
+  take aim_hookshot
+  give hooked
+
+# the one item usable in water (P:3544)
+verb v109_fire_the_hookshot_from_the_bottom "Fire the Hookshot from the bottom" by link at 0 0
+  take sunk
+  give hooked
+
+# PLAYER_STATE3_FLYING_WITH_HOOKSHOT (PL:624)
+verb v110_arrive "Arrive" by clock at 0 0
+  take hooked
+  give on_foot
+
+# P:3055
+verb v111_lower_the_hookshot "Lower the Hookshot" by link at 0 0
+  take aim_hookshot
+  give on_foot
+
+# child item (KS:751)
+verb v112_throw_the_boomerang "Throw the Boomerang" by link at 0 0
+  take on_foot
+  give boomerang
+  need child
+  unless object
+
+# PLAYER_STATE1_USING_BOOMERANG
+verb v113_the_boomerang_comes_back "The Boomerang comes back" by clock at 0 0
+  take boomerang
+  give on_foot
+
+# not indoors (P:6591)
+verb v114_throw_a_deku_nut "Throw a Deku Nut" by link at 0 0
+  need on_foot
+  unless indoors
+  unless object
+
+# 12 magic (P:1692); C buttons are off in water and on horseback (ZP:679, P:3544)
+verb v115_cast_din_s_fire "Cast Din's Fire" by link at 0 0
+  need on_foot
+  take 12 magic
+  unless object
+
+# 24 magic (P:1692)
+verb v116_cast_nayru_s_love "Cast Nayru's Love" by link at 0 0
+  need on_foot
+  take 24 magic
+  unless object
+
+# 12 magic (P:1692)
+verb v117_cast_farore_s_wind "Cast Farore's Wind" by link at 0 0
+  take no_point
+  give point
+  need on_foot
+  take 12 magic
+  unless object
+
+# no magic (P:3578)
+verb v118_warp_to_farore_s_point "Warp to Farore's point" by link at 0 0
+  take point
+  give no_point
+  need on_foot
+  unless object
+
+# free to switch on (P:3559)
+verb v119_look_through_the_lens "Look through the Lens" by link at 0 0
+  take lens_off
+  give lens_on
+  need magic
+  unless object
+
+# P:3559
+verb v120_put_the_lens_away "Put the Lens away" by link at 0 0
+  take lens_on
+  give lens_off
+
+# 1 every 80 frames (P:3559)
+verb v121_the_lens_drains_magic "The Lens drains magic" by clock at 0 0
+  need lens_on
+  take magic
+
+# off at 0 magic (P:3559)
+verb v122_the_lens_closes "The Lens closes" by world at 0 0
+  take lens_on
+  give lens_off
+  unless magic
+
+# not under hostile lock-on (P:3598-3605)
+verb v123_play_the_ocarina "Play the ocarina" by link at 0 0
+  take on_foot
+  give ocarina
+  unless battle
+  unless object
+
+# P:6030
+verb v124_stop_playing "Stop playing" by link at 0 0
+  take ocarina
+  give on_foot
+
+# child item (KS:805); no movement effect (P:11799)
+verb v125_put_on_a_mask "Put on a mask" by link at 0 0
+  take no_mask
+  give mask
+  need child
+
+# P:3588-3594
+verb v126_take_off_the_mask "Take off the mask" by link at 0 0
+  take mask
+  give no_mask
+
+# child item (KS:805)
+verb v127_plant_a_magic_bean "Plant a magic bean" by link at 0 0
+  need on_foot
+  need soil_front
+  need child
+
+# handler 1 (P:5372); not when hostile-locked (P:4169)
+verb v128_open_the_door "Open the door" by link at 0 0
+  take on_foot
+  give door
+  need door_front
+  unless battle
+  unless object
+
+# P:5372
+verb v129_through_the_door "Through the door" by clock at 0 0
+  take door
+  give on_foot
+
+# handler 2 (P:7331)
+verb v130_open_the_chest "Open the chest" by link at 0 0
+  take on_foot
+  give chest
+  need chest_front
+  unless object
+
+# P:7331
+verb v131_take_what_was_inside "Take what was inside" by clock at 0 0
+  take chest
+  give on_foot
+
+# blocked while carrying (P:6213-6220)
+verb v132_talk "Talk" by link at 0 0
+  take on_foot
+  give talking
+  need talker_front
+  unless object
+
+# P:6176
+verb v133_finish_talking "Finish talking" by link at 0 0
+  take talking
+  give on_foot
+
+# A held, ledge at least 39 up (P:7808-7835); not when hostile-locked (P:4169)
+verb v134_grab_the_block "Grab the block" by link at 0 0
+  take on_foot
+  give pushing
+  need block_front
+  unless battle
+  unless object
+
+# P:7808
+verb v135_push_or_pull "Push or pull" by link at 0 0
+  need pushing
+
+# P:7808
+verb v136_let_go_of_the_block "Let go of the block" by link at 0 0
+  take pushing
+  give on_foot
+
+# seven years pass (P:7414)
+verb v137_draw_the_master_sword "Draw the Master Sword" by link at 0 0
+  take child
+  give adult
+  need on_foot
+  need pedestal_front
+
+# P:7414
+verb v138_return_the_master_sword "Return the Master Sword" by link at 0 0
+  take adult
+  give child
+  need on_foot
+  need pedestal_front
+
+# content
+verb v139_come_up_to_a_door "Come up to a door" by level at 0 0
+  take nothing
+  give door_front
+
+# content
+verb v140_move_away "Move away" by level at 0 0
+  take door_front
+  give nothing
+
+# content
+verb v141_come_up_to_a_chest "Come up to a chest" by level at 0 0
+  take nothing
+  give chest_front
+
+# content
+verb v142_move_away "Move away" by level at 0 0
+  take chest_front
+  give nothing
+
+# content
+verb v143_come_up_to_a_ledge "Come up to a ledge" by level at 0 0
+  take nothing
+  give ledge_front
+
+# content
+verb v144_move_away "Move away" by level at 0 0
+  take ledge_front
+  give nothing
+
+# content
+verb v145_come_up_to_a_climbable_wall "Come up to a climbable wall" by level at 0 0
+  take nothing
+  give wall_front
+
+# content
+verb v146_move_away "Move away" by level at 0 0
+  take wall_front
+  give nothing
+
+# content
+verb v147_come_up_to_a_crawlspace "Come up to a crawlspace" by level at 0 0
+  take nothing
+  give crawl_front
+
+# content
+verb v148_move_away "Move away" by level at 0 0
+  take crawl_front
+  give nothing
+
+# content
+verb v149_come_up_to_a_pushable_block "Come up to a pushable block" by level at 0 0
+  take nothing
+  give block_front
+
+# content
+verb v150_move_away "Move away" by level at 0 0
+  take block_front
+  give nothing
+
+# content
+verb v151_come_up_to_someone_to_talk_to "Come up to someone to talk to" by level at 0 0
+  take nothing
+  give talker_front
+
+# content
+verb v152_move_away "Move away" by level at 0 0
+  take talker_front
+  give nothing
+
+# content
+verb v153_come_up_to_something_to_lift "Come up to something to lift" by level at 0 0
+  take nothing
+  give lift_front
+
+# content
+verb v154_move_away "Move away" by level at 0 0
+  take lift_front
+  give nothing
+
+# content
+verb v155_come_up_to_a_silver_rock "Come up to a silver rock" by level at 0 0
+  take nothing
+  give rock_front
+
+# content
+verb v156_move_away "Move away" by level at 0 0
+  take rock_front
+  give nothing
+
+# content
+verb v157_come_up_to_a_giant_block "Come up to a giant block" by level at 0 0
+  take nothing
+  give giant_front
+
+# content
+verb v158_move_away "Move away" by level at 0 0
+  take giant_front
+  give nothing
+
+# content
+verb v159_come_up_to_epona "Come up to epona" by level at 0 0
+  take nothing
+  give horse_front
+
+# content
+verb v160_move_away "Move away" by level at 0 0
+  take horse_front
+  give nothing
+
+# content
+verb v161_come_up_to_the_master_sword_pedestal "Come up to the master sword pedestal" by level at 0 0
+  take nothing
+  give pedestal_front
+
+# content
+verb v162_move_away "Move away" by level at 0 0
+  take pedestal_front
+  give nothing
+
+# content
+verb v163_come_up_to_soft_soil "Come up to soft soil" by level at 0 0
+  take nothing
+  give soil_front
+
+# content
+verb v164_move_away "Move away" by level at 0 0
+  take soil_front
+  give nothing
+
+# indoor rooms block jumps and nuts (include/room.h:110)
+verb v165_enter_an_indoor_room "Enter an indoor room" by level at 0 0
+  take outdoors
+  give indoors
+
+# content
+verb v166_go_outside "Go outside" by level at 0 0
+  take indoors
+  give outdoors
+
+# content
+verb v167_pick_up_a_magic_jar "Pick up a magic jar" by level at 0 0
+  unless 48 magic
+  give magic
+
+# shields by age (KS:784-801)
+verb v168_equip_the_deku_shield "Equip the Deku Shield" by link at 0 0
+  take hylian
+  give deku
+  need child
+
+# shields by age (KS:784-801)
+verb v169_equip_the_deku_shield "Equip the Deku Shield" by link at 0 0
+  take mirror
+  give deku
+  need child
+
+# shields by age (KS:784-801)
+verb v170_equip_the_hylian_shield "Equip the Hylian Shield" by link at 0 0
+  take deku
+  give hylian
+
+# shields by age (KS:784-801)
+verb v171_equip_the_hylian_shield "Equip the Hylian Shield" by link at 0 0
+  take mirror
+  give hylian
+
+# shields by age (KS:784-801)
+verb v172_equip_the_mirror_shield "Equip the Mirror Shield" by link at 0 0
+  take deku
+  give mirror
+  need adult
+
+# shields by age (KS:784-801)
+verb v173_equip_the_mirror_shield "Equip the Mirror Shield" by link at 0 0
+  take hylian
+  give mirror
+  need adult
+
+# KS:784
+verb v174_equip_the_deku_shield "Equip the Deku Shield" by link at 0 0
+  take no_shield
+  give deku
+  need child
+
+# KS:784
+verb v175_equip_the_hylian_shield "Equip the Hylian Shield" by link at 0 0
+  take no_shield
+  give hylian
+
+# boots by age (KS:784-801)
+verb v176_equip_the_kokiri_boots "Equip the Kokiri Boots" by link at 0 0
+  take iron
+  give kokiri_boots
+
+# boots by age (KS:784-801)
+verb v177_equip_the_kokiri_boots "Equip the Kokiri Boots" by link at 0 0
+  take hover
+  give kokiri_boots
+
+# boots by age (KS:784-801)
+verb v178_equip_the_iron_boots "Equip the Iron Boots" by link at 0 0
+  take kokiri_boots
+  give iron
+  need adult
+
+# boots by age (KS:784-801)
+verb v179_equip_the_iron_boots "Equip the Iron Boots" by link at 0 0
+  take hover
+  give iron
+  need adult
+
+# boots by age (KS:784-801)
+verb v180_equip_the_hover_boots "Equip the Hover Boots" by link at 0 0
+  take kokiri_boots
+  give hover
+  need adult
+
+# boots by age (KS:784-801)
+verb v181_equip_the_hover_boots "Equip the Hover Boots" by link at 0 0
+  take iron
+  give hover
+  need adult
+
+# content
+verb v182_find_the_goron_s_bracelet "Find the Goron's Bracelet" by level at 0 0
+  take no_str
+  give bracelet
+
+# content
+verb v183_find_the_silver_gauntlets "Find the Silver Gauntlets" by level at 0 0
+  take bracelet
+  give silver
+
+# content
+verb v184_find_the_golden_gauntlets "Find the Golden Gauntlets" by level at 0 0
+  take silver
+  give gold
+
+# knockback (P:4892)
+verb v185_take_a_hit "Take a hit" by level at 0 0
+  take on_foot
+  give knocked
+
+# knockback (P:4892)
+verb v186_take_a_hit "Take a hit" by level at 0 0
+  take swinging
+  give knocked
+
+# knockback (P:4892)
+verb v187_take_a_hit "Take a hit" by level at 0 0
+  take charging
+  give knocked
+
+# knockback (P:4892)
+verb v188_take_a_hit "Take a hit" by level at 0 0
+  take charged
+  give knocked
+
+# knockback (P:4892)
+verb v189_take_a_hit "Take a hit" by level at 0 0
+  take full
+  give knocked
+
+# knockback (P:4892)
+verb v190_take_a_hit "Take a hit" by level at 0 0
+  take finish
+  give knocked
+
+# knockback (P:4892)
+verb v191_take_a_hit "Take a hit" by level at 0 0
+  take crouch_stab
+  give knocked
+
+# knockback (P:4892)
+verb v192_take_a_hit "Take a hit" by level at 0 0
+  take looking
+  give knocked
+
+# knockback (P:4892)
+verb v193_take_a_hit "Take a hit" by level at 0 0
+  take aim_slingshot
+  give knocked
+
+# knockback (P:4892)
+verb v194_take_a_hit "Take a hit" by level at 0 0
+  take aim_bow
+  give knocked
+
+# knockback (P:4892)
+verb v195_take_a_hit "Take a hit" by level at 0 0
+  take aim_hookshot
+  give knocked
+
+# knockback (P:4892)
+verb v196_take_a_hit "Take a hit" by level at 0 0
+  take ocarina
+  give knocked
+
+# knockback (P:4892)
+verb v197_take_a_hit "Take a hit" by level at 0 0
+  take pushing
+  give knocked
+
+# knockback (P:4892)
+verb v198_take_a_hit "Take a hit" by level at 0 0
+  take boomerang
+  give knocked
+
+# P:4892
+verb v199_get_up "Get up" by clock at 0 0
+  take knocked
+  give on_foot
