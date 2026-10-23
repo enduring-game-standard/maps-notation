@@ -49,6 +49,7 @@ const geom = (l: Drawing['layout']) => JSON.stringify({
   n: Object.keys(l.nodes).sort().map((k) => [k, r1(l.nodes[k].x), r1(l.nodes[k].y)]),
   a: Object.keys(l.arcs).sort().map((k) => [k, l.arcs[k].map((p) => [r1(p.x), r1(p.y)])]),
 })
+const picture = (l: Drawing['layout']) => JSON.stringify({ n: Object.values(l.nodes).map((b) => [r1(b.x), r1(b.y), r1(b.w), r1(b.h)].join(',')).sort(), a: Object.values(l.arcs).map((p) => p.map((q) => `${r1(q.x)},${r1(q.y)}`).join(' ')).sort() })
 const geomNoSize = geom
 
 function clutter(d: Drawing) {
@@ -189,13 +190,16 @@ for (const dir of designDirs) {
       row.deterministic = geom(design.draw(clone(net), opts).layout) === geom(d.layout)
       row.positionBlind = geom(design.draw(withPositions(net, () => Math.round(rand() * 2000)), opts).layout) === geom(d.layout)
       const rn = renamed(net)
-      row.nameBlind = geomNoSize(unmapLayout(design.draw(rn.net, opts), rn.inv)) === geomNoSize(d.layout)
-      row.orderBlind = geom(design.draw(reordered(net), opts).layout) === geom(d.layout)
+      const rd = design.draw(rn.net, opts)
+      row.nameBlind = geomNoSize(unmapLayout(rd, rn.inv)) === geomNoSize(d.layout) ? true : picture(rd.layout) === picture(d.layout) ? 'same picture' : false
+      const od = design.draw(reordered(net), opts)
+      row.orderBlind = geom(od.layout) === geom(d.layout) ? true : picture(od.layout) === picture(d.layout) ? 'same picture' : false
       row.clutter = clutter(d)
     } catch (e: any) { row.error = String(e?.stack ?? e).split('\n').slice(0, 3).join(' | ') }
     R.scores[name] = row
   }
   for (const sub of shared) {
+    sub.files = sub.files.map((f) => f.replace(/\.maps$/, ''))
     const ids = [...sub.states, ...sub.verbs]
     const shapes = sub.files.map((f) => drawings.get(f) && relShape(drawings.get(f)!.layout, ids)).filter(Boolean) as { id: string; x: number; y: number }[][]
     let worst = 0
@@ -224,7 +228,7 @@ for (let i = 0; i < ds.length; i++) for (let j = i + 1; j < ds.length; j++) {
 }
 writeFileSync(join(OUT, 'report.json'), JSON.stringify(report, null, 1))
 
-const yes = (b: any) => (b === true ? 'yes' : b === false ? '**no**' : '–')
+const yes = (b: any) => (b === true ? 'yes' : b === false ? '**no**' : b === 'same picture' ? 'same picture' : '–')
 let md = `# Notation bakeoff report\n\nCorpus: ${scores.map((s) => s.name).join(', ')}\n\n`
 for (const [dir, R] of Object.entries<any>(report.designs)) {
   md += `## ${dir}: conformance ${R.conformance.length ? '**' + R.conformance.join('; ') + '**' : 'ok'}\n\n`
