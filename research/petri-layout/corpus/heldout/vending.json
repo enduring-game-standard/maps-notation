@@ -1,0 +1,113 @@
+{
+ "name": "vending",
+ "source": "held out",
+ "note": "vending machine: insert coin, choose tea or coffee, dispense, ready again",
+ "places": [
+  {
+   "id": "ready",
+   "label": "ready",
+   "tokens": 1
+  },
+  {
+   "id": "paid",
+   "label": "coin in"
+  },
+  {
+   "id": "tea",
+   "label": "brewing tea"
+  },
+  {
+   "id": "coffee",
+   "label": "brewing coffee"
+  },
+  {
+   "id": "cups",
+   "label": "cups",
+   "tokens": 5
+  }
+ ],
+ "transitions": [
+  {
+   "id": "coin",
+   "label": "insert coin"
+  },
+  {
+   "id": "pickT",
+   "label": "choose tea"
+  },
+  {
+   "id": "pickC",
+   "label": "choose coffee"
+  },
+  {
+   "id": "giveT",
+   "label": "dispense tea"
+  },
+  {
+   "id": "giveC",
+   "label": "dispense coffee"
+  },
+  {
+   "id": "refund",
+   "label": "refund"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "ready",
+   "to": "coin"
+  },
+  {
+   "from": "coin",
+   "to": "paid"
+  },
+  {
+   "from": "paid",
+   "to": "pickT"
+  },
+  {
+   "from": "paid",
+   "to": "pickC"
+  },
+  {
+   "from": "pickT",
+   "to": "tea"
+  },
+  {
+   "from": "pickC",
+   "to": "coffee"
+  },
+  {
+   "from": "tea",
+   "to": "giveT"
+  },
+  {
+   "from": "coffee",
+   "to": "giveC"
+  },
+  {
+   "from": "giveT",
+   "to": "ready"
+  },
+  {
+   "from": "giveC",
+   "to": "ready"
+  },
+  {
+   "from": "cups",
+   "to": "pickT"
+  },
+  {
+   "from": "cups",
+   "to": "pickC"
+  },
+  {
+   "from": "paid",
+   "to": "refund"
+  },
+  {
+   "from": "refund",
+   "to": "ready"
+  }
+ ]
+}

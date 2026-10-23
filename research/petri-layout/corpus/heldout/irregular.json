@@ -1,0 +1,103 @@
+{
+ "name": "irregular",
+ "source": "held out",
+ "note": "no modeled meaning: an arbitrary small net with a fork, a merge, a back arc and a side input",
+ "places": [
+  {
+   "id": "a",
+   "tokens": 1
+  },
+  {
+   "id": "b"
+  },
+  {
+   "id": "c"
+  },
+  {
+   "id": "d"
+  },
+  {
+   "id": "e"
+  },
+  {
+   "id": "f",
+   "tokens": 2
+  }
+ ],
+ "transitions": [
+  {
+   "id": "t1",
+   "label": ""
+  },
+  {
+   "id": "t2",
+   "label": ""
+  },
+  {
+   "id": "t3",
+   "label": ""
+  },
+  {
+   "id": "t4",
+   "label": ""
+  },
+  {
+   "id": "t5",
+   "label": ""
+  }
+ ],
+ "arcs": [
+  {
+   "from": "a",
+   "to": "t1"
+  },
+  {
+   "from": "t1",
+   "to": "b"
+  },
+  {
+   "from": "t1",
+   "to": "c"
+  },
+  {
+   "from": "b",
+   "to": "t2"
+  },
+  {
+   "from": "c",
+   "to": "t3"
+  },
+  {
+   "from": "f",
+   "to": "t3"
+  },
+  {
+   "from": "t2",
+   "to": "d"
+  },
+  {
+   "from": "t3",
+   "to": "d"
+  },
+  {
+   "from": "d",
+   "to": "t4"
+  },
+  {
+   "from": "t4",
+   "to": "e"
+  },
+  {
+   "from": "e",
+   "to": "t5"
+  },
+  {
+   "from": "t5",
+   "to": "a"
+  },
+  {
+   "from": "t3",
+   "to": "f"
+  }
+ ]
+}

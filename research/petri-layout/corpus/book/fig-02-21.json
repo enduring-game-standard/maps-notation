@@ -1,0 +1,72 @@
+{
+  "name": "fig-2.21",
+  "source": "Peterson fig 2.21",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 2
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    },
+    {
+      "id": "t5"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p1",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p2",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p3"
+    },
+    {
+      "from": "p3",
+      "to": "t5"
+    }
+  ],
+  "note": "t3 is a self-loop on p2; t5 is a sink transition with no outputs."
+}

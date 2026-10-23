@@ -1,0 +1,130 @@
+{
+ "name": "intersection",
+ "source": "held out",
+ "note": "two traffic lights that may never both be green; a shared token grants the crossing",
+ "places": [
+  {
+   "id": "r1",
+   "label": "NS red",
+   "tokens": 1
+  },
+  {
+   "id": "g1",
+   "label": "NS green"
+  },
+  {
+   "id": "y1",
+   "label": "NS yellow"
+  },
+  {
+   "id": "r2",
+   "label": "EW red",
+   "tokens": 1
+  },
+  {
+   "id": "g2",
+   "label": "EW green"
+  },
+  {
+   "id": "y2",
+   "label": "EW yellow"
+  },
+  {
+   "id": "x",
+   "label": "crossing free",
+   "tokens": 1
+  }
+ ],
+ "transitions": [
+  {
+   "id": "a1",
+   "label": "NS go"
+  },
+  {
+   "id": "b1",
+   "label": "NS slow"
+  },
+  {
+   "id": "c1",
+   "label": "NS stop"
+  },
+  {
+   "id": "a2",
+   "label": "EW go"
+  },
+  {
+   "id": "b2",
+   "label": "EW slow"
+  },
+  {
+   "id": "c2",
+   "label": "EW stop"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "r1",
+   "to": "a1"
+  },
+  {
+   "from": "a1",
+   "to": "g1"
+  },
+  {
+   "from": "g1",
+   "to": "b1"
+  },
+  {
+   "from": "b1",
+   "to": "y1"
+  },
+  {
+   "from": "y1",
+   "to": "c1"
+  },
+  {
+   "from": "c1",
+   "to": "r1"
+  },
+  {
+   "from": "r2",
+   "to": "a2"
+  },
+  {
+   "from": "a2",
+   "to": "g2"
+  },
+  {
+   "from": "g2",
+   "to": "b2"
+  },
+  {
+   "from": "b2",
+   "to": "y2"
+  },
+  {
+   "from": "y2",
+   "to": "c2"
+  },
+  {
+   "from": "c2",
+   "to": "r2"
+  },
+  {
+   "from": "x",
+   "to": "a1"
+  },
+  {
+   "from": "x",
+   "to": "a2"
+  },
+  {
+   "from": "c1",
+   "to": "x"
+  },
+  {
+   "from": "c2",
+   "to": "x"
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "name": "traffic-light",
+ "source": "held out",
+ "note": "one signal cycling red, green, yellow",
+ "places": [
+  {
+   "id": "red",
+   "label": "red",
+   "tokens": 1
+  },
+  {
+   "id": "green",
+   "label": "green"
+  },
+  {
+   "id": "yellow",
+   "label": "yellow"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "go",
+   "label": "go"
+  },
+  {
+   "id": "slow",
+   "label": "slow"
+  },
+  {
+   "id": "stop",
+   "label": "stop"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "red",
+   "to": "go"
+  },
+  {
+   "from": "go",
+   "to": "green"
+  },
+  {
+   "from": "green",
+   "to": "slow"
+  },
+  {
+   "from": "slow",
+   "to": "yellow"
+  },
+  {
+   "from": "yellow",
+   "to": "stop"
+  },
+  {
+   "from": "stop",
+   "to": "red"
+  }
+ ]
+}

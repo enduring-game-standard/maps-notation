@@ -1,0 +1,136 @@
+{
+ "name": "conversation",
+ "source": "held out",
+ "note": "Crawford conversation: two parties listen, think, speak; idle start picks who speaks first",
+ "places": [
+  {
+   "id": "idle",
+   "label": "idle",
+   "tokens": 1
+  },
+  {
+   "id": "l1",
+   "label": "A listens"
+  },
+  {
+   "id": "k1",
+   "label": "A thinks"
+  },
+  {
+   "id": "s1",
+   "label": "A speaks"
+  },
+  {
+   "id": "l2",
+   "label": "B listens"
+  },
+  {
+   "id": "k2",
+   "label": "B thinks"
+  },
+  {
+   "id": "s2",
+   "label": "B speaks"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "st1",
+   "label": "A starts"
+  },
+  {
+   "id": "st2",
+   "label": "B starts"
+  },
+  {
+   "id": "th1",
+   "label": "A forms reply"
+  },
+  {
+   "id": "x12",
+   "label": "A speaks to B"
+  },
+  {
+   "id": "th2",
+   "label": "B forms reply"
+  },
+  {
+   "id": "x21",
+   "label": "B speaks to A"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "idle",
+   "to": "st1"
+  },
+  {
+   "from": "st1",
+   "to": "s1"
+  },
+  {
+   "from": "st1",
+   "to": "l2"
+  },
+  {
+   "from": "idle",
+   "to": "st2"
+  },
+  {
+   "from": "st2",
+   "to": "s2"
+  },
+  {
+   "from": "st2",
+   "to": "l1"
+  },
+  {
+   "from": "s1",
+   "to": "x12"
+  },
+  {
+   "from": "l2",
+   "to": "x12"
+  },
+  {
+   "from": "x12",
+   "to": "k2"
+  },
+  {
+   "from": "x12",
+   "to": "l1"
+  },
+  {
+   "from": "s2",
+   "to": "x21"
+  },
+  {
+   "from": "l1",
+   "to": "x21"
+  },
+  {
+   "from": "x21",
+   "to": "k1"
+  },
+  {
+   "from": "x21",
+   "to": "l2"
+  },
+  {
+   "from": "k1",
+   "to": "th1"
+  },
+  {
+   "from": "th1",
+   "to": "s1"
+  },
+  {
+   "from": "k2",
+   "to": "th2"
+  },
+  {
+   "from": "th2",
+   "to": "s2"
+  }
+ ]
+}

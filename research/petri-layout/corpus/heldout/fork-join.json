@@ -1,0 +1,168 @@
+{
+ "name": "fork-join",
+ "source": "held out",
+ "note": "one job splits into three tasks of different lengths and joins",
+ "places": [
+  {
+   "id": "s",
+   "label": "start",
+   "tokens": 1
+  },
+  {
+   "id": "a1",
+   "label": "A step 1"
+  },
+  {
+   "id": "a2",
+   "label": "A step 2"
+  },
+  {
+   "id": "a3",
+   "label": "A step 3"
+  },
+  {
+   "id": "b1",
+   "label": "B step 1"
+  },
+  {
+   "id": "c1",
+   "label": "C step 1"
+  },
+  {
+   "id": "c2",
+   "label": "C step 2"
+  },
+  {
+   "id": "ad",
+   "label": "A done"
+  },
+  {
+   "id": "bd",
+   "label": "B done"
+  },
+  {
+   "id": "cd",
+   "label": "C done"
+  },
+  {
+   "id": "e",
+   "label": "end"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "fork",
+   "label": "fork"
+  },
+  {
+   "id": "ta1",
+   "label": "a1"
+  },
+  {
+   "id": "ta2",
+   "label": "a2"
+  },
+  {
+   "id": "ta3",
+   "label": "a3"
+  },
+  {
+   "id": "tb1",
+   "label": "b1"
+  },
+  {
+   "id": "tc1",
+   "label": "c1"
+  },
+  {
+   "id": "tc2",
+   "label": "c2"
+  },
+  {
+   "id": "join",
+   "label": "join"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "s",
+   "to": "fork"
+  },
+  {
+   "from": "fork",
+   "to": "a1"
+  },
+  {
+   "from": "fork",
+   "to": "b1"
+  },
+  {
+   "from": "fork",
+   "to": "c1"
+  },
+  {
+   "from": "a1",
+   "to": "ta1"
+  },
+  {
+   "from": "ta1",
+   "to": "a2"
+  },
+  {
+   "from": "a2",
+   "to": "ta2"
+  },
+  {
+   "from": "ta2",
+   "to": "a3"
+  },
+  {
+   "from": "a3",
+   "to": "ta3"
+  },
+  {
+   "from": "ta3",
+   "to": "ad"
+  },
+  {
+   "from": "b1",
+   "to": "tb1"
+  },
+  {
+   "from": "tb1",
+   "to": "bd"
+  },
+  {
+   "from": "c1",
+   "to": "tc1"
+  },
+  {
+   "from": "tc1",
+   "to": "c2"
+  },
+  {
+   "from": "c2",
+   "to": "tc2"
+  },
+  {
+   "from": "tc2",
+   "to": "cd"
+  },
+  {
+   "from": "ad",
+   "to": "join"
+  },
+  {
+   "from": "bd",
+   "to": "join"
+  },
+  {
+   "from": "cd",
+   "to": "join"
+  },
+  {
+   "from": "join",
+   "to": "e"
+  }
+ ]
+}
