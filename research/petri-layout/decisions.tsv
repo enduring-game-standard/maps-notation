@@ -1,0 +1,8 @@
+ts	phase	decision	why	evidence	result
+2026-10-23T21:41:13Z	frame	pulled the PDF from galvatron over ssh and kept it out of git	user asked; the PDF is a 13 MB copyrighted scan	scratchpad/pdf/peterson.pdf	310 scanned pages, no text layer
+2026-10-23T21:41:13Z	frame	rasterize at 150 dpi and OCR every page with RapidOCR	the scan has no text; captions locate figures and text explains them	tools/ocr.py	running
+2026-10-23T21:41:13Z	frame	work on branch research/petri-layout with draft PR, images gitignored	user asked mid-run	PR #23	open
+2026-10-23T21:41:13Z	extract	clip each figure as the ink between its caption and the nearest prose line, caption, or running head above it	captions are reliable anchors; prose lines are long and figures are not	tools/clip.py	first pass 24 figures on 27 pages; one false caption from an exercise sentence fixed by regex
+2026-10-23T21:50:57Z	extract	kept the tallest crop when a figure number matched twice	prose lines that start with Figure N.M also match the caption pattern	tools/clip.py	159 figures, numbering complete in every chapter
+2026-10-23T21:50:57Z	extract	looked at every clip on contact sheets and classified each	a clipper can cut the wrong region silently	figures.json	89 nets, 26 net fragments, 44 not nets; all crops hold their figure
+2026-10-23T21:50:57Z	analyze	wrote the analysis protocol and analyzed Figure 3.29 by hand as the worked example	agents follow a concrete example better than a template	analysis/PROTOCOL.md	done
