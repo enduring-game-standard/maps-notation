@@ -16,11 +16,18 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
   const at = (id: NodeId) => lay.nodes[id]
   const onTwoLanes = (t: NodeId) => (s.spineOfTransition.get(t)?.length ?? 0) > 1
 
-  if (isLoneCycle(net, s)) {
-    const ids = [...net.places, ...net.transitions].map((n) => n.id)
-    const c = { x: avg(ids.map((i) => at(i).x)), y: avg(ids.map((i) => at(i).y)) }
-    const ds = ids.map((i) => Math.hypot(at(i).x - c.x, at(i).y - c.y))
-    if (Math.max(...ds) - Math.min(...ds) > 0.15 * avg(ds)) failures.push('R15 a lone cycle is not drawn as a ring')
+  // R15: a lone cycle, or one unbranched cycle of three or more places with tails hung on it, is a ring
+  const sp0 = s.spines[0]
+  const ringWithTails = s.spines.length === 1 && !sp0.open && sp0.places.length >= 3
+    && !sp0.places.some((p) => sp0.transitions.filter((t) => s.pre.get(t)!.has(p) && !s.post.get(t)!.has(p)).length > 1)
+  if (isLoneCycle(net, s) || ringWithTails) {
+    const reads = (t: string) => [...s.pre.get(t)!.keys()].filter((p) => sp0.places.includes(p)).every((p) => s.post.get(t)!.has(p))
+    const ids = isLoneCycle(net, s) ? [...net.places, ...net.transitions].map((n) => n.id) : [...sp0.places, ...sp0.transitions.filter((t) => !reads(t))]
+    // a regular polygon: the places equally far from its center, and the bars equally far (a circle or a polygon)
+    const ps = ids.filter((i) => at(i).kind === 'place'), ts = ids.filter((i) => at(i).kind === 'transition')
+    const c = { x: avg(ps.map((i) => at(i).x)), y: avg(ps.map((i) => at(i).y)) }
+    const even = (xs: string[]) => { const ds = xs.map((i) => Math.hypot(at(i).x - c.x, at(i).y - c.y)); return Math.max(...ds) - Math.min(...ds) <= 0.15 * avg(ds) }
+    if (!even(ps) || !even(ts)) failures.push('R15 a lone cycle is not drawn as a ring')
     return { failures, notes }
   }
 

@@ -74,7 +74,7 @@ export function lanePlan(g: Graph): Plan {
     L.retSide = L.outer
   }
 
-  for (const L of lanes) laneTracks(g, L, own, row)
+  for (const L of lanes) laneTracks(g, L, own, row, lanes, lanesOf)
 
   // what is not on a lane: shared places between lanes, everything else beside its lane
   const onLane = (n: NodeId) => lanesOf.has(n)
@@ -251,7 +251,7 @@ function couplingArcs(g: Graph, L: Lane, M: Lane, lanesOf: Map<NodeId, number[]>
 
 // R10, R13, R14: cross offsets inside one lane. Alternatives spread symmetrically about their place;
 // a branch keeps its offset; a merge comes back between its branches; loops and returns step outside.
-function laneTracks(g: Graph, L: Lane, own: (L: Lane, n: NodeId) => boolean, row: Map<NodeId, number>) {
+function laneTracks(g: Graph, L: Lane, own: (L: Lane, n: NodeId) => boolean, row: Map<NodeId, number>, lanes: Lane[], lanesOf: Map<NodeId, number[]>) {
   const stage = L.ord.stage
   const P = new Set(L.sp.places)
   const byStage = new Map<number, NodeId[]>()
@@ -260,6 +260,12 @@ function laneTracks(g: Graph, L: Lane, own: (L: Lane, n: NodeId) => boolean, row
   tr.set(L.ord.anchor, 0)
   const laneOut = (t: NodeId) => g.outs.get(t)!.filter((p) => P.has(p))
   const continuing = (t: NodeId) => { const o = laneOut(t); return o.length === 0 || o.some((p) => stage.get(p)! > stage.get(t)!) }
+  // R7: a loop that also feeds or takes a shared place sits on the side facing the lanes it couples to
+  const facing = (t: NodeId): Side | undefined => {
+    const others = g.nbrs.get(t)!.filter((p) => g.s.placeRole.get(p)?.kind === 'shared')
+      .flatMap((p) => touchingLanes(g, p, lanesOf)).filter((i) => i !== L.i).map((i) => lanes[i].pos - L.pos)
+    return others.length && others.every((d) => Math.sign(d) === Math.sign(others[0])) ? (Math.sign(others[0]) as Side) : undefined
+  }
   const maxStage = Math.max(...stage.values())
   for (let k = 1; k <= maxStage; k++) {
     const ns = (byStage.get(k) ?? []).slice().sort(g.byKey)
@@ -282,8 +288,8 @@ function laneTracks(g: Graph, L: Lane, own: (L: Lane, n: NodeId) => boolean, row
       if (!excursion(n)) want.set(n, base + (cont.indexOf(n) - (cont.length - 1) / 2) * 2 * S.half)
       else {
         const isLoop = laneOut(n).includes(m!)
-        const side = isLoop ? L.satSide : L.retSide
-        const sameSide = exc.filter((t) => (laneOut(t).includes(m!) ? L.satSide : L.retSide) === side)
+        const side = isLoop ? facing(n) ?? L.satSide : L.retSide
+        const sameSide = exc.filter((t) => (laneOut(t).includes(m!) ? facing(t) ?? L.satSide : L.retSide) === side)
         const spread = cont.length > 1 ? (cont.length - 1) * S.half : 0
         want.set(n, base + side * (spread + (sameSide.indexOf(n) + 1) * S.exc))
       }

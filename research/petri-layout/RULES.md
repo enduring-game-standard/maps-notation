@@ -20,7 +20,7 @@ The engine sees only structure, never meaning. These are computed by `engine/str
 - **Side place.** A place on no lane whose transitions all lie on one lane: a private resource, a counter, a side condition.
 - **Choice.** A place with two or more output transitions on its own lane. **Merge**: two or more inputs.
 - **Fork / join.** A transition whose outputs / inputs lie on two or more lanes, not counting a resource's take and give-back.
-- **Self-loop.** A place that is both input and output of one transition.
+- **Self-loop.** A place that is both input and output of one transition. A bar that self-loops on another lane's place only *reads* that lane: it does not lie on it, and its give-back is not a step forward.
 
 ## Rules, in priority order
 
@@ -50,11 +50,11 @@ When two rules disagree about a node, the lower number wins.
 
 **R10. A choice is a row of alternatives that rejoin as a diamond.** The output transitions of a choice share one cross-row just after it, spread symmetrically about the lane; each branch continues as a parallel sub-line, stage against stage, and closes back onto the lane at the merge. *Reader:* one of these; none favored. (3.2, 3.25, 3.40, 2.21, 6.9.) When the competing transitions are on different lanes, each stays in its lane and the shared place reaches to both (R4).
 
-**R11. A fork spans the lanes it starts; a join spans the lanes it closes.** The bar sits across the lanes, centered on them, each lane's arc at its own end; whatever follows continues on the bar's axis. *Reader:* from here these run together; here they wait for each other. (3.26, 3.27, 3.37, 4.7, 6.9.)
+**R11. A fork spans the lanes it starts; a join spans the lanes it closes.** The bar sits across the lanes, centered on them, each lane's arc at its own end; whatever follows continues on the bar's axis. Bars that start two lanes from a common start sit side by side across them, a row before the first node they feed, with the common start above. *Reader:* from here these run together; here they wait for each other. (3.26, 3.27, 3.37, 4.7, 6.9.)
 
 **R12. Pairs sit as pairs.** Two places with the same inputs and outputs are mirrored about the line through those transitions. Complementary places (full/empty, item/slot) sit on one cross-row, either side of their line, or stacked together in the gap when they couple two lanes. *Reader:* two values of one thing. (2.4, 3.19, 3.31, 4.2.)
 
-**R13. Self-loops sit tight.** A transition that only loops on a lane place sits beside that place, across from the lane, joined by two short parallel arcs. A place that only loops on a lane transition sits beside that bar, joined by a small lens. *Reader:* "may repeat here" or "needs this and gives it back". (6.2, 6.12, 4.9, 4.18; 3.39, 4.1, 7.11.)
+**R13. Self-loops sit tight.** A transition that only loops on a lane place sits beside that place, across from the lane, joined by two short parallel arcs; if it also feeds or takes a shared place, it sits on the side facing that place (R7 outranks R9's outside). A place that only loops on a lane transition sits beside that bar, joined by a small lens. *Reader:* "may repeat here" or "needs this and gives it back". (6.2, 6.12, 4.9, 4.18; 3.39, 4.1, 7.11.)
 
 **R14. Skips and back-jumps take opposite sides.** A transition joining two non-adjacent places of one lane bows away from the lane: forward skips on one side, backward jumps on the other. *Reader:* skip ahead versus go back. (3.25, 6.8, 8.19.)
 
@@ -72,7 +72,7 @@ When two rules disagree about a node, the lower number wins.
 
 **R20. Straight along a lane, one smooth curve elsewhere.** Arcs between consecutive lane nodes are straight. Every other arc is one smooth curve, routed around the body rather than through it. Weight 2 or 3 is parallel strokes; more is one thick arc with its number.
 
-**R21. Labels on the free side; tokens fixed.** A label goes where no arc leaves its node, away from shared places when there is a choice, mirrored with its node. Tokens are centered dots in fixed patterns up to five, a numeral above.
+**R21. Labels on the free side; tokens fixed.** A label goes where no arc leaves its node, away from shared places when there is a choice, mirrored with its node. No label touches another label, a node, or an arc; spacing makes room for it rather than the label giving way: a gap holding shared places is wide enough for a label beside each, and bars side by side across a flow leave a label line between them. On a spoke, "side" is relative to the spoke. Tokens are centered dots in fixed patterns up to five, a numeral above.
 
 **R22. Same net, same drawing.** Layout depends only on structure and marking, never on names or declaration order.
 
@@ -83,6 +83,6 @@ When two rules disagree about a node, the lower number wins.
 - **C1 ring or column.** A cycle coupled to anything is a column (R1). Only a net that is one lone cycle is a ring (R15).
 - **C7 middle lane.** A lane between two neighbors sends its return around whichever side carries fewer coupling arcs; the outermost lanes always return outside.
 - **C9 one place shared by three or more lanes.** It sits centered across the lanes it couples, in front of them along the flow, its arcs fanning to each lane. No figure supports this; it is a guess.
-- **C10 lanes of unequal length.** Align on the transitions that touch the shared place; pad the rest.
+- **C10 lanes of unequal length.** Cut all lanes at once and number every lane node by its longest forward path, so a bar shared by two lanes has one level and the shorter lane waits (a stretch). A node stays right after its producer in the stretch. This is what makes two-phase commit symmetric and conversation a staircase.
 - **C12 no lane structure.** Fall back to a layered drawing along the flow direction: marked places and sources first, feedback arcs routed outside, then R10 to R22 locally.
 - **C13, C14.** The engine never duplicates places, and cannot see relations that live only in captions.
