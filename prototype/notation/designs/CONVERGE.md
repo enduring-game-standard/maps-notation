@@ -32,7 +32,7 @@ Kept, with the evidence for each:
 - **One straight line per state, with an entity's states together as one staff or spine.** Score, spines, and noreturn all grouped an entity's states. Readers answered entity questions best on score (8.25/9) and noreturn (8). This is #14's "an entity is always in a state".
 - **Verbs as thin bars, speaker by color, world neutral.** All six designs used them, and every reader said who speaks was easy.
 - **Arc ends.** Arrows for take and give, a dot for need, an open ring for unless. Readers learned the dot. The ring needs the key below.
-- **Connections that never need tracing.** Score's verb-column-over-state-lines geometry gives zero crossings by construction, and it is the only design that compares by shape. Kept as the target. The routed designs failed on exactly this.
+- ~~Connections that never need tracing, zero crossings as the target.~~ **Retracted.** The user never asked for zero crossings, and the dining philosophers figure has crossings. A count is a diagnostic, never a goal. The goal is what each node's placement says, and that every route can be followed. The staffnet, spinenet, and philnet briefs inherited this wrong target.
 - **Returns swept around the outside of a spine.** This is the critic's best idea in noreturn, and the dining philosophers idiom.
 - **Coupling states between the spines they couple.** This is the critic's best idea in spines, and the dining philosophers idiom again.
 - **World answers ordered by priority, highest first.** Exchange's axis. Readers of exchange answered "what resolves first" directly.
