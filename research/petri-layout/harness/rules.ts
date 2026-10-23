@@ -30,6 +30,12 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
   const ring = laneRing(net, s)
   const center = ring ? centroid(lanes.map((l) => at(l.ord.anchor))) : { x: 0, y: 0 }
   const frames = lanes.map(({ ord }) => {
+    if (ring?.length === 2) {
+      // a ring of two runs its lanes side by side in opposite directions: each lane's own direction is its flow
+      const a = at(ord.anchor), z = at([...ord.stage].reduce((m, e) => (e[1] > m[1] ? e : m))[0])
+      const L = Math.hypot(z.x - a.x, z.y - a.y) || 1, ux = (z.x - a.x) / L, uy = (z.y - a.y) / L
+      return { flow: (p: Pt) => (p.x - a.x) * ux + (p.y - a.y) * uy, off: (p: Pt) => -(p.x - a.x) * uy + (p.y - a.y) * ux } as Frame
+    }
     if (ring) {
       const a = at(ord.anchor)
       const ux = (a.x - center.x) / (Math.hypot(a.x - center.x, a.y - center.y) || 1), uy = (a.y - center.y) / (Math.hypot(a.x - center.x, a.y - center.y) || 1)
@@ -40,7 +46,7 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
       ? { flow: (p: Pt) => p.y, off: (p: Pt) => p.x - a.x } as Frame
       : { flow: (p: Pt) => p.x, off: (p: Pt) => p.y - a.y } as Frame
   })
-  if (ring) notes.push(`ring of ${ring.length} lanes: radial frame`)
+  if (ring) notes.push(`ring of ${ring.length} lanes: ${ring.length === 2 ? 'counterflow' : 'radial'} frame`)
 
   lanes.forEach(({ sp, ord }, li) => {
     const F = frames[li]
@@ -85,12 +91,12 @@ export function ruleChecks(net: Net, lay: Layout, TOL = 2): { failures: string[]
     if (role.spines.length === 2) {
       const [i, j] = role.spines
       const si = Math.sign(frames[i].off(at(p.id))), sj = Math.sign(frames[j].off(at(lanes[i].ord.anchor)))
-      const between = ring
+      const between = ring && ring.length > 2
         ? angleBetween(at(p.id), at(lanes[i].ord.anchor), at(lanes[j].ord.anchor), center)
         : lanes.length >= 2 ? strictly(at(p.id).x, at(lanes[i].ord.anchor).x, at(lanes[j].ord.anchor).x, TOL) : si !== 0 && sj !== 0
       if (!between) failures.push(`R4 shared place ${p.id} is not between its lanes`)
     }
-    if (ring) {
+    if (ring && ring.length > 2) {
       const r = frames[0].flow(at(p.id))
       const takers = net.arcs.filter((a) => a.from === p.id).map((a) => frames[0].flow(at(a.to)))
       if (!(r < Math.min(...takers) && r > Math.max(...lanes.map((l) => frames[0].flow(at(l.ord.anchor)))))) failures.push(`R5 shared place ${p.id} is not just inside its takers`)

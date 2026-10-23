@@ -4,6 +4,7 @@ import { analyze, isLoneCycle, isRingWithTails, laneOrders, laneRing } from '../
 import { arcKey, buildGraph, type FC, type Graph, type Hint, type Plan, type Side } from './model.ts'
 import { lanePlan, ROW } from './lanes.ts'
 import { draw } from './draw.ts'
+import { labelExtent } from './text.ts'
 import { shapePlan } from './shape.ts'
 
 export function layout(net: Net): Layout {
@@ -11,7 +12,7 @@ export function layout(net: Net): Layout {
   const g = buildGraph(net, s)
   if (isLoneCycle(net, s)) return draw(g, ringPlan(g))
   const ring = laneRing(net, s)
-  if (ring) return draw(g, spokePlan(g, ring))
+  if (ring) return draw(g, ring.length === 2 ? counterPlan(g, ring) : spokePlan(g, ring))
   if (s.spines.length && !isRingWithTails(s)) return draw(g, lanePlan(g))
   return draw(g, shapePlan(g))
 }
@@ -30,6 +31,40 @@ function ringPlan(g: Graph): Plan {
   })
   for (const a of g.net.arcs) hints.set(arcKey(a.from, a.to), { kind: 'ring', r })
   return { frame: 'right', pos, bar, barSpan: new Map(), hints, labelSide }
+}
+
+// A ring of two: the second lane is the first turned half a circle, running up beside it, so each handoff joins the
+// near ends of the two lanes (7.13: p3 across the top, p4 across the bottom).
+function counterPlan(g: Graph, [a, b]: number[]): Plan {
+  const { net, s } = g
+  const ords = laneOrders(net, s)
+  const last = Math.max(...ords[a].stage.values(), ...ords[b].stage.values())
+  const shared = net.places.filter((p) => s.placeRole.get(p.id)!.kind === 'shared').map((p) => p.id)
+  const gap = Math.max(160, ...shared.map((p) => 2 * (36 + labelExtent(g, p).w)))
+  const pos = new Map<NodeId, FC>(), bar: Plan['bar'] = new Map(), hints = new Map<string, Hint>(), labelSide = new Map<NodeId, Side>()
+  const laneOf = new Map<NodeId, number>()
+  for (const [li, col, side] of [[a, 0, -1], [b, gap, 1]] as const) {
+    for (const [n, k] of ords[li].stage) {
+      laneOf.set(n, li)
+      pos.set(n, { f: (li === a ? k : last - k) * ROW, c: col })
+      labelSide.set(n, side)
+      if (!g.isPlace(n)) bar.set(n, 'across')
+    }
+  }
+  for (const p of shared) {
+    const ts = g.nbrs.get(p)!.map((t) => pos.get(t)!.f)
+    pos.set(p, { f: (Math.min(...ts) + Math.max(...ts)) / 2, c: gap / 2 })
+    labelSide.set(p, 1)
+  }
+  for (const x of net.arcs) {
+    const li = laneOf.get(x.from), lj = laneOf.get(x.to)
+    const k = arcKey(x.from, x.to)
+    const back = li !== undefined && li === lj && ords[li].returnArcs.some((r) => r.from === x.from && r.to === x.to)
+    if (back) hints.set(k, { kind: 'free', prefer: li === a ? -1 : 1, hook: false })
+    else if (li !== undefined && li === lj) hints.set(k, { kind: 'lane' })
+    else hints.set(k, { kind: 'free', prefer: 1, hook: true })
+  }
+  return { frame: 'down', pos, bar, barSpan: new Map(), hints, labelSide }
 }
 
 function spokePlan(g: Graph, ring: number[]): Plan {

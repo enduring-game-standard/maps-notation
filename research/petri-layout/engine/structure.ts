@@ -289,6 +289,7 @@ function laneArc(s: Structure, sp: Spine, a: NodeId, b: NodeId) {
 
 export function laneRing(net: Net, s: Structure): number[] | null {
   const n = s.spines.length
+  if (n === 2) return handoffPair(net, s)
   if (n < 3) return null
   const sig = (k: number) => [...s.spines[k].places, ...s.spines[k].transitions].map((x) => s.shape.get(x)!).sort().join('|')
   if (new Set(s.spines.map((_, k) => sig(k))).size !== 1) return null
@@ -308,6 +309,26 @@ export function laneRing(net: Net, s: Structure): number[] | null {
     order.push(next)
   }
   return nb.get(order[n - 1])!.has(0) ? order : null
+}
+
+// Two lanes of one shape that hand tokens to each other through places joining different bars (7.13) are a ring of
+// two. A pair of places between the same two bars in opposite directions is one buffer's full and empty halves (3.31),
+// and a place taken and given back by both is a resource they compete for (3.28): neither is a ring.
+function handoffPair(net: Net, s: Structure): number[] | null {
+  const sig = (k: number) => [...s.spines[k].places, ...s.spines[k].transitions].map((x) => s.shape.get(x)!).sort().join('|')
+  if (sig(0) !== sig(1)) return null
+  const shared = net.places.filter((p) => s.placeRole.get(p.id)!.kind === 'shared').map((p) => p.id)
+  const ends = (p: NodeId) => {
+    const w = net.transitions.filter((t) => s.post.get(t.id)!.has(p) && !s.pre.get(t.id)!.has(p)).map((t) => t.id)
+    const r = net.transitions.filter((t) => s.pre.get(t.id)!.has(p) && !s.post.get(t.id)!.has(p)).map((t) => t.id)
+    return w.length === 1 && r.length === 1 ? { w: w[0], r: r[0], from: s.spineOfTransition.get(w[0]) ?? [], to: s.spineOfTransition.get(r[0]) ?? [] } : null
+  }
+  const hs = shared.map(ends)
+  if (!hs.length || hs.some((h) => !h || h.from.length !== 1 || h.to.length !== 1 || h.from[0] === h.to[0])) return null
+  const ok = hs as { w: NodeId; r: NodeId; from: number[]; to: number[] }[]
+  if (!ok.some((h) => h.from[0] === 0) || !ok.some((h) => h.from[0] === 1)) return null
+  if (ok.some((h) => ok.some((k) => k !== h && k.w === h.r && k.r === h.w))) return null
+  return [0, 1]
 }
 
 // t takes from these places only what it puts back: it reads them
