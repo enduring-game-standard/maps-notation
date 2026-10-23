@@ -11,7 +11,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const designs = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 const only = process.argv.find((a) => a.startsWith('--net='))?.slice(6)
 const corpus = loadCorpus(root).filter((e) => !only || e.key === only)
-const out = `${root}/out`
+const out = `${root}/${process.env.OUT ?? 'out'}`
 mkdirSync(`${out}/figures`, { recursive: true })
 const report: Record<string, Record<string, unknown>> = {}
 for (const d of designs) {

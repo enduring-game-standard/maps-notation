@@ -7,7 +7,7 @@ const root = resolve(import.meta.dirname, '..')
 const require = createRequire('/home/wscottsh/repos/egs/maps-notation/studio/package.json')
 const { chromium } = require('playwright')
 const [design, only] = process.argv.slice(2)
-const dir = `${root}/out/${design}`
+const dir = `${root}/${process.env.OUT ?? 'out'}/${design}`
 const b = await chromium.launch()
 const p = await b.newPage({ viewport: { width: 1800, height: 1200 }, deviceScaleFactor: 1 })
 for (const f of readdirSync(dir).filter((f) => f.endsWith('.svg') && (!only || f === only + '.svg'))) {

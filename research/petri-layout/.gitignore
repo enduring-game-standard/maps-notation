@@ -2,3 +2,4 @@ figures/
 *.png
 *.pdf
 out/
+out*/
