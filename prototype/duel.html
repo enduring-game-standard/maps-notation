@@ -39,6 +39,7 @@
 </header>
 <main><div id="view"></div><div id="side"></div></main>
 <script src="duel.js"></script>
+<script src="duel-layout.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const q = new URLSearchParams(location.search);
@@ -69,48 +70,56 @@ function side() {
 }
 
 // 1. A straight Petri net: places are circles, verbs are boxes, a dot is a token. Link's verbs are blue, the world's grey.
-const POS = {
-  neutral: [90, 90], guard: [90, 210], roll: [90, 330], strike: [90, 450],
-  idle: [930, 90], windup: [930, 200], delay: [930, 300], attack: [930, 400], recover: [930, 500],
-  beatE: [660, 600], beatL: [300, 600],
-  wait: [250, 40], strike_: [250, 450], gstrike: [250, 380], guard_: [250, 160], lower: [250, 260], roll_: [250, 330],
-  punish: [500, 80], interrupt: [500, 140], armor: [500, 140], catch: [500, 195], bounce: [500, 250], hit: [500, 310], trade: [500, 370], block: [500, 430], evade: [500, 490],
-  tell: [760, 145], swing: [760, 250], feint: [760, 300], late: [760, 350], recover_: [760, 470],
-  rollend: [250, 520], whiff: [380, 540], endE: [760, 600], endL: [400, 640],
-};
-const pos = v => POS[net.places.includes(v.id) ? v.id + '_' : v.id] || POS[v.id];
+// Positions and arc routes come from duel-layout.js (node gen-layout.mjs).
+const nodeId = v => 'v:' + (v.id === 'armor' ? 'interrupt' : v.id);
+// Straight segments with rounded corners, the way a schematic is routed.
+function route(pts) {
+  let d = `M${pts[0]}`;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const [p, c, n] = [pts[i - 1], pts[i], pts[i + 1]], r = Math.min(12, Math.hypot(c[0] - p[0], c[1] - p[1]) / 2, Math.hypot(n[0] - c[0], n[1] - c[1]) / 2);
+    const a = [c[0] - Math.sign(c[0] - p[0]) * r, c[1] - Math.sign(c[1] - p[1]) * r], b = [c[0] + Math.sign(n[0] - c[0]) * r, c[1] + Math.sign(n[1] - c[1]) * r];
+    d += ` L${a} Q${c} ${b}`;
+  }
+  return d + ` L${pts[pts.length - 1]}`;
+}
+// Pull an arc's end back to the edge of its node so the arrowhead shows.
+function clip(id, c, toward) {
+  const dx = toward[0] - c[0], dy = toward[1] - c[1], d = Math.hypot(dx, dy) || 1;
+  if (id.startsWith('p:')) return [c[0] + dx / d * 19, c[1] + dy / d * 19];
+  const t = Math.min(53 / Math.abs(dx || 1e-9), 13 / Math.abs(dy || 1e-9));
+  return [c[0] + dx * t, c[1] + dy * t];
+}
 function petri() {
-  const m = ex.rests.get(st.here).m, r = ex.rests.get(st.here);
+  const m = ex.rests.get(st.here).m, r = ex.rests.get(st.here), L = LAYOUT;
   const flagged = new Map(r.flags.flatMap(f => f.verbs.map(id => [id, f.kind])));
   const fired = new Map((st.lastAnswer || []).map((w, i) => [w.id, i + 1]));
-  let g = '<defs><marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#888"/></marker></defs>';
-  const edge = (a, b, kind) => {
-    const [x1, y1] = a, [x2, y2] = b, d = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / d, uy = (y2 - y1) / d;
-    const sx = x1 + ux * 20, sy = y1 + uy * 20, ex_ = x2 - ux * 20, ey = y2 - uy * 20;
-    if (kind === 'need') return `<line x1="${sx}" y1="${sy}" x2="${ex_}" y2="${ey}" stroke="#999" stroke-dasharray="3 3"/>`;
-    if (kind === 'unless') return `<line x1="${sx}" y1="${sy}" x2="${ex_}" y2="${ey}" stroke="#c33" stroke-width=".8"/><circle cx="${ex_}" cy="${ey}" r="3" fill="#fff" stroke="#c33"/>`;
-    return `<line x1="${sx}" y1="${sy}" x2="${ex_}" y2="${ey}" stroke="#aaa" marker-end="url(#ar)"/>`;
+  let g = '<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#777"/></marker></defs>';
+  const arc = (a, b, kind) => {
+    let pts = L.edges[a + '>' + b + ':' + kind];
+    if (!pts) return '';
+    pts = [clip(a, pts[0], pts[1]), ...pts.slice(1, -1), clip(b, pts[pts.length - 1], pts[pts.length - 2])];
+    const style = kind === 'need' ? 'stroke="#999" stroke-dasharray="4 3"' : kind === 'unless' ? 'stroke="#c33"' : 'stroke="#888" marker-end="url(#ar)"';
+    return `<path d="${route(pts)}" fill="none" ${style}/>` + (kind === 'unless' ? `<circle cx="${pts[pts.length - 1][0]}" cy="${pts[pts.length - 1][1]}" r="3.5" fill="#fff" stroke="#c33"/>` : '');
   };
   for (const v of net.verbs) {
-    const at = pos(v);
-    v.take.forEach(p => g += edge(POS[p], at, 'take'));
-    v.give.forEach(p => g += edge(at, POS[p], 'give'));
-    v.need.forEach(p => g += edge(POS[p], at, 'need'));
-    v.unless.forEach(p => g += edge(POS[p], at, 'unless'));
+    const id = nodeId(v);
+    v.take.forEach(p => g += arc('p:' + p, id, 'take'));
+    v.give.forEach(p => g += arc(id, 'p:' + p, 'give'));
+    v.need.forEach(p => g += arc('p:' + p, id, 'need'));
+    v.unless.forEach(p => g += arc('p:' + p, id, 'unless'));
   }
   for (const p of net.places) {
-    const [x, y] = POS[p];
-    g += `<circle cx="${x}" cy="${y}" r="20" fill="#fff" stroke="#222"/>${m.has(p) ? `<circle cx="${x}" cy="${y}" r="6" fill="#222"/>` : ''}<text x="${x}" y="${y + 34}" text-anchor="middle">${p}</text>`;
+    const [x, y] = L.nodes['p:' + p];
+    g += `<circle cx="${x}" cy="${y}" r="18" fill="#fff" stroke="#222" stroke-width="1.5"/>${m.has(p) ? `<circle cx="${x}" cy="${y}" r="6" fill="#222"/>` : ''}<text x="${x}" y="${y + 32}" text-anchor="middle">${p}</text>`;
   }
   for (const v of net.verbs) {
-    const [x, y] = pos(v), on = v.by === 'link' && enabled(v, m), isLink = v.by === 'link';
+    const [x, y] = L.nodes[nodeId(v)], on = v.by === 'link' && enabled(v, m), isLink = v.by === 'link';
     const f = flagged.get(v.id), stroke = f === 'only' ? '#e0a800' : f === 'same' ? '#e07a00' : isLink ? '#1a5fd0' : '#777';
-    const w = v.quiet ? 40 : 110;
-    g += `<g class="${isLink ? 'tr' : ''}" data-v="${v.id}"><rect x="${x - w / 2}" y="${y - 11}" width="${w}" height="22" rx="2" fill="${on ? '#dbe7ff' : fired.has(v.id) ? '#eee' : '#fff'}" stroke="${stroke}" stroke-width="${f ? 3 : 1}" opacity="${isLink && !on ? .45 : 1}"/>
+    g += `<g class="${isLink ? 'tr' : ''}" data-v="${v.id}"><rect x="${x - 52}" y="${y - 12}" width="104" height="24" rx="2" fill="${on ? '#dbe7ff' : fired.has(v.id) ? '#eee' : '#fff'}" stroke="${stroke}" stroke-width="${f ? 3 : 1}" opacity="${isLink && !on ? .45 : 1}"/>
       <text x="${x}" y="${y + 4}" text-anchor="middle" fill="${isLink ? '#1a5fd0' : '#444'}">${fired.has(v.id) ? fired.get(v.id) + '. ' : ''}${v.quiet ? 'beat ends' : v.id}${v.weight ? ' ×' + v.weight : ''}</text></g>`;
   }
-  $('#view').innerHTML = `<p><b>${describe(st.here)}</b> <button id="reset">start over</button></p><svg width="1000" height="680">${g}</svg>
-    <p class="note">Arrows take and give tokens. Dashed lines need a token without taking it. A red line ending in a ring means "unless". World verbs answer top to bottom within a column, contact first; the numbers show the order they just fired in. ×n is a weight where the world picks. Yellow and orange outlines are the findings for this moment.</p>`;
+  $('#view').innerHTML = `<p><b>${describe(st.here)}</b> <button id="reset">start over</button></p><svg width="${L.width + 40}" height="${L.height + 40}"><g transform="translate(20,20)">${g}</g></svg>
+    <p class="note">Arrows take and give tokens. Dashed lines need a token without taking it. A red line ending in a ring means "unless". The numbers show the order the world's verbs just fired in. ×n is a weight where the world picks. Yellow and orange outlines are the findings for this moment.</p>`;
   $('#view').querySelectorAll('g.tr').forEach(el => el.onclick = () => {
     const v = net.verbs.find(v => v.id === el.dataset.v);
     if (!enabled(v, m)) return;

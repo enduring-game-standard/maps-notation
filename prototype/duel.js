@@ -1,51 +1,48 @@
 // Prototype, throwaway. A designer's sketch, not a transcription of any shipped game: Link against one armed
 // enemy, in two drafts. The sketch is a 1-safe Petri net in MAPS 2 terms. Each verb names its speaker, and
-// world verbs answer in array order (priority). Every Link verb takes one beat; the beat is two tokens, one the
-// enemy spends to advance, one Link's own motion spends to finish.
+// world verbs answer in array order (priority). Every Link verb takes one beat. The world's tick splits the beat in
+// two: one half the enemy's clock spends to advance, the other ("after") Link's roll spends to finish once the enemy has moved.
 
 const P = (...xs) => xs;
 
 function duel(draft) {
   const first = draft === 'first', mixup = draft === 'mixup';
   const link = [
-    { id: 'wait', by: 'link', label: 'hold', take: P(), give: P('beatE', 'beatL'), unless: P('beatE', 'roll', 'strike') },
-    { id: 'strike', by: 'link', label: 'strike', take: P('neutral'), give: P('strike', 'beatE', 'beatL') },
-    ...(first ? [{ id: 'gstrike', by: 'link', label: 'strike from guard', take: P('guard'), give: P('strike', 'beatE', 'beatL') }] : []),
-    { id: 'guard', by: 'link', label: 'raise the shield', take: P('neutral'), give: P('guard', 'beatE', 'beatL') },
-    { id: 'lower', by: 'link', label: 'lower the shield', take: P('guard'), give: P('neutral', 'beatE', 'beatL') },
-    { id: 'roll', by: 'link', label: 'roll', take: P('neutral'), give: P('roll', 'beatE', 'beatL') },
+    { id: 'wait', by: 'link', label: 'hold', take: P(), give: P('beat'), unless: P('beat') },
+    { id: 'strike', by: 'link', label: 'strike', take: P('neutral'), give: P('strike', 'beat') },
+    ...(first ? [{ id: 'gstrike', by: 'link', label: 'strike from guard', take: P('guard'), give: P('strike', 'beat') }] : []),
+    { id: 'guard', by: 'link', label: 'raise the shield', take: P('neutral'), give: P('guard', 'beat') },
+    { id: 'lower', by: 'link', label: 'lower the shield', take: P('guard'), give: P('neutral', 'beat') },
+    { id: 'roll', by: 'link', label: 'roll', take: P('neutral'), give: P('roll', 'beat') },
   ];
   const world = [
     // contact: the enemy's state against Link's
-    { id: 'punish', label: 'the strike lands in the opening', take: P('strike', 'recover'), give: P('neutral', 'idle'), outcome: +1 },
-    first
-      ? { id: 'interrupt', label: 'the strike breaks the wind-up', take: P('strike', 'windup'), give: P('neutral', 'idle'), outcome: +1 }
-      : { id: 'armor', label: 'the enemy shrugs off the strike', take: P('strike'), need: P('windup'), give: P('neutral') },
-    ...(mixup ? [{ id: 'catch', label: 'the strike catches the held swing', take: P('strike', 'delay'), give: P('neutral', 'idle'), outcome: +1 }] : []),
-    { id: 'bounce', label: 'the strike bounces off its guard', take: P('strike'), need: P('idle'), give: P('neutral') },
-    { id: 'hit', label: 'the blow hits Link', take: P('attack', 'neutral'), give: P('idle', 'neutral'), outcome: -1 },
-    { id: 'trade', label: 'the blow hits Link mid-swing', take: P('attack', 'strike'), give: P('idle', 'neutral'), outcome: -1 },
+    { id: 'punish', label: 'the strike lands in the opening', take: P('recover'), need: P('strike'), give: P('idle'), outcome: +1 },
+    ...(first ? [{ id: 'interrupt', label: 'the strike breaks the wind-up', take: P('windup'), need: P('strike'), give: P('idle'), outcome: +1 }] : []),
+    ...(mixup ? [{ id: 'catch', label: 'the strike catches the held swing', take: P('delay'), need: P('strike'), give: P('idle'), outcome: +1 }] : []),
+    { id: 'hit', label: 'the blow hits Link', take: P('attack'), need: P('neutral'), give: P('idle'), outcome: -1 },
     first
       ? { id: 'block', label: 'the shield stops it and the enemy reels', take: P('attack'), need: P('guard'), give: P('recover') }
       : { id: 'block', label: 'the shield stops it and pushes Link back', take: P('attack'), need: P('guard'), give: P('idle') },
     { id: 'evade', label: 'the blow whiffs over the roll', take: P('attack'), need: P('roll'), give: P('recover') },
+    // Link's swing finishes once the world has read it
+    { id: 'whiff', label: 'the swing finishes', take: P('strike'), give: P('neutral') },
+    { id: 'tick', label: '', take: P('beat'), give: P('ebeat', 'after'), quiet: true },
     // the enemy's own clock
-    { id: 'tell', label: 'the enemy winds up', take: P('idle', 'beatE'), give: P('windup') },
-    { id: 'swing', label: 'the enemy swings', take: P('windup', 'beatE'), give: P('attack'), ...(mixup ? { group: 'read', weight: 3 } : {}) },
+    { id: 'tell', label: 'the enemy winds up', take: P('idle', 'ebeat'), give: P('windup') },
+    { id: 'swing', label: 'the enemy swings', take: P('windup', 'ebeat'), give: P('attack'), ...(mixup ? { group: 'read', weight: 3 } : {}) },
     ...(mixup ? [
-      { id: 'feint', label: 'the enemy holds the swing back', take: P('windup', 'beatE'), give: P('delay'), group: 'read', weight: 2 },
-      { id: 'late', label: 'the late swing comes', take: P('delay', 'beatE'), give: P('attack') },
+      { id: 'feint', label: 'the enemy holds the swing back', take: P('windup', 'ebeat'), give: P('delay'), group: 'read', weight: 2 },
+      { id: 'late', label: 'the late swing comes', take: P('delay', 'ebeat'), give: P('attack') },
     ] : []),
-    { id: 'recover', label: 'the enemy recovers', take: P('recover', 'beatE'), give: P('idle') },
+    { id: 'steady', label: 'the enemy recovers', take: P('recover', 'ebeat'), give: P('idle') },
     // Link's motion finishing
-    { id: 'rollend', label: 'Link comes out of the roll', take: P('roll', 'beatL'), give: P('neutral') },
-    { id: 'whiff', label: 'the strike whiffs', take: P('strike', 'beatL'), give: P('neutral') },
-    { id: 'endE', label: '', take: P('beatE'), give: P(), quiet: true },
-    { id: 'endL', label: '', take: P('beatL'), give: P(), quiet: true },
+    { id: 'rollend', label: 'Link comes out of the roll', take: P('roll', 'after'), give: P('neutral') },
+    { id: 'end', label: '', take: P('after'), give: P(), quiet: true },
   ].map(v => ({ by: 'world', need: P(), unless: P(), ...v }));
   return {
     draft,
-    places: ['neutral', 'guard', 'roll', 'strike', 'idle', 'windup', ...(mixup ? ['delay'] : []), 'attack', 'recover', 'beatE', 'beatL'],
+    places: ['neutral', 'guard', 'roll', 'strike', 'idle', 'windup', ...(mixup ? ['delay'] : []), 'attack', 'recover', 'beat', 'ebeat', 'after'],
     verbs: [...link.map(v => ({ need: P(), unless: P(), ...v })), ...world],
     start: ['neutral', 'idle'],
   };
@@ -86,7 +83,9 @@ function explore(net) {
   const value = (k, d) => d === 0 ? 0 : Math.max(...rests.get(k).options.map(o => worth(o, d)));
   for (const r of rests.values()) for (const o of r.options) o.worth = +worth(o, 5).toFixed(2);
   for (const r of rests.values()) r.flags = flags(r);
-  return { start: key(start), rests, settled: bestLoop(rests, key(start)) };
+  const fired = new Set([...rests.values()].flatMap(r => r.options.flatMap(o => [o.said, ...o.branches.flatMap(b => b.answer)])));
+  const dead = net.verbs.filter(v => !fired.has(v));
+  return { start: key(start), rests, dead, settled: bestLoop(rests, key(start)) };
 }
 
 // What a designer would want to know about a moment: are the choices real, and is one of them the only answer?
