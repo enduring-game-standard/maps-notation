@@ -1,0 +1,235 @@
+{
+ "name": "pipeline",
+ "source": "held out",
+ "note": "four-stage pipeline; each stage idles, works, and hands its result to a one-slot buffer for the next",
+ "places": [
+  {
+   "id": "in",
+   "label": "jobs waiting",
+   "tokens": 3
+  },
+  {
+   "id": "idle1",
+   "label": "stage 1 idle",
+   "tokens": 1
+  },
+  {
+   "id": "idle2",
+   "label": "stage 2 idle",
+   "tokens": 1
+  },
+  {
+   "id": "idle3",
+   "label": "stage 3 idle",
+   "tokens": 1
+  },
+  {
+   "id": "idle4",
+   "label": "stage 4 idle",
+   "tokens": 1
+  },
+  {
+   "id": "busy1",
+   "label": "stage 1 busy"
+  },
+  {
+   "id": "busy2",
+   "label": "stage 2 busy"
+  },
+  {
+   "id": "busy3",
+   "label": "stage 3 busy"
+  },
+  {
+   "id": "busy4",
+   "label": "stage 4 busy"
+  },
+  {
+   "id": "buf1",
+   "label": "buffer 1"
+  },
+  {
+   "id": "buf2",
+   "label": "buffer 2"
+  },
+  {
+   "id": "buf3",
+   "label": "buffer 3"
+  },
+  {
+   "id": "free1",
+   "label": "slot 1 free",
+   "tokens": 1
+  },
+  {
+   "id": "free2",
+   "label": "slot 2 free",
+   "tokens": 1
+  },
+  {
+   "id": "free3",
+   "label": "slot 3 free",
+   "tokens": 1
+  },
+  {
+   "id": "out",
+   "label": "jobs done"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "start1",
+   "label": "start 1"
+  },
+  {
+   "id": "start2",
+   "label": "start 2"
+  },
+  {
+   "id": "start3",
+   "label": "start 3"
+  },
+  {
+   "id": "start4",
+   "label": "start 4"
+  },
+  {
+   "id": "end1",
+   "label": "finish 1"
+  },
+  {
+   "id": "end2",
+   "label": "finish 2"
+  },
+  {
+   "id": "end3",
+   "label": "finish 3"
+  },
+  {
+   "id": "end4",
+   "label": "finish 4"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "idle1",
+   "to": "start1"
+  },
+  {
+   "from": "start1",
+   "to": "busy1"
+  },
+  {
+   "from": "busy1",
+   "to": "end1"
+  },
+  {
+   "from": "end1",
+   "to": "idle1"
+  },
+  {
+   "from": "idle2",
+   "to": "start2"
+  },
+  {
+   "from": "start2",
+   "to": "busy2"
+  },
+  {
+   "from": "busy2",
+   "to": "end2"
+  },
+  {
+   "from": "end2",
+   "to": "idle2"
+  },
+  {
+   "from": "idle3",
+   "to": "start3"
+  },
+  {
+   "from": "start3",
+   "to": "busy3"
+  },
+  {
+   "from": "busy3",
+   "to": "end3"
+  },
+  {
+   "from": "end3",
+   "to": "idle3"
+  },
+  {
+   "from": "idle4",
+   "to": "start4"
+  },
+  {
+   "from": "start4",
+   "to": "busy4"
+  },
+  {
+   "from": "busy4",
+   "to": "end4"
+  },
+  {
+   "from": "end4",
+   "to": "idle4"
+  },
+  {
+   "from": "in",
+   "to": "start1"
+  },
+  {
+   "from": "end4",
+   "to": "out"
+  },
+  {
+   "from": "end1",
+   "to": "buf1"
+  },
+  {
+   "from": "free1",
+   "to": "end1"
+  },
+  {
+   "from": "buf1",
+   "to": "start2"
+  },
+  {
+   "from": "start2",
+   "to": "free1"
+  },
+  {
+   "from": "end2",
+   "to": "buf2"
+  },
+  {
+   "from": "free2",
+   "to": "end2"
+  },
+  {
+   "from": "buf2",
+   "to": "start3"
+  },
+  {
+   "from": "start3",
+   "to": "free2"
+  },
+  {
+   "from": "end3",
+   "to": "buf3"
+  },
+  {
+   "from": "free3",
+   "to": "end3"
+  },
+  {
+   "from": "buf3",
+   "to": "start4"
+  },
+  {
+   "from": "start4",
+   "to": "free3"
+  }
+ ]
+}

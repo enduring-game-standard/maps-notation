@@ -1,0 +1,75 @@
+{
+  "name": "simple-machine-shop",
+  "source": "Peterson fig 3.1",
+  "places": [
+    {
+      "id": "p1",
+      "label": "An order is waiting"
+    },
+    {
+      "id": "p2",
+      "label": "The order is being processed"
+    },
+    {
+      "id": "p3",
+      "label": "The order is complete"
+    },
+    {
+      "id": "p4",
+      "label": "The machine shop is idle, waiting for work"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "An order arrives"
+    },
+    {
+      "id": "t2",
+      "label": "Processing starts"
+    },
+    {
+      "id": "t3",
+      "label": "Processing is complete"
+    },
+    {
+      "id": "t4",
+      "label": "The order is sent for delivery"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "t1",
+      "to": "p1"
+    },
+    {
+      "from": "p1",
+      "to": "t2"
+    },
+    {
+      "from": "p4",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p3"
+    },
+    {
+      "from": "t3",
+      "to": "p4"
+    },
+    {
+      "from": "p3",
+      "to": "t4"
+    }
+  ],
+  "note": "Ids invented left to right; labels are the text printed beside each node. Unmarked. t1 is a source and t4 a sink."
+}

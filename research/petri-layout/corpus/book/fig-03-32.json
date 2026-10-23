@@ -1,0 +1,269 @@
+{
+  "name": "dining-philosophers",
+  "source": "Peterson fig 3.32",
+  "places": [
+    {
+      "id": "M1",
+      "label": "M1"
+    },
+    {
+      "id": "M2",
+      "label": "M2",
+      "tokens": 1
+    },
+    {
+      "id": "M3",
+      "label": "M3",
+      "tokens": 1
+    },
+    {
+      "id": "M4",
+      "label": "M4",
+      "tokens": 1
+    },
+    {
+      "id": "M5",
+      "label": "M5",
+      "tokens": 1
+    },
+    {
+      "id": "E1",
+      "label": "E1",
+      "tokens": 1
+    },
+    {
+      "id": "E2",
+      "label": "E2"
+    },
+    {
+      "id": "E3",
+      "label": "E3"
+    },
+    {
+      "id": "E4",
+      "label": "E4"
+    },
+    {
+      "id": "E5",
+      "label": "E5"
+    },
+    {
+      "id": "C1",
+      "label": "C1"
+    },
+    {
+      "id": "C2",
+      "label": "C2",
+      "tokens": 1
+    },
+    {
+      "id": "C3",
+      "label": "C3",
+      "tokens": 1
+    },
+    {
+      "id": "C4",
+      "label": "C4",
+      "tokens": 1
+    },
+    {
+      "id": "C5",
+      "label": "C5"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    },
+    {
+      "id": "t5"
+    },
+    {
+      "id": "t6"
+    },
+    {
+      "id": "t7"
+    },
+    {
+      "id": "t8"
+    },
+    {
+      "id": "t9"
+    },
+    {
+      "id": "t10"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "M1",
+      "to": "t1"
+    },
+    {
+      "from": "C1",
+      "to": "t1"
+    },
+    {
+      "from": "C5",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "E1"
+    },
+    {
+      "from": "E1",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "M1"
+    },
+    {
+      "from": "t6",
+      "to": "C1"
+    },
+    {
+      "from": "t6",
+      "to": "C5"
+    },
+    {
+      "from": "M2",
+      "to": "t2"
+    },
+    {
+      "from": "C2",
+      "to": "t2"
+    },
+    {
+      "from": "C1",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "E2"
+    },
+    {
+      "from": "E2",
+      "to": "t7"
+    },
+    {
+      "from": "t7",
+      "to": "M2"
+    },
+    {
+      "from": "t7",
+      "to": "C2"
+    },
+    {
+      "from": "t7",
+      "to": "C1"
+    },
+    {
+      "from": "M3",
+      "to": "t3"
+    },
+    {
+      "from": "C3",
+      "to": "t3"
+    },
+    {
+      "from": "C2",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "E3"
+    },
+    {
+      "from": "E3",
+      "to": "t8"
+    },
+    {
+      "from": "t8",
+      "to": "M3"
+    },
+    {
+      "from": "t8",
+      "to": "C3"
+    },
+    {
+      "from": "t8",
+      "to": "C2"
+    },
+    {
+      "from": "M4",
+      "to": "t4"
+    },
+    {
+      "from": "C3",
+      "to": "t4"
+    },
+    {
+      "from": "C4",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "E4"
+    },
+    {
+      "from": "E4",
+      "to": "t9"
+    },
+    {
+      "from": "t9",
+      "to": "M4"
+    },
+    {
+      "from": "t9",
+      "to": "C3"
+    },
+    {
+      "from": "t9",
+      "to": "C4"
+    },
+    {
+      "from": "M5",
+      "to": "t5"
+    },
+    {
+      "from": "C4",
+      "to": "t5"
+    },
+    {
+      "from": "C5",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "E5"
+    },
+    {
+      "from": "E5",
+      "to": "t10"
+    },
+    {
+      "from": "t10",
+      "to": "M5"
+    },
+    {
+      "from": "t10",
+      "to": "C4"
+    },
+    {
+      "from": "t10",
+      "to": "C5"
+    }
+  ],
+  "note": "M_i meditating, E_i eating, C_i forks; place names as printed. Transitions unlabeled: t_i (i=1..5) is philosopher i picking up forks (M_i plus two forks to E_i); t_(i+5) is philosopher i putting them down (E_i back to M_i and both forks). Philosopher i uses forks C_(i-1) and C_i (philosopher 1 uses C5 and C1). Marking as drawn: philosopher 1 is eating, so M1, C1, C5 are empty."
+}

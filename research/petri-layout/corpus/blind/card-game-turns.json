@@ -1,0 +1,145 @@
+{
+  "name": "card-game-turns",
+  "source": "blind",
+  "note": "Two players alternate turns via a shared turn token; each turn draws from the draw pile then plays a card to the discard pile. When the draw pile is empty the discard pile is reshuffled into it (inhibitor).",
+  "places": [
+    {
+      "id": "ta",
+      "label": "Alice's turn",
+      "tokens": 1
+    },
+    {
+      "id": "da",
+      "label": "Alice has drawn"
+    },
+    {
+      "id": "ha",
+      "label": "Alice's hand",
+      "tokens": 5
+    },
+    {
+      "id": "tb",
+      "label": "Bob's turn"
+    },
+    {
+      "id": "db",
+      "label": "Bob has drawn"
+    },
+    {
+      "id": "hb",
+      "label": "Bob's hand",
+      "tokens": 5
+    },
+    {
+      "id": "deck",
+      "label": "draw pile",
+      "tokens": 20
+    },
+    {
+      "id": "disc",
+      "label": "discard pile",
+      "tokens": 1
+    }
+  ],
+  "transitions": [
+    {
+      "id": "adraw",
+      "label": "Alice draws"
+    },
+    {
+      "id": "aplay",
+      "label": "Alice plays a card"
+    },
+    {
+      "id": "bdraw",
+      "label": "Bob draws"
+    },
+    {
+      "id": "bplay",
+      "label": "Bob plays a card"
+    },
+    {
+      "id": "shuf",
+      "label": "Reshuffle discard into deck"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "ta",
+      "to": "adraw"
+    },
+    {
+      "from": "deck",
+      "to": "adraw"
+    },
+    {
+      "from": "adraw",
+      "to": "da"
+    },
+    {
+      "from": "adraw",
+      "to": "ha"
+    },
+    {
+      "from": "da",
+      "to": "aplay"
+    },
+    {
+      "from": "ha",
+      "to": "aplay"
+    },
+    {
+      "from": "aplay",
+      "to": "disc"
+    },
+    {
+      "from": "aplay",
+      "to": "tb"
+    },
+    {
+      "from": "tb",
+      "to": "bdraw"
+    },
+    {
+      "from": "deck",
+      "to": "bdraw"
+    },
+    {
+      "from": "bdraw",
+      "to": "db"
+    },
+    {
+      "from": "bdraw",
+      "to": "hb"
+    },
+    {
+      "from": "db",
+      "to": "bplay"
+    },
+    {
+      "from": "hb",
+      "to": "bplay"
+    },
+    {
+      "from": "bplay",
+      "to": "disc"
+    },
+    {
+      "from": "bplay",
+      "to": "ta"
+    },
+    {
+      "from": "disc",
+      "to": "shuf"
+    },
+    {
+      "from": "deck",
+      "to": "shuf",
+      "inhibitor": true
+    },
+    {
+      "from": "shuf",
+      "to": "deck"
+    }
+  ]
+}

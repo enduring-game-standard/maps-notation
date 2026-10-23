@@ -1,0 +1,343 @@
+{
+  "name": "pert-chart",
+  "source": "Peterson fig 3.36",
+  "places": [
+    {
+      "id": "a",
+      "label": "Start",
+      "tokens": 1
+    },
+    {
+      "id": "b"
+    },
+    {
+      "id": "c"
+    },
+    {
+      "id": "d"
+    },
+    {
+      "id": "e"
+    },
+    {
+      "id": "f"
+    },
+    {
+      "id": "g"
+    },
+    {
+      "id": "h"
+    },
+    {
+      "id": "i"
+    },
+    {
+      "id": "j"
+    },
+    {
+      "id": "k"
+    },
+    {
+      "id": "l"
+    },
+    {
+      "id": "m"
+    },
+    {
+      "id": "n"
+    },
+    {
+      "id": "o"
+    },
+    {
+      "id": "p"
+    },
+    {
+      "id": "q"
+    },
+    {
+      "id": "r"
+    },
+    {
+      "id": "s"
+    },
+    {
+      "id": "t"
+    },
+    {
+      "id": "u"
+    },
+    {
+      "id": "v"
+    },
+    {
+      "id": "w"
+    },
+    {
+      "id": "x",
+      "label": "Finish"
+    },
+    {
+      "id": "z1"
+    },
+    {
+      "id": "z2"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    },
+    {
+      "id": "t5"
+    },
+    {
+      "id": "t6"
+    },
+    {
+      "id": "t7"
+    },
+    {
+      "id": "t8"
+    },
+    {
+      "id": "t9"
+    },
+    {
+      "id": "t10"
+    },
+    {
+      "id": "t11"
+    },
+    {
+      "id": "t12"
+    },
+    {
+      "id": "t13"
+    },
+    {
+      "id": "t14"
+    },
+    {
+      "id": "t15"
+    },
+    {
+      "id": "t16"
+    },
+    {
+      "id": "t17"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "a",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "b"
+    },
+    {
+      "from": "b",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "c"
+    },
+    {
+      "from": "c",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "r"
+    },
+    {
+      "from": "t3",
+      "to": "d"
+    },
+    {
+      "from": "t3",
+      "to": "f"
+    },
+    {
+      "from": "d",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "e"
+    },
+    {
+      "from": "t4",
+      "to": "i"
+    },
+    {
+      "from": "t4",
+      "to": "z1"
+    },
+    {
+      "from": "f",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "g"
+    },
+    {
+      "from": "t5",
+      "to": "h"
+    },
+    {
+      "from": "g",
+      "to": "t6"
+    },
+    {
+      "from": "z1",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "j"
+    },
+    {
+      "from": "i",
+      "to": "t7"
+    },
+    {
+      "from": "j",
+      "to": "t7"
+    },
+    {
+      "from": "h",
+      "to": "t7"
+    },
+    {
+      "from": "t7",
+      "to": "k"
+    },
+    {
+      "from": "e",
+      "to": "t8"
+    },
+    {
+      "from": "t8",
+      "to": "p"
+    },
+    {
+      "from": "p",
+      "to": "t9"
+    },
+    {
+      "from": "t9",
+      "to": "q"
+    },
+    {
+      "from": "r",
+      "to": "t10"
+    },
+    {
+      "from": "q",
+      "to": "t10"
+    },
+    {
+      "from": "t10",
+      "to": "v"
+    },
+    {
+      "from": "v",
+      "to": "t11"
+    },
+    {
+      "from": "t11",
+      "to": "w"
+    },
+    {
+      "from": "k",
+      "to": "t12"
+    },
+    {
+      "from": "t12",
+      "to": "l"
+    },
+    {
+      "from": "l",
+      "to": "t13"
+    },
+    {
+      "from": "t13",
+      "to": "o"
+    },
+    {
+      "from": "t13",
+      "to": "m"
+    },
+    {
+      "from": "t13",
+      "to": "n"
+    },
+    {
+      "from": "m",
+      "to": "t14"
+    },
+    {
+      "from": "n",
+      "to": "t14"
+    },
+    {
+      "from": "t14",
+      "to": "t"
+    },
+    {
+      "from": "t",
+      "to": "t15"
+    },
+    {
+      "from": "t15",
+      "to": "z2"
+    },
+    {
+      "from": "t15",
+      "to": "u"
+    },
+    {
+      "from": "o",
+      "to": "t16"
+    },
+    {
+      "from": "z2",
+      "to": "t16"
+    },
+    {
+      "from": "t16",
+      "to": "s"
+    },
+    {
+      "from": "w",
+      "to": "t17"
+    },
+    {
+      "from": "s",
+      "to": "t17"
+    },
+    {
+      "from": "u",
+      "to": "t17"
+    },
+    {
+      "from": "t17",
+      "to": "x"
+    }
+  ],
+  "note": "Places use the printed letters a-x as ids (a also labeled Start, x Finish). z1 and z2 are the two small unlabeled places the book adds for waiting (z1 between the d and g joins, z2 between the t fork and the s join). Transitions are unlabeled; ids t1-t17 invented top to bottom, left to right."
+}

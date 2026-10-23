@@ -1,0 +1,95 @@
+{
+ "name": "guarded-retry",
+ "source": "held out",
+ "note": "a request is sent; it either succeeds or times out and retries, up to a budget of three tries; an inhibitor stops retrying once the give-up flag is set",
+ "places": [
+  {
+   "id": "ready",
+   "label": "ready",
+   "tokens": 1
+  },
+  {
+   "id": "sent",
+   "label": "request sent"
+  },
+  {
+   "id": "ok",
+   "label": "succeeded"
+  },
+  {
+   "id": "tries",
+   "label": "tries left",
+   "tokens": 3
+  },
+  {
+   "id": "gaveup",
+   "label": "gave up"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "send",
+   "label": "send"
+  },
+  {
+   "id": "ack",
+   "label": "acknowledge"
+  },
+  {
+   "id": "timeout",
+   "label": "time out"
+  },
+  {
+   "id": "quit",
+   "label": "give up"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "ready",
+   "to": "send"
+  },
+  {
+   "from": "tries",
+   "to": "send"
+  },
+  {
+   "from": "send",
+   "to": "sent"
+  },
+  {
+   "from": "sent",
+   "to": "ack"
+  },
+  {
+   "from": "ack",
+   "to": "ok"
+  },
+  {
+   "from": "sent",
+   "to": "timeout"
+  },
+  {
+   "from": "timeout",
+   "to": "ready"
+  },
+  {
+   "from": "ready",
+   "to": "quit"
+  },
+  {
+   "from": "tries",
+   "to": "quit",
+   "inhibitor": true
+  },
+  {
+   "from": "quit",
+   "to": "gaveup"
+  },
+  {
+   "from": "gaveup",
+   "to": "send",
+   "inhibitor": true
+  }
+ ]
+}

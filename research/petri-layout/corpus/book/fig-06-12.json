@@ -1,0 +1,100 @@
+{
+  "name": "anbn-language",
+  "source": "Peterson fig 6.12",
+  "places": [
+    {
+      "id": "ps",
+      "label": "p_s"
+    },
+    {
+      "id": "p1"
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "pf",
+      "label": "p_f"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "a"
+    },
+    {
+      "id": "t2",
+      "label": "a"
+    },
+    {
+      "id": "t3",
+      "label": "b"
+    },
+    {
+      "id": "t4",
+      "label": "b"
+    },
+    {
+      "id": "t5",
+      "label": "b"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "ps",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p1"
+    },
+    {
+      "from": "p1",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p1"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p1",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p2"
+    },
+    {
+      "from": "p3",
+      "to": "t4"
+    },
+    {
+      "from": "p2",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t5"
+    },
+    {
+      "from": "p3",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "pf"
+    }
+  ],
+  "note": "p_s and p_f printed; p1 (after first a), p2 (after first b), p3 (top counter) invented. Transition ids invented left to right, lower before upper; labels are the printed letters (several transitions share a label). Self-loops: t2 on p1, t4 on p2. No tokens drawn; p_s is the start place. Language printed: L(C) = {a^n b^n | n > 1}."
+}

@@ -1,0 +1,128 @@
+{
+  "name": "fig-2.6",
+  "source": "Peterson fig 2.6",
+  "places": [
+    {
+      "id": "p1"
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    },
+    {
+      "id": "p5"
+    },
+    {
+      "id": "p6"
+    },
+    {
+      "id": "p7"
+    },
+    {
+      "id": "p8"
+    },
+    {
+      "id": "p9"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    },
+    {
+      "id": "t5"
+    },
+    {
+      "id": "t6"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "t1",
+      "to": "p3"
+    },
+    {
+      "from": "p8",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p1"
+    },
+    {
+      "from": "t2",
+      "to": "p7"
+    },
+    {
+      "from": "p2",
+      "to": "t3"
+    },
+    {
+      "from": "p5",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p6"
+    },
+    {
+      "from": "p3",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p4"
+    },
+    {
+      "from": "p6",
+      "to": "t5"
+    },
+    {
+      "from": "p7",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "p9"
+    },
+    {
+      "from": "p4",
+      "to": "t6"
+    },
+    {
+      "from": "p9",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "p5"
+    },
+    {
+      "from": "t6",
+      "to": "p8"
+    }
+  ],
+  "note": "Graph of the structure in fig 2.3; arcs match the printed I/O tuples. Unmarked."
+}

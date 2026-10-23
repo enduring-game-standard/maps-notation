@@ -1,0 +1,199 @@
+{
+  "name": "traffic-intersection",
+  "source": "blind",
+  "note": "A two-way traffic light cycle (north-south, east-west, with all-red clearance). A pedestrian button inserts a walk phase before north-south green; inhibitors make the button idempotent and skip the walk when nobody pressed.",
+  "places": [
+    {
+      "id": "nsg",
+      "label": "NS green",
+      "tokens": 1
+    },
+    {
+      "id": "nsy",
+      "label": "NS yellow"
+    },
+    {
+      "id": "ar1",
+      "label": "all red after NS"
+    },
+    {
+      "id": "ewg",
+      "label": "EW green"
+    },
+    {
+      "id": "ewy",
+      "label": "EW yellow"
+    },
+    {
+      "id": "ar2",
+      "label": "all red after EW"
+    },
+    {
+      "id": "walk",
+      "label": "walk signal on"
+    },
+    {
+      "id": "req",
+      "label": "walk requested"
+    },
+    {
+      "id": "pw",
+      "label": "pedestrians waiting",
+      "tokens": 3
+    },
+    {
+      "id": "pc",
+      "label": "pedestrians crossed"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "NS to yellow"
+    },
+    {
+      "id": "t2",
+      "label": "NS to red"
+    },
+    {
+      "id": "t3",
+      "label": "EW to green"
+    },
+    {
+      "id": "t4",
+      "label": "EW to yellow"
+    },
+    {
+      "id": "t5",
+      "label": "EW to red"
+    },
+    {
+      "id": "t6",
+      "label": "NS to green"
+    },
+    {
+      "id": "t7",
+      "label": "Walk on"
+    },
+    {
+      "id": "t8",
+      "label": "Walk off"
+    },
+    {
+      "id": "t9",
+      "label": "Press button"
+    },
+    {
+      "id": "t10",
+      "label": "Pedestrian crosses"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "nsg",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "nsy"
+    },
+    {
+      "from": "nsy",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "ar1"
+    },
+    {
+      "from": "ar1",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "ewg"
+    },
+    {
+      "from": "ewg",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "ewy"
+    },
+    {
+      "from": "ewy",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "ar2"
+    },
+    {
+      "from": "ar2",
+      "to": "t6"
+    },
+    {
+      "from": "req",
+      "to": "t6",
+      "inhibitor": true
+    },
+    {
+      "from": "t6",
+      "to": "nsg"
+    },
+    {
+      "from": "ar2",
+      "to": "t7"
+    },
+    {
+      "from": "req",
+      "to": "t7"
+    },
+    {
+      "from": "t7",
+      "to": "walk"
+    },
+    {
+      "from": "walk",
+      "to": "t8"
+    },
+    {
+      "from": "t8",
+      "to": "nsg"
+    },
+    {
+      "from": "pw",
+      "to": "t9"
+    },
+    {
+      "from": "req",
+      "to": "t9",
+      "inhibitor": true
+    },
+    {
+      "from": "t9",
+      "to": "pw"
+    },
+    {
+      "from": "t9",
+      "to": "req"
+    },
+    {
+      "from": "walk",
+      "to": "t10"
+    },
+    {
+      "from": "pw",
+      "to": "t10"
+    },
+    {
+      "from": "t10",
+      "to": "walk"
+    },
+    {
+      "from": "t10",
+      "to": "pc"
+    }
+  ]
+}

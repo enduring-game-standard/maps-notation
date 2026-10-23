@@ -1,0 +1,80 @@
+{
+  "name": "language-classes-example",
+  "source": "Peterson fig 6.2",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 1
+    },
+    {
+      "id": "p2"
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "a"
+    },
+    {
+      "id": "t2",
+      "label": "b"
+    },
+    {
+      "id": "t3",
+      "label": "c"
+    },
+    {
+      "id": "t4",
+      "label": "d"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "p3",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p1",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p3"
+    },
+    {
+      "from": "p3",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p4"
+    }
+  ],
+  "note": "Transition ids invented; labels are the printed transition labels a-d. a has a self-loop on p1; b has a self-loop on p3."
+}

@@ -1,0 +1,155 @@
+{
+ "name": "robot-cell",
+ "source": "held out",
+ "note": "two machines share one robot that loads them; parts flow from an input buffer through either machine to output",
+ "places": [
+  {
+   "id": "raw",
+   "label": "raw parts",
+   "tokens": 4
+  },
+  {
+   "id": "robot",
+   "label": "robot free",
+   "tokens": 1
+  },
+  {
+   "id": "m1i",
+   "label": "machine 1 idle",
+   "tokens": 1
+  },
+  {
+   "id": "m1l",
+   "label": "machine 1 loading"
+  },
+  {
+   "id": "m1w",
+   "label": "machine 1 working"
+  },
+  {
+   "id": "m2i",
+   "label": "machine 2 idle",
+   "tokens": 1
+  },
+  {
+   "id": "m2l",
+   "label": "machine 2 loading"
+  },
+  {
+   "id": "m2w",
+   "label": "machine 2 working"
+  },
+  {
+   "id": "done",
+   "label": "finished parts"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "l1",
+   "label": "robot loads 1"
+  },
+  {
+   "id": "s1",
+   "label": "start 1"
+  },
+  {
+   "id": "u1",
+   "label": "unload 1"
+  },
+  {
+   "id": "l2",
+   "label": "robot loads 2"
+  },
+  {
+   "id": "s2",
+   "label": "start 2"
+  },
+  {
+   "id": "u2",
+   "label": "unload 2"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "raw",
+   "to": "l1"
+  },
+  {
+   "from": "robot",
+   "to": "l1"
+  },
+  {
+   "from": "m1i",
+   "to": "l1"
+  },
+  {
+   "from": "l1",
+   "to": "m1l"
+  },
+  {
+   "from": "m1l",
+   "to": "s1"
+  },
+  {
+   "from": "s1",
+   "to": "robot"
+  },
+  {
+   "from": "s1",
+   "to": "m1w"
+  },
+  {
+   "from": "m1w",
+   "to": "u1"
+  },
+  {
+   "from": "u1",
+   "to": "m1i"
+  },
+  {
+   "from": "u1",
+   "to": "done"
+  },
+  {
+   "from": "raw",
+   "to": "l2"
+  },
+  {
+   "from": "robot",
+   "to": "l2"
+  },
+  {
+   "from": "m2i",
+   "to": "l2"
+  },
+  {
+   "from": "l2",
+   "to": "m2l"
+  },
+  {
+   "from": "m2l",
+   "to": "s2"
+  },
+  {
+   "from": "s2",
+   "to": "robot"
+  },
+  {
+   "from": "s2",
+   "to": "m2w"
+  },
+  {
+   "from": "m2w",
+   "to": "u2"
+  },
+  {
+   "from": "u2",
+   "to": "m2i"
+  },
+  {
+   "from": "u2",
+   "to": "done"
+  }
+ ]
+}

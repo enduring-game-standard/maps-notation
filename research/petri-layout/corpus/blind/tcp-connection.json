@@ -1,0 +1,273 @@
+{
+  "name": "tcp-connection",
+  "source": "blind",
+  "note": "TCP three-way handshake and four-way teardown between a client and a server. Message places in the middle carry SYN, SYN-ACK, ACK and FIN segments.",
+  "places": [
+    {
+      "id": "cc",
+      "label": "client CLOSED",
+      "tokens": 1
+    },
+    {
+      "id": "css",
+      "label": "client SYN_SENT"
+    },
+    {
+      "id": "ce",
+      "label": "client ESTABLISHED"
+    },
+    {
+      "id": "cf1",
+      "label": "client FIN_WAIT_1"
+    },
+    {
+      "id": "cf2",
+      "label": "client FIN_WAIT_2"
+    },
+    {
+      "id": "ctw",
+      "label": "client TIME_WAIT"
+    },
+    {
+      "id": "sl",
+      "label": "server LISTEN",
+      "tokens": 1
+    },
+    {
+      "id": "ssr",
+      "label": "server SYN_RCVD"
+    },
+    {
+      "id": "se",
+      "label": "server ESTABLISHED"
+    },
+    {
+      "id": "scw",
+      "label": "server CLOSE_WAIT"
+    },
+    {
+      "id": "sla",
+      "label": "server LAST_ACK"
+    },
+    {
+      "id": "m_syn",
+      "label": "SYN in flight"
+    },
+    {
+      "id": "m_synack",
+      "label": "SYN-ACK in flight"
+    },
+    {
+      "id": "m_ack",
+      "label": "ACK in flight (handshake)"
+    },
+    {
+      "id": "m_cfin",
+      "label": "client FIN in flight"
+    },
+    {
+      "id": "m_sack",
+      "label": "server ACK of FIN in flight"
+    },
+    {
+      "id": "m_sfin",
+      "label": "server FIN in flight"
+    },
+    {
+      "id": "m_cack",
+      "label": "client ACK of FIN in flight"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "label": "Client sends SYN"
+    },
+    {
+      "id": "t2",
+      "label": "Server receives SYN"
+    },
+    {
+      "id": "t3",
+      "label": "Client receives SYN-ACK"
+    },
+    {
+      "id": "t4",
+      "label": "Server receives ACK"
+    },
+    {
+      "id": "t5",
+      "label": "Client closes"
+    },
+    {
+      "id": "t6",
+      "label": "Server receives FIN"
+    },
+    {
+      "id": "t7",
+      "label": "Client receives ACK"
+    },
+    {
+      "id": "t8",
+      "label": "Server closes"
+    },
+    {
+      "id": "t9",
+      "label": "Client receives FIN"
+    },
+    {
+      "id": "t10",
+      "label": "Server receives last ACK"
+    },
+    {
+      "id": "t11",
+      "label": "TIME_WAIT expires"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "cc",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "css"
+    },
+    {
+      "from": "t1",
+      "to": "m_syn"
+    },
+    {
+      "from": "sl",
+      "to": "t2"
+    },
+    {
+      "from": "m_syn",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "ssr"
+    },
+    {
+      "from": "t2",
+      "to": "m_synack"
+    },
+    {
+      "from": "css",
+      "to": "t3"
+    },
+    {
+      "from": "m_synack",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "ce"
+    },
+    {
+      "from": "t3",
+      "to": "m_ack"
+    },
+    {
+      "from": "ssr",
+      "to": "t4"
+    },
+    {
+      "from": "m_ack",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "se"
+    },
+    {
+      "from": "ce",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "cf1"
+    },
+    {
+      "from": "t5",
+      "to": "m_cfin"
+    },
+    {
+      "from": "se",
+      "to": "t6"
+    },
+    {
+      "from": "m_cfin",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "scw"
+    },
+    {
+      "from": "t6",
+      "to": "m_sack"
+    },
+    {
+      "from": "cf1",
+      "to": "t7"
+    },
+    {
+      "from": "m_sack",
+      "to": "t7"
+    },
+    {
+      "from": "t7",
+      "to": "cf2"
+    },
+    {
+      "from": "scw",
+      "to": "t8"
+    },
+    {
+      "from": "t8",
+      "to": "sla"
+    },
+    {
+      "from": "t8",
+      "to": "m_sfin"
+    },
+    {
+      "from": "cf2",
+      "to": "t9"
+    },
+    {
+      "from": "m_sfin",
+      "to": "t9"
+    },
+    {
+      "from": "t9",
+      "to": "ctw"
+    },
+    {
+      "from": "t9",
+      "to": "m_cack"
+    },
+    {
+      "from": "sla",
+      "to": "t10"
+    },
+    {
+      "from": "m_cack",
+      "to": "t10"
+    },
+    {
+      "from": "t10",
+      "to": "sl"
+    },
+    {
+      "from": "ctw",
+      "to": "t11"
+    },
+    {
+      "from": "t11",
+      "to": "cc"
+    }
+  ]
+}

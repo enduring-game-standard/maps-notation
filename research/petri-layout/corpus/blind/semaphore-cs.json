@@ -1,0 +1,187 @@
+{
+  "name": "semaphore-cs",
+  "source": "blind",
+  "note": "Three processes contend for a critical section guarded by a counting semaphore with two permits, so at most two are inside at once.",
+  "places": [
+    {
+      "id": "sem",
+      "label": "semaphore permits",
+      "tokens": 2
+    },
+    {
+      "id": "iA",
+      "label": "A idle",
+      "tokens": 1
+    },
+    {
+      "id": "wA",
+      "label": "A waiting"
+    },
+    {
+      "id": "cA",
+      "label": "A in critical section"
+    },
+    {
+      "id": "iB",
+      "label": "B idle",
+      "tokens": 1
+    },
+    {
+      "id": "wB",
+      "label": "B waiting"
+    },
+    {
+      "id": "cB",
+      "label": "B in critical section"
+    },
+    {
+      "id": "iC",
+      "label": "C idle",
+      "tokens": 1
+    },
+    {
+      "id": "wC",
+      "label": "C waiting"
+    },
+    {
+      "id": "cC",
+      "label": "C in critical section"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "rA",
+      "label": "A requests"
+    },
+    {
+      "id": "eA",
+      "label": "A enters (P)"
+    },
+    {
+      "id": "xA",
+      "label": "A exits (V)"
+    },
+    {
+      "id": "rB",
+      "label": "B requests"
+    },
+    {
+      "id": "eB",
+      "label": "B enters (P)"
+    },
+    {
+      "id": "xB",
+      "label": "B exits (V)"
+    },
+    {
+      "id": "rC",
+      "label": "C requests"
+    },
+    {
+      "id": "eC",
+      "label": "C enters (P)"
+    },
+    {
+      "id": "xC",
+      "label": "C exits (V)"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "iA",
+      "to": "rA"
+    },
+    {
+      "from": "rA",
+      "to": "wA"
+    },
+    {
+      "from": "wA",
+      "to": "eA"
+    },
+    {
+      "from": "sem",
+      "to": "eA"
+    },
+    {
+      "from": "eA",
+      "to": "cA"
+    },
+    {
+      "from": "cA",
+      "to": "xA"
+    },
+    {
+      "from": "xA",
+      "to": "iA"
+    },
+    {
+      "from": "xA",
+      "to": "sem"
+    },
+    {
+      "from": "iB",
+      "to": "rB"
+    },
+    {
+      "from": "rB",
+      "to": "wB"
+    },
+    {
+      "from": "wB",
+      "to": "eB"
+    },
+    {
+      "from": "sem",
+      "to": "eB"
+    },
+    {
+      "from": "eB",
+      "to": "cB"
+    },
+    {
+      "from": "cB",
+      "to": "xB"
+    },
+    {
+      "from": "xB",
+      "to": "iB"
+    },
+    {
+      "from": "xB",
+      "to": "sem"
+    },
+    {
+      "from": "iC",
+      "to": "rC"
+    },
+    {
+      "from": "rC",
+      "to": "wC"
+    },
+    {
+      "from": "wC",
+      "to": "eC"
+    },
+    {
+      "from": "sem",
+      "to": "eC"
+    },
+    {
+      "from": "eC",
+      "to": "cC"
+    },
+    {
+      "from": "cC",
+      "to": "xC"
+    },
+    {
+      "from": "xC",
+      "to": "iC"
+    },
+    {
+      "from": "xC",
+      "to": "sem"
+    }
+  ]
+}

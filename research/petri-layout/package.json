@@ -1,0 +1,8 @@
+{
+  "name": "petri-layout",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "run": "../../studio/node_modules/.bin/tsx harness/run.ts"
+  }
+}

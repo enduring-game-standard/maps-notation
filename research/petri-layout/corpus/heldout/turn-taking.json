@@ -1,0 +1,69 @@
+{
+ "name": "turn-taking",
+ "source": "held out",
+ "note": "two players alternate turns; each move adds a mark to a shared board until it is full",
+ "places": [
+  {
+   "id": "turnX",
+   "label": "X to move",
+   "tokens": 1
+  },
+  {
+   "id": "turnO",
+   "label": "O to move"
+  },
+  {
+   "id": "empty",
+   "label": "empty squares",
+   "tokens": 9
+  },
+  {
+   "id": "marks",
+   "label": "marks on board"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "mx",
+   "label": "X moves"
+  },
+  {
+   "id": "mo",
+   "label": "O moves"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "turnX",
+   "to": "mx"
+  },
+  {
+   "from": "empty",
+   "to": "mx"
+  },
+  {
+   "from": "mx",
+   "to": "marks"
+  },
+  {
+   "from": "mx",
+   "to": "turnO"
+  },
+  {
+   "from": "turnO",
+   "to": "mo"
+  },
+  {
+   "from": "empty",
+   "to": "mo"
+  },
+  {
+   "from": "mo",
+   "to": "marks"
+  },
+  {
+   "from": "mo",
+   "to": "turnX"
+  }
+ ]
+}

@@ -1,0 +1,278 @@
+{
+  "name": "boss-fight",
+  "source": "blind",
+  "note": "A player state machine (idle, attacking, dodging, hurt) against a three-phase boss. Player hits accumulate damage that advances boss phases; boss telegraphs spawn incoming attacks that hurt the player unless dodged.",
+  "places": [
+    {
+      "id": "idle",
+      "label": "player idle",
+      "tokens": 1
+    },
+    {
+      "id": "atk",
+      "label": "player attacking"
+    },
+    {
+      "id": "dodge",
+      "label": "player dodging"
+    },
+    {
+      "id": "hurt",
+      "label": "player hurt"
+    },
+    {
+      "id": "hp",
+      "label": "player health",
+      "tokens": 5
+    },
+    {
+      "id": "b1",
+      "label": "boss phase 1",
+      "tokens": 1
+    },
+    {
+      "id": "b2",
+      "label": "boss phase 2"
+    },
+    {
+      "id": "b3",
+      "label": "boss phase 3 (enraged)"
+    },
+    {
+      "id": "bd",
+      "label": "boss defeated"
+    },
+    {
+      "id": "dmg",
+      "label": "damage on boss"
+    },
+    {
+      "id": "inc",
+      "label": "boss attack incoming"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "swing",
+      "label": "Swing"
+    },
+    {
+      "id": "land",
+      "label": "Swing lands"
+    },
+    {
+      "id": "roll",
+      "label": "Dodge roll"
+    },
+    {
+      "id": "rollend",
+      "label": "Dodge ends"
+    },
+    {
+      "id": "hitI",
+      "label": "Boss hits idle player"
+    },
+    {
+      "id": "hitA",
+      "label": "Boss hits mid-swing"
+    },
+    {
+      "id": "evade",
+      "label": "Attack evaded"
+    },
+    {
+      "id": "rec",
+      "label": "Recover"
+    },
+    {
+      "id": "tel1",
+      "label": "Phase 1 telegraph"
+    },
+    {
+      "id": "tel2",
+      "label": "Phase 2 telegraph"
+    },
+    {
+      "id": "tel3",
+      "label": "Phase 3 double strike"
+    },
+    {
+      "id": "ph2",
+      "label": "Enter phase 2"
+    },
+    {
+      "id": "ph3",
+      "label": "Enrage"
+    },
+    {
+      "id": "fall",
+      "label": "Boss falls"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "idle",
+      "to": "swing"
+    },
+    {
+      "from": "swing",
+      "to": "atk"
+    },
+    {
+      "from": "atk",
+      "to": "land"
+    },
+    {
+      "from": "land",
+      "to": "idle"
+    },
+    {
+      "from": "land",
+      "to": "dmg"
+    },
+    {
+      "from": "idle",
+      "to": "roll"
+    },
+    {
+      "from": "roll",
+      "to": "dodge"
+    },
+    {
+      "from": "dodge",
+      "to": "rollend"
+    },
+    {
+      "from": "rollend",
+      "to": "idle"
+    },
+    {
+      "from": "inc",
+      "to": "hitI"
+    },
+    {
+      "from": "idle",
+      "to": "hitI"
+    },
+    {
+      "from": "hp",
+      "to": "hitI"
+    },
+    {
+      "from": "hitI",
+      "to": "hurt"
+    },
+    {
+      "from": "inc",
+      "to": "hitA"
+    },
+    {
+      "from": "atk",
+      "to": "hitA"
+    },
+    {
+      "from": "hp",
+      "to": "hitA"
+    },
+    {
+      "from": "hitA",
+      "to": "hurt"
+    },
+    {
+      "from": "inc",
+      "to": "evade"
+    },
+    {
+      "from": "dodge",
+      "to": "evade"
+    },
+    {
+      "from": "evade",
+      "to": "dodge"
+    },
+    {
+      "from": "hurt",
+      "to": "rec"
+    },
+    {
+      "from": "rec",
+      "to": "idle"
+    },
+    {
+      "from": "b1",
+      "to": "tel1"
+    },
+    {
+      "from": "tel1",
+      "to": "b1"
+    },
+    {
+      "from": "tel1",
+      "to": "inc"
+    },
+    {
+      "from": "b2",
+      "to": "tel2"
+    },
+    {
+      "from": "tel2",
+      "to": "b2"
+    },
+    {
+      "from": "tel2",
+      "to": "inc"
+    },
+    {
+      "from": "b3",
+      "to": "tel3"
+    },
+    {
+      "from": "tel3",
+      "to": "b3"
+    },
+    {
+      "from": "tel3",
+      "to": "inc",
+      "weight": 2
+    },
+    {
+      "from": "b1",
+      "to": "ph2"
+    },
+    {
+      "from": "dmg",
+      "to": "ph2",
+      "weight": 3
+    },
+    {
+      "from": "ph2",
+      "to": "b2"
+    },
+    {
+      "from": "b2",
+      "to": "ph3"
+    },
+    {
+      "from": "dmg",
+      "to": "ph3",
+      "weight": 3
+    },
+    {
+      "from": "ph3",
+      "to": "b3"
+    },
+    {
+      "from": "b3",
+      "to": "fall"
+    },
+    {
+      "from": "dmg",
+      "to": "fall",
+      "weight": 2
+    },
+    {
+      "from": "fall",
+      "to": "bd"
+    }
+  ]
+}

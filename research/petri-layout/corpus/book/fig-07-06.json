@@ -1,0 +1,124 @@
+{
+  "name": "constraint-p3-p7",
+  "source": "Peterson fig 7.6",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 1
+    },
+    {
+      "id": "p2",
+      "tokens": 1
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    },
+    {
+      "id": "p5"
+    },
+    {
+      "id": "p6"
+    },
+    {
+      "id": "p7"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    },
+    {
+      "id": "t5"
+    },
+    {
+      "id": "t6"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p5",
+      "to": "t1"
+    },
+    {
+      "from": "p3",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "t1",
+      "to": "p1"
+    },
+    {
+      "from": "p3",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p1"
+    },
+    {
+      "from": "t2",
+      "to": "p4"
+    },
+    {
+      "from": "p1",
+      "to": "t3"
+    },
+    {
+      "from": "p4",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p6"
+    },
+    {
+      "from": "p2",
+      "to": "t4"
+    },
+    {
+      "from": "p1",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p6"
+    },
+    {
+      "from": "t4",
+      "to": "p7"
+    },
+    {
+      "from": "p6",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "p3"
+    },
+    {
+      "from": "p7",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "p5"
+    }
+  ],
+  "note": "The constraint {p3, p7} (no reachable marking has tokens in both) is semantic and not drawn."
+}

@@ -1,0 +1,91 @@
+{
+  "name": "marked-graph",
+  "source": "Peterson fig 7.13",
+  "places": [
+    {
+      "id": "p1"
+    },
+    {
+      "id": "p2",
+      "tokens": 1
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    },
+    {
+      "id": "p5"
+    },
+    {
+      "id": "p6",
+      "tokens": 1
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "t1"
+    },
+    {
+      "from": "p4",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p2"
+    },
+    {
+      "from": "p2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p1"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p5",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p6"
+    },
+    {
+      "from": "t3",
+      "to": "p4"
+    },
+    {
+      "from": "p3",
+      "to": "t4"
+    },
+    {
+      "from": "p6",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p5"
+    }
+  ],
+  "note": "Marked graph: every place has exactly one input and one output transition."
+}

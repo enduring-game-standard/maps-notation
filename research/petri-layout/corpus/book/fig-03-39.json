@@ -1,0 +1,50 @@
+{
+  "name": "ethane-catalysis",
+  "source": "Peterson fig 3.39",
+  "places": [
+    {
+      "id": "Pt",
+      "label": "Pt"
+    },
+    {
+      "id": "H2",
+      "label": "H2"
+    },
+    {
+      "id": "C2H4",
+      "label": "C2H4"
+    },
+    {
+      "id": "C2H6",
+      "label": "C2H6"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "Pt",
+      "to": "t1"
+    },
+    {
+      "from": "H2",
+      "to": "t1"
+    },
+    {
+      "from": "C2H4",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "C2H6"
+    },
+    {
+      "from": "t1",
+      "to": "Pt"
+    }
+  ],
+  "note": "Unmarked. Pt is a catalyst: a self-loop with t1. Transition unlabeled."
+}

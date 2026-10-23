@@ -1,0 +1,175 @@
+{
+  "name": "async-pipeline-control",
+  "source": "Peterson fig 3.19",
+  "places": [
+    {
+      "id": "p1",
+      "label": "Unit k - 1 busy"
+    },
+    {
+      "id": "p2",
+      "label": "Output of k - 1 empty",
+      "tokens": 1
+    },
+    {
+      "id": "p3",
+      "label": "Output of k - 1 full"
+    },
+    {
+      "id": "p4",
+      "label": "Copy k - 1 to k"
+    },
+    {
+      "id": "p5",
+      "label": "Input of k full"
+    },
+    {
+      "id": "p6",
+      "label": "Input of k empty",
+      "tokens": 1
+    },
+    {
+      "id": "p7",
+      "label": "Unit k busy"
+    },
+    {
+      "id": "p8",
+      "label": "Output of k empty",
+      "tokens": 1
+    },
+    {
+      "id": "p9",
+      "label": "Output of k full"
+    },
+    {
+      "id": "p10",
+      "label": "Copy k to k + 1"
+    },
+    {
+      "id": "p11",
+      "label": "Input of k + 1 full"
+    },
+    {
+      "id": "p12",
+      "label": "Input of k + 1 empty",
+      "tokens": 1
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1"
+    },
+    {
+      "id": "t2"
+    },
+    {
+      "id": "t3"
+    },
+    {
+      "id": "t4"
+    },
+    {
+      "id": "t5"
+    },
+    {
+      "id": "t6"
+    },
+    {
+      "id": "t7"
+    },
+    {
+      "id": "t8"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p2",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "to": "p1"
+    },
+    {
+      "from": "p1",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "to": "p3"
+    },
+    {
+      "from": "p4",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "to": "p2"
+    },
+    {
+      "from": "t3",
+      "to": "p5"
+    },
+    {
+      "from": "p3",
+      "to": "t4"
+    },
+    {
+      "from": "p6",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "p4"
+    },
+    {
+      "from": "p5",
+      "to": "t5"
+    },
+    {
+      "from": "p8",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "p7"
+    },
+    {
+      "from": "p7",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "to": "p9"
+    },
+    {
+      "from": "t6",
+      "to": "p6"
+    },
+    {
+      "from": "p10",
+      "to": "t7"
+    },
+    {
+      "from": "t7",
+      "to": "p8"
+    },
+    {
+      "from": "t7",
+      "to": "p11"
+    },
+    {
+      "from": "p9",
+      "to": "t8"
+    },
+    {
+      "from": "p12",
+      "to": "t8"
+    },
+    {
+      "from": "t8",
+      "to": "p10"
+    }
+  ],
+  "note": "Ids invented top to bottom, left before right; place labels are the printed text; transitions are unlabeled. Four dashed stubs leading off-figure are omitted (into t1 from above, out of t2 upward, out of p11 downward, into p12 from below)."
+}

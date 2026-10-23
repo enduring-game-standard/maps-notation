@@ -1,0 +1,194 @@
+{
+ "name": "two-phase-commit",
+ "source": "held out",
+ "note": "coordinator asks two participants to vote, then commits when both vote yes",
+ "places": [
+  {
+   "id": "c0",
+   "label": "coordinator idle",
+   "tokens": 1
+  },
+  {
+   "id": "cw",
+   "label": "waiting for votes"
+  },
+  {
+   "id": "cd",
+   "label": "committed"
+  },
+  {
+   "id": "q1",
+   "label": "request to 1"
+  },
+  {
+   "id": "q2",
+   "label": "request to 2"
+  },
+  {
+   "id": "v1",
+   "label": "yes from 1"
+  },
+  {
+   "id": "v2",
+   "label": "yes from 2"
+  },
+  {
+   "id": "d1",
+   "label": "decision to 1"
+  },
+  {
+   "id": "d2",
+   "label": "decision to 2"
+  },
+  {
+   "id": "w1",
+   "label": "participant 1 ready",
+   "tokens": 1
+  },
+  {
+   "id": "h1",
+   "label": "1 voted"
+  },
+  {
+   "id": "f1",
+   "label": "1 done"
+  },
+  {
+   "id": "w2",
+   "label": "participant 2 ready",
+   "tokens": 1
+  },
+  {
+   "id": "h2",
+   "label": "2 voted"
+  },
+  {
+   "id": "f2",
+   "label": "2 done"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "ask",
+   "label": "send vote request"
+  },
+  {
+   "id": "decide",
+   "label": "commit"
+  },
+  {
+   "id": "vote1",
+   "label": "1 votes yes"
+  },
+  {
+   "id": "fin1",
+   "label": "1 commits"
+  },
+  {
+   "id": "vote2",
+   "label": "2 votes yes"
+  },
+  {
+   "id": "fin2",
+   "label": "2 commits"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "c0",
+   "to": "ask"
+  },
+  {
+   "from": "ask",
+   "to": "cw"
+  },
+  {
+   "from": "ask",
+   "to": "q1"
+  },
+  {
+   "from": "ask",
+   "to": "q2"
+  },
+  {
+   "from": "cw",
+   "to": "decide"
+  },
+  {
+   "from": "v1",
+   "to": "decide"
+  },
+  {
+   "from": "v2",
+   "to": "decide"
+  },
+  {
+   "from": "decide",
+   "to": "cd"
+  },
+  {
+   "from": "decide",
+   "to": "d1"
+  },
+  {
+   "from": "decide",
+   "to": "d2"
+  },
+  {
+   "from": "w1",
+   "to": "vote1"
+  },
+  {
+   "from": "q1",
+   "to": "vote1"
+  },
+  {
+   "from": "vote1",
+   "to": "h1"
+  },
+  {
+   "from": "vote1",
+   "to": "v1"
+  },
+  {
+   "from": "h1",
+   "to": "fin1"
+  },
+  {
+   "from": "d1",
+   "to": "fin1"
+  },
+  {
+   "from": "fin1",
+   "to": "f1"
+  },
+  {
+   "from": "w2",
+   "to": "vote2"
+  },
+  {
+   "from": "q2",
+   "to": "vote2"
+  },
+  {
+   "from": "vote2",
+   "to": "h2"
+  },
+  {
+   "from": "vote2",
+   "to": "v2"
+  },
+  {
+   "from": "h2",
+   "to": "fin2"
+  },
+  {
+   "from": "d2",
+   "to": "fin2"
+  },
+  {
+   "from": "fin2",
+   "to": "f2"
+  }
+ ]
+}

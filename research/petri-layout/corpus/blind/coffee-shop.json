@@ -1,0 +1,143 @@
+{
+  "name": "coffee-shop",
+  "source": "blind",
+  "note": "A cashier takes orders into an order queue; a barista turns orders into cups on the pickup counter. Customers wait after paying and leave when their cup is up.",
+  "places": [
+    {
+      "id": "line",
+      "label": "customers in line",
+      "tokens": 4
+    },
+    {
+      "id": "cf",
+      "label": "cashier free",
+      "tokens": 1
+    },
+    {
+      "id": "to",
+      "label": "taking order"
+    },
+    {
+      "id": "oq",
+      "label": "order queue"
+    },
+    {
+      "id": "cw",
+      "label": "customers waiting for drink"
+    },
+    {
+      "id": "bf",
+      "label": "barista free",
+      "tokens": 1
+    },
+    {
+      "id": "br",
+      "label": "brewing"
+    },
+    {
+      "id": "cups",
+      "label": "clean cups",
+      "tokens": 6
+    },
+    {
+      "id": "pick",
+      "label": "cups on pickup counter"
+    },
+    {
+      "id": "served",
+      "label": "customers served"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "greet",
+      "label": "Greet customer"
+    },
+    {
+      "id": "pay",
+      "label": "Take payment"
+    },
+    {
+      "id": "make",
+      "label": "Start drink"
+    },
+    {
+      "id": "ready",
+      "label": "Call drink ready"
+    },
+    {
+      "id": "take",
+      "label": "Customer picks up"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "line",
+      "to": "greet"
+    },
+    {
+      "from": "cf",
+      "to": "greet"
+    },
+    {
+      "from": "greet",
+      "to": "to"
+    },
+    {
+      "from": "to",
+      "to": "pay"
+    },
+    {
+      "from": "pay",
+      "to": "cf"
+    },
+    {
+      "from": "pay",
+      "to": "oq"
+    },
+    {
+      "from": "pay",
+      "to": "cw"
+    },
+    {
+      "from": "oq",
+      "to": "make"
+    },
+    {
+      "from": "bf",
+      "to": "make"
+    },
+    {
+      "from": "cups",
+      "to": "make"
+    },
+    {
+      "from": "make",
+      "to": "br"
+    },
+    {
+      "from": "br",
+      "to": "ready"
+    },
+    {
+      "from": "ready",
+      "to": "bf"
+    },
+    {
+      "from": "ready",
+      "to": "pick"
+    },
+    {
+      "from": "pick",
+      "to": "take"
+    },
+    {
+      "from": "cw",
+      "to": "take"
+    },
+    {
+      "from": "take",
+      "to": "served"
+    }
+  ]
+}

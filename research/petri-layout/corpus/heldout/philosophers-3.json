@@ -1,0 +1,173 @@
+{
+ "name": "philosophers-3",
+ "source": "held out",
+ "note": "three dining philosophers",
+ "places": [
+  {
+   "id": "think0",
+   "label": "phil 0 thinks",
+   "tokens": 1
+  },
+  {
+   "id": "eat0",
+   "label": "phil 0 eats"
+  },
+  {
+   "id": "fork0",
+   "label": "fork 0",
+   "tokens": 1
+  },
+  {
+   "id": "think1",
+   "label": "phil 1 thinks",
+   "tokens": 1
+  },
+  {
+   "id": "eat1",
+   "label": "phil 1 eats"
+  },
+  {
+   "id": "fork1",
+   "label": "fork 1",
+   "tokens": 1
+  },
+  {
+   "id": "think2",
+   "label": "phil 2 thinks",
+   "tokens": 1
+  },
+  {
+   "id": "eat2",
+   "label": "phil 2 eats"
+  },
+  {
+   "id": "fork2",
+   "label": "fork 2",
+   "tokens": 1
+  }
+ ],
+ "transitions": [
+  {
+   "id": "take0",
+   "label": "0 picks up"
+  },
+  {
+   "id": "put0",
+   "label": "0 puts down"
+  },
+  {
+   "id": "take1",
+   "label": "1 picks up"
+  },
+  {
+   "id": "put1",
+   "label": "1 puts down"
+  },
+  {
+   "id": "take2",
+   "label": "2 picks up"
+  },
+  {
+   "id": "put2",
+   "label": "2 puts down"
+  }
+ ],
+ "arcs": [
+  {
+   "from": "think0",
+   "to": "take0"
+  },
+  {
+   "from": "fork0",
+   "to": "take0"
+  },
+  {
+   "from": "fork1",
+   "to": "take0"
+  },
+  {
+   "from": "take0",
+   "to": "eat0"
+  },
+  {
+   "from": "eat0",
+   "to": "put0"
+  },
+  {
+   "from": "put0",
+   "to": "think0"
+  },
+  {
+   "from": "put0",
+   "to": "fork0"
+  },
+  {
+   "from": "put0",
+   "to": "fork1"
+  },
+  {
+   "from": "think1",
+   "to": "take1"
+  },
+  {
+   "from": "fork1",
+   "to": "take1"
+  },
+  {
+   "from": "fork2",
+   "to": "take1"
+  },
+  {
+   "from": "take1",
+   "to": "eat1"
+  },
+  {
+   "from": "eat1",
+   "to": "put1"
+  },
+  {
+   "from": "put1",
+   "to": "think1"
+  },
+  {
+   "from": "put1",
+   "to": "fork1"
+  },
+  {
+   "from": "put1",
+   "to": "fork2"
+  },
+  {
+   "from": "think2",
+   "to": "take2"
+  },
+  {
+   "from": "fork2",
+   "to": "take2"
+  },
+  {
+   "from": "fork0",
+   "to": "take2"
+  },
+  {
+   "from": "take2",
+   "to": "eat2"
+  },
+  {
+   "from": "eat2",
+   "to": "put2"
+  },
+  {
+   "from": "put2",
+   "to": "think2"
+  },
+  {
+   "from": "put2",
+   "to": "fork2"
+  },
+  {
+   "from": "put2",
+   "to": "fork0"
+  }
+ ]
+}

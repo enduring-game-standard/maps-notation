@@ -1,0 +1,124 @@
+{
+  "name": "instruction-sequences",
+  "source": "Peterson fig 3.37",
+  "places": [
+    {
+      "id": "p1",
+      "tokens": 1
+    },
+    {
+      "id": "p2",
+      "tokens": 1
+    },
+    {
+      "id": "p3"
+    },
+    {
+      "id": "p4"
+    },
+    {
+      "id": "p5"
+    },
+    {
+      "id": "p6"
+    },
+    {
+      "id": "p7"
+    },
+    {
+      "id": "p8"
+    },
+    {
+      "id": "p9"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "a",
+      "label": "a"
+    },
+    {
+      "id": "b",
+      "label": "b"
+    },
+    {
+      "id": "c",
+      "label": "c"
+    },
+    {
+      "id": "d",
+      "label": "d"
+    },
+    {
+      "id": "e",
+      "label": "e"
+    },
+    {
+      "id": "f",
+      "label": "f"
+    }
+  ],
+  "arcs": [
+    {
+      "from": "p1",
+      "to": "a"
+    },
+    {
+      "from": "a",
+      "to": "p3"
+    },
+    {
+      "from": "p2",
+      "to": "b"
+    },
+    {
+      "from": "b",
+      "to": "p4"
+    },
+    {
+      "from": "p3",
+      "to": "c"
+    },
+    {
+      "from": "p4",
+      "to": "c"
+    },
+    {
+      "from": "c",
+      "to": "p5"
+    },
+    {
+      "from": "c",
+      "to": "p6"
+    },
+    {
+      "from": "p5",
+      "to": "d"
+    },
+    {
+      "from": "d",
+      "to": "p7"
+    },
+    {
+      "from": "p6",
+      "to": "e"
+    },
+    {
+      "from": "e",
+      "to": "p8"
+    },
+    {
+      "from": "p7",
+      "to": "f"
+    },
+    {
+      "from": "p8",
+      "to": "f"
+    },
+    {
+      "from": "f",
+      "to": "p9"
+    }
+  ],
+  "note": "Places unlabeled; ids invented left to right, top before bottom. Transitions use the printed letters a-f."
+}
