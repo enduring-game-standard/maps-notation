@@ -1,6 +1,6 @@
 # Findings
 
-This study derives placement rules from the 89 Petri net figures in Peterson (1981), *Petri Net Theory and the Modeling of Systems*. It then tests whether an engine that follows only those rules can draw nets it was given without coordinates. `RULES.md` states the rules (R1 to R22) and the decisions for when they conflict (C1 to C16). Every rule cites the figures it comes from.
+This study derives placement rules from the 89 Petri net figures in Peterson (1981), *Petri Net Theory and the Modeling of Systems*. It then tests whether an engine that follows only those rules can draw nets it was given without coordinates. `RULES.md` states the rules (R1 to R22) and the decisions for when they conflict (C1, C7, C9, C10, C12 to C14). Every rule cites the figures it comes from.
 
 ## The rules in one paragraph
 
@@ -30,7 +30,7 @@ The engine passes 57 of 61. Two controls show the checks measure placement:
 - Peterson's own coordinates for 3.29 and 4.6 pass (`tools/positive-control.ts`).
 - A baseline that puts every node on a circle passes 0 of 61.
 
-**Blind critics.** Two opus agents, briefed separately, graded every render from 1 to 5. Neither saw the rules or the code. Book nets were graded beside Peterson's figure.
+**Blind critics.** Their reports are in `critique/`. Two opus agents, briefed separately, graded every render from 1 to 5. Neither saw the rules or the code. Book nets were graded beside Peterson's figure.
 
 | Set | Critic 1 | Critic 2 (after fixes) |
 |---|---|---|
@@ -42,14 +42,14 @@ On critic 2's book nets, the engine was judged better than Peterson on 2, about 
 
 ## Where it falls short
 
-These failures are measured. Each one names the net it shows up in.
+The label and R7 failures come from the checks. The rest come from the critics' reports in `critique/`.
 
-- **Labels.** The four nets that fail the checks all fail on labels: an arc through a label, or labels touching. These are philosophers-3, bank-account, boss-fight and elevator.
+- **Labels.** Four nets fail the checks, all on labels (an arc through a label, or labels touching): philosophers-3, bank-account, boss-fight and elevator. Boss-fight also fails R7, because one return runs on the shared side.
 - **One place serving many bars.** In elevator, the place "door closed" fans about ten arcs across the drawing. R9 puts a hub among the bars it serves, but here they span every lane.
-- **Lanes the invariants do not separate.** In tcp-connection and conversation, the minimal invariants put message places into one actor's lane. The lane that results is not an actor. A cover that prefers lanes of a single actor broke four other nets, so it was reverted.
-- **Self-loops on raised bars.** The two strands are drawn close and at a slant. Seen in 4.9, 4.18, 4.23 and 6.2.
+- **Lanes the invariants do not separate.** In tcp-connection, the minimal invariants put message places into one actor's lane. The lane that results is not an actor. Critic 2 also saw an actor split in conversation, card-game-turns and 3.31. A cover that prefers lanes of a single actor broke four other nets, so it was reverted.
+- **Self-loops on raised bars.** The two strands are drawn close and at a slant. Critic 2 saw this in 4.9, 4.18, 4.23 and 6.2, even where the placement matches Peterson's.
 - **Small nets with no lanes.** These now read left to right with upright bars. Critic 2 graded them before that change and gave them 2. They have not been regraded.
-- **Long returns.** In boss-fight and vending, returns wrap the whole drawing. This follows from R7 (returns outside). Peterson's nets are small enough that the cost never shows.
+- **Long returns.** Critic 2 saw returns wrap the whole drawing in boss-fight, vending and print-spooler. This follows from R7 (returns outside). Peterson's nets are small enough that the cost never shows.
 
 ## Files
 
